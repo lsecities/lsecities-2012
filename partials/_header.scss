@@ -6,8 +6,7 @@
 
 header {
  /* font-size: 0.75em; */
- background-image: url("/images/backgrounds/header-background-strip-lsecities.gif");
- background-repeat: repeat-x;
+ margin-top: 1em;
 }
 
 header #subsitesNavigation {
@@ -77,6 +76,18 @@ header ul {
    padding: 0 1.2em;
    text-decoration: none;
    text-transform: uppercase;
+  }
+ }
+}
+
+header #lcnav {
+ ul {
+  margin-right: 3.8%;
+
+  li {
+   display: block;
+   float: none;
+   line-height: 1.2em;
   }
  }
 }
