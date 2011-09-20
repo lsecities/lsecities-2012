@@ -2,19 +2,21 @@
 
 $base-font-family: unquote('Tahoma, sans-serif');  // default font-family
 
+$base-article-font-family: unquote('Gentium Book Basic, serif'); // default font-family for page body
+
 $base-font-size: 16px;  // default font-size for YUI fonts
 
 $base-line-height: 1;  // default line-height for YUI fonts
 
-$font-color: #444;
+$font-color: #000;
 
-$link-color: #607890;
+$link-color: #333333;
 
-$link-hover-color: #036;
+$link-hover-color: #630;
 
-$link-active-color: #607890;
+$link-active-color: #333;
 
-$link-visited-color: #607890;
+$link-visited-color: #333;
 
 $selected-font-color: #fff;  // color for selected text
 

@@ -25,6 +25,30 @@ strong, th {
   font-weight: bold;
 }
 
+.featureboxes {
+  margin-top: 1em;
+  font-family: $base-font-family;
+  
+  .featurebox {
+    background: #eeeeee;
+    height: 5em;
+    vertical-align: middle;
+    display: inline-block;
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 0.5em;
+    
+    &.last {
+      margin-right: 0;
+    }
+  }
+}
+
+article, aside.extras {
+  font-family: $base-article-font-family;
+}
+
 small {
   // Use font-size mixin to convert to percentage for YUI
   // http://developer.yahoo.com/yui/3/cssfonts/#fontsize

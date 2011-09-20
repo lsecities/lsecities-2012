@@ -81,33 +81,34 @@ header ul {
  }
 }
 
-header #mainmenus {
-  nav {
-    line-height: 1.5em;
-  }
+#mainmenus {
+  opacity: 0.5;
   
-  nav#level1nav ul li.current,
-  nav#level2nav ul li.current {
-   background-color: #B4001D;
-   @include border-top-left-radius(5px);
-   @include border-top-right-radius(5px);
-   
-   a {
-    color: #ffffff;
-   }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+  nav#level1nav,
+  nav#level2nav {
+    line-height: 1.5em;
+    
+    ul li.current {
+      border-bottom: #B4001D 5px solid;
+      /*
+      @include border-top-left-radius(5px);
+      @include border-top-right-radius(5px);
+      */
+    }
   }
 
   #level1nav ul li:hover:not(.current) {
    @include border-top-left-radius(5px);
    @include border-top-right-radius(5px);
-   background-color: #ff7700;
-   
-   a {
-    color: #ffffff;
-   }
+   border-bottom: 5px solid #ff7700;
   }
 
-  #level2nav ul {
+  #level2nav, #level2nav ul {
     background-color: #b4001d;
   }
  
@@ -115,10 +116,15 @@ header #mainmenus {
     color: #ffffff;
     display: block;
     margin: 0;
+    border-bottom: 5px solid #b4001d;
+    
+    &:hover {
+      border-bottom: 5px solid #ffffff;
+    }
   }
-}
 
-header #toolbox {
+header #searchbox {
+  float: right;
   opacity: 0.3;
   font-size: 0.75em;
   
@@ -128,12 +134,11 @@ header #toolbox {
 }
 
 header #searchbox input#queryfield {
- background: url("/images/icons/search_icon.png") no-repeat scroll right center transparent;
- border: 1px solid #CCCCCC;
- height: 1.2em;
- margin: 10px 0;
- padding: 3px 0;
- width: 99%;
+  background: url("/images/icons/search_icon.png") no-repeat scroll right center transparent;
+  border: 1px solid #CCCCCC;
+  height: 1.2em;
+  margin: 10px 0;
+  padding: 3px 0;
 }
 
 header #socialbuttons {
@@ -148,12 +153,10 @@ header #socialbuttons {
  }
 }
 
-nav#conferencesmenu {
- font-family: "Anton", "BureauGrotesque-ThreeSeven";
- font-size: 1.4375em;
- text-transform: uppercase;
- 
- ul {
+ul#conferencesmenu {
+  font-family: "Anton", "BureauGrotesque-ThreeSeven";
+  font-size: 1.4375em;
+  text-transform: uppercase;
   list-style: none;
   padding-left: 0;
   
@@ -164,5 +167,4 @@ nav#conferencesmenu {
   li:first-child {
    margin-top: 0;
   }
- }
 }
