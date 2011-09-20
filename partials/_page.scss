@@ -25,6 +25,14 @@ strong, th {
   font-weight: bold;
 }
 
+article .introblurb {
+  font-size: 1.5em;
+}
+
+aside h2 {
+  margin-bottom: 1.2em;
+}
+
 .featureboxes {
   margin-top: 1em;
   font-family: $base-font-family;
@@ -38,6 +46,10 @@ strong, th {
     float: left;
     margin-right: 5%;
     margin-bottom: 0.5em;
+    
+    h2 {
+      padding: 0.5em;
+    }
     
     &.last {
       margin-right: 0;
