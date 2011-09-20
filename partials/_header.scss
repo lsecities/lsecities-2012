@@ -6,50 +6,55 @@
 
 header {
  /* font-size: 0.75em; */
- margin-top: 1em;
-}
-
-header #subsitesNavigation {
- height: 1.9375em;
+ /* margin-top: 1em; */
+ background: url('/images/backgrounds/header-background-strip-lsecities.gif') repeat-x;
  
  nav {
-  color: #ffffff;
-  font-weight: bold;
+  color: inherit;
   
   ul {
    float: right;
    padding-top: 0.125em;
-   font-size: 0.75em;
    
    a {
-    line-height: 1em;
-    color: #ffffff;
+    color: inherit;
    }
   }
+ }
+}
+
+header #subsitesNavigation {
+  height: 1.9375em * 1.5;
+  font-size: 0.75em;
+  font-weight: bold;
   
- }
+  img#lsecitiesSmallLogo {
+    padding: 0.125em 2em 0;
+    margin: 0.125em auto 0;
+    display: block;
+    background-color: #ffffff;
+    @include border-top-left-radius(3px);
+    @include border-top-right-radius(3px);
+  }
  
- img#lsecitiesSmallLogo {
-  padding: 0.125em 2em 0;
-  margin: 0.125em auto 0;
-  display: block;
-  background-color: #ffffff;
-  @include border-top-left-radius(3px);
-  @include border-top-right-radius(3px);
- }
+  ul li a {
+    color: #ffffff;
+  }
 }
 
 header #logo.full {
  background: url("/images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
  height: 59px;
- margin: 2px 0 10px;
+ margin-top: 5px;
+ margin-bottom: 5px;
  text-indent: -9999px;
 }
 
 header #logo.small {
  background: url("/images/logo_lsecities_nostrapline_small.gif") no-repeat scroll left bottom transparent;
  height: 59px; /* kept consistent with #logo.full to allow bottom alignment */
- margin: 2px 0 10px;
+ margin-top: 5px;
+ margin-bottom: 5px;
  text-indent: -9999px;
 }
 
@@ -61,7 +66,6 @@ header #ualogo {
 
 header ul {
  display: inline-block;
- height: 1em;
  list-style: none;
  margin: 0;
  padding: 0;
@@ -71,67 +75,56 @@ header ul {
   float: left;
   
   a {
-   font-weight: bold;
-   line-height: 1em;
-   padding: 0 1.2em;
+   padding: 0 0.6em;
    text-decoration: none;
-   text-transform: uppercase;
   }
  }
 }
 
-header #lcnav {
- ul {
-  margin-right: 3.8%;
-
-  li {
-   display: block;
-   float: none;
-   line-height: 1.5em;
+header #mainmenus {
+  nav {
+    line-height: 1.5em;
   }
- }
-}
+  
+  nav#level1nav ul li.current,
+  nav#level2nav ul li.current {
+   background-color: #B4001D;
+   @include border-top-left-radius(5px);
+   @include border-top-right-radius(5px);
+   
+   a {
+    color: #ffffff;
+   }
+  }
 
-header ul.lcmenu li.current {
- background-color: #B4001D;
- @include border-top-left-radius(5px);
- @include border-top-right-radius(5px);
+  #level1nav ul li:hover:not(.current) {
+   @include border-top-left-radius(5px);
+   @include border-top-right-radius(5px);
+   background-color: #ff7700;
+   
+   a {
+    color: #ffffff;
+   }
+  }
+
+  #level2nav ul {
+    background-color: #b4001d;
+  }
  
- a {
-  color: #ffffff;
- }
-}
-
-header ul.lcmenu li:hover:not(.current) {
- @include border-top-left-radius(5px);
- @include border-top-right-radius(5px);
- background-color: #ff7700;
- 
- a {
-  color: #ffffff;
- }
-}
-
-header ul.lcmenu a {
-
-}
-
-header ul.uamenu {
- background-color: #b4001d;
-}
-
-header ul.uamenu a {
- color: #ffffff;
- display: block;
- margin: 0;
-}
-
-header nav {
- height: 1em;
+  #level2nav ul a {
+    color: #ffffff;
+    display: block;
+    margin: 0;
+  }
 }
 
 header #toolbox {
- font-size: 0.75em;
+  opacity: 0.3;
+  font-size: 0.75em;
+  
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 header #searchbox input#queryfield {
