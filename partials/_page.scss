@@ -46,18 +46,22 @@ aside {
     height: 5em;
     vertical-align: middle;
     display: inline-block;
+    /*
     width: 30%;
     float: left;
     margin-right: 5%;
+    */
     margin-bottom: 0.5em;
     
     h2 {
       padding: 0.5em;
     }
     
+    /*
     &.last {
       margin-right: 0;
     }
+    */
   }
 }
 

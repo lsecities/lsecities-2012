@@ -121,7 +121,7 @@ header ul {
     }
     
     ul {
-      li.current{
+      li.current a {
         border-bottom: #ffffff 5px solid;
       }
       
@@ -172,18 +172,21 @@ header #socialbuttons {
  }
 }
 
-ul#conferencesmenu {
-  font-family: "Anton", "BureauGrotesque-ThreeSeven";
-  font-size: 1.4375em;
-  text-transform: uppercase;
-  list-style: none;
-  padding-left: 0;
+#conferencesmenu {
+
+  ul {
+    font-family: "Anton", "BureauGrotesque-ThreeSeven";
+    font-size: 1.4375em;
+    text-transform: uppercase;
+    list-style: none;
+    padding-left: 0;
   
-  li {
-   margin-top: 0.5625em;
-  }
+    li {
+      margin-top: 0.5625em;
+    }
   
-  li:first-child {
-   margin-top: 0;
+    li:first-child {
+      margin-top: 0;
+    }
   }
 }
