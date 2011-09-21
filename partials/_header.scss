@@ -111,16 +111,16 @@ header ul {
       @include border-top-right-radius(5px);
       
       &.lsecitiesAreaAbout {
-        border-bottom: 5px solid rgba(255, 119, 0, 0.5);
-      }
-      &.lsecitiesAreaResearch {
         border-bottom: 5px solid rgba(0, 174, 239, 0.5);
       }
+      &.lsecitiesAreaResearch {
+        border-bottom: 5px solid rgba(255, 119, 0, 0.5);
+      }
       &.lsecitiesAreaPublications {
-        border-bottom: 5px solid rgba(54, 55, 149, 0.5);
+        border-bottom: 5px solid rgba(219, 65, 64, 0.5);
       }
       &.lsecitiesAreaEvents {
-        border-bottom: 5px solid rgba(219, 65, 64, 0.5);
+        border-bottom: 5px solid rgba(54, 55, 149, 0.5);
       }
       &.lsecitiesAreaUrbanAge {
         border-bottom: 5px solid rgba(180, 0, 29, 0.5);
