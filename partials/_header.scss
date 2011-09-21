@@ -117,6 +117,7 @@ header ul {
       color: #ffffff;
       font-size: 1.2em;
       font-weight: normal;
+      font-family: UbuntuBold;
       padding: 0 0.5em;
     }
     
@@ -188,4 +189,20 @@ header #socialbuttons {
       margin-top: 0;
     }
   }
+  
+  .cityName.conferencesNorthAmerica a:hover {
+    color: #0073AE;
+  }
+  .cityName.conferencesSouthAmerica a:hover {
+    color: #CC7601;
+  }
+  .cityName.conferencesAsia a:hover {
+    color: #6D6290;
+  }
+  .cityName.conferencesEurope a:hover {
+    color: #8F9404;
+  }
+  .cityName.conferencesAfrica a:hover {
+    color: #CF4A78;
+  }  
 }
