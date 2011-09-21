@@ -120,14 +120,20 @@ header ul {
       padding: 0 0.5em;
     }
     
-    ul a {
-      color: #ffffff;
-      display: block;
-      margin: 0;
-      border-bottom: 5px solid #b4001d;
+    ul {
+      li.current{
+        border-bottom: #ffffff 5px solid;
+      }
+      
+      a {
+        color: #ffffff;
+        display: block;
+        margin: 0;
+        border-bottom: 5px solid #b4001d;
     
-      &:hover {
-        border-bottom: 5px solid #ffffff;
+        &:hover {
+          border-bottom: 5px solid #ffffff;
+        }
       }
     }
   }
