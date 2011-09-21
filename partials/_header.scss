@@ -84,6 +84,7 @@ header ul {
 
 #mainmenus {
   opacity: 0.8;
+  @include box-shadow(#888 3px 3px 5px);
   
   &:hover {
     opacity: 1;
@@ -93,6 +94,7 @@ header ul {
   nav#level1nav,
   nav#level2nav {
     line-height: 1.5em;
+    font-family: UbuntuRegular;
     
     ul li.current {
       border-bottom: #B4001D 5px solid;
@@ -108,28 +110,30 @@ header ul {
    @include border-top-right-radius(5px);
    border-bottom: 5px solid #ff7700;
   }
-
-  #level2nav h1 {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 1.2em;
-    font-weight: normal;
-    padding: 0 0.5em;
+ 
+  #level2nav {
+    h1 {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 1.2em;
+      font-weight: normal;
+      padding: 0 0.5em;
+    }
+    
+    ul a {
+      color: #ffffff;
+      display: block;
+      margin: 0;
+      border-bottom: 5px solid #b4001d;
+    
+      &:hover {
+        border-bottom: 5px solid #ffffff;
+      }
+    }
   }
   
   #level2nav, #level2nav ul {
     background-color: #b4001d;
-  }
- 
-  #level2nav ul a {
-    color: #ffffff;
-    display: block;
-    margin: 0;
-    border-bottom: 5px solid #b4001d;
-    
-    &:hover {
-      border-bottom: 5px solid #ffffff;
-    }
   }
 
 header #searchbox {

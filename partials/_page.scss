@@ -29,8 +29,12 @@ article .introblurb {
   font-size: 1.5em;
 }
 
-aside h2 {
-  margin-bottom: 1.2em;
+aside {
+  font-family: $base-font-family;
+  
+  h2 {
+    margin-bottom: 1.2em;
+  }
 }
 
 .featureboxes {
@@ -57,7 +61,7 @@ aside h2 {
   }
 }
 
-article, aside.extras {
+article {
   font-family: $base-article-font-family;
 }
 
@@ -77,6 +81,9 @@ input:invalid, textarea:invalid {
 .no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
+#slider {
+  margin-bottom: 0.5em;
+}
 
 //-----------------------------------
 // Add your own custom styles below
