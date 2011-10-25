@@ -2,11 +2,11 @@
 
 $base-font-family: unquote('UbuntuRegular, Tahoma, sans-serif');  // default font-family
 
-$base-article-font-family: unquote('LinuxLibertineORegular, Gentium Book Basic, serif'); // default font-family for page body
+$base-article-font-family: unquote('ff-meta-serif-web-pro, Palatino, Georgia, LinuxLibertineORegular, Gentium Book Basic, serif'); // default font-family for page body
 
 $base-font-size: 16px;  // default font-size for YUI fonts
 
-$base-line-height: 1;  // default line-height for YUI fonts
+$base-line-height: 1.2;  // default line-height for YUI fonts
 
 $font-color: #000;
 
@@ -38,4 +38,8 @@ a:focus,
 a:active,
 a:hover {
   text-decoration: none;
+}
+
+p {
+  margin-bottom: 1.625em;
 }

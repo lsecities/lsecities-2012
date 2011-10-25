@@ -7,7 +7,7 @@
 body > #container > header {
  /* font-size: 0.75em; */
  /* margin-top: 1em; */
- /* background: url('/images/backgrounds/header-background-strip-lsecities.gif') repeat-x; */
+ /* background: url('../images/backgrounds/header-background-strip-lsecities.gif') repeat-x; */
  border-top: 3px solid #ff0000;
  
  nav {
@@ -43,23 +43,21 @@ body > #container > header {
  }
  
  #logo.full {
-  background: url("/images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
-  height: 59px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  background: url("../images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
+  height: 6.93333em;
+  margin-top: 0.166667em;
   text-indent: -9999px;
  }
 
  #logo.small {
-  background: url("/images/logo_lsecities_nostrapline_small.gif") no-repeat scroll left bottom transparent;
-  height: 59px; /* kept consistent with #logo.full to allow bottom alignment */
-  margin-top: 5px;
-  margin-bottom: 5px;
+  background: url("../images/logo_lsecities_nostrapline_small.gif") no-repeat scroll left bottom transparent;
+  height: 6.93333em; /* kept consistent with #logo.full to allow bottom alignment */
+  margin-top: 0.166667em;
   text-indent: -9999px;
  }
 
  #ualogo {
-  background: url("/images/logo_urbanage_strapline.gif") no-repeat scroll 0 0 transparent;
+  background: url("../images/logo_urbanage_strapline.gif") no-repeat scroll 0 0 transparent;
   height: 6.93333em;
   margin-top: 0.166667em;
  }
@@ -110,22 +108,22 @@ body > #container > header {
       @include border-top-left-radius(5px);
       @include border-top-right-radius(5px);
       
-      &.lsecitiesAreaAbout {
+      &.lsecitiesAreaAbout, &.page-item-303 {
         border-bottom: 5px solid rgba(0, 174, 239, 0.5);
       }
-      &.lsecitiesAreaResearch {
+      &.lsecitiesAreaResearch, &.page-item-306 {
         border-bottom: 5px solid rgba(255, 119, 0, 0.5);
       }
-      &.lsecitiesAreaPublications {
+      &.lsecitiesAreaPublications, &.page-item-309 {
         border-bottom: 5px solid rgba(219, 65, 64, 0.5);
       }
-      &.lsecitiesAreaEvents {
+      &.lsecitiesAreaEvents, &.page-item-311 {
         border-bottom: 5px solid rgba(54, 55, 149, 0.5);
       }
-      &.lsecitiesAreaUrbanAge {
+      &.lsecitiesAreaUrbanAge, &.page-item-94 {
         border-bottom: 5px solid rgba(180, 0, 29, 0.5);
       }
-      &.lsecitiesAreaMediaArchive {
+      &.lsecitiesAreaMediaArchive, &.page-item-313 {
         border-bottom: 5px solid rgba(75, 128, 68, 0.5);
       }
     }
@@ -142,8 +140,10 @@ body > #container > header {
     }
     
     ul {
-      li.current a {
-        border-bottom: #ffffff 5px solid;
+      li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
+        a {
+          border-bottom: #ffffff 5px solid;
+        }
       }
       
       a {
@@ -181,7 +181,7 @@ header #searchbox {
 }
 
 header #searchbox input#queryfield {
-  background: url("/images/icons/search_icon.png") no-repeat scroll right center transparent;
+  background: url("../images/icons/search_icon.png") no-repeat scroll right center transparent;
   border: 1px solid #CCCCCC;
   height: 1.2em;
   margin: 10px 0;
