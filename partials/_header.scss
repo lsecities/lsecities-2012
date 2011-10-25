@@ -4,6 +4,13 @@
 // Add your own custom styles below
 //-----------------------------------
 
+$about_area_colour: rgba(0, 174, 239, 1);
+$research_area_colour: rgba(255, 119, 0, 1);
+$publications_area_colour: rgba(219, 65, 64, 1);
+$events_area_colour: rgba(54, 55, 149, 1);
+$urbanage_area_colour: rgba(180, 0, 29, 1);
+$media_archive_area_colour: rgba(75, 128, 68, 1);
+
 body > #container > header {
  /* font-size: 0.75em; */
  /* margin-top: 1em; */
@@ -96,35 +103,59 @@ body > #container > header {
     
     ul li.current {
       border-bottom: #B4001D 5px solid;
-      /*
-      @include border-top-left-radius(5px);
-      @include border-top-right-radius(5px);
-      */
     }
   }
 
   #level1nav {
-    ul li:hover:not(.current) {
-      @include border-top-left-radius(5px);
-      @include border-top-right-radius(5px);
-      
+    ul li {
+      &:hover:not(.current), &:hover:not(.current_page_item) {
+        border-bottom: 5px solid;
+      }
+      &.current, &.current_page_item {
+        border-bottom-width: 5px;
+        border-bottom-style: solid;
+      }
       &.lsecitiesAreaAbout, &.page-item-303 {
-        border-bottom: 5px solid rgba(0, 174, 239, 0.5);
+        border-bottom: $about_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($about_area_colour, 0.5);
+        }
       }
       &.lsecitiesAreaResearch, &.page-item-306 {
-        border-bottom: 5px solid rgba(255, 119, 0, 0.5);
+        border-bottom: $research_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($research_area_colour, 0.5);
+        }
       }
       &.lsecitiesAreaPublications, &.page-item-309 {
-        border-bottom: 5px solid rgba(219, 65, 64, 0.5);
+        border-bottom: $publications_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($publications_area_colour, 0.5);
+        }
       }
       &.lsecitiesAreaEvents, &.page-item-311 {
-        border-bottom: 5px solid rgba(54, 55, 149, 0.5);
+        border-bottom: $events_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($events_area_colour, 0.5);
+        }
       }
       &.lsecitiesAreaUrbanAge, &.page-item-94 {
-        border-bottom: 5px solid rgba(180, 0, 29, 0.5);
+        border-bottom: $urbanage_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($urbanage_area_colour, 0.5);
+        }
       }
       &.lsecitiesAreaMediaArchive, &.page-item-313 {
-        border-bottom: 5px solid rgba(75, 128, 68, 0.5);
+        border-bottom: $media_archive_area_colour;
+        
+        &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize($media_archive_area_colour, 0.5);
+        }
       }
     }
   }
@@ -178,6 +209,7 @@ header #searchbox {
 
 #persistentLogo {
   float: right;
+  height: 31px;
 }
 
 header #searchbox input#queryfield {
