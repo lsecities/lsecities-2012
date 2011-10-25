@@ -23,23 +23,3 @@ $selected-font-color: #fff;  // color for selected text
 $selected-background-color: #ff5E99;  // bg-color for selected text
 
 $list-left-margin: 0;  // left margin for ul an ol
-
-dl {
-  dt {
-    font-weight: bold;
-  }
-  dd {
-    margin-bottom: 0.5em;
-  }
-}
-
-a,
-a:focus,
-a:active,
-a:hover {
-  text-decoration: none;
-}
-
-p {
-  margin-bottom: 1.625em;
-}

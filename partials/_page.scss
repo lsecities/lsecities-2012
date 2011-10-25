@@ -120,6 +120,30 @@ input:invalid, textarea:invalid {
 }
 
 //-----------------------------------
+// Base styles
+//-----------------------------------
+
+dl {
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin-bottom: 0.5em;
+  }
+}
+
+a,
+a:focus,
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 1.625em;
+}
+
+//-----------------------------------
 // Add your own custom styles below
 //-----------------------------------
 
