@@ -99,11 +99,7 @@ body > #container > header {
   nav#level1nav,
   nav#level2nav {
     line-height: 1.5em;
-    font-family: UbuntuRegular;
-    
-    ul li.current {
-      border-bottom: #B4001D 5px solid;
-    }
+    font-family: $headings-font-family;
   }
 
   #level1nav {
@@ -111,47 +107,43 @@ body > #container > header {
       &:hover:not(.current), &:hover:not(.current_page_item) {
         border-bottom: 5px solid;
       }
-      &.current, &.current_page_item {
-        border-bottom-width: 5px;
-        border-bottom-style: solid;
-      }
       &.lsecitiesAreaAbout, &.page-item-303 {
-        border-bottom: $about_area_colour;
+        border-bottom-color: $about_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($about_area_colour, 0.5);
         }
       }
       &.lsecitiesAreaResearch, &.page-item-306 {
-        border-bottom: $research_area_colour;
+        border-bottom-color: $research_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($research_area_colour, 0.5);
         }
       }
       &.lsecitiesAreaPublications, &.page-item-309 {
-        border-bottom: $publications_area_colour;
+        border-bottom-color: $publications_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($publications_area_colour, 0.5);
         }
       }
       &.lsecitiesAreaEvents, &.page-item-311 {
-        border-bottom: $events_area_colour;
+        border-bottom-color: $events_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($events_area_colour, 0.5);
         }
       }
       &.lsecitiesAreaUrbanAge, &.page-item-94 {
-        border-bottom: $urbanage_area_colour;
+        border-bottom-color: $urbanage_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($urbanage_area_colour, 0.5);
         }
       }
       &.lsecitiesAreaMediaArchive, &.page-item-313 {
-        border-bottom: $media_archive_area_colour;
+        border-bottom-color: $media_archive_area_colour;
         
         &:hover:not(.current), &:hover:not(.current_page_item) {
           border-bottom-color: transparentize($media_archive_area_colour, 0.5);
@@ -181,7 +173,7 @@ body > #container > header {
         color: #ffffff;
         display: block;
         margin: 0;
-        border-bottom: 5px solid #b4001d;
+        border-bottom: 5px solid transparent;
     
         &:hover {
           border-bottom: 5px solid #ffffff;
@@ -189,9 +181,30 @@ body > #container > header {
       }
     }
   }
-  
-  #level2nav, #level2nav ul {
-    background-color: #b4001d;
+
+  #level2nav {
+    &.section-ancestor-303 {
+      background-color: $about_area_colour;
+    }
+    &.section-ancestor-306 {
+      background-color: $research_area_colour;
+    }
+    &.section-ancestor-309 {
+      background-color: $publications_area_colour;
+    }
+    &.section-ancestor-311 {
+      background-color: $events_area_colour;
+    }
+    &.section-ancestor-94 {
+      background-color: $urbanage_area_colour;
+    }
+    &.section-ancestor-313 {
+      background-color: $media_archive_area_colour;
+    }
+
+    ul {
+      background-color: inherit;
+    }
   }
 
 header #searchbox {

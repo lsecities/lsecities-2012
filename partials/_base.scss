@@ -2,7 +2,7 @@
 
 $headings-font-family: unquote('ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif');
 
-$base-font-family: unquote('UbuntuRegular, Tahoma, sans-serif');  // default font-family
+$base-font-family: unquote('ff-meta-web-pro, UbuntuRegular, Tahoma, sans-serif');  // default font-family
 
 $article-font-family: unquote('ff-meta-serif-web-pro, Palatino, Georgia, LinuxLibertineORegular, Gentium Book Basic, serif'); // default font-family for page body
 
@@ -12,13 +12,13 @@ $base-line-height: 1.2;  // default line-height for YUI fonts
 
 $font-color: #000;
 
-$link-color: #333333;
+$link-color: #555555;
 
-$link-hover-color: #630;
+$link-hover-color: #09f;
 
-$link-active-color: #333;
+$link-active-color: #555;
 
-$link-visited-color: #333;
+$link-visited-color: #555;
 
 $selected-font-color: #fff;  // color for selected text
 

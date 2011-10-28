@@ -53,10 +53,10 @@ article .introblurb {
 }
 
 aside {
-  font-family: $base-font-family;
+  font-family: $article-font-family;
   
-  h2 {
-    margin-bottom: 1.2em;
+  p {
+    font-size: 0.9em;
   }
 }
 
@@ -73,8 +73,9 @@ aside {
   .featurebox {
     display: inline-block;
     margin-bottom: 0.5em;
+    background-color: #cccccc;
     
-    h2 {
+    h3 {
       font-family: $headings-font-family;
       padding: 0.5em;
     }
@@ -85,6 +86,10 @@ aside {
     }
     */
   }
+}
+
+.featured-item {
+  margin-bottom: 4em;
 }
 
 article {
@@ -140,6 +145,18 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $headings-font-family;
 }
 
+ul {
+  list-style-type: none;
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
 //-----------------------------------
 // Add your own custom styles below
 //-----------------------------------
@@ -174,7 +191,10 @@ header {
     font-size: 1.2em;
     margin-bottom: 1em;
   }
-
+  
+  .article-text img {
+    max-width: 100%;
+  }
 }
 
 footer {}
