@@ -137,12 +137,19 @@ a:hover {
   text-decoration: none;
 }
 
+nav {
+  a, a:active, a:visited {
+		color: #555;
+	}
+}
+
 p {
   margin-bottom: 1.625em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $headings-font-family;
+  text-transform: uppercase;
 }
 
 ul {

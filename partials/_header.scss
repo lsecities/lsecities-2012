@@ -15,18 +15,14 @@ body > #container > header {
  /* font-size: 0.75em; */
  /* margin-top: 1em; */
  /* background: url('../images/backgrounds/header-background-strip-lsecities.gif') repeat-x; */
- border-top: 3px solid #ff0000;
+ padding-top: 0.25em;
  
  nav {
   color: inherit;
-  
+
   ul {
    float: right;
    padding-top: 0.125em;
-   
-   a {
-    color: inherit;
-   }
   }
  }
  
@@ -51,21 +47,21 @@ body > #container > header {
  
  #logo.full {
   background: url("../images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
-  height: 6.93333em;
+  height: 5.125em;
   margin-top: 0.166667em;
   text-indent: -9999px;
  }
 
  #logo.small {
   background: url("../images/logo_lsecities_nostrapline_small.gif") no-repeat scroll left bottom transparent;
-  height: 6.93333em; /* kept consistent with #logo.full to allow bottom alignment */
+  height: 5.125em; /* kept consistent with #logo.full to allow bottom alignment */
   margin-top: 0.166667em;
   text-indent: -9999px;
  }
 
  #ualogo {
   background: url("../images/logo_urbanage_strapline.gif") no-repeat scroll 0 0 transparent;
-  height: 6.93333em;
+  height: 5.125em;
   margin-top: 0.166667em;
  }
 
@@ -88,8 +84,7 @@ body > #container > header {
 }
 
 #mainmenus {
-  opacity: 0.8;
-  @include box-shadow(#888 3px 3px 5px);
+  opacity: 0.9;
   
   &:hover {
     opacity: 1;
@@ -98,61 +93,34 @@ body > #container > header {
 
   nav#level1nav,
   nav#level2nav {
-    line-height: 1.5em;
+    line-height: 1.2em;
     font-family: $headings-font-family;
+    text-transform: uppercase;
+    margin: 0.25em 0;
   }
 
   #level1nav {
     ul li {
+      border-bottom: 5px solid transparent;
+	  
+	  &.current, &.current_page_item, &.current_page_ancestor {
+		border-bottom-color: #666;
+	  }
+	  
       &:hover:not(.current), &:hover:not(.current_page_item) {
         border-bottom: 5px solid;
       }
-      &.lsecitiesAreaAbout, &.page-item-303 {
-        border-bottom-color: $about_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($about_area_colour, 0.5);
-        }
-      }
-      &.lsecitiesAreaResearch, &.page-item-306 {
-        border-bottom-color: $research_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($research_area_colour, 0.5);
-        }
-      }
-      &.lsecitiesAreaPublications, &.page-item-309 {
-        border-bottom-color: $publications_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($publications_area_colour, 0.5);
-        }
-      }
-      &.lsecitiesAreaEvents, &.page-item-311 {
-        border-bottom-color: $events_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($events_area_colour, 0.5);
-        }
-      }
-      &.lsecitiesAreaUrbanAge, &.page-item-94 {
-        border-bottom-color: $urbanage_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($urbanage_area_colour, 0.5);
-        }
-      }
-      &.lsecitiesAreaMediaArchive, &.page-item-313 {
-        border-bottom-color: $media_archive_area_colour;
-        
-        &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize($media_archive_area_colour, 0.5);
-        }
+      
+      &:hover:not(.current), &:hover:not(.current_page_item) {
+          border-bottom-color: transparentize(#000, 0.5);
       }
     }
   }
  
   #level2nav {
+		padding-top: 5px;
+		height: 26px;
+	
     h1 {
       display: inline-block;
       color: #ffffff;
@@ -163,6 +131,8 @@ body > #container > header {
     }
     
     ul {
+	  font-weight: bold;
+	  
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
         a {
           border-bottom: #ffffff 5px solid;
@@ -183,24 +153,8 @@ body > #container > header {
   }
 
   #level2nav {
-    &.section-ancestor-303 {
-      background-color: $about_area_colour;
-    }
-    &.section-ancestor-306 {
-      background-color: $research_area_colour;
-    }
-    &.section-ancestor-309 {
-      background-color: $publications_area_colour;
-    }
-    &.section-ancestor-311 {
-      background-color: $events_area_colour;
-    }
-    &.section-ancestor-94 {
-      background-color: $urbanage_area_colour;
-    }
-    &.section-ancestor-313 {
-      background-color: $media_archive_area_colour;
-    }
+	background-color: #000;
+	color: #fff;
 
     ul {
       background-color: inherit;
@@ -229,7 +183,7 @@ header #searchbox input#queryfield {
   background: url("../images/icons/search_icon.png") no-repeat scroll right center transparent;
   border: 1px solid #CCCCCC;
   height: 1.2em;
-  margin: 10px 0;
+  margin-bottom: 0.25em;
   padding: 3px 0;
 }
 
