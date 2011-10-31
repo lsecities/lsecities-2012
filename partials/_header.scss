@@ -103,16 +103,16 @@ body > #container > header {
     ul li {
       border-bottom: 5px solid transparent;
 	  
-	  &.current, &.current_page_item, &.current_page_ancestor {
-		border-bottom-color: #666;
-	  }
+      &.current, &.current_page_item, &.current_page_ancestor {
+        border-bottom-color: #666;
+      }
 	  
       &:hover:not(.current), &:hover:not(.current_page_item) {
         border-bottom: 5px solid;
       }
       
       &:hover:not(.current), &:hover:not(.current_page_item) {
-          border-bottom-color: transparentize(#000, 0.5);
+        border-bottom-color: transparentize(#000, 0.1);
       }
     }
   }
