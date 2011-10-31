@@ -106,7 +106,11 @@ aside {
   .featurebox {
     display: inline-block;
     margin-bottom: 0.5em;
-    background-color: #cccccc;
+    background-color: #111;
+    
+    a {
+      color: #fff;
+    }
     
     h3 {
       font-family: $headings-font-family;
