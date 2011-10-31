@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3/transition";
 
 //-----------------------------------------------
 // The following html5-boilerplate styles should
@@ -64,6 +65,7 @@ aside {
 #featuresgrid {
   width: 100%;
   line-height: 1em;
+  font-family: $headings-font-family;
   
   .featurescolumn {
     width: 49.5260664%;
@@ -76,20 +78,81 @@ aside {
     }
   }
   
-  .featureboxbig {
+  .featurebox.bigbox {
     width: 100%;
     float: left;
     margin-bottom: 0.9569378%;
+    position: relative;
   }
   
-  .featureboxsmall {
+  .featurebox.smallbox {
     width: 49.0430622%;
+    float: left;
     margin-right: 1.9138756%;
     margin-bottom: 0.9569378%;
-    float: left;
+    position: relative;
 
     &.last {
       margin-right: 0;
+    }
+  }
+  
+  .featurebox .feature_blurb {
+    //-moz-transition: max-height 0.5s ease-in-out 0s;
+    //transition: max-height 0.5s ease-in-out 0s;
+    float: left;
+    font-size: 0.8em;
+    line-height: 1.08em;
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 5px;
+    width: 100%;
+  }
+  
+  .featurebox:hover {
+    .feature_title, .feature_caption {
+      //-moz-transition: visibility 0.2s ease-in-out 0.5s;
+      //transition: visibility 0.2s ease-in-out 0.5s;
+      display: none;
+    }
+
+    .feature_blurb {
+      //-moz-transition: max-height 0.2s ease-in-out 0s;
+      //transition: max-height 0.2s ease-in-out 0s;
+      max-height: 75%;
+    }
+    
+    .feature_info {
+      @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+      background-color: #3F3F3F;
+      max-height: 75%;
+    }
+  }
+
+  .feature_info {
+    @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+    // background: url("/images/X/interface/toc_project_bg.png") repeat scroll left top transparent;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    color: #F8F8F8;
+    cursor: pointer;
+    line-height: 1em;
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    
+    .feature_title, .feature_caption {
+      //-moz-transition: visibility 0.2s ease-in-out 0.5s;
+      //transition: visibility 0.2s ease-in-out 0.5s;
+    }
+    
+    .feature_title {
+      font-weight: bold;
+    }
+    
+    .feature_caption {
+      font-weight: normal;
     }
   }
 }
@@ -100,7 +163,7 @@ aside {
   }
 }
 
-.featureboxes {
+#featureboxes {
   margin-top: 1em;
   font-family: $article-font-family;
   
