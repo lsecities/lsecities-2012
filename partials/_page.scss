@@ -63,6 +63,7 @@ aside {
 
 #featuresgrid {
   width: 100%;
+  line-height: 1em;
   
   .featurescolumn {
     width: 49.5260664%;
@@ -78,13 +79,13 @@ aside {
   .featureboxbig {
     width: 100%;
     float: left;
-    margin-bottom: 1.9138756%;
+    margin-bottom: 0.9569378%;
   }
   
   .featureboxsmall {
     width: 49.0430622%;
     margin-right: 1.9138756%;
-    margin-bottom: 1.9138756%;
+    margin-bottom: 0.9569378%;
     float: left;
 
     &.last {
