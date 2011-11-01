@@ -16,7 +16,7 @@ body, select, input, textarea {
 h1, h2, h3, h4, h5, h6 {
   // Bold might not be the best choice if you are
   // embedding a @font-face that's already bold
-  font-weight: bold;
+  font-weight: normal;
 }
 
 a, a:active, a:visited { color: $link-color; }
@@ -138,6 +138,11 @@ aside {
   .featurebox {
     background-color: #000;
     color: #fff;
+    margin-bottom: 0.9569378%;
+    
+    h3 {
+      padding: 0 0.3em;
+    }
     
     a, a:active, a:visited, a:hover {
       color: #fff;
