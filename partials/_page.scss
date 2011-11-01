@@ -107,8 +107,14 @@ aside {
     
     .feature_info {
       @include single-transition(background-color, 0.5s, ease-in-out, 0s);
-      background-color: #3F3F3F;
+      background-color: #000;
       max-height: 75%;
+    }
+    
+    .feature_info.textonly {
+      @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+      background-color: #000;
+      max-height: inherit;
     }
   }
 
@@ -141,6 +147,7 @@ aside {
   
   .feature_info.textonly {
     top: 0;
+    background-color: #000;
     
     .feature_blurb {
       max-height: 75%;
