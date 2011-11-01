@@ -26,29 +26,6 @@ strong, th {
   font-weight: bold;
 }
 
-/*
-.recto {
-  background-color: #dddddd;
-}
-*/
-
-/*
-.flipbox .box.verso {
-  position: absolute;
-  left: -9999px;
-  display: none;
-  background-color: rgba(255, 166, 0, 0.7);
-}
-*/
- 
-.boxbig {
-  height: 283px;
-}
-
-.boxsmall {
-  height: 137px;
-}
-
 article .introblurb {
   font-size: 1.3em;
 }
@@ -157,35 +134,14 @@ aside {
   }
 }
 
-#headfeatures {
-  .flipbox {
-    margin-bottom: 1em;
-  }
-}
-
-#featureboxes {
-  margin-top: 1em;
-  font-family: $article-font-family;
-  
+.featureboxes {
   .featurebox {
-    display: inline-block;
-    margin-bottom: 0.5em;
-    background-color: #111;
+    background-color: #000;
+    color: #fff;
     
-    a {
+    a, a:active, a:visited, a:hover {
       color: #fff;
     }
-    
-    h3 {
-      font-family: $headings-font-family;
-      padding: 0.5em;
-    }
-    
-    /*
-    &.last {
-      margin-right: 0;
-    }
-    */
   }
 }
 
