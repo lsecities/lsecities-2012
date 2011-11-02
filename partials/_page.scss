@@ -26,10 +26,6 @@ strong, th {
   font-weight: bold;
 }
 
-article .introblurb {
-  font-size: 1.3em;
-}
-
 aside {
   font-family: $article-font-family;
   
@@ -286,6 +282,18 @@ header {
   
   .article-text img {
     max-width: 100%;
+  }
+  
+  article .introblurb {
+    h2 {
+      margin-top: 0.6em;
+      margin-bottom: 0;
+    }
+  
+    p {
+      font-size: 1.25em;
+      line-height: 1.25em;
+    }
   }
 }
 
