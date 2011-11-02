@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3/columns";
 
 //-----------------------------------
 // Add your own custom styles below
@@ -13,5 +14,11 @@ footer {
  
  ul {
   list-style-type: none;
+ }
+ 
+ #footerSitemap {
+  section ul {
+    @include column-count(2);
+  }
  }
 }
