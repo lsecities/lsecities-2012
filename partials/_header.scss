@@ -102,7 +102,11 @@ body > #container > header {
   #level1nav {
     ul li {
       border-bottom: 5px solid transparent;
-	  
+      
+      a, a:active, a:visited {
+        color: #000;
+      }
+      
       &.current, &.current_page_item, &.current_page_ancestor {
         border-bottom-color: #666;
       }
