@@ -17,8 +17,12 @@ footer {
  }
  
  #footerSitemap {
-  .row > section > ul {
-    @include column-count(2);
+  & > .row {
+    margin-bottom: 1.5em;
+    
+    & > section > ul {
+      @include column-count(2);
+    }
   }
  }
 }
