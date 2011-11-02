@@ -5,34 +5,34 @@
 // Add your own custom styles below
 //-----------------------------------
 
-#organizer-logos {
+#level3nav #organizer-logos {
   max-width: 67.7290%;
   width: 67.7290%;
 }
 
 footer {
- font-size: 0.75em;
- background: none repeat scroll 0 0 #F1F1EC;
- border-top: 1px solid #E5E5E0;
- margin-top: 20px;
- padding: 40px;
+  font-size: 0.75em;
+  background: none repeat scroll 0 0 #F1F1EC;
+  border-top: 1px solid #E5E5E0;
+  margin-top: 20px;
+  padding: 40px;
+  
+  ul {
+    list-style-type: none;
+  }
  
- ul {
-  list-style-type: none;
- }
- 
- #footerSitemap {
-  & > .row {
-    margin-bottom: 1.5em;
+  #footerSitemap {
+    & > .row {
+      margin-bottom: 1.5em;
     
-    & > section > ul {
-      @include column-count(2);
+      & > section > ul {
+        @include column-count(2);
       
-      li {
-        line-height: 1em;
-        margin-bottom: 0.5em;
+        li {
+          line-height: 1em;
+          margin-bottom: 0.5em;
+        }
       }
     }
   }
- }
 }
