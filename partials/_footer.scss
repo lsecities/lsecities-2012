@@ -17,7 +17,7 @@ footer {
  }
  
  #footerSitemap {
-  section ul {
+  .row > section > ul {
     @include column-count(2);
   }
  }
