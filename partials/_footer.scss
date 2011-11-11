@@ -6,6 +6,11 @@
 //-----------------------------------
 
 #level3nav {
+  font-size: 0.925em;
+  font-family: $headings-font-family;
+  
+  @include navbar-list;
+  
   ul.children {
     margin-left: 1em;
   }
@@ -32,6 +37,10 @@ footer {
   }
  
   #footerSitemap {
+    ul li > ul {
+      margin-top: 0.5em;
+    }
+    
     & > .row {
       margin-bottom: 1.5em;
     
