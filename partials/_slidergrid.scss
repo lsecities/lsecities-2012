@@ -1,0 +1,65 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+
+.flexslider {
+  font-family: ff-meta-web-pro,UbuntuRegular,Tahoma,Elvetica,sans-serif;
+  
+  .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
+    margin-right: 0;
+  }
+  
+  .col2 {
+    width: (1140em/5*2/16);
+    float: left;
+  }
+  
+  .col1 {
+    width: (1140em/5/16);
+    float: left;
+  }
+
+  .gridbox {
+    border-right: 1px solid #dedede;
+    border-top: 1px solid #dedede;
+    float: left;
+    padding: 0.3125em;
+    overflow: hidden;
+    position: relative;
+    min-height: 210px;
+
+    &.mono {
+	  width: 13.5625em;
+    }
+    
+    .inner-box {
+	  padding: 0.3125em;
+    }
+  }
+  
+  .introbox {
+    .inner-box {
+      background-color: #000;
+      color: #fff;
+    
+      p {
+        font-size: 0.8em;
+      }
+    }
+  }
+  
+  ul.citieslist {
+    display: inline;
+    text-transform: uppercase;
+    font-family: BureauGrotesque, Anton;
+    font-size: 2em;
+    
+    li {
+      display: inline;
+      
+      &.alternate {
+        color: #ddd;
+      }
+    }
+  }
+}
