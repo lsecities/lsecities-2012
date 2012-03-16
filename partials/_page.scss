@@ -34,6 +34,38 @@ aside {
     font-size: 0.875em; // = 14px/16px
     line-height: 1.5em;
   }
+  
+  &.extras {
+    font-family: $base-font-family;
+    float: right;
+    padding-bottom: 1.2em;
+    background-color: #eee;
+    
+	
+    > dl {
+      padding-left: 1em;
+    }
+    
+    ul.people-list {
+      display: inline;
+      
+      & > li {
+        display: inline;
+      }
+      
+      li:after {
+        content: ', ';
+      }
+      
+      li:last-child:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.event-extra-content {
+	margin-top: 1.2em;
 }
 
 #featuresgrid {
@@ -197,6 +229,7 @@ input:invalid, textarea:invalid {
   font-family: $base-font-family;
   max-height: 13.18001222em;
   height: 13.18001222em;
+  overflow: hidden;
 }
 
 //-----------------------------------

@@ -2,38 +2,62 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 
+$slider_full_pxwidth: 1140;
+$columns: 5;
+$slider_base_font_pxsize: 14;
+$tile_base_emwidth: $slider_full_pxwidth / $columns / $slider_base_font_pxsize;
+$tile_base_emheight: $tile_base_emwidth;
+$tile_pxpadding: 4;
+$tile_padding: $tile_pxpadding/$slider_base_font_pxsize;
+$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns );
+$onetile_emwidth: ($onetile_pxwidth / $slider_base_font_pxsize);
+$onetilecolumn_emwidth: (($onetile_pxwidth + 2) / $slider_base_font_pxsize);
+$twotiles_pxwidth: (((($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns * 2) + $tile_pxpadding *2));
+$twotiles_emwidth: ($twotiles_pxwidth / $slider_base_font_pxsize);
+$twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize);
+
 .flexslider {
   font-family: ff-meta-web-pro,UbuntuRegular,Tahoma,Elvetica,sans-serif;
   position: relative;
+  font-size: 0.875em;
   
   .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
     margin-right: 0;
   }
 
+  .slides > li {
+    height: #{2*$tile_base_emheight}em;
+  }
+  
   .slide-inner {
     border-left: 1px solid #dedede;
     border-bottom: 1px solid #dedede;
   }
   
   .col2 {
-    width: (1140em/5*2/16);
+    width: #{$twotilescolumn_emwidth}em;
     float: left;
   }
   
   .col1 {
-    width: (1140em/5/16);
+    width: #{$onetilecolumn_emwidth}em;
     float: left;
   }
 
-  .gridbox {
+  .tile {
     border-right: 1px solid #dedede;
     border-top: 1px solid #dedede;
     float: left;
-    padding: 0.3125em;
+    padding: #{$tile_padding}em;
     overflow: hidden;
     position: relative;
     min-height: 210px;
-
+    height: #{$tile_base_emheight}em;
+    
+    &.tall {
+      height: #{$tile_base_emheight*2}em;
+    }
+    
 	  &:hover {
       .feature_title, .feature_caption {
         //-moz-transition: visibility 0.2s ease-in-out 0.5s;
@@ -67,9 +91,14 @@
 	  }
 
 
-    &.mono {
-	  width: 13.5625em;
+    &.onetile {
+      width: #{$onetile_emwidth}em;
     }
+    
+    &.twotiles {
+      width: #{$twotiles_emwidth}em;
+    }
+    
     
     .inner-box {
 	  padding: 0.3125em;
