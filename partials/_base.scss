@@ -1,8 +1,10 @@
 // This file must be imported before loading html5-boilerplate
 
+$main-headings-font-family: unquote('nevisBold, PT Sans, sans-serif');
+
 $headings-font-family: unquote('PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif');
 
-$base-font-family: unquote('PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, sans-serif');  // default font-family
+$base-font-family: $headings-font-family;  // default font-family
 
 $article-font-family: unquote('PT Serif, ff-meta-serif-web-pro, Palatino, Georgia, LinuxLibertineORegular, Gentium Book Basic, serif'); // default font-family for page body
 

@@ -9,15 +9,17 @@ $tile_base_emwidth: $slider_full_pxwidth / $columns / $slider_base_font_pxsize;
 $tile_base_emheight: $tile_base_emwidth;
 $tile_pxpadding: 4;
 $tile_padding: $tile_pxpadding/$slider_base_font_pxsize;
-$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns );
+$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns ) - 0.8;
 $onetile_emwidth: ($onetile_pxwidth / $slider_base_font_pxsize);
-$onetilecolumn_emwidth: (($onetile_pxwidth + 2) / $slider_base_font_pxsize);
+//$onetilecolumn_emwidth: (($onetile_pxwidth + 2) / $slider_base_font_pxsize);
+$onetilecolumn_emwidth: $tile_base_emwidth;
 $twotiles_pxwidth: (((($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns * 2) + $tile_pxpadding *2));
 $twotiles_emwidth: ($twotiles_pxwidth / $slider_base_font_pxsize);
-$twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize);
+//$twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize);
+$twotilescolumn_emwidth: $tile_base_emwidth * 2;
 
 .flexslider {
-  font-family: ff-meta-web-pro,UbuntuRegular,Tahoma,Elvetica,sans-serif;
+  font-family: $base-font-family;
   position: relative;
   font-size: 0.875em;
   
@@ -25,9 +27,11 @@ $twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize)
     margin-right: 0;
   }
 
+/*
   .slides > li {
     height: #{2*$tile_base_emheight}em;
   }
+*/
   
   .slide-inner {
     border-left: 1px solid #dedede;
@@ -107,8 +111,6 @@ $twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize)
     .crop {
       position: relative;
       overflow: hidden;
-      width: 445px;
-      height: 210px;
       
       img {
         /* position: absolute; */
@@ -135,19 +137,46 @@ $twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize)
         text-transform: uppercase;
       }
     }
-  }
-  
-  .introbox {
-    .inner-box {
-      background-color: #000;
-      color: #fff;
     
-      p {
-        font-size: 0.8em;
+    &.citieslist ul {
+      display: inline;
+      text-transform: uppercase;
+      font-family: BureauGrotesque, Anton;
+      font-size: 2em;
+    
+      li {
+        display: inline;
+        
+        &::after {
+          content: ' ';
+        }
+        
+        &.alternate {
+          color: #999;
+        }
+      
+        a, a:active, a:visited {
+          color: inherit;
+        }
+      
+        a:hover {
+          color: #990000;
+        }
+      }
+    }
+    
+    &.introbox {
+      .inner-box {
+        background-color: #000;
+        color: #fff;
+    
+        p {
+          font-size: 0.9em;
+        }
       }
     }
   }
-  
+
   .feature_info {
     @include single-transition(background-color, 0.5s, ease-in-out, 0s);
     // background: url("/images/X/interface/toc_project_bg.png") repeat scroll left top transparent;
@@ -192,29 +221,6 @@ $twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize)
     
     li {
       list-style-type: inherit;
-    }
-  }
-  
-  ul.citieslist {
-    display: inline;
-    text-transform: uppercase;
-    font-family: BureauGrotesque, Anton;
-    font-size: 2em;
-    
-    li {
-      display: inline;
-      
-      &.alternate {
-        color: #999;
-      }
-      
-      a, a:active, a:visited {
-		color: inherit;
-      }
-      
-      a:hover {
-        color: #990000;
-      }
     }
   }
 

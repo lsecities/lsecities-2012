@@ -1,4 +1,17 @@
 // font-face fonts
 // see http://compass-style.org/docs/reference/compass/css3/font_face/
 
-//@import "compass/css3/font-face"
+@import "compass/css3/font-face";
+
+//@include font-face('nevisBold', font-files('fonts/webfont_nevis/nevis-webfont.eot', embedded-opentype, 'fonts/webfont_nevis/nevis-webfont.woff', woff, 'fonts/webfont_nevis/nevis-webfont.ttf', truetype,  'fonts/webfont_nevis/nevis-webfont.svg#nevisBold', svg));
+
+@font-face {
+    font-family: 'nevisBold';
+    src: url('fonts/webfont_nevis/nevis-webfont.eot');
+    src: url('fonts/webfont_nevis/nevis-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/webfont_nevis/nevis-webfont.woff') format('woff'),
+         url('fonts/webfont_nevis/nevis-webfont.ttf') format('truetype'),
+         url('fonts/webfont_nevis/nevis-webfont.svg#nevisBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
