@@ -263,7 +263,7 @@ nav {
 }
 
 p {
-  margin-bottom: 1.625em;
+  margin-bottom: 1.5em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -273,6 +273,11 @@ h1, h2, h3, h4, h5, h6 {
 
 ul {
   list-style-type: none;
+  
+  li {
+    line-height: 1.2em;
+    margin-bottom: 0.6em;
+  }
 }
 
 .alignleft {
@@ -298,6 +303,7 @@ header {
   h1.entry-title {
     font-size: 2em;
     margin-bottom: 1.2em;
+    font-family: $main-headings-font-family;
   }
 }
 
@@ -305,7 +311,7 @@ header {
 
   h1 {
     font-size: 2em;
-    margin-bottom: 1.2em;
+    margin-bottom: 1em;
     
     &.mainheading {
       font-size: 3em;
@@ -314,10 +320,10 @@ header {
   
   h2 {
     font-size: 1.5em;
-    margin-bottom: 1.1em;
+    margin-bottom: 1em;
     
     &.mainheading {
-      font-size: 2.4em;
+      font-size: 2.5em;
     }
   }
   
@@ -325,13 +331,7 @@ header {
     font-size: 1.2em;
     margin-bottom: 1em;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    &.mainheading {
-      font-family: $main-headings-font-family;
-    }
-  }
-  
+
   .article-text img {
     max-width: 100%;
   }
@@ -344,7 +344,7 @@ header {
   
     p {
       font-size: 1.25em;
-      line-height: 1.25em;
+      line-height: 1.2em;
     }
   }
   

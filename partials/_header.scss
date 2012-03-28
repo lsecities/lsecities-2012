@@ -89,37 +89,6 @@ body > #container > header {
   &:hover {
     opacity: 1;
   }
-}
-
-  nav#level1nav,
-  nav#level2nav {
-    line-height: 1.2em;
-    font-family: $headings-font-family;
-    text-transform: uppercase;
-    margin: 0.25em 0;
-  }
-
-  #level1nav {
-    ul li {
-      border-bottom: 5px solid transparent;
-      
-      a, a:active, a:visited {
-        color: #000;
-      }
-      
-      &.current, &.current_page_item, &.current_page_ancestor {
-        border-bottom-color: #666;
-      }
-	  
-      &:hover:not(.current), &:hover:not(.current_page_item) {
-        border-bottom: 5px solid;
-      }
-      
-      &:hover:not(.current), &:hover:not(.current_page_item) {
-        border-bottom-color: transparentize(#000, 0.1);
-      }
-    }
-  }
  
   #level2nav {
 		padding-top: 0.5em;
@@ -164,6 +133,42 @@ body > #container > header {
       background-color: inherit;
     }
   }
+}
+
+nav#level1nav,
+nav#level2nav {
+  line-height: 1.2em;
+  font-family: $headings-font-family;
+  text-transform: uppercase;
+  margin: 0.25em 0;
+  
+  ul li {
+    line-height: 1em;
+    margin-bottom: 0;
+  }
+}
+
+#level1nav {
+  ul li {
+    border-bottom: 5px solid transparent;
+    
+    a, a:active, a:visited {
+      color: #000;
+    }
+    
+    &.current, &.current_page_item, &.current_page_ancestor {
+      border-bottom-color: #666;
+    }
+  
+    &:hover:not(.current), &:hover:not(.current_page_item) {
+      border-bottom: 5px solid;
+    }
+    
+    &:hover:not(.current), &:hover:not(.current_page_item) {
+      border-bottom-color: transparentize(#000, 0.1);
+    }
+  }
+}
 
 header #searchbox {
   float: right;
