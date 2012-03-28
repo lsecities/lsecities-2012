@@ -1,0 +1,20 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+
+#speaker-profiles {
+  h1 {
+    font-size: 1.2em;
+  }
+  
+  .people-list {
+    .person {
+      h1 {
+        font-size: 1em;
+        font-weight: bold;
+        text-transform: inherit;
+        border-bottom: $list-divider;
+      }
+    }
+  }
+}

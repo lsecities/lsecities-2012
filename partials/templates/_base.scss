@@ -1,0 +1,84 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+
+$section_divider: unquote('1px solid #ff0000');
+$list_divider: unquote('1px solid #eee');
+
+@mixin inline-lists {
+  ul {
+    display: inline;
+    
+    & > li {
+      display: inline;
+    }
+    
+    li:after {
+      content: ', ';
+    }
+    
+    li:last-child:after {
+      content: '';
+    }
+  }
+}
+
+#main {
+  margin-top: 1em;
+}
+
+#contentarea {
+  .top-content {
+    article {
+      header {
+        margin-bottom: 1em;
+        
+        h1 {
+          font-family: $main-headings-font-family;
+          font-weight: 900;
+          border-bottom: $section_divider;
+        }
+      }
+    }
+  }
+  
+  .extra-content {
+    border-top: $section_divider;
+  }
+}
+
+#keyfacts, #navigationarea nav {
+  dl dt {
+    text-transform: uppercase;
+    border-bottom: $list_divider;
+  }
+}
+
+#navigationarea {
+  nav {
+    h1 {
+      font-size: 1em;
+    }
+  }
+}
+
+#keyfacts-short {
+  dl {
+    dt {
+      float: left;
+      margin-right: 0.5em;
+      
+      &:after {
+        content: ': ';
+      }
+    }
+    
+    @include inline-lists;
+  }
+}
+
+#keyfacts {
+  dl dd {
+    @include inline-lists;
+  }
+}

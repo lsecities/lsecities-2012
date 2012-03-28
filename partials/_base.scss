@@ -1,12 +1,12 @@
 // This file must be imported before loading html5-boilerplate
 
-$main-headings-font-family: unquote('nevisBold, PT Sans, sans-serif');
+$main-headings-font-family: unquote('museo-sans, nevisBold, PT Sans, sans-serif');
 
-$headings-font-family: unquote('PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif');
+$headings-font-family: unquote('nimbus-sans, PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif');
 
 $base-font-family: $headings-font-family;  // default font-family
 
-$article-font-family: unquote('PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif'); // default font-family for page body
+$article-font-family: unquote('ff-meta-web-pro, nimbus-sans, PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif'); // default font-family for page body
 
 $base-font-size: 16px;  // default font-size for YUI fonts
 
