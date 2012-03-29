@@ -6,13 +6,15 @@ $headings-font-family: unquote('nimbus-sans, PT Sans, ff-meta-web-pro, UbuntuReg
 
 $base-font-family: $headings-font-family;  // default font-family
 
-$article-font-family: unquote('ff-meta-web-pro, nimbus-sans, PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif'); // default font-family for page body
+$article-font-family: unquote('nimbus-sans, PT Sans, ff-meta-web-pro, UbuntuRegular, Tahoma, Elvetica, sans-serif'); // default font-family for page body
 
 $base-font-size: 16px;  // default font-size for YUI fonts
 
 $base-line-height: 1.5;  // default line-height for YUI fonts
 
 $font-color: #000;
+
+$headings-font-color: #22273b;
 
 $link-color: #900;
 

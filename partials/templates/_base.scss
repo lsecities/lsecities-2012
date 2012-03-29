@@ -37,6 +37,7 @@ $list_divider: unquote('1px solid #eee');
           font-family: $main-headings-font-family;
           font-weight: 900;
           border-bottom: $section_divider;
+          color: $headings-font-color;
         }
       }
     }
