@@ -50,13 +50,26 @@ $list_divider: unquote('1px solid #eee');
 
 #keyfacts, #navigationarea nav {
   dl dt {
-    text-transform: uppercase;
     border-bottom: $list_divider;
+    margin-top: 1em;
+    
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 
 #navigationarea {
   nav {
+    dl {
+      dt.ui-accordion-header::before {
+        content: '►';
+      }
+      dt.ui-accordion-header.ui-state-active::before {
+        content: '▼';
+      }
+    }
+    
     h1 {
       font-size: 1em;
     }

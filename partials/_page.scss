@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6 {
   // Bold might not be the best choice if you are
   // embedding a @font-face that's already bold
   font-weight: normal;
+  line-height: 1.5em;
 }
 
 a, a:active, a:visited { color: $link-color; }
@@ -307,6 +308,10 @@ header {
   }
 }
 
+.article-text img {
+  max-width: 100%;
+}
+  
 #main {
 
   h1 {
@@ -327,10 +332,6 @@ header {
   
   h3 {
     font-size: 1.2em;
-  }
-
-  .article-text img {
-    max-width: 100%;
   }
   
   article .introblurb {
