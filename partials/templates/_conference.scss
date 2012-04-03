@@ -3,7 +3,12 @@
 @import "compass/css3/box-shadow";
 
 #speaker-profiles {
+  h1 {
+    font-size: 1.2em;
+  }
+  
   .people-list {
+    
     .person {
       h1 {
         font-size: 1em;
