@@ -2,7 +2,8 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 
-$section_divider: unquote('1px solid #ff0000');
+$palette_red: unquote('#e93616');
+$section_divider: unquote('1px solid $palette_red');
 $list_divider: unquote('1px solid #eee');
 
 @mixin inline-lists {
@@ -28,6 +29,17 @@ $list_divider: unquote('1px solid #eee');
 }
 
 #contentarea {
+  extra-content > section {
+    border-top: 1px solid $palette_red;
+    
+    & > h1 {
+      color: #fff;
+      background-color: $palette_red;
+      display: inline-block;
+      padding: 0 0.5em;
+    }
+  }
+  
   .top-content {
     article {
       header {
@@ -36,15 +48,10 @@ $list_divider: unquote('1px solid #eee');
         h1 {
           font-family: $main-headings-font-family;
           font-weight: 900;
-          border-bottom: $section_divider;
           color: $headings-font-color;
         }
       }
     }
-  }
-  
-  .extra-content {
-    border-top: $section_divider;
   }
 }
 
@@ -62,11 +69,13 @@ $list_divider: unquote('1px solid #eee');
 #navigationarea {
   nav {
     dl {
-      dt.ui-accordion-header::before {
-        content: '►';
+      dt.ui-accordion-header {
+        background-image: url('http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/bullet-horizontal.gif');
+        padding-left: 1em;
       }
-      dt.ui-accordion-header.ui-state-active::before {
-        content: '▼';
+      dt.ui-accordion-header.ui-state-active {
+        background-image: url('http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/bullet-vertical.gif');
+        padding-left: 1em;
       }
     }
     
