@@ -52,14 +52,15 @@ $list_divider: unquote('1px solid #eee');
   
   .top-content {
   
-    header.heading-image {
+    .photospread {
       overflow: hidden; // TODO : remove after all images are re-exported to correct ratio
       height: 21.125em; // TODO : remove after all images are re-exported to correct ratio
-      
-      .photospread img {
+        
+      img {
         width: 100%; // TODO : remove after all images are re-exported to correct ratio
       }
     }
+    
     article {
       header {
         margin-bottom: 1em;
