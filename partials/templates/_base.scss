@@ -34,6 +34,16 @@ $list_divider: unquote('1px solid #eee');
   padding-left: 2.5em;
 }
 
+header.entry-header { // TODO : remove once all templates have been refactored to new scheme
+  margin-bottom: 1.5em;
+  
+  h1 {
+    font-family: $main-headings-font-family;
+    font-weight: 900;
+    color: $headings-font-color;
+  }
+}
+
 #contentarea {
   .extra-content > section {
     clear: both;
@@ -52,6 +62,10 @@ $list_divider: unquote('1px solid #eee');
   
   .top-content {
   
+    & > header {
+      margin-bottom: 1em;
+    }
+    
     .photospread {
       overflow: hidden; // TODO : remove after all images are re-exported to correct ratio
       height: 21.125em; // TODO : remove after all images are re-exported to correct ratio
@@ -72,6 +86,12 @@ $list_divider: unquote('1px solid #eee');
         }
       }
     }
+    
+    aside {
+      *:first-child {
+        margin-top: 0.625em;
+      }
+    }
     margin-bottom: 1em;
   }
 }
@@ -89,6 +109,12 @@ $list_divider: unquote('1px solid #eee');
 
 #navigationarea {
   nav {
+    margin-top: 2.5em;
+    
+    &:first-child {
+      margin-top: inherit;
+    }
+    
     dl {
       dt.ui-accordion-header {
         background: url('http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/bullet-horizontal.gif') no-repeat 0 0.25em;
