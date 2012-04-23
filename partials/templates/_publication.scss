@@ -4,7 +4,45 @@
 @import "compass/css3/columns";
 
 .lc-publication {
-  #pressarea dl.reviews {
-    @include column-count(2);
+  #keyfacts {
+    .cover-thumbnail img {
+      width: 60%
+    }
+  }
+  
+  #wp-posts-reviews {
+    dl.posts {
+      // @include column-count(2);
+    }
+  }
+  
+  #tableofcontents {
+    .articles {
+      & > section {
+        margin-bottom: 1em;
+        
+        & > h1 {
+          font-size: 1.5em;
+          line-height: 2em;
+          font-weight: bold;
+        }
+        
+        .article {
+          margin-bottom: 0.5em;
+        
+          & > h1 {
+            font-size: 1.3em;
+          }
+          
+          .authors {
+            font-size: 0.8em;
+          }
+          
+          .excerpt {
+            font-size: 1em;
+          }
+        }
+      }
+    }
   }
 }
