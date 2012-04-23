@@ -197,3 +197,17 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     @include inline-lists;
   }
 }
+
+#share-on-social-media {
+  float: right;
+  
+  & > h1 {
+    display: inline;
+    font-size: 1em;
+  }
+  
+  & > ul, & > ul > li {
+    display: inline;
+    vertical-align: middle;
+  }
+}
