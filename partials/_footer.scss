@@ -26,16 +26,27 @@ footer {
   border-top: 1px solid #E5E5E0;
   margin-top: 20px;
   padding: 40px;
+  color: #fff;
 
   h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin-bottom: 0.5em;
+    color: #fff;
+    border-bottom: 1px solid #ccc;
   }
   
   ul {
     list-style-type: none;
   }
- 
+  
+  a, a:visited, a:active {
+    color: #ee2222;
+  }
+  
+  a:hover {
+    color: #ccc;
+  }
+  
   #footerSitemap {
     ul li > ul {
       margin-top: 0.5em;
@@ -45,8 +56,6 @@ footer {
       margin-bottom: 1.5em;
     
       & > section > ul {
-        @include column-count(2);
-      
         li {
           line-height: 1em;
           margin-bottom: 0.5em;

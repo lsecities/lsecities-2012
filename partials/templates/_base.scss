@@ -34,6 +34,14 @@ $list_divider: unquote('1px solid #eee');
   padding-left: 2.5em;
 }
 
+header.heading-image {
+  .flexslider {
+    .flex-direction-nav li a {
+      top: ((352-64)/2)px;
+    }
+  }
+}
+
 header.entry-header { // TODO : remove once all templates have been refactored to new scheme
   margin-bottom: 1.5em;
   
@@ -217,4 +225,12 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     display: inline;
     vertical-align: middle;
   }
+}
+
+.downloadthis.pdf {
+  background: url("http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+}
+
+footer {
+  background: url("http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
 }
