@@ -1,8 +1,8 @@
 @import "compass/css3";
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
+@import "palette";
 
-$palette_red: unquote('#e93616');
 $section_divider: unquote('1px solid $palette_red');
 $list_divider: unquote('1px solid #eee');
 
@@ -45,6 +45,13 @@ header.entry-header { // TODO : remove once all templates have been refactored t
 }
 
 #contentarea {
+  
+  .top-content {
+    .entry-content .abstract {
+      font-size: 0.9em;
+    }
+  }
+  
   .extra-content {
     & > section, & > aside {
       margin-top: 2em;

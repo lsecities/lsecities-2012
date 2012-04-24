@@ -29,13 +29,13 @@
 @import "partials/main";
 @import "partials/footer";
 @import "partials/articles";
-@import "partials/slidergrid";
 
 // Final designs - main frame and one SCSS per template
 // @import "eleven40/reset";
 // @import "eleven40/base";
 // @import "eleven40/typography";
 @import "partials/templates/base";
+@import "partials/templates/slider";
 @import "partials/templates/event";
 @import "partials/templates/article";
 @import "partials/templates/conference";

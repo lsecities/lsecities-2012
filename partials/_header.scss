@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "templates/palette";
 
 //-----------------------------------
 // Add your own custom styles below
@@ -22,7 +23,7 @@ body > #container > header {
 
   ul {
    float: right;
-   padding-top: 0.125em;
+   // padding-top: 0.125em;
   }
  }
  
@@ -47,7 +48,7 @@ body > #container > header {
  
  #logo.full {
   background: url("../images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
-  height: 5.125em;
+  height: 3.6875em;
   margin-top: 0.166667em;
   text-indent: -9999px;
  }
@@ -90,10 +91,7 @@ body > #container > header {
     opacity: 1;
   }
  
-  #level2nav {
-		padding-top: 0.5em;
-		height: 26px;
-	
+  #level2nav {	
     h1 {
       display: inline-block;
       color: #ffffff;
@@ -108,7 +106,9 @@ body > #container > header {
 	  
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
         a {
-          border-bottom: #ffffff 5px solid;
+          // border-bottom: #ffffff 5px solid;
+          background-color: #ddd;
+          color: #000;
         }
       }
       
@@ -116,10 +116,12 @@ body > #container > header {
         color: #ffffff;
         display: block;
         margin: 0;
-        border-bottom: 5px solid transparent;
+        // border-bottom: 5px solid transparent;
     
         &:hover {
-          border-bottom: 5px solid #ffffff;
+          // border-bottom: 5px solid #ffffff;
+          background-color: transparentize(#ddd, 0.2);
+          color: #000;
         }
       }
     }
@@ -140,40 +142,47 @@ nav#level2nav {
   line-height: 1.2em;
   font-family: $headings-font-family;
   text-transform: uppercase;
-  margin: 0.25em 0;
   
   ul li {
-    line-height: 1em;
+    line-height: 1.5em;
     margin-bottom: 0;
   }
 }
 
 #level1nav {
   ul li {
-    border-bottom: 5px solid transparent;
+    // border-bottom: 5px solid transparent;
     
     a, a:active, a:visited {
       color: #000;
     }
     
     &.current, &.current_page_item, &.current_page_ancestor {
-      border-bottom-color: #666;
+      // border-bottom-color: #666;
+      background-color: $palette_red;
+      color: #fff;
+      
+      a {
+        color: #fff;
+      }
     }
-  
+
     &:hover:not(.current), &:hover:not(.current_page_item) {
-      border-bottom: 5px solid;
-    }
-    
-    &:hover:not(.current), &:hover:not(.current_page_item) {
-      border-bottom-color: transparentize(#000, 0.1);
+      background-color: transparentize($palette_red, 0.2);
+      a {
+        color: #fff;
+      }
     }
   }
 }
 
 header #searchbox {
-  float: right;
+  #socialbuttons {
+    float: right;
+  }
   
   form {
+    float: right;
     opacity: 0.3;
     font-size: 0.75em;
   
@@ -190,10 +199,12 @@ header #searchbox {
 
 header #searchbox input#queryfield {
   background: url("../images/icons/search_icon.png") no-repeat scroll right center transparent;
-  border: 1px solid #CCCCCC;
-  height: 1.2em;
-  margin-bottom: 0.25em;
-  padding: 3px 0;
+  border: 2px solid #CCCCCC;
+  height: 2em;
+  padding: 0 0.25em;
+  font-size: 1em;
+  line-height: 1em;
+  @include border-radius(0.25em);
 }
 
 header #socialbuttons {
