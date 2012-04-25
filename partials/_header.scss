@@ -82,6 +82,15 @@ body > #container > header {
    }
   }
  }
+ 
+ #socialbuttons {
+  ul li {
+    a {
+      margin: 0 0.3125em;
+      padding: 0;
+    }
+  }
+ }
 }
 
 #mainmenus {
@@ -120,7 +129,8 @@ body > #container > header {
     
         &:hover {
           // border-bottom: 5px solid #ffffff;
-          background-color: transparentize(#ddd, 0.2);
+          /// background-color: transparentize(#ddd, 0.2);
+          background-color: #ddd;
           color: #000;
         }
       }
@@ -144,8 +154,12 @@ nav#level2nav {
   text-transform: uppercase;
   
   ul li {
-    line-height: 1.5em;
+    line-height: 2em;
     margin-bottom: 0;
+    
+    a {
+      padding-top: 0.125em;
+    }
   }
 }
 
@@ -168,7 +182,8 @@ nav#level2nav {
     }
 
     &:hover:not(.current), &:hover:not(.current_page_item) {
-      background-color: transparentize($palette_red, 0.2);
+      /// background-color: transparentize($palette_red, 0.2);
+      background-color: $palette_red;
       a {
         color: #fff;
       }
@@ -185,6 +200,7 @@ header #searchbox {
     float: right;
     opacity: 0.3;
     font-size: 0.75em;
+    margin-left: 0.625em;
   
     &:hover {
       opacity: 0.9;

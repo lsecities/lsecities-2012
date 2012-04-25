@@ -29,7 +29,7 @@ $list_divider: unquote('1px solid #eee');
 }
 
 .twitterbox {
-  background: url("http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/tweet.gif") no-repeat scroll 0 50% transparent;
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/tweet.gif") no-repeat scroll 0 50% transparent;
   line-height: 2em;
   padding-left: 2.5em;
 }
@@ -137,11 +137,11 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     
     dl {
       dt.ui-accordion-header {
-        background: url('http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/bullet-horizontal.gif') no-repeat 0 0.25em;
+        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-horizontal.gif') no-repeat 0 0.25em;
         padding-left: 1em;
       }
       dt.ui-accordion-header.ui-state-active {
-        background: url('http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/icons/mal/bullet-vertical.gif') no-repeat 0 0.25em;
+        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-vertical.gif') no-repeat 0 0.25em;
         padding-left: 1em;
       }
     }
@@ -224,13 +224,20 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   & > ul, & > ul > li {
     display: inline;
     vertical-align: middle;
+    
+    a img {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
 .downloadthis.pdf {
-  background: url("http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
 }
 
 footer {
-  background: url("http://v1.lsecities.net/wp-content/themes/twentyeleven-child-lsecities/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
 }
