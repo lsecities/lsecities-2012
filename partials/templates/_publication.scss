@@ -5,8 +5,25 @@
 
 .lc-publication {
   #keyfacts {
-    .cover-thumbnail img {
-      width: 60%
+    & > div {
+      padding: 0 4em;
+    }
+    
+    dl dt {
+      border-bottom: none;
+    }
+  }
+  
+  .publication-sections {
+    margin-top: 2em;
+    
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    
+    ul li {
+      line-height: 1.125em;
+      margin-bottom: 0.5em;
     }
   }
   
@@ -22,7 +39,7 @@
         margin-bottom: 1em;
         
         & > h1 {
-          font-size: 1.5em;
+          font-size: 1.125em;
           line-height: 2em;
           font-weight: bold;
         }

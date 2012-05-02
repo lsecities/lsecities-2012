@@ -20,9 +20,9 @@
   }
 }
 
-footer {
+footer#footer {
   font-size: 0.75em;
-  background: none repeat scroll 0 0 #F1F1EC;
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
   border-top: 1px solid #E5E5E0;
   margin-top: 20px;
   padding: 40px;
@@ -32,11 +32,12 @@ footer {
     font-weight: bold;
     margin-bottom: 0.5em;
     color: #fff;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.6);
   }
   
   ul {
     list-style-type: none;
+    margin-bottom: 2em;
   }
   
   a, a:visited, a:active {

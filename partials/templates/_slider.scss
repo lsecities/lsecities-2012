@@ -6,25 +6,34 @@
 $slider_full_pxwidth: 1140;
 $columns: 5;
 $slider_base_font_pxsize: 14;
-$tile_base_emwidth: $slider_full_pxwidth / $columns / $slider_base_font_pxsize;
-$tile_base_emheight: $tile_base_emwidth;
+$tile_base_emwidth: ($slider_full_pxwidth / $columns / $slider_base_font_pxsize);
+$tile_base_emheight: (224/14);
 $tile_pxpadding: 0;
 $tile_padding: $tile_pxpadding/$slider_base_font_pxsize;
-$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns ) - 0.8;
+$tile_pxmargin: 2;
+$tile_margin: ($tile_pxmargin / $slider_base_font_pxsize);
+$tile_tall_emheight: (($tile_base_emheight * 2) + (($tile_pxmargin / $slider_base_font_pxsize) * 2));
+$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxmargin * 2) - ($columns + 1)) / $columns ) + 1.2;
 $onetile_emwidth: ($onetile_pxwidth / $slider_base_font_pxsize);
 //$onetilecolumn_emwidth: (($onetile_pxwidth + 2) / $slider_base_font_pxsize);
 $onetilecolumn_emwidth: $tile_base_emwidth;
-$twotiles_pxwidth: (((($slider_full_pxwidth - ($columns * $tile_pxpadding * 2) - ($columns + 1)) / $columns * 2) + $tile_pxpadding *2));
+$twotiles_pxwidth: (((($slider_full_pxwidth - ($columns * $tile_pxmargin * 2) - ($columns + 1)) / $columns * 2) + $tile_pxmargin *2)) + 3;
 $twotiles_emwidth: ($twotiles_pxwidth / $slider_base_font_pxsize);
 //$twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize);
 $twotilescolumn_emwidth: $tile_base_emwidth * 2;
-$innersliderborder: 1px solid #fefefe;
+$innersliderborder: 0px solid transparent;
 
 .lc-slider-page {
+  #main {
+    margin-top: 0;
+  }
+  
   .flexslider {
     font-family: $base-font-family;
     position: relative;
     font-size: 0.875em;
+    margin-left: -2px;
+    margin-right: -2px;
     
     .flex-direction-nav li a {
       top: ((467-64)/2)px;
@@ -56,24 +65,36 @@ $innersliderborder: 1px solid #fefefe;
     }
   
     .tile {
+      // background-color: #ccc; // for tests only
       border-right: $innersliderborder;
       border-top: $innersliderborder;
       float: left;
       padding: #{$tile_padding}em;
+      margin: #{$tile_margin}em;
       overflow: hidden;
       position: relative;
       min-height: 210px;
       height: #{$tile_base_emheight}em;
       
+      a, a:hover, a:active, a:visited {
+        color: inherit;
+      }
+      
       &.tall {
-        height: #{$tile_base_emheight*2}em;
+        height: #{$tile_tall_emheight}em;
       }
       
       &:hover {
-        .feature_title, .feature_caption {
+        header, .feature_title, .feature_caption, .feature_date {
           //-moz-transition: visibility 0.2s ease-in-out 0.5s;
           //transition: visibility 0.2s ease-in-out 0.5s;
           display: none;
+        }
+        
+        .feature_info.noblurb {
+          header, .feature_title, .feature_caption, .feature_date {
+            display: inherit;
+          }
         }
   
         .feature_info.textonly  {
@@ -86,11 +107,13 @@ $innersliderborder: 1px solid #fefefe;
           //-moz-transition: max-height 0.2s ease-in-out 0s;
           //transition: max-height 0.2s ease-in-out 0s;
           max-height: 75%;
+          background:url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
         }
         
         .feature_info {
           @include single-transition(background-color, 0.5s, ease-in-out, 0s);
           background-color: #000;
+          background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
           max-height: 75%;
         }
         
@@ -112,7 +135,7 @@ $innersliderborder: 1px solid #fefefe;
       
       
       .inner-box {
-      padding: 0.3125em;
+        padding: 0.714285714em;
       }
       
       .crop {
@@ -122,15 +145,16 @@ $innersliderborder: 1px solid #fefefe;
         img {
           /* position: absolute; */
           margin: 0;
+          width: 100%; // only until we have all images of correct size
         }
       }
       
       &.databox {
         
-        font-family: BureauGrotesque, Anton;
+        font-family: $grotesque-font-family;
         
         h1 {
-          font-family: BureauGrotesque, Anton;
+          font-family: $grotesque-font-family;
           text-transform: uppercase;
           font-weight: bold;
           font-size: 6em !important;
@@ -148,7 +172,7 @@ $innersliderborder: 1px solid #fefefe;
       &.citieslist ul {
         display: inline;
         text-transform: uppercase;
-        font-family: BureauGrotesque, Anton;
+        font-family: $grotesque-font-family;
         font-size: 2em;
       
         li {
@@ -175,6 +199,11 @@ $innersliderborder: 1px solid #fefefe;
       &.introbox {
         background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
 
+        h1 {
+          border-bottom: 1px $palette_red solid;
+          margin-bottom: 0.225em;
+        }
+        
         .inner-box {
           color: #fff;
       
@@ -187,21 +216,66 @@ $innersliderborder: 1px solid #fefefe;
   
     .feature_info {
       @include single-transition(background-color, 0.5s, ease-in-out, 0s);
-      // background: url("/images/X/interface/toc_project_bg.png") repeat scroll left top transparent;
-      background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
       bottom: 0;
       color: #F8F8F8;
       cursor: pointer;
       line-height: 1em;
-      padding: 10px;
-      margin: 0.3125em;
+      padding-left: 0.714285em;
+      padding-right: 0.714285em;
+      padding-top: 0.714285em;
+      padding-bottom: 0.3571428em;
       position: absolute;
       left: 0;
       right: 0;
+      z-index: 1;
+
+      &:before {
+       content:"";
+       position:absolute;
+       z-index:-1;
+       top:0;
+       bottom:0;
+       left:0;
+       right:0;
+       background:url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+       opacity:0.7;
+      }
       
-      .feature_title, .feature_caption {
-        //-moz-transition: visibility 0.2s ease-in-out 0.5s;
-        //transition: visibility 0.2s ease-in-out 0.5s;
+      p {
+        margin: 0;
+      }
+      
+      header {
+        display: table-cell;
+        vertical-align: middle;
+        
+        .feature_title, .feature_caption {
+          //-moz-transition: visibility 0.2s ease-in-out 0.5s;
+          //transition: visibility 0.2s ease-in-out 0.5s;
+        }
+      }
+
+      .feature_date {
+        border-right: 1px solid $palette_red;
+        display: table-cell;
+        padding-right: 0.714285em;
+        vertical-align: middle;
+        text-align: center;
+
+        
+        & + header {
+          padding-left: 0.714285em;
+        }
+                
+        .month {
+          font-size: 0.8em;
+        }
+        
+        .day {
+          font-size: 1.5em;
+          font-weight: bold;
+          line-height: 1em;
+        }
       }
       
       .feature_title {
@@ -213,13 +287,10 @@ $innersliderborder: 1px solid #fefefe;
       }
       
       .feature_blurb {
-        //-moz-transition: max-height 0.5s ease-in-out 0s;
-        //transition: max-height 0.5s ease-in-out 0s;
         float: left;
         line-height: 1.08em;
         max-height: 0;
         overflow: hidden;
-        padding-top: 5px;
         width: 100%;
       }
     }

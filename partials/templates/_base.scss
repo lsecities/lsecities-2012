@@ -1,6 +1,7 @@
 @import "compass/css3";
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
+@import "compass/css3/transform";
 @import "palette";
 
 $section_divider: unquote('1px solid $palette_red');
@@ -24,14 +25,33 @@ $list_divider: unquote('1px solid #eee');
   }
 }
 
+@mixin red-flag-header {
+  margin-top: 2em;
+  
+  & > header {
+    border-top: 1px solid $palette_red;
+  
+    & > h1 {
+      color: #fff;
+      background-color: $palette_red;
+      display: inline-block;
+      padding: 0 0.5em;
+      margin-bottom: 1em;
+      font-size: 1.125em;
+      line-height: 1.3em;
+      font-weight: bold;
+    }
+  }
+}
+
 #main {
   margin-top: 1em;
 }
 
 .twitterbox {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/tweet.gif") no-repeat scroll 0 50% transparent;
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_twitter-v1darkblue_24x24.png") no-repeat scroll 0 50% transparent;
   line-height: 2em;
-  padding-left: 2.5em;
+  padding-left: 2em;
 }
 
 header.heading-image {
@@ -52,6 +72,35 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   }
 }
 
+.lc-event-programme { // TODO: move this to event-programme template SCSS file and reuse mixin from there
+  #contentarea {
+    section {
+      @include red-flag-header;
+      
+      & > header > h1 {
+        margin-bottom: 0;
+      }
+    }
+    
+    .event-programme {
+      .session-chairs {
+        dt, dd {
+          display: inline;
+        }
+      }
+      
+      ul.mediaitems {
+        display: inline;
+        
+        & > li {
+          display: inline;
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+}
+
 #contentarea {
   
   .top-content {
@@ -60,23 +109,14 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     }
   }
   
+  section > h1 {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
   .extra-content {
     & > section, & > aside {
-      margin-top: 2em;
-      
-      & > header {
-        border-top: 1px solid $palette_red;
-      
-        & > h1 {
-          color: #fff;
-          background-color: $palette_red;
-          display: inline-block;
-          padding: 0 0.5em;
-          margin-bottom: 1em;
-          font-size: 1.2em;
-          line-height: 1.2em;
-        }
-      }
+      @include red-flag-header;
     }
   }
   
@@ -85,16 +125,7 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     & > header {
       margin-bottom: 1em;
     }
-    
-    .photospread {
-      overflow: hidden; // TODO : remove after all images are re-exported to correct ratio
-      height: 21.125em; // TODO : remove after all images are re-exported to correct ratio
-        
-      img {
-        width: 100%; // TODO : remove after all images are re-exported to correct ratio
-      }
-    }
-    
+
     article {
       header {
         margin-bottom: 1em;
@@ -106,24 +137,41 @@ header.entry-header { // TODO : remove once all templates have been refactored t
         }
       }
     }
-    
-    aside {
-      *:first-child {
-        margin-top: 0.625em;
-      }
-    }
+
     margin-bottom: 1em;
   }
 }
 
-#keyfacts, #navigationarea nav {
+#keyfacts, #navigationarea {
+  font-size: 90%;
+  
   dl dt {
     border-bottom: $list_divider;
-    margin-top: 1em;
+    margin-top: 0.5em;
     
     &:first-child {
       margin-top: 0;
     }
+  }
+  
+  &.minorfacts {
+    dl dt {
+      border-bottom: none;
+    }
+  }
+}
+
+#contentarea {
+  #keyfacts, #navigationarea {
+    font-size: 100%;
+  }
+}
+
+div.widget {
+  margin-bottom: 1em;
+  
+  h2 {
+    margin-bottom: 0.5em;
   }
 }
 
@@ -136,13 +184,15 @@ header.entry-header { // TODO : remove once all templates have been refactored t
     }
     
     dl {
-      dt.ui-accordion-header {
-        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-horizontal.gif') no-repeat 0 0.25em;
-        padding-left: 1em;
+      dt.ui-accordion-header:before {
+        content: '';
+        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-horizontal.gif') no-repeat 0;
+        padding-left: 0.75em;
       }
-      dt.ui-accordion-header.ui-state-active {
-        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-vertical.gif') no-repeat 0 0.25em;
-        padding-left: 1em;
+      dt.ui-accordion-header.ui-state-active:before {
+        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-vertical.gif') no-repeat 0;
+        padding-left: 0.75em;
+        // @include transform(rotate(90deg));
       }
     }
     
@@ -177,7 +227,7 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   
   .citieslist li {
     text-transform: uppercase;
-    font-family: BureauGrotesque, Anton;
+    font-family: $grotesque-font-family;
     font-size: 1.2em;
     line-height: 1em;
     
@@ -238,6 +288,14 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   padding-bottom: 8px;
 }
 
-footer {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+.readthis.online {
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
+}
+
+.watchvideo.onyoutube {
+  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
 }

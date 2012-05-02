@@ -6,10 +6,11 @@
   .people-list {
     .person {
       h1 {
-        font-size: 1em;
+        font-size: 1.125em;
         font-weight: bold;
         text-transform: inherit;
         border-bottom: $list-divider;
+        margin-bottom: 0.444444444em;
       }
     }
   }

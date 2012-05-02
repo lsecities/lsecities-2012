@@ -4,9 +4,11 @@
 
 .lc-newspaper-article {
   header.heading-image img {
+    max-width: 100%;
     width: 100%;
   }
-  
+
+/* // TODO: re-enable once all the articles have been reviewed and pullquotes added
   .has-pullquote::before {
     content: attr(data-pullquote);
     
@@ -22,14 +24,16 @@
     font-size: 1.5em;
     line-height: 1.25em;
   }
-  
+
   .has-pullquote::before::before {
     content: '"';
     color: #ff0000;
   }
+*/
 
   article .article {
     .entry-content, .extra-content {
+/* // TODO: re-enable once all the article photos have been double checked
       img {
         float: right;
         margin-left: 1.5em;
@@ -38,6 +42,29 @@
         position: relative;
         width: 150%;
       }
+*/
     }
+  }
+  
+}
+
+#publication-side-toc {
+  margin-top: 0.625em;
+  
+  h1 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  h2 {
+    font-size: 1em;
+    margin-bottom: 0.25em;
+    margin-top: 1em;
+  }
+  
+  ul li {
+    line-height: 1.125em;
+    margin-bottom: 0.3em;
   }
 }
