@@ -46,28 +46,12 @@ body > #container > header {
   }
  }
  
- #logo.full {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/logo_lsecities_strapline.gif") no-repeat scroll 0 0 transparent;
-  // height: 3.6875em;
-  height: 4em;
-  margin-top: 0.166667em;
-  text-indent: -9999px;
- }
- 
- #logo.full.violence {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/logo_lsecities_fullred.png") no-repeat scroll 0 0 transparent;
- }
-
- #logo.small {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/logo_lsecities_nostrapline_small.gif") no-repeat scroll left bottom transparent;
-  height: 5.125em; /* kept consistent with #logo.full to allow bottom alignment */
-  margin-top: 0.166667em;
-  text-indent: -9999px;
+ #lclogo {
+  height: 4.5em;
  }
 
  #ualogo {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/logo_urbanage_nostrapline.gif") no-repeat scroll 0 0 transparent;
-  height: 5.125em;
+  height: 4.5em;
   margin-top: 0.166667em;
  }
 

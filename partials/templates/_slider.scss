@@ -34,6 +34,7 @@ $innersliderborder: 0px solid transparent;
     font-size: 0.875em;
     margin-left: -2px;
     margin-right: -2px;
+    border: 0;
     
     .flex-direction-nav li a {
       top: ((467-64)/2)px;
@@ -43,11 +44,10 @@ $innersliderborder: 0px solid transparent;
       margin-right: 0;
     }
   
-  /*
     .slides > li {
-      height: #{2*$tile_base_emheight}em;
+      //height: #{2*$tile_base_emheight}em;
+      width: #{$slider_full_pxwidth}px;
     }
-  */
     
     .slide-inner {
       border-left: $innersliderborder;
