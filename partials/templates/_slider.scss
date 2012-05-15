@@ -23,6 +23,17 @@ $twotiles_emwidth: ($twotiles_pxwidth / $slider_base_font_pxsize);
 $twotilescolumn_emwidth: $tile_base_emwidth * 2;
 $innersliderborder: 0px solid transparent;
 
+// take two - responsive version
+$slider_full_pcwidth: 100;
+$sides_margin: 0; // left margin of first column tiles, right margin of last column tiles
+$col1_column_width: 20%;
+$col2_column_width: 40%;
+$col1_onetile_width: 98.245614035087719298245614035088%;
+$col2_onetile_width: 49.122807017543859649122807017544%;
+$col2_twotiles_width: 99.342105263157894736842105263158%;
+$col1_tile_margin: 0.87719298245614035087719298245614%;
+$col2_tile_margin: 0.43859649122807017543859649122807%;
+
 .lc-slider-page {
   #main {
     margin-top: 0;
@@ -32,8 +43,6 @@ $innersliderborder: 0px solid transparent;
     font-family: $base-font-family;
     position: relative;
     font-size: 0.875em;
-    margin-left: -2px;
-    margin-right: -2px;
     border: 0;
     
     .flex-direction-nav li a {
@@ -49,28 +58,56 @@ $innersliderborder: 0px solid transparent;
       width: #{$slider_full_pxwidth}px;
     }
     
+    .col1 {
+      width: #{$col1_column_width};
+      float: left;
+      
+      .tile {
+        margin: $col1_tile_margin;
+        
+        &.onetile {
+          width: $col1_onetile_width;
+        }
+      }
+    }
+
+    .col2 {
+      width: #{$col2_column_width};
+      float: left;
+      
+      .tile {
+        margin: $col2_tile_margin;
+        
+        &.onetile {
+          width: $col2_onetile_width;
+        }
+        &.twotiles {
+          width: $col2_twotiles_width;
+        }
+      }
+    }
+
     .slide-inner {
       border-left: $innersliderborder;
       border-bottom: $innersliderborder;
+
+/*      
+      & > div:first-child .tile {
+        margin-left: $sides_margin;
+      }
+
+      & > div:last-child .tile {
+        margin-right: $sides_margin;
+      }
+*/
     }
-    
-    .col2 {
-      width: #{$twotilescolumn_emwidth}em;
-      float: left;
-    }
-    
-    .col1 {
-      width: #{$onetilecolumn_emwidth}em;
-      float: left;
-    }
-  
+
     .tile {
       // background-color: #ccc; // for tests only
       border-right: $innersliderborder;
       border-top: $innersliderborder;
       float: left;
       padding: #{$tile_padding}em;
-      margin: #{$tile_margin}em;
       overflow: hidden;
       position: relative;
       min-height: 210px;
@@ -123,17 +160,7 @@ $innersliderborder: 0px solid transparent;
           max-height: inherit;
         }
       }
-  
-  
-      &.onetile {
-        width: #{$onetile_emwidth}em;
-      }
-      
-      &.twotiles {
-        width: #{$twotiles_emwidth}em;
-      }
-      
-      
+
       .inner-box {
         padding: 0.714285714em;
       }
