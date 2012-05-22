@@ -161,11 +161,13 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   }
 }
 
+/* // keyfacts should always be displayed in smaller font
 #contentarea {
   #keyfacts, #navigationarea {
     font-size: 100%;
   }
 }
+*/
 
 div.widget {
   margin-bottom: 1em;
@@ -282,20 +284,38 @@ div.widget {
   }
 }
 
+blockquote {
+  margin: 1.5em 0 0.75em 3em;
+  @include box-shadow(rgba(black, 0.5) 0 0 6px);
+  border-left: 0.5em solid #DDDDDD;
+  padding: 0 0.5em;
+  
+  &::before {
+    color: #999999;
+    content: "“";
+    display: block;
+    font-size: 4em;
+    font-style: italic;
+    line-height: 1em;
+    height: 0;
+    margin-left: -0.8em;
+  }
+}
+
 .downloadthis.pdf {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
 }
 
 .readthis.online {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
 }
 
 .watchvideo.onyoutube {
-  background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
 }

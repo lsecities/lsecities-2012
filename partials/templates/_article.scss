@@ -8,7 +8,6 @@
     width: 100%;
   }
 
-/* // TODO: re-enable once all the articles have been reviewed and pullquotes added
   .has-pullquote::before {
     content: attr(data-pullquote);
     
@@ -17,7 +16,10 @@
     
     float: right;
     width: 50%;
-    margin: 0.5em -55.5% 0 0;
+    margin: 0.5em -30% 0 0;
+    padding-left: 1.5em;
+    padding-bottom: 0.5em;
+    font-style: italic;
     
     position: relative;
 
@@ -29,7 +31,6 @@
     content: '"';
     color: #ff0000;
   }
-*/
 
   article .article {
     .entry-content, .extra-content {
