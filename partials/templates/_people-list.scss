@@ -1,0 +1,15 @@
+@import "compass/css3";
+
+.lc-people-list {
+  .person {
+    margin-bottom: 1em;
+    
+    .profile-photo {
+      text-align: center;
+      img {
+        width: 144px;
+        max-width: 144px;
+      }
+    }
+  }
+}

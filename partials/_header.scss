@@ -186,14 +186,28 @@ header #searchbox {
     float: right;
   }
   
-  input#queryfield {
-    background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent;
+  #queryfield {
+    input[type="text"] {
+      border: none;
+      color: inherit;
+      vertical-align: bottom;
+      height: 1.6em;
+      float: left;
+    }
+    
+    input[type="submit"] {
+      float: right;
+      background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent;
+      border: none;
+      width: 2.9166667em;
+      height: 2.0833333em;
+    }
+    
     border: 2px solid #a8abb2;
     color: #888;
-    height: 1.83333em;
-    padding: 0 0.25em;
+    height: 1.9166667em;
+    padding: 0 0 0 0.25em;
     font-size: 1em;
-    line-height: 1em;
     @include border-radius(0.25em);
   }
 
