@@ -1,14 +1,29 @@
 @import "compass/css3";
+@import "compass/css3/border-radius";
 
 .lc-people-list {
-  .person {
-    margin-bottom: 1em;
-    
-    .profile-photo {
-      text-align: center;
-      img {
-        width: 144px;
-        max-width: 144px;
+  #contentarea {
+    section.people-list {
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      .person {
+        margin-bottom: 2em;
+        
+        .profile-photo {
+          text-align: center;
+          img {
+            width: 144px;
+            max-width: 144px;
+            @include border-radius(2px);
+          }
+        }
+        
+        h1 {
+          font-size: 1.2em;
+          font-weight: bold;
+        }
       }
     }
   }

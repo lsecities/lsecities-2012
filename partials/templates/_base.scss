@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3";
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
@@ -20,7 +21,7 @@ $list_divider: unquote('1px solid #eee');
     }
     
     li:last-child:after {
-      content: '';
+      content: '' !important;
     }
   }
 }
@@ -170,12 +171,18 @@ ol.article-references {
 #keyfacts, #navigationarea {
   font-size: 90%;
   
-  dl dt {
-    border-bottom: $list_divider;
-    margin-top: 0.5em;
-    
-    &:first-child {
-      margin-top: 0;
+  dl {
+    dt {
+      border-bottom: $list_divider;
+      margin-top: 0.5em;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    dd {
+      line-height: 1.5em;
+      margin-bottom: 0.2em;
     }
   }
   
@@ -225,6 +232,16 @@ div.widget {
     
     h1 {
       font-size: 1em;
+    }
+  }
+  
+  #whoswho-side-toc {
+    h1 {
+      font-weight: bold;
+    }
+    
+    h1 + ul {
+      margin-bottom: 1.5em;
     }
   }
 }
