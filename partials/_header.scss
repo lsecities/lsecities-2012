@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3/transition";
 @import "templates/palette";
 
 //-----------------------------------
@@ -133,6 +134,10 @@ body > #container > header {
 
     ul {
       background-color: inherit;
+      
+      li a {
+        @include transition(background-color 0.4s ease-out 0s, color 0.1s ease 0.1s);
+      }
     }
   }
 }
@@ -154,6 +159,7 @@ nav#level2nav {
   
   ul li {
     // border-bottom: 5px solid transparent;
+    @include transition(background-color 0.4s ease-out 0s);
     
     a, a:active, a:visited {
       color: #000;
