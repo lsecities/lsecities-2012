@@ -78,6 +78,7 @@ body > #container > header {
     a {
       margin: 0 0.3125em;
       padding: 0;
+      @include round-button-effects;
     }
   }
  }

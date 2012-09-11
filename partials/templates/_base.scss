@@ -343,6 +343,8 @@ div.widget {
     
     a {
       vertical-align: middle;
+      @include round-button-effects;
+      
       img {
         width: 20px;
         height: 20px;
@@ -373,16 +375,22 @@ blockquote {
   background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
+  
+  @include round-button-effects;
 }
 
 .readthis.online {
   background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
+  
+  @include round-button-effects;
 }
 
 .watchvideo.onyoutube {
   background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent;
   padding-left: 28px;
   padding-bottom: 8px;
+  
+  @include round-button-effects;
 }
