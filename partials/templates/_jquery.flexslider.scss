@@ -1,48 +1,54 @@
 .flexslider {
   position: relative;
+  box-shadow: none;
+  margin: 0;
   
   /* Direction Nav */
-  .flex-direction-nav li {
+  .flex-direction-nav {
+    list-style-type: none;
   
-    a {
-      width:33px;
-      height:64px;
-      text-indent:-9999px;
-      border:0;
-      margin: -13px 0 0;
-      display: block;
-      /* background: url(theme/bg_direction_nav.png) no-repeat 0 0; */
-      position: absolute;
-      top: 45%; // generic approximation - set exact position according to container height where needed
-      /* top: 50%; */
-      opacity: 0.9;
+    li {
+    
+      a {
+        width:33px;
+        height:64px;
+        text-indent:-9999px;
+        border:0;
+        margin: -13px 0 0;
+        display: block;
+        /* background: url(theme/bg_direction_nav.png) no-repeat 0 0; */
+        position: absolute;
+        top: 45%; // generic approximation - set exact position according to container height where needed
+        /* top: 50%; */
+        opacity: 0.9;
+        
+        &:hover {
+          background-position: 0px -65px;
+          opacity: 1;
+        }
+    
+        &:active {
+          background-position: 0px -130px;
+        }
+      }
       
-      &:hover {
-        background-position: 0px -65px;
-        opacity: 1;
+      .flex-next {
+        background: transparent url('http://v0.urban-age.net/stylesheets/plugins/jquery.nivoslider/2.4/arrow-right.png') no-repeat;
+        right: 0px;
+        /* background-position: -52px 0;
+        right: -21px; */
       }
-  
-      &:active {
-        background-position: 0px -130px;
+      
+      .flex-prev {
+        /* left: -20px; */
+        background: transparent url('http://v0.urban-age.net/stylesheets/plugins/jquery.nivoslider/2.4/arrow-left.png') no-repeat;
+        left: -2px;
       }
-    }
-    
-    .next {
-      background: transparent url('http://v0.urban-age.net/stylesheets/plugins/jquery.nivoslider/2.4/arrow-right.png') no-repeat;
-      right: 0px;
-      /* background-position: -52px 0;
-      right: -21px; */
-    }
-    
-    .prev {
-      /* left: -20px; */
-      background: transparent url('http://v0.urban-age.net/stylesheets/plugins/jquery.nivoslider/2.4/arrow-left.png') no-repeat;
-      left: -2px;
-    }
-    
-    .disabled {
-      opacity: .3; filter:alpha(opacity=30);
-      cursor: default;
+      
+      .flex-disabled {
+        opacity: .3; filter:alpha(opacity=30);
+        cursor: default;
+      }
     }
   }
   

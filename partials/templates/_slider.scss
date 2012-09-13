@@ -144,13 +144,13 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
           //-moz-transition: max-height 0.2s ease-in-out 0s;
           //transition: max-height 0.2s ease-in-out 0s;
           max-height: 75%;
-          background:url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+          background:url("http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
         }
         
         .feature_info {
           @include single-transition(background-color, 0.5s, ease-in-out, 0s);
           background-color: #000;
-          background: url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+          background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
           max-height: 75%;
         }
         
@@ -224,7 +224,7 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
       }
       
       &.introbox {
-        background: url('http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
+        background: url('http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
 
         h1 {
           border-bottom: 1px $palette_red solid;
