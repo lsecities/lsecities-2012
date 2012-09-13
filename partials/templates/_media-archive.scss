@@ -1,0 +1,36 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+
+.lc-media-archive-search {
+  input[type="checkbox"] {
+    margin-right: 0.5em;
+  }
+  
+  .queryarea {
+    background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif");
+    @include box-shadow(1px 1px 10px #ccc);
+    @include border-radius(5px);
+    padding: 1em;
+    margin-bottom: 2em;
+    
+    h3 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+  }
+  
+  article > section {
+    
+  }
+  
+  #query {
+    border: none;
+    background-color: #fcfcfc;
+    color: #999;
+    line-height: 2em;
+    padding: 0.5em 1em;
+    font-style: italics;
+  }
+}
