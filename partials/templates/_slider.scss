@@ -45,8 +45,12 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
     font-size: 0.875em;
     border: 0;
     
-    .flex-direction-nav li a {
-      top: ((467-64)/2)px;
+    .flex-direction-nav {
+      
+      li a {
+        @include transition-property(none);
+        top: ((467-64)/2)px;
+      }
     }
     
     .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
@@ -323,7 +327,7 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
     }
     
     ul {
-      list-style-type: disc;
+      list-style-type: none;
       
       li {
         list-style-type: inherit;
