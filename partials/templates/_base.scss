@@ -134,30 +134,30 @@ ol.article-references {
   }
 }
 
-#contentarea {
-  
-  .top-content {
-    .entry-content .abstract {
-      font-size: 0.9375em;
-      font-style: italic;
-    }
+.top-content {
+  .entry-content .abstract {
+    font-size: 0.9375em;
+    font-style: italic;
   }
+}
+
+.extra-content {
+  margin-top: 3em;
+  padding-top: 1em;
+  font-size: 0.875em;
   
+  & > section, & > aside {
+    @include red-flag-header;
+  }
+}
+  
+#contentarea {
+
   section > h1 {
     font-weight: bold;
     font-size: 1.2em;
   }
-  
-  .extra-content {
-    margin-top: 3em;
-    padding-top: 1em;
-    font-size: 0.875em;
-    
-    & > section, & > aside {
-      @include red-flag-header;
-    }
-  }
-  
+
   .top-content {
   
     & > header {
