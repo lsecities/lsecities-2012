@@ -3,36 +3,40 @@
 @import "compass/css3/box-shadow";
 @import "palette";
 
-$slider_full_pxwidth: 1140;
+@function percent($element_width, $context_width) {
+  @return $element_width / $context_width * 100%;
+}
+$slider_pxwidth: 1140;
 $columns: 5;
+$gutter_pxwidth: 5;
 $slider_base_font_pxsize: 14;
-$tile_base_emwidth: ($slider_full_pxwidth / $columns / $slider_base_font_pxsize);
-$tile_base_emheight: (224/14);
-$tile_pxpadding: 0;
-$tile_padding: $tile_pxpadding/$slider_base_font_pxsize;
-$tile_pxmargin: 2;
-$tile_margin: ($tile_pxmargin / $slider_base_font_pxsize);
-$tile_tall_emheight: (($tile_base_emheight * 2) + (($tile_pxmargin / $slider_base_font_pxsize) * 2));
-$onetile_pxwidth: (($slider_full_pxwidth - ($columns * $tile_pxmargin * 2) - ($columns + 1)) / $columns ) + 1.2;
-$onetile_emwidth: ($onetile_pxwidth / $slider_base_font_pxsize);
-//$onetilecolumn_emwidth: (($onetile_pxwidth + 2) / $slider_base_font_pxsize);
-$onetilecolumn_emwidth: $tile_base_emwidth;
-$twotiles_pxwidth: (((($slider_full_pxwidth - ($columns * $tile_pxmargin * 2) - ($columns + 1)) / $columns * 2) + $tile_pxmargin *2)) + 3;
-$twotiles_emwidth: ($twotiles_pxwidth / $slider_base_font_pxsize);
-//$twotilescolumn_emwidth: (($onetile_pxwidth * 2 + 2) / $slider_base_font_pxsize);
-$twotilescolumn_emwidth: $tile_base_emwidth * 2;
+$tile_pxwidth: ($slider_pxwidth - (($columns - 1) * $gutter_pxwidth)) / $columns;
+$tile_pxheight: $tile_pxwidth;
+$tile_emheight: $tile_pxheight / $slider_base_font_pxsize;
+$tile_plus_margin_pxwidth: $tile_pxwidth + $gutter_pxwidth;
+
+$tile_margin: ($gutter_pxwidth / $slider_base_font_pxsize);
+$tile_padding: 0;
+
+$col1_onetile_width: ($tile_pxwidth / $tile_plus_margin_pxwidth) * 100%;
+$col1last_onetile_width: 100%;
+$col2_onetile_width: ($tile_pxwidth / (2 * $tile_plus_margin_pxwidth)) * 100%;
+$col2_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (2 * $tile_plus_margin_pxwidth)) * 100%;
+
+$col1_gutter_width: percent($gutter_pxwidth, $tile_plus_margin_pxwidth);
+$col2_gutter_width: percent($gutter_pxwidth, (2 * $tile_plus_margin_pxwidth));
+
+$col1_column_width: percent($tile_plus_margin_pxwidth, $slider_pxwidth);
+$col1last_column_width: percent($tile_pxwidth, $slider_pxwidth);
+$col2_column_width: percent((2 * $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col2last_column_width: percent(($tile_pxwidth + $tile_plus_margin_pxwidth), $slider_pxwidth);
+
+$tile_tall_emheight: ((2 * $tile_pxheight) + $gutter_pxwidth) / $slider_base_font_pxsize;
 $innersliderborder: 0px solid transparent;
 
 // take two - responsive version
 $slider_full_pcwidth: 100;
 $sides_margin: 0; // left margin of first column tiles, right margin of last column tiles
-$col1_column_width: 20%;
-$col2_column_width: 40%;
-$col1_onetile_width: 98.245614035087719298245614035088%;
-$col2_onetile_width: 49.122807017543859649122807017544%;
-$col2_twotiles_width: 99.342105263157894736842105263158%;
-$col1_tile_margin: 0.87719298245614035087719298245614%;
-$col2_tile_margin: 0.43859649122807017543859649122807%;
 
 .lc-slider-page {
   #main {
@@ -58,29 +62,44 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
     }
   
     .slides > li {
-      //height: #{2*$tile_base_emheight}em;
-      width: #{$slider_full_pxwidth}px;
+      width: 100%;
     }
     
     .col1 {
-      width: #{$col1_column_width};
+      width: $col1_column_width;
       float: left;
-      
+
       .tile {
-        margin: $col1_tile_margin;
-        
+        margin-right: $col1_gutter_width;
+        margin-bottom: $col1_gutter_width;
+
         &.onetile {
           width: $col1_onetile_width;
         }
       }
+      
+      &.last {
+        width: $col1last_column_width;
+        
+        .tile {
+          &.onetile {
+            width: $col1last_onetile_width;
+          }
+        }        
+      }
     }
 
     .col2 {
-      width: #{$col2_column_width};
+      width: $col2_column_width;
       float: left;
       
+      &.last {
+        width: $col2last_column_width;
+      }
+
       .tile {
-        margin: $col2_tile_margin;
+        margin-right: $col2_gutter_width;
+        margin-bottom: $col2_gutter_width;
         
         &.onetile {
           width: $col2_onetile_width;
@@ -92,30 +111,20 @@ $col2_tile_margin: 0.43859649122807017543859649122807%;
     }
 
     .slide-inner {
-      border-left: $innersliderborder;
-      border-bottom: $innersliderborder;
-
-/*      
-      & > div:first-child .tile {
-        margin-left: $sides_margin;
-      }
-
-      & > div:last-child .tile {
-        margin-right: $sides_margin;
-      }
-*/
+      border-left: $innersliderborder;                         // DELETE
+      border-bottom: $innersliderborder;                       // DELETE
     }
 
     .tile {
       // background-color: #ccc; // for tests only
-      border-right: $innersliderborder;
-      border-top: $innersliderborder;
+      border-right: $innersliderborder;                        // DELETE
+      border-top: $innersliderborder;                          // DELETE
       float: left;
       padding: #{$tile_padding}em;
       overflow: hidden;
       position: relative;
       min-height: 210px;
-      height: #{$tile_base_emheight}em;
+      height: #{$tile_emheight}em;
       
       a, a:hover, a:active, a:visited {
         color: inherit;
