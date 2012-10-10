@@ -201,6 +201,10 @@ ol.article-references {
       line-height: 1.5em;
       margin-bottom: 0.2em;
     }
+    
+    &:not(:first-child) {
+      margin-top: 0.5em;
+    }
   }
   
   &.minorfacts {

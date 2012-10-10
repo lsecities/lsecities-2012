@@ -84,11 +84,6 @@ strong, th {
 aside {
   font-family: $article-font-family;
   
-  p {
-    font-size: 0.875em; // = 14px/16px
-    line-height: 1.5em;
-  }
-  
   &.extras {
     font-family: $base-font-family;
     float: right;
