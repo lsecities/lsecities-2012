@@ -22,14 +22,17 @@ $col1_onetile_width: ($tile_pxwidth / $tile_plus_margin_pxwidth) * 100%;
 $col1last_onetile_width: 100%;
 $col2_onetile_width: ($tile_pxwidth / (2 * $tile_plus_margin_pxwidth)) * 100%;
 $col2_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (2 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_fourtiles_width: (((4 * $tile_pxwidth) + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
 
 $col1_gutter_width: percent($gutter_pxwidth, $tile_plus_margin_pxwidth);
 $col2_gutter_width: percent($gutter_pxwidth, (2 * $tile_plus_margin_pxwidth));
+$col4_gutter_width: percent($gutter_pxwidth, (4 * $tile_plus_margin_pxwidth));
 
 $col1_column_width: percent($tile_plus_margin_pxwidth, $slider_pxwidth);
 $col1last_column_width: percent($tile_pxwidth, $slider_pxwidth);
 $col2_column_width: percent((2 * $tile_plus_margin_pxwidth), $slider_pxwidth);
 $col2last_column_width: percent(($tile_pxwidth + $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col4_column_width: percent((4 * $tile_plus_margin_pxwidth), $slider_pxwidth);
 
 $tile_tall_emheight: ((2 * $tile_pxheight) + $gutter_pxwidth) / $slider_base_font_pxsize;
 $innersliderborder: 0px solid transparent;
