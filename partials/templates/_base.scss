@@ -1,4 +1,4 @@
-@import "compass/css3";
+@import "compass/utilities/general/clearfix";
 @import "compass/css3";
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
@@ -148,6 +148,10 @@ ol.article-references {
   
   & > section, & > aside {
     @include red-flag-header;
+  }
+  
+  & > section {
+    @include clearfix;
   }
 }
   
