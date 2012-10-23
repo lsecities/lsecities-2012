@@ -13,8 +13,8 @@ $events_area_colour: rgba(54, 55, 149, 1);
 $urbanage_area_colour: rgba(180, 0, 29, 1);
 $media_archive_area_colour: rgba(75, 128, 68, 1);
 
-$social-media-icons-color: #b9bbc1;
-$social-media-icons-hover-color: #a8abb2;
+$social-media-icons-color: #a8abb2;
+$social-media-icons-hover-color: #b9bbc1;
 
 body > #container > header {
  padding-top: 0.75em;
@@ -194,20 +194,21 @@ header #searchbox {
       border-bottom: 1px solid $social-media-icons-color;
       color: inherit;
       vertical-align: bottom;
-      height: 1.6em;
+      height: 1.75em;
       float: left;
     }
     
-    input[type="submit"] {
+    input[type="submit"], button {
       float: right;
+      color: white;
       background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent;
       border: none;
       background: $social-media-icons-color;
-      width: 1.2em;
-      height: 1.2em;
+      width: 1em;
+      height: 1em;
       font-weight: bold;
-      font-size: 2em;
-      @include border-radius(1.2em);
+      font-size: 2.1em;
+      @include border-radius(50%);
       &:hover {
         background: $social-media-icons-hover-color;
       }
