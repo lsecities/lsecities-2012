@@ -22,6 +22,8 @@ $col1_onetile_width: ($tile_pxwidth / $tile_plus_margin_pxwidth) * 100%;
 $col1last_onetile_width: 100%;
 $col2_onetile_width: ($tile_pxwidth / (2 * $tile_plus_margin_pxwidth)) * 100%;
 $col2_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (2 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_onetile_width: (($tile_pxwidth + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
 $col4_fourtiles_width: (((4 * $tile_pxwidth) + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
 
 $col1_gutter_width: percent($gutter_pxwidth, $tile_plus_margin_pxwidth);
@@ -33,6 +35,7 @@ $col1last_column_width: percent($tile_pxwidth, $slider_pxwidth);
 $col2_column_width: percent((2 * $tile_plus_margin_pxwidth), $slider_pxwidth);
 $col2last_column_width: percent(($tile_pxwidth + $tile_plus_margin_pxwidth), $slider_pxwidth);
 $col4_column_width: percent((4 * $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col4last_column_width: percent(($tile_pxwidth + (3 * $tile_plus_margin_pxwidth)), $slider_pxwidth);
 
 $tile_tall_emheight: ((2 * $tile_pxheight) + $gutter_pxwidth) / $slider_base_font_pxsize;
 $innersliderborder: 0px solid transparent;
@@ -112,6 +115,30 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
         }
       }
     }
+    
+    .col4 {
+      width: $col4_column_width;
+      float: left;
+      
+      &.last {
+        width: $col4last_column_width;
+      }
+
+      .tile {
+        margin-right: $col4_gutter_width;
+        margin-bottom: $col4_gutter_width;
+        
+        &.onetile {
+          width: $col4_onetile_width;
+        }
+        &.twotiles {
+          width: $col4_twotiles_width;
+        }
+        &.fourtiles {
+          width: $col4_fourtiles_width;
+        }
+      }
+    }
 
     .slide-inner {
       border-left: $innersliderborder;                         // DELETE
@@ -160,13 +187,13 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
           //-moz-transition: max-height 0.2s ease-in-out 0s;
           //transition: max-height 0.2s ease-in-out 0s;
           max-height: 75%;
-          background:url("http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+          background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
         }
         
         .feature_info {
           @include single-transition(background-color, 0.5s, ease-in-out, 0s);
           background-color: #000;
-          background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+          background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
           max-height: 75%;
         }
         
@@ -240,7 +267,7 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
       }
       
       &.introbox {
-        background: url('http://lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
+        background: url('//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
 
         h1 {
           border-bottom: 1px $palette_red solid;
@@ -280,7 +307,7 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
        bottom:0;
        left:0;
        right:0;
-       background:url("http://v1.lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+       background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
        opacity:0.7;
       }
       
