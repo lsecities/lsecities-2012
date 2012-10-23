@@ -1,0 +1,104 @@
+@import "compass/utilities/general/clearfix";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transform";
+@import "palette";
+
+$background-color: black;
+$text-color: white;
+$link-color: #eee111;
+$link-hover-color: darken($link-color, 20%);
+
+body.ec2012 {
+  background-color: black;
+  color: $text-color;
+  
+  header {
+    #searchbox {
+      #queryfield {
+        border: none;
+        border-bottom: 1px solid $text-color;
+        color: $text-color;
+        
+        input[type="text"] {
+          background: transparent;
+        }
+      }
+    }
+  }
+  
+  #level1nav, #level2nav {
+    font-family: theovandregular;
+    letter-spacing: 1px;
+  }
+  
+  #level1nav {
+    a, a:active, a:visited, a:focus {
+      color: $link-color;
+    }
+
+    ul {
+      li:hover {
+        background-color: $link-color;
+      
+        a {
+          color: $background-color;
+        }
+      }
+      
+      li.current, li.current_page_item, li.current_page_ancestor {
+        background-color: $link-color;
+        
+        a {
+          color: $background-color;
+        }
+      }
+    }    
+  }
+  
+  #level2nav {
+    ul {
+      li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
+        a {
+          color: $background-color;
+          background-color: $link-color;
+        }
+      }
+    }
+  }
+  
+  #contentarea .top-content article header h1 {
+    color: $link-color;
+  }
+  
+  .extra-content > section, .extra-content > aside {
+    & > header {
+      border-top: 1px solid $link-color;
+      
+      & > h1 {
+        color: $background-color;
+        background-color: $link-color;
+      }
+    }
+  }
+  
+  a, a:focus, a:active {
+    color: $link-color;
+  }
+  
+  a:hover {
+    color: $link-hover-color;
+  }
+  
+  footer#footer {
+  
+    a, a:visited, a:active {
+      color: $link-color;
+    }
+    
+    a:hover {
+      color: $link-hover-color;
+    }
+  }
+}

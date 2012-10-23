@@ -13,10 +13,10 @@ $events_area_colour: rgba(54, 55, 149, 1);
 $urbanage_area_colour: rgba(180, 0, 29, 1);
 $media_archive_area_colour: rgba(75, 128, 68, 1);
 
+$social-media-icons-color: #b9bbc1;
+$social-media-icons-hover-color: #a8abb2;
+
 body > #container > header {
- /* font-size: 0.75em; */
- /* margin-top: 1em; */
- /* background: url('../images/backgrounds/header-background-strip-lsecities.gif') repeat-x; */
  padding-top: 0.75em;
  
  nav {
@@ -24,7 +24,6 @@ body > #container > header {
 
   ul {
    float: right;
-   // padding-top: 0.125em;
   }
  }
  
@@ -91,6 +90,7 @@ body > #container > header {
   &:hover {
     opacity: 1;
   }
+}
  
   #level2nav {	
     h1 {
@@ -106,9 +106,9 @@ body > #container > header {
 	  font-weight: bold;
 	  
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
-        a {
-          // border-bottom: #ffffff 5px solid;
-          background-color: #ddd;
+        background-color: #ddd;
+        
+        a {  
           color: #000;
         }
       }
@@ -117,11 +117,8 @@ body > #container > header {
         color: #ffffff;
         display: block;
         margin: 0;
-        // border-bottom: 5px solid transparent;
     
         &:hover {
-          // border-bottom: 5px solid #ffffff;
-          /// background-color: transparentize(#ddd, 0.2);
           background-color: #ddd;
           color: #000;
         }
@@ -136,12 +133,12 @@ body > #container > header {
     ul {
       background-color: inherit;
       
-      li a {
+      li {
         @include transition(background-color 0.4s ease-out 0s, color 0.1s ease 0.1s);
       }
     }
   }
-}
+
 
 nav#level1nav,
 nav#level2nav {
@@ -159,7 +156,6 @@ nav#level2nav {
   margin-top: 4em;
   
   ul li {
-    // border-bottom: 5px solid transparent;
     @include transition(background-color 0.4s ease-out 0s);
     
     a, a:active, a:visited {
@@ -177,7 +173,6 @@ nav#level2nav {
     }
 
     &:hover:not(.current), &:hover:not(.current_page_item) {
-      /// background-color: transparentize($palette_red, 0.2);
       background-color: $palette_red;
       a {
         color: #fff;
@@ -194,8 +189,9 @@ header #searchbox {
   }
   
   #queryfield {
-    input[type="text"] {
+    input[type="text"], input[type="text"]:focus {
       border: none;
+      border-bottom: 1px solid $social-media-icons-color;
       color: inherit;
       vertical-align: bottom;
       height: 1.6em;
@@ -206,16 +202,22 @@ header #searchbox {
       float: right;
       background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent;
       border: none;
-      width: 2.9166667em;
-      height: 2.0833333em;
+      background: $social-media-icons-color;
+      width: 1.2em;
+      height: 1.2em;
+      font-weight: bold;
+      font-size: 2em;
+      @include border-radius(1.2em);
+      &:hover {
+        background: $social-media-icons-hover-color;
+      }
     }
     
-    border: 2px solid #a8abb2;
-    color: #888;
+    border: none;
+    color: #666;
     height: 1.9166667em;
     padding: 0 0 0 0.25em;
     font-size: 1em;
-    @include border-radius(0.25em);
   }
 
   form {
