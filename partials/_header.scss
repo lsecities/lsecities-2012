@@ -189,16 +189,42 @@ header #searchbox {
   }
   
   #queryfield {
-    input[type="text"], input[type="text"]:focus {
+    input[type="text"] {
       border: none;
       border-bottom: 1px solid $social-media-icons-color;
       color: inherit;
       vertical-align: bottom;
       height: 1.75em;
       float: left;
+      width: 15em;
+      @include transition(width 0.6s ease 0s);
     }
     
-    input[type="submit"], button {
+    input[type="text"]:focus {
+      border: none;
+      border-bottom: 1px solid $social-media-icons-color;
+      width: 20em;
+      @include transition(width 0.6s ease 0s);
+    }
+    
+    button {
+      float: right;
+      color: $social-media-icons-color;
+      @include transition(color 0.4s ease-out 0s);
+      font-family: fontello;
+      font-size: 2.25em;
+      background: transparent;
+      border: none;
+      width: 1em;
+      height: 1em;
+      padding: 0;
+      margin: 0;
+      &:hover {
+        color: $social-media-icons-hover-color;
+      }
+    }
+    
+    input[type="submit"] {
       float: right;
       color: white;
       background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent;
