@@ -96,7 +96,7 @@ header.entry-header { // TODO : remove once all templates have been refactored t
 
 .lc-event-programme { // TODO: move this to event-programme template SCSS file and reuse mixin from there
   #contentarea {
-    section {
+    section, section > section {
       @include red-flag-header;
       
       & > header > h1 {
@@ -157,9 +157,13 @@ ol.article-references {
   
 #contentarea {
 
-  section > h1 {
-    font-weight: bold;
-    font-size: 1.2em;
+  section {
+    clear: both;
+    
+    & > h1 {
+      font-weight: bold;
+      font-size: 1.2em;
+     }
   }
 
   .top-content {
@@ -172,7 +176,7 @@ ol.article-references {
       header {
         margin-bottom: 1em;
         
-        h1 {
+        h1.entry-title {
           font-family: $main-headings-font-family;
           font-weight: 900;
           color: $headings-font-color;
@@ -231,6 +235,25 @@ div.widget {
   
   h2 {
     margin-bottom: 0.5em;
+  }
+}
+
+/* organic tabs jquery plugin */
+.organictabs {
+  margin-top: 2em;
+  
+  & >  li {
+    a, a:visited, a:active, a:focus, a:hover {
+      color: white;
+      font-weight: bold;
+      display: block;
+      padding: 0.5em;
+      background-color: $palette_red;
+      
+      &.current {
+        background-color: black;
+      }
+    }
   }
 }
 

@@ -1,7 +1,18 @@
 @import "compass/css3";
 
 .lc-research-project {
+
+  #photo-essays > div {
+    margin-bottom: 1em;
+  }
   
+  section {
+    @include red-flag-header;
+  
+    & > header > h1 {
+      margin-bottom: 0;
+    }
+  }
 }
 
 nav#projectsmenu {
