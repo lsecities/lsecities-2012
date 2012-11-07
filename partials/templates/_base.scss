@@ -96,14 +96,6 @@ header.entry-header { // TODO : remove once all templates have been refactored t
 
 .lc-event-programme { // TODO: move this to event-programme template SCSS file and reuse mixin from there
   #contentarea {
-    section, section > section {
-      @include red-flag-header;
-      
-      & > header > h1 {
-        margin-bottom: 0;
-      }
-    }
-    
     .event-programme {
       .session-chairs {
         dt, dd {
@@ -156,6 +148,19 @@ ol.article-references {
 }
   
 #contentarea {
+  section, section > section {
+    @include red-flag-header;
+    
+    & > header > h1 {
+      margin-bottom: 0;
+    }
+  }
+  
+  .list-wrap {
+    section, section > section {
+      margin-top: 0; // overrides red-flag-header mixin when in .list-wrap aka organictabs
+    }
+  }
 
   section {
     clear: both;
@@ -200,6 +205,7 @@ ol.article-references {
     dt {
       border-bottom: $list_divider;
       margin-top: 0.5em;
+      margin-bottom: 0.2em;
       
       &:first-child {
         margin-top: 0;
