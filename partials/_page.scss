@@ -17,7 +17,7 @@
   width: 100%;
   
   .yks-mailchimpFormDivRow {
-    clear: both;
+    @include clearfix;
   }
   
   .yks-mailchimpFormDivRowLabel {
@@ -41,7 +41,7 @@
   .mc_merge_var {
     margin-bottom: 1em;
     width: 100%;
-    clear: both;
+    @include clearfix;
     
     label {
       width: 30%;

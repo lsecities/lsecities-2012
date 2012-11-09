@@ -142,9 +142,10 @@ ol.article-references {
     @include red-flag-header;
   }
   
-  & > section {
-    @include clearfix;
+  &.multi-section > section {
+    clear: none;
   }
+  
 }
   
 #contentarea {
@@ -164,6 +165,7 @@ ol.article-references {
 
   section {
     clear: both;
+    @include clearfix;
     
     & > h1 {
       font-weight: bold;
