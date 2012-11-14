@@ -26,6 +26,12 @@ body.ec2012 {
         }
       }
     }
+    
+    &.entry-header {
+      h1 {
+        color: $link-color;
+      }
+    }
   }
   
   #level1nav, #level2nav {
@@ -58,6 +64,8 @@ body.ec2012 {
   }
   
   #level2nav {
+    background-color: transparent;
+    
     ul {
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
         a {
@@ -72,7 +80,7 @@ body.ec2012 {
     color: $link-color;
   }
   
-  .extra-content > section, .extra-content > aside {
+  #contentarea section, .extra-content > section, .extra-content > aside {
     & > header {
       border-top: 1px solid $link-color;
       
