@@ -137,7 +137,8 @@ ol.article-references {
   margin-top: 3em;
   padding-top: 1em;
   font-size: 0.875em;
-  
+  clear: both;
+
   & > section, & > aside {
     @include red-flag-header;
   }
@@ -165,7 +166,6 @@ ol.article-references {
 
   section {
     clear: both;
-    @include clearfix;
     
     & > h1 {
       font-weight: bold;
