@@ -331,6 +331,7 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
         border-right: 1px solid $palette_red;
         display: table-cell;
         padding-right: 0.714285em;
+        padding-left: 0;
         vertical-align: middle;
         text-align: center;
 
@@ -380,5 +381,27 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
     font-size: 1em;
     margin-top: 0;
     padding-top: 0;
+  }
+}
+
+.feature-info {
+  padding-top: 0.5em;
+  
+  .feature-date {
+    display: table-cell;
+    padding: 0 0.714285em;
+    text-align: center;
+    vertical-align: top;
+    line-height: 1em;
+    
+    .day {
+      font-size: 1.2em;
+      font-weight: bold;
+      padding-top: 0.1em;
+    }
+  }
+  
+  .feature-date + header {
+    display: table-cell;
   }
 }

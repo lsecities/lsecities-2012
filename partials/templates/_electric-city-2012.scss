@@ -9,75 +9,93 @@ $background-color: black;
 $text-color: white;
 $link-color: #eee111;
 $link-hover-color: darken($link-color, 20%);
+$site-font: theovandregular;
 
 body.ec2012 {
   background-color: black;
   color: $text-color;
+
+  .reset-layout {
+    clear: both;
+    overflow: hidden;
+  }
   
-  header {
-    #searchbox {
-      #queryfield {
-        border: none;
-        border-bottom: 1px solid $text-color;
-        color: $text-color;
-        
-        input[type="text"] {
-          background: transparent;
-        }
-      }
-    }
-    
+  #container {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  header {    
     &.entry-header {
+      display: none;
+      
       h1 {
         color: $link-color;
       }
     }
   }
-  
-  #level1nav, #level2nav {
-    font-family: theovandregular;
-    letter-spacing: 1px;
+    
+  #ec2012title {
+    font-family: $site-font;
+    letter-spacing: 2px;
+    font-size: 3em;
+    margin-bottom: 0.5em;
   }
   
-  #level1nav {
-    a, a:active, a:visited, a:focus {
-      color: $link-color;
-    }
-
-    ul {
-      li:hover {
-        background-color: $link-color;
-      
-        a {
-          color: $background-color;
-        }
-      }
-      
-      li.current, li.current_page_item, li.current_page_ancestor {
-        background-color: $link-color;
-        
-        a {
-          color: $background-color;
-        }
-      }
-    }    
+  #level1nav, #level2nav {
+    font-family: $site-font;
+    letter-spacing: 1px;
   }
   
   #level2nav {
     background-color: transparent;
     
     ul {
+      float: left;
+      
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
         a {
           color: $background-color;
           background-color: $link-color;
         }
       }
+      
+      li:first-child a {
+        padding-left: 0;
+      }
     }
   }
   
-  #contentarea .top-content article header h1 {
-    color: $link-color;
+  #mainmenus {
+    margin-bottom: 1em;
+  }
+  
+  // this is a workaround until we switch to a susy-style grid that does
+  // not rely on elements' classes
+  [role='main'] {
+    padding-bottom: 10em;
+    & > article.ninecol {
+      width: 100%;
+    }
+  }
+  // same as above (until we switch to a susy-style grid) but re
+  // overflow
+  [role='main'], #main {
+    overflow: visible;
+  }
+  
+  #contentarea {
+    .top-content article header h1 {
+      color: $link-color;
+    }
+    
+    &.ninecol {
+      width: 100%;
+    }
+    &>h1 {
+      display:none;
+    }
   }
   
   #contentarea section, .extra-content > section, .extra-content > aside {
@@ -107,6 +125,23 @@ body.ec2012 {
     
     a:hover {
       color: $link-hover-color;
+    }
+  }
+  
+  #navigationarea {
+    display: none;
+  }
+  
+  // plugins
+  
+  // jquery.hovercard plugin styles
+  .lc-event-speaker-list {
+    .hc-details {
+      @include box-shadow(none);
+      
+      a, a:visited, a:active {
+        color: $link_red;
+      }
     }
   }
 }
