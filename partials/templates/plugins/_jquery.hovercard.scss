@@ -1,0 +1,30 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transform";
+@import "../palette";
+
+// jquery.hovercard plugin styles
+.lc-event-speaker-list {
+  .hc-details {
+      border: none;
+      @include box-shadow(3px 3px 2px #888888);
+      @include border-radius(inherit);
+      background-color: #fff;
+      color: #000;
+      font-family: inherit;
+      font-size: inherit;
+      left: 0;
+      top: 0;
+      line-height: inherit;
+      margin-right: 5em;
+      padding: 2em 0.5em 0.5em;
+      position: absolute;
+      text-align: left;
+      opacity: 0.9;
+      
+      h1 {
+        font-weight: bold;
+      }
+  }
+}
