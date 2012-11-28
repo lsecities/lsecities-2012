@@ -1,0 +1,34 @@
+.lc-event-programme {
+  
+  #contentarea {
+    
+    section.sessiontype-day {
+      & > header {
+        border-top: none;
+        
+        & > h1 {
+          font-size: 1.5em;
+          color: inherit;
+          background-color: inherit;
+          padding-left: 0;
+        }
+      }
+    }
+    
+    section.sessiontype-session .session  {
+      & > header {
+        & > h1 {
+          background-color: inherit;
+          color: inherit;
+          padding-left: 0;
+        }
+      }
+      
+      .session {
+        & > header {
+          border-top: none;
+        }
+      }
+    }
+  }
+}

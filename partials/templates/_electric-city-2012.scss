@@ -11,9 +11,20 @@ $link-color: #eee111;
 $link-hover-color: darken($link-color, 20%);
 $site-font: theovandregular;
 
+@mixin basic-link {
+  background-color: inherit;
+  color: $link-color;
+}
+
+@mixin basic-link-hover {
+  @include basic-link;
+  color: $link-hover-color;
+}
+
 body.ec2012 {
   background-color: black;
   color: $text-color;
+  font-family: 'Open Sans' !important;
 
   .reset-layout {
     clear: both;
@@ -41,6 +52,10 @@ body.ec2012 {
     letter-spacing: 2px;
     font-size: 3em;
     margin-bottom: 0.5em;
+    
+    a, a:active, a:hover, a:visited {
+      color: $text-color;
+    }
   }
   
   #level1nav, #level2nav {
@@ -53,11 +68,29 @@ body.ec2012 {
     
     ul {
       float: left;
+
+      li {
+        a:hover {
+          @include basic-link-hover;
+        }
+      }
       
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
+        background-color: inherit;
+        
         a {
-          color: $background-color;
-          background-color: $link-color;
+          @include basic-link;
+          
+          &:hover {
+            @include basic-link-hover;
+          }
+        }
+        
+        &:hover {
+          a {
+            background-color: inherit;
+            color: $link-hover-color;
+          }
         }
       }
       
@@ -132,6 +165,22 @@ body.ec2012 {
     display: none;
   }
   
+  // Pods
+  
+  .lc-event-programme {
+    .sessiontype-presentation {
+      header {
+        border-top: none;
+        
+        h1 {
+          color: $link-color;
+          background-color: inherit;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
   // plugins
   
   // jquery.hovercard plugin styles
@@ -143,5 +192,10 @@ body.ec2012 {
         color: $link_red;
       }
     }
+  }
+  
+  // wordpress usernoise plugin styles
+  #un-button {
+    display: none;
   }
 }
