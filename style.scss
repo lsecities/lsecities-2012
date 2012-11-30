@@ -42,14 +42,13 @@
 @import "partials/templates/slider";
 @import "partials/templates/event";
 @import "partials/templates/event-programme";
+@import "partials/templates/event-speaker-list";
 @import "partials/templates/article";
 @import "partials/templates/conference";
 @import "partials/templates/publication";
 @import "partials/templates/researchproject";
 @import "partials/templates/people-list";
 @import "partials/templates/media-archive";
-
-@import "partials/templates/plugins/jquery.hovercard";
 
 // Media should come last
 @import "partials/media";

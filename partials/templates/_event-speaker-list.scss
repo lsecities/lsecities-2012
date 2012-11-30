@@ -2,9 +2,8 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
-@import "../palette";
+@import "palette";
 
-// jquery.hovercard plugin styles
 .lc-event-speaker-list {
   .clearline {
     clear: both;
@@ -29,6 +28,7 @@
     @include transition(color 1s ease);
   }
   
+  // hovercard styles
   .speaker-card {
     display: none;
     border: none;
