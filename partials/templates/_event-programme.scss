@@ -1,5 +1,4 @@
 .lc-event-programme {
-  
   .entry-content {
     
     section.sessiontype-day {
@@ -38,6 +37,21 @@
           border-bottom: 1px solid $palette_red;
         }
       }
+    }
+  }
+  
+  .session-chairs {
+    dt, dd {
+      display: inline;
+    }
+  }
+  
+  ul.mediaitems {
+    display: inline;
+    
+    & > li {
+      display: inline;
+      margin-right: 1em;
     }
   }
 }

@@ -94,27 +94,6 @@ header.entry-header { // TODO : remove once all templates have been refactored t
   }
 }
 
-.lc-event-programme { // TODO: move this to event-programme template SCSS file and reuse mixin from there
-  #contentarea {
-    .event-programme {
-      .session-chairs {
-        dt, dd {
-          display: inline;
-        }
-      }
-      
-      ul.mediaitems {
-        display: inline;
-        
-        & > li {
-          display: inline;
-          margin-right: 1em;
-        }
-      }
-    }
-  }
-}
-
 ol.article-references {
   list-style-position: inside;
   
