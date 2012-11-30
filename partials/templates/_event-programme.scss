@@ -1,6 +1,6 @@
 .lc-event-programme {
   
-  #contentarea {
+  .entry-content {
     
     section.sessiontype-day {
       & > header {
@@ -15,18 +15,27 @@
       }
     }
     
-    section.sessiontype-session .session  {
-      & > header {
-        & > h1 {
-          background-color: inherit;
-          color: inherit;
-          padding-left: 0;
+    section.sessiontype-session {
+      .session  {
+        & > header {
+          & > h1 {
+            background-color: inherit;
+            color: inherit;
+            padding-left: 0;
+          }
+        }
+        
+        .session {
+          & > header {
+            border-top: none;
+          }
         }
       }
-      
-      .session {
+
+      .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
         & > header {
           border-top: none;
+          border-bottom: 1px solid $palette_red;
         }
       }
     }

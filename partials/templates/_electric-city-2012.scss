@@ -46,7 +46,26 @@ body.ec2012 {
       }
     }
   }
+  
+  #header {
+    position: relative;
     
+    .twitter-hashtag {
+      position: absolute;
+      top: 30%;
+      line-height: 1em;
+      right: 0;
+      background-color: #eee111;
+      padding: 0.2em 0.5em;
+      border-radius: 0.2em;
+      font-weight: bold;
+      
+      a, a:active, a:visited {
+        color: $background-color;
+      }
+    }
+  }
+  
   #ec2012title {
     font-family: $site-font;
     letter-spacing: 2px;
@@ -131,7 +150,7 @@ body.ec2012 {
     }
   }
   
-  #contentarea section, .extra-content > section, .extra-content > aside {
+  .entry-content section, .extra-content > section, .extra-content > aside {
     & > header {
       border-top: 1px solid $link-color;
       
@@ -168,14 +187,25 @@ body.ec2012 {
   // Pods
   
   .lc-event-programme {
-    .sessiontype-presentation {
-      header {
-        border-top: none;
-        
-        h1 {
-          color: $link-color;
-          background-color: inherit;
-          padding-left: 0;
+    .entry-content {
+      .sessiontype-session {
+        .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
+          & > header {
+            border-top: none;
+            border-bottom: 1px solid $link-color;
+          }
+        }
+      }
+      
+      .sessiontype-presentation {
+        header {
+          border-top: none;
+          
+          h1 {
+            color: $link-color;
+            background-color: inherit;
+            padding-left: 0;
+          }
         }
       }
     }
@@ -185,12 +215,10 @@ body.ec2012 {
   
   // jquery.hovercard plugin styles
   .lc-event-speaker-list {
-    .hc-details {
+    .speaker-card {
       @include box-shadow(none);
-      
-      a, a:visited, a:active {
-        color: $link_red;
-      }
+      background-color: #424242;
+      color: white;
     }
   }
   

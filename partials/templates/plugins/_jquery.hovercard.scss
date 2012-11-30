@@ -6,25 +6,59 @@
 
 // jquery.hovercard plugin styles
 .lc-event-speaker-list {
-  .hc-details {
-      border: none;
-      @include box-shadow(3px 3px 2px #888888);
-      @include border-radius(inherit);
-      background-color: #fff;
-      color: #000;
-      font-family: inherit;
-      font-size: inherit;
-      left: 0;
-      top: 0;
-      line-height: inherit;
-      margin-right: 5em;
-      padding: 2em 0.5em 0.5em;
-      position: absolute;
-      text-align: left;
-      opacity: 0.9;
-      
-      h1 {
-        font-weight: bold;
-      }
+  .clearline {
+    clear: both;
+    
+    &.halfway {
+      display: none;
+    }
+  }
+  
+  .speaker-profile {
+    position: relative;
+    
+    img {
+      display: block;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  
+  .speaker-profile:hover > div > strong {
+    color: transparent;
+    @include transition(color 1s ease);
+  }
+  
+  .speaker-card {
+    display: none;
+    border: none;
+    @include box-shadow(3px 3px 2px #888888);
+    @include border-radius(inherit);
+    background-color: #fff;
+    color: #000;
+    font-size: 0.85em;;
+    left: 0;
+    top: 100%;
+    line-height: inherit;
+    padding: 0.5em;
+    position: absolute;
+    z-index: 100;
+    text-align: left;
+    opacity: 0.95;
+    width: 200%;
+    
+    h1 {
+      font-weight: bold;
+      font-size: 1.8em;
+    }
+    
+    p {
+      line-height: 1.2em;
+    }
+  }
+  
+  .speaker-profile.last .speaker-card {
+    left: inherit;
+    right: 0;
   }
 }
