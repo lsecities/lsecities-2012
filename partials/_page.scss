@@ -63,7 +63,7 @@
 body, select, input, textarea {
   color: $font-color;
   // Set your base font here, to apply evenly
-  // font-family: Georgia, serif;
+  font-family: $base-font-family;
 }
 
 //Headers (h1, h2, etc) have no default font-size or margin; define those yourself
@@ -82,10 +82,10 @@ strong, th {
 }
 
 aside {
-  font-family: $article-font-family;
+  // Font-family: $article-font-family;
   
   &.extras {
-    font-family: $base-font-family;
+    // Font-family: $base-font-family;
     float: right;
     padding-bottom: 1.2em;
     background-color: #eee;
@@ -134,7 +134,7 @@ aside {
 }
 
 article {
-  font-family: $article-font-family;
+  // Font-family: $article-font-family;
 }
 
 small {
@@ -155,7 +155,7 @@ input:invalid, textarea:invalid {
 
 #slider {
   margin-bottom: 0.5em;
-  font-family: $base-font-family;
+  // Font-family: $base-font-family;
   max-height: 13.18001222em;
   height: 13.18001222em;
   overflow: hidden;
@@ -282,7 +282,7 @@ body {
   
   .wp-caption-text {
     font-size: 0.875em;
-    font-family: $headings-font-family;
+    // Font-family: $headings-font-family;
   }
   
   ul.publication-side-toc {
