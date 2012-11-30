@@ -3,13 +3,14 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
-@import "palette";
+@import "../palette";
 
 $background-color: black;
 $text-color: white;
 $link-color: #eee111;
 $link-hover-color: darken($link-color, 20%);
 $site-font: theovandregular;
+$ec2012-font-family: 'Open Sans', $base-font-family;
 
 @mixin basic-link {
   background-color: inherit;
@@ -24,7 +25,7 @@ $site-font: theovandregular;
 body.ec2012 {
   background-color: black;
   color: $text-color;
-  font-family: 'Open Sans' !important;
+  font-family: $ec2012-font-family;
 
   .reset-layout {
     clear: both;
@@ -44,6 +45,12 @@ body.ec2012 {
       h1 {
         color: $link-color;
       }
+    }
+    
+    h1, h2 {
+      color: $link-color;
+      font-weight: bold;
+      font-size: 2em;
     }
   }
   

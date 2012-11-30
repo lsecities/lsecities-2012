@@ -36,9 +36,8 @@
 // @import "eleven40/base";
 // @import "eleven40/typography";
 @import "partials/templates/base";
-@import "partials/templates/electric-city-2012";
-@import "partials/templates/jquery.flexslider";
-@import "partials/templates/jquery.galleria";
+@import "partials/templates/plugins/jquery.flexslider";
+@import "partials/templates/plugins/jquery.galleria";
 @import "partials/templates/slider";
 @import "partials/templates/event";
 @import "partials/templates/event-programme";
@@ -49,6 +48,8 @@
 @import "partials/templates/researchproject";
 @import "partials/templates/people-list";
 @import "partials/templates/media-archive";
+@import "partials/templates/subthemes/electric-city-2012";
 
 // Media should come last
 @import "partials/media";
+@import "partials/templates/subthemes/electric-city-2012-mediaqueries";
