@@ -33,6 +33,7 @@ $keyfacts-font-size: 0.9em;
   
   & > header {
     border-top: 1px solid $palette_red;
+    line-height: 1em;
   
     & > h1 {
       color: #fff;
@@ -77,10 +78,18 @@ label {
 }
 
 header.heading-image {
+  margin-bottom: 1em;
+  
   .flexslider {
     .flex-direction-nav li a {
       top: ((352-64)/2)px;
     }
+  }
+  
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 }
 

@@ -7,22 +7,14 @@
 @media only screen and (min-width: 480px) {
   // Style adjustments for viewports 480px and over go here
   body.ec2012 {
-    .lc-event-speaker-list {
-      .speaker-profile {
-        width: 30.75%;
-      }
-    }
+
   }
 }/*/mediaquery*/
 
 @media only screen and (min-width: 768px) {
   // Style adjustments for viewports 768px and over go here
   body.ec2012 {
-    .lc-event-speaker-list {
-      .speaker-profile {
-        width: inherit;
-      }
-    }
+
   }
 }/*/mediaquery*/
 

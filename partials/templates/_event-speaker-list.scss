@@ -4,8 +4,14 @@
 @import "compass/css3/transform";
 @import "palette";
 
+@mixin last-in-row-speaker-card {
+  left: inherit;
+  right: 0;
+}
+
 .lc-event-speaker-list {
   .clearline {
+    display: block;
     clear: both;
     
     &.halfway {
@@ -15,6 +21,10 @@
   
   .speaker-profile {
     position: relative;
+    
+    &.last {
+      margin-right: 0;
+    }
     
     img {
       display: block;
@@ -58,7 +68,6 @@
   }
   
   .speaker-profile.last .speaker-card {
-    left: inherit;
-    right: 0;
+    @include last-in-row-speaker-card;
   }
 }
