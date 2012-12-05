@@ -60,7 +60,11 @@
         
         .article {
           margin-bottom: 0.5em;
-        
+
+          .heading-image {
+          width: 100%;
+            max-width: 100%;
+          }
           & > h1 {
             font-size: 1em;
           }

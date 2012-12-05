@@ -27,6 +27,10 @@ body.ec2012 {
   color: $text-color;
   font-family: $ec2012-font-family;
 
+  #mailing-list-subscription {                                                                                                                                          
+    display: none;                                                                                                                                                      
+  }
+  
   .reset-layout {
     clear: both;
     overflow: hidden;
@@ -36,6 +40,12 @@ body.ec2012 {
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  &.page-id-393 { // takeover of frontpage on lsecities.net
+    #container {
+      max-width: inherit;
+    }
   }
   
   header {    
@@ -87,6 +97,29 @@ body.ec2012 {
   #level1nav, #level2nav {
     font-family: $site-font;
     letter-spacing: 1px;
+  }
+  
+  #level1nav {
+    ul {
+      li {
+        &:hover {
+          background-color: transparent;
+          a, a:active, a:visited {
+            color: $text-color;
+          }
+          a:hover {
+            color: $link-color;
+          }
+        }
+        
+        a, a:active, a:visited {
+          color: $text-color;
+        }
+        a:hover {
+          color: $link-color;
+        }
+      }
+    }
   }
   
   #level2nav {
@@ -157,6 +190,17 @@ body.ec2012 {
     }
   }
   
+  .entry-content {  
+    h1, h2, h3 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    
+    ul {
+      margin-bottom: 1em;
+    }
+  }
+  
   .entry-content section, .extra-content > section, .extra-content > aside {
     & > header {
       border-top: 1px solid $link-color;
@@ -192,6 +236,28 @@ body.ec2012 {
   }
   
   // Pods
+  .lc-publication {
+    #share-on-social-media {
+      display: none;
+    }
+    
+    #tableofcontents {
+      &.publication-category-research-data {
+        .articles {
+          & > section {
+            .article {
+              margin-bottom: 4em !important;
+              
+              & > h1 {
+                font-size: 2em;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   
   .lc-event-programme {
     .entry-content {
@@ -217,6 +283,61 @@ body.ec2012 {
       }
     }
   }
+  
+  .lc-newspaper-article {
+    position: relative;
+    
+    header.heading-image {
+      display: none;
+    }
+    
+    header.entry-header {
+      display: block;
+    }
+
+    #navigationarea {                                                                                                                                                   
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      display: inherit;
+
+      img.show, img.hide {
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        display: none;
+      }
+      
+      img.show {
+        display: inline;
+      }                                                                                                                                                       
+
+      nav#publication-side-toc {
+        display: none;
+        position: absolute;
+        right: 15px;
+        background: #EEE111;
+        padding: 1em;
+        width: 300px;
+        top: -22px;
+        z-index: 3;
+
+        h1, li, a, a:hover, a:active, a:visited {
+          color: black;
+        }
+        
+        ul li {
+          margin-bottom: 1em;
+        }
+        
+        h1 {
+          font-weight: bold;
+        }                                                                                                                                                               
+      }                                                                                                                                                                 
+
+    }                                                                                                                                                                   
+  }
 
   // plugins
   
@@ -233,4 +354,6 @@ body.ec2012 {
   #un-button {
     display: none;
   }
+  
+  // widgets
 }
