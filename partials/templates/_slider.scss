@@ -216,8 +216,8 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
         img {
           /* position: absolute; */
           margin: 0;
-          width: inherit;
-          max-width: inherit;
+          width: 100%;
+          max-width: 100%;
         }
       }
       

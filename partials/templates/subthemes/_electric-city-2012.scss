@@ -153,8 +153,9 @@ body.ec2012 {
         }
       }
       
-      li:first-child a {
+      li a {
         padding-left: 0;
+        padding-right: 1em;
       }
     }
   }
@@ -313,7 +314,7 @@ body.ec2012 {
         display: inline;
       }                                                                                                                                                       
 
-      nav#publication-side-toc {
+      #publication-side-toc {
         display: none;
         position: absolute;
         right: 15px;
@@ -333,6 +334,7 @@ body.ec2012 {
         
         h1 {
           font-weight: bold;
+          font-size: 1.5em;
         }                                                                                                                                                               
       }                                                                                                                                                                 
 

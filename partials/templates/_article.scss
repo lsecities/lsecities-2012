@@ -32,6 +32,11 @@
     color: #ff0000;
   }
 
+  .cite_ref, .cite_note {
+    vertical-align: super;
+    font-size: 0.83em;
+  }
+  
   article .article {
     section {
       margin-bottom: 2em;
@@ -43,7 +48,13 @@
       width: 50%;
       margin-right: 1em;
     }
-      
+    
+    .entry-content.article-text {
+      h1 {
+        margin-top: 1em;
+      }
+    }
+    
     .entry-content, .extra-content {
 /* // TODO: re-enable once all the article photos have been double checked
       img {

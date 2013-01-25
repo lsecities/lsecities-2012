@@ -18,6 +18,25 @@
   }
 }/*/mediaquery*/
 
+@media only screen and (max-width: 768px) {
+  // Style adjustments for viewports 768px and less go here
+  body.ec2012 {
+    .lc-newspaper-article {
+      #navigationarea {
+        position: static;
+        
+        .hide, .show {
+          display: none !important;
+        }
+        
+        #publication-side-toc {
+          position: static;
+          display: block;
+        }
+      }
+    }
+  }
+}/*/mediaquery*/
 
 // Print styles
 // Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
