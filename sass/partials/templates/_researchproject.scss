@@ -19,7 +19,7 @@
       position: relative;
       
       h1 {
-        box-sizing: border-box;
+        @include box-sizing(border-box);
         position: absolute;
         bottom: 0;
         color: white;
