@@ -13,6 +13,22 @@
       margin-bottom: 0;
     }
   }
+  
+  #keyfacts .highlights {
+    & > a {
+      position: relative;
+      
+      h1 {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        color: white;
+        background: rgba(0,0,0,0.6);
+        width: 100%;
+        padding: 0.3em;
+      }
+    }
+  }
 }
 
 nav#projectsmenu {
