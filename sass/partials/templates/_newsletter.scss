@@ -1,13 +1,86 @@
 @import "compass/css3";
 
+@mixin flag-title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.2em;
+  line-height: 0.8em;
+  
+  span {
+    color: white;
+    background-color: rgb(255, 0, 0);
+    padding: 0 0.2em;
+  }
+}
+
+@mixin two-column-content {
+  width: 48%;
+  margin-right: 4%;
+  float: left;
+  
+  &:nth-of-type(2n) {
+    margin-right: 0;
+  }
+}
+
 body#newsletter-2013 {
   width: 841px;
   margin-left: auto;
   margin-right: auto;
   
+  .page-header > h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin: 1em 0 1.5em;
+  }
+  
+  .toc-section {
+    @include two-column-content;
+    
+    h1 {
+      @include flag-title;
+    }
+  }
+    
   img {
     max-width: 100%;
     width: 100%;
     height: auto;
+  }
+  
+  .page-header, .page-body {
+    clear: both;
+  }
+  
+  .page-body {
+    padding-top: 2em;
+    
+    .newsletter-section {
+      clear:both;
+      
+      & > h1 {
+        @include flag-title;
+        border-top: 1px solid rgb(255, 0, 0);
+        line-height: 1.3em;
+      }
+      
+      .section-item {
+        @include two-column-content;
+        
+        &.wide {
+          width: 100%;
+          margin-left: 0;
+        }
+        
+        h1 {
+          font-size: 1em;
+          font-weight: bold;
+        }
+        
+        .content {
+          line-height: 1.25em;
+        }
+      }
+    }
   }
 }
