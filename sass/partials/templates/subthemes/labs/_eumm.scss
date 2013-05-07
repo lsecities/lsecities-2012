@@ -17,9 +17,13 @@ body.site-labs.page-template-default {
 .site-labs {
     .lc-slider-page {
         .introbox#slidetile-european-metromonitor {
-            background: url('http://lsecities.net/wp-content/themes/lsecities-2012/images/logos/logo_heif5_col_whitebackground.png') no-repeat bottom;
+            background: url('http://lsecities.net/wp-content/themes/lsecities-2012/images/logo_heif5_col.png') no-repeat bottom;
             background-size: 100% auto;
-            background-color: rgba(0,0,0,0.8);
+            background-color: transparent;
+            
+            .inner-box {
+                color: inherit;
+            }
         }
     }
 }
