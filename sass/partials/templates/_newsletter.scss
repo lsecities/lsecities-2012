@@ -28,10 +28,18 @@ body#newsletter-2013 {
   margin-left: auto;
   margin-right: auto;
   
+  .logo {
+    display: block;
+    width: 250px;
+    margin-top: 1em;
+  }
+  
   .page-header > h1 {
     font-size: 1.5em;
     text-transform: uppercase;
     margin: 1em 0 1.5em;
+    color: rgb(255, 0, 0);
+    font-weight: 900;
   }
   
   .toc-section {
@@ -39,6 +47,7 @@ body#newsletter-2013 {
     
     h1 {
       @include flag-title;
+      line-height: 0.6em;
     }
   }
     
@@ -53,6 +62,8 @@ body#newsletter-2013 {
   }
   
   .page-body {
+    margin-bottom: 4em;
+    
     .newsletter-section {
       clear:both;
       padding-top: 3em;
@@ -60,10 +71,12 @@ body#newsletter-2013 {
       & > h1 {
         @include flag-title;
         border-top: 1px solid rgb(255, 0, 0);
-        line-height: 1.3em;
+        line-height: 1.1em;
       }
       
       .section-item {
+        margin-bottom: 2em;
+        
         &.narrow {
           @include two-column-content;
         }
@@ -72,6 +85,9 @@ body#newsletter-2013 {
           width: 100%;
           margin-left: 0;
           margin-bottom: 2em;
+          display: block; /* this would normally be a span,
+            to allow nth-of-type(even) to work with narrow divs,
+            so we need to set block display */
         }
         
         h1 {
@@ -81,6 +97,15 @@ body#newsletter-2013 {
         
         .content {
           line-height: 1.25em;
+        }
+      }
+      
+      &.news-section {
+        .section-item {
+          width: 100%;
+          float: none;
+          margin-right: 0;
+          margin-bottom: 2em;
         }
       }
     }
