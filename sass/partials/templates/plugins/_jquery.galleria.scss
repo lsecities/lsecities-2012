@@ -17,6 +17,12 @@
     width: 100%;
     max-width: 100%;
   }
+  
+  section {
+    .lc-galleria, .lc-galleria-picasa {
+      margin: 1em 0;
+    }
+  }
 }
 
 .lc-conference-frontpage {
