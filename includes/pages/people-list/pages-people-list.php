@@ -184,6 +184,25 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     if($blurb) {
       $output .= "  $blurb";
     }
+    // project involvement (i.e. list of projects this person is involved in as coordinator or researcher), if applicable
+    $p1_list = $pod->get_field('research_projects') ? $pod->get_field('research_projects') : array();
+	$p2_list = $pod->get_field('projects_coordinated') ? $pod->get_field('projects_coordinated') : array();
+	$projects_list = array_unique(array_merge($p1_list, $p2_list));
+    if(count($projects_list) > 0) {
+    	$output .= "  <ul class='run-in comma-separated'>";
+    	foreach($projects_list as $project) {
+    		$output .= "  <li>";
+    		if ($project['slug']) {
+    			$output .= '<a href="http://lsecities.net' . PODS_BASEURI_RESEARCH_PROJECTS . '/' . $project['slug'] . '">';
+    		}
+    		$output .=  $project['name'];
+    		if ($project['slug']) {
+    			$output .=  '</a>';
+    		}
+    		$output .= "  </li>";  			
+    	}
+    	$output .= "  </ul>";
+    }
     $output .= "  </div>";
     $output .= "</li>";
   } elseif($mode === 'summary') {
