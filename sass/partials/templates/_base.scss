@@ -11,7 +11,6 @@ $nav-and-keyfacts-h1-size: 1em;
 $keyfacts-font-size: 0.9em;
 
 @mixin inline-lists {
-  ul {
     display: inline;
     
     & > li {
@@ -25,7 +24,6 @@ $keyfacts-font-size: 0.9em;
     li:last-child:after {
       content: '' !important;
     }
-  }
 }
 
 @mixin red-flag-header {
@@ -75,6 +73,10 @@ table {
 
 label {
   display: block;
+}
+
+ul.run-in.comma-separated {
+  @include inline-lists;
 }
 
 header.heading-image {
@@ -355,13 +357,17 @@ div.widget {
       }
     }
     
-    @include inline-lists;
+    ul {
+      @include inline-lists;
+    }
   }
 }
 
 #keyfacts {
   dl dd {
-    @include inline-lists;
+    ul {
+      @include inline-lists;
+    }
   }
 }
 
