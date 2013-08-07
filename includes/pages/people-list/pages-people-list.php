@@ -230,9 +230,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     }
 
     // project involvement (i.e. list of projects this person is involved in as coordinator or researcher), if applicable
-    if(is_user_logged_in()) {
-      $output .= person_data__project_involvement($pod);
-    }
+    $output .= person_data__project_involvement($pod);
 
     $output .= "  </div>";
     $output .= "</li>";
