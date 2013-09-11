@@ -1,3 +1,15 @@
+lsecities-theme-alexandria (1.5) UNRELEASED; urgency=low
+
+  release 1.8 "panais"
+  
+  * changed theme name to lsecities-theme-<city> where <city> is
+    a global city with name starting with A, then B, etc. as
+    new major releases of the theme are made
+  * now using Composer for PHP dependencies (Twig, MtHaml) rather
+    than git submodules
+  
+ -- andrea rota <a.rota@lse.ac.uk>  Mon, 30 Sep 2013 16:30:00 +0100
+ 
 lsecities-2012 (1.4) stable; urgency=low
   
   release 1.4 "bacchante"
