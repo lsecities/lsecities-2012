@@ -3,8 +3,7 @@
 use MtHaml\Autoloader;
 use MtHaml\Environment;
 
-require_once __DIR__ . '/../../vendor/lib/mthaml/lib/MtHaml/Autoloader.php';
-require_once __DIR__ . '/../../vendor/lib/twig/lib/Twig/Autoloader.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 Twig_Autoloader::register();
 Autoloader::register();
