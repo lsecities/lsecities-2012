@@ -64,7 +64,7 @@ function pods_prepare_conference($pod_slug) {
   $visualization_tiles = $pod->field('research_summary.visualization_tiles');
   $tile_pod = pods('tile', $visualization_tiles[0]['slug']);
   var_trace('tile_image: ' . var_export($tile_pod->field('image'), true), $TRACE_PREFIX, $TRACE_ENABLED);
-  $obj['research_summary_tile_image'] = wp_get_attachment_url($tile_pod->field('image.ID'));
+  $obj['research_summary_tile_image'] = pods_image_url($tile_pod->field('image'));
   $obj['research_summary_pdf_uri'] = $pod->field('research_summary.data_section_pdf_uri');
 
   // generate list of items for conference menu (used in nav partial)
