@@ -224,8 +224,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               foreach($publication_sections as $section) : ?>
                 <section id="publication-section-<?php echo $section['title']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
-          
-                mysql_data_seek($articles_pods->result,0);
+
+                $articles_pods->reset();
                 while($articles_pods->fetch()) :
                   if(preg_match("/^" . $section['id'] . "/", $articles_pods->field('sequence'))) :
                     $article_authors = $articles_pods->field('authors');
