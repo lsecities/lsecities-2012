@@ -68,7 +68,7 @@ function people_list_generate_list($list_id, $check_list, $mode = 'full_list') {
 
 function people_list_generate_section($section_slug, &$check_list, $section_heading = false, $mode = 'full_list') {
   $pod = pods('people_group', $section_slug);
-  $people = (array)$pod->field('members', array('orderby' => 'family_name ASC'));
+  $people = (array)$pod->field(array('name' => 'members', 'orderby' => 'family_name ASC'));
   // global $people_in_output_full, $people_in_output_summary;
   var_trace(var_export($people, true), $TRACE_PREFIX . ' - group_members');
   $output = "<section class='people-list $section_slug'>";
