@@ -11,50 +11,50 @@ $TRACE_PREFIX = 'pods-publications';
 
 $publication_slug = get_post_meta($post->ID, 'pod_slug', true);
 var_trace('pod_slug: ' . $publication_slug, $TRACE_PREFIX, $TRACE_ENABLED);
-$pod = new Pod('publication_wrappers', $publication_slug);
+$pod = pods('publication_wrappers', $publication_slug);
 $publication_pod = $pod; // TODO refactor code and move generation of list of articles to sub used both in pods-articles and pods-publication
-$pod_title = $pod->get_field('name');
-$pod_subtitle = $pod->get_field('publication_subtitle');
-$pod_issuu_uri = $pod->get_field('issuu_uri');
-$pod_cover = wp_get_attachment_url($pod->get_field('snapshot.ID'));
-$pod_abstract = do_shortcode($pod->get_field('abstract'));
+$pod_title = $pod->field('name');
+$pod_subtitle = $pod->field('publication_subtitle');
+$pod_issuu_uri = $pod->field('issuu_uri');
+$pod_cover = pods_image_url($pod->field('snapshot'), 'original');
+$pod_abstract = do_shortcode($pod->field('abstract'));
 
-$publication_category = $pod->get_field('category.slug');
+$publication_category = $pod->field('category.slug');
 
 // get tiles for heading slider
 $heading_slides = array();
-var_trace($pod->get_field('heading_slides.slug'), $TRACE_PREFIX . '--heading_slides.slug', $TRACE_ENABLED);
-$slider_pod = new Pod('slide', $pod->get_field('heading_slides.slug'));
-foreach((array)$slider_pod->get_field('tiles.slug') as $tile_slug) {
+var_trace($pod->field('heading_slides.slug'), $TRACE_PREFIX . '--heading_slides.slug', $TRACE_ENABLED);
+$slider_pod = pods('slide', $pod->field('heading_slides.slug'));
+foreach((array)$slider_pod->field('tiles.slug') as $tile_slug) {
   var_trace($tile_slug, $TRACE_PREFIX. '--tiles.slug', $TRACE_ENABLED);
-  $tile = new Pod('tile', $tile_slug);
+  $tile = pods('tile', $tile_slug);
   if($tile) {
-    array_push($heading_slides, wp_get_attachment_url($tile->get_field('image.ID')));
+    array_push($heading_slides, pods_image_url($tile->field('image'), 'original'));
   }
 }
 
 /**
  * Fetch data for English language publication PDF and extra ('alt') publication PDF
  */
-$pod_pdf = $pod->get_field('publication_pdf.guid') ? wp_get_attachment_url($pod->get_field('publication_pdf.ID')) : $pod->get_field('publication_pdf_uri');
-$pod_pdf_filesize = $pod->get_field('publication_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->get_field('publication_pdf.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf = $pod->get_field('publication_alt_pdf.guid') ? wp_get_attachment_url($pod->get_field('publication_alt_pdf.ID')) : $pod->get_field('publication_alt_pdf_uri');
-$pod_alt_pdf_filesize = $pod->get_field('publication_alt_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->get_field('publication_alt_pdf.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf_label = $pod->get_field('publication_alt_pdf.guid') && $pod->get_field('publication_alt_pdf_label') ? $pod->get_field('publication_alt_pdf_label') : 'Download extra content';
+$pod_pdf = $pod->field('publication_pdf.guid') ? wp_get_attachment_url($pod->field('publication_pdf.ID')) : $pod->field('publication_pdf_uri');
+$pod_pdf_filesize = $pod->field('publication_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf.ID'))) / 1e+6 ) : '';
+$pod_alt_pdf = $pod->field('publication_alt_pdf.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf.ID')) : $pod->field('publication_alt_pdf_uri');
+$pod_alt_pdf_filesize = $pod->field('publication_alt_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf.ID'))) / 1e+6 ) : '';
+$pod_alt_pdf_label = $pod->field('publication_alt_pdf.guid') && $pod->field('publication_alt_pdf_label') ? $pod->field('publication_alt_pdf_label') : 'Download extra content';
 
 /**
  * Fetch data for 2nd language publication PDF and extra ('alt') publication PDF
  */
-$pod_pdf_lang2 = $pod->get_field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->get_field('publication_pdf_lang2.ID')) : $pod->get_field('publication_pdf_lang2_uri');
-$pod_pdf_filesize_lang2 = $pod->get_field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->get_field('publication_pdf_lang2.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf_lang2 = $pod->get_field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->get_field('publication_alt_pdf_lang2.ID')) : $pod->get_field('publication_alt_pdf_lang2_uri');
-$pod_alt_pdf_filesize_lang2 = $pod->get_field('publication_alt_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->get_field('publication_alt_pdf_lang2.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf_label_lang2 = $pod->get_field('publication_alt_pdf_label_lang2');
+$pod_pdf_lang2 = $pod->field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_pdf_lang2.ID')) : $pod->field('publication_pdf_lang2_uri');
+$pod_pdf_filesize_lang2 = $pod->field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf_lang2.ID'))) / 1e+6 ) : '';
+$pod_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf_lang2.ID')) : $pod->field('publication_alt_pdf_lang2_uri');
+$pod_alt_pdf_filesize_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf_lang2.ID'))) / 1e+6 ) : '';
+$pod_alt_pdf_label_lang2 = $pod->field('publication_alt_pdf_label_lang2');
 
-$extra_publication_metadata = $pod->get_field('extra_publication_metadata');
+$extra_publication_metadata = $pod->field('extra_publication_metadata');
 
 if(is_array($publication_authors_list)) {
-  $publication_authors_list = $pod->get_field('authors', 'family_name ASC');
+  $publication_authors_list = $pod->field('authors', array('orderby' => 'family_name ASC'));
   foreach($publication_authors_list as $publication_author) {
     $publication_authors .= $publication_author['name'] . ' ' . $publication_author['family_name'] . ', ';
   }
@@ -62,7 +62,7 @@ if(is_array($publication_authors_list)) {
 }
 
 if(is_array($publication_editors_list)) {
-  $publication_editors_list = $pod->get_field('editors', 'family_name ASC');
+  $publication_editors_list = $pod->field('editors', array('orderby' => 'family_name ASC'));
   foreach($publication_editors_list as $publication_editor) {
     $publication_editors .= $publication_editor['name'] . ' ' . $publication_editor['family_name'] . ', ';
   }
@@ -70,14 +70,14 @@ if(is_array($publication_editors_list)) {
 }
 
 if(is_array($publication_contributors_list)) {
-  $publication_contributors_list = $pod->get_field('contributors', 'family_name ASC');
+  $publication_contributors_list = $pod->field('contributors', array('orderby' => 'family_name ASC'));
   foreach($publication_contributors_list as $publication_contributor) {
     $publication_contributors .= $publication_contributor['name'] . ' ' . $publication_contributor['family_name'] . ', ';
   }
   $publication_contributors = substr($publication_contributors, 0, -2);
 }
 
-$publication_partners_list = $pod->get_field('partner_organizations', 'name ASC');
+$publication_partners_list = $pod->field('partner_organizations', array('orderby' => 'name ASC'));
 if(is_array($publication_partners_list)) {
   foreach($publication_partners_list as $publication_partner) {
     if($publication_partner['web_uri']) {
@@ -89,19 +89,19 @@ if(is_array($publication_partners_list)) {
   $publication_partners = substr($publication_partners, 0, -2);
 }
 
-$publication_catalogue_data = $pod->get_field('catalogue_data');
-$publishing_date = $pod->get_field('publishing_date');
+$publication_catalogue_data = $pod->field('catalogue_data');
+$publishing_date = $pod->field('publishing_date');
 
-$articles_pods = new Pod('article');
+$articles_pods = pods('article');
 $search_params = array();
-$search_params['where'] = 'in_publication.id = ' .$pod->get_field('id');
+$search_params['where'] = 'in_publication.id = ' .$pod->field('id');
 $search_params['orderby'] = 't.sequence ASC';
 $search_params['limit'] = -1;
-$articles_pods->findRecords($search_params);
+$articles_pods->find($search_params);
 
 // get list of publication sections
 $publication_sections = array();
-foreach(preg_split("/\n/", $publication_pod->get_field('sections')) as $section_line) {
+foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
   preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
   if($matches[1]) {
     array_push($publication_sections, array( 'id' => $matches[1], 'title' => $matches[2]));
@@ -129,7 +129,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <?php if($pod_subtitle): ?><h2><?php echo $pod_subtitle; ?></h2><?php endif ; ?>
           </header>
           <div class='entry-content article-text'>
-            <?php echo $pod->get_field('blurb'); ?>
+            <?php echo $pod->field('blurb'); ?>
           </div>
           <?php if(count($publication_sections) > 1): ?>
           <section class='publication-sections'>
@@ -194,9 +194,9 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->
       <div class='extra-content row'>
-          <?php var_trace(var_export($pod->get_field('reviews_category.term_id'), true), $TRACE_PREFIX, $TRACE_ENABLED); ?>
-          <?php if($pod->get_field('reviews_category.term_id')):
-                  $wp_posts_reviews = get_posts(array('category' => $pod->get_field('reviews_category.term_id'), 'numberposts' => 10));
+          <?php var_trace(var_export($pod->field('reviews_category.term_id'), true), $TRACE_PREFIX, $TRACE_ENABLED); ?>
+          <?php if($pod->field('reviews_category.term_id')):
+                  $wp_posts_reviews = get_posts(array('category' => $pod->field('reviews_category.term_id'), 'numberposts' => 10));
                   if(count($wp_posts_reviews)): ?>
           <section class="row" id="wp-posts-reviews">
             <header><h1>Reviews</h1></header>
@@ -211,11 +211,11 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
           </section><!-- #wp-posts-reviews -->
             <?php endif; ?>
           <?php endif; ?>
-          <?php if($articles_pods->getTotalRows()) : ?>
+          <?php if($articles_pods->total_found()) : ?>
           <section class="row publication-category-<?php echo $publication_category; ?>" id="tableofcontents">
             <header><h1>Articles</h1></header>
             <div class="eightcol">
-              <?php if($articles_pods->getTotalRows()) : ?>
+              <?php if($articles_pods->total_found()) : ?>
               <div class="articles">
               <?php
               if(!count($publication_sections)) {
@@ -226,35 +226,35 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
           
                 mysql_data_seek($articles_pods->result,0);
-                while($articles_pods->fetchRecord()) :
-                  if(preg_match("/^" . $section['id'] . "/", $articles_pods->get_field('sequence'))) :
-                    $article_authors = $articles_pods->get_field('authors');
+                while($articles_pods->fetch()) :
+                  if(preg_match("/^" . $section['id'] . "/", $articles_pods->field('sequence'))) :
+                    $article_authors = $articles_pods->field('authors');
                     $author_names = '';
                     foreach($article_authors as $author) {
                       $author_names = $author_names . $author['name'] . ' ' . $author['family_name'] . ', ';
                     }
                     // remove trailing comma
                     $author_names = substr($author_names, 0, -2);
-                    $article_title = $articles_pods->get_field('name');
-                    var_trace('article Pod object: ' . var_export($articles_pods, true), $TRACE_PREFIX, $TRACE_ENABLED);
+                    $article_title = $articles_pods->field('name');
+                    // var_trace('article Pod object: ' . var_export($articles_pods, true), $TRACE_PREFIX, $TRACE_ENABLED);
                     ?>
                     <div class="article">
-                      <?php if($publication_category == 'research-data' and $articles_pods->get_field('heading_image')): ?>
-                      <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->get_field('slug'); ?>">
-                      <img class='heading-image' src='<?php echo wp_get_attachment_url($articles_pods->get_field('heading_image.ID')); ?>' />
+                      <?php if($publication_category == 'research-data' and $articles_pods->field('heading_image')): ?>
+                      <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>">
+                      <img class='heading-image' src='<?php echo pods_image_url($articles_pods->field('heading_image'), 'original'); ?>' />
                       </a>
                       <?php endif; ?>
                       <h1>
-                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->get_field('slug'); ?>"><?php echo $article_title; ?></a>
+                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>"><?php echo $article_title; ?></a>
                       </h1>
                       <?php if($author_names): ?>
                       <div class="authors">
                         <?php echo $author_names ; ?>
                       </div>
                       <?php endif; ?>
-                      <?php if(false and $articles_pods->get_field('abstract')): //disable until we can generate plain text only ?>
+                      <?php if(false and $articles_pods->field('abstract')): //disable until we can generate plain text only ?>
                       <div class="excerpt">
-                        <?php echo shorten_string($articles_pods->get_field('abstract'), 30); ?><a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->get_field('slug'); ?>">...</a>
+                        <?php echo shorten_string($articles_pods->field('abstract'), 30); ?><a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>">...</a>
                       </div>
                       <?php endif; ?>
                     </div><!-- .article -->

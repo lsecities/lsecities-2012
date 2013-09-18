@@ -22,13 +22,13 @@ jQuery(document).ready(function($) {
 </script>
 <?php endif; // ($http_req_headers["X-Site-Id"] == 'ec2012') ?>
 <nav id="publication-side-toc">
-<?php if(count($publication_pod->get_field('articles'))) : ?>
+<?php if(count($publication_pod->field('articles'))) : ?>
   <div>
-    <h1><?php echo $publication_pod->get_field('name'); ?></h1>
+    <h1><?php echo $publication_pod->field('name'); ?></h1>
     <ul>
     <?php
     $sections = array();
-    foreach(preg_split("/\n/", $publication_pod->get_field('sections')) as $section_line) {
+    foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
       preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
       array_push($sections, array( 'id' => $matches[1], 'title' => $matches[2]));
     }
@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
     }
     foreach($sections as $section) : ?>
       <?php if($section['title']) { ?><h2><?php echo $section['title']; ?></h2><?php }
-      foreach($publication_pod->get_field('articles', 'sequence ASC') as $article) :
+      foreach($publication_pod->field('articles', array('orderby' => 'sequence ASC')) as $article) :
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) : ?>
           <?php var_trace(var_export($article, true), 'article-pod-object', $TRACE_ENABLED); ?>
           <li>

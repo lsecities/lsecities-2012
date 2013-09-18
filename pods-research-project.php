@@ -26,35 +26,35 @@ if(!$pod_from_page) {
 }
 
 var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
-$pod = new Pod('research_project', $pod_slug);
+$pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-$pod_title = $pod->get_field('name');
-$pod_tagline = $pod->get_field('tagline');
-$web_uri = $pod->get_field('web_uri');
-$pod_summary = do_shortcode($pod->get_field('summary'));
-$pod_blurb = do_shortcode($pod->get_field('blurb'));
-$pod_keywords = $pod->get_field('keywords');
+$pod_title = $pod->field('name');
+$pod_tagline = $pod->field('tagline');
+$web_uri = $pod->field('web_uri');
+$pod_summary = do_shortcode($pod->field('summary'));
+$pod_blurb = do_shortcode($pod->field('blurb'));
+$pod_keywords = $pod->field('keywords');
 
 // project duration
 $project_duration = '';
 
 // get years from start and date fields
 try {
-  if($pod->get_field('date_start')) { 
-    $project_start = new DateTime($pod->get_field('date_start') . '-01-01');
+  if($pod->field('date_start')) { 
+    $project_start = new DateTime($pod->field('date_start') . '-01-01');
     $project_start = $project_start->format('Y');
   }
   
-  if($pod->get_field('date_end')) {
-    $project_end = new DateTime($pod->get_field('date_end') . '-12-31');
+  if($pod->field('date_end')) {
+    $project_end = new DateTime($pod->field('date_end') . '-12-31');
     $project_end = $project_end->format('Y');
   }
 } catch (Exception $e) {}
 
 // get freeform duration text, if available
-$project_duration_freeform = $pod->get_field('duration');
+$project_duration_freeform = $pod->field('duration');
 
 // if freeform duration is available, use this
 if($project_duration_freeform) {
@@ -64,11 +64,11 @@ if($project_duration_freeform) {
 }
 
 // build a list of all current members of staff
-$staff = new Pod('people_group', 'lsecities-staff');
-$all_staff = $staff->get_field('members.slug');
+$staff = pods('people_group', 'lsecities-staff');
+$all_staff = $staff->field('members.slug');
 var_trace($all_staff, 'all_staff');
 
-$project_coordinators_list = $pod->get_field('coordinators');
+$project_coordinators_list = $pod->field('coordinators');
 $project_coordinators_count = count($project_coordinators_list);
 foreach($project_coordinators_list as $project_coordinator) {
   if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
@@ -82,7 +82,7 @@ foreach($project_coordinators_list as $project_coordinator) {
 }
 $project_coordinators = substr($project_coordinators, 0, -2);
 
-$project_researchers_list = $pod->get_field('researchers');
+$project_researchers_list = $pod->field('researchers');
 $project_researchers_count = count($project_researchers_list);
 foreach($project_researchers_list as $project_researcher) {
   if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
@@ -97,7 +97,7 @@ foreach($project_researchers_list as $project_researcher) {
 $project_researchers = substr($project_researchers, 0, -2);
 
 /*
-$project_partners_list = $pod->get_field('partners');
+$project_partners_list = $pod->field('partners');
 $project_partners_count = count($project_partners_list);
 foreach($project_partners_list as $project_partner) {
   $project_partners .= $project_partner['name'] . ', ';
@@ -106,7 +106,7 @@ $project_partners = substr($project_partners, 0, -2);
 */
 
 // generate list of research partners
-$project_partners_list = $pod->get_field('partners', 'name ASC');
+$project_partners_list = $pod->field('partners', array('orderby' => 'name ASC'));
 $project_partners_count = count($project_partners_list);
 foreach($project_partners_list as $project_partner) {
   if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
@@ -118,7 +118,7 @@ foreach($project_partners_list as $project_partner) {
 $project_partners = substr($project_partners, 0, -2);
 
 // generate list of research funders
-$project_funders_list = $pod->get_field('funders', 'name ASC');
+$project_funders_list = $pod->field('funders', array('orderby' => 'name ASC'));
 $project_funders_count = count($project_funders_list);
 foreach($project_funders_list as $project_funder) {
   if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
@@ -129,12 +129,12 @@ foreach($project_funders_list as $project_funder) {
 }
 $project_funders = substr($project_funders, 0, -2);
 
-$research_strand_title = $pod->get_field('research_strand.name');
-$research_strand_summary = $pod->get_field('research_strand.summary');
+$research_strand_title = $pod->field('research_strand.name');
+$research_strand_summary = $pod->field('research_strand.summary');
 
-$project_status = $pod->get_field('project_status.name');
+$project_status = $pod->field('project_status.name');
 
-$featured_post['ID'] = $pod->get_field('featured_post.ID');
+$featured_post['ID'] = $pod->field('featured_post.ID');
 if($featured_post['ID']) {
   $featured_post['permalink'] = get_permalink($featured_post['ID']);
   $featured_post['thumbnail_url'] = wp_get_attachment_url(get_post_thumbnail_id($featured_post['ID']));
@@ -145,45 +145,45 @@ $research_output_categories = array('book', 'journal-article', 'book-chapter', '
 $research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
 $event_calendar_categories = array('lse-cities-event');
 
-$research_output_publications_pod_slugs = (array)$pod->get_field('research_outputs_publications.slug');
+$research_output_publications_pod_slugs = (array)$pod->field('research_outputs_publications.slug');
 var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
 
-$research_output_pod_slugs = (array)$pod->get_field('research_outputs.slug');
+$research_output_pod_slugs = (array)$pod->field('research_outputs.slug');
 var_trace(var_export($research_output_pod_slugs, true), 'research_output_pod_slugs');
 $research_outputs = array();
 foreach($research_output_pod_slugs as $research_output_pod_slug) {
-  $research_output_pod = new Pod('research_output', $research_output_pod_slug);
+  $research_output_pod = pods('research_output', $research_output_pod_slug);
   
-  var_trace(var_export($research_output_pod->get_field('category'), true), 'output category');
+  var_trace(var_export($research_output_pod->field('category'), true), 'output category');
 
-  $research_outputs[$research_output_pod->get_field('category.slug')][] = array(
-    'title' => $research_output_pod->get_field('name'),
-    'citation' => $research_output_pod->get_field('citation'),
-    'date' => date_string($research_output_pod->get_field('date')),
-    'uri' => $research_output_pod->get_field('uri')
+  $research_outputs[$research_output_pod->field('category.slug')][] = array(
+    'title' => $research_output_pod->field('name'),
+    'citation' => $research_output_pod->field('citation'),
+    'date' => date_string($research_output_pod->field('date')),
+    'uri' => $research_output_pod->field('uri')
   );
 }
 
 // now add publications from the publication_wrappers aka Publications pod
-$research_output_publications_pod_slugs = (array)$pod->get_field('research_output_publications.slug');
+$research_output_publications_pod_slugs = (array)$pod->field('research_output_publications.slug');
 var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
 foreach($research_output_publications_pod_slugs as $tmp_slug) {
-  $research_output_publication_pod = new Pod('publication_wrappers', $tmp_slug);
+  $research_output_publication_pod = pods('publication_wrappers', $tmp_slug);
   
-  var_trace(var_export($research_output_publication_pod->get_field('category'), true), 'output category');
+  var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
   
-  $research_outputs[$research_output_publication_pod->get_field('category.slug')][] = array(
-    'title' => $research_output_publication_pod->get_field('name'),
-    'citation' => $research_output_publication_pod->get_field('name'),
-    'date' => date_string($research_output_publication_pod->get_field('publishing_date')),
-    'uri' => get_permalink($research_output_publication_pod->get_field('publication_web_page.ID'))
+  $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
+    'title' => $research_output_publication_pod->field('name'),
+    'citation' => $research_output_publication_pod->field('name'),
+    'date' => date_string($research_output_publication_pod->field('publishing_date')),
+    'uri' => get_permalink($research_output_publication_pod->field('publication_web_page.ID'))
   );
 }
 
 // select events from the main LSE Cities calendar
 $events = array();
-if($pod->get_field('events')) {
-  foreach($pod->get_field('events', 'date_start DESC') as $event) {
+if($pod->field('events')) {
+  foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
     $events[] = array(
       'title' => $event['name'],
       'citation' => $event['name'],
@@ -221,7 +221,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 // if we have research photo galleries/photo essays, prepare them
 $research_photo_galleries = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
 
-$news_categories = news_categories($pod->get_field('news_category'));
+$news_categories = news_categories($pod->field('news_category'));
 
 ?><?php get_header(); ?>
 
@@ -244,7 +244,7 @@ $news_categories = news_categories($pod->get_field('news_category'));
             <div class="abstract"><?php echo $pod_summary; ?></div>
             <?php endif; ?>
             
-            <?php if((is_array($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0) or count($events) or count($research_photo_galleries)): ?>
+            <?php if((is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) or count($events) or count($research_photo_galleries)): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -256,7 +256,7 @@ $news_categories = news_categories($pod->get_field('news_category'));
               <?php if(count($events)): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0) or count($research_events)): ?>
+              <?php if((is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) or count($research_events)): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if($project_has_research_outputs): ?>
@@ -270,7 +270,7 @@ $news_categories = news_categories($pod->get_field('news_category'));
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
-              <?php echo $pod->get_field('blurb'); ?>
+              <?php echo $pod->field('blurb'); ?>
             </section>
             <?php
               if(count($events)):
@@ -294,11 +294,11 @@ $news_categories = news_categories($pod->get_field('news_category'));
             </section>
             <?php endif; // (count($events)) ?>
             <?php
-              if($project_has_research_events or (is_array($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0)):
+              if($project_has_research_events or (is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0)):
               // latest news in categories defined for this research project
-              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->get_field('news_category'))); ?>
+              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->field('news_category'))); ?>
               <section id="t-news" class="hide">
-                <?php if(is_array($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0): ?>
+                <?php if(is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0): ?>
                 <header><h1>Project news</h1></header>
                 <ul>
                 <?php
@@ -310,7 +310,7 @@ $news_categories = news_categories($pod->get_field('news_category'));
                     endwhile;
                 ?>
                 </ul>
-                <?php endif; // (is_array($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0) ?>
+                <?php endif; // (is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) ?>
                 <?php if(count($research_events)): ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
@@ -327,7 +327,7 @@ $news_categories = news_categories($pod->get_field('news_category'));
                 <?php endif; // (count($research_events)) ?>
               </section> <!-- #news_area -->
             <?php
-             endif; // ($pod->get_field('news_category')) and count($pod->get_field('news_category')) > 0 or count($events))
+             endif; // ($pod->field('news_category')) and count($pod->field('news_category')) > 0 or count($events))
             // publications
             if($project_has_research_outputs): ?>
             <section id="t-publications" class="hide">

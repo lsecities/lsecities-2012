@@ -18,7 +18,7 @@ class PodObject {
   
   function __construct($pod, $page_section) {
     $this->pod = $pod;
-    $this->page_title = $this->pod->get_field('name');
+    $this->page_title = $this->pod->field('name');
     $this->page_section = $page_section;
   }
 }

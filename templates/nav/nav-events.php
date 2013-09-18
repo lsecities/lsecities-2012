@@ -14,22 +14,22 @@ var_trace('HIDE_PAST_EVENTS: '. $HIDE_PAST_EVENTS, $TRACE_PREFIX, $TRACE_ENABLED
 var_trace('post ID: ' . $current_post_id, $TRACE_PREFIX, $TRACE_ENABLED);
 var_trace(var_export($pod, true), $TRACE_PREFIX, $TRACE_ENABLED);
 
-$events_pod = new Pod('event');
+$events_pod = pods('event');
 $datetime_now = new DateTime('now');
 var_trace('datetime_now: ' . $datetime_now->format(DATE_ATOM), $TRACE_PREFIX, $TRACE_ENABLED);
 
 // prepare array with list of upcoming events
 $upcoming_events = Array();
-$events_pod->findRecords(array(
+$events_pod->find(array(
   'where' => 't.date_end > NOW() AND t.hide IS NOT TRUE',
   'orderby' => 't.date_start ASC',
   'limit' => -1
 ));
-while($events_pod->fetchRecord()) {
+while($events_pod->fetch()) {
   array_push($upcoming_events, array(
-    'slug' => $events_pod->get_field('slug'),
-    'name' => $events_pod->get_field('name'),
-    'date' => date('d F', strtotime($events_pod->get_field('date_start')))
+    'slug' => $events_pod->field('slug'),
+    'name' => $events_pod->field('name'),
+    'date' => date('d F', strtotime($events_pod->field('date_start')))
   ));
 }
 
@@ -39,22 +39,22 @@ $current_year = date("Y");
 $active_year = $current_year; // used to set initial active section for jQuery UI accordion
 
 for($year = 2005; $year <= $current_year; $year++) {
-  $events_pod->findRecords(array(
+  $events_pod->find(array(
     'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND t.hide IS NOT TRUE',
     'orderby' => 'date_start DESC',
     'limit' => -1
   ));
-  var_trace($events_pod->getTotalRows(), $TRACE_PREFIX . " - event records found for year $year", $TRACE_ENABLED);
-  while($events_pod->fetchRecord()) {
+  var_trace($events_pod->total_found(), $TRACE_PREFIX . " - event records found for year $year", $TRACE_ENABLED);
+  while($events_pod->fetch()) {
     // if event is past, add it to array
-    if($events_pod->get_field['date_end'] < $datetime_now) {
-      if($pod_slug == $events_pod->get_field('slug')) {
+    if($events_pod->field['date_end'] < $datetime_now) {
+      if($pod_slug == $events_pod->field('slug')) {
         $active_year = $year;
       }
       $events[$year][] = Array(
-        'slug' => $events_pod->get_field('slug'),
-        'name' => $events_pod->get_field('name'),
-        'date' => date('j F', strtotime($events_pod->get_field('date_start')))
+        'slug' => $events_pod->field('slug'),
+        'name' => $events_pod->field('name'),
+        'date' => date('j F', strtotime($events_pod->field('date_start')))
       );
     }
   }
