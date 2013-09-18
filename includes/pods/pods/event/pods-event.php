@@ -84,10 +84,10 @@ function pods_prepare_event($pod_slug) {
   $obj['slug'] = $pod_slug;
   $obj['title'] = $pod->field('name');
   
-  $event_speakers = $pod->field('speakers', array('orderby' => 'family_name ASC'));
-  $event_respondents = $pod->field('respondents', array('orderby' => 'family_name ASC'));
-  $event_chairs = $pod->field('chairs', array('orderby' => 'family_name ASC'));
-  $event_moderators = $pod->field('moderators', array('orderby' => 'family_name ASC'));
+  $event_speakers = sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
+  $event_respondents = sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
+  $event_chairs = sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
+  $event_moderators = sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
   $obj['event_all_the_people'] = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
   var_trace($event_all_the_people, $TRACE_PREFIX, $TRACE_ENABLED);
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
@@ -110,7 +110,7 @@ function pods_prepare_event($pod_slug) {
   if(is_array($event_media_items)) {
     foreach($event_media_items as $item) {
       $item_pod = pods('media_item_v0', $item['id']);
-      $slides_pdf_id = $item_pod->field('slides_pdf.ID');
+      $slides_pdf_id = $item_pod->field('slides_pdf.ID', TRUE);
       if($slides_pdf_id) {
         $item['slides_uri'] = wp_get_attachment_url($slides_pdf_id);
       }
@@ -124,7 +124,7 @@ function pods_prepare_event($pod_slug) {
   }
 
   // grab the image URI from the Pod
-  $attachment_ID = $pod->field('heading_image.ID');
+  $attachment_ID = $pod->field('heading_image.ID', TRUE);
   $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
   push_media_attribution($attachment_ID);
 
