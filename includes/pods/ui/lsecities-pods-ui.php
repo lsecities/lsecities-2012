@@ -237,7 +237,7 @@ function slide_page() {
       'tiles'  => 'Tiles'
     ),
   );
-  pods_ui_manage($object);
+  pods_ui($object);
 }
 
 add_action('admin_menu','pods_ui_slide');
