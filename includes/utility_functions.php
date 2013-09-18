@@ -50,3 +50,30 @@ function hide_lsecities_page_hierarchy_in_labs_links($string_blob) {
 function abspath_to($file) {
   return lc_data('theme_filesystem_abspath') . '/' . $file;
 }
+
+/**
+ * Sort multi-value field from Pods::field()
+ * Replaces sort functionality removed in Pods v2's field() vs v1's get_field()
+ *
+ * @param array $fields The fields array returned by field()
+ * @param string $sort_by The linked table's field according to which to sort
+ * @param mixed $sort_order (default: SORT_ASC) SORT_ASC or SORT_DESC
+ * @return array The fields array, sorted as requested, or FALSE if an error occurs
+ */
+function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
+  if(!(count($fields) > 0) and !is_array($fields)) {
+    error_log('Array to sort is not an array or has is an empty array');
+    return FALSE;
+  }
+  if(!isset($sort_by)) {
+    error_log('Sort by field not provided');
+    return FALSE;
+  }
+
+  $sorted_fields = array();
+  foreach($fields as $key => $value) {
+    $sorted_fields[$key] = $value[$sort_by];
+  }
+  array_multisort($sorted_fields, $sort_order, $fields);
+  return $fields;
+}
