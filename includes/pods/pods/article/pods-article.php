@@ -31,7 +31,7 @@ function pods_prepare_article($post_id) {
   lc_data('publication_pod', $publication_pod);
 
   // grab the image URI from the Pod
-  $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'));
+  $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), 'original');
 
   var_trace($lang, 'request_language');
   var_trace($article_lang2, 'article_lang2');
@@ -43,7 +43,7 @@ function pods_prepare_article($post_id) {
     $obj['article_summary'] = do_shortcode($pod->field('summary_lang2'));
     $obj['article_text'] = do_shortcode($pod->field('text_lang2'));
     $obj['article_extra_content'] = do_shortcode($pod->field('extra_content_lang2'));
-    $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID'));
+    $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri_lang2');
     }
@@ -54,7 +54,7 @@ function pods_prepare_article($post_id) {
     $obj['article_summary'] = do_shortcode($pod->field('summary'));
     $obj['article_text'] = do_shortcode($pod->field('text'));
     $obj['article_extra_content'] = do_shortcode($pod->field('extra_content'));
-    $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf.ID'));
+    $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri');
     }
@@ -64,9 +64,9 @@ function pods_prepare_article($post_id) {
   if(!preg_match('/^https?:\/\//i', $obj['pdf_uri']) && !empty($obj['pdf_uri'])) {
     // Istanbul newspaper follows different URI template
     if($pod->field('in_publication.slug') == 'istanbul-city-of-intersections') {
-      $obj['pdf_uri'] = 'http://v0.urban-age.net/publications/newspapers/' . $pdf_uri;
+      $obj['pdf_uri'] = 'http://v0.urban-age.net/publications/newspapers/' . $obj['pdf_uri'];
     } else {
-      $obj['pdf_uri'] = "http://v0.urban-age.net/0_downloads/" . $pdf_uri;
+      $obj['pdf_uri'] = "http://v0.urban-age.net/0_downloads/" . $obj['pdf_uri'];
     }
   }
 

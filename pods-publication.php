@@ -36,19 +36,19 @@ foreach((array)$slider_pod->field('tiles.slug') as $tile_slug) {
 /**
  * Fetch data for English language publication PDF and extra ('alt') publication PDF
  */
-$pod_pdf = $pod->field('publication_pdf.guid') ? wp_get_attachment_url($pod->field('publication_pdf.ID')) : $pod->field('publication_pdf_uri');
-$pod_pdf_filesize = $pod->field('publication_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf = $pod->field('publication_alt_pdf.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf.ID')) : $pod->field('publication_alt_pdf_uri');
-$pod_alt_pdf_filesize = $pod->field('publication_alt_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf.ID'))) / 1e+6 ) : '';
+$pod_pdf = $pod->field('publication_pdf.guid') ? wp_get_attachment_url($pod->field('publication_pdf.ID', TRUE)) : $pod->field('publication_pdf_uri');
+$pod_pdf_filesize = $pod->field('publication_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf.ID', TRUE))) / 1e+6 ) : '';
+$pod_alt_pdf = $pod->field('publication_alt_pdf.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf.ID', TRUE)) : $pod->field('publication_alt_pdf_uri');
+$pod_alt_pdf_filesize = $pod->field('publication_alt_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf.ID', TRUE))) / 1e+6 ) : '';
 $pod_alt_pdf_label = $pod->field('publication_alt_pdf.guid') && $pod->field('publication_alt_pdf_label') ? $pod->field('publication_alt_pdf_label') : 'Download extra content';
 
 /**
  * Fetch data for 2nd language publication PDF and extra ('alt') publication PDF
  */
-$pod_pdf_lang2 = $pod->field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_pdf_lang2.ID')) : $pod->field('publication_pdf_lang2_uri');
-$pod_pdf_filesize_lang2 = $pod->field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf_lang2.ID'))) / 1e+6 ) : '';
-$pod_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf_lang2.ID')) : $pod->field('publication_alt_pdf_lang2_uri');
-$pod_alt_pdf_filesize_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf_lang2.ID'))) / 1e+6 ) : '';
+$pod_pdf_lang2 = $pod->field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_pdf_lang2.ID', TRUE)) : $pod->field('publication_pdf_lang2_uri');
+$pod_pdf_filesize_lang2 = $pod->field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf_lang2.ID', TRUE))) / 1e+6 ) : '';
+$pod_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf_lang2.ID', TRUE)) : $pod->field('publication_alt_pdf_lang2_uri');
+$pod_alt_pdf_filesize_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf_lang2.ID', TRUE))) / 1e+6 ) : '';
 $pod_alt_pdf_label_lang2 = $pod->field('publication_alt_pdf_label_lang2');
 
 $extra_publication_metadata = $pod->field('extra_publication_metadata');
