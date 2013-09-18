@@ -9,9 +9,9 @@ function pods_prepare_slider($pod_slug) {
    */
   lc_data('TILES_PER_COLUMN', 2);
   
-  $pod = new Pod('slider', $pod_slug);
+  $pod = pods('slider', $pod_slug);
 
-  if(!$pod->getTotalRows()) {
+  if(!$pod->exists()) {
     redirect_to_404();
   }
 
@@ -22,27 +22,27 @@ function pods_prepare_slider($pod_slug) {
   // prepare array for return data structure
   $obj = array();
 
-  lc_data('META_last_modified', $pod->get_field('modified'));
+  lc_data('META_last_modified', $pod->field('modified'));
 
   var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
 
-  $obj['news_categories'] = $pod->get_field('news_category');
+  $obj['news_categories'] = $pod->field('news_category');
   
   /**
    * Read any jquery options and set global variable accordingly; these
    * options are used in the footer.php template.
    */
-  lc_data('slider_jquery_options', $pod->get_field('slider_jquery_options'));
+  lc_data('slider_jquery_options', $pod->field('slider_jquery_options'));
   
   $obj['slides'] = array();
   
-  $slides = $pod->get_field('slides', 'displayorder ASC');
+  $slides = $pod->field('slides', array('orderby' => 'displayorder ASC'));
 
   foreach($slides as $slide) {
     $obj['slides'][] = compose_slide($slide['slug']);
   }
   
-  $obj['linked_events'] = $pod->get_field('linked_events', 'date_start DESC');
+  $obj['linked_events'] = $pod->field('linked_events', array('orderby' => 'date_start DESC'));
   
   return $obj;
 }
@@ -81,8 +81,8 @@ function get_tile_classes($tile_layout) {
 }
 
 function compose_slide($slide_slug) {
-  $current_slide_pod = new Pod('slide', $slide_slug);
-  $slide_layout = $current_slide_pod->get_field('slide_layout.slug');
+  $current_slide_pod = pods('slide', $slide_slug);
+  $slide_layout = $current_slide_pod->field('slide_layout.slug');
 
   /**
    * build array of slides for this tile by reading in sequence
@@ -90,7 +90,7 @@ function compose_slide($slide_slug) {
    */
   $tiles = array();
   foreach(array(0, 1, 2, 3, 4, 5, 6, 7) as $tile_counter) {
-    $this_tile_slug = $current_slide_pod->get_field('tile_' . sprintf('%02d', $tile_counter) . '.slug');
+    $this_tile_slug = $current_slide_pod->field('tile_' . sprintf('%02d', $tile_counter) . '.slug');
     array_push($tiles, array('slug' => $this_tile_slug));
   }
   
@@ -137,8 +137,8 @@ function compose_slide_content($column_spans, $tiles) {
     $slide_column = array('layout' => 'col' . $column_span . $last_class, 'tiles' => array());
     while($tile_count > 0 and $tile_index <= $total_tiles) {
       var_trace(var_export($tiles[$tile_index]['slug'], true), 'tile[slug]');
-      $tile = new Pod('tile', $tiles[$tile_index++]['slug']);
-      $tile_layout = $tile->get_field('tile_layout.name');
+      $tile = pods('tile', $tiles[$tile_index++]['slug']);
+      $tile_layout = $tile->field('tile_layout.name');
       var_trace(var_export($tile_layout, true), 'tile[layout]');
       $this_tile_count = preg_replace('/x/', '*', $tile_layout);
       var_trace(var_export($this_tile_count, true), 'this_tile_count');
@@ -148,24 +148,24 @@ function compose_slide_content($column_spans, $tiles) {
 
       unset($target_event_month, $target_event_day, $target_uri);
       
-      if($tile->get_field('target_event.date_start')) {
-        $target_event_date = new DateTime($tile->get_field('target_event.date_start'));
+      if($tile->field('target_event.date_start')) {
+        $target_event_date = new DateTime($tile->field('target_event.date_start'));
         var_trace('target_event_date: ' . var_export($target_event_date, true), $TRACE_PREFIX);
         $target_event_month = $target_event_date->format('M');
         $target_event_day = $target_event_date->format('j');
-        $target_event_slug = $tile->get_field('target_event.slug');
+        $target_event_slug = $tile->field('target_event.slug');
       }
       
-      if($tile->get_field('target_event.slug')) {
-        $target_uri = PODS_BASEURI_EVENTS . '/' . $tile->get_field('target_event.slug');
-      } elseif($tile->get_field('target_research_project')) {
-        $target_uri = PODS_BASEURI_RESEARCH_PROJECTS . '/' . $tile->get_field('target_research_project.slug');
-      } elseif($tile->get_field('target_uri')) {
-        $target_uri = $tile->get_field('target_uri');
-      } elseif($tile->get_field('target_page.ID')) {
-        $target_uri = get_permalink($tile->get_field('target_page.ID'));
-      } elseif($tile->get_field('target_post.ID')) {
-        $target_uri = get_permalink($tile->get_field('target_post.ID'));
+      if($tile->field('target_event.slug')) {
+        $target_uri = PODS_BASEURI_EVENTS . '/' . $tile->field('target_event.slug');
+      } elseif($tile->field('target_research_project')) {
+        $target_uri = PODS_BASEURI_RESEARCH_PROJECTS . '/' . $tile->field('target_research_project.slug');
+      } elseif($tile->field('target_uri')) {
+        $target_uri = $tile->field('target_uri');
+      } elseif($tile->field('target_page.ID')) {
+        $target_uri = get_permalink($tile->field('target_page.ID'));
+      } elseif($tile->field('target_post.ID')) {
+        $target_uri = get_permalink($tile->field('target_post.ID'));
       } else {
         $target_uri = null;
       }
@@ -173,20 +173,20 @@ function compose_slide_content($column_spans, $tiles) {
       /**
        * Add image attribution metadata if present in media item
        */
-      $image_attribution = format_media_attribution($tile->get_field('image.ID'));
+      $image_attribution = format_media_attribution($tile->field('image.id'));
       
       array_push($slide_column['tiles'],
         array(
-          'id' => $tile->get_field('slug'),
-          'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->get_field('class'), ' '),
-          'title' => $tile->get_field('name'),
-          'display_title' => $tile->get_field('display_title'),
-          'subtitle' => $tile->get_field('tagline'),
-          'blurb' => $tile->get_field('blurb'),
-          'plain_content' => $tile->get_field('plain_content'),
-          'posts_category' => $tile->get_field('posts_category.term_id'),
+          'id' => $tile->field('slug'),
+          'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
+          'title' => $tile->field('name'),
+          'display_title' => $tile->field('display_title'),
+          'subtitle' => $tile->field('tagline'),
+          'blurb' => $tile->field('blurb'),
+          'plain_content' => $tile->field('plain_content'),
+          'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
-          'image' => wp_get_attachment_url($tile->get_field('image.ID')),
+          'image' => pods_image_url($tile->field('image'), 'original'),
           'image_attribution' => $image_attribution,
           'target_event' => array(
             'month' => $target_event_month,
@@ -194,7 +194,7 @@ function compose_slide_content($column_spans, $tiles) {
           )
         )
       );
-      push_media_attribution($tile->get_field('image.ID'));
+      push_media_attribution($tile->field('image.ID'));
     }
     array_push($slide_content['columns'], $slide_column);
   }

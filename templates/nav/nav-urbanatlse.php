@@ -5,7 +5,7 @@ $current_post_id = $post->ID;
 
 $GALLERY_POD_SLUG = 'urban-at-lse-gallery';
 
-$pod = new Pod('gallery', $GALLERY_POD_SLUG);
+$pod = pods('gallery', $GALLERY_POD_SLUG);
 
 $gallery = galleria_prepare($pod, 'fullbleed wireframe wait', '', true);
 
