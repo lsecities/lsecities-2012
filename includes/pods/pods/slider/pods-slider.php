@@ -36,18 +36,13 @@ function pods_prepare_slider($pod_slug) {
   
   $obj['slides'] = array();
   
-  $slides = $pod->field('slides');
-  $slides_displayorder = array();
-  foreach($slides as $key => $value) {
-    $slides_displayorder[$key] = $value['displayorder'];
-  }
-  array_multisort($slides_displayorder, SORT_ASC, $slides);
+  $slides = sort_linked_field($pod->field('slides'), 'displayorder', SORT_ASC);
 
   foreach($slides as $slide) {
     $obj['slides'][] = compose_slide($slide['slug']);
   }
   
-  $obj['linked_events'] = $pod->field('linked_events', array('orderby' => 'date_start DESC'));
+  $obj['linked_events'] = sort_linked_field($pod->field('linked_events'), 'date_start', SORT_DESC);
   
   return $obj;
 }
