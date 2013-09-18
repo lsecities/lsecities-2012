@@ -165,9 +165,8 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
   $qualifications_list = array_map(function($string) { return trim($string); }, explode("\n", $pod->field('qualifications')));
   
   // get photo and related attribution, push attribution to attribution list
-  if($photo_id = $pod->field('photo.ID')) {
-    // $photo_id = $pod->field('photo.ID');
-    $profile_photo_uri = wp_get_attachment_url($photo_id);
+  if($photo_id = $pod->field('photo.ID', TRUE)) {
+    $profile_photo_uri = pods_image_url($photo_id);
     $profile_photo_attribution = get_post_meta($photo_id, '_attribution_name', true);
     push_media_attribution($photo_id);
   }

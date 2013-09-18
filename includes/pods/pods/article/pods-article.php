@@ -31,7 +31,7 @@ function pods_prepare_article($post_id) {
   lc_data('publication_pod', $publication_pod);
 
   // grab the image URI from the Pod
-  $obj['featured_image_uri'] = wp_get_attachment_url($pod->field('heading_image.ID'));
+  $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'));
 
   var_trace($lang, 'request_language');
   var_trace($article_lang2, 'article_lang2');

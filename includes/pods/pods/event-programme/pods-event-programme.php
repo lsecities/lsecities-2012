@@ -190,7 +190,7 @@ function add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_s
     $all_speakers[$session_speaker['slug']]['family_name'] = $session_speaker['family_name'];
     $all_speakers[$session_speaker['slug']]['blurb'] = $speaker_blurb_and_affiliation['blurb'];
     if($this_speaker->field('photo')) {
-      $all_speakers[$session_speaker['slug']]['photo_uri'] = wp_get_attachment_url($this_speaker->field('photo.ID'));
+      $all_speakers[$session_speaker['slug']]['photo_uri'] = pods_image_url($this_speaker->field('photo'));
     } elseif($session_speaker['photo_legacy']) {
       $all_speakers[$session_speaker['slug']]['photo_uri'] = 'http://v0.urban-age.net' . $session_speaker['photo_legacy'];
     }
