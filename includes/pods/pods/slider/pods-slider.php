@@ -36,7 +36,12 @@ function pods_prepare_slider($pod_slug) {
   
   $obj['slides'] = array();
   
-  $slides = $pod->field('slides', array('orderby' => 'displayorder ASC'));
+  $slides = $pod->field('slides');
+  $slides_displayorder = array();
+  foreach($slides as $key => $value) {
+    $slides_displayorder[$key] = $value['displayorder'];
+  }
+  array_multisort($slides_displayorder, SORT_ASC, $slides);
 
   foreach($slides as $slide) {
     $obj['slides'][] = compose_slide($slide['slug']);
