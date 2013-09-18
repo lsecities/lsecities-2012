@@ -54,7 +54,7 @@ $pod_alt_pdf_label_lang2 = $pod->field('publication_alt_pdf_label_lang2');
 $extra_publication_metadata = $pod->field('extra_publication_metadata');
 
 if(is_array($publication_authors_list)) {
-  $publication_authors_list = $pod->field('authors', array('orderby' => 'family_name ASC'));
+  $publication_authors_list = sort_linked_field($pod->field('authors'), 'family_name', SORT_ASC);
   foreach($publication_authors_list as $publication_author) {
     $publication_authors .= $publication_author['name'] . ' ' . $publication_author['family_name'] . ', ';
   }
@@ -62,7 +62,7 @@ if(is_array($publication_authors_list)) {
 }
 
 if(is_array($publication_editors_list)) {
-  $publication_editors_list = $pod->field('editors', array('orderby' => 'family_name ASC'));
+  $publication_editors_list = sort_linked_field($pod->field('editors'), 'family_name', SORT_ASC);
   foreach($publication_editors_list as $publication_editor) {
     $publication_editors .= $publication_editor['name'] . ' ' . $publication_editor['family_name'] . ', ';
   }
@@ -70,14 +70,14 @@ if(is_array($publication_editors_list)) {
 }
 
 if(is_array($publication_contributors_list)) {
-  $publication_contributors_list = $pod->field('contributors', array('orderby' => 'family_name ASC'));
+  $publication_contributors_list = sort_linked_field($pod->field('contributors'), 'family_name', SORT_ASC);
   foreach($publication_contributors_list as $publication_contributor) {
     $publication_contributors .= $publication_contributor['name'] . ' ' . $publication_contributor['family_name'] . ', ';
   }
   $publication_contributors = substr($publication_contributors, 0, -2);
 }
 
-$publication_partners_list = $pod->field('partner_organizations', array('orderby' => 'name ASC'));
+$publication_partners_list = sort_linked_field($pod->field('partner_organizations'), 'name', SORT_ASC);
 if(is_array($publication_partners_list)) {
   foreach($publication_partners_list as $publication_partner) {
     if($publication_partner['web_uri']) {
