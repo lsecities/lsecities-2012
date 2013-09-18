@@ -57,7 +57,7 @@ function pods_prepare_list($pod_slugs) {
         $items[] = array(
           'title' => $item_pod->field('name'),
           'permalink' => get_permalink($item['ID']),
-          'pod_featured_image_uri' => pods_image_url($item_pod->field('snapshot'))
+          'pod_featured_image_uri' => pods_image_url($item_pod->field('snapshot'), 'original')
         );
       }
 
@@ -81,7 +81,7 @@ function pods_prepare_list($pod_slugs) {
     $page_id = $pod->field('featured_item.ID');
     var_trace('slug for featured item: ' . get_post_meta($page_id, 'pod_slug', true), $TRACE_PREFIX, $TRACE_ENABLED);
     $pod_featured_item_thumbnail = get_the_post_thumbnail($page_id, array(960,367));
-    if(!$pod_featured_item_thumbnail) { $pod_featured_item_thumbnail = '<img src="' . pods_image_url($pod->field('featured_item_image')) . '" />'; }
+    if(!$pod_featured_item_thumbnail) { $pod_featured_item_thumbnail = '<img src="' . pods_image_url($pod->field('featured_item_image'), 'original') . '" />'; }
     $pod_featured_item_permalink = get_permalink($page_id);
     $pod_featured_item_pod = pods($pod_type, get_post_meta($pod->field('featured_item.ID'), 'pod_slug', true));
     $sort_order = $pod->field('sort_descending') ? 'DESC' : 'ASC';
