@@ -106,7 +106,8 @@ $project_partners = substr($project_partners, 0, -2);
 */
 
 // generate list of research partners
-$project_partners_list = $pod->field('partners', array('orderby' => 'name ASC'));
+$project_partners_list = sort_linked_field($pod->field('partners'), 'name', SORT_ASC);
+
 $project_partners_count = count($project_partners_list);
 foreach($project_partners_list as $project_partner) {
   if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
@@ -118,7 +119,8 @@ foreach($project_partners_list as $project_partner) {
 $project_partners = substr($project_partners, 0, -2);
 
 // generate list of research funders
-$project_funders_list = $pod->field('funders', array('orderby' => 'name ASC'));
+$project_funders_list = sort_linked_field($pod->field('funders'), 'name', SORT_ASC);
+
 $project_funders_count = count($project_funders_list);
 foreach($project_funders_list as $project_funder) {
   if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
