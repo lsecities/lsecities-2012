@@ -83,12 +83,7 @@ function pods_prepare_conference($pod_slug) {
   
   $conference_list = pods('list', 'urban-age-conferences');
   $pod_type = $conference_list->field('pod_type.slug');
-  $pod_list = $conference_list->field('list_pages');
-  $pod_list_menu_order = array();
-  foreach($pod_list as $key => $value) {
-    $pod_list_menu_order[$key] = $value['menu_order'];
-  }
-  array_multisort($pod_list_menu_order, SORT_DESC, $pod_list);
+  $pod_list = sort_linked_field($conference_list->field('list_pages'), 'menu_order', SORT_DESC);
 
   $obj['conferences_menu_items'] = array();
   
