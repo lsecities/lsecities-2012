@@ -372,7 +372,8 @@ function date_string($date, $format = 'ISO') {
 
 function compose_project_list_by_strand($project_status) {
   // only accept known project statuses
-  $known_project_status = pods('project_status', $project_status);
+  // $known_project_status = pods('project_status', $project_status);
+  $known_project_status = pods('project_status', array('where' => 'slug = "' . $project_status . '"'));
   if(!$known_project_status->total_found()) {
     error_log('unknown project status requested: ' . $project_status);
     return;
