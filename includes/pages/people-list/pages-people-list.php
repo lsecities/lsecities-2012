@@ -68,15 +68,8 @@ function people_list_generate_list($list_id, $check_list, $mode = 'full_list') {
 
 function people_list_generate_section($section_slug, &$check_list, $section_heading = false, $mode = 'full_list') {
   $pod = pods('people_group', $section_slug);
-  $people = (array)$pod->field('members');
+  $people = sort_linked_field($pod->field('members'), 'family_name', SORT_ASC);
   
-  // sort array by family name
-  $people_family_names = array();
-  foreach($people as $key => $value) {
-    $people_family_names[$key] = $value['family_name'];
-  }
-  array_multisort($people_family_names, SORT_ASC, $people);
-
   // global $people_in_output_full, $people_in_output_summary;
   var_trace(var_export($people, true), $TRACE_PREFIX . ' - group_members');
   $output = "<section class='people-list $section_slug'>";
