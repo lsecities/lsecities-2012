@@ -5,13 +5,13 @@ namespace LSECitiesWPTheme\event_programme;
 if ( !defined('ABSPATH')) exit;
 
 function pods_prepare_event_programme($pod_slug) {
-  $pod = new \Pod('event_programme', $pod_slug);
+  $pod = pods('event_programme', $pod_slug);
   
   $obj = array();
   
-  $obj['pod_title'] = $pod->get_field('name');
-  $obj['pod_subtitle'] = $pod->get_field('programme_subtitle');
-  $subsession_slugs = $pod->get_field('sessions.slug');
+  $obj['pod_title'] = $pod->field('name');
+  $obj['pod_subtitle'] = $pod->field('programme_subtitle');
+  $subsession_slugs = $pod->field('sessions.slug');
   if(count($subsession_slugs) == 1) { $subsession_slugs = array(0 => $subsession_slugs); }
   
   /**
@@ -25,10 +25,10 @@ function pods_prepare_event_programme($pod_slug) {
    * - special_ec2012_blurb
    * - special_ec2012_affiliation
   */
-  $special_fields_prefix = $pod->get_field('special_author_fields');
+  $special_fields_prefix = $pod->field('special_author_fields');
   
-  $for_conference = $pod->get_field('for_conference.slug');
-  $for_event = $pod->get_field('for_event.slug');
+  $for_conference = $pod->field('for_conference.slug');
+  $for_event = $pod->field('for_event.slug');
   $all_speakers = array();
   
   $obj['page_title'] = !empty($for_conference) ? "Conference programme" : "Event programme";
@@ -51,22 +51,22 @@ function pods_prepare_event_programme($pod_slug) {
 function process_session($session_slug, $special_fields_prefix, &$all_speakers) {
   global $TRACE_ENABLED;
   
-  $pod = new \Pod('event_session', $session_slug);
-  $session_id = $pod->get_field('slug');
-  $session_title = $pod->get_field('name');
-  $session_speakers = $pod->get_field('speakers');
-  $session_chairs = $pod->get_field('chairs');
-  $session_respondents = $pod->get_field('respondents');
-  $session_start_datetime = new \DateTime($pod->get_field('start'));
-  $session_end_datetime = $pod->get_field('end') === '0000-00-00 00:00:00' ? null : new \DateTime($pod->get_field('end'));
-  $session_type = $pod->get_field('session_type.slug');
+  $pod = pods('event_session', $session_slug);
+  $session_id = $pod->field('slug');
+  $session_title = $pod->field('name');
+  $session_speakers = $pod->field('speakers');
+  $session_chairs = $pod->field('chairs');
+  $session_respondents = $pod->field('respondents');
+  $session_start_datetime = new \DateTime($pod->field('start'));
+  $session_end_datetime = $pod->field('end') === '0000-00-00 00:00:00' ? null : new \DateTime($pod->field('end'));
+  $session_type = $pod->field('session_type.slug');
   if($session_type != 'session') { $session_type = "session $session_type"; }
 
   // get link to PDF of slides: try pick field of file type first
-  $session_slides = wp_get_attachment_url($pod->get_field('media_items.slides_pdf.ID'));
+  $session_slides = wp_get_attachment_url($pod->field('media_items.slides_pdf.ID'));
   // if no file is linked, try the plain text field for an URI
-  if(!$session_slides and $pod->get_field('media_items.slides_uri')) {
-    $session_slides = 'http://downloads0.cloud.lsecities.net/' . $pod->get_field('media_items.slides_uri');
+  if(!$session_slides and $pod->field('media_items.slides_uri')) {
+    $session_slides = 'http://downloads0.cloud.lsecities.net/' . $pod->field('media_items.slides_uri');
   }
   
   if(is_array($session_speakers)) {
@@ -79,7 +79,7 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   /**
    * Recursively process subsessions. HSL.
    */
-  $sessions = $pod->get_field('sessions.slug', 'sequence ASC');
+  $sessions = $pod->field('sessions.slug', 'sequence ASC');
   if($sessions and count($sessions) === 1) { $sessions = array(0 => $sessions); }
   if($TRACE_ENABLED) { error_log($TRACE_PREFIX . 'session count: ' . count($subsessions)); }
   if($TRACE_ENABLED) { error_log($TRACE_PREFIX . 'sessions: ' . var_export($subsessions, true)); }
@@ -92,19 +92,19 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   $obj = array(  
     'id' => $session_id,
     'title' => $session_title,
-    'subtitle' => $pod->get_field('sub_title'),
-    'blurb' => $pod->get_field('extra_session_blurb'),
-    'show_times' => $pod->get_field('show_times'),
+    'subtitle' => $pod->field('sub_title'),
+    'blurb' => $pod->field('extra_session_blurb'),
+    'show_times' => $pod->field('show_times'),
     'start_datetime' => $session_start_datetime->format('H:i'),
     'end_datetime' => is_null($session_end_datetime) ? NULL : $session_end_datetime->format('H:i'),
-    'hide_title' => $pod->get_field('hide_title'),
+    'hide_title' => $pod->field('hide_title'),
     'type' => $session_type,
     'speakers_blurb' => !is_array($session_speakers) ? NULL : generate_session_people_blurb($pod, 'speakers_blurb', $special_fields_prefix, $session_speakers),
     'chairs_label' => count($session_chairs) > 1 ? "Chairs" : "Chair",
     'chairs_blurb' => !is_array($session_chairs) ? NULL : generate_session_people_blurb($pod, 'chairs_blurb', $special_fields_prefix, $session_chairs),
     'respondents_label' => count($session_respondents) > 1 ? "Respondents" : "Respondent",
     'respondents_blurb' => !is_array($session_respondents) ? NULL : generate_session_people_blurb($pod, 'respondents_blurb', $special_fields_prefix, $session_respondents),
-    'youtube_video' => $pod->get_field('media_items.youtube_uri'),
+    'youtube_video' => $pod->field('media_items.youtube_uri'),
     'slides' => $session_slides,
     'sessions' => $sessions_data
   );
@@ -170,8 +170,8 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
     
     /* remove trailing semicolon */
     $session_people_blurb = preg_replace('/; $/', '', $session_people_blurb);
-  } elseif($pod->get_field($blurb_field)) { /* otherwise, if per-session blurb is available, use this */
-    $session_people_blurb = strip_tags($pod->get_field($blurb_field), $ALLOWED_TAGS_IN_BLURBS);
+  } elseif($pod->field($blurb_field)) { /* otherwise, if per-session blurb is available, use this */
+    $session_people_blurb = strip_tags($pod->field($blurb_field), $ALLOWED_TAGS_IN_BLURBS);
   }
   
   return $session_people_blurb;
@@ -183,14 +183,14 @@ function add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_s
   foreach($session_speakers as $session_speaker) {
     // Process speaker whether they are already in list or not as
     // we need to list all the sessions they are taking part in.
-    $this_speaker = new \Pod('authors', $session_speaker['slug']);
+    $this_speaker = pods('authors', $session_speaker['slug']);
     $speaker_blurb_and_affiliation = generate_speaker_card_data($special_fields_prefix, $session_speaker['slug']);
 
     $all_speakers[$session_speaker['slug']]['name'] = $session_speaker['name'];
     $all_speakers[$session_speaker['slug']]['family_name'] = $session_speaker['family_name'];
     $all_speakers[$session_speaker['slug']]['blurb'] = $speaker_blurb_and_affiliation['blurb'];
-    if($this_speaker->get_field('photo')) {
-      $all_speakers[$session_speaker['slug']]['photo_uri'] = wp_get_attachment_url($this_speaker->get_field('photo.ID'));
+    if($this_speaker->field('photo')) {
+      $all_speakers[$session_speaker['slug']]['photo_uri'] = wp_get_attachment_url($this_speaker->field('photo.ID'));
     } elseif($session_speaker['photo_legacy']) {
       $all_speakers[$session_speaker['slug']]['photo_uri'] = 'http://v0.urban-age.net' . $session_speaker['photo_legacy'];
     }
@@ -202,21 +202,21 @@ function add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_s
 }
 
 function generate_speaker_card_data($special_fields_prefix, $person_slug) {
-  $pod = new \Pod('authors', $person_slug);
+  $pod = pods('authors', $person_slug);
   
   if($special_fields_prefix) {
-    $affiliation = $pod->get_field($special_fields_prefix . '_affiliation');
-    $blurb = $pod->get_field($special_fields_prefix . '_blurb');
+    $affiliation = $pod->field($special_fields_prefix . '_affiliation');
+    $blurb = $pod->field($special_fields_prefix . '_blurb');
   } else {
-    $role = $pod->get_field('role');
-    $organization = $pod->get_field('organization');
+    $role = $pod->field('role');
+    $organization = $pod->field('organization');
     
     if($role and $organization) {
       $affiliation = $role . ', ' . $organization;
     } elseif($organization) {
       $affiliation = $organization;
     }
-    $blurb = $pod->get_field('profile_text');
+    $blurb = $pod->field('profile_text');
   }
   
   return array(

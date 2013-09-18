@@ -22,7 +22,7 @@ function pods_ui_events() {
 }
 
 function event_page() {
-  $object = new Pod('event');
+  $object = pods('event');
   $object->ui = array(
     'title'   => 'Event',
     'columns' => array(
@@ -52,7 +52,7 @@ function pods_ui_event_session() {
 }
 
 function event_session_page() {
-  $object = new Pod('event_session');
+  $object = pods('event_session');
   $object->ui = array(
     'title'   => 'Event session',
     'sort' => 'start',
@@ -78,7 +78,7 @@ function pods_ui_people() {
 }
 
 function person_page() {
-  $object = new Pod('authors');
+  $object = pods('authors');
   $add_fields = $edit_fields = array(
     'slug',
     'name',
@@ -128,7 +128,7 @@ function pods_ui_tiles() {
 }
 
 function tile_page() {
-  $object = new Pod('tile');
+  $object = pods('tile');
   $add_fields = $edit_fields = array(
     'slug',
     'name',
@@ -169,7 +169,7 @@ function tile_page() {
 }
 
 function active_tile_page() {
-  $object = new Pod('tile');
+  $object = pods('tile');
   $object->ui = array(
     'title'   => 'Tile',
     'reorder' => 'displayorder',
@@ -202,7 +202,7 @@ function pods_ui_research_projects() {
 }
 
 function research_project_page() {
-  $object = new Pod('research_project');
+  $object = pods('research_project');
   $object->ui = array(
     'title'   => 'Research project',
     'columns' => array(
@@ -226,7 +226,7 @@ function pods_ui_slide() {
 }
 
 function slide_page() {
-  $object = new Pod('slide');
+  $object = pods('slide');
   $object->ui = array(
     'title'   => 'Slide',
     'sort' => 'displayorder',

@@ -127,7 +127,7 @@ function shorten_string($string, $wordsreturned) {
 include_once('pods/class.podobject.inc.php');
 function set_pod_page_title($title, $sep, $seplocation) {
   global $this_pod;
-  var_trace($this_pod, 'this_pod', is_user_logged_in());
+  // var_trace($this_pod, 'this_pod', is_user_logged_in());
   if(isset($this_pod) and $this_pod->page_title){
     $title = $this_pod->page_title;
     
@@ -237,7 +237,7 @@ function galleria_prepare($pod, $extra_classes = '', $gallery_field = 'gallery',
 
   // if $gallery_field is provided AND it is empty, look up the
   // pod itself rather than a pick pod by using plain field names
-  // in get_field(); otherwise, prepend $gallery_field . '.' to
+  // in field(); otherwise, prepend $gallery_field . '.' to
   // perform lookup in pick pod
   if($gallery_field != '') {
     $gallery_field .= '.';
@@ -246,19 +246,19 @@ function galleria_prepare($pod, $extra_classes = '', $gallery_field = 'gallery',
   var_trace($gallery_field, 'gallery field');
   
   $gallery = array(
-    'slug' => $pod->get_field($gallery_field . 'slug'),
+    'slug' => $pod->field($gallery_field . 'slug'),
     'extra_classes' => $extra_classes,
     'slides' => array()
   );
 
   // if picasa_gallery_id is set, add this to the object
-  if($pod->get_field($gallery_field . 'picasa_gallery_id')) {
-    $gallery['picasa_gallery_id'] = $pod->get_field($gallery_field . 'picasa_gallery_id');
+  if($pod->field($gallery_field . 'picasa_gallery_id')) {
+    $gallery['picasa_gallery_id'] = $pod->field($gallery_field . 'picasa_gallery_id');
   }
   // otherwise build the slides list
   else {
     for($i = 1; $i < (GALLERY_MAX_SLIDES_COUNT + 1); $i++) {
-      $slide_id = $pod->get_field($gallery_field . sprintf('slide%02d', $i) . '.ID');
+      $slide_id = $pod->field($gallery_field . sprintf('slide%02d', $i) . '.ID');
       var_trace($slide_id);
       if($slide_id) {
         array_push($gallery['slides'], array_shift(get_posts(array('post_type'=>'attachment', 'numberposts'=>1, 'p' => $slide_id))));
@@ -280,7 +280,7 @@ function galleria_prepare_multi($pod, $extra_classes, $gallery_field='galleries'
   define(GALLERY_MAX_SLIDES_COUNT, 12);
   $gallery_array = array();
   
-  foreach($pod->get_field($gallery_field) as $key => $gallery) {
+  foreach($pod->field($gallery_field) as $key => $gallery) {
     
     $gallery_object = array(
       'slug' => $gallery['slug'],
@@ -372,8 +372,8 @@ function date_string($date, $format = 'ISO') {
 
 function compose_project_list_by_strand($project_status) {
   // only accept known project statuses
-  $known_project_status = new Pod('project_status', $project_status);
-  if(!$known_project_status->getTotalRows()) {
+  $known_project_status = pods('project_status', $project_status);
+  if(!$known_project_status->total_found()) {
     error_log('unknown project status requested: ' . $project_status);
     return;
   }
@@ -381,31 +381,31 @@ function compose_project_list_by_strand($project_status) {
   // retrieve all projects with requested status
   // TODO: do we want to sort projects by start date?
   // some have an arbitrary start day so this might not work in practice
-  $projects_pod = new Pod('research_project');
-  $projects_pod->findRecords(array(
+  $projects_pod = pods('research_project');
+  $projects_pod->find(array(
     'where' => 'status.name = "' . $project_status . '"'
   ));
 
   // prepare research strands array
   // we want to display strands in a specific order, using strands' slugs for sorting (NNN-strand-slug)
   // where NNN is e.g. 010, 020, etc. for the first, second, etc. strand respectively
-  $research_strands_pod = new Pod('research_stream', array('orderby' => 'slug'));
+  $research_strands_pod = pods('research_stream', array('orderby' => 'slug'));
   
   $projects_by_strand = array();
   
-  while($research_strands_pod->fetchRecord()) {
-    $projects_by_strand[$research_strands_pod->get_field('slug')] = array(
-      'name' => $research_strands_pod->get_field('name'),
+  while($research_strands_pod->fetch()) {
+    $projects_by_strand[$research_strands_pod->field('slug')] = array(
+      'name' => $research_strands_pod->field('name'),
       'projects' => array()
     );
   }
   
-  while($projects_pod->fetchRecord()) {
-    $projects_by_strand[$projects_pod->get_field('research_strand.slug')]['projects'][] = array(
-      'slug' => $projects_pod->get_field('slug'),
-      'name' => $projects_pod->get_field('name'),
-      'strand' => $projects_pod->get_field('research_strand.name'),
-      'strand_slug' => $projects_pod->get_field('research_strand.slug')
+  while($projects_pod->fetch()) {
+    $projects_by_strand[$projects_pod->field('research_strand.slug')]['projects'][] = array(
+      'slug' => $projects_pod->field('slug'),
+      'name' => $projects_pod->field('name'),
+      'strand' => $projects_pod->field('research_strand.name'),
+      'strand_slug' => $projects_pod->field('research_strand.slug')
     );
   }
   
