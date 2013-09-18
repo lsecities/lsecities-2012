@@ -46,12 +46,7 @@ function pods_prepare_list($pod_slugs) {
       ));
     } else {
       // Otherwise, we get all the pages selected in the list_pages multi-select pick field
-      $item_pages = $this_pod->field('list_pages');
-      $item_pages_menu_order = array();
-      foreach($item_pages as $key => $value) {
-        $item_pages_menu_order[$key] = $value['menu_order'];
-      }
-      array_multisort($item_pages_menu_order, $sort_order === 'ASC' ? SORT_ASC : SORT_DESC, $item_pages);
+      $item_pages = sort_linked_field($this_pod->field('list_pages'), 'menu_order', $sort_order === 'ASC' ? SORT_ASC : SORT_DESC);
       
       $items = array();
       
