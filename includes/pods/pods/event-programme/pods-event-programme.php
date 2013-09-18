@@ -11,8 +11,12 @@ function pods_prepare_event_programme($pod_slug) {
   
   $obj['pod_title'] = $pod->field('name');
   $obj['pod_subtitle'] = $pod->field('programme_subtitle');
-  $subsession_slugs = $pod->field('sessions.slug');
-  if(count($subsession_slugs) == 1) { $subsession_slugs = array(0 => $subsession_slugs); }
+  $subsessions = sort_linked_field($pod->field('sessions'), 'sequence', SORT_ASC);
+
+  $subsession_slugs = array();
+  foreach($subsessions as $subsession) {
+    $subsession_slugs[] = $subsession['slug'];
+  }
   
   /**
    * If we use special fields from the speakers objects to generate
@@ -63,7 +67,7 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   if($session_type != 'session') { $session_type = "session $session_type"; }
 
   // get link to PDF of slides: try pick field of file type first
-  $session_slides = wp_get_attachment_url($pod->field('media_items.slides_pdf.ID'));
+  $session_slides = wp_get_attachment_url($pod->field('media_items.slides_pdf.ID', TRUE));
   // if no file is linked, try the plain text field for an URI
   if(!$session_slides and $pod->field('media_items.slides_uri')) {
     $session_slides = 'http://downloads0.cloud.lsecities.net/' . $pod->field('media_items.slides_uri');
@@ -79,11 +83,15 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   /**
    * Recursively process subsessions. HSL.
    */
-  $sessions = $pod->field('sessions.slug', 'sequence ASC');
-  if($sessions and count($sessions) === 1) { $sessions = array(0 => $sessions); }
-  if($TRACE_ENABLED) { error_log($TRACE_PREFIX . 'session count: ' . count($subsessions)); }
-  if($TRACE_ENABLED) { error_log($TRACE_PREFIX . 'sessions: ' . var_export($subsessions, true)); }
-  if($sessions) {
+  $session_fields = sort_linked_field($pod->field('sessions'), 'sequence', SORT_ASC);
+  foreach($session_fields as $session_field) {
+    $sessions[] = $session_field['slug'];
+  }
+
+  var_trace(count($subsessions), 'session count');
+  var_trace(var_export($subsessions, true), 'sessions');
+
+  if(count($sessions) > 0) {
     foreach($sessions as $session) {
       $sessions_data[] = process_session($session, $special_fields_prefix, $all_speakers);
     }
