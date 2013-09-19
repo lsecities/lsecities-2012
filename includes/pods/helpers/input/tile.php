@@ -13,7 +13,7 @@ $active_tile_id = $value[0];
 jQuery(function($) { $('.pods_form').css({overflow: 'visible'}); });
 </script>
 
-<div id="<?php echo $css_id; ?>_container">
+<div id="<?php echo $name; ?>_container">
 <select name="<?php echo $name; ?>" id="pods_form1_<?php echo $name; ?>" class="form pick1 <?php echo $name; ?> pods_field pods_field_<?php echo $name; ?> pods_coltype_pick">
   <option value="">-- Select one --</option>
   <?php if ( !empty( $options['data'] ) ) : ?>
