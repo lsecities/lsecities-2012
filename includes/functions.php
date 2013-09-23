@@ -16,7 +16,8 @@ define('TRACE_PREFIX', __FILE__);
 // log php errors
 define('LSECITIES2012_LOG_FILE', '/srv/web/wordpress/www/tmp/lsecities-2012.log');
 
-if(is_user_logged_in()) {
+// dump error log info only if LSE Cities theme debugging is enabled in wp-config.php (LSECITIES_THEME_DEBUG)
+if(LSECITIES_THEME_DEBUG) {
   @ini_set('log_errors', 'On'); // enable or disable php error logging (use 'On' or 'Off')
   @ini_set('display_errors', 'Off'); // enable or disable public display of errors (use 'On' or 'Off')
   @ini_set('error_log', LSECITIES2012_LOG_FILE); // path to server-writable log file
