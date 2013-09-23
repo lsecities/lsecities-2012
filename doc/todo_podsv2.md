@@ -1,12 +1,14 @@
 # Upgrading theme to Pods v2.x - TODO
 
-* port helper input/people to Podsv2 (used in: event/speakers,
+* DONE: port helper input/people to Podsv2 (used in: event/speakers,
   event/respondents, event/chairs, event/moderators, people_group/members,
   publication_wrappers/authors, publication_wrappers/editors,
   publication_wrappers/contributors, research_output/authors,
   research_output/contributors, research_project/coordinators,
   research_project/researchers)
-* check whether helper input/date/timepicker is still needed (should be provided by Podsv2)
+* DONE: port helper input/tile to Podsv2 (used in: slide/tile_NN)
+* DONE (NOT NEEDED): check whether helper input/date/timepicker is still needed
+  (should be provided by Podsv2)
 * check whether helper pre_save/date is still needed (used in: event)
 * port input/select_categories to Podsv2 (used in: article/tags)
 * port pre_save/save_categories to Podsv2 (used in: article)
