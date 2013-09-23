@@ -76,10 +76,10 @@ function pods_prepare_list($pod_slugs) {
     $pod_slug = get_post_meta($post->ID, 'pod_slug', true);
     $pod = pods('list', $pod_slug);
     $pod_type = $pod->field('pod_type.slug');
-    var_trace('fetching list Pod with slug: ' . $pod_slug . " and pod_type: " . $pod_type, $TRACE_PREFIX, $TRACE_ENABLED);
+    var_trace('fetching list Pod with slug: ' . $pod_slug . " and pod_type: " . $pod_type, $TRACE_PREFIX);
     $pod_title = $pod->field('name');
     $page_id = $pod->field('featured_item.ID');
-    var_trace('slug for featured item: ' . get_post_meta($page_id, 'pod_slug', true), $TRACE_PREFIX, $TRACE_ENABLED);
+    var_trace('slug for featured item: ' . get_post_meta($page_id, 'pod_slug', true), $TRACE_PREFIX);
     $pod_featured_item_thumbnail = get_the_post_thumbnail($page_id, array(960,367));
     if(!$pod_featured_item_thumbnail) { $pod_featured_item_thumbnail = '<img src="' . pods_image_url($pod->field('featured_item_image'), 'original') . '" />'; }
     $pod_featured_item_permalink = get_permalink($page_id);

@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
       preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
       array_push($sections, array( 'id' => $matches[1], 'title' => $matches[2]));
     }
-    var_trace(var_export($sections, true), 'sections', $TRACE_ENABLED);
+    var_trace(var_export($sections, true), 'sections');
     
     if(!count($sections)) {
       $sections = array("010" => "");
@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
       <?php if($section['title']) { ?><h2><?php echo $section['title']; ?></h2><?php }
       foreach($publication_pod->field('articles', array('orderby' => 'sequence ASC')) as $article) :
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) : ?>
-          <?php var_trace(var_export($article, true), 'article-pod-object', $TRACE_ENABLED); ?>
+          <?php var_trace(var_export($article, true), 'article-pod-object'); ?>
           <li>
             <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>"><?php echo $article['name']; ?></a>
             <?php if(!empty($article['language']['name'])) : ?>
