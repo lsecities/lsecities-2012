@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pods input helper - wp_pages
+ *
+ * List WordPress pages in WP hierarchy order, add ancestor page titles
+ * NOTE: this is obsolete with Pods v2.x as the new input field for this already provides the features needed
+ */
 if(!empty($value)) {
   $pages = array();
   
