@@ -22,7 +22,7 @@ function pods_prepare_research_project($pod_slug) {
 
   lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('pod_slug: ' . $pod_slug);
 
   $obj['title'] = $pod->field('name');
   $obj['events_blurb'] = $pod->field('events_blurb');

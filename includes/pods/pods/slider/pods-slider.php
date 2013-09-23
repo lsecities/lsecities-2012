@@ -24,7 +24,7 @@ function pods_prepare_slider($pod_slug) {
 
   lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 
   $obj['news_categories'] = $pod->field('news_category');
   
@@ -94,8 +94,8 @@ function compose_slide($slide_slug) {
     array_push($tiles, array('slug' => $this_tile_slug));
   }
   
-  var_trace('tiles: ' . var_export($tiles, true), $TRACE_PREFIX, $TRACE_ENABLED);
-  var_trace('slide_layout: ' . var_export($slide_layout, true), $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('tiles: ' . var_export($tiles, true), $TRACE_PREFIX);
+  var_trace('slide_layout: ' . var_export($slide_layout, true), $TRACE_PREFIX);
   
   switch($slide_layout) {
     case 'two-two-one':

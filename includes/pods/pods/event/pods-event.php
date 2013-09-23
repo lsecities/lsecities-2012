@@ -17,7 +17,7 @@ function people_list($people, $heading_singular, $heading_plural) {
     $output .= "<dd>\n";
     
     foreach($people as $person) {
-      var_trace($person, 'people_list:$person', $TRACE_ENABLED);
+      var_trace($person, 'people_list:$person');
       $people_count++;
       if($person['profile_text']) {
         $output .= '<a href="#person-profile-' . $person['slug'] . '">' . $person['name'] . ' ' . $person['family_name'] . "</a>, \n";
@@ -79,7 +79,7 @@ function pods_prepare_event($pod_slug) {
 
   lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
   
   $obj['slug'] = $pod_slug;
   $obj['title'] = $pod->field('name');
@@ -89,7 +89,7 @@ function pods_prepare_event($pod_slug) {
   $event_chairs = sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
   $event_moderators = sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
   $obj['event_all_the_people'] = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
-  var_trace($event_all_the_people, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace($event_all_the_people, $TRACE_PREFIX);
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
   $obj['event_story_id'] = $pod->field('storify_id');
 
@@ -102,7 +102,7 @@ function pods_prepare_event($pod_slug) {
 
   $obj['event_blurb'] = do_https_shortcode($pod->field('blurb'));
   $obj['event_blurb_after_event'] = do_https_shortcode($pod->field('blurb_after_event'));
-  var_trace($obj['event_blurb_after_event'], $TRACE_PREFIX . 'blurb_after_event', $TRACE_ENABLED);
+  var_trace($obj['event_blurb_after_event'], $TRACE_PREFIX . 'blurb_after_event');
   $obj['event_contact_info'] = do_shortcode($pod->field('contact_info'));
 
   $event_media_items = $pod->field('media_attachments');
