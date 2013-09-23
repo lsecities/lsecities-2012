@@ -1,4 +1,11 @@
-<?php $PODS_BASEURI_NEW_ITEM = '/wp-admin/admin.php?page=';
+<?php
+/**
+ * Pods input helper - people
+ *
+ * Show people as FamilyName, FirstName
+ */
+
+$PODS_BASEURI_NEW_ITEM = '/wp-admin/admin.php?page=';
 $people = pods('authors')->find(array('orderby' => 'family_name', 'limit' => -1));
 ?>
 
