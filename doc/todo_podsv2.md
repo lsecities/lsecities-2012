@@ -10,7 +10,7 @@
 * DONE (NOT NEEDED): check whether helper input/date/timepicker is still needed
   (should be provided by Podsv2)
 * check whether helper pre_save/date is still needed (used in: event)
-* port input/select_categories to Podsv2 (used in: article/tags)
+* NOT NEEDED: port input/select_categories to Podsv2 (used in: article/tags)
 * port pre_save/save_categories to Podsv2 (used in: article)
 * port pre_save/authors_slug to Podsv2 (used in: authors)
 * port input/wp_pages to Podsvs (used in: conference/links, list/list_pages, list/featured_item)
