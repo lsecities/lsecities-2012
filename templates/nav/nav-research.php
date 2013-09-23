@@ -7,17 +7,17 @@ global $IN_CONTENT_AREA;
 global $HIDE_CURRENT_PROJECTS, $HIDE_PAST_PROJECTS;
 $BASE_URI = PODS_BASEURI_RESEARCH_PROJECTS;
 
-var_trace('HIDE_CURRENT_PROJECTS: '. $HIDE_CURRENT_PROJECTS, $TRACE_PREFIX, $TRACE_ENABLED);
-var_trace('HIDE_PAST_PROJECTS: '. $HIDE_PAST_PROJECTS, $TRACE_PREFIX, $TRACE_ENABLED);
+var_trace('HIDE_CURRENT_PROJECTS: '. $HIDE_CURRENT_PROJECTS, $TRACE_PREFIX);
+var_trace('HIDE_PAST_PROJECTS: '. $HIDE_PAST_PROJECTS, $TRACE_PREFIX);
 
-var_trace('post ID: ' . $current_post_id, $TRACE_PREFIX, $TRACE_ENABLED);
-var_trace(var_export($pod, true), $TRACE_PREFIX, $TRACE_ENABLED);
+var_trace('post ID: ' . $current_post_id, $TRACE_PREFIX);
+var_trace(var_export($pod, true), $TRACE_PREFIX);
 
 
 $current_projects_by_strand = compose_project_list_by_strand('active');
-var_trace(var_export($current_projects_by_strand, true), $TRACE_PREFIX . ' - active projects (by strand): ', $TRACE_ENABLED);
+var_trace(var_export($current_projects_by_strand, true), $TRACE_PREFIX . ' - active projects (by strand): ');
 $past_projects_by_strand = compose_project_list_by_strand('completed');
-var_trace(var_export($past_projects_by_strand, true), $TRACE_PREFIX . ' - completed projects (by strand): ', $TRACE_ENABLED);
+var_trace(var_export($past_projects_by_strand, true), $TRACE_PREFIX . ' - completed projects (by strand): ');
 
 ?>
   <?php if(($IN_CONTENT_AREA and !$HIDE_CURRENT_PROJECTS) or (!$IN_CONTENT_AREA and $HIDE_CURRENT_PROJECTS)): ?>

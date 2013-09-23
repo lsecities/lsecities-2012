@@ -8,7 +8,6 @@
 ?><?php
 /* URI: /objects/research-projects */
 $BASE_URI = PODS_BASEURI_RESEARCH_PROJECTS;
-$TRACE_ENABLED = is_user_logged_in();
 global $IN_CONTENT_AREA, $HIDE_CURRENT_PROJECTS, $HIDE_PAST_PROJECTS;
 $TRACE_PREFIX = 'pods-research-projects';
 lc_data('pods_toplevel_ancestor', 306);
@@ -25,7 +24,7 @@ if(!$pod_from_page) {
   lc_data('pods_toplevel_ancestor', 306);
 }
 
-var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);

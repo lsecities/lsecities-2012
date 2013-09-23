@@ -10,7 +10,7 @@ $TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'pods-publications';
 
 $publication_slug = get_post_meta($post->ID, 'pod_slug', true);
-var_trace('pod_slug: ' . $publication_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+var_trace('pod_slug: ' . $publication_slug);
 $pod = pods('publication_wrappers', $publication_slug);
 $publication_pod = $pod; // TODO refactor code and move generation of list of articles to sub used both in pods-articles and pods-publication
 $pod_title = $pod->field('name');
@@ -23,10 +23,10 @@ $publication_category = $pod->field('category.slug');
 
 // get tiles for heading slider
 $heading_slides = array();
-var_trace($pod->field('heading_slides.slug'), $TRACE_PREFIX . '--heading_slides.slug', $TRACE_ENABLED);
+var_trace($pod->field('heading_slides.slug'), $TRACE_PREFIX . '--heading_slides.slug');
 $slider_pod = pods('slide', $pod->field('heading_slides.slug'));
 foreach((array)$slider_pod->field('tiles.slug') as $tile_slug) {
-  var_trace($tile_slug, $TRACE_PREFIX. '--tiles.slug', $TRACE_ENABLED);
+  var_trace($tile_slug, $TRACE_PREFIX. '--tiles.slug');
   $tile = pods('tile', $tile_slug);
   if($tile) {
     array_push($heading_slides, pods_image_url($tile->field('image'), 'original'));
@@ -107,7 +107,7 @@ foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line
     array_push($publication_sections, array( 'id' => $matches[1], 'title' => $matches[2]));
   }
 }
-var_trace('sections: ' . var_export($publication_sections, true), $TRACE_PREFIX, $TRACE_ENABLED);
+var_trace('sections: ' . var_export($publication_sections, true));
               
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
@@ -194,7 +194,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->
       <div class='extra-content row'>
-          <?php var_trace(var_export($pod->field('reviews_category.term_id'), true), $TRACE_PREFIX, $TRACE_ENABLED); ?>
+          <?php var_trace(var_export($pod->field('reviews_category.term_id'), true)); ?>
           <?php if($pod->field('reviews_category.term_id')):
                   $wp_posts_reviews = get_posts(array('category' => $pod->field('reviews_category.term_id'), 'numberposts' => 10));
                   if(count($wp_posts_reviews)): ?>
@@ -236,7 +236,6 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                     // remove trailing comma
                     $author_names = substr($author_names, 0, -2);
                     $article_title = $articles_pods->field('name');
-                    // var_trace('article Pod object: ' . var_export($articles_pods, true), $TRACE_PREFIX, $TRACE_ENABLED);
                     ?>
                     <div class="article">
                       <?php if($publication_category == 'research-data' and $articles_pods->field('heading_image')): ?>

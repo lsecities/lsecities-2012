@@ -60,10 +60,10 @@ function pods_prepare_conference($pod_slug) {
   // than one tile to display here, however initially we only process the
   // first one and ignore the rest - later on we should deal with more
   // complex cases (e.g. as a slider or so)
-  var_trace('tiles: ' . var_export($pod->field('research_summary.visualization_tiles'), true), $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('tiles: ' . var_export($pod->field('research_summary.visualization_tiles'), true), $TRACE_PREFIX);
   $visualization_tiles = $pod->field('research_summary.visualization_tiles');
   $tile_pod = pods('tile', $visualization_tiles[0]['slug']);
-  var_trace('tile_image: ' . var_export($tile_pod->field('image'), true), $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('tile_image: ' . var_export($tile_pod->field('image'), true), $TRACE_PREFIX);
   $obj['research_summary_tile_image'] = pods_image_url($tile_pod->field('image'));
   $obj['research_summary_pdf_uri'] = $pod->field('research_summary.data_section_pdf_uri');
 
