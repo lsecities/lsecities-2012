@@ -39,7 +39,7 @@ if(is_user_logged_in()) {
  * @return bool the tracing output if $destination == 'page' or the
  *         return value of error_log() if $destination == 'error_log'
  */
-function var_trace($var, $prefix = 'pods', $enabled = TRACE_ENABLED, $destination = 'error_log') {
+function var_trace($var, $prefix = 'pods', $enabled = LSECITIES_THEME_DEBUG, $destination = 'error_log') {
   if($enabled) {
     $output_string = "tracing $prefix : " . var_export($var, true) . "\n\n";
     
