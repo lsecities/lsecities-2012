@@ -27,7 +27,7 @@ $element_id = 'pods-form-ui-pods-field-' . $field_name . ($position + 1);
       ?>
       <li>
         <div class="pods-field pods-boolean">
-          <input name="pods-field_<?php echo $field_name; ?>[<?php echo $position; ?>]" data-name-clean="pods-field-<?php echo $field_name; ?>" data-label="<?php echo $field_label; ?>" id="<?php echo $element_id; ?>" class="pods-form-ui-field-type-pick pods-form-ui-field-name-pods-field-<?php echo $field_name; ?> pods-dependent-multi" type="checkbox" value="<?php echo $people->field('id'); ?>"<?php echo $checked; ?>></input>
+          <input name="pods_field_<?php echo $field_name; ?>[<?php echo $position; ?>]" data-name-clean="pods-field-<?php echo $field_name; ?>" data-label="<?php echo $field_label; ?>" id="<?php echo $element_id; ?>" class="pods-form-ui-field-type-pick pods-form-ui-field-name-pods-field-<?php echo $field_name; ?> pods-dependent-multi" type="checkbox" value="<?php echo $people->field('id'); ?>"<?php echo $checked; ?>></input>
           <label class="pods-form-ui-label pods-form-ui-label-<?php echo $element_id; ?>" for="<?php echo $element_id; ?>"><?php echo $full_name; ?></label>
         </div>
       </li>
