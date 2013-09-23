@@ -14,6 +14,8 @@
 * port pre_save/save_categories to Podsv2 (used in: article)
 * port pre_save/authors_slug to Podsv2 (used in: authors)
 * NOT NEEDED: port input/wp_pages to Podsvs (used in: conference/links, list/list_pages, list/featured_item)
-* port helper input/event_sessions to Podsv2 (used in: event_programme/sessions, media_item_v0/session)
+* DONE: port helper input/event_sessions to Podsv2 (used in: event_programme/sessions, media_item_v0/session)
 * check research summaries in Conference frontpages
 * check dual-language articles in newspapers (links to second language and back)
+* move helpers to theme, load from theme in Pods UI
+* test all helpers for any warnings in logs
