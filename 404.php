@@ -17,7 +17,7 @@ get_header(); ?>
 
 				<div class="entry-content">
 					<div class="widget">
-          <p><?php _e( 'We have just moved all our legacy content to this new website; all the old web addresses should be redirected to their new location, but we might have missed the odd page: we are monitoring all the "page not found" errors visitors might get and aim to rectify any glitches - in the meanwhile, you might want to use the search form below to locate the content you are looking for.', 'lsecities-2012' ); ?></p>
+          <p><?php _e( 'We are re sorry, but we cannot find the page that you are looking for. You might want to use the search form below to locate the content you are looking for. If you followed a link to our legacy Urban Age website from an external website, you might want to browser for archived content on <a href="http://v0.urban-age.net/">urban-age.net</a>. Otherwise, please <a href="' . esc_url(get_permalink(get_page_by_title('Contacts'))) . '">contact us</a>.', 'lsecities-2012' ); ?></p>
 
 					<?php get_search_form(); ?>
           </div>
