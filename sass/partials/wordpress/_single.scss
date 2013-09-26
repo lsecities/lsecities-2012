@@ -1,0 +1,16 @@
+.single-post {
+  .nav-single {
+    .nav-previous, .nav-next {
+      display: block;
+      width: 49%;
+    }
+    .nav-previous {
+      float: left;
+      text-align: left;
+    }
+    .nav-next {
+      float: right;
+      text-align: right;
+    }
+  }
+}

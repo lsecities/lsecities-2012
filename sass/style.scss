@@ -25,6 +25,10 @@
 @import "partials/footer";
 @import "partials/articles";
 
+// Styles for base WordPress content types
+// Add more as needed
+@import "partials/wordpress/single";
+
 // Final designs - main frame and one SCSS per template
 @import "partials/templates/base";
 @import "partials/templates/plugins/jquery.flexslider";
