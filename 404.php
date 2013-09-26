@@ -31,18 +31,18 @@ get_header(); ?>
       <div class="wireframe threecol last" id="navigationarea">
         <nav class="widget">
           <dl>
-            <dt class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></dt>
-            <dd>
-              <ul>
-              <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
-              </ul>
-            </dd>
             <dt>News archive</dt>
             <dd>
               <dl class="accordion">
               <?php
               lsecities_get_archives(); ?>
               </dl>
+            </dd>
+            <dt class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></dt>
+            <dd>
+              <ul>
+              <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
+              </ul>
             </dd>
           </dl>
         </nav>
