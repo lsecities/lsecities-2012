@@ -526,3 +526,65 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
   }
   return $output;
 }
+
+/**
+ * 
+ */
+/*
+function lsecities_get_archives() {
+  $current_year = date("Y");
+  $archive_by_month = array();
+  
+  // look back until 2005
+  for($year = $current_year; $year >= 2005; $year--) {
+    $archive_by_month[$year] = wp_get_archives(array(
+      'show_post_count' => TRUE,
+      'echo' => FALSE
+    ));
+    
+    // remove whole year if we have no news at all for the year
+    if(empty($archive_by_month[$year])) {
+      unset($archive_by_month[$year]);
+    }
+  }
+  
+  return $archive_by_month;
+}
+*/
+
+function lsecities_get_archives_callback($item, $index, $currYear) {
+    global $wp_locale;
+
+    if ( $item['year'] == $currYear ) {
+        $url = get_month_link( $item['year'], $item['month'] );
+        // translators: 1: month name, 2: 4-digit year
+        $text = sprintf(__('%1$s %2$d'), $wp_locale->get_month($item['month']), $item['year']);
+        echo get_archives_link($url, $text);
+    }
+}
+
+function lsecities_get_archives() {
+    global $wpdb;
+
+    $query = "SELECT YEAR(post_date) AS `year` FROM $wpdb->posts WHERE `post_type` = 'post' AND `post_status` = 'publish' GROUP BY `year` ORDER BY `year` DESC";
+    $arcresults = $wpdb->get_results($query);
+    $years = array();
+
+    if ($arcresults) {
+        foreach ( (array)$arcresults as $arcresult ) {
+            array_push($years, $arcresult->year);
+        }
+    }
+
+    $query = "SELECT YEAR(post_date) as `year`, MONTH(post_date) as `month` FROM $wpdb->posts WHERE `post_type` = 'post' AND `post_status` = 'publish' GROUP BY `year`, `month` ORDER BY `year` DESC, `month` ASC";
+    $arcresults = $wpdb->get_results($query, ARRAY_A);
+    $months = array();
+
+    if ( $arcresults ) {
+        foreach ($years as $year) {
+            echo "\t<dt>$year</dt>\n\t<dd><ul>\n";
+            array_walk($arcresults, "lsecities_get_archives_callback", $year);
+            echo "\t</ul></dd>\n";
+        }
+    }
+}
