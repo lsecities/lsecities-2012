@@ -254,25 +254,25 @@ header {
 body {
 
   h1 {
-    font-size: 2em;
+    font-size: $h1-font-size;
     margin-bottom: 0.25em;
     
     &.mainheading {
-      font-size: 3em;
+      font-size: $h1-font-size / 2 * 3;
     }
   }
   
   h2 {
-    font-size: 1.5em;
+    font-size: $h2-font-size;
     margin-bottom: 0.25em;
     
     &.mainheading {
-      font-size: 2.5em;
+      font-size: $h2-font-size / 3 * 5;
     }
   }
   
   h3 {
-    font-size: 1.125em;
+    font-size: $h3-font-size;
     margin-bottom: 0.25em;
   }
   

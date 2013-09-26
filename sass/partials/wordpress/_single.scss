@@ -17,4 +17,14 @@
       text-align: right;
     }
   }
+  
+  .comments-area {
+    h2 {
+      font-size: $h3-font-size;
+    }
+    
+    .commentlist p {
+      margin-bottom: 0;
+    }
+  }
 }
