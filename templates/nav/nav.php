@@ -30,14 +30,24 @@ var_trace(var_export($pods_toplevel_ancestor, true), $TRACE_PREFIX . 'pods_tople
 <div class="wireframe threecol last" id="navigationarea">
 
 <?php
- // deal with WordPress base templates first
- if(is_single() or is_archive()): ?>
-   <dl class="accordion">
+// deal with WordPress base templates first
+if(is_single() or is_archive()): ?>
+  <dl>
+    <dt>News archive</dt>
+    <dd>
+      <dl class="accordion">
 <?php
-   lsecities_get_archives(); ?>
-   </dl>
+  lsecities_get_archives(); ?>
+      </dl>
+    </dd>
+    <dt>News categories</dt>
+    <dd>
 <?php
- else: // (is_single() or is_archive())
+      wp_list_categories(array('show_count' => TRUE, 'hierarchical' => FALSE)); ?>
+    </dd>
+  </dl>
+<?php
+else: // (is_single() or is_archive())
 ?>
 
 <?php
