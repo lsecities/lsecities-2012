@@ -1,5 +1,9 @@
 .single-post {
-  .nav-single {
+  .nav-single {    
+    margin-top: 1em;
+    margin-bottom: 2em;
+    @include clearfix;
+
     .nav-previous, .nav-next {
       display: block;
       width: 49%;
