@@ -42,8 +42,10 @@ if(is_single() or is_archive()): ?>
     </dd>
     <dt>News categories</dt>
     <dd>
+      <ul>
 <?php
-      wp_list_categories(array('show_count' => TRUE, 'title_li' => NULL, 'hierarchical' => FALSE)); ?>
+  wp_list_categories(array('show_count' => TRUE, 'title_li' => NULL, 'hierarchical' => FALSE)); ?>
+      </ul>
     </dd>
   </dl>
 <?php
