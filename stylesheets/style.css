@@ -339,6 +339,7 @@ body.ec2012 .lc-event-speaker-list .speaker-card { -moz-box-shadow: none; -webki
   h2, h3 { page-break-after: avoid; } }
 .row .row { min-width: inherit; }
 
+/** Define default font sizes for base elements */
 /* uservoice.com integration -- begin */
 #uvTab { opacity: 0.7; }
 
@@ -513,6 +514,7 @@ footer#footer #footerSitemap > .row > section > ul li { line-height: 1em; margin
 .single-post .nav-single .nav-previous, .single-post .nav-single .nav-next { display: block; width: 49%; }
 .single-post .nav-single .nav-previous { float: left; text-align: left; }
 .single-post .nav-single .nav-next { float: right; text-align: right; }
+.single-post .comments-area h2 { font-size: 1.125em; }
 
 #main { margin-top: 1em; min-height: 18em; }
 
