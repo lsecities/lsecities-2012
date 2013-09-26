@@ -37,8 +37,14 @@ get_header(); ?>
               <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
               </ul>
             </dd>
+            <dt>News archive</dt>
+            <dd>
+              <dl class="accordion">
+              <?php
+              lsecities_get_archives(); ?>
+              </dl>
+            </dd>
           </dl>
-          <!-- TODO: add accordion-ready monthly archive list, grouped by year -->
         </nav>
 
       </div><!-- .threecol.last -->
