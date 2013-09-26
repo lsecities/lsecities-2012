@@ -515,6 +515,7 @@ footer#footer #footerSitemap > .row > section > ul li { line-height: 1em; margin
 .single-post .nav-single .nav-previous { float: left; text-align: left; }
 .single-post .nav-single .nav-next { float: right; text-align: right; }
 .single-post .comments-area h2 { font-size: 1.125em; }
+.single-post .comments-area .commentlist p { margin-bottom: 0; }
 
 #main { margin-top: 1em; min-height: 18em; }
 
