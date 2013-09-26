@@ -509,6 +509,7 @@ footer#footer #footerSitemap > .row > section > ul li { line-height: 1em; margin
 
 .entry-meta.article-abstract { font-style: italic; }
 
+.single-post .nav-single { margin-top: 1em; margin-bottom: 2em; overflow: hidden; *zoom: 1; }
 .single-post .nav-single .nav-previous, .single-post .nav-single .nav-next { display: block; width: 49%; }
 .single-post .nav-single .nav-previous { float: left; text-align: left; }
 .single-post .nav-single .nav-next { float: right; text-align: right; }
