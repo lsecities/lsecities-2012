@@ -17,7 +17,7 @@ get_header(); ?>
 
 				<div class="entry-content">
 					<div class="widget">
-          <p><?php _e( 'We are re sorry, but we cannot find the page that you are looking for. You might want to use the search form below to locate the content you are looking for. If you followed a link to our legacy Urban Age website from an external website, you might want to browser for archived content on <a href="http://v0.urban-age.net/">urban-age.net</a>. Otherwise, please <a href="' . esc_url(get_permalink(get_page_by_title('Contacts'))) . '">contact us</a>.', 'lsecities-2012' ); ?></p>
+          <p><?php _e( 'We are re sorry, but we cannot find the page that you are looking for. You might want to use the search form below to locate the content you are looking for. If you followed a link to our legacy Urban Age website from an external website, you might want to browse for archived content on <a href="http://v0.urban-age.net/">urban-age.net</a>. Otherwise, please <a href="' . esc_url(get_permalink(get_page_by_title('Contacts'))) . '">contact us</a>.', 'lsecities-2012' ); ?></p>
 
 					<?php get_search_form(); ?>
           </div>
@@ -38,10 +38,10 @@ get_header(); ?>
               lsecities_get_archives(); ?>
               </dl>
             </dd>
-            <dt class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></dt>
+            <dt class="widgettitle"><?php _e( 'News categories', 'lsecities' ); ?></dt>
             <dd>
               <ul>
-              <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
+              <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10, 'hierarchical' => FALSE ) ); ?>
               </ul>
             </dd>
           </dl>
