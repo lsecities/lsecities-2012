@@ -28,18 +28,18 @@ get_header(); ?>
 
 				</div><!-- .entry-content -->
 			</article><!-- #post-0 -->
-      <div class="threecol last">
-        <div class="widget">
-						<h2 class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></h2>
-						<ul>
-						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
-						</ul>
-					</div>
-
-					<?php
-					$archive_content = '<p>' . _e( 'Try looking in the monthly archives.', 'lsecities-2012' ) . '</p>';
-					the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );
-					?>
+      <div class="wireframe threecol last" id="navigationarea">
+        <nav class="widget">
+          <dl>
+            <dt class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></dt>
+            <dd>
+              <ul>
+              <?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
+              </ul>
+            </dd>
+          </dl>
+          <!-- TODO: add accordion-ready monthly archive list, grouped by year -->
+        </nav>
 
       </div><!-- .threecol.last -->
 		</div><!-- #content -->
