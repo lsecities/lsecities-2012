@@ -8,9 +8,9 @@
 get_header(); ?>
 
 	<div id="primary">
-		<div id="content" role="main">
+		<div id="content" role="main" class="row">
 
-			<article id="post-0" class="post error404 not-found">
+			<article id="post-0" class="post error404 not-found ninecol">
 				<header class="entry-header">
 					<h1 class="entry-title"><?php _e( 'Sorry, we could not find the content you are looking for.', 'lsecities-2012' ); ?></h1>
 				</header>
@@ -24,7 +24,12 @@ get_header(); ?>
           
 					<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 10 ), array( 'widget_id' => '404' ) ); ?>
 
-					<div class="widget">
+					<?php // the_widget( 'WP_Widget_Tag_Cloud' ); ?>
+
+				</div><!-- .entry-content -->
+			</article><!-- #post-0 -->
+      <div class="threecol last">
+        <div class="widget">
 						<h2 class="widgettitle"><?php _e( 'Most Used Categories', 'twentyeleven' ); ?></h2>
 						<ul>
 						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
@@ -36,11 +41,7 @@ get_header(); ?>
 					the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );
 					?>
 
-					<?php // the_widget( 'WP_Widget_Tag_Cloud' ); ?>
-
-				</div><!-- .entry-content -->
-			</article><!-- #post-0 -->
-
+      </div><!-- .threecol.last -->
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
