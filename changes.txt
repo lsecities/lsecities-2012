@@ -1,12 +1,18 @@
-lsecities-theme-alexandria (1.5) UNRELEASED; urgency=low
+lsecities-theme-alexandria (1.8) experimental; urgency=low
 
   release 1.8 "panais"
   
-  * changed theme name to lsecities-theme-<city> where <city> is
-    a global city with name starting with A, then B, etc. as
+  * [MAJOR CHANGE] ported theme to Pods v2.x
+  * [update] changed theme name to lsecities-theme-<city> where <city>
+    is a global city with name starting with A, then B, etc. as
     new major releases of the theme are made
-  * now using Composer for PHP dependencies (Twig, MtHaml) rather
-    than git submodules
+  * [deployment] now using Composer for PHP dependencies (Twig, MtHaml)
+    rather than git submodules
+  * [update] updated post archive pages to show each item's date
+  * [update] updated sidebars in archive pages to show full list of
+    archive years and months with same styling as #navigationarea
+    sidebars on rest of website
+  * [update] updated single post page to show date and pingbacks
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 30 Sep 2013 16:30:00 +0100
  
