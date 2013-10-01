@@ -2,7 +2,8 @@ lsecities-theme-alexandria (1.8) experimental; urgency=low
 
   release 1.8 "panais"
   
-  * [MAJOR CHANGE] ported theme to Pods v2.x
+  * [MAJOR CHANGE] ported theme to Pods v2.x; this version won't
+    work with Pods v1.x anymore as the API is different
   * [update] changed theme name to lsecities-theme-<city> where <city>
     is a global city with name starting with A, then B, etc. as
     new major releases of the theme are made
