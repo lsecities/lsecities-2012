@@ -33,9 +33,9 @@ function pods_prepare_conference($pod_slug) {
     
     // MONKEYPATCH_BEGIN
     if($_GET["siteid"] == 'ec2012') {
-      $logo_uri = wp_get_attachment_url($organization_pod->field('logo_white_raster.ID'));
+      $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), 'original');
     } else {
-      $logo_uri = wp_get_attachment_url($organization_pod->field('logo.ID'));
+      $logo_uri = pods_image_url($organization_pod->field('logo'), 'original');
     }
     // MONKEYPATCH_END
     
