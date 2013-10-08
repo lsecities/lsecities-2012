@@ -30,6 +30,29 @@ var_trace(var_export($pods_toplevel_ancestor, true), $TRACE_PREFIX . 'pods_tople
 <div class="wireframe threecol last" id="navigationarea">
 
 <?php
+// deal with WordPress base templates first
+if(is_single() or is_archive()): ?>
+  <dl>
+    <dt>News archive</dt>
+    <dd>
+      <dl class="accordion">
+<?php
+  lsecities_get_archives(); ?>
+      </dl>
+    </dd>
+    <dt>News categories</dt>
+    <dd>
+      <ul>
+<?php
+  wp_list_categories(array('show_count' => TRUE, 'title_li' => NULL, 'hierarchical' => FALSE)); ?>
+      </ul>
+    </dd>
+  </dl>
+<?php
+else: // (is_single() or is_archive())
+?>
+
+<?php
 $nav_generated = false;
 
 // /ua/ (Urban Age frontpage)
@@ -95,6 +118,8 @@ if($nav_generated === false) {
 
 // include mailing list subscription template part
 get_template_part('templates/nav/nav', 'mailing-list-subscription');
+
+endif; // (is_single() or is_archive())
 ?>
 </div>
 <?php else: // (!lc_data('site-ec2012')) ?>

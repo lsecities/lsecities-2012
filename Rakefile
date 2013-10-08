@@ -2,6 +2,9 @@ namespace :deploy do
     task :live do
         push_to_deploy_branch('live')
     end
+    task :podsv2 do
+        push_to_deploy_branch('podsv2')
+    end
 end
 
 def push_to_deploy_branch(to_branch)
