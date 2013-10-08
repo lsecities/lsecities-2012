@@ -17,7 +17,7 @@ function people_list($people, $heading_singular, $heading_plural) {
     $output .= "<dd>\n";
     
     foreach($people as $person) {
-      var_trace($person, 'people_list:$person', $TRACE_ENABLED);
+      var_trace($person, 'people_list:$person');
       $people_count++;
       if($person['profile_text']) {
         $output .= '<a href="#person-profile-' . $person['slug'] . '">' . $person['name'] . ' ' . $person['family_name'] . "</a>, \n";
@@ -61,14 +61,14 @@ function orgs_list($organizations) {
 }
 
 function pods_prepare_event($pod_slug) {
-  $pod = new Pod('event');
-  $pod->findRecords(array('where' => "t.slug = '" . $pod_slug . "'"));
+  $pod = pods('event');
+  $pod->find(array('where' => "t.slug = '" . $pod_slug . "'"));
 
-  if(!$pod->getTotalRows()) {
+  if(!$pod->total_found()) {
     redirect_to_404();
   }
 
-  $pod->fetchRecord();
+  $pod->fetch();
 
   // for menus etc.
   global $this_pod;
@@ -77,21 +77,21 @@ function pods_prepare_event($pod_slug) {
   // prepare array for return data structure
   $obj = array();
 
-  lc_data('META_last_modified', $pod->get_field('modified'));
+  lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
   
   $obj['slug'] = $pod_slug;
-  $obj['title'] = $pod->get_field('name');
+  $obj['title'] = $pod->field('name');
   
-  $event_speakers = $pod->get_field('speakers', 'family_name ASC');
-  $event_respondents = $pod->get_field('respondents', 'family_name ASC');
-  $event_chairs = $pod->get_field('chairs', 'family_name ASC');
-  $event_moderators = $pod->get_field('moderators', 'family_name ASC');
+  $event_speakers = sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
+  $event_respondents = sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
+  $event_chairs = sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
+  $event_moderators = sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
   $obj['event_all_the_people'] = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
-  var_trace($event_all_the_people, $TRACE_PREFIX, $TRACE_ENABLED);
-  $obj['event_hashtag'] = ltrim($pod->get_field('hashtag'), '#');
-  $obj['event_story_id'] = $pod->get_field('storify_id');
+  var_trace($event_all_the_people, $TRACE_PREFIX);
+  $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
+  $obj['event_story_id'] = $pod->field('storify_id');
 
   $obj['speakers_output'] = people_list($event_speakers, "Speaker", "Speakers");
   $obj['respondents_output'] = people_list($event_respondents, "Respondent", "Respondents");
@@ -100,17 +100,17 @@ function pods_prepare_event($pod_slug) {
 
   $obj['people_with_blurb'] = $obj['speakers_output']['with_blurb'] + $obj['respondents_output']['with_blurb'] + $obj['chairs_output']['with_blurb'] + $obj['moderators_output']['with_blurb'];
 
-  $obj['event_blurb'] = do_https_shortcode($pod->get_field('blurb'));
-  $obj['event_blurb_after_event'] = do_https_shortcode($pod->get_field('blurb_after_event'));
-  var_trace($obj['event_blurb_after_event'], $TRACE_PREFIX . 'blurb_after_event', $TRACE_ENABLED);
-  $obj['event_contact_info'] = do_shortcode($pod->get_field('contact_info'));
+  $obj['event_blurb'] = do_https_shortcode($pod->field('blurb'));
+  $obj['event_blurb_after_event'] = do_https_shortcode($pod->field('blurb_after_event'));
+  var_trace($obj['event_blurb_after_event'], $TRACE_PREFIX . 'blurb_after_event');
+  $obj['event_contact_info'] = do_shortcode($pod->field('contact_info'));
 
-  $event_media_items = $pod->get_field('media_attachments');
+  $event_media_items = $pod->field('media_attachments');
   
   if(is_array($event_media_items)) {
     foreach($event_media_items as $item) {
-      $item_pod = new Pod('media_item_v0', $item['id']);
-      $slides_pdf_id = $item_pod->get_field('slides_pdf.ID');
+      $item_pod = pods('media_item_v0', $item['id']);
+      $slides_pdf_id = $item_pod->field('slides_pdf.ID', TRUE);
       if($slides_pdf_id) {
         $item['slides_uri'] = wp_get_attachment_url($slides_pdf_id);
       }
@@ -118,36 +118,36 @@ function pods_prepare_event($pod_slug) {
     }
   }
   
-  $obj['slider'] = $pod->get_field('slider');
+  $obj['slider'] = $pod->field('slider');
   if(!$obj['slider']) {
     $obj['featured_image_uri'] = get_the_post_thumbnail(get_the_ID(), array(960,367));
   }
 
   // grab the image URI from the Pod
-  $attachment_ID = $pod->get_field('heading_image.ID');
+  $attachment_ID = $pod->field('heading_image.ID', TRUE);
   $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
   push_media_attribution($attachment_ID);
 
-  $event_date_start = new DateTime($pod->get_field('date_start'));
-  $event_date_end = new DateTime($pod->get_field('date_end'));
+  $event_date_start = new DateTime($pod->field('date_start'));
+  $event_date_end = new DateTime($pod->field('date_end'));
   $event_dtstart = $event_date_start->format(DATE_ISO8601);
   $event_dtend = $event_date_end->format(DATE_ISO8601);
 
   $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
   $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
-  // $event_date_string = $pod->get_field('date_freeform');
+  // $event_date_string = $pod->field('date_freeform');
   $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
   $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
   $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
   $datetime_now = new DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
 
-  $obj['event_location'] = $pod->get_field('venue.name');
+  $obj['event_location'] = $pod->field('venue.name');
 
-  $event_type = $pod->get_field('event_type.name');
-  $event_series = $pod->get_field('event_series.name');
-  $event_host_organizations = orgs_list((array) $pod->get_field('hosted_by'));
-  $event_partner_organizations = orgs_list((array) $pod->get_field('partners'));
+  $event_type = $pod->field('event_type.name');
+  $event_series = $pod->field('event_series.name');
+  $event_host_organizations = orgs_list((array) $pod->field('hosted_by'));
+  $event_partner_organizations = orgs_list((array) $pod->field('partners'));
 
   $obj['event_info'] = '';
   if($event_type) {
@@ -167,7 +167,7 @@ function pods_prepare_event($pod_slug) {
     $event_info .= 'in partnership with ' . $event_partner_organizations;
   }
 
-  $poster_pdf = $pod->get_field('poster_pdf');
+  $poster_pdf = $pod->field('poster_pdf');
   $obj['poster_pdf'] = wp_get_attachment_url($poster_pdf[0]['ID']);
   
   $obj['event_page_uri'] = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$obj['slug'];

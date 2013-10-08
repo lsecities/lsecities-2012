@@ -67,8 +67,9 @@ function people_list_generate_list($list_id, $check_list, $mode = 'full_list') {
 }
 
 function people_list_generate_section($section_slug, &$check_list, $section_heading = false, $mode = 'full_list') {
-  $pod = new Pod('people_group', $section_slug);
-  $people = (array)$pod->get_field('members', 'family_name ASC');
+  $pod = pods('people_group', $section_slug);
+  $people = sort_linked_field($pod->field('members'), 'family_name', SORT_ASC);
+  
   // global $people_in_output_full, $people_in_output_summary;
   var_trace(var_export($people, true), $TRACE_PREFIX . ' - group_members');
   $output = "<section class='people-list $section_slug'>";
@@ -110,9 +111,9 @@ function people_list_generate_section($section_slug, &$check_list, $section_head
  */
 function person_data__project_involvement($pod) {
   // fetch list of projects on which this person is a researcher
-  $p1_list = $pod->get_field('research_projects') ? $pod->get_field('research_projects') : array();
+  $p1_list = $pod->field('research_projects') ? $pod->field('research_projects') : array();
   // ... or a coordinator
-  $p2_list = $pod->get_field('projects_coordinated') ? $pod->get_field('projects_coordinated') : array();
+  $p2_list = $pod->field('projects_coordinated') ? $pod->field('projects_coordinated') : array();
   // initialize full project list
   $projects_list = array();
 
@@ -149,10 +150,10 @@ function person_data__project_involvement($pod) {
 
 function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_list') {
   $LEGACY_PHOTO_URI_PREFIX = 'http://v0.urban-age.net';
-  $pod = new Pod('authors', $slug);
-  $fullname = $pod->get_field('name') . ' ' . $pod->get_field('family_name');
+  $pod = pods('authors', $slug);
+  $fullname = $pod->field('name') . ' ' . $pod->field('family_name');
   $fullname = trim($fullname);
-  $title = $pod->get_field('title');
+  $title = $pod->field('title');
   
   $fullname_for_heading = $fullname;
   if($title) {
@@ -162,26 +163,25 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     $fullname_for_heading .= ' ' . $extra_title;
   }
   
-  $qualifications_list = array_map(function($string) { return trim($string); }, explode("\n", $pod->get_field('qualifications')));
+  $qualifications_list = array_map(function($string) { return trim($string); }, explode("\n", $pod->field('qualifications')));
   
   // get photo and related attribution, push attribution to attribution list
-  if($photo_id = $pod->get_field('photo.ID')) {
-    // $photo_id = $pod->get_field('photo.ID');
-    $profile_photo_uri = wp_get_attachment_url($photo_id);
+  if($photo_id = $pod->field('photo.ID', TRUE)) {
+    $profile_photo_uri = pods_image_url($photo_id);
     $profile_photo_attribution = get_post_meta($photo_id, '_attribution_name', true);
     push_media_attribution($photo_id);
   }
 
   // if no media library photo is associated to this person,
   // and legacy photo URI is set, use this  
-  if(!$profile_photo_uri and $pod->get_field('photo_legacy')) {
-    $profile_photo_uri = $LEGACY_PHOTO_URI_PREFIX . $pod->get_field('photo_legacy');
+  if(!$profile_photo_uri and $pod->field('photo_legacy')) {
+    $profile_photo_uri = $LEGACY_PHOTO_URI_PREFIX . $pod->field('photo_legacy');
   }
 
-  $email_address = $pod->get_field('email_address');
-  $blurb = $pod->get_field('staff_pages_blurb');
-  $organization = '<span class=\'org\'>' . $pod->get_field('organization') . '</span>';
-  $role = '<span class=\'role\'>' . $pod->get_field('role') . '</span>';
+  $email_address = $pod->field('email_address');
+  $blurb = $pod->field('staff_pages_blurb');
+  $organization = '<span class=\'org\'>' . $pod->field('organization') . '</span>';
+  $role = '<span class=\'role\'>' . $pod->field('role') . '</span>';
   if($role and $organization) {
     $affiliation = $role . ', ' . $organization;
   } elseif(!$role and $organization) {
@@ -190,7 +190,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     $affiliation = $role;
   }
   
-  $additional_affiliations = $pod->get_field('additional_affiliations');
+  $additional_affiliations = $pod->field('additional_affiliations');
   if($additional_affiliations) {
     $additional_affiliations = explode('\n', $additional_affiliations);
     foreach($additional_affiliations as $additional_affiliation) {
