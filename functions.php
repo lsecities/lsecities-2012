@@ -25,6 +25,9 @@ require_fragment('/includes/hooks.php' );
 require_fragment('/includes/functions.php' );
 require_fragment('/includes/utility_functions.php' );
 
+// Function files for WP partials go here
+require_fragment('/includes/partials/header.php' );
+
 // Plugin files go here
 require_fragment('/includes/plugins/galleria/galleria.php' );
 

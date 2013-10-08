@@ -6,11 +6,12 @@
  *
  * @package LSECities2012
  */
-?><?php
+namespace LSECitiesWPTheme\page_header;
+
 $TRACE_ENABLED = is_user_logged_in();
 var_trace('header.php starting for post with ID' . $post->ID);
 
-$obj = LSECitiesWPTheme\event_programme\prepare_header($post);
+$obj = prepare_header($post);
 
 ?><!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
@@ -120,7 +121,7 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
       // include site-specific header fragment
       if(lc_data('x-site-id') === 'ec2012') {
         locate_template('templates/header/header-ec2012.php', true, true);
-      } elseif(lc_data('x-side-id') === 'rio2013') {
+      } elseif(lc_data('x-site-id') === 'rio2013') {
         locate_template('templates/header/header-rio2013.php', true, true);
       } else {
         locate_template('templates/header/header-default.php', true, true);
