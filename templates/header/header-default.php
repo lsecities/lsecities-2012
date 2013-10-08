@@ -20,7 +20,7 @@
           </a>
           <?php endif; // ($_GET["siteid"] == 'ec2012') ?>
         <?php
-          if(lc_data('urban_age_section')): 
+          if(lc_data('urban_age_section')):
             if($_GET["siteid"] == 'ec2012'): ?>
               <a href="/ua/">
                 <div class='threecol' id='ualogo'><img src="<?php bloginfo('stylesheet_directory'); ?>/images/logos/logo_urbanage_nostrapline_white.png" alt="Urban Age logo"></div>
