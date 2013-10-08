@@ -82,21 +82,35 @@ function prepare_header() {
     // And strip prefix
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2012-london\/site/', '', $obj['level2nav']);
     var_trace($obj['level2nav'], 'header_level2nav', true);
-    /*
-    $obj['level2nav'] = '<li class="page-item page-item-2701 current_page_item"><a href="/">Home</a></li><li class="page_item page-item-2714"><a href="/programme/">Programme</a></li>
-  <li class="page_item page-item-2716"><a href="/speakers/">Speakers</a></li>'; */
+    // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/ec2012.appcache';
     lc_data('site-ec2012', true);
+  } elseif(lc_data('x-site-id') === 'rio2013') {
+    // If we are navigating the Rio 2013 minisite via reverse proxy, display appropriate menu
+    $obj['level1nav'] = '';
+    $class_for_current_page = $post->ID == 5449 ? ' current_page_item' : '';
+    if(!is_user_logged_in()) {
+      // list only the pages we want to show in this menu
+      // $only_include_top_pages_ids = '&include=';
+      // until we have any content, just hide everything
+      $only_include_top_pages_ids = '&include=5449';
+    } else {
+      $only_include_top_pages_ids = '&child_of=5449';
+    }
+    $obj['level2nav'] = '<li class="page-item page-item-5449' . $class_for_current_page . '">' .
+      '<a href="/">Home</a></li>' . 
+      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
+    // And strip prefix
+    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2013-rio\/site/', '', $obj['level2nav']);
+    var_trace($obj['level2nav'], 'header_level2nav', true);
+    // enable appcache manifest, if needed
+    // $appcache_manifest = '/appcache-manifests/rio2013.appcache';
   }
-  
-  // TODO: check this - we shouldn't need it at all
-  /*
-  elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) { // if within Newsletter section, do not populate level2nav
+  /* if within Newsletter section, do not populate level2nav: otherwise,
+     all the children pages will be listd there! */
+  elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) {
     $obj['level2nav'] = '';
-  }
-  */
-  
-  else {
+  } else {
     $include_pages = '617,306,309,311,94,629,3338';
     $obj['level1nav'] = '<li><a href="/" title="Home">Home</a></li>' . wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=&include=' . $include_pages);
   }
