@@ -11,10 +11,6 @@
  * @since LSE Cities 2012 1.4
  */
 ?>
-<?php if(is_user_logged_in() and (is_single() or is_archive())): ?>
-	<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-		<div id="secondary" class="widget-area threecol last" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</div><!-- #secondary -->
-	<?php endif; ?>
+<?php if((is_single() or is_archive())): ?>
+
 <?php endif; ?>

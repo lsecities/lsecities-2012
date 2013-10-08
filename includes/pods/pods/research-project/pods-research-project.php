@@ -4,14 +4,14 @@
 if ( !defined('ABSPATH')) exit;
 
 function pods_prepare_research_project($pod_slug) {
-  $pod = new Pod('research_project');
-  $pod->findRecords(array('where' => "t.slug = '" . $pod_slug . "'"));
+  $pod = pods('research_project');
+  $pod->find(array('where' => "t.slug = '" . $pod_slug . "'"));
 
-  if(!$pod->getTotalRows()) {
+  if(!$pod->total_found()) {
     redirect_to_404();
   }
 
-  $pod->fetchRecord();
+  $pod->fetch();
 
   // for menus etc.
   global $this_pod;
@@ -20,12 +20,12 @@ function pods_prepare_research_project($pod_slug) {
   // prepare array for return data structure
   $obj = array();
 
-  lc_data('META_last_modified', $pod->get_field('modified'));
+  lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX, $TRACE_ENABLED);
+  var_trace('pod_slug: ' . $pod_slug);
 
-  $obj['title'] = $pod->get_field('name');
-  $obj['events_blurb'] = $pod->get_field('events_blurb');
+  $obj['title'] = $pod->field('name');
+  $obj['events_blurb'] = $pod->field('events_blurb');
   
   return $obj;
 }

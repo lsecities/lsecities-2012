@@ -27,21 +27,21 @@ if($TRACE_ENABLED) { error_log('search: ' . $search); }
 $params = array(
   'where' => 't.name LIKE "%' . $search . '%" OR session.speakers.family_name LIKE "%' . $search . '%" OR event.speakers.family_name LIKE "%' . $search . '%"'
 );
-$pod = new Pod('media_item_v0', $params);
+$pod = pods('media_item_v0', $params);
 
 $media_items = array();
 
-while($pod->fetchRecord()) {
+while($pod->fetch()) {
   $media_item = array (
-    'id' => $pod->get_field('slug'),
-    'title' => $pod->get_field('name'),
-    'date' => $pod->get_field('date'),
-    'youtube_uri' => $pod->get_field('youtube_uri'),
-    'video_uri' => $pod->get_field('video_uri'),
-    'audio_uri' => $pod->get_field('audio_uri'),
-    'presentation_uri' => $pod->get_field('presentation_uri'),
-    'tags' => $pod->get_field('tag.name'),
-    'geotags' => $pod->get_field('geotags.name')
+    'id' => $pod->field('slug'),
+    'title' => $pod->field('name'),
+    'date' => $pod->field('date'),
+    'youtube_uri' => $pod->field('youtube_uri'),
+    'video_uri' => $pod->field('video_uri'),
+    'audio_uri' => $pod->field('audio_uri'),
+    'presentation_uri' => $pod->field('presentation_uri'),
+    'tags' => $pod->field('tag.name'),
+    'geotags' => $pod->field('geotags.name')
   );
   array_push($media_items, $media_item);
 }
