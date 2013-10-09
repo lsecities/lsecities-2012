@@ -164,6 +164,11 @@ body.rio2013 {
     margin-bottom: 1em;
   }
   
+  // MONKEYPATCH: this is only needed for tests
+  #content article.sixcol {
+    width: 74.05%;
+  }
+  
   // this is a workaround until we switch to a susy-style grid that does
   // not rely on elements' classes
   [role='main'] {
