@@ -27,7 +27,7 @@ $font-weight: 100;
 }
 
 body.rio2013 {
-  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center / 100% auto rgba(0, 0, 0, 0);
+  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center / auto 100% rgba(0, 0, 0, 0);
   opacity: 0.90;
   color: $text-color;
   font-family: $rio2013-font-family;
