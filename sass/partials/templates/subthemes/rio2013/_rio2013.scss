@@ -33,6 +33,11 @@ body.rio2013 {
   font-family: $rio2013-font-family;
   font-weight: $font-weight;
   
+  // TODO - just for testing: remove following ruleset when done with tests
+  .heading-image {
+    display: none;
+  }
+  
   #mailing-list-subscription {                                                                                                                                          
     display: none;                                                                                                                                                      
   }
