@@ -27,7 +27,7 @@ $font-weight: 100;
 }
 
 body.rio2013 {
-  background-color: $background-color;
+  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed center center / 100% auto rgba(0, 0, 0, 0)
   color: $text-color;
   font-family: $rio2013-font-family;
   font-weight: $font-weight;
@@ -45,6 +45,7 @@ body.rio2013 {
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
+    background: rgba(255, 255, 255, 0.95);
   }
 
   &.page-id-393 { // takeover of frontpage on lsecities.net
@@ -216,7 +217,7 @@ body.rio2013 {
   
   #footer {
     background-color: $header-background-color;
-    background-image: inherit;
+    background-image: none;
     border-top: none;
     
     h1 {
