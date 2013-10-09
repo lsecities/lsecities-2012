@@ -1,3 +1,4 @@
+    <header id='header'>
       <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
       <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%40lsecities&f=realtime">@lsecities</a></span>
 			<div class='row' id='mainmenus'>
@@ -11,3 +12,4 @@
 					</ul>
 				</nav>
 			</div><!-- #mainmenus -->
+    </header><!-- #header -->
