@@ -427,19 +427,19 @@ body ul.publication-side-toc li { line-height: 1.25em; margin-bottom: 0.25em; }
 body .publication-cover { -webkit-box-shadow: 0.3125em 0.3125em 0.1875em #888888; -moz-box-shadow: 0.3125em 0.3125em 0.1875em #888888; box-shadow: 0.3125em 0.3125em 0.1875em #888888; }
 body .article .entry-content.article-text.sidebyside > div { -webkit-column-count: 2; -moz-column-count: 2; -ms-column-count: 2; -o-column-count: 2; column-count: 2; }
 
-body > #container > header { padding-top: 0.75em; }
-body > #container > header nav { color: inherit; }
-body > #container > header nav ul { float: right; }
-body > #container > header #subsitesNavigation { height: 2.90625em; font-size: 0.75em; font-weight: bold; }
-body > #container > header #subsitesNavigation img#lsecitiesSmallLogo { padding: 0.125em 2em 0; margin: 0.125em auto 0; display: block; background-color: #ffffff; -moz-border-radius-topleft: 3px; -webkit-border-top-left-radius: 3px; border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -webkit-border-top-right-radius: 3px; border-top-right-radius: 3px; }
-body > #container > header #subsitesNavigation ul li a { color: #ffffff; }
-body > #container > header #lclogo { height: 4.5em; }
-body > #container > header #ualogo { height: 4.5em; margin-top: 0.166667em; }
-body > #container > header ul { display: inline-block; list-style: none; margin: 0; padding: 0; }
-body > #container > header ul li { display: inline; float: left; }
-body > #container > header ul li a { padding: 0.250em 0.6em 0 0.6em; text-decoration: none; }
-body > #container > header #socialbuttons ul li a { margin: 0 0.3125em; padding: 0; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
-body > #container > header #socialbuttons ul li a:hover { opacity: 0.6; }
+#header { padding-top: 0.75em; }
+#header nav { color: inherit; }
+#header nav ul { float: right; }
+#header #subsitesNavigation { height: 2.90625em; font-size: 0.75em; font-weight: bold; }
+#header #subsitesNavigation img#lsecitiesSmallLogo { padding: 0.125em 2em 0; margin: 0.125em auto 0; display: block; background-color: #ffffff; -moz-border-radius-topleft: 3px; -webkit-border-top-left-radius: 3px; border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -webkit-border-top-right-radius: 3px; border-top-right-radius: 3px; }
+#header #subsitesNavigation ul li a { color: #ffffff; }
+#header #lclogo { height: 4.5em; }
+#header #ualogo { height: 4.5em; margin-top: 0.166667em; }
+#header ul { display: inline-block; list-style: none; margin: 0; padding: 0; }
+#header ul li { display: inline; float: left; }
+#header ul li a { padding: 0.250em 0.6em 0 0.6em; text-decoration: none; }
+#header #socialbuttons ul li a { margin: 0 0.3125em; padding: 0; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
+#header #socialbuttons ul li a:hover { opacity: 0.6; }
 
 #mainmenus { opacity: 1; }
 #mainmenus:hover { opacity: 1; }
@@ -499,14 +499,14 @@ header #socialbuttons ul { height: 16px; }
 #level3nav ul.children { margin-left: 1em; }
 #level3nav #organizer-logos { max-width: 67.7290%; width: 67.7290%; }
 
-footer#footer { font-size: 0.75em; background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; border-top: 1px solid #E5E5E0; margin-top: 20px; padding: 40px; color: #fff; }
-footer#footer h1, footer#footer h2, footer#footer h3, footer#footer h4, footer#footer h5, footer#footer h6 { font-weight: bold; margin-bottom: 0.5em; color: #fff; border-bottom: 1px solid rgba(204, 204, 204, 0.6); font-size: 1em; }
-footer#footer ul { list-style-type: none; margin-bottom: 2em; }
-footer#footer a, footer#footer a:visited, footer#footer a:active { color: #ee2222; }
-footer#footer a:hover { color: #ccc; }
-footer#footer #footerSitemap ul li > ul { margin-top: 0.5em; }
-footer#footer #footerSitemap > .row { margin-bottom: 1.5em; }
-footer#footer #footerSitemap > .row > section > ul li { line-height: 1em; margin-bottom: 0.5em; }
+#footer { font-size: 0.75em; background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; border-top: 1px solid #E5E5E0; margin-top: 20px; padding: 40px; color: #fff; }
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 { font-weight: bold; margin-bottom: 0.5em; color: #fff; border-bottom: 1px solid rgba(204, 204, 204, 0.6); font-size: 1em; }
+#footer ul { list-style-type: none; margin-bottom: 2em; }
+#footer a, #footer a:visited, #footer a:active { color: #ee2222; }
+#footer a:hover { color: #ccc; }
+#footer #footerSitemap ul li > ul { margin-top: 0.5em; }
+#footer #footerSitemap > .row { margin-bottom: 1.5em; }
+#footer #footerSitemap > .row > section > ul li { line-height: 1em; margin-bottom: 0.5em; }
 
 .entry-meta.article-abstract { font-style: italic; }
 
@@ -921,50 +921,55 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { background-color: transparent; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
+body.rio2013 { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center/100% auto rgba(0, 0, 0, 0); opacity: 0.90; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; }
+body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; }
 body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
-body.rio2013 header.entry-header h1 { color: #993300; }
-body.rio2013 header h1, body.rio2013 header h2 { color: #993300; font-weight: bold; font-size: 2em; }
-body.rio2013 #header { position: relative; }
-body.rio2013 #header .twitter-hashtag { position: absolute; top: 30%; line-height: 1em; right: 0; background-color: #eee111; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
-body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: transparent; }
+body.rio2013 header.entry-header h1 { color: #331100; }
+body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
+body.rio2013 #header { background-color: #ffee00; }
+body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
+body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
+body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: #ffee00; }
 body.rio2013 #rio2013title { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 2px; font-size: 3em; margin-bottom: 0.5em; text-transform: uppercase; }
 body.rio2013 #rio2013title a, body.rio2013 #rio2013title a:active, body.rio2013 #rio2013title a:hover, body.rio2013 #rio2013title a:visited { color: black; }
 body.rio2013 #level1nav, body.rio2013 #level2nav { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 1px; }
 body.rio2013 #level2nav { background-color: transparent; }
 body.rio2013 #level2nav ul { float: left; }
-body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #993300; color: #331100; }
+body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #331100; color: #666666; }
 body.rio2013 #level2nav ul li.current, body.rio2013 #level2nav ul li.current_page_item, body.rio2013 #level2nav ul li.current_page_ancestor, body.rio2013 #level2nav ul li.current_page_parent { background-color: inherit; }
-body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_page_item a, body.rio2013 #level2nav ul li.current_page_ancestor a, body.rio2013 #level2nav ul li.current_page_parent a { background-color: inherit; color: #993300; }
-body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #993300; color: #331100; }
-body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #331100; }
-body.rio2013 #level2nav ul li a { padding-left: 0; padding-right: 1em; }
+body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_page_item a, body.rio2013 #level2nav ul li.current_page_ancestor a, body.rio2013 #level2nav ul li.current_page_parent a { background-color: inherit; color: #331100; }
+body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #331100; color: #666666; }
+body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #666666; }
+body.rio2013 #level2nav ul li a { background-color: inherit; color: #331100; padding-left: 0; padding-right: 1em; }
+body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #331100; color: #666666; }
 body.rio2013 #mainmenus { margin-bottom: 1em; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
 body.rio2013 [role='main'] > article.ninecol { width: 100%; }
 body.rio2013 [role='main'], body.rio2013 #main { overflow: visible; }
-body.rio2013 #contentarea .top-content article header h1 { color: #993300; }
+body.rio2013 #contentarea .top-content article header h1 { color: #331100; }
 body.rio2013 #contentarea.ninecol { width: 100%; }
 body.rio2013 #contentarea > h1 { display: none; }
 body.rio2013 .entry-content h1, body.rio2013 .entry-content h2, body.rio2013 .entry-content h3 { font-weight: bold; margin-bottom: 0.5em; }
 body.rio2013 .entry-content ul { margin-bottom: 1em; }
-body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #993300; }
-body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #993300; }
-body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #993300; }
-body.rio2013 a:hover { color: #331100; }
-body.rio2013 footer#footer a, body.rio2013 footer#footer a:visited, body.rio2013 footer#footer a:active { color: #993300; }
-body.rio2013 footer#footer a:hover { color: #331100; }
+body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #331100; }
+body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #331100; }
+body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #331100; }
+body.rio2013 a:hover { color: #666666; }
+body.rio2013 #footer { background-color: #ffee00; background-image: none; border-top: none; }
+body.rio2013 #footer h1 { font-size: 1.4em; font-family: BureauGrotesque-ThreeSeven; text-transform: uppercase; color: black; }
+body.rio2013 #footer a, body.rio2013 #footer a:visited, body.rio2013 #footer a:active { color: #331100; }
+body.rio2013 #footer a:hover { color: #666666; }
 body.rio2013 #navigationarea { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid #993300; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid #331100; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: #993300; background-color: inherit; padding-left: 0; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: #331100; background-color: inherit; padding-left: 0; }
 body.rio2013 .lc-newspaper-article { position: relative; }
 body.rio2013 .lc-newspaper-article header.heading-image { display: none; }
 body.rio2013 .lc-newspaper-article header.entry-header { display: block; }
