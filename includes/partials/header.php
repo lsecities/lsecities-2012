@@ -115,5 +115,10 @@ function prepare_header() {
     $obj['level1nav'] = '<li><a href="/" title="Home">Home</a></li>' . wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=&include=' . $include_pages);
   }
   
+  // set query vars for other partials
+  set_query_var('lc_toplevel_ancestor', $obj['toplevel_ancestor']);
+  set_query_var('lc_level1nav', $obj['level1nav']);
+  set_query_var('lc_level2nav', $obj['level2nav']);
+      
   return $obj;
 }
