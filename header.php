@@ -114,10 +114,6 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
 	<div class='container' id='container'> <!-- ## grid -->
 		<header id='header'>
     <?php
-      // prepare variables for template
-      set_query_var('lc_toplevel_ancestor', $obj['toplevel_ancestor']);
-      set_query_var('lc_level1nav', $obj['level1nav']);
-      set_query_var('lc_level2nav', $obj['level2nav']);
       // include site-specific header fragment
       if(lc_data('x-site-id') === 'ec2012') {
         locate_template('templates/header/header-ec2012.php', true, true);
