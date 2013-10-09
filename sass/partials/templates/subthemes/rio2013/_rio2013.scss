@@ -5,12 +5,14 @@
 @import "compass/css3/transform";
 @import "../../palette";
 
-$background-color: #ffeb00;
+$background-color: transparent;
+$header-background-color: #ffee00;
+$header-text-color: black;
 $text-color: black;
 $link-color: #993300;
 $link-hover-color: darken($link-color, 20%);
 $site-font: BureauGrotesque-ThreeSeven;
-$ec2012-font-family: 'Open Sans', $base-font-family;
+$rio2013-font-family: 'Open Sans', $base-font-family;
 
 @mixin basic-link {
   background-color: inherit;
@@ -22,10 +24,10 @@ $ec2012-font-family: 'Open Sans', $base-font-family;
   color: $link-hover-color;
 }
 
-body.ec2012 {
-  background-color: black;
+body.rio2013 {
+  background-color: $background-color;
   color: $text-color;
-  font-family: $ec2012-font-family;
+  font-family: $rio2013-font-family;
 
   #mailing-list-subscription {                                                                                                                                          
     display: none;                                                                                                                                                      
@@ -83,11 +85,12 @@ body.ec2012 {
     }
   }
   
-  #ec2012title {
+  #rio2013title {
     font-family: $site-font;
     letter-spacing: 2px;
     font-size: 3em;
     margin-bottom: 0.5em;
+    text-transform: uppercase;
     
     a, a:active, a:hover, a:visited {
       color: $text-color;
@@ -97,29 +100,6 @@ body.ec2012 {
   #level1nav, #level2nav {
     font-family: $site-font;
     letter-spacing: 1px;
-  }
-  
-  #level1nav {
-    ul {
-      li {
-        &:hover {
-          background-color: transparent;
-          a, a:active, a:visited {
-            color: $text-color;
-          }
-          a:hover {
-            color: $link-color;
-          }
-        }
-        
-        a, a:active, a:visited {
-          color: $text-color;
-        }
-        a:hover {
-          color: $link-color;
-        }
-      }
-    }
   }
   
   #level2nav {
