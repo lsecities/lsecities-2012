@@ -54,6 +54,8 @@ function prepare_header() {
   if($_GET["siteid"] == 'ec2012') { // we are being called via the ec2012 microsite
     $obj['body_class_extra'] = 'ec2012';
     lc_data('microsite_id', 'ec2012');
+    // TODO: use microsite_id all over, remove site-ec2012
+    lc_data('site-ec2012', true);
   } elseif(lc_data('x-site-id') === 'rio2013') {
     $obj['body_class_extra'] = 'rio2013';
     lc_data('microsite_id', 'rio2013');
@@ -84,7 +86,6 @@ function prepare_header() {
     var_trace($obj['level2nav'], 'header_level2nav', true);
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/ec2012.appcache';
-    lc_data('site-ec2012', true);
   } elseif(lc_data('x-site-id') === 'rio2013') {
     // If we are navigating the Rio 2013 minisite via reverse proxy, display appropriate menu
     $obj['level1nav'] = '';
