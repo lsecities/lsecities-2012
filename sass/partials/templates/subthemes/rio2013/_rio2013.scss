@@ -27,12 +27,12 @@ $font-weight: 100;
 }
 
 body.rio2013 {
-  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed center center / 100% auto rgba(0, 0, 0, 0);
-  opacity: 0.95;
+  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center / 100% auto rgba(0, 0, 0, 0);
+  opacity: 0.90;
   color: $text-color;
   font-family: $rio2013-font-family;
   font-weight: $font-weight;
-
+  
   #mailing-list-subscription {                                                                                                                                          
     display: none;                                                                                                                                                      
   }
@@ -46,7 +46,7 @@ body.rio2013 {
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 1);
   }
 
   &.page-id-393 { // takeover of frontpage on lsecities.net
