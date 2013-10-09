@@ -921,7 +921,8 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center/auto 100% rgba(0, 0, 0, 0); opacity: 0.90; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; }
+body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; }
+body.rio2013::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; opacity: 0.90; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1; }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
