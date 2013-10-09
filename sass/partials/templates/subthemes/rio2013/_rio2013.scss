@@ -70,25 +70,25 @@ body.rio2013 {
   }
   
   #header {
-    position: relative;
     background-color: $header-background-color;
     
     & > div {
+      position: relative;
       @include center960;
     }
     
     .twitter-hashtag {
       position: absolute;
-      top: 30%;
+      top: 10%;
       line-height: 1em;
       right: 0;
-      background-color: #eee111;
+      background-color: #555;
       padding: 0.2em 0.5em;
       border-radius: 0.2em;
       font-weight: bold;
       
       a, a:active, a:visited {
-        color: $background-color;
+        color: $header-background-color;
       }
     }
   }
@@ -142,8 +142,13 @@ body.rio2013 {
       }
       
       li a {
+        @include basic-link;
         padding-left: 0;
         padding-right: 1em;
+        
+        &:hover {
+          @include basic-link-hover;
+        }
       }
     }
   }
