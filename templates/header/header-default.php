@@ -1,3 +1,4 @@
+		<header id='header'>
 			<div class='row'>
 				
           <?php if($_GET["siteid"] == 'ec2012'): ?>
@@ -90,3 +91,4 @@
 					</ul>
 				</nav>
 			</div><!-- #mainmenus -->
+    </header><!-- #header -->
