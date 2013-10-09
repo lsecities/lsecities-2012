@@ -921,10 +921,62 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.site-labs.page-template-default .entry-content ul { list-style-type: disc; padding-left: 25px; }
-
-.site-labs .lc-slider-page .introbox#slidetile-european-metromonitor { background: url("http://lsecities.net/wp-content/themes/lsecities-2012/images/logo_heif5_col.png") no-repeat bottom; background-size: 100% auto; background-color: transparent; }
-.site-labs .lc-slider-page .introbox#slidetile-european-metromonitor .inner-box { color: inherit; }
+body.rio2013 { background-color: transparent; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
+body.rio2013 #mailing-list-subscription { display: none; }
+body.rio2013 .reset-layout { clear: both; overflow: hidden; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; }
+body.rio2013.page-id-393 #container { max-width: inherit; }
+body.rio2013 header.entry-header { display: none; }
+body.rio2013 header.entry-header h1 { color: #993300; }
+body.rio2013 header h1, body.rio2013 header h2 { color: #993300; font-weight: bold; font-size: 2em; }
+body.rio2013 #header { position: relative; }
+body.rio2013 #header .twitter-hashtag { position: absolute; top: 30%; line-height: 1em; right: 0; background-color: #eee111; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
+body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: transparent; }
+body.rio2013 #rio2013title { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 2px; font-size: 3em; margin-bottom: 0.5em; text-transform: uppercase; }
+body.rio2013 #rio2013title a, body.rio2013 #rio2013title a:active, body.rio2013 #rio2013title a:hover, body.rio2013 #rio2013title a:visited { color: black; }
+body.rio2013 #level1nav, body.rio2013 #level2nav { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 1px; }
+body.rio2013 #level2nav { background-color: transparent; }
+body.rio2013 #level2nav ul { float: left; }
+body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #993300; color: #331100; }
+body.rio2013 #level2nav ul li.current, body.rio2013 #level2nav ul li.current_page_item, body.rio2013 #level2nav ul li.current_page_ancestor, body.rio2013 #level2nav ul li.current_page_parent { background-color: inherit; }
+body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_page_item a, body.rio2013 #level2nav ul li.current_page_ancestor a, body.rio2013 #level2nav ul li.current_page_parent a { background-color: inherit; color: #993300; }
+body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #993300; color: #331100; }
+body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #331100; }
+body.rio2013 #level2nav ul li a { padding-left: 0; padding-right: 1em; }
+body.rio2013 #mainmenus { margin-bottom: 1em; }
+body.rio2013 [role='main'] { padding-bottom: 10em; }
+body.rio2013 [role='main'] > article.ninecol { width: 100%; }
+body.rio2013 [role='main'], body.rio2013 #main { overflow: visible; }
+body.rio2013 #contentarea .top-content article header h1 { color: #993300; }
+body.rio2013 #contentarea.ninecol { width: 100%; }
+body.rio2013 #contentarea > h1 { display: none; }
+body.rio2013 .entry-content h1, body.rio2013 .entry-content h2, body.rio2013 .entry-content h3 { font-weight: bold; margin-bottom: 0.5em; }
+body.rio2013 .entry-content ul { margin-bottom: 1em; }
+body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #993300; }
+body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #993300; }
+body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #993300; }
+body.rio2013 a:hover { color: #331100; }
+body.rio2013 footer#footer a, body.rio2013 footer#footer a:visited, body.rio2013 footer#footer a:active { color: #993300; }
+body.rio2013 footer#footer a:hover { color: #331100; }
+body.rio2013 #navigationarea { display: none; }
+body.rio2013 .lc-publication #share-on-social-media { display: none; }
+body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
+body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid #993300; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: #993300; background-color: inherit; padding-left: 0; }
+body.rio2013 .lc-newspaper-article { position: relative; }
+body.rio2013 .lc-newspaper-article header.heading-image { display: none; }
+body.rio2013 .lc-newspaper-article header.entry-header { display: block; }
+body.rio2013 .lc-newspaper-article #navigationarea { position: absolute; top: 0; right: 0; z-index: 3; display: inherit; }
+body.rio2013 .lc-newspaper-article #navigationarea img.show, body.rio2013 .lc-newspaper-article #navigationarea img.hide { position: absolute; z-index: 4; right: 0; display: none; }
+body.rio2013 .lc-newspaper-article #navigationarea img.show { display: inline; }
+body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc { display: none; position: absolute; right: 15px; background: #EEE111; padding: 1em; width: 300px; top: -22px; z-index: 3; }
+body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1, body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc li, body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc a, body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc a:hover, body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc a:active, body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc a:visited { color: black; }
+body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc ul li { margin-bottom: 1em; }
+body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1 { font-weight: bold; font-size: 1.5em; }
+body.rio2013 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
+body.rio2013 #un-button { display: none; }
 
 /*/mediaquery*/
 /*/mediaquery*/
@@ -943,6 +995,16 @@ body.site-labs.page-template-default .entry-content ul { list-style-type: disc; 
 @media only screen and (max-width: 768px) { body.ec2012 .lc-newspaper-article #navigationarea { position: static; }
   body.ec2012 .lc-newspaper-article #navigationarea .hide, body.ec2012 .lc-newspaper-article #navigationarea .show { display: none !important; }
   body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc { position: static; display: block; } }
+/*/mediaquery*/
+/*
+@media print { @include media-print;
+}
+*/
+/*/mediaquery*/
+/*/mediaquery*/
+@media only screen and (max-width: 768px) { body.rio2013 .lc-newspaper-article #navigationarea { position: static; }
+  body.rio2013 .lc-newspaper-article #navigationarea .hide, body.rio2013 .lc-newspaper-article #navigationarea .show { display: none !important; }
+  body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc { position: static; display: block; } }
 /*/mediaquery*/
 /*
 @media print { @include media-print;
