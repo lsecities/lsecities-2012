@@ -42,7 +42,9 @@ function pods_prepare_slider($pod_slug) {
     $obj['slides'][] = compose_slide($slide['slug']);
   }
   
-  $obj['linked_events'] = sort_linked_field($pod->field('linked_events'), 'date_start', SORT_DESC);
+  if(count($pod->field('linked_events') > 0)) {
+    $obj['linked_events'] = sort_linked_field($pod->field('linked_events'), 'date_start', SORT_DESC);
+  }
   
   return $obj;
 }
