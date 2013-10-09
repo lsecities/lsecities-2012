@@ -3,6 +3,7 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
+@import "../../../mixins";
 @import "../../palette";
 
 $background-color: black;
@@ -37,9 +38,7 @@ body.ec2012 {
   }
   
   #container {
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+    @include center960;
   }
 
   &.page-id-393 { // takeover of frontpage on lsecities.net

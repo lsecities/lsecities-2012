@@ -3,16 +3,18 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
+@import "../../../mixins";
 @import "../../palette";
 
 $background-color: transparent;
 $header-background-color: #ffee00;
 $header-text-color: black;
 $text-color: black;
-$link-color: #993300;
-$link-hover-color: darken($link-color, 20%);
+$link-color: #331100;
+$link-hover-color: #666;
 $site-font: BureauGrotesque-ThreeSeven;
 $rio2013-font-family: 'Open Sans', $base-font-family;
+$font-weight: 100;
 
 @mixin basic-link {
   background-color: inherit;
@@ -28,6 +30,7 @@ body.rio2013 {
   background-color: $background-color;
   color: $text-color;
   font-family: $rio2013-font-family;
+  font-weight: $font-weight;
 
   #mailing-list-subscription {                                                                                                                                          
     display: none;                                                                                                                                                      
@@ -68,6 +71,7 @@ body.rio2013 {
   
   #header {
     position: relative;
+    @include center960;
     
     .twitter-hashtag {
       position: absolute;
