@@ -947,6 +947,7 @@ body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.cur
 body.rio2013 #level2nav ul li a { background-color: inherit; color: #331100; padding-left: 0; padding-right: 1em; }
 body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #331100; color: #666666; }
 body.rio2013 #mainmenus { margin-bottom: 1em; }
+body.rio2013 #content article.sixcol { width: 74.05%; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
 body.rio2013 [role='main'] > article.ninecol { width: 100%; }
 body.rio2013 [role='main'], body.rio2013 #main { overflow: visible; }
