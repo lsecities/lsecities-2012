@@ -71,7 +71,11 @@ body.rio2013 {
   
   #header {
     position: relative;
-    @include center960;
+    background-color: $header-background-color;
+    
+    & > div {
+      @include center960;
+    }
     
     .twitter-hashtag {
       position: absolute;
@@ -205,8 +209,18 @@ body.rio2013 {
     color: $link-hover-color;
   }
   
-  footer#footer {
-  
+  #footer {
+    background-color: $header-background-color;
+    background-image: inherit;
+    border-top: none;
+    
+    h1 {
+      font-size: 1.4em;
+      font-family: $site-font;
+      text-transform: uppercase;
+      color: black;
+    }
+    
     a, a:visited, a:active {
       color: $link-color;
     }
