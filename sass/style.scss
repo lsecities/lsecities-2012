@@ -47,9 +47,12 @@
 @import "partials/templates/publication";
 @import "partials/templates/researchproject";
 @import "partials/templates/slider";
-@import "partials/templates/subthemes/electric-city-2012";
-@import "partials/templates/subthemes/labs/eumm";
 
-// Media should come last
+// Microsites
+@import "partials/templates/subthemes/ec2012/electric-city-2012";
+@import "partials/templates/subthemes/rio2013/rio2013";
+
+// Media queries should be imported last
 @import "partials/media";
 @import "partials/templates/subthemes/electric-city-2012-mediaqueries";
+@import "partials/templates/subthemes/rio2013/rio2013-mediaqueries";
