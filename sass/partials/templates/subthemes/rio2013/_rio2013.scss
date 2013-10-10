@@ -35,6 +35,7 @@ body.rio2013 {
   // full screen photo background
   // credits: http://css-tricks.com/perfect-full-page-background-image/,
   // http://css-tricks.com/snippets/css/transparent-background-images/
+  /*
   &::after {
     background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed;
     @include background-size(cover);
@@ -47,6 +48,7 @@ body.rio2013 {
     content: "";
     z-index: -1;
   }
+  */
   
   // TODO - just for testing: remove following ruleset when done with tests
   .heading-image {
