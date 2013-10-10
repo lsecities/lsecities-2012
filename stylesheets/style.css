@@ -921,8 +921,10 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; }
-body.rio2013::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; opacity: 0.90; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1; }
+body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; /*
+&::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
+}
+*/ }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
@@ -931,6 +933,7 @@ body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
 body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
+body.rio2013 #header, body.rio2013 #footer { opacity: 0.90; }
 body.rio2013 #header { background-color: #ffee00; }
 body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
 body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
