@@ -925,6 +925,8 @@ body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open
 &::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
 }
 */ }
+body.rio2013 .full-background-photo { position: fixed; height: 100%; width: 100%; z-index: -1; }
+body.rio2013 .full-background-photo > img { display: block; width: 100%; margin-left: auto; margin-right: auto; }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }

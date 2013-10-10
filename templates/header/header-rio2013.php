@@ -1,4 +1,4 @@
-    <div id="background-photo"><img src="http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg"></div>
+    <div class="full-background-photo"><img src="http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg"></div>
     <header id='header'>
       <div>
         <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
