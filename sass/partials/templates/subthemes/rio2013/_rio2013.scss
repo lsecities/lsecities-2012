@@ -27,11 +27,26 @@ $font-weight: 100;
 }
 
 body.rio2013 {
-  background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat fixed top center / auto 100% rgba(0, 0, 0, 0);
-  opacity: 0.90;
+  position: relative;
   color: $text-color;
   font-family: $rio2013-font-family;
   font-weight: $font-weight;
+
+  // full screen photo background
+  // credits: http://css-tricks.com/perfect-full-page-background-image/,
+  // http://css-tricks.com/snippets/css/transparent-background-images/
+  &::after {
+    background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed;
+    @include background-size(cover);
+    opacity: 0.80;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    z-index: -1;
+  }
   
   // TODO - just for testing: remove following ruleset when done with tests
   .heading-image {
@@ -74,6 +89,10 @@ body.rio2013 {
       font-weight: bold;
       font-size: 2em;
     }
+  }
+  
+  #header, #footer {
+    opacity: 0.90;
   }
   
   #header {
