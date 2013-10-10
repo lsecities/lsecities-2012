@@ -921,22 +921,23 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; /*
+body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; /*
 &::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
 }
 */ }
-body.rio2013 .full-background-photo { position: fixed; height: 100%; width: 100%; z-index: -1; }
-body.rio2013 .full-background-photo > img { display: block; width: 100%; margin-left: auto; margin-right: auto; }
+body.rio2013 .full-background-photo { position: fixed; height: 100%; width: 100%; z-index: -1; background-color: #555; pointer-events: auto; }
+body.rio2013 .full-background-photo > img { display: block; width: 100%; margin-left: auto; margin-right: auto; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='0.97'/></filter></svg>#grayscale"); /* Firefox 10+ */ filter: gray alpha(opacity=97); /* IE6-9 */ -webkit-filter: grayscale(97%); /* Chrome 19+ & Safari 6+ */ -webkit-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease; -webkit-transition-delay: 0s, 0s, 2s; -moz-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; -o-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; /* Fade to color for Chrome and Safari */ -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
+body.rio2013 .full-background-photo > img:hover { filter: none; -webkit-filter: grayscale(0%); -webkit-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease; -webkit-transition-delay: 2s, 2s, 0s; -moz-transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; -o-transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; opacity: 1; }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; }
 body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
 body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
 body.rio2013 #header, body.rio2013 #footer { opacity: 0.90; }
-body.rio2013 #header { background-color: #ffee00; }
+body.rio2013 #header { background-color: #ffee00; pointer-events: auto; }
 body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
 body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
 body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: #ffee00; }
@@ -966,7 +967,7 @@ body.rio2013 .entry-content section > header, body.rio2013 .extra-content > sect
 body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #331100; }
 body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #331100; }
 body.rio2013 a:hover { color: #666666; }
-body.rio2013 #footer { background-color: #ffee00; background-image: none; border-top: none; }
+body.rio2013 #footer { background-color: #ffee00; background-image: none; border-top: none; pointer-events: auto; }
 body.rio2013 #footer h1 { font-size: 1.4em; font-family: BureauGrotesque-ThreeSeven; text-transform: uppercase; color: black; }
 body.rio2013 #footer a, body.rio2013 #footer a:visited, body.rio2013 #footer a:active { color: #331100; }
 body.rio2013 #footer a:hover { color: #666666; }
