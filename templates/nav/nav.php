@@ -26,7 +26,7 @@ var_trace(var_export($ancestors, true), $TRACE_PREFIX . 'ancestors: ');
 var_trace(var_export($pods_toplevel_ancestor, true), $TRACE_PREFIX . 'pods_toplevel_ancestor: ');
 ?>
 
-<?php if(!lc_data('site-ec2012')): ?>
+<?php if(! ec2012 === lc_data('microsite_id')): ?>
 <div class="wireframe threecol last" id="navigationarea">
 
 <?php
@@ -122,7 +122,7 @@ get_template_part('templates/nav/nav', 'mailing-list-subscription');
 endif; // (is_single() or is_archive())
 ?>
 </div>
-<?php else: // (!lc_data('site-ec2012')) ?>
+<?php else: // (! ec2012 === lc_data('microsite_id')) ?>
 <div class="wireframe threecol last" id="navigationarea">
 <?php
 if(lc_data('pods_toplevel_ancestor') === 309) {
@@ -130,4 +130,4 @@ if(lc_data('pods_toplevel_ancestor') === 309) {
   $nav_generated = true;
 } ?>
 </div>
-<?php endif; // (!lc_data('site-ec2012')) ?>
+<?php endif; // (! ec2012 === lc_data('microsite_id'))) ?>
