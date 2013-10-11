@@ -3,13 +3,14 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
+@import "compass/css3/filter";
 @import "../../../mixins";
 @import "../../palette";
 
 $background-color: transparent;
 $header-background-color: #ffee00;
 $header-text-color: black;
-$menu-current-background-color: rgba(33,33,33,0.5)
+$menu-current-background-color: rgba(33,33,33,0.5);
 $menu-current-color: $header-background-color;
 $text-color: black;
 $link-color: #331100;
@@ -70,17 +71,14 @@ body.rio2013 {
     background-color: #555;
     pointer-events: auto;
     
-    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'saturate\' values=\'0.97\'/></filter></svg>#grayscale"); /* Firefox 10+ */
-    filter: gray alpha(opacity=97); /* IE6-9 */
-    -webkit-filter: grayscale(97%); /* Chrome 19+ & Safari 6+ */
-    @include transition(filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s); /* Fade to color for Chrome and Safari */
+    @include filter(grayscale(97%) blur(2px));
+    @include transition(all 5s ease);
     -webkit-backface-visibility: hidden; /* Fix for transition flickering */
     opacity: 0.2;
     
     &:hover {
-      filter: none;
-      -webkit-filter: grayscale(0%);
-      @include transition(filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease);
+      @include filter(grayscale(0%) blur(0));
+      @include transition(all 5s ease);
       opacity: 1;
     }
   }
@@ -188,10 +186,23 @@ body.rio2013 {
     
     ul {
       float: left;
-
+      
       li {
-        a:hover {
-          @include basic-link-hover;
+        @include transition(background-color 0.3s ease);
+        a {
+          @include basic-link;
+          padding: 0 0.6em;
+          @include transition(color 0.3s ease);
+        }
+      }
+
+      li:hover {
+        background: fade-in($menu-current-background-color, 0.1);
+        @include transition(background-color 0.3s ease);
+        
+        a {
+          color: lighten($menu-current-color, 10%);
+          @include transition(color 0.3s ease);
         }
       }
       
@@ -210,19 +221,10 @@ body.rio2013 {
         &:hover {
           a {
             background-color: inherit;
-            color: $link-hover-color;
+            color: $menu-current-color;
           }
         }
-      }
-      
-      li a {
-        @include basic-link;
-        padding: 0 0.6em;
-        
-        &:hover {
-          @include basic-link-hover;
-        }
-      }
+      }      
     }
   }
   
