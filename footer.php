@@ -45,12 +45,12 @@
           <ul>
             <?php wp_list_pages('title_li=&depth=1&child_of=94&sort_column=menu_order&sort_order=ASC&echo=1'); ?>
           </ul>
-          <?php if(lc_data('site-ec2012')): ?>
+          <?php if(lc_data('microsite_id') === 'ec2012' or lc_data('microsite_id') === 'rio2013'): ?>
           <h1>Conferences</h1>
           <ul>
             <?php wp_list_pages('title_li=&depth=1&child_of=96&sort_column=menu_order&sort_order=ASC&echo=1'); ?>
           </ul>          
-          <?php endif; // (lc_data('site-ec2012')) ?>
+          <?php endif; // (lc_data('microsite_id') === 'ec2012' or lc_data('microsite_id') === 'rio2013') ?>
         </div>
         <div class="twocol">
           <?php get_template_part('templates/partials/organizers'); ?>
