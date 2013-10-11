@@ -186,7 +186,7 @@ function compose_slide_content($column_spans, $tiles) {
           'plain_content' => $tile->field('plain_content'),
           'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
-          'image' => pods_image_url($tile->field('image'), 'original'),
+          'image' => pods_image_url($tile->field('image.ID'), 'original'),
           'image_attribution' => $image_attribution,
           'target_event' => array(
             'month' => $target_event_month,
