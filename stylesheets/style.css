@@ -925,13 +925,14 @@ body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open
 &::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
 }
 */ }
-body.rio2013 .full-background-photo { position: fixed; height: 100%; width: 100%; z-index: -1; background-color: #555; pointer-events: auto; }
-body.rio2013 .full-background-photo > img { display: block; width: 100%; margin-left: auto; margin-right: auto; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='0.97'/></filter></svg>#grayscale"); /* Firefox 10+ */ filter: gray alpha(opacity=97); /* IE6-9 */ -webkit-filter: grayscale(97%); /* Chrome 19+ & Safari 6+ */ -webkit-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease; -webkit-transition-delay: 0s, 0s, 2s; -moz-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; -o-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease 2s; /* Fade to color for Chrome and Safari */ -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
-body.rio2013 .full-background-photo > img:hover { filter: none; -webkit-filter: grayscale(0%); -webkit-transition: filter 5s ease, -webkit-filter 5s ease, opacity 5s ease; -webkit-transition-delay: 2s, 2s, 0s; -moz-transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; -o-transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; transition: filter 5s ease 2s, -webkit-filter 5s ease 2s, opacity 5s ease; opacity: 1; }
+body.rio2013 .full-background-photo { /* Set rules to fill background */ min-height: 100%; min-width: 1024px; /* Set up proportionate scaling */ width: 100%; height: auto; /* Set up positioning */ position: fixed; top: 0; left: 0; background-color: #555; pointer-events: auto; -webkit-filter: grayscale(97%) blur(2px); -moz-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
+body.rio2013 .full-background-photo:hover { -webkit-filter: grayscale(0%), blur(0); -moz-filter: grayscale(0%), blur(0); filter: grayscale(0%), blur(0); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
+@media screen and (max-width: 1024px) { body.rio2013 { /* Specific to this particular image */ }
+  body.rio2013 img.bg { left: 50%; margin-left: -512px; /* 50% */ } }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; }
 body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
@@ -943,16 +944,17 @@ body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-heigh
 body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: #ffee00; }
 body.rio2013 #rio2013title { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 2px; font-size: 3em; margin-bottom: 0.5em; text-transform: uppercase; }
 body.rio2013 #rio2013title a, body.rio2013 #rio2013title a:active, body.rio2013 #rio2013title a:hover, body.rio2013 #rio2013title a:visited { color: black; }
-body.rio2013 #level1nav, body.rio2013 #level2nav { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 1px; }
+body.rio2013 #level1nav, body.rio2013 #level2nav { font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; letter-spacing: 1px; }
 body.rio2013 #level2nav { background-color: transparent; }
 body.rio2013 #level2nav ul { float: left; }
-body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #331100; color: #666666; }
-body.rio2013 #level2nav ul li.current, body.rio2013 #level2nav ul li.current_page_item, body.rio2013 #level2nav ul li.current_page_ancestor, body.rio2013 #level2nav ul li.current_page_parent { background-color: inherit; }
-body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_page_item a, body.rio2013 #level2nav ul li.current_page_ancestor a, body.rio2013 #level2nav ul li.current_page_parent a { background-color: inherit; color: #331100; }
+body.rio2013 #level2nav ul li { -webkit-transition: background-color 0.3s ease; -moz-transition: background-color 0.3s ease; -o-transition: background-color 0.3s ease; transition: background-color 0.3s ease; }
+body.rio2013 #level2nav ul li a { background-color: inherit; color: #331100; padding: 0 0.6em; -webkit-transition: color 0.3s ease; -moz-transition: color 0.3s ease; -o-transition: color 0.3s ease; transition: color 0.3s ease; }
+body.rio2013 #level2nav ul li:hover { background: rgba(33, 33, 33, 0.6); -webkit-transition: background-color 0.3s ease; -moz-transition: background-color 0.3s ease; -o-transition: background-color 0.3s ease; transition: background-color 0.3s ease; }
+body.rio2013 #level2nav ul li:hover a { color: #fff133; -webkit-transition: color 0.3s ease; -moz-transition: color 0.3s ease; -o-transition: color 0.3s ease; transition: color 0.3s ease; }
+body.rio2013 #level2nav ul li.current, body.rio2013 #level2nav ul li.current_page_item, body.rio2013 #level2nav ul li.current_page_ancestor, body.rio2013 #level2nav ul li.current_page_parent { background-color: rgba(33, 33, 33, 0.5); -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; }
+body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_page_item a, body.rio2013 #level2nav ul li.current_page_ancestor a, body.rio2013 #level2nav ul li.current_page_parent a { color: #ffee00; }
 body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #331100; color: #666666; }
-body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #666666; }
-body.rio2013 #level2nav ul li a { background-color: inherit; color: #331100; padding-left: 0; padding-right: 1em; }
-body.rio2013 #level2nav ul li a:hover { background-color: inherit; color: #331100; color: #666666; }
+body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #ffee00; }
 body.rio2013 #mainmenus { margin-bottom: 1em; }
 body.rio2013 #content article.sixcol { width: 74.05%; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
