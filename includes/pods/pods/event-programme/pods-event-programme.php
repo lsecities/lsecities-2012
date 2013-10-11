@@ -83,11 +83,16 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   /**
    * Recursively process subsessions. HSL.
    */
+  var_trace($pod->field('sessions'), 'event programme - sessions');
+  var_trace(count($pod->field('sessions'), 'count of sessions'));
+  
   $session_fields = sort_linked_field($pod->field('sessions'), 'sequence', SORT_ASC);
-  foreach($session_fields as $session_field) {
-    $sessions[] = $session_field['slug'];
+  if($session_fields) {
+    foreach($session_fields as $session_field) {
+      $sessions[] = $session_field['slug'];
+    }
   }
-
+  
   var_trace(count($subsessions), 'session count');
   var_trace(var_export($subsessions, true), 'sessions');
 

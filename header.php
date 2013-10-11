@@ -6,79 +6,13 @@
  *
  * @package LSECities2012
  */
-?><?php
+namespace LSECitiesWPTheme\page_header;
+
 $TRACE_ENABLED = is_user_logged_in();
 var_trace('header.php starting for post with ID' . $post->ID);
 
-$ancestors = get_ancestors($post->ID, 'page');
-array_unshift($ancestors, $post->ID);
-$pods_toplevel_ancestor = lc_data('pods_toplevel_ancestor');
-$toplevel_ancestor = array_pop($ancestors);
+$obj = prepare_header($post);
 
-// co-branding: check the X-Site-Id HTTP header from frontend cache
-$http_req_headers = getallheaders();
-if($http_req_headers["X-Site-Id"] == 'ec2012') {
-  lc_data('x-site-id', 'ec2012');
-}
-
-if($_GET["siteid"] == 'ec2012') { // we are being called via the ec2012 microsite
-  $body_class_extra = 'ec2012';
-  lc_data('microsite_id', 'ec2012');
-} elseif($_GET["siteid"] == 'labs' or $post->ID == 2481 or in_array(2481, $post->ancestors)) { // we are being called via the Cities and the crisis microsite
-  $body_class_extra = 'site-labs';
-  lc_data('microsite_id', 'labs');
-}
-
-// If we are on the root frontpage ('/', page ID 393), set ancestor to nil
-if($toplevel_ancestor == 393) { $toplevel_ancestor = null; }
-
-// If we are processing a Pods page for the Article pod, manually set our current position
-if($pods_toplevel_ancestor) { $toplevel_ancestor = $pods_toplevel_ancestor; }
-
-var_trace(var_export($ancestors, true), 'ancestors (array)');
-var_trace($ancestors[0], 'ancestor[0]');
-var_trace($toplevel_ancestor, 'toplevel_ancestor');
-
-$level2nav = wp_list_pages('child_of=' . $toplevel_ancestor . '&depth=1&sort_column=menu_order&title_li=&echo=0');
-
-// check if we are in the Urban Age section
-lc_data('urban_age_section', ($toplevel_ancestor == 94) ? true : false);
-$logo_element_id = lc_data('urban_age_section') ? 'ualogo' : 'logo';
-
-if($post->ID == 2481 or in_array(2481, $post->ancestors)) { // Labs
-  // If we are navigating the Labs minisite via reverse proxy, display appropriate menu
-  $level1nav = '<li><a href="/labs/eumm/" title="Home">European Metromonitor</a></li>';
-  $level2nav = wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=&child_of=' . '2481');
-  var_trace($level2nav, 'level2nav in Labs section');
-  // And strip prefix
-  // $level2nav = hide_lsecities_page_hierarchy_in_labs_links($level2nav);
-  lc_data('site-labs', true);
-} elseif(lc_data('x-site-id') === 'ec2012') { // Electric City conference minisite
-  // If we are navigating the EC2012 minisite via reverse proxy, display appropriate menu
-  $level1nav = '';
-  $class_for_current_page = $post->ID == 2701 ? ' current_page_item' : '';
-  if(!is_user_logged_in()) {
-    $only_include_top_pages_ids = '&include=2714,2716,3288,3290,3294,2949,3160,3098';
-  } else {
-    $only_include_top_pages_ids = '&child_of=2701';
-  }
-  $level2nav = '<li class="page-item page-item-2701' . $class_for_current_page . '">' .
-    '<a href="/">Home</a></li>' . 
-    wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
-  // And strip prefix
-  $level2nav = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2012-london\/site/', '', $level2nav);
-  var_trace($level2nav, 'header_level2nav', true);
-  /*
-  $level2nav = '<li class="page-item page-item-2701 current_page_item"><a href="/">Home</a></li><li class="page_item page-item-2714"><a href="/programme/">Programme</a></li>
-<li class="page_item page-item-2716"><a href="/speakers/">Speakers</a></li>'; */
-  // $appcache_manifest = '/appcache-manifests/ec2012.appcache';
-  lc_data('site-ec2012', true);
-} elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) { // if within Newsletter section, do not populate level2nav
-  $level2nav = '';
-} else {
-  $include_pages = '617,306,309,311,94,629,3338';
-  $level1nav = '<li><a href="/" title="Home">Home</a></li>' . wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=&include=' . $include_pages);
-}
 ?><!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
@@ -166,13 +100,12 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
 </script>
 </head>
 
-<body <?php body_class($body_class_extra); ?>>
+<body <?php body_class($obj['body_class_extra']); ?>>
 
     <!--[if lt IE 9 ]>
       <p class='flash top chromeframe'>
         You are using an outdated browser.
-        <a href="http://browsehappy.com/">Upgrade your browser today</a> or
-        <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+        <a href="http://browsehappy.com/">Upgrade your browser today</a>
         to better experience this site.
       </p>
     <![endif]-->
@@ -185,12 +118,7 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
 ?>
 
 	<div class='container' id='container'> <!-- ## grid -->
-		<header id='header'>
     <?php
-      // prepare variables for template
-      set_query_var('lc_toplevel_ancestor', $toplevel_ancestor);
-      set_query_var('lc_level1nav', $level1nav);
-      set_query_var('lc_level2nav', $level2nav);
       // include site-specific header fragment
       if(lc_data('x-site-id') === 'ec2012') {
         locate_template('templates/partials/header/header-ec2012.php', true, true);
@@ -198,6 +126,5 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
         locate_template('templates/partials/header/header-default.php', true, true);
       }
     ?>
-	  </header><!-- #header -->
 
 	<div id="main" class="row">

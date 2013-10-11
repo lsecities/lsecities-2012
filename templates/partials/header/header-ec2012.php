@@ -1,3 +1,4 @@
+    <header id='header'>
       <h1 id="ec2012title" class='row'><a href="/">The Electric City</a></h1>
       <span class="twitter-hashtag"><a href="https://twitter.com/search/realtime?q=%23UAelectric">#UAelectric</a></span>
 			<div class='row' id='mainmenus'>
@@ -11,3 +12,4 @@
 					</ul>
 				</nav>
 			</div><!-- #mainmenus -->
+    </header><!-- #header -->
