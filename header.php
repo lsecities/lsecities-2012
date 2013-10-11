@@ -177,6 +177,13 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
       </p>
     <![endif]-->
 
+<?php
+  // for rio2013 microsite, we need a full-frame header: outside of #container
+  if(lc_data('x-site-id') === 'rio2013') {
+    locate_template('templates/partials/header/header-rio2013.php', true, true);
+  }
+?>
+
 	<div class='container' id='container'> <!-- ## grid -->
 		<header id='header'>
     <?php
@@ -186,9 +193,9 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
       set_query_var('lc_level2nav', $level2nav);
       // include site-specific header fragment
       if(lc_data('x-site-id') === 'ec2012') {
-        locate_template('templates/header/header-ec2012.php', true, true);
-      } else {
-        locate_template('templates/header/header-default.php', true, true);
+        locate_template('templates/partials/header/header-ec2012.php', true, true);
+      } elseif(lc_data('x-site-id') == NULL) {
+        locate_template('templates/partials/header/header-default.php', true, true);
       }
     ?>
 	  </header><!-- #header -->
