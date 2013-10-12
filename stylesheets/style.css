@@ -962,8 +962,8 @@ body.rio2013 #contentarea.ninecol { width: 100%; }
 body.rio2013 #contentarea > h1 { display: none; }
 body.rio2013 .entry-content h1, body.rio2013 .entry-content h2, body.rio2013 .entry-content h3 { font-weight: bold; margin-bottom: 0.5em; }
 body.rio2013 .entry-content ul { margin-bottom: 1em; }
-body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #331100; }
-body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #331100; }
+body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #ffee00; }
+body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: black; background-color: #ffee00; font-family: BureauGrotesque-ThreeSeven; text-transform: uppercase; }
 body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #331100; }
 body.rio2013 a:hover { color: #666666; }
 body.rio2013 #footer { background-color: #ffee00; background-image: none; border-top: none; pointer-events: auto; }
@@ -974,9 +974,9 @@ body.rio2013 #navigationarea { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid #331100; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid black; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: #331100; background-color: inherit; padding-left: 0; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: black; background-color: inherit; padding-left: 0; }
 body.rio2013 .lc-newspaper-article { position: relative; }
 body.rio2013 .lc-newspaper-article header.heading-image { display: none; }
 body.rio2013 .lc-newspaper-article header.entry-header { display: block; }
