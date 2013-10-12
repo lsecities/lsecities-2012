@@ -921,12 +921,9 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; /*
-&::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
-}
-*/ }
+body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; }
 body.rio2013 .full-background-photo { /* Set rules to fill background */ min-height: 100%; min-width: 1024px; /* Set up proportionate scaling */ width: 100%; height: auto; /* Set up positioning */ position: fixed; top: 0; left: 0; background-color: #555; pointer-events: auto; -webkit-filter: grayscale(97%) blur(2px); -moz-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
-body.rio2013 .full-background-photo:hover { -webkit-filter: grayscale(0%), blur(0); -moz-filter: grayscale(0%), blur(0); filter: grayscale(0%), blur(0); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
+body.rio2013 .full-background-photo:hover { -webkit-filter: grayscale(0%) blur(0); -moz-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
 @media screen and (max-width: 1024px) { body.rio2013 { /* Specific to this particular image */ }
   body.rio2013 img.bg { left: 50%; margin-left: -512px; /* 50% */ } }
 body.rio2013 .heading-image { display: none; }
@@ -1016,6 +1013,8 @@ body.rio2013 #un-button { display: none; }
 }
 */
 /*/mediaquery*/
+/*/mediaquery*/
+@media only screen and (max-width: 1024px) { body.rio2013 .full-background-photo { display: none; } }
 /*/mediaquery*/
 @media only screen and (max-width: 768px) { body.rio2013 .lc-newspaper-article #navigationarea { position: static; }
   body.rio2013 .lc-newspaper-article #navigationarea .hide, body.rio2013 .lc-newspaper-article #navigationarea .show { display: none !important; }
