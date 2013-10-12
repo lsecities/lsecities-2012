@@ -18,6 +18,14 @@
   }
 }/*/mediaquery*/
 
+@media only screen and (max-width: 1024px) {
+  body.rio2013 {
+    .full-background-photo {
+      display: none;
+    }
+  }
+}/*/mediaquery*/
+
 @media only screen and (max-width: 768px) {
   // Style adjustments for viewports 768px and less go here
   body.rio2013 {
