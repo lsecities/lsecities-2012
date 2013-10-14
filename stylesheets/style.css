@@ -974,6 +974,7 @@ body.rio2013 #navigationarea { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
+body.rio2013 .lc-event-programme .entry-content .session a { color: #222; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid black; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: black; background-color: inherit; padding-left: 0; }
@@ -988,6 +989,7 @@ body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1, bod
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc ul li { margin-bottom: 1em; }
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1 { font-weight: bold; font-size: 1.5em; }
 body.rio2013 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
+body.rio2013 .lc-event-speaker-list .speaker-card a, body.rio2013 .lc-event-speaker-list .speaker-card a:active, body.rio2013 .lc-event-speaker-list .speaker-card a:hover, body.rio2013 .lc-event-speaker-list .speaker-card a:visited { color: #ffee00; font-weight: bold; }
 body.rio2013 #un-button { display: none; }
 
 /*/mediaquery*/
