@@ -78,8 +78,10 @@ function pods_prepare_conference($pod_slug) {
     array_multisort($conference_menu, SORT_ASC, $button_links);
   }
   // add the conference homepage itself
-  if($pod->field('conference_wp_page.slug')) {
-    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod->field('conference_wp_page.slug')));
+  if($pod->field('conference_wp_page.post_name')) {
+    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod->field('conference_wp_page.post_name')));
+  } else {
+    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod_slug));
   }
   $obj['button_links'] = $button_links;
   
