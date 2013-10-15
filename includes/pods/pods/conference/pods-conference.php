@@ -78,7 +78,9 @@ function pods_prepare_conference($pod_slug) {
     array_multisort($conference_menu, SORT_ASC, $button_links);
   }
   // add the conference homepage itself
-  array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod_slug));
+  if($pod->field('conference_wp_page.slug')) {
+    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod->field('conference_wp_page.slug')));
+  }
   $obj['button_links'] = $button_links;
   
   $conference_list = pods('list', 'urban-age-conferences');
