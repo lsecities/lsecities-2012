@@ -39,10 +39,10 @@ function pods_prepare_article($post_id) {
   if(!empty($lang) && $lang == $article_lang2) {
     $obj['article_title'] = $pod->field('title_lang2');
     $obj['article_subtitle'] = $pod->field('subtitle_lang2');
-    $obj['article_abstract'] = do_shortcode($pod->field('abstract_lang2'));
-    $obj['article_summary'] = do_shortcode($pod->field('summary_lang2'));
-    $obj['article_text'] = do_shortcode(wpautop($pod->field('text_lang2')));
-    $obj['article_extra_content'] = do_shortcode($pod->field('extra_content_lang2'));
+    $obj['article_abstract'] = do_shortcode($pod->display('abstract_lang2'));
+    $obj['article_summary'] = do_shortcode($pod->display('summary_lang2'));
+    $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
+    $obj['article_extra_content'] = do_shortcode($pod->display('extra_content_lang2'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri_lang2');
@@ -50,10 +50,10 @@ function pods_prepare_article($post_id) {
   } else {
     $obj['article_title'] = $pod->field('name');
     $obj['article_subtitle'] = $pod->field('article_subtitle');
-    $obj['article_abstract'] = do_shortcode($pod->field('abstract'));
-    $obj['article_summary'] = do_shortcode($pod->field('summary'));
+    $obj['article_abstract'] = do_shortcode($pod->display('abstract'));
+    $obj['article_summary'] = do_shortcode($pod->display('summary'));
     $obj['article_text'] = do_shortcode($pod->display('text'));
-    $obj['article_extra_content'] = do_shortcode($pod->field('extra_content'));
+    $obj['article_extra_content'] = do_shortcode($pod->display('extra_content'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri');
