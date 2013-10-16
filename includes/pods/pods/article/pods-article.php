@@ -41,7 +41,7 @@ function pods_prepare_article($post_id) {
     $obj['article_subtitle'] = $pod->field('subtitle_lang2');
     $obj['article_abstract'] = do_shortcode($pod->field('abstract_lang2'));
     $obj['article_summary'] = do_shortcode($pod->field('summary_lang2'));
-    $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
+    $obj['article_text'] = do_shortcode(wpautop($pod->field('text_lang2')));
     $obj['article_extra_content'] = do_shortcode($pod->field('extra_content_lang2'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
