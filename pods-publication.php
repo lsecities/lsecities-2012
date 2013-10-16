@@ -129,7 +129,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <?php if($pod_subtitle): ?><h2><?php echo $pod_subtitle; ?></h2><?php endif ; ?>
           </header>
           <div class='entry-content article-text'>
-            <?php echo $pod->field('blurb'); ?>
+            <?php echo $pod->display('blurb'); ?>
           </div>
           <?php if(count($publication_sections) > 1): ?>
           <section class='publication-sections'>
