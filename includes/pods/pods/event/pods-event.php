@@ -100,10 +100,10 @@ function pods_prepare_event($pod_slug) {
 
   $obj['people_with_blurb'] = $obj['speakers_output']['with_blurb'] + $obj['respondents_output']['with_blurb'] + $obj['chairs_output']['with_blurb'] + $obj['moderators_output']['with_blurb'];
 
-  $obj['event_blurb'] = do_https_shortcode($pod->field('blurb'));
-  $obj['event_blurb_after_event'] = do_https_shortcode($pod->field('blurb_after_event'));
+  $obj['event_blurb'] = do_https_shortcode($pod->display('blurb'));
+  $obj['event_blurb_after_event'] = do_https_shortcode($pod->display('blurb_after_event'));
   var_trace($obj['event_blurb_after_event'], $TRACE_PREFIX . 'blurb_after_event');
-  $obj['event_contact_info'] = do_shortcode($pod->field('contact_info'));
+  $obj['event_contact_info'] = do_shortcode($pod->display('contact_info'));
 
   $event_media_items = $pod->field('media_attachments');
   
