@@ -957,6 +957,7 @@ body.rio2013 #content article.sixcol { width: 74.05%; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
 body.rio2013 [role='main'] > article.ninecol { width: 100%; }
 body.rio2013 [role='main'], body.rio2013 #main { overflow: visible; }
+body.rio2013 #contentarea { margin-top: 2em; }
 body.rio2013 #contentarea .top-content article header h1 { color: #331100; }
 body.rio2013 #contentarea.ninecol { width: 100%; }
 body.rio2013 #contentarea > h1 { display: none; }
@@ -972,6 +973,8 @@ body.rio2013 #footer a, body.rio2013 #footer a:visited, body.rio2013 #footer a:a
 body.rio2013 #footer a:hover { color: #666666; }
 body.rio2013 #navigationarea { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
+body.rio2013 .lc-publication header.entry-header { display: block; }
+body.rio2013 .lc-publication header.entry-header h2 { font-size: 1.25em; font-weight: normal; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
 body.rio2013 .lc-event-programme .entry-content .session a { color: #222; }
