@@ -136,7 +136,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <h1>Browse content</h1>
             <ul>
               <?php foreach($publication_sections as $section): ?>
-              <li><a href="#publication-section-<?php echo $section['title']; ?>"><?php echo $section['title']; ?></a></li>
+              <li><a href="#publication-section-<?php echo $section['id']; ?>"><?php echo $section['title']; ?></a></li>
               <?php endforeach; ?>
             </ul>
           </section>
@@ -222,7 +222,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                 $publication_sections = array("010" => "");
               }
               foreach($publication_sections as $section) : ?>
-                <section id="publication-section-<?php echo $section['title']; ?>">
+                <section id="publication-section-<?php echo $section['id']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
 
                 $articles_pods->reset();
