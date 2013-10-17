@@ -234,6 +234,8 @@ body.rio2013 {
   }
   
   #contentarea {
+    margin-top: 2em;
+    
     .top-content article header h1 {
       color: $link-color;
     }
@@ -259,11 +261,13 @@ body.rio2013 {
   
   .entry-content section, .extra-content > section, .extra-content > aside {
     & > header {
-      border-top: 1px solid $link-color;
+      border-top: 1px solid $header-background-color;
       
       & > h1 {
-        color: $background-color;
-        background-color: $link-color;
+        color: black; // TODO: use variable
+        background-color: $header-background-color;
+        font-family: $site-font;
+        text-transform: uppercase;
       }
     }
   }
@@ -308,6 +312,15 @@ body.rio2013 {
       display: none;
     }
     
+    header.entry-header {
+      display: block;
+      
+      h2 {
+        font-size: 1.25em;
+        font-weight: normal;
+      }
+    }
+    
     #tableofcontents {
       &.publication-category-research-data {
         .articles {
@@ -328,11 +341,17 @@ body.rio2013 {
   
   .lc-event-programme {
     .entry-content {
+      .session {
+        a {
+          color: #222;
+        }
+      }
+      
       .sessiontype-session {
         .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
           & > header {
             border-top: none;
-            border-bottom: 1px solid $link-color;
+            border-bottom: 1px solid black; // TODO: use variable
           }
         }
       }
@@ -342,7 +361,7 @@ body.rio2013 {
           border-top: none;
           
           h1 {
-            color: $link-color;
+            color: black; // TODO: use variable
             background-color: inherit;
             padding-left: 0;
           }
@@ -415,6 +434,11 @@ body.rio2013 {
       @include box-shadow(none);
       background-color: #424242;
       color: white;
+      
+      a, a:active, a:hover, a:visited {
+        color: $header-background-color;
+        font-weight: bold;
+      }
     }
   }
   
