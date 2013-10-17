@@ -2,7 +2,7 @@
     <header id='header'>
       <div>
         <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
-        <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%7BsearchTerms%7D%23UrbanAgeRio&src=typd&f=realtime">#UrbanAgeRio</a></span>
+        <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%23UARio&src=typd&f=realtime">#UARio</a></span>
         <div class='row' id='mainmenus'>
           <nav class='twelvecol section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
             <ul>
