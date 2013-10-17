@@ -131,6 +131,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
           <div class='entry-content article-text'>
             <?php echo $pod->display('blurb'); ?>
           </div>
+          <!--
           <?php if(count($publication_sections) > 1): ?>
           <section class='publication-sections'>
             <h1>Browse content</h1>
@@ -140,7 +141,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               <?php endforeach; ?>
             </ul>
           </section>
-          <?php endif; ?>
+          <?php endif; // (count($publication_sections) > 1)?>
+          -->
           <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
