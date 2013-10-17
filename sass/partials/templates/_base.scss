@@ -399,7 +399,7 @@ blockquote {
   
   &::before {
     color: #999999;
-    content: "“";
+    content: '\00AB';
     display: block;
     font-size: 4em;
     font-style: italic;
