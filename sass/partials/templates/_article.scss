@@ -28,7 +28,7 @@
   }
 
   .has-pullquote::before::before {
-    content: '"';
+    content: '\00AB';
     color: #ff0000;
   }
 
