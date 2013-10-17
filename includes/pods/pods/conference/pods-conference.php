@@ -8,13 +8,13 @@ function pods_prepare_conference($pod_slug) {
   $is_conference = true;
 
   $obj['conference_title'] = $pod->field('name');
-  $obj['conference_tagline'] = $pod->field('tagline');
+  $obj['conference_tagline'] = $pod->display('tagline');
   $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
-  $obj['event_info'] = $pod->field('info');
+  $obj['event_info'] = $pod->display('info');
   
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
 
-  $obj['event_blurb'] = do_shortcode($pod->field('abstract'));
+  $obj['event_blurb'] = do_shortcode($pod->display('abstract'));
 
   $slider = $pod->field('slider');
   if(!$slider) {
@@ -47,14 +47,14 @@ function pods_prepare_conference($pod_slug) {
     ));
   }
 
-  $obj['conference_publication_blurb'] = $pod->field('conference_newspaper.blurb');
+  $obj['conference_publication_blurb'] = $pod->display('conference_newspaper.blurb');
   $obj['conference_publication_cover'] = wp_get_attachment_url($pod->field('conference_newspaper.snapshot.ID'));
   $obj['conference_publication_wp_page'] = get_permalink($pod->field('conference_newspaper.publication_web_page.ID'));
   $obj['conference_publication_pdf'] = $pod->field('conference_newspaper.publication_pdf_uri');
   $obj['conference_publication_issuu'] = $pod->field('conference_newspaper.issuu_uri');
 
   $obj['research_summary_title'] = $pod->field('research_summary.name');
-  $obj['research_summary_blurb'] = $pod->field('research_summary.blurb');
+  $obj['research_summary_blurb'] = $pod->display('research_summary.blurb');
 
   // tiles is a multi-select pick field so in theory we could have more
   // than one tile to display here, however initially we only process the
