@@ -307,6 +307,14 @@ body.rio2013 {
   }
   
   // Pods
+  .lc-conference-frontpage {
+    #contentarea {
+      .extra-content {
+        display: none;
+      }
+    }
+  }
+  
   .lc-publication {
     #share-on-social-media {
       display: none;
