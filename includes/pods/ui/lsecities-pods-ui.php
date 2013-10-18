@@ -99,8 +99,8 @@ function person_page() {
     'extended_blurb',
     'groups',
     'research_projects',
-    'special_2012ec_blurb',
-    'special_2012ec_affiliation');
+    'special_2013rio_blurb',
+    'special_2013rio_affiliation');
   $object->ui = array(
     'title'   => 'Person',
     'sort'    => 't.family_name ASC',
