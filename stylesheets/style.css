@@ -972,6 +972,7 @@ body.rio2013 #footer h1 { font-size: 1.4em; font-family: BureauGrotesque-ThreeSe
 body.rio2013 #footer a, body.rio2013 #footer a:visited, body.rio2013 #footer a:active { color: #331100; }
 body.rio2013 #footer a:hover { color: #666666; }
 body.rio2013 #navigationarea { display: none; }
+body.rio2013 .lc-conference-frontpage #contentarea .extra-content { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
 body.rio2013 .lc-publication header.entry-header { display: block; }
 body.rio2013 .lc-publication header.entry-header h2 { font-size: 1.25em; font-weight: normal; }
