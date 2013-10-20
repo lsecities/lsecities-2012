@@ -216,5 +216,14 @@
         });
       //]]>
 </script>
+<?php
+/**
+ * run microsite-specific footer code, if it exists,
+ * as <microsite_id>_footer()
+ */
+if(lc_data('microsite_id')) {
+  locate_template('templates/microsites/' . lc_data('microsite_id') . '/' . lc_data('microsite_id') . '_footer.php', TRUE, TRUE);
+}
+?>
 </body>
 </html>
