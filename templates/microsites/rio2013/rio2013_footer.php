@@ -4,6 +4,11 @@
   jQuery(function() {
     jQuery('.full-background-photo')
       .attr('src', '<?php echo lc_data('rio2013_background_image_prefix'); ?>' + images[Math.floor(Math.random() * images.length)] + '.jpg')
-      .removeClass('loading');
+      .removeClass('loading')
+      .addClass('just-loaded');
+      
+    setTimeout(function() {
+      jQuery('.full-background-photo').removeClass('just-loaded');
+    }, 3000);
   });
 </script>
