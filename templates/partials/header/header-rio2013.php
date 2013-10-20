@@ -1,4 +1,4 @@
-    <img class="full-background-photo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" /> <!-- start with transparent gif; if js is on, load random image from pool -->
+    <img class="full-background-photo" src="data:image/gif;base64,R0lGODdhAQABAIAAAP///////ywAAAAAAQABAAACAkQBADs=" /> <!-- start with white pixel gif; if js is on, load random image from pool -->
     <header id='header'>
       <div>
         <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
