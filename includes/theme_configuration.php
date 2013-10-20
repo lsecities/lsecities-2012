@@ -70,3 +70,9 @@ lc_data('meta_description', 'LSE Cities is an international centre at the London
  */
 lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/wp-content/themes/lsecities-2012');
 lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012');
+
+/**
+ * rio2013 microsite configuration
+ */
+
+lc_data('rio2013_background_image_prefix', 'http://files.lsecities.net/files/2013/10/rio2013_');

@@ -1,4 +1,4 @@
-    <img class="full-background-photo" src="http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg" />
+    <img class="full-background-photo" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" /> <!-- start with transparent gif; if js is on, load random image from pool -->
     <header id='header'>
       <div>
         <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
