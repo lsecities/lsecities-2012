@@ -58,10 +58,14 @@ body.rio2013 {
     -webkit-backface-visibility: hidden; /* Fix for transition flickering */
     opacity: 0.2;
     
-    &:hover {
+    &:hover, &.just-loaded {
       @include filter(grayscale(0%) blur(0));
       @include transition(all 5s ease);
       opacity: 1;
+    }
+    
+    &.loading {
+      opacity: 0;
     }
   }
   
