@@ -41,6 +41,13 @@ function pods_prepare_event_programme($pod_slug) {
     $obj['sessions'][] = process_session($session_slug, $special_fields_prefix, $all_speakers);
   }
   
+  $obj['programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
+  
+  if($pod->field('lang2.name')) {
+    $obj['programme_pdf_lang2'] = wp_get_attachment_url($pod->field('programme_pdf_lang2.ID'));
+    $obj['lang2'] = $pod->field('lang2.name');
+  }
+  
   // sort speakers by family name
   $family_names = array();
   foreach ($all_speakers as $key => $row) {
