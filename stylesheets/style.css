@@ -979,6 +979,7 @@ body.rio2013 .lc-publication header.entry-header { display: block; }
 body.rio2013 .lc-publication header.entry-header h2 { font-size: 1.25em; font-weight: normal; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
+body.rio2013 .lc-event-programme .entry-content section:first-child { margin-top: 0; }
 body.rio2013 .lc-event-programme .entry-content .session a { color: #222; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid black; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
