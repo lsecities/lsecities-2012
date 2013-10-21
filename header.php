@@ -49,29 +49,34 @@ $obj = prepare_header($post);
 <meta name="description" content="<?php echo esc_html(lc_data('meta_description')); ?>">
 
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<script async type="text/javascript" src="https://use.typekit.com/ftd3lpp.js"></script>
-<script async type="text/javascript">try{Typekit.load();}catch(e){}</script> 
 <link href="https://cloud.webtype.com/css/9044dce3-7052-4e0e-9dbb-377978412ca7.css" rel="stylesheet" type="text/css" />
 <?php 
+  // enqueue styles first
   wp_enqueue_style('font-open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,300italic,400italic,800italic');
-
   wp_enqueue_style('jquery.flexslider', get_stylesheet_directory_uri() . '/stylesheets/flexslider/flexslider.css');
-  wp_enqueue_script('jquery.flexslider', get_stylesheet_directory_uri() . '/javascripts/jquery.flexslider.min.js', 'jquery', false, true);
-?>
+  wp_enqueue_style('jquery-mediaelement', get_stylesheet_directory_uri() .'/stylesheets/mediaelement/mediaelementplayer.css');
+  wp_enqueue_style('font-theovandoegsburg', get_stylesheet_directory_uri() . '/stylesheets/fonts/theovand/stylesheet.css');
+  wp_enqueue_style('font-fontello', get_stylesheet_directory_uri() . '/stylesheets/fonts/fontello/stylesheet.css'); ?>
 
-<?php wp_enqueue_script('jquery-ui-core', '', '', '', true); ?>
-<?php wp_enqueue_script('jquery-ui-accordion', '', '', '', true); ?>
-<?php wp_enqueue_script('jquery-ui-tabs', '', '', '', true); ?>
-<?php wp_enqueue_script('jquery-sticky', get_stylesheet_directory_uri() . '/javascripts/jquery.sticky.min.js', 'jquery', false, true); ?>
-<?php wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true); ?>
-<?php wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', false); ?>
-<?php wp_enqueue_script('rfc3339date', get_stylesheet_directory_uri() . '/javascripts/rfc3339date.js', false, false, true); ?>
-<?php wp_enqueue_script('jquery-addtocal', get_stylesheet_directory_uri() . '/javascripts/jquery.addtocal.js', array('jquery', 'jquery-ui-core', 'jquery-ui-menu'), false, true); ?>
-<?php wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true); ?>
-<?php wp_enqueue_style('jquery-mediaelement', get_stylesheet_directory_uri() .'/stylesheets/mediaelement/mediaelementplayer.css'); ?>
-<?php wp_enqueue_style('font-theovandoegsburg', get_stylesheet_directory_uri() . '/stylesheets/fonts/theovand/stylesheet.css'); ?>
-<?php wp_enqueue_style('font-fontello', get_stylesheet_directory_uri() . '/stylesheets/fonts/fontello/stylesheet.css'); ?>
- <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_directory') ?>/stylesheets/cssgrid.net/1140.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
+
+<?php
+  // enqueue scripts after styles (with flag to have them put in header, whenever possible)
+  wp_enqueue_script('jquery.flexslider', get_stylesheet_directory_uri() . '/javascripts/jquery.flexslider.min.js', 'jquery', false, true);
+  wp_enqueue_script('jquery-ui-core', '', '', '', true);
+  wp_enqueue_script('jquery-ui-accordion', '', '', '', true);
+  wp_enqueue_script('jquery-ui-tabs', '', '', '', true);
+  wp_enqueue_script('jquery-sticky', get_stylesheet_directory_uri() . '/javascripts/jquery.sticky.min.js', 'jquery', false, true);
+  wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
+  wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', false);
+  wp_enqueue_script('rfc3339date', get_stylesheet_directory_uri() . '/javascripts/rfc3339date.js', false, false, true);
+  wp_enqueue_script('jquery-addtocal', get_stylesheet_directory_uri() . '/javascripts/jquery.addtocal.js', array('jquery', 'jquery-ui-core', 'jquery-ui-menu'), false, true);
+  wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
+ ?>
+  <script async type="text/javascript" src="https://use.typekit.com/ftd3lpp.js"></script>
+  <script async type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
@@ -89,9 +94,6 @@ $obj = prepare_header($post);
 	 */
 	wp_head();
 ?>
-
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_directory') ?>/stylesheets/cssgrid.net/1140.css" />
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
 
 <script type='text/javascript'>
 /* <![CDATA[ */
