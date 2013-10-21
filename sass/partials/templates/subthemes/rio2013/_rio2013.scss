@@ -353,6 +353,10 @@ body.rio2013 {
   
   .lc-event-programme {
     .entry-content {
+      section:first-child {
+        margin-top: 0;
+      }
+      
       .session {
         a {
           color: #222;
