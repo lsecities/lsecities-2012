@@ -47,6 +47,31 @@ function pods_prepare_conference($pod_slug) {
     ));
   }
 
+  /* process list of media partners */
+  $obj['media_partners'] = array();
+  $conference_media_partners_slugs = (array) $pod->field('media_partners.slug');
+  // MONKEYPATCH_BEGIN: sort by slug
+  asort($conference_media_partners_slugs);
+  // MONKEYPATCH_END
+
+  foreach($conference_media_partners_slugs as $conference_media_partners_slug) {
+    $media_organization_pod = pods('organization', $conference_media_partners_slug);
+    
+    // MONKEYPATCH_BEGIN
+    if($_GET["siteid"] == 'ec2012') {
+      $logo_uri = pods_image_url($media_organization_pod->field('logo_white_raster'), 'original');
+    } else {
+      $logo_uri = pods_image_url($media_organization_pod->field('logo'), 'original');
+    }
+    // MONKEYPATCH_END
+    
+    array_push($obj['media_partners'], array(
+        'id' => $media_organization_pod->field('slug'),
+        'name' => $media_organization_pod->field('name'),
+        'logo_uri' => $logo_uri,
+        'web_uri' => $media_organization_pod->field('web_uri')
+    ));
+  }
   $obj['conference_publication_blurb'] = $pod->display('conference_newspaper.blurb');
   $obj['conference_publication_cover'] = wp_get_attachment_url($pod->field('conference_newspaper.snapshot.ID'));
   $obj['conference_publication_wp_page'] = get_permalink($pod->field('conference_newspaper.publication_web_page.ID'));
