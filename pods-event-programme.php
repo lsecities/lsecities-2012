@@ -30,8 +30,12 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
         <?php process_session_templates($obj['sessions']); ?>
         </div>
         <div class="threecol last">
-          <div>
-          </div>
+          <?php if($obj['programme_pdf']): ?>
+          <dl>
+            <dt>Full programme</dt>
+            <dd><a href="<?php echo $obj['programme_pdf']; ?>">Download as PDF</a></dd>
+          </dl>
+          <?php endif; // ($obj['programme_pdf']) ?>
         </div>
       </div>
     <?php endif ?>
