@@ -23,6 +23,14 @@ $ec2012-font-family: 'Open Sans', $base-font-family;
   color: $link-hover-color;
 }
 
+/**
+ * MONKEYPATCH - while we investigate why WP decided to override this
+ * all of a sudden
+ */  
+body.custom-background {
+  background-color: black !important;
+}
+
 body.ec2012 {
   background-color: black;
   color: $text-color;
