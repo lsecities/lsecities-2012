@@ -23,7 +23,8 @@ function pods_prepare_article($post_id) {
   global $nav_show_conferences;
   $nav_show_conferences = $pod_from_page;
 
-  $lang = strtolower(pods_url_variable('lang', 'get'));
+  // trim trailing slash (may be added by Varnish)
+  $lang = rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
   $article_lang2 = $pod->field('language.slug');
   $article_layout = $pod->field('layout');
 
