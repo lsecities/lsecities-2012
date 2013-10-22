@@ -238,6 +238,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                     // remove trailing comma
                     $author_names = substr($author_names, 0, -2);
                     $article_title = $articles_pods->field('name');
+                    $article_title_lang2 = $articles_pods->field('title_lang2');
+                    $lang2_language_code = $articles_pods->field('language.language_code');
                     ?>
                     <div class="article">
                       <?php if($publication_category == 'research-data' and $articles_pods->field('heading_image')): ?>
@@ -247,6 +249,9 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                       <?php endif; ?>
                       <h1>
                         <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>"><?php echo $article_title; ?></a>
+                        <?php if($article_title_lang2 and $lang2_language_code): ?>
+                        | <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '?lang=' . $lang2_language_code; ?>"><?php echo $article_title_lang2; ?></a>
+                        <?php endif; // ($article_title_lang2 and $lang2_language_code) ?>
                       </h1>
                       <?php if($author_names): ?>
                       <div class="authors">
