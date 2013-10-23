@@ -933,7 +933,7 @@ body.rio2013 .full-background-photo.loading { opacity: 0; }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
 body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
