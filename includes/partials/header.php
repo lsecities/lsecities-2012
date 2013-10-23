@@ -94,7 +94,7 @@ function prepare_header() {
       // list only the pages we want to show in this menu
       // $only_include_top_pages_ids = '&include=';
       // until we have any content, just hide everything
-      $only_include_top_pages_ids = '&include=5523,5530';
+      $only_include_top_pages_ids = '&include=5523,5455,5458,5530';
     } else {
       $only_include_top_pages_ids = '&child_of=5449';
     }
