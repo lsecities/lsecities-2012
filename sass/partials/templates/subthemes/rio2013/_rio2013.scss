@@ -97,6 +97,8 @@ body.rio2013 {
     background: rgba(255, 255, 255, 1);
     pointer-events: auto;
     opacity: 0.99;
+    position: relative;
+    z-index: 10;
   }
 
   &.page-id-393 { // takeover of frontpage on lsecities.net
@@ -456,6 +458,10 @@ body.rio2013 {
         color: $header-background-color;
         font-weight: bold;
       }
+    }
+    
+    .speaker-profile:hover > div > strong {
+      color: inherit;
     }
   }
   
