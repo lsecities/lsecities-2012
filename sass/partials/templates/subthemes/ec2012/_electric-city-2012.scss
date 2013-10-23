@@ -27,7 +27,7 @@ $ec2012-font-family: 'Open Sans', $base-font-family;
  * MONKEYPATCH - while we investigate why WP decided to override this
  * all of a sudden
  */  
-body.custom-background {
+body.ec2012.custom-background {
   background-color: black !important;
 }
 
