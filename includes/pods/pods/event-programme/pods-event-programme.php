@@ -9,10 +9,28 @@ function pods_prepare_event_programme($pod_slug) {
   
   $obj = array();
   
-  $obj['pod_title'] = $pod->field('name');
-  $obj['pod_subtitle'] = $pod->field('programme_subtitle');
+  /**
+   * Handle second language
+   */
+  $obj['request_language'] = rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
+  // save current path (used to generate links to translation of article, if available)
+  $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+  $obj['current_page_uri'] = $uri_parts[0];
+  $obj['lang2_slug'] = $pod->field('lang2.slug');
+  $obj['lang2_name'] = $pod->field('lang2.name');
+  
+  $is_lang2 = (!empty($obj['request_language']) && $obj['request_language'] == $obj['lang2_slug']) ? TRUE : FALSE;
+  
+  if($is_lang2) {
+    $obj['pod_title'] = $pod->field('name');
+    $obj['pod_subtitle'] = $pod->field('programme_subtitle');
+  } else {
+    $obj['pod_title'] = $pod->field('name_lang2');
+    $obj['pod_subtitle'] = $pod->field('programme_subtitle_lang2');
+  }
   $subsessions = sort_linked_field($pod->field('sessions'), 'sequence', SORT_ASC);
 
+  
   $subsession_slugs = array();
   foreach($subsessions as $subsession) {
     $subsession_slugs[] = $subsession['slug'];
@@ -41,7 +59,7 @@ function pods_prepare_event_programme($pod_slug) {
   $obj['page_title'] = !empty($for_conference) ? "Conference programme" : "Event programme";
   
   foreach($subsession_slugs as $session_slug) {
-    $obj['sessions'][] = process_session($session_slug, $special_fields_prefix, $all_speakers);
+    $obj['sessions'][] = process_session($session_slug, $special_fields_prefix, $is_lang2, $all_speakers);
   }
   
   $obj['programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
@@ -62,12 +80,20 @@ function pods_prepare_event_programme($pod_slug) {
   return $obj;
 }
 
-function process_session($session_slug, $special_fields_prefix, &$all_speakers) {
+function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALSE, &$all_speakers) {
   global $TRACE_ENABLED;
+  
+  /**
+   * If second language is requested, append suitable suffix to all
+   * field names available in lang2.
+   */
+  if($is_lang2) {
+    $lang_suffix = '_lang2';
+  }
   
   $pod = pods('event_session', $session_slug);
   $session_id = $pod->field('slug');
-  $session_title = $pod->field('name');
+  $session_title = $pod->field('name' . $lang_suffix);
   $session_speakers = $pod->field('speakers');
   $session_chairs = $pod->field('chairs');
   $session_respondents = $pod->field('respondents');
@@ -84,10 +110,10 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
   }
   
   if(is_array($session_speakers)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_speakers, $session_id, $session_title);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_speakers, $session_id, $session_title);
   }
   if(is_array($session_chairs)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_chairs, $session_id, $session_title);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_chairs, $session_id, $session_title);
   }
   
   /**
@@ -108,7 +134,7 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
 
   if(count($sessions) > 0) {
     foreach($sessions as $session) {
-      $sessions_data[] = process_session($session, $special_fields_prefix, $all_speakers);
+      $sessions_data[] = process_session($session, $special_fields_prefix, $is_lang2, $all_speakers);
     }
   }
   
@@ -122,11 +148,11 @@ function process_session($session_slug, $special_fields_prefix, &$all_speakers) 
     'end_datetime' => is_null($session_end_datetime) ? NULL : $session_end_datetime->format('H:i'),
     'hide_title' => $pod->field('hide_title'),
     'type' => $session_type,
-    'speakers_blurb' => !is_array($session_speakers) ? NULL : generate_session_people_blurb($pod, 'speakers_blurb', $special_fields_prefix, $session_speakers),
+    'speakers_blurb' => !is_array($session_speakers) ? NULL : generate_session_people_blurb($pod, 'speakers_blurb', $special_fields_prefix, $is_lang2, $session_speakers),
     'chairs_label' => count($session_chairs) > 1 ? "Chairs" : "Chair",
-    'chairs_blurb' => !is_array($session_chairs) ? NULL : generate_session_people_blurb($pod, 'chairs_blurb', $special_fields_prefix, $session_chairs),
+    'chairs_blurb' => !is_array($session_chairs) ? NULL : generate_session_people_blurb($pod, 'chairs_blurb', $special_fields_prefix, $is_lang2, $session_chairs),
     'respondents_label' => count($session_respondents) > 1 ? "Respondents" : "Respondent",
-    'respondents_blurb' => !is_array($session_respondents) ? NULL : generate_session_people_blurb($pod, 'respondents_blurb', $special_fields_prefix, $session_respondents),
+    'respondents_blurb' => !is_array($session_respondents) ? NULL : generate_session_people_blurb($pod, 'respondents_blurb', $special_fields_prefix, $is_lang2, $session_respondents),
     'youtube_video' => $pod->field('media_items.youtube_uri'),
     'slides' => $session_slides,
     'sessions' => $sessions_data
@@ -142,11 +168,11 @@ function process_session_templates($sessions) {
   }
 }
 
-function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefix, $session_people) {
+function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefix, $is_lang2 = FALSE, $session_people) {
   $ALLOWED_TAGS_IN_BLURBS = '<strong><em>';
   
   if(!isset($pod)) {
-    error_log('No pod objet provided');
+    error_log('No pod object provided');
     return;
   }
   if(!isset($blurb_field)) {
@@ -157,7 +183,15 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
     error_log('No people list provided');
     return;
   }
-  
+
+  /**
+   * If second language is requested, append suitable suffix to all
+   * field names available in lang2.
+   */
+  if($is_lang2) {
+    $lang_suffix = '_lang2';
+  }
+    
   $session_people_blurb = '';
 
   /* If we have event-specific author info, use this */
@@ -165,7 +199,7 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
     foreach($session_people as $this_person) {
       $affiliation = '';
       $session_people_blurb .= '<strong>' . $this_person['name'] . ' ' . $this_person['family_name'] . '</strong>';
-      $affiliation = $this_person[$special_fields_prefix . '_affiliation'];
+      $affiliation = $this_person[$special_fields_prefix . '_affiliation' . $lang_suffix];
       
       /* if no event-specific blurb is available for person, fetch
        * generic person role and affiliation information from their
@@ -200,14 +234,14 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
   return $session_people_blurb;
 }
 
-function add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_speakers, $session_id, $session_title) {
+function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_speakers, $session_speakers, $session_id, $session_title) {
   if(!is_array($session_speakers)) return $all_speakers;
   
   foreach($session_speakers as $session_speaker) {
     // Process speaker whether they are already in list or not as
     // we need to list all the sessions they are taking part in.
     $this_speaker = pods('authors', $session_speaker['slug']);
-    $speaker_blurb_and_affiliation = generate_speaker_card_data($special_fields_prefix, $session_speaker['slug']);
+    $speaker_blurb_and_affiliation = generate_speaker_card_data($special_fields_prefix, $is_lang2, $session_speaker['slug']);
 
     $all_speakers[$session_speaker['slug']]['name'] = $session_speaker['name'];
     $all_speakers[$session_speaker['slug']]['family_name'] = $session_speaker['family_name'];
@@ -224,12 +258,20 @@ function add_speakers_to_stash($special_fields_prefix, $all_speakers, $session_s
   return $all_speakers;
 }
 
-function generate_speaker_card_data($special_fields_prefix, $person_slug) {
+function generate_speaker_card_data($special_fields_prefix, $is_lang2 = FALSE, $person_slug) {
   $pod = pods('authors', $person_slug);
   
+  /**
+   * If second language is requested, append suitable suffix to all
+   * field names available in lang2.
+   */
+  if($is_lang2) {
+    $lang_suffix = '_lang2';
+  }
+    
   if($special_fields_prefix) {
-    $affiliation = $pod->field($special_fields_prefix . '_affiliation');
-    $blurb = $pod->field($special_fields_prefix . '_blurb');
+    $affiliation = $pod->field($special_fields_prefix . '_affiliation' . $lang_suffix);
+    $blurb = $pod->field($special_fields_prefix . '_blurb' . $lang_suffix);
   } else {
     $role = $pod->field('role');
     $organization = $pod->field('organization');
