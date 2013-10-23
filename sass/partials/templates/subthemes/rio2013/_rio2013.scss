@@ -214,6 +214,10 @@ body.rio2013 {
     margin-bottom: 1em;
   }
   
+  // Language selector
+  .inline-language-switch ul {
+    @include inline-lists;
+  }
   // MONKEYPATCH: this is only needed for tests
   #content article.sixcol {
     width: 74.05%;
