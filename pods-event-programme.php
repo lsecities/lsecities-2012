@@ -30,14 +30,20 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
         <?php process_session_templates($obj['sessions']); ?>
         </div>
         <div class="threecol last">
+          <?php if($obj['timezone_notice']): ?>
+          <dl>
+            <dt>Timezone</dt>
+            <dd><?php echo $obj['timezone_notice']; ?></dd>
+          </dl>
+          <?php endif; // ($obj['timezone_notice']) ?>
           <?php if($obj['programme_pdf']): ?>
           <dl>
             <dt>Full programme</dt>
             <dd><a href="<?php echo $obj['programme_pdf']; ?>">Download as PDF</a></dd>
-            <?php if($obj['lang2']): ?>
+            <?php if($obj['lang2'] and $obj['programme_pdf_lang2']): ?>
             <dt>Full programme - <?php echo $obj['lang2']; ?></dt>
             <dd><a href="<?php echo $obj['programme_pdf_lang2']; ?>">Download as PDF</a></dd>
-            <?php endif; // ($obj['lang2']) ?>
+            <?php endif; // ($obj['lang2'] and $obj['programme_pdf_lang2']) ?>
           </dl>
           <?php endif; // ($obj['programme_pdf']) ?>
         </div>
