@@ -999,6 +999,7 @@ body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc ul li {
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1 { font-weight: bold; font-size: 1.5em; }
 body.rio2013 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.rio2013 .lc-event-speaker-list .speaker-card a, body.rio2013 .lc-event-speaker-list .speaker-card a:active, body.rio2013 .lc-event-speaker-list .speaker-card a:hover, body.rio2013 .lc-event-speaker-list .speaker-card a:visited { color: #ffee00; font-weight: bold; }
+body.rio2013 .lc-event-speaker-list .speaker-profile:hover > div > strong { color: inherit; }
 body.rio2013 #un-button { display: none; }
 
 /*/mediaquery*/
