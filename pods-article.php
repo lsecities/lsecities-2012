@@ -91,6 +91,14 @@ $gallery = $obj['gallery'];
                       </ul>
                     </dd>
                     <?php endif; ?>
+                    <?php if($obj['lang2_slug']): ?>
+                    <dt>Translations</dt>
+                      <?php if($obj['lang2_slug'] === $obj['request_language']): // we are currently serving article in lang2: show English as translation ?>
+                    <dd><a href='<?php echo $obj['current_page_uri']; ?>'>English</a></dd>
+                    <?php else: ?>
+                    <dd><a href='<?php echo $obj['current_page_uri'] . '?lang=' . $obj['lang2_slug']; ?>'><?php echo $obj['lang2_name']; ?></a></dd>
+                      <?php endif; ?>
+                    <?php endif; ?>
                   </dl>
                   <?php if($obj['pdf_uri'] or is_array($obj['attachments'])) : ?>
                   <div class="downloads-area">
