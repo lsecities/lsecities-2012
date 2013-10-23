@@ -4,6 +4,7 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
 @import "compass/css3/filter";
+@import "compass/css3/border-radius";
 @import "../../../mixins";
 @import "../../palette";
 
@@ -137,7 +138,7 @@ body.rio2013 {
       right: 0;
       background-color: #555;
       padding: 0.2em 0.5em;
-      border-radius: 0.2em;
+      @include border-radius(0.2em);
       font-weight: bold;
       
       a, a:active, a:visited {
@@ -216,7 +217,26 @@ body.rio2013 {
   
   // Language selector
   .inline-language-switch ul {
-    @include inline-lists;
+    display: inline-block;
+    
+    li {
+      display: inline;
+      margin-right: 0.5em;
+      font-weight: bold;
+      @include border-radius(0.2em);
+      background-color: $menu-current-background-color;
+      
+      a, a:hover, a:active, a:visited, a:focus {
+        color: white;
+        padding: 0 0.5em;
+      }
+      
+      &.active {
+        a, a:hover, a:active, a:visited, a:focus {
+          color: $header-background-color;
+        }
+      }
+    }
   }
   // MONKEYPATCH: this is only needed for tests
   #content article.sixcol {
