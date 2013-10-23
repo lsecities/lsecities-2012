@@ -33,6 +33,9 @@ function pods_prepare_event_programme($pod_slug) {
   
   $for_conference = $pod->field('for_conference.slug');
   $for_event = $pod->field('for_event.slug');
+  
+  $obj['timezone_notice'] = $pod->field('timezone_notice');
+  
   $all_speakers = array();
   
   $obj['page_title'] = !empty($for_conference) ? "Conference programme" : "Event programme";
