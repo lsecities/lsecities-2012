@@ -934,14 +934,13 @@ body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
 body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
-body.rio2013.page-id-393 #container { max-width: inherit; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
 body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
 body.rio2013 #header, body.rio2013 #footer { opacity: 0.90; }
 body.rio2013 #header { background-color: #ffee00; pointer-events: auto; }
 body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
-body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
+body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; -ms-border-radius: 0.2em; -o-border-radius: 0.2em; border-radius: 0.2em; font-weight: bold; }
 body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: #ffee00; }
 body.rio2013 #rio2013title { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 2px; font-size: 3em; margin-bottom: 0.5em; text-transform: uppercase; }
 body.rio2013 #rio2013title a, body.rio2013 #rio2013title a:active, body.rio2013 #rio2013title a:hover, body.rio2013 #rio2013title a:visited { color: black; }
@@ -957,6 +956,10 @@ body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_p
 body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #331100; color: #666666; }
 body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #ffee00; }
 body.rio2013 #mainmenus { margin-bottom: 1em; }
+body.rio2013 .inline-language-switch ul { display: inline-block; }
+body.rio2013 .inline-language-switch ul li { display: inline; margin-right: 0.5em; font-weight: bold; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; -ms-border-radius: 0.2em; -o-border-radius: 0.2em; border-radius: 0.2em; background-color: rgba(33, 33, 33, 0.5); }
+body.rio2013 .inline-language-switch ul li a, body.rio2013 .inline-language-switch ul li a:hover, body.rio2013 .inline-language-switch ul li a:active, body.rio2013 .inline-language-switch ul li a:visited, body.rio2013 .inline-language-switch ul li a:focus { color: white; padding: 0 0.5em; }
+body.rio2013 .inline-language-switch ul li.active a, body.rio2013 .inline-language-switch ul li.active a:hover, body.rio2013 .inline-language-switch ul li.active a:active, body.rio2013 .inline-language-switch ul li.active a:visited, body.rio2013 .inline-language-switch ul li.active a:focus { color: #ffee00; }
 body.rio2013 #content article.sixcol { width: 74.05%; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
 body.rio2013 [role='main'] > article.ninecol { width: 100%; }
