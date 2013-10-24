@@ -94,9 +94,9 @@ $gallery = $obj['gallery'];
                     <?php if($obj['lang2_slug']): ?>
                     <dt>Translations</dt>
                       <?php if($obj['lang2_slug'] === $obj['request_language']): // we are currently serving article in lang2: show English as translation ?>
-                    <dd><a href='<?php echo $obj['current_page_uri']; ?>'>English</a></dd>
+                    <dd><a href='../en-gb/'>English</a></dd>
                     <?php else: ?>
-                    <dd><a href='<?php echo $obj['current_page_uri'] . '?lang=' . $obj['lang2_slug']; ?>'><?php echo $obj['lang2_name']; ?></a></dd>
+                    <dd><a href='<?php echo '../' . $obj['lang2_slug']; ?>'><?php echo $obj['lang2_name']; ?></a></dd>
                       <?php endif; ?>
                     <?php endif; ?>
                   </dl>

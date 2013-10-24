@@ -24,7 +24,7 @@ function pods_prepare_article($post_id) {
   $nav_show_conferences = $pod_from_page;
 
   // trim trailing slash (may be added by Varnish)
-  $obj['request_language'] = rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
+  $obj['request_language'] = pods_url_variable(4);//rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
   
   // save current path (used to generate links to translation of article, if available)
   $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
