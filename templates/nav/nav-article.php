@@ -43,9 +43,9 @@ jQuery(document).ready(function($) {
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) : ?>
           <?php var_trace(var_export($article, true), 'article-pod-object'); ?>
           <li>
-            <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>"><?php echo $article['name']; ?></a>
+            <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/'; ?>"><?php echo $article['name']; ?></a>
             <?php if(!empty($article['language']['name'])) : ?>
-              (English) - <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/?lang=' . $article['language']['language_code']; ?>">(<?php echo $article['language']['name']; ?>)</a>
+              (English) - <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article['language']['language_code']) . '/'; ?>">(<?php echo $article['language']['name']; ?>)</a>
             <?php endif; ?>
           </li>
       <?php
