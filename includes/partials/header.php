@@ -94,7 +94,7 @@ function prepare_header() {
       // list only the pages we want to show in this menu
       // $only_include_top_pages_ids = '&include=';
       // DURING CONFERENCE:
-      $only_include_top_pages_ids = '&include=5523,5526,5455,5458,5530,5528';
+      $only_include_top_pages_ids = '&include=5523,5526,5455,5458,5530,5532,5528';
       // BEFORE/AFTER CONFERENCE: (if needed add /photos [id: 5532])
       // $only_include_top_pages_ids = '&include=5523,5455,5458,5530';
     } else {
