@@ -248,9 +248,9 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                       </a>
                       <?php endif; ?>
                       <h1>
-                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>"><?php echo $article_title; ?></a>
+                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/en-gb/' ; ?>"><?php echo $article_title; ?></a>
                         <?php if($article_title_lang2 and $lang2_language_code): ?>
-                        | <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '?lang=' . $lang2_language_code; ?>"><?php echo $article_title_lang2; ?></a>
+                        | <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/' . $lang2_language_code; ?>"><?php echo $article_title_lang2; ?></a>
                         <?php endif; // ($article_title_lang2 and $lang2_language_code) ?>
                       </h1>
                       <?php if($author_names): ?>

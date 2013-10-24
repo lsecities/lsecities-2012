@@ -12,10 +12,13 @@ function pods_prepare_article($post_id) {
     $pod = pods('article', $pod_slug);
     $pod_from_page = true;
   } else {
-    $pod = pods('article', pods_url_variable(3));
+    $pod = pods('article', pods_var(3, 'url'));
     $pod_from_page = false;
   }
 
+  var_trace('article pod - var 3: '. pods_var(3, 'url'));
+  var_trace('article pod - var 4: '. pods_var(4, 'url'));
+  
   global $this_pod;
   $this_pod = new LC\PodObject($pod, 'Articles');
 
@@ -24,7 +27,7 @@ function pods_prepare_article($post_id) {
   $nav_show_conferences = $pod_from_page;
 
   // trim trailing slash (may be added by Varnish)
-  $obj['request_language'] = pods_url_variable(4);//rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
+  $obj['request_language'] = pods_var(4, 'url');//rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
   
   // save current path (used to generate links to translation of article, if available)
   $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
