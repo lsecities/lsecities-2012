@@ -90,16 +90,10 @@ function prepare_header() {
     // If we are navigating the Rio 2013 minisite via reverse proxy, display appropriate menu
     $obj['level1nav'] = '';
     $class_for_current_page = $post->ID == 5449 ? ' current_page_item' : '';
-    if(!is_user_logged_in()) {
-      // list only the pages we want to show in this menu
-      // $only_include_top_pages_ids = '&include=';
-      // DURING CONFERENCE:
-      $only_include_top_pages_ids = '&include=5523,5526,5455,5458,5530,5532,5528';
-      // BEFORE/AFTER CONFERENCE: (if needed add /photos [id: 5532])
-      // $only_include_top_pages_ids = '&include=5523,5455,5458,5530';
-    } else {
-      $only_include_top_pages_ids = '&child_of=5449';
-    }
+    
+    // only show selected subpages in top navmenu
+    $only_include_top_pages_ids = '&include=5523,5455,5458,5530,5532';
+    
     $obj['level2nav'] = '<li class="page-item page-item-5449' . $class_for_current_page . '">' .
       '<a href="/">Home</a></li>' . 
       wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
