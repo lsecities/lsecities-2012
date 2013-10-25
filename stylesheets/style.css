@@ -660,6 +660,10 @@ right: -21px; */ }
 
 .lc-conference-frontpage .lc-galleria-picasa { width: 100%; max-width: 100%; }
 
+/** UserNoise WordPress plugin */
+#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; }
+
+@media only screen and (max-width: 480px) { #un-button { display: none; } }
 .lc-newspaper-article header.heading-image img { max-width: 100%; width: 100%; }
 .lc-newspaper-article .has-pullquote::before { content: attr(data-pullquote); font-weight: bold; opacity: 0.8; float: right; width: 50%; margin: 0.5em -30% 0 0; padding-left: 1.5em; padding-bottom: 0.5em; font-style: italic; position: relative; font-size: 1.5em; line-height: 1.25em; }
 .lc-newspaper-article .has-pullquote::before::before { content: '\00AB'; color: #ff0000; }
