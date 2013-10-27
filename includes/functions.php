@@ -423,8 +423,8 @@ function compose_project_list_by_strand($project_status) {
 
 function news_categories($pod_news_categories) {
   var_trace(var_export($pod_news_categories, true), 'news_category_ids');
-  if($pod_news_categories) {
-    $news_categories = '';
+  $news_categories = '';
+  if(!empty($pod_news_categories)) {
     foreach($pod_news_categories as $category) {
       $news_categories .= $category['term_id'] . ',';
     }
@@ -506,7 +506,7 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
   var_trace(var_export($news_categories_slugs, true), 'news_categories_slugs');
   if(!is_array($news_categories_slugs)) return $output;
   
-  if(count($news_categories_slugs) > 0) {
+  if(is_array($news_categories_slugs) and !empty($news_categories_slugs)) {
     $news_categories = news_categories($news_categories_slugs);
   }
 
