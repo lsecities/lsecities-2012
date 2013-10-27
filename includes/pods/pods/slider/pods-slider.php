@@ -26,7 +26,7 @@ function pods_prepare_slider($pod_slug) {
 
   var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 
-  $obj['news_categories'] = $pod->field('news_category');
+  $obj['news_categories'] = $pod->field('news_category.slug');
   
   /**
    * Read any jquery options and set global variable accordingly; these
