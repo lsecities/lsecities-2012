@@ -69,50 +69,47 @@ var_trace($all_staff, 'all_staff');
 
 $project_coordinators_list = $pod->field('coordinators');
 $project_coordinators_count = count($project_coordinators_list);
-foreach($project_coordinators_list as $project_coordinator) {
-  if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-    $project_coordinators .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_coordinator['slug'] . '">';
+if($project_coordinators_count > 0) {
+  foreach($project_coordinators_list as $project_coordinator) {
+    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
+      $project_coordinators .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_coordinator['slug'] . '">';
+    }
+    $project_coordinators .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
+    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
+      $project_coordinators .= '</a>';
+    }
+    $project_coordinators .= ', ';
   }
-  $project_coordinators .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
-  if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-    $project_coordinators .= '</a>';
-  }
-  $project_coordinators .= ', ';
 }
 $project_coordinators = substr($project_coordinators, 0, -2);
 
 $project_researchers_list = $pod->field('researchers');
 $project_researchers_count = count($project_researchers_list);
-foreach($project_researchers_list as $project_researcher) {
-  if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-    $project_researchers .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_researcher['slug'] . '">';
+if($project_researchers_count > 0) {
+  foreach($project_researchers_list as $project_researcher) {
+    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
+      $project_researchers .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_researcher['slug'] . '">';
+    }
+    $project_researchers .= $project_researcher['name'] . ' ' . $project_researcher['family_name'];
+    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
+      $project_researchers .= '</a>';
+    }
+    $project_researchers .= ', ';
   }
-  $project_researchers .= $project_researcher['name'] . ' ' . $project_researcher['family_name'];
-  if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-    $project_researchers .= '</a>';
-  }
-  $project_researchers .= ', ';
 }
 $project_researchers = substr($project_researchers, 0, -2);
-
-/*
-$project_partners_list = $pod->field('partners');
-$project_partners_count = count($project_partners_list);
-foreach($project_partners_list as $project_partner) {
-  $project_partners .= $project_partner['name'] . ', ';
-}
-$project_partners = substr($project_partners, 0, -2);
-*/
 
 // generate list of research partners
 $project_partners_list = sort_linked_field($pod->field('partners'), 'name', SORT_ASC);
 
 $project_partners_count = count($project_partners_list);
-foreach($project_partners_list as $project_partner) {
-  if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
-    $project_partners .= '<a href="' . $project_partner['web_uri'] . '">' . $project_partner['name'] . '</a>, ';
-  } else {
-    $project_partners .= $project_partner['name'] . ', ';
+if($project_partners_count > 0) {
+  foreach($project_partners_list as $project_partner) {
+    if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
+      $project_partners .= '<a href="' . $project_partner['web_uri'] . '">' . $project_partner['name'] . '</a>, ';
+    } else {
+      $project_partners .= $project_partner['name'] . ', ';
+    }
   }
 }
 $project_partners = substr($project_partners, 0, -2);
@@ -121,11 +118,13 @@ $project_partners = substr($project_partners, 0, -2);
 $project_funders_list = sort_linked_field($pod->field('funders'), 'name', SORT_ASC);
 
 $project_funders_count = count($project_funders_list);
-foreach($project_funders_list as $project_funder) {
-  if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
-    $project_funders .= '<a href="' . $project_funder['web_uri'] . '">' . $project_funder['name'] . '</a>, ';
-  } else {
-    $project_funders .= $project_funder['name'] . ', ';
+if($project_funders_count > 0) {
+  foreach($project_funders_list as $project_funder) {
+    if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
+      $project_funders .= '<a href="' . $project_funder['web_uri'] . '">' . $project_funder['name'] . '</a>, ';
+    } else {
+      $project_funders .= $project_funder['name'] . ', ';
+    }
   }
 }
 $project_funders = substr($project_funders, 0, -2);
