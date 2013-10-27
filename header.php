@@ -74,8 +74,6 @@ $obj = prepare_header($post);
   wp_enqueue_script('jquery-addtocal', get_stylesheet_directory_uri() . '/javascripts/jquery.addtocal.js', array('jquery', 'jquery-ui-core', 'jquery-ui-menu'), false, true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
  ?>
-  <script async type="text/javascript" src="https://use.typekit.com/ftd3lpp.js"></script>
-  <script async type="text/javascript">try{Typekit.load();}catch(e){}</script> 
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
