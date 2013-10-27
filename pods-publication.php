@@ -138,8 +138,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
           <section class='publication-sections'>
             <h1>Browse content</h1>
             <ul>
-              <?php foreach($publication_sections as $section): ?>
-              <li><a href="#publication-section-<?php echo $section['id']; ?>"><?php echo $section['title']; ?></a></li>
+              <?php foreach($publication_sections as $index_section): ?>
+              <li><a href="#publication-section-<?php echo $index_section['id']; ?>"><?php echo $index_section['title']; ?></a></li>
               <?php endforeach; ?>
             </ul>
           </section>
