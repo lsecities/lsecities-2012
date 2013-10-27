@@ -83,7 +83,7 @@ function prepare_header() {
       wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
     // And strip prefix
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2012-london\/site/', '', $obj['level2nav']);
-    var_trace($obj['level2nav'], 'header_level2nav', true);
+    var_trace($obj['level2nav'], 'header_level2nav');
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/ec2012.appcache';
   } elseif(lc_data('x-site-id') === 'rio2013') {
@@ -99,7 +99,7 @@ function prepare_header() {
       wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
     // And strip prefix
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2013-rio\/site/', '', $obj['level2nav']);
-    var_trace($obj['level2nav'], 'header_level2nav', true);
+    var_trace($obj['level2nav'], 'header_level2nav');
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/rio2013.appcache';
   }
