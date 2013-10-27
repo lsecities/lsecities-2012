@@ -430,7 +430,7 @@ function compose_project_list_by_strand($project_status) {
 function news_categories($pod_news_categories) {
   var_trace(var_export($pod_news_categories, true), 'news_category_ids');
   $news_categories = '';
-  if(!empty($pod_news_categories)) {
+  if(is_array($pod_news_categories) and !empty($pod_news_categories)) {
     foreach($pod_news_categories as $category) {
       $news_categories .= $category['term_id'] . ',';
     }
