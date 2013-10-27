@@ -109,8 +109,11 @@ foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line
     array_push($publication_sections, array( 'id' => $this_section_id, 'title' => $this_section_title));
   }
 }
+if(empty($publication_sections)) {
+  array_push($publication_sections, array('id' => "10", 'title' => ''));
+}
 var_trace('sections: ' . var_export($publication_sections, true));
-              
+
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
 
@@ -222,9 +225,6 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               <?php if($articles_pods->total_found()) : ?>
               <div class="articles">
               <?php
-              if(!count($publication_sections)) {
-                $publication_sections = array("010" => "");
-              }
               foreach($publication_sections as $section) : ?>
                 <section id="publication-section-<?php echo $section['id']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
