@@ -103,8 +103,10 @@ $articles_pods->find($search_params);
 $publication_sections = array();
 foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
   preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
-  if($matches[1]) {
-    array_push($publication_sections, array( 'id' => $matches[1], 'title' => $matches[2]));
+  $this_section_id = $matches[1];
+  $this_section_title = empty($matches[2]) ? '' : $matches[2];
+  if($this_section_id) {
+    array_push($publication_sections, array( 'id' => $this_section_id, 'title' => $this_section_title));
   }
 }
 var_trace('sections: ' . var_export($publication_sections, true));
