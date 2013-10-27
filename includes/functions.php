@@ -280,7 +280,13 @@ function galleria_prepare_multi($pod, $extra_classes, $gallery_field='galleries'
   define(GALLERY_MAX_SLIDES_COUNT, 12);
   $gallery_array = array();
   
-  foreach($pod->field($gallery_field) as $key => $gallery) {
+  $galleries = $pod->field($gallery_field);
+  if(empty($galleries)) {
+    error_log('No galleries found in pod field ' . $gallery_field);
+    return $gallery_array;
+  }
+  
+  foreach($galleries as $key => $gallery) {
     
     $gallery_object = array(
       'slug' => $gallery['slug'],
