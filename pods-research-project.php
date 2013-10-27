@@ -222,7 +222,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 // if we have research photo galleries/photo essays, prepare them
 $research_photo_galleries = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
 
-$news_categories = news_categories($pod->field('news_category'));
+$news_categories = news_categories($pod->field('news_categories'));
 
 ?><?php get_header(); ?>
 
@@ -245,7 +245,7 @@ $news_categories = news_categories($pod->field('news_category'));
             <div class="abstract"><?php echo $pod_summary; ?></div>
             <?php endif; ?>
             
-            <?php if((is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) or count($events) or count($research_photo_galleries)): ?>
+            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries)): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -257,7 +257,7 @@ $news_categories = news_categories($pod->field('news_category'));
               <?php if(count($events)): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) or count($research_events)): ?>
+              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($research_events)): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if($project_has_research_outputs): ?>
@@ -295,11 +295,11 @@ $news_categories = news_categories($pod->field('news_category'));
             </section>
             <?php endif; // (count($events)) ?>
             <?php
-              if($project_has_research_events or (is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0)):
+              if($project_has_research_events or (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
               // latest news in categories defined for this research project
-              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->field('news_category'))); ?>
+              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
               <section id="t-news" class="hide">
-                <?php if(is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0): ?>
+                <?php if(is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0): ?>
                 <header><h1>Project news</h1></header>
                 <ul>
                 <?php
@@ -311,7 +311,7 @@ $news_categories = news_categories($pod->field('news_category'));
                     endwhile;
                 ?>
                 </ul>
-                <?php endif; // (is_array($pod->field('news_category')) and count($pod->field('news_category')) > 0) ?>
+                <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
                 <?php if(count($research_events)): ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
@@ -328,7 +328,7 @@ $news_categories = news_categories($pod->field('news_category'));
                 <?php endif; // (count($research_events)) ?>
               </section> <!-- #news_area -->
             <?php
-             endif; // ($pod->field('news_category')) and count($pod->field('news_category')) > 0 or count($events))
+             endif; // ($pod->field('news_categories')) and count($pod->field('news_categories')) > 0 or count($events))
             // publications
             if($project_has_research_outputs): ?>
             <section id="t-publications" class="hide">
