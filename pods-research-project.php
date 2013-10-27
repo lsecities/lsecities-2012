@@ -197,8 +197,10 @@ if($pod->field('events')) {
 // now create a single array with all the research events
 $research_events = array();
 foreach($research_event_categories as $category_slug) {
-  foreach($research_outputs[$category_slug] as $event) {
-    array_push($research_events, $event);
+  if(is_array($research_outputs[$category_slug])) {
+    foreach($research_outputs[$category_slug] as $event) {
+      array_push($research_events, $event);
+    }
   }
 }
 
@@ -355,7 +357,7 @@ $news_categories = news_categories($pod->field('news_categories'));
                     endif; // (count($research_outputs[$category_slug]))
                   endforeach; // ($research_output_categories as $category) ?>
 
-                <!--
+                <?php if(FALSE): // TODO: check legacy code below and either update it or remove it ?>
                 <?php foreach($publications as $publications_in_category): ?>
                 <dt></dt>
                 <dd>
@@ -366,7 +368,7 @@ $news_categories = news_categories($pod->field('news_categories'));
                   </ul>
                 </dd>
                 <?php endforeach; // ($publications as $publication_category) ?>
-                -->
+                <?php endif; // (FALSE) ?>
 
               </dl>
             </section>
