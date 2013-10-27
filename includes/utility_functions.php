@@ -61,7 +61,7 @@ function abspath_to($file) {
  * @return array The fields array, sorted as requested, or FALSE if an error occurs
  */
 function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
-  if(!(count($fields) > 0) and !is_array($fields)) {
+  if(!(count($fields) > 0) or !is_array($fields)) {
     error_log('Array to sort is not an array or is an empty array');
     return FALSE;
   }
