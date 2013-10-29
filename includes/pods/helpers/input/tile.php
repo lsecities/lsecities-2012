@@ -6,7 +6,11 @@
  */
 
 $PODS_BASEURI_NEW_ITEM = '/wp-admin/admin.php?page=';
-$active_tile_id = $value[0];
+
+// read first value of associative array
+reset($value);
+$active_tile_id = $value[key($value)];
+
 $data_label = $options['label'];
 $data_name_clean = str_replace('_', '-', $name);
 $element_id = 'pods-form-ui-' . $data_name_clean;
