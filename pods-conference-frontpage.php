@@ -79,7 +79,26 @@ $gallery = $obj['gallery'];
                   </dd>
                 </dl>
                 <?php endif; // (count($partners)) ?>
-                <?php if($obj['event_hashtag']): ?>
+                <?php if(count($obj['media_partners'])): ?>
+                <dl id="conference-media-partners">
+                  <dt>Media partners</dt>
+                  <dd>
+                    <ul>
+                    <?php foreach($obj['media_partners'] as $media_partner): ?>
+                      <li id="media-partner-<?php echo $media_partner['id']; ?>">
+                      <?php if($media_partner['web_uri']): ?><a href="<?php echo $media_partner['web_uri']; ?>"><?php endif; ?>
+                      <?php if($media_partner['logo_uri']): ?>
+                        <img src="<?php echo $media_partner['logo_uri']; ?>" alt="<?php echo $media_partner['name']; ?>" />
+                      <?php else: ?>
+                        <?php echo $media_partner['name']; ?>
+                      <?php endif; //($media_partner['logo_uri'])?>
+                      <?php if($media_partner['web_uri']): ?></a><?php endif; ?>
+                      </li>
+                    <?php endforeach; //($media_partners as $media_partner) ?>
+                    </ul>
+                  </dd>
+                </dl>
+                <?php endif; // (count($media_partners)) ?>                <?php if($obj['event_hashtag']): ?>
                 <div class='twitterbox'>
                   <a href="https://twitter.com/#!/search/#<?php echo $obj['event_hashtag']; ?>">#<?php echo $obj['event_hashtag']; ?></a>
                 </div>

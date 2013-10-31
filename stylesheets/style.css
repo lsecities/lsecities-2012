@@ -455,7 +455,7 @@ body .article .entry-content.article-text.sidebyside > div { -webkit-column-coun
 #level2nav ul { background-color: inherit; }
 #level2nav ul li { -webkit-transition: background-color 0.4s ease-out, color 0.1s ease; -webkit-transition-delay: 0s, 0.1s; -moz-transition: background-color 0.4s ease-out 0s, color 0.1s ease 0.1s; -o-transition: background-color 0.4s ease-out 0s, color 0.1s ease 0.1s; transition: background-color 0.4s ease-out 0s, color 0.1s ease 0.1s; }
 
-nav#level1nav, nav#level2nav { line-height: 1.2em; font-family: museo-sans, "Open Sans", sans-serif; text-transform: uppercase; }
+nav#level1nav, nav#level2nav { line-height: 1.2em; font-family: "Open Sans", sans-serif; text-transform: uppercase; }
 nav#level1nav ul li, nav#level2nav ul li { line-height: 1.5em; margin-bottom: 0; }
 
 #level1nav { margin-top: 4em; }
@@ -624,7 +624,7 @@ div.widget h2 { margin-bottom: 0.5em; }
 #share-on-social-media span a img { width: 20px; height: 20px; }
 
 blockquote { margin: 1.5em 0 0.75em 3em; -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; border-left: 0.5em solid #DDDDDD; padding: 0 0.5em; }
-blockquote::before { color: #999999; content: "â"; display: block; font-size: 4em; font-style: italic; line-height: 1em; height: 0; margin-left: -0.8em; }
+blockquote::before { color: #999999; content: '\00AB'; display: block; font-size: 4em; font-style: italic; line-height: 1em; height: 0; margin-left: -0.8em; }
 
 .downloadthis.pdf { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
 .downloadthis.pdf:hover { opacity: 0.6; }
@@ -660,9 +660,13 @@ right: -21px; */ }
 
 .lc-conference-frontpage .lc-galleria-picasa { width: 100%; max-width: 100%; }
 
+/** UserNoise WordPress plugin */
+#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; }
+
+@media only screen and (max-width: 480px) { #un-button { display: none; } }
 .lc-newspaper-article header.heading-image img { max-width: 100%; width: 100%; }
 .lc-newspaper-article .has-pullquote::before { content: attr(data-pullquote); font-weight: bold; opacity: 0.8; float: right; width: 50%; margin: 0.5em -30% 0 0; padding-left: 1.5em; padding-bottom: 0.5em; font-style: italic; position: relative; font-size: 1.5em; line-height: 1.25em; }
-.lc-newspaper-article .has-pullquote::before::before { content: '"'; color: #ff0000; }
+.lc-newspaper-article .has-pullquote::before::before { content: '\00AB'; color: #ff0000; }
 .lc-newspaper-article .cite_ref, .lc-newspaper-article .cite_note { vertical-align: super; font-size: 0.83em; }
 .lc-newspaper-article article .article section { margin-bottom: 2em; overflow: hidden; }
 .lc-newspaper-article article .article .thumbnail-graphics { float: left; width: 50%; margin-right: 1em; }
@@ -859,6 +863,9 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .feature-info .feature-date .day { font-size: 1.2em; font-weight: bold; padding-top: 0.1em; }
 .feature-info .feature-date + header { display: table-cell; }
 
+/** MONKEYPATCH - while we investigate why WP decided to override this all of a sudden */
+body.ec2012.custom-background { background-color: black !important; }
+
 body.ec2012 { background-color: black; color: white; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
 body.ec2012 #mailing-list-subscription { display: none; }
 body.ec2012 .reset-layout { clear: both; overflow: hidden; }
@@ -921,26 +928,25 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; /*
-&::after { background: url("http://files.lsecities.net/files/2013/05/IMAG0410_edited-1200x500-1024x426.jpg") no-repeat center center fixed; @include background-size(cover); opacity: 0.80; position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; z-index: -1;
-}
-*/ }
+body.rio2013 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; }
 body.rio2013 .full-background-photo { /* Set rules to fill background */ min-height: 100%; min-width: 1024px; /* Set up proportionate scaling */ width: 100%; height: auto; /* Set up positioning */ position: fixed; top: 0; left: 0; background-color: #555; pointer-events: auto; -webkit-filter: grayscale(97%) blur(2px); -moz-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
-body.rio2013 .full-background-photo:hover { -webkit-filter: grayscale(0%), blur(0); -moz-filter: grayscale(0%), blur(0); filter: grayscale(0%), blur(0); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
+body.rio2013 .full-background-photo:hover, body.rio2013 .full-background-photo.just-loaded { -webkit-filter: grayscale(0%) blur(0); -moz-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); -webkit-transition: all 5s ease; -moz-transition: all 5s ease; -o-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
+body.rio2013 .full-background-photo.loading { opacity: 0; }
 @media screen and (max-width: 1024px) { body.rio2013 { /* Specific to this particular image */ }
   body.rio2013 img.bg { left: 50%; margin-left: -512px; /* 50% */ } }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; }
-body.rio2013.page-id-393 #container { max-width: inherit; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; margin-top: 2em; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
 body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
 body.rio2013 #header, body.rio2013 #footer { opacity: 0.90; }
+body.rio2013 #footer { opacity: 0.70; transition: opacity 1s ease; }
+body.rio2013 #footer:hover { opacity: 0.90; transition: opacity 1s ease; }
 body.rio2013 #header { background-color: #ffee00; pointer-events: auto; }
 body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
-body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; border-radius: 0.2em; font-weight: bold; }
+body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; -ms-border-radius: 0.2em; -o-border-radius: 0.2em; border-radius: 0.2em; font-weight: bold; }
 body.rio2013 #header .twitter-hashtag a, body.rio2013 #header .twitter-hashtag a:active, body.rio2013 #header .twitter-hashtag a:visited { color: #ffee00; }
 body.rio2013 #rio2013title { font-family: BureauGrotesque-ThreeSeven; letter-spacing: 2px; font-size: 3em; margin-bottom: 0.5em; text-transform: uppercase; }
 body.rio2013 #rio2013title a, body.rio2013 #rio2013title a:active, body.rio2013 #rio2013title a:hover, body.rio2013 #rio2013title a:visited { color: black; }
@@ -956,17 +962,22 @@ body.rio2013 #level2nav ul li.current a, body.rio2013 #level2nav ul li.current_p
 body.rio2013 #level2nav ul li.current a:hover, body.rio2013 #level2nav ul li.current_page_item a:hover, body.rio2013 #level2nav ul li.current_page_ancestor a:hover, body.rio2013 #level2nav ul li.current_page_parent a:hover { background-color: inherit; color: #331100; color: #666666; }
 body.rio2013 #level2nav ul li.current:hover a, body.rio2013 #level2nav ul li.current_page_item:hover a, body.rio2013 #level2nav ul li.current_page_ancestor:hover a, body.rio2013 #level2nav ul li.current_page_parent:hover a { background-color: inherit; color: #ffee00; }
 body.rio2013 #mainmenus { margin-bottom: 1em; }
+body.rio2013 .inline-language-switch ul { display: inline-block; }
+body.rio2013 .inline-language-switch ul li { display: inline; margin-right: 0.5em; font-weight: bold; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; -ms-border-radius: 0.2em; -o-border-radius: 0.2em; border-radius: 0.2em; background-color: rgba(33, 33, 33, 0.5); }
+body.rio2013 .inline-language-switch ul li a, body.rio2013 .inline-language-switch ul li a:hover, body.rio2013 .inline-language-switch ul li a:active, body.rio2013 .inline-language-switch ul li a:visited, body.rio2013 .inline-language-switch ul li a:focus { color: white; padding: 0 0.5em; }
+body.rio2013 .inline-language-switch ul li.active a, body.rio2013 .inline-language-switch ul li.active a:hover, body.rio2013 .inline-language-switch ul li.active a:active, body.rio2013 .inline-language-switch ul li.active a:visited, body.rio2013 .inline-language-switch ul li.active a:focus { color: #ffee00; }
 body.rio2013 #content article.sixcol { width: 74.05%; }
 body.rio2013 [role='main'] { padding-bottom: 10em; }
 body.rio2013 [role='main'] > article.ninecol { width: 100%; }
 body.rio2013 [role='main'], body.rio2013 #main { overflow: visible; }
+body.rio2013 #contentarea { margin-top: 2em; }
 body.rio2013 #contentarea .top-content article header h1 { color: #331100; }
 body.rio2013 #contentarea.ninecol { width: 100%; }
 body.rio2013 #contentarea > h1 { display: none; }
 body.rio2013 .entry-content h1, body.rio2013 .entry-content h2, body.rio2013 .entry-content h3 { font-weight: bold; margin-bottom: 0.5em; }
 body.rio2013 .entry-content ul { margin-bottom: 1em; }
-body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #331100; }
-body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: transparent; background-color: #331100; }
+body.rio2013 .entry-content section > header, body.rio2013 .extra-content > section > header, body.rio2013 .extra-content > aside > header { border-top: 1px solid #ffee00; }
+body.rio2013 .entry-content section > header > h1, body.rio2013 .extra-content > section > header > h1, body.rio2013 .extra-content > aside > header > h1 { color: black; background-color: #ffee00; font-family: BureauGrotesque-ThreeSeven; text-transform: uppercase; }
 body.rio2013 a, body.rio2013 a:focus, body.rio2013 a:active { color: #331100; }
 body.rio2013 a:hover { color: #666666; }
 body.rio2013 #footer { background-color: #ffee00; background-image: none; border-top: none; pointer-events: auto; }
@@ -974,16 +985,21 @@ body.rio2013 #footer h1 { font-size: 1.4em; font-family: BureauGrotesque-ThreeSe
 body.rio2013 #footer a, body.rio2013 #footer a:visited, body.rio2013 #footer a:active { color: #331100; }
 body.rio2013 #footer a:hover { color: #666666; }
 body.rio2013 #navigationarea { display: none; }
+body.rio2013 .lc-conference-frontpage #contentarea .extra-content { display: none; }
 body.rio2013 .lc-publication #share-on-social-media { display: none; }
+body.rio2013 .lc-publication header.entry-header { display: block; }
+body.rio2013 .lc-publication header.entry-header h2 { font-size: 1.25em; font-weight: normal; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
 body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-size: 2em; font-weight: bold; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid #331100; }
+body.rio2013 .lc-event-programme .entry-content section:first-child { margin-top: 0; }
+body.rio2013 .lc-event-programme .entry-content .session a { color: #222; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-session > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-panel > header, body.rio2013 .lc-event-programme .entry-content .sessiontype-session .sessiontype-discussion > header { border-top: none; border-bottom: 1px solid black; }
 body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header { border-top: none; }
-body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: #331100; background-color: inherit; padding-left: 0; }
+body.rio2013 .lc-event-programme .entry-content .sessiontype-presentation header h1 { color: black; background-color: inherit; padding-left: 0; }
 body.rio2013 .lc-newspaper-article { position: relative; }
 body.rio2013 .lc-newspaper-article header.heading-image { display: none; }
 body.rio2013 .lc-newspaper-article header.entry-header { display: block; }
-body.rio2013 .lc-newspaper-article #navigationarea { position: absolute; top: 0; right: 0; z-index: 3; display: inherit; }
+body.rio2013 .lc-newspaper-article #navigationarea { position: absolute; top: 0; right: 0; z-index: 3; display: inherit; margin-top: 1em; }
 body.rio2013 .lc-newspaper-article #navigationarea img.show, body.rio2013 .lc-newspaper-article #navigationarea img.hide { position: absolute; z-index: 4; right: 0; display: none; }
 body.rio2013 .lc-newspaper-article #navigationarea img.show { display: inline; }
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc { display: none; position: absolute; right: 15px; background: #EEE111; padding: 1em; width: 300px; top: -22px; z-index: 3; }
@@ -991,6 +1007,8 @@ body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1, bod
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc ul li { margin-bottom: 1em; }
 body.rio2013 .lc-newspaper-article #navigationarea #publication-side-toc h1 { font-weight: bold; font-size: 1.5em; }
 body.rio2013 .lc-event-speaker-list .speaker-card { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
+body.rio2013 .lc-event-speaker-list .speaker-card a, body.rio2013 .lc-event-speaker-list .speaker-card a:active, body.rio2013 .lc-event-speaker-list .speaker-card a:hover, body.rio2013 .lc-event-speaker-list .speaker-card a:visited { color: #ffee00; font-weight: bold; }
+body.rio2013 .lc-event-speaker-list .speaker-profile:hover > div > strong { color: inherit; }
 body.rio2013 #un-button { display: none; }
 
 /*/mediaquery*/
@@ -1016,6 +1034,8 @@ body.rio2013 #un-button { display: none; }
 }
 */
 /*/mediaquery*/
+/*/mediaquery*/
+@media only screen and (max-width: 1024px) { body.rio2013 .full-background-photo { display: none; } }
 /*/mediaquery*/
 @media only screen and (max-width: 768px) { body.rio2013 .lc-newspaper-article #navigationarea { position: static; }
   body.rio2013 .lc-newspaper-article #navigationarea .hide, body.rio2013 .lc-newspaper-article #navigationarea .show { display: none !important; }
