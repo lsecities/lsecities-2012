@@ -95,6 +95,7 @@ body.rio2013 {
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2em;
     background: rgba(255, 255, 255, 1);
     pointer-events: auto;
     opacity: 0.99;
@@ -120,6 +121,16 @@ body.rio2013 {
   
   #header, #footer {
     opacity: 0.90;
+  }
+
+  #footer {
+    opacity: 0.70;
+    transition: opacity 1s ease;
+
+    &:hover {
+      opacity: 0.90;
+      transition: opacity 1s ease;
+    }
   }
   
   #header {
