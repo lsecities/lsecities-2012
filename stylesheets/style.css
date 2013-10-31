@@ -937,11 +937,13 @@ body.rio2013 .full-background-photo.loading { opacity: 0; }
 body.rio2013 .heading-image { display: none; }
 body.rio2013 #mailing-list-subscription { display: none; }
 body.rio2013 .reset-layout { clear: both; overflow: hidden; }
-body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
+body.rio2013 #container { max-width: 960px; margin-left: auto; margin-right: auto; margin-top: 2em; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
 body.rio2013 header.entry-header { display: none; }
 body.rio2013 header.entry-header h1 { color: #331100; }
 body.rio2013 header h1, body.rio2013 header h2 { color: #331100; font-weight: bold; font-size: 2em; }
 body.rio2013 #header, body.rio2013 #footer { opacity: 0.90; }
+body.rio2013 #footer { opacity: 0.70; transition: opacity 1s ease; }
+body.rio2013 #footer:hover { opacity: 0.90; transition: opacity 1s ease; }
 body.rio2013 #header { background-color: #ffee00; pointer-events: auto; }
 body.rio2013 #header > div { position: relative; max-width: 960px; margin-left: auto; margin-right: auto; }
 body.rio2013 #header .twitter-hashtag { position: absolute; top: 10%; line-height: 1em; right: 0; background-color: #555; padding: 0.2em 0.5em; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; -ms-border-radius: 0.2em; -o-border-radius: 0.2em; border-radius: 0.2em; font-weight: bold; }
