@@ -8,13 +8,13 @@ function pods_prepare_conference($pod_slug) {
   $is_conference = true;
 
   $obj['conference_title'] = $pod->field('name');
-  $obj['conference_tagline'] = $pod->field('tagline');
+  $obj['conference_tagline'] = $pod->display('tagline');
   $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
-  $obj['event_info'] = $pod->field('info');
+  $obj['event_info'] = $pod->display('info');
   
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
 
-  $obj['event_blurb'] = do_shortcode($pod->field('abstract'));
+  $obj['event_blurb'] = do_shortcode($pod->display('abstract'));
 
   $slider = $pod->field('slider');
   if(!$slider) {
@@ -47,14 +47,39 @@ function pods_prepare_conference($pod_slug) {
     ));
   }
 
-  $obj['conference_publication_blurb'] = $pod->field('conference_newspaper.blurb');
+  /* process list of media partners */
+  $obj['media_partners'] = array();
+  $conference_media_partners_slugs = (array) $pod->field('media_partners.slug');
+  // MONKEYPATCH_BEGIN: sort by slug
+  asort($conference_media_partners_slugs);
+  // MONKEYPATCH_END
+
+  foreach($conference_media_partners_slugs as $conference_media_partners_slug) {
+    $media_organization_pod = pods('organization', $conference_media_partners_slug);
+    
+    // MONKEYPATCH_BEGIN
+    if($_GET["siteid"] == 'ec2012') {
+      $logo_uri = pods_image_url($media_organization_pod->field('logo_white_raster'), 'original');
+    } else {
+      $logo_uri = pods_image_url($media_organization_pod->field('logo'), 'original');
+    }
+    // MONKEYPATCH_END
+    
+    array_push($obj['media_partners'], array(
+        'id' => $media_organization_pod->field('slug'),
+        'name' => $media_organization_pod->field('name'),
+        'logo_uri' => $logo_uri,
+        'web_uri' => $media_organization_pod->field('web_uri')
+    ));
+  }
+  $obj['conference_publication_blurb'] = $pod->display('conference_newspaper.blurb');
   $obj['conference_publication_cover'] = wp_get_attachment_url($pod->field('conference_newspaper.snapshot.ID'));
   $obj['conference_publication_wp_page'] = get_permalink($pod->field('conference_newspaper.publication_web_page.ID'));
   $obj['conference_publication_pdf'] = $pod->field('conference_newspaper.publication_pdf_uri');
   $obj['conference_publication_issuu'] = $pod->field('conference_newspaper.issuu_uri');
 
   $obj['research_summary_title'] = $pod->field('research_summary.name');
-  $obj['research_summary_blurb'] = $pod->field('research_summary.blurb');
+  $obj['research_summary_blurb'] = $pod->display('research_summary.blurb');
 
   // tiles is a multi-select pick field so in theory we could have more
   // than one tile to display here, however initially we only process the
@@ -78,7 +103,11 @@ function pods_prepare_conference($pod_slug) {
     array_multisort($conference_menu, SORT_ASC, $button_links);
   }
   // add the conference homepage itself
-  array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod_slug));
+  if($pod->field('conference_wp_page.post_name')) {
+    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod->field('conference_wp_page.post_name')));
+  } else {
+    array_unshift($button_links, array('post_title' => $obj['conference_title'], 'guid' => '/ua/conferences/' . $pod_slug));
+  }
   $obj['button_links'] = $button_links;
   
   $conference_list = pods('list', 'urban-age-conferences');

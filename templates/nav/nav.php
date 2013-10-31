@@ -26,7 +26,7 @@ var_trace(var_export($ancestors, true), $TRACE_PREFIX . 'ancestors: ');
 var_trace(var_export($pods_toplevel_ancestor, true), $TRACE_PREFIX . 'pods_toplevel_ancestor: ');
 ?>
 
-<?php if(! ec2012 === lc_data('microsite_id')): ?>
+<?php if('ec2012' !== lc_data('microsite_id')): ?>
 <div class="wireframe threecol last" id="navigationarea">
 
 <?php

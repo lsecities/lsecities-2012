@@ -24,14 +24,37 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
     <div id="contentarea">
     <h1><?php echo $obj['page_title']; ?></h1>
 
+    <?php if($obj['lang2_slug']): ?>
+    <div class='inline-language-switch'>
+      <ul>
+        <li<?php if($obj['request_language'] != $obj['lang2_slug']):?> class='active'<?php endif; ?>><a href='<?php echo '?lang='; ?>'>English</a></li>
+        <li<?php if($obj['request_language'] == $obj['lang2_slug']):?> class='active'<?php endif; ?>><a href='<?php echo '?lang=' . $obj['lang2_slug']; ?>'><?php echo $obj['lang2_name']; ?></a></li>
+      </ul>
+    </div>
+    <?php endif; // ($obj['lang2_slug']) ?>
+    
     <?php if(!empty($obj['sessions'])) : ?>
       <div class="article row">
         <div class="ninecol event-programme">
         <?php process_session_templates($obj['sessions']); ?>
         </div>
         <div class="threecol last">
-          <div>
-          </div>
+          <?php if($obj['timezone_notice']): ?>
+          <dl>
+            <dt>Timezone</dt>
+            <dd><?php echo $obj['timezone_notice']; ?></dd>
+          </dl>
+          <?php endif; // ($obj['timezone_notice']) ?>
+          <?php if($obj['programme_pdf']): ?>
+          <dl>
+            <dt>Full programme</dt>
+            <dd><a href="<?php echo $obj['programme_pdf']; ?>">Download as PDF</a></dd>
+            <?php if($obj['lang2'] and $obj['programme_pdf_lang2']): ?>
+            <dt>Full programme - <?php echo $obj['lang2']; ?></dt>
+            <dd><a href="<?php echo $obj['programme_pdf_lang2']; ?>">Download as PDF</a></dd>
+            <?php endif; // ($obj['lang2'] and $obj['programme_pdf_lang2']) ?>
+          </dl>
+          <?php endif; // ($obj['programme_pdf']) ?>
         </div>
       </div>
     <?php endif ?>

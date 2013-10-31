@@ -38,7 +38,7 @@ $obj = pods_prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
           </div>
           <div class='storify-box'>
             <?php
-            if($obj['live_storify_stories']) {
+            if(count($obj['live_storify_stories']) > 0) {
               echo $obj['live_storify_stories'];
             }
             ?>
@@ -47,7 +47,7 @@ $obj = pods_prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
         <aside class='wireframe fourcol last tweetfeed-box'>
           <?php
           if($obj['live_streaming_video_embedcode']): ?>
-         <a class="twitter-timeline" data-dnt=true href="https://twitter.com/search?q=<?php echo urlencode($obj['live_twitter_querystring']); ?>" data-widget-id="275652040124932096">Tweets about "<?php echo $obj['live_twitter_querystring']; ?>"</a>
+         <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=<?php echo urlencode($obj['live_twitter_querystring']); ?>"<?php if($obj['live_twitter_widget_id']) { ?> data-widget-id="<?php echo $obj['live_twitter_widget_id']; ?>"<?php } ?>>Tweets about "<?php echo $obj['live_twitter_querystring']; ?>"</a>
          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           <?php endif; //($live_streaming_video_embedcode) ?>
         </aside><!-- .tweetfeed-box -->
