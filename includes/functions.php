@@ -280,7 +280,13 @@ function galleria_prepare_multi($pod, $extra_classes, $gallery_field='galleries'
   define(GALLERY_MAX_SLIDES_COUNT, 12);
   $gallery_array = array();
   
-  foreach($pod->field($gallery_field) as $key => $gallery) {
+  $galleries = $pod->field($gallery_field);
+  if(empty($galleries)) {
+    error_log('No galleries found in pod field ' . $gallery_field);
+    return $gallery_array;
+  }
+  
+  foreach($galleries as $key => $gallery) {
     
     $gallery_object = array(
       'slug' => $gallery['slug'],
@@ -423,8 +429,8 @@ function compose_project_list_by_strand($project_status) {
 
 function news_categories($pod_news_categories) {
   var_trace(var_export($pod_news_categories, true), 'news_category_ids');
-  if($pod_news_categories) {
-    $news_categories = '';
+  $news_categories = '';
+  if(is_array($pod_news_categories) and !empty($pod_news_categories)) {
     foreach($pod_news_categories as $category) {
       $news_categories .= $category['term_id'] . ',';
     }
@@ -506,7 +512,7 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
   var_trace(var_export($news_categories_slugs, true), 'news_categories_slugs');
   if(!is_array($news_categories_slugs)) return $output;
   
-  if(count($news_categories_slugs) > 0) {
+  if(is_array($news_categories_slugs) and !empty($news_categories_slugs)) {
     $news_categories = news_categories($news_categories_slugs);
   }
 

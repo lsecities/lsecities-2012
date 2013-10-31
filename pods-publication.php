@@ -103,12 +103,17 @@ $articles_pods->find($search_params);
 $publication_sections = array();
 foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
   preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
-  if($matches[1]) {
-    array_push($publication_sections, array( 'id' => $matches[1], 'title' => $matches[2]));
+  $this_section_id = $matches[1];
+  $this_section_title = empty($matches[2]) ? '' : $matches[2];
+  if($this_section_id) {
+    array_push($publication_sections, array( 'id' => $this_section_id, 'title' => $this_section_title));
   }
 }
+if(empty($publication_sections)) {
+  array_push($publication_sections, array('id' => "10", 'title' => ''));
+}
 var_trace('sections: ' . var_export($publication_sections, true));
-              
+
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
 
@@ -129,18 +134,20 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <?php if($pod_subtitle): ?><h2><?php echo $pod_subtitle; ?></h2><?php endif ; ?>
           </header>
           <div class='entry-content article-text'>
-            <?php echo $pod->field('blurb'); ?>
+            <?php echo $pod->display('blurb'); ?>
           </div>
+          <!--
           <?php if(count($publication_sections) > 1): ?>
           <section class='publication-sections'>
             <h1>Browse content</h1>
             <ul>
-              <?php foreach($publication_sections as $section): ?>
-              <li><a href="#publication-section-<?php echo $section['title']; ?>"><?php echo $section['title']; ?></a></li>
+              <?php foreach($publication_sections as $index_section): ?>
+              <li><a href="#publication-section-<?php echo $index_section['id']; ?>"><?php echo $index_section['title']; ?></a></li>
               <?php endforeach; ?>
             </ul>
           </section>
-          <?php endif; ?>
+          <?php endif; // (count($publication_sections) > 1)?>
+          -->
           <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
@@ -218,11 +225,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               <?php if($articles_pods->total_found()) : ?>
               <div class="articles">
               <?php
-              if(!count($publication_sections)) {
-                $publication_sections = array("010" => "");
-              }
               foreach($publication_sections as $section) : ?>
-                <section id="publication-section-<?php echo $section['title']; ?>">
+                <section id="publication-section-<?php echo $section['id']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
 
                 $articles_pods->reset();
@@ -236,6 +240,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                     // remove trailing comma
                     $author_names = substr($author_names, 0, -2);
                     $article_title = $articles_pods->field('name');
+                    $article_title_lang2 = $articles_pods->field('title_lang2');
+                    $lang2_language_code = $articles_pods->field('language.language_code');
                     ?>
                     <div class="article">
                       <?php if($publication_category == 'research-data' and $articles_pods->field('heading_image')): ?>
@@ -244,7 +250,10 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                       </a>
                       <?php endif; ?>
                       <h1>
-                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>"><?php echo $article_title; ?></a>
+                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/en-gb/' ; ?>"><?php echo $article_title; ?></a>
+                        <?php if($article_title_lang2 and $lang2_language_code): ?>
+                        | <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/' . strtolower($lang2_language_code) . '/'; ?>"><?php echo $article_title_lang2; ?></a>
+                        <?php endif; // ($article_title_lang2 and $lang2_language_code) ?>
                       </h1>
                       <?php if($author_names): ?>
                       <div class="authors">

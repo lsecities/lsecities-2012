@@ -26,13 +26,19 @@ function pods_prepare_slider($pod_slug) {
 
   var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 
-  $obj['news_categories'] = $pod->field('news_category');
+  $news_categories = $pod->field('news_categories');
+  $obj['news_categories'] = array();
+  var_trace($news_categories, 'news_categories');
+  
+  foreach($news_categories as $category) {
+    array_push($obj['news_categories'], $category['slug']);
+  }
   
   /**
    * Read any jquery options and set global variable accordingly; these
    * options are used in the footer.php template.
    */
-  lc_data('slider_jquery_options', $pod->field('slider_jquery_options'));
+  lc_data('slider_jquery_options', $pod->field('jquery_options'));
   
   $obj['slides'] = array();
   

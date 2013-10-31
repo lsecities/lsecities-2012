@@ -30,6 +30,14 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
     <div id="contentarea">
     <h1><?php the_title(); ?></h1>
 
+    <?php if($obj['lang2_slug']): ?>
+    <div class='inline-language-switch'>
+      <ul>
+        <li<?php if($obj['request_language'] != $obj['lang2_slug']):?> class='active'<?php endif; ?>><a href='<?php echo '?lang='; ?>'>English</a></li>
+        <li<?php if($obj['request_language'] == $obj['lang2_slug']):?> class='active'<?php endif; ?>><a href='<?php echo '?lang=' . $obj['lang2_slug']; ?>'><?php echo $obj['lang2_name']; ?></a></li>
+      </ul>
+    </div>
+    <?php endif; // ($obj['lang2_slug']) ?>
     <?php if(is_array($obj['all_speakers'])) : ?>
       <div class="article">
         <?php
