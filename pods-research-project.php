@@ -272,7 +272,7 @@ $news_categories = news_categories($pod->field('news_categories'));
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
-              <?php echo $pod->field('blurb'); ?>
+              <?php echo $pod_blurb; ?>
             </section>
             <?php
               if(count($events)):
