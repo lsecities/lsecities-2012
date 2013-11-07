@@ -25,7 +25,7 @@ function pods_prepare_research_project($pod_slug) {
   var_trace('pod_slug: ' . $pod_slug);
 
   $obj['title'] = $pod->field('name');
-  $obj['events_blurb'] = $pod->field('events_blurb');
+  $obj['events_blurb'] = $pod->display('events_blurb');
   
   return $obj;
 }
