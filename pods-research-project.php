@@ -32,8 +32,8 @@ $obj = pods_prepare_research_project($pod_slug);
 $pod_title = $pod->field('name');
 $pod_tagline = $pod->field('tagline');
 $web_uri = $pod->field('web_uri');
-$pod_summary = do_shortcode($pod->field('summary'));
-$pod_blurb = do_shortcode($pod->field('blurb'));
+$pod_summary = do_shortcode($pod->display('summary'));
+$pod_blurb = do_shortcode($pod->display('blurb'));
 $pod_keywords = $pod->field('keywords');
 
 // project duration
@@ -130,7 +130,7 @@ if($project_funders_count > 0) {
 $project_funders = substr($project_funders, 0, -2);
 
 $research_strand_title = $pod->field('research_strand.name');
-$research_strand_summary = $pod->field('research_strand.summary');
+$research_strand_summary = $pod->display('research_strand.summary');
 
 $project_status = $pod->field('project_status.name');
 
@@ -272,7 +272,7 @@ $news_categories = news_categories($pod->field('news_categories'));
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
-              <?php echo $pod->field('blurb'); ?>
+              <?php echo $pod_blurb; ?>
             </section>
             <?php
               if(count($events)):
