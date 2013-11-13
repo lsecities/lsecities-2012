@@ -10,9 +10,4 @@ if ( !defined('ABSPATH')) exit;
  * admin functionality of the theme.
  */
 
-function activate_categories_for_pages() {  
-  // Add category metabox to page
-  register_taxonomy_for_object_type('category', 'page');  
-}
- // Add to the admin_init hook of your theme functions.php file 
-add_action( 'admin_init', 'activate_categories_for_pages' );
+// e.g. adding categories to pages would go here
