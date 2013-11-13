@@ -22,6 +22,7 @@ function require_fragment($file) {
 
 require_fragment('/includes/theme_configuration.php' );
 require_fragment('/includes/hooks.php' );
+require_fragment('/includes/theme_initialization.php');
 require_fragment('/includes/functions.php' );
 require_fragment('/includes/utility_functions.php' );
 
