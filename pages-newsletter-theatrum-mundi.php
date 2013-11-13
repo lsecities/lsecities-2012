@@ -13,4 +13,4 @@ define('WP_USE_THEMES', false);
  */
 set_query_var('newsletter_branding', 'theatrum-mundi');
 
-require(get_stylesheet_directory() . '/includes/newsletter/pages-newsletter-common.php');
+require(get_stylesheet_directory() . '/includes/pages/newsletter/pages-newsletter-common.php');
