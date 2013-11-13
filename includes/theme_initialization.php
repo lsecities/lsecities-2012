@@ -10,4 +10,21 @@ if ( !defined('ABSPATH')) exit;
  * admin functionality of the theme.
  */
 
-// e.g. adding categories to pages would go here
+/**
+ * Unset WordPress cookies for non-logged-in users
+ * Any users who had these cookies set before we tightened down
+ * Varnish caching will keep getting cache misses until the cookies
+ * expire (up to 1 year...) so we pre-emptively clear them here.
+ */
+add_action('init', function() {
+  if (!is_user_logged_in() and isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+      $parts = explode('=', $cookie);
+      $name = trim($parts[0]);
+      setcookie($name, '', time()-1000);
+      setcookie($name, '', time()-1000, '/');
+    }
+  }
+});
+
