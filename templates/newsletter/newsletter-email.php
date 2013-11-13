@@ -237,10 +237,13 @@
    <?php if($theme_skin == 'ec2012'): ?>
     background-color: #eee111;
     color: #000000;
+   <?php elseif('theatrum-mundi' === $newsletter_branding): ?>
+    background-color: #272e80;
+    color: #ffffff;
    <?php else: ?>
     background-color: #de1f00;
     color: #ffffff;
-	<?php endif; ?>
+   <?php endif; ?>
     font-size: 1.5em;
     display: inline-block;
     text-transform: uppercase;
