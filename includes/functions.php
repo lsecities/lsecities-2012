@@ -594,3 +594,29 @@ function lsecities_get_archives() {
         }
     }
 }
+
+/**
+ * replace post content with 'post-factum' content if a post-date is
+ * defined and is in the past, and if 'post-factum' content is defined
+ * 
+ * @param $post_object The WordPress post object
+ */
+function post_factum_text_for_posts($post_object) {
+  var_trace(var_export($post_object, true), 'post-object');
+  
+  $pod = pods('post', $post_object->ID);
+  
+  $post_factum_content = $pod->display('post_factum_content');
+  $show_post_factum_text_after = new DateTime($pod->field('show_post_factum_text_after'));
+  $datetime_now = new DateTime('now');
+
+  var_trace($show_post_factum_text_after);
+  var_trace($post_factum_content);
+
+  if(!empty($post_factum_content) and $show_post_factum_text_after < $datetime_now) {
+    $post_object->post_content = $post_factum_content;
+    var_trace(var_export($post_object, true), 'replaced post_content');
+  }
+}
+
+add_action('the_post', 'post_factum_text_for_posts');
