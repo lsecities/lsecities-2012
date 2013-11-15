@@ -179,7 +179,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
   }
 
   $email_address = $pod->field('email_address');
-  $blurb = $pod->field('staff_pages_blurb');
+  $blurb = $pod->display('staff_pages_blurb');
   $organization = '<span class=\'org\'>' . $pod->field('organization') . '</span>';
   $role = '<span class=\'role\'>' . $pod->field('role') . '</span>';
   if($role and $organization) {
