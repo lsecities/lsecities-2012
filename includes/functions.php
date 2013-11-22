@@ -652,3 +652,11 @@ function new_wp_trim_excerpt($text) {
 }
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 add_filter('get_the_excerpt', 'new_wp_trim_excerpt');
+
+/**
+ * make 'read more' hellipsis in excerpts link to full post
+ */
+function new_excerpt_more( $more ) {
+	return ' <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">[&hellip;]</a>';
+}
+add_filter( 'excerpt_more', 'new_excerpt_more' );
