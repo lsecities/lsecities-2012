@@ -51,6 +51,6 @@ require_fragment('/includes/pods/pods/list/pods-list.php' );
 require_fragment('/includes/pods/pods/slider/pods-slider.php' );
 require_fragment('/includes/pods/pods/research-project/pods-research-project.php' );
 
-// Inclues for microsites
+// Includes for microsites
 
 // (none yet)
