@@ -13,7 +13,7 @@ $publication_slug = get_post_meta($post->ID, 'pod_slug', true);
 var_trace('pod_slug: ' . $publication_slug);
 $pod = pods('publication_wrappers', $publication_slug);
 
-var_trace(var_export($pod, TRUE), 'publication_POD');
+var_trace(var_export($pod->fields(), TRUE), 'publication_POD');
 
 $publication_pod = $pod; // TODO refactor code and move generation of list of articles to sub used both in pods-articles and pods-publication
 $pod_title = $pod->field('name');
