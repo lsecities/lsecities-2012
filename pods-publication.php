@@ -166,7 +166,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               <li><a class="downloadthis pdf button" href="<?php echo $pod_alt_pdf; ?>"><?php echo $pod_alt_pdf_label; ?></a><?php if(!empty($pod_alt_pdf_filesize)) : ?> (<?php echo $pod_alt_pdf_filesize; ?>)<?php endif; ?></li>
               <?php endif ; ?>
               <?php if($pod_issuu_uri) : ?>
-              <li><a class="readthis online issuu button" href="<?php echo $pod_issuu_uri; ?>">Online browser</a></li>
+              <li><a class="readthis online issuu button" href="<?php echo $pod_issuu_uri; ?>">Browse PDF online</a></li>
               <?php endif ; ?>
             </ul>
             <dl>
