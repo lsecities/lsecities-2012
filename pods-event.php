@@ -126,7 +126,12 @@ $media_items_output_counter = 1;
                   <div class="fourcol<?php echo ' ' . class_if_last_item('last', $media_items_output_counter, 3); ?>">
                     <dt>Audio</dt>
                     <dd>
-                      <p>Listen to <a class="link mp3" href="<?php echo $event_media_item['audio_uri']; ?>">podcast</a>.</p>
+                      <p>
+                        Listen to <a class="link mp3" href="<?php echo $event_media_item['audio_uri']; ?>">podcast</a>
+                        <?php if($event_media_item['label']): ?>
+                        (<?php echo $event_media_item['label']; ?>)
+                        <?php endif; // ($event_media_item['label'] ?>
+                      </p>
                       <?php if(false) : ?><audio class='mediaelement' src='<?php echo $event_media_item['audio_uri']; ?>' preload='auto'></audio><?php endif; ?>
                     </dd>
                   </div>
