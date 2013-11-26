@@ -133,7 +133,7 @@ $gallery = $obj['gallery'];
                   <ul class="sixcol">
                     <?php if($obj['conference_publication_wp_page']): ?><li><a class="readthis online" href="<?php echo $obj['conference_publication_wp_page']; ?>">Read online</a></li><?php endif; ?>
                     <?php if($obj['conference_publication_pdf']): ?><li><a class="downloadthis pdf" href="<?php echo $obj['conference_publication_pdf']; ?>">Download (PDF)</a></li><?php endif; ?>
-                    <?php if($obj['conference_publication_issuu']): ?><li><a class="readthis online" href="<?php echo $obj['conference_publication_issuu']; ?>">Online reader</a></li><?php endif; ?>
+                    <?php if($obj['conference_publication_issuu']): ?><li><a class="readthis online" href="<?php echo $obj['conference_publication_issuu']; ?>">Browse PDF online</a></li><?php endif; ?>
                   </ul>
                   <img src="<?php echo $obj['conference_publication_cover']; ?>" class="sixcol last">
                 </div>
