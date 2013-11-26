@@ -160,7 +160,7 @@ $media_items_output_counter = 1;
                 <?php endif; ?>
                     <li id="person-profile-<?php echo $event_speaker['slug'] ?>" class="person fourcol<?php if((($index + 1) % 3) == 0) : ?> last<?php endif ; ?>">
                       <h1><?php echo $event_speaker['name'] ?> <?php echo $event_speaker['family_name'] ?></h1>
-                      <?php echo $event_speaker['profile_text'] ?>
+                      <?php echo do_https_shortcode($event_speaker['profile_text']); ?>
                       <?php if($event_speaker['homepage'] || $event_speaker['twitterhandle']): ?>
                       <ul class="personal-links">
                       <?php if($event_speaker['homepage']): ?>
