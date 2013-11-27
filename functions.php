@@ -48,6 +48,7 @@ require_fragment('/includes/pods/pods/conference/pods-conference-live.php' );
 require_fragment('/includes/pods/pods/event/pods-event.php' );
 require_fragment('/includes/pods/pods/event-programme/pods-event-programme.php' );
 require_fragment('/includes/pods/pods/list/pods-list.php' );
+require_fragment('/includes/pods/pods/publication/pods-publication.php' );
 require_fragment('/includes/pods/pods/slider/pods-slider.php' );
 require_fragment('/includes/pods/pods/research-project/pods-research-project.php' );
 
