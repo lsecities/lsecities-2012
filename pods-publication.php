@@ -1,10 +1,14 @@
 <?php
+namespace LSECitiesWPTheme\publication;
 /**
  * Template Name: Pods - Publications - index
  * Description: The template used for Publications, showing publication info, listing available articles, etc.
  *
  * @package LSECities2012
  */
+
+$obj_sections = pods_prepare_table_of_contents(get_post_meta($post->ID, 'pod_slug', true));
+
 ?><?php
 $TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'pods-publications';
@@ -102,21 +106,6 @@ $search_params['orderby'] = 't.sequence ASC';
 $search_params['limit'] = -1;
 $articles_pods->find($search_params);
 
-// get list of publication sections
-$publication_sections = array();
-foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
-  preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
-  $this_section_id = $matches[1];
-  $this_section_title = empty($matches[2]) ? '' : $matches[2];
-  if($this_section_id) {
-    array_push($publication_sections, array( 'id' => $this_section_id, 'title' => $this_section_title));
-  }
-}
-if(empty($publication_sections)) {
-  array_push($publication_sections, array('id' => "10", 'title' => ''));
-}
-var_trace('sections: ' . var_export($publication_sections, true));
-
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
 
@@ -140,16 +129,16 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <?php echo $pod->display('blurb'); ?>
           </div>
           <!--
-          <?php if(count($publication_sections) > 1): ?>
+          <?php if(count($obj_sections['sections']) > 1): ?>
           <section class='publication-sections'>
             <h1>Browse content</h1>
             <ul>
-              <?php foreach($publication_sections as $index_section): ?>
+              <?php foreach($obj_sections['sections'] as $index_section): ?>
               <li><a href="#publication-section-<?php echo $index_section['id']; ?>"><?php echo $index_section['title']; ?></a></li>
               <?php endforeach; ?>
             </ul>
           </section>
-          <?php endif; // (count($publication_sections) > 1)?>
+          <?php endif; // (count($obj_sections['sections']) > 1)?>
           -->
           <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </article>
@@ -221,19 +210,16 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
           </section><!-- #wp-posts-reviews -->
             <?php endif; ?>
           <?php endif; ?>
-          <?php if($articles_pods->total_found()) : ?>
+          <?php if($obj_sections['sections']) : ?>
           <section class="row publication-category-<?php echo $publication_category; ?>" id="tableofcontents">
             <header><h1>Articles</h1></header>
             <div class="eightcol">
-              <?php if($articles_pods->total_found()) : ?>
               <div class="articles">
               <?php
-              foreach($publication_sections as $section) : ?>
+              foreach($obj_sections['sections'] as $section) : ?>
                 <section id="publication-section-<?php echo $section['id']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
-
-                $articles_pods->reset();
-                while($articles_pods->fetch()) :
+                foreach($section['articles'] as $article) :
                   if(preg_match("/^" . $section['id'] . "/", $articles_pods->field('sequence'))) :
                     $article_authors = $articles_pods->field('authors');
                     $author_names = '';
@@ -247,36 +233,40 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                     $lang2_language_code = $articles_pods->field('language.language_code');
                     ?>
                     <div class="article">
-                      <?php if($publication_category == 'research-data' and $articles_pods->field('heading_image')): ?>
-                      <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>">
-                      <img class='heading-image' src='<?php echo pods_image_url($articles_pods->field('heading_image'), 'original'); ?>' />
+                      <?php
+                      /**
+                       * if this is the ToC entry for an article part of a research-data publication (e.g.
+                       * data section of a conference newspaper), show heading image as article teaser.
+                       */
+                      if($publication_category == 'research-data' and $article['heading_image']): ?>
+                      <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>">
+                      <img class='heading-image' src='<?php echo pods_image_url($article['heading_image'], 'original'); ?>' />
                       </a>
                       <?php endif; ?>
                       <h1>
-                        <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/en-gb/' ; ?>"><?php echo $article_title; ?></a>
-                        <?php if($article_title_lang2 and $lang2_language_code): ?>
-                        | <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug') . '/' . strtolower($lang2_language_code) . '/'; ?>"><?php echo $article_title_lang2; ?></a>
-                        <?php endif; // ($article_title_lang2 and $lang2_language_code) ?>
+                        <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
+                        <?php if($article['lang2_title'] and $lang2_language_code): ?>
+                        | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
+                        <?php endif; // ($article['lang2_title'] and $lang2_language_code) ?>
                       </h1>
-                      <?php if($author_names): ?>
+                      <?php if($article['authors']): ?>
                       <div class="authors">
-                        <?php echo $author_names ; ?>
+                        <?php echo implode(', ', $article['authors']) ; ?>
                       </div>
                       <?php endif; ?>
-                      <?php if(false and $articles_pods->field('abstract')): //disable until we can generate plain text only ?>
+                      <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
                       <div class="excerpt">
-                        <?php echo shorten_string($articles_pods->field('abstract'), 30); ?><a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $articles_pods->field('slug'); ?>">...</a>
+                        <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
                       </div>
                       <?php endif; ?>
                     </div><!-- .article -->
                 <?php
                   endif;
-                endwhile; ?>
+                endforeach; ?>
                 </section><!-- publication-section-<?php echo $section['title']; ?> -->
               <?php  
               endforeach; ?>
               </div><!-- .articles -->
-              <?php endif; ?>
             </div><!-- .eightcol -->
             <div class="fourcol last">
             </div><!-- .fourcol.last -->
