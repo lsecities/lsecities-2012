@@ -77,20 +77,6 @@ function pods_prepare_table_of_contents($pod_slug) {
             'lang2_langname' => $article_lang2_langname
           );
         }
-        
-        /**
-         * TODO:
-         * add fields:
-         * heading_image
-         * authors
-         */
-        $articles[] = array(
-          'title' => $article_title,
-          'uri' => $article_uri,
-          'lang2_title' => $article_lang2_title,
-          'lang2_uri' => $article_lang2_uri,
-          'lang2_langname' => $article_lang2_langname
-        );
       }
       
       $obj['sections'][] = array(
