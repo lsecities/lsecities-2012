@@ -20,8 +20,6 @@ function pods_prepare_table_of_contents($pod_slug) {
   // retrieve pod by slug
   $pod = pods('publication_wrappers', $pod_slug);
   
-  var_trace(var_export($pod, true), 'publication_pod');
-  
   // return if no such pod was found
   if(!$pod->exists()) {
     return;
@@ -31,8 +29,6 @@ function pods_prepare_table_of_contents($pod_slug) {
   $obj = array();
   
   $obj['title'] = $pod->field('name');
-  
-  var_trace($obj['title'], 'publication_title');
   
   if(count($pod->field('articles'))) {
     $sections = array();
@@ -104,8 +100,6 @@ function pods_prepare_table_of_contents($pod_slug) {
       );
     }
   }
-  
-  var_trace(var_export($obj, true), 'OBJ_SECTIONS');
   
   return $obj;
 }
