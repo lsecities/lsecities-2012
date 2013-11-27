@@ -219,49 +219,36 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
               foreach($obj_sections['sections'] as $section) : ?>
                 <section id="publication-section-<?php echo $section['id']; ?>">
                 <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
-                foreach($section['articles'] as $article) :
-                  if(preg_match("/^" . $section['id'] . "/", $articles_pods->field('sequence'))) :
-                    $article_authors = $articles_pods->field('authors');
-                    $author_names = '';
-                    foreach($article_authors as $author) {
-                      $author_names = $author_names . $author['name'] . ' ' . $author['family_name'] . ', ';
-                    }
-                    // remove trailing comma
-                    $author_names = substr($author_names, 0, -2);
-                    $article_title = $articles_pods->field('name');
-                    $article_title_lang2 = $articles_pods->field('title_lang2');
-                    $lang2_language_code = $articles_pods->field('language.language_code');
-                    ?>
-                    <div class="article">
-                      <?php
-                      /**
-                       * if this is the ToC entry for an article part of a research-data publication (e.g.
-                       * data section of a conference newspaper), show heading image as article teaser.
-                       */
-                      if($publication_category == 'research-data' and $article['heading_image']): ?>
-                      <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>">
-                      <img class='heading-image' src='<?php echo pods_image_url($article['heading_image'], 'original'); ?>' />
-                      </a>
-                      <?php endif; ?>
-                      <h1>
-                        <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
-                        <?php if($article['lang2_title'] and $lang2_language_code): ?>
-                        | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
-                        <?php endif; // ($article['lang2_title'] and $lang2_language_code) ?>
-                      </h1>
-                      <?php if($article['authors']): ?>
-                      <div class="authors">
-                        <?php echo implode(', ', $article['authors']) ; ?>
-                      </div>
-                      <?php endif; ?>
-                      <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
-                      <div class="excerpt">
-                        <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
-                      </div>
-                      <?php endif; ?>
-                    </div><!-- .article -->
+                foreach($section['articles'] as $article) : ?>
+                  <div class="article">
+                    <?php
+                    /**
+                     * if this is the ToC entry for an article part of a research-data publication (e.g.
+                     * data section of a conference newspaper), show heading image as article teaser.
+                     */
+                    if($publication_category == 'research-data' and $article['heading_image']): ?>
+                    <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>">
+                    <img class='heading-image' src='<?php echo pods_image_url($article['heading_image'], 'original'); ?>' />
+                    </a>
+                    <?php endif; ?>
+                    <h1>
+                      <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
+                      <?php if($article['lang2_title'] and $lang2_language_code): ?>
+                      | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
+                      <?php endif; // ($article['lang2_title'] and $lang2_language_code) ?>
+                    </h1>
+                    <?php if($article['authors']): ?>
+                    <div class="authors">
+                      <?php echo implode(', ', $article['authors']) ; ?>
+                    </div>
+                    <?php endif; ?>
+                    <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
+                    <div class="excerpt">
+                      <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
+                    </div>
+                    <?php endif; ?>
+                  </div><!-- .article -->
                 <?php
-                  endif;
                 endforeach; ?>
                 </section><!-- publication-section-<?php echo $section['title']; ?> -->
               <?php  
