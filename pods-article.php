@@ -9,8 +9,6 @@ $TRACE_ENABLED = is_user_logged_in();
 
 $obj = pods_prepare_article($post->ID);
 
-$obj_sections = LSECitiesWPTheme\publication\pods_prepare_table_of_contents($post->ID);
-
 /**
  * Copy gallery object to own variable for compatibility with
  * gallery partial.
