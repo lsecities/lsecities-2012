@@ -52,6 +52,8 @@ $pod_alt_pdf_label = $pod->field('publication_alt_pdf.guid') && $pod->field('pub
 /**
  * Fetch data for 2nd language publication PDF and extra ('alt') publication PDF
  */
+$lang2_language_code = $pod->field('language.slug');
+
 $pod_pdf_lang2 = $pod->field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_pdf_lang2.ID', TRUE)) : $pod->field('publication_pdf_lang2_uri');
 $pod_pdf_filesize_lang2 = $pod->field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf_lang2.ID', TRUE))) / 1e+6 ) : '';
 $pod_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf_lang2.ID', TRUE)) : $pod->field('publication_alt_pdf_lang2_uri');
