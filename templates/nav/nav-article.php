@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
     <h1><?php echo $obj_sections['title']; ?></h1>
     <ul>
     <?php
-    foreach($obj_sections as $section) : ?>
+    foreach($obj_sections['sections'] as $section) : ?>
       <?php if($section['title']) { ?><h2><?php echo $section['title']; ?></h2><?php }
       foreach($section['articles'] as $article) : ?>
       <li>
@@ -40,8 +40,8 @@ jQuery(document).ready(function($) {
         <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
       </li>
       <?php
-      endforeach; 
-    endforeach; ?>
+      endforeach; // ($section['articles'] as $article) 
+    endforeach; // ($obj_sections as $section) ?>
     </ul>
   </div>
-<?php endif; ?></nav>
+<?php endif; // (count($obj_sections['sections']))?></nav>
