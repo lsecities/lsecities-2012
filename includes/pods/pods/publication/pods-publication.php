@@ -52,18 +52,20 @@ function pods_prepare_table_of_contents($pod_slug) {
         var_trace(var_export($article_lang2, true), 'article_lang2');
         
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) {
-          $article_uri = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
-          $article_title = $article['name'];
+          $this_article = array();
+          
+          $this_article['uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
+          $this_article['title'] = $article['name'];
           if(!empty($article_lang2['name'])) {
-            $article_lang2_uri = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article_lang2['language_code']) . '/';
-            $article_lang2_title = $article['title_lang2'];
-            $article_lang2_langname = $article_lang2['name'];
+            $this_article['lang2_uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article_lang2['language_code']) . '/';
+            $this_article['lang2_title'] = $article['title_lang2'];
+            $this_article['lang2_langname'] = $article_lang2['name'];
           }
           
-          $authors = array();
+          $this_article['authors'] = array();
           
           foreach(sort_linked_field($article_pod->field('authors'), 'family_name', SORT_ASC) as $author) {
-            $authors[] = $author['name'] . ' ' . $author['family_name'];
+            $this_article['authors'][] = $author['name'] . ' ' . $author['family_name'];
           }
           
           /**
@@ -72,13 +74,13 @@ function pods_prepare_table_of_contents($pod_slug) {
            * heading_image
            */
           $articles[] = array(
-            'title' => $article_title,
-            'uri' => $article_uri,
-            'authors' => $authors,
+            'title' => $this_article['title'],
+            'uri' => $this_article['uri'],
+            'authors' => $this_article['authors'],
             'heading_image' => pods_image_url($article['heading_image'], 'original'),
-            'lang2_title' => $article_lang2_title,
-            'lang2_uri' => $article_lang2_uri,
-            'lang2_langname' => $article_lang2_langname
+            'lang2_title' => $this_article['lang2_title'],
+            'lang2_uri' => $this_article['lang2_uri'],
+            'lang2_langname' => $this_article['lang2_langname']
           );
         }
       }
