@@ -60,7 +60,7 @@ function pods_prepare_table_of_contents($pod_slug) {
           
           var_trace(var_export($article['authors'], true), 'PUBLICATION_AUTHORS');
           
-          foreach($article_pod->field('authors') as $author) {
+          foreach(sort_linked_field($pod->field('authors'), 'family_name', SORT_ASC) as $author) {
             $authors[] = $author['name'] . ' ' . $author['family_name'];
           }
           
