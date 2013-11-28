@@ -22,34 +22,21 @@ jQuery(document).ready(function($) {
 </script>
 <?php endif; // (lc_data('x-site-id') === 'ec2012' or lc_data('x-site-id') === 'rio2013') ?>
 <nav id="publication-side-toc">
-<?php if(count($publication_pod->field('articles'))) : ?>
+<?php if(count($obj_sections)) : ?>
   <div>
     <h1><?php echo $publication_pod->field('name'); ?></h1>
     <ul>
     <?php
-    $sections = array();
-    foreach(preg_split("/\n/", $publication_pod->field('sections')) as $section_line) {
-      preg_match("/^(\d+)?\s?(.*)$/", $section_line, $matches);
-      array_push($sections, array( 'id' => $matches[1], 'title' => $matches[2]));
-    }
-    var_trace(var_export($sections, true), 'sections');
-    
-    if(!count($sections)) {
-      $sections = array("010" => "");
-    }
-    foreach($sections as $section) : ?>
+    foreach($obj_sections as $section) : ?>
       <?php if($section['title']) { ?><h2><?php echo $section['title']; ?></h2><?php }
-      foreach($publication_pod->field('articles', array('orderby' => 'sequence ASC')) as $article) :
-        if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) : ?>
-          <?php var_trace(var_export($article, true), 'article-pod-object'); ?>
-          <li>
-            <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/'; ?>"><?php echo $article['name']; ?></a>
-            <?php if(!empty($article['language']['name'])) : ?>
-              (English) - <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article['language']['language_code']) . '/'; ?>">(<?php echo $article['language']['name']; ?>)</a>
-            <?php endif; ?>
-          </li>
+      foreach($section['articles'] as $article) : ?>
+      <li>
+        <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
+        <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
+        | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
+        <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
+      </li>
       <?php
-        endif;
       endforeach; 
     endforeach; ?>
     </ul>
