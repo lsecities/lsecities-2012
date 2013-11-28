@@ -45,18 +45,22 @@ function pods_prepare_table_of_contents($pod_slug) {
       $articles = array();
       
       foreach($pod->field('articles', array('orderby' => 'sequence ASC')) as $article) {
+        
+        $article_pod = pods('article', $article['id']);
+        $article_lang2 = $article_pod->field('language');
+        
+        var_trace(var_export($article_lang2, true), 'article_lang2');
+        
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) {
           $article_uri = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
           $article_title = $article['name'];
-          if(!empty($article['language']['name'])) {
-            $article_lang2_uri = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article['language']['language_code']) . '/';
+          if(!empty($article_lang2['name'])) {
+            $article_lang2_uri = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article_lang2['language_code']) . '/';
             $article_lang2_title = $article['title_lang2'];
-            $article_lang2_langname = $article['language']['name'];
+            $article_lang2_langname = $article_lang2['name'];
           }
           
           $authors = array();
-          
-          $article_pod = pods('article', $article['id']);
           
           foreach(sort_linked_field($article_pod->field('authors'), 'family_name', SORT_ASC) as $author) {
             $authors[] = $author['name'] . ' ' . $author['family_name'];
