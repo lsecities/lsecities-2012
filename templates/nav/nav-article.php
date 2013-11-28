@@ -1,8 +1,11 @@
 <?php
-$TRACE_ENABLED = is_user_logged_in();
-$TRACE_PREFIX = 'nav.php -- ';
 $current_post_id = $post->ID;
-$publication_pod = lc_data('publication_pod');
+
+// prepare Table of Contents
+$obj_sections = LSECitiesWPTheme\publication\pods_prepare_table_of_contents($post->ID);
+
+var_trace(var_export($obj_sections, true), 'toc_for_nav');
+
 ?>
 <?php 
 $http_req_headers = apache_request_headers();
@@ -22,9 +25,9 @@ jQuery(document).ready(function($) {
 </script>
 <?php endif; // (lc_data('x-site-id') === 'ec2012' or lc_data('x-site-id') === 'rio2013') ?>
 <nav id="publication-side-toc">
-<?php if(count($obj_sections)) : ?>
+<?php if(count($obj_sections['sections'])) : ?>
   <div>
-    <h1><?php echo $publication_pod->field('name'); ?></h1>
+    <h1><?php echo $obj_sections['title']; ?></h1>
     <ul>
     <?php
     foreach($obj_sections as $section) : ?>
