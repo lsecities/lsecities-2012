@@ -99,13 +99,6 @@ if(is_array($publication_partners_list)) {
 $publication_catalogue_data = $pod->field('catalogue_data');
 $publishing_date = $pod->field('publishing_date');
 
-$articles_pods = pods('article');
-$search_params = array();
-$search_params['where'] = 'in_publication.slug = \'' .$pod->field('slug') . '\'';
-$search_params['orderby'] = 't.sequence ASC';
-$search_params['limit'] = -1;
-$articles_pods->find($search_params);
-
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
 
