@@ -2,7 +2,7 @@
 $current_post_id = $post->ID;
 
 // prepare Table of Contents
-$obj_sections = LSECitiesWPTheme\publication\pods_prepare_table_of_contents($post->ID);
+$obj_sections = LSECitiesWPTheme\publication\pods_prepare_table_of_contents($parent_publication_id);
 
 var_trace(var_export($obj_sections, true), 'toc_for_nav');
 

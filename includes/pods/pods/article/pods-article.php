@@ -36,7 +36,8 @@ function pods_prepare_article($post_id) {
   $obj['lang2_name'] = $pod->field('language.name');
   $article_layout = $pod->field('layout');
 
-  $publication_pod = pods('publication_wrappers', $pod->field('in_publication.id'));
+  $obj['parent_publication_id'] = $pod->field('in_publication.id');
+  $publication_pod = pods('publication_wrappers', $obj['parent_publication_id']);
   lc_data('publication_pod', $publication_pod);
 
   // grab the image URI from the Pod

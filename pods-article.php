@@ -9,6 +9,8 @@ $TRACE_ENABLED = is_user_logged_in();
 
 $obj = pods_prepare_article($post->ID);
 
+set_query_var('parent_publication_id', $obj['parent_publication_id']);
+
 /**
  * Copy gallery object to own variable for compatibility with
  * gallery partial.
