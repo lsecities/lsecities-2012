@@ -222,15 +222,15 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                      * data section of a conference newspaper), show heading image as article teaser.
                      */
                     if($publication_category == 'research-data' and $article['heading_image']): ?>
-                    <a href="<?php echo PODS_BASEURI_ARTICLES . '/' . $article['slug']; ?>">
+                    <a href="<?php $article['uri']; ?>">
                     <img class='heading-image' src='<?php echo pods_image_url($article['heading_image'], 'original'); ?>' />
                     </a>
                     <?php endif; ?>
                     <h1>
                       <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
-                      <?php if($article['lang2_title'] and $lang2_language_code): ?>
+                      <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
                       | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
-                      <?php endif; // ($article['lang2_title'] and $lang2_language_code) ?>
+                      <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
                     </h1>
                     <?php if($article['authors']): ?>
                     <div class="authors">
