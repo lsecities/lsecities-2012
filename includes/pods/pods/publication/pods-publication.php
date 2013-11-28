@@ -56,7 +56,11 @@ function pods_prepare_table_of_contents($pod_slug) {
           
           $authors = array();
           
-          foreach($article['authors'] as $author) {
+          $article_pod = pods('article', $article['id']);
+          
+          var_trace(var_export($article['authors'], true), 'PUBLICATION_AUTHORS');
+          
+          foreach($article_pod->field('authors') as $author) {
             $authors[] = $author['name'] . ' ' . $author['family_name'];
           }
           
