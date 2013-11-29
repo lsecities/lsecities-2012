@@ -225,7 +225,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                     <a href="<?php echo $article['uri']; ?>">
                     <img class='heading-image' src='<?php echo $article['heading_image']; ?>' />
                     </a>
-                    <?php endif; ?>
+                    <?php endif; // ($publication_category == 'research-data' and $article['heading_image']) ?>
                     <h1>
                       <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
                       <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
