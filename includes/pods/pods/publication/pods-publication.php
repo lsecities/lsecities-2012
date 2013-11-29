@@ -51,7 +51,7 @@ function pods_prepare_table_of_contents($pod_slug) {
 
         var_trace(var_export($article_lang2, true), 'article_lang2');
 
-        if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) {
+        if(preg_match("/^" . $section['id'] . "/", '0' . $article['sequence'])) {
           $this_article = array();
 
           $this_article['uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
