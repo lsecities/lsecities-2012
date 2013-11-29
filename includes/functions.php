@@ -1,7 +1,7 @@
 <?php
 /**
  * Functions for the LSE Cities 2012 WordPress+Pods theme
- * 
+ *
  * @package LSECities2012
  */
 
@@ -25,25 +25,29 @@ if(LSECITIES_THEME_DEBUG) {
 
 /**
  * tracing/debugging output
- * 
+ *
  * This function can either return a formatted dump of the variable to
  * debug, or send the dump to the defined error_log. Ideally this
  * should be coupled with PHP INI settings to enable error log, to
  * disable error output on pages and to send logs to a specific
  * file instead
- * 
+ *
  * @param mixed $var The variable to dump
  * @param string $prefix Text to prepend to the variable to be dumped
- * @param bool $enabled Only if true will the function do anything
  * @param string $destination Whether to return a string ('page') or to
  *        send output to error_log ('error_log')
  * @return bool the tracing output if $destination == 'page' or the
  *         return value of error_log() if $destination == 'error_log'
  */
-function var_trace($var, $prefix = 'pods', $enabled = LSECITIES_THEME_DEBUG, $destination = 'error_log') {
-  if($enabled) {
+function var_trace($var, $prefix = 'pods', $destination = 'error_log') {
+  /**
+	 * If LSECITIES_THEME_DEBUG is set to 1 (only trace actions of logged-in users)
+	 * or if LSECITIES_THEME_DEBUG is set to 2 (trace actions of any visitor), then log,
+	 * otherwise do nothing.
+	 */
+	if((LSECITIES_THEME_DEBUG == 1 and is_user_logged_in()) or LSECITIES_THEME_DEBUG == 2) {
     $output_string = "tracing $prefix : " . var_export($var, true) . "\n\n";
-    
+
     if($destination == 'page') {
       return "<!-- $output_string -->";
     } elseif($destination == 'error_log') {
@@ -87,7 +91,7 @@ function do_https_shortcode($content) {
   return $content;
 }
 
-/** 
+/**
  * enable uploads of file types we need
  */
 add_filter('upload_mimes', 'custom_upload_mimes');
@@ -122,7 +126,7 @@ function shorten_string($string, $wordsreturned) {
   return $retval;
 }
 
-/* 
+/*
  * Set wp_title according to current Pod content
  */
 include_once('pods/class.podobject.inc.php');
@@ -130,16 +134,16 @@ function set_pod_page_title($title, $sep, $seplocation) {
   global $this_pod;
   if(isset($this_pod) and $this_pod->page_title){
     $title = $this_pod->page_title;
-    
+
     if($this_pod->page_section){
       $title .= " $sep " . $this_pod->page_section;
     }
-    
+
     $title .= " $sep ";
-    
+
     var_trace($title, 'page_title');
   }
-  
+
   return $title;
 }
 add_filter('wp_title', 'set_pod_page_title', 5, 3);
@@ -159,12 +163,12 @@ function get_current_page_URI() {
 
 /* attribution and license metadata support for media library
  * thanks to jvelez (http://stackoverflow.com/questions/11475741/word-press-saving-custom-field-to-database)
- * 
- * To learn more: 
+ *
+ * To learn more:
  * http://net.tutsplus.com/tutorials/wordpress/creating-custom-fields-for-attachments-in-wordpress/
  * http://codex.wordpress.org/Plugin_API/Filter_Reference/attachment_fields_to_save
- * 
- * Weird Wordpress convention : Fields prefixed with an underscore 
+ *
+ * Weird Wordpress convention : Fields prefixed with an underscore
  * (_RevisionDate) will not be listed in the drop down of available custom fields on the post/page screen;
  * We only need the custom fields in the media library page
  */
@@ -175,27 +179,27 @@ function get_media_library_item_custom_form_fields($form_fields, $post) {
     'value' => get_post_meta($post->ID, '_attribution_name', true),
     'helps' => 'Media author (or rights holder)'
   );
-  
+
   $form_fields['attribution_uri'] = array(
     'label' => 'URI of original work',
     'input' => 'text',
     'value' => get_post_meta($post->ID, '_attribution_uri', true),
     'helps' => 'Link to original work for attribution purposes'
   );
-  
+
   return $form_fields;
 }
 
-add_filter('attachment_fields_to_edit', "get_media_library_item_custom_form_fields", null, 2);  
+add_filter('attachment_fields_to_edit', "get_media_library_item_custom_form_fields", null, 2);
 
 function save_media_library_item_custom_form_fields($post, $attachment) {
   if(isset($attachment['attribution_name'])) {
-    update_post_meta($post['ID'], '_attribution_name', $attachment['attribution_name']);  
+    update_post_meta($post['ID'], '_attribution_name', $attachment['attribution_name']);
   }
   if(isset($attachment['attribution_uri'])) {
-    update_post_meta($post['ID'], '_attribution_uri', $attachment['attribution_uri']);  
+    update_post_meta($post['ID'], '_attribution_uri', $attachment['attribution_uri']);
   }
-  
+
   return $post;
 }
 
@@ -228,7 +232,7 @@ function format_media_attribution($media_item_id) {
       // if either meta field is provided, just join both as only one will be output
       $image_attribution = 'Photo credits: ' . $image_attribution_name . $image_attribution_uri;
     }
-    
+
     return $image_attribution;
 }
 
@@ -242,9 +246,9 @@ function galleria_prepare($pod, $extra_classes = '', $gallery_field = 'gallery',
   if($gallery_field != '') {
     $gallery_field .= '.';
   }
-  
+
   var_trace($gallery_field, 'gallery field');
-  
+
   $gallery = array(
     'slug' => $pod->field($gallery_field . 'slug'),
     'extra_classes' => $extra_classes,
@@ -265,35 +269,35 @@ function galleria_prepare($pod, $extra_classes = '', $gallery_field = 'gallery',
       }
     }
   }
-  
+
   // shuffle order of slides randomly if requested by caller
   if($random_slide_order) {
     shuffle($gallery['slides']);
   }
-  
+
   var_trace($gallery, 'gallery');
-  
+
   return $gallery;
 }
 
 function galleria_prepare_multi($pod, $extra_classes, $gallery_field='galleries') {
   define(GALLERY_MAX_SLIDES_COUNT, 12);
   $gallery_array = array();
-  
+
   $galleries = $pod->field($gallery_field);
   if(empty($galleries)) {
     error_log('No galleries found in pod field ' . $gallery_field);
     return $gallery_array;
   }
-  
+
   foreach($galleries as $key => $gallery) {
-    
+
     $gallery_object = array(
       'slug' => $gallery['slug'],
       'extra_classes' => $extra_classes,
       'slides' => array()
     );
-  
+
     // if picasa_gallery_id is set, add this to the object
     if($gallery['picasa_gallery_id']) {
       $gallery_object['picasa_gallery_id'] = $gallery['picasa_gallery_id'];
@@ -321,7 +325,7 @@ function galleria_prepare_multi($pod, $extra_classes, $gallery_field='galleries'
  * Parse date and return it as a YYYY-MM-DD string, or YYYY-MM, or YYYY
  * month/day given as single digit are padded with zero to make
  * dates sortable with array_multisort
- * 
+ *
  * @param $date The date
  * @param $format Output format (can be 'ISO' for YYYY-MM-DD or 'jFY'
  *   for DD Month YYYY; if day or day and month are missing, only output
@@ -331,35 +335,35 @@ function date_string($date, $format = 'ISO') {
   if(!$date) {
     return false;
   }
-  
+
   $match = array();
-  
+
   if(!preg_match('/(\d{4})(\-(\d{1,2})(\-(\d{1,2}))?)?/', $date, $match)) {
     return false;
   }
-  
+
   $date_array = array(
     'year' => $match[1],
     'month' => $match[3],
     'day' => $match[5]
   );
-  
+
   var_trace(var_export($date_array, true), 'date_arraytime');
-  
+
 
   $date_string = sprintf("%4d", $date_array['year']);
   if($date_array['month']) {
     $date_string .= "-" . sprintf("%02d", $date_array['month']);
-    
+
     if($date_array['day']) {
       $date_string .= "-" . sprintf("%02d", $date_array['day']);
     }
   }
-  
+
   // now that we have the date in ISO format, apply any further
   // formatting as requested, or return ISO date if no other
   // format has been requested
-  
+
   // j F Y (DD Month YYYY) format
   if($format === 'jFY') {
     if(!$date_array['day'] and !$date_array['month']) {
@@ -371,7 +375,7 @@ function date_string($date, $format = 'ISO') {
     }
     $date_string = date($format, strtotime($date_string));
   }
-  
+
   var_trace($date_string, 'date_string');
   return $date_string;
 }
@@ -397,16 +401,16 @@ function compose_project_list_by_strand($project_status) {
   // we want to display strands in a specific order, using strands' slugs for sorting (NNN-strand-slug)
   // where NNN is e.g. 010, 020, etc. for the first, second, etc. strand respectively
   $research_strands_pod = pods('research_stream', array('orderby' => 'slug'));
-  
+
   $projects_by_strand = array();
-  
+
   while($research_strands_pod->fetch()) {
     $projects_by_strand[$research_strands_pod->field('slug')] = array(
       'name' => $research_strands_pod->field('name'),
       'projects' => array()
     );
   }
-  
+
   while($projects_pod->fetch()) {
     $projects_by_strand[$projects_pod->field('research_strand.slug')]['projects'][] = array(
       'slug' => $projects_pod->field('slug'),
@@ -415,7 +419,7 @@ function compose_project_list_by_strand($project_status) {
       'strand_slug' => $projects_pod->field('research_strand.slug')
     );
   }
-  
+
   foreach($projects_by_strand as $key => $value) {
     if(sizeof($projects_by_strand[$key]['projects']) == 0) {
       error_log('removing empty research strand "' . $key . '" from ' . $project_status . ' projects list');
@@ -448,7 +452,7 @@ function custom_query_shortcode($atts) {
 
    // EXAMPLE USAGE:
    // [loop the_query="showposts=100&post_type=page&post_parent=453"]
-   
+
    // Defaults
    extract(shortcode_atts(array(
       "the_query" => ''
@@ -458,32 +462,32 @@ function custom_query_shortcode($atts) {
    $the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
    $the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
 
-   // query is made               
+   // query is made
    query_posts($the_query);
-   
+
    // Reset and setup variables
    $output = '';
    $temp_title = '';
    $temp_link = '';
-   
+
    // the loop
    if (have_posts()) : while (have_posts()) : the_post();
-   
+
       $temp_title = get_the_title($post->ID);
       $temp_link = get_permalink($post->ID);
-      
+
       // output all findings - CUSTOMIZE TO YOUR LIKING
       $output .= "<li><a href='$temp_link'>$temp_title</a></li>";
-          
+
    endwhile; else:
-   
+
       $output .= "nothing found.";
-      
+
    endif;
-   
+
    wp_reset_query();
    return $output;
-   
+
 }
 add_shortcode("loop", "custom_query_shortcode");
 
@@ -492,16 +496,16 @@ define(COMPONENTS_ROOT, 'templates/partials');
 
 /**
  * News component
- * 
+ *
  * This function outputs a News section or a combined
  * News/Events/Highlights section as used on Slider frontpages and
  * Research project pages.
- * 
+ *
  * If only one or more news categories are provided, the template
  * used will be News only (three news items with title and blurb, up to
  * ten further news items with title only). If news/highlights are
  * passed in, the layout used will be combined News/Highlights.
- * 
+ *
  * @param array $news_categories_slugs The list of categories slugs
  * @param string $news_prefix Any text to be displayed in the News heading
  * @param array $linked_events An array of Events pods
@@ -511,7 +515,7 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
   $output = '';
   var_trace(var_export($news_categories_slugs, true), 'news_categories_slugs');
   if(!is_array($news_categories_slugs)) return $output;
-  
+
   if(is_array($news_categories_slugs) and !empty($news_categories_slugs)) {
     $news_categories = news_categories($news_categories_slugs);
   }
@@ -519,7 +523,7 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
   var_trace(var_export($news_categories, true), 'news_categories');
   var_trace(count($news_categories_slug), 'count($news_categories_slugs)');
   var_trace($linked_events, 'linked_events');
-  
+
   if(count($news_categories_slugs) > 0 and is_array($linked_events) and count($linked_events) >0) {
     $template = COMPONENTS_ROOT . '/news+highlights.inc.php';
   } elseif(count($news_categories_slugs) > 0) {
@@ -534,26 +538,26 @@ function component_news($news_categories_slugs, $news_prefix = '', $linked_event
 }
 
 /**
- * 
+ *
  */
 /*
 function lsecities_get_archives() {
   $current_year = date("Y");
   $archive_by_month = array();
-  
+
   // look back until 2005
   for($year = $current_year; $year >= 2005; $year--) {
     $archive_by_month[$year] = wp_get_archives(array(
       'show_post_count' => TRUE,
       'echo' => FALSE
     ));
-    
+
     // remove whole year if we have no news at all for the year
     if(empty($archive_by_month[$year])) {
       unset($archive_by_month[$year]);
     }
   }
-  
+
   return $archive_by_month;
 }
 */
@@ -598,14 +602,14 @@ function lsecities_get_archives() {
 /**
  * replace post content with 'post-factum' content if a post-date is
  * defined and is in the past, and if 'post-factum' content is defined
- * 
+ *
  * @param $post_object The WordPress post object
  */
 function post_factum_text_for_posts($post_object) {
   var_trace(var_export($post_object, true), 'post-object');
-  
+
   $pod = pods('post', $post_object->ID);
-  
+
   $post_factum_content = $pod->display('post_factum_content');
   $show_post_factum_text_after = new DateTime($pod->field('show_post_factum_text_after'));
   $datetime_now = new DateTime('now');
@@ -629,14 +633,14 @@ function new_wp_trim_excerpt($text) {
     $raw_excerpt = $text;
     if ( '' == $text ) {
         $text = get_the_content('');
- 
+
         $text = strip_shortcodes( $text );
- 
+
         $text = apply_filters('the_content', $text);
         $text = str_replace(']]>', ']]>', $text);
         $text = strip_tags($text, '<a>');
         $excerpt_length = apply_filters('excerpt_length', 55);
- 
+
         $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
         $words = preg_split('/(<a.*?a>)|\n|\r|\t|\s/', $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE );
         if ( count($words) > $excerpt_length ) {
@@ -648,7 +652,7 @@ function new_wp_trim_excerpt($text) {
         }
     }
     return apply_filters('new_wp_trim_excerpt', $text, $raw_excerpt);
- 
+
 }
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 add_filter('get_the_excerpt', 'new_wp_trim_excerpt');
