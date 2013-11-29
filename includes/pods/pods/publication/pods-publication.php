@@ -44,12 +44,10 @@ function pods_prepare_table_of_contents($pod_slug) {
     foreach($sections as $section) {
       $articles = array();
 
-      foreach($pod->field('articles', array('orderby' => 'sequence ASC')) as $article) {
+      foreach(sort_linked_field($pod->field('articles'), 'sequence', SORT_ASC) as $article) {
 
         $article_pod = pods('article', $article['id']);
         $article_lang2 = $article_pod->field('language');
-
-        var_trace(var_export($article_lang2, true), 'article_lang2');
 
         if(preg_match("/^" . $section['id'] . "/", $article['sequence'])) {
           $this_article = array();
