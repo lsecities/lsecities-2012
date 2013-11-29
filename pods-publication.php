@@ -114,7 +114,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
           <?php include('templates/partials/galleria.inc.php'); ?>
         </header>
         <?php endif; ?>
-        
+
         <article class='wireframe eightcol row'>
           <header class='entry-header'>
             <h1><?php echo $pod_title; ?></h1>
@@ -182,7 +182,7 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
             <?php if($publication_catalogue_data): ?>
               <dt>Catalogue data</dt>
               <dd><?php echo $publication_catalogue_data; ?></dd>
-            <?php endif; ?>         
+            <?php endif; ?>
             </dl>
           </div>
         </aside><!-- #keyfacts -->
@@ -222,8 +222,8 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                      * data section of a conference newspaper), show heading image as article teaser.
                      */
                     if($publication_category == 'research-data' and $article['heading_image']): ?>
-                    <a href="<?php $article['uri']; ?>">
-                    <img class='heading-image' src='<?php echo pods_image_url($article['heading_image'], 'original'); ?>' />
+                    <a href="<?php echo $article['uri']; ?>">
+                    <img class='heading-image' src='<?php echo $article['heading_image']; ?>' />
                     </a>
                     <?php endif; ?>
                     <h1>
@@ -246,14 +246,14 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                 <?php
                 endforeach; ?>
                 </section><!-- publication-section-<?php echo $section['title']; ?> -->
-              <?php  
+              <?php
               endforeach; ?>
               </div><!-- .articles -->
             </div><!-- .eightcol -->
             <div class="fourcol last">
             </div><!-- .fourcol.last -->
           </section><!-- .row -->
-        <?php endif ?> 
+        <?php endif ?>
       </div><!-- .extra-content -->
     </div><!-- #contentarea -->
   </div><!-- #post-<?php the_ID(); ?> -->
