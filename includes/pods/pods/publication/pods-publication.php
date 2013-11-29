@@ -44,14 +44,19 @@ function pods_prepare_table_of_contents($pod_slug) {
     foreach($sections as $section) {
       $articles = array();
 
-      foreach($pod->field('articles', array('orderby' => 'sequence ASC')) as $article) {
+      foreach(sort_linked_field($pod->field('articles'), 'sequence', SORT_ASC) as $article) {
 
         $article_pod = pods('article', $article['id']);
         $article_lang2 = $article_pod->field('language');
 
-        var_trace(var_export($article_lang2, true), 'article_lang2');
+				// TODO: just rely on full ordering when repeatable fields are available in Pods
+				// here we are using substr because the leading zero from
+				// $article['sequence'] is actually dropped by Pods when entering data as the
+				// value is numeric; this only works if we never have more than 9 sections in
+				// a single publication - more than fine for now.
+				var_trace('section_substr: ' . substr($section['id'], 0, 1) . ', article_sequence: ' . $article['sequence']);
 
-        if(preg_match("/^" . $section['id'] . "/", '0' . $article['sequence'])) {
+        if(preg_match("/^" . substr($section['id'], 0, 1) . "/", $article['sequence'])) {
           $this_article = array();
 
           $this_article['uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
