@@ -93,7 +93,5 @@ function pods_prepare_table_of_contents($pod_slug) {
     }
   }
 
-	var_trace(var_export($obj, true), 'PUBLICATION_TOC');
-
   return $obj;
 }
