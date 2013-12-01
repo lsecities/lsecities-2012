@@ -63,10 +63,11 @@ $obj = prepare_header($post);
 
 <?php
   // enqueue scripts after styles (with flag to have them put in header, whenever possible)
+  wp_enqueue_script('jquery', '', 'json2', '', false);
   wp_enqueue_script('jquery.flexslider', get_stylesheet_directory_uri() . '/javascripts/jquery.flexslider.min.js', 'jquery', false, true);
-  wp_enqueue_script('jquery-ui-core', '', '', '', true);
-  wp_enqueue_script('jquery-ui-accordion', '', '', '', true);
-  wp_enqueue_script('jquery-ui-tabs', '', '', '', true);
+  wp_enqueue_script('jquery-ui-core', '', 'jquery', '', true);
+  wp_enqueue_script('jquery-ui-accordion', '', 'jquery', '', true);
+  wp_enqueue_script('jquery-ui-tabs', '', 'jquery', '', true);
   wp_enqueue_script('jquery-sticky', get_stylesheet_directory_uri() . '/javascripts/jquery.sticky.min.js', 'jquery', false, true);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
   wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', false);
