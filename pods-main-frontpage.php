@@ -34,7 +34,7 @@ $obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
                     <?php foreach($slide_content['columns'] as $slide_column): ?>
                       <div class="<?php echo $slide_column['layout']; ?> column">
                         <?php foreach($slide_column['tiles'] as $tile): ?>
-                        
+
                           <div class="tile <?php echo $tile['element_class']; ?>" id="slidetile-<?php echo $tile['id']; ?>">
                             <?php if($tile['target_uri']): ?><a href="<?php echo $tile['target_uri']; ?>"><?php endif; ?>
                             <?php if($tile['image']): ?>
@@ -76,7 +76,7 @@ $obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
                             <?php endif; ?>
                             <?php if($tile['target_uri']): ?></a><?php endif; ?>
                           </div><!-- .tile#slidetile-<?php echo $tile['id']; ?> -->
-                                                  
+
                         <?php endforeach; ?>
                       </div><!-- <?php echo $slide_column['layout']; ?> -->
                     <?php endforeach; ?>
@@ -85,7 +85,7 @@ $obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
                 <?php endforeach; ?>
               </ul>
             </div>
-      </div>      
+      </div>
       <div class="extra-content<?php if(count($obj['linked_events']) > 0): ?> multi-section<?php endif; ?>">
       <?php
         component_news($obj['news_categories'], '', $obj['linked_events']);
@@ -93,7 +93,6 @@ $obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
       </div><!-- .extra-content -->
 <?php include_once('templates/partials/page-meta.php'); ?>
     </div><!-- #core.row -->
-    </div>        
 		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
 	</div><!-- .entry-content -->
 
