@@ -9,7 +9,7 @@
 ?>
     <div class="reset-layout">&#160;</div>
 	</div><!-- #main -->
-</div><!-- #page -->
+
 	<footer id="footer">
     <nav id="footerSitemap">
       <div class="row">
@@ -49,7 +49,7 @@
           <h1>Conferences</h1>
           <ul>
             <?php wp_list_pages('title_li=&depth=1&child_of=96&sort_column=menu_order&sort_order=ASC&echo=1'); ?>
-          </ul>          
+          </ul>
           <?php endif; // (lc_data('microsite_id') === 'ec2012' or lc_data('microsite_id') === 'rio2013') ?>
         </div>
         <div class="twocol">
@@ -79,7 +79,7 @@
       countries:'United Kingdom' // Or supply a list ['United Kingdom', 'Greece']
   });
    //]]>
-</script>  
+</script>
 <?php endif; ?>
 
 <script>
@@ -89,7 +89,7 @@
           var matchParams = match[3].split(','),
           validLabels = /^(data|css):/,
           attr = {
-            method: matchParams[0].match(validLabels) ? 
+            method: matchParams[0].match(validLabels) ?
                         matchParams[0].split(':')[0] : 'attr',
             property: matchParams.shift().replace(validLabels,'')
           },
@@ -97,7 +97,7 @@
           regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
           return regex.test(jQuery(elem)[attr.method](attr.property));
         };
-        
+
         jQuery(document).ready(function($) {
           /**
            * jQuery plugin to change element type (http://stackoverflow.com/questions/8584098/how-to-change-an-element-type-using-jquery)
@@ -115,14 +115,14 @@
               });
             };
           })(jQuery);
-          
+
           // enable Galleria for embedded slideshows
           try {
             if(jQuery('.lc-newspaper-article .lc-galleria').length > 0) {
               jQuery('.lc-newspaper-article .lc-galleria').galleria({responsive: true, height: 0.75, lightbox: true, _toggleInfo: false, preload: 'all', debug: <?php echo is_user_logged_in() ? 'true' : 'false'; ?>});
             }
           } catch(error) { }
-          
+
           // enable Galleria for right-hand-side navbar slideshows
           try {
             if(jQuery('#navigationarea .lc-galleria').length > 0) {
@@ -130,7 +130,7 @@
               jQuery('#navigationarea .lc-galleria.fullbleed .galleria-thumbnails-container').hide();
             }
           } catch(error) { }
-          
+
           // enable Galleria for research pages photo slider
           try {
             if(jQuery('.lc-research-project .lc-galleria, .lc-publication .lc-galleria').length > 0) {
@@ -138,13 +138,13 @@
               jQuery('.lc-research-project .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-publication .lc-galleria .lc-galleria.fullbleed .galleria-thumbnails-container').hide();
             }
           } catch(error) { }
-          
+
           try {
             if(jQuery('.lc-galleria.single .galleria-image-nav')) {
               jQuery('.lc-galleria.single .galleria-image-nav').hide();
             }
           } catch(error) {}
-          
+
           $('.speaker-profile').hover(
             function () {
                 $(this).children('.speaker-card').fadeIn();
@@ -153,7 +153,7 @@
                 $(this).children('.speaker-card').fadeOut();
             }
           );
-          
+
           $('.flexslider').flexslider(({
             animation: "slide",
             slideshow: false,
@@ -176,7 +176,7 @@
             var href = originalhref.replace(re, '$2');
             <?php if(is_user_logged_in()): ?>
             console.log("PDF download at URI %s tracked with event label '%s'", originalhref, href);
-            <?php endif; ?>            
+            <?php endif; ?>
             _gaq.push(['_trackEvent', 'PDF', 'download', href]);
           }
           $(':regex(href,(http:\/\/lsecities\.net\/)?\/files\/.*.pdf)').click(function() {
@@ -190,7 +190,7 @@
             console.log('Download (type: %s) at URI %s tracked with event label \'%s\'', extension, originalhref, href);
           });
           <?php else: ?>
-          
+
           $(':regex(href,(http:\/\/lsecities\.net\/)?\/files\/.*.pdf)').click(function() {
             var re = /^(http:\/\/lsecities\.net)?(.*)$/gi;
             var originalhref = $(this).attr('href');
