@@ -11,6 +11,10 @@ License URI: license.txt
 Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
 
-/* =Import the real stylesheet, compiled from SCSS
+/**
+ * Look ma, no styles!
+ * We actually only use style.css for theme metadata - the
+ * actual styles are in stylesheets/style.css (compiled via
+ * SASS), which is the only theme CSS file linked to in the
+ * theme's header.php
 -------------------------------------------------------------- */
-@import url("stylesheets/style.css");
