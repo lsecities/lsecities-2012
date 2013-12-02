@@ -38,13 +38,13 @@ function pods_prepare_publication($pod_slug) {
   $__publication_alt_pdf_label = $pod->field('publication_alt_pdf_label');
 
   $obj['pdf'] = $__publication_pdf ?
-    wp_get_attachment_url($__publication_pdf['ID'], TRUE) :
+    wp_get_attachment_url($__publication_pdf['ID']) :
     $pod->field('publication_pdf_uri');
   $obj['pdf_filesize'] = $__publication_pdf ?
     sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) :
     '';
   $obj['alt_pdf'] = $__publication_alt_pdf ?
-    wp_get_attachment_url($__publication_alt_pdf['ID'], TRUE) :
+    wp_get_attachment_url($__publication_alt_pdf['ID']) :
     $pod->field('publication_alt_pdf_uri');
   $obj['alt_pdf_filesize'] = $__publication_alt_pdf ?
     sprintf("%0.1f MB", filesize(get_attached_file($__publication_alt_pdf['ID'], TRUE)) / 1e+6 ) :
@@ -62,13 +62,13 @@ function pods_prepare_publication($pod_slug) {
   
   if($pod->field('language.slug')) {
     $obj['pdf_lang2'] = $__publication_pdf_lang2 ?
-      wp_get_attachment_url($__publication_pdf_lang2['ID'], TRUE) :
+      wp_get_attachment_url($__publication_pdf_lang2['ID']) :
       $pod->field('publication_pdf_lang2_uri');
     $obj['pdf_filesize_lang2'] = $__publication_pdf_lang2 ?
       sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf_lang2['ID'], TRUE)) / 1e+6 ) :
       '';
     $obj['alt_pdf_lang2'] = $__publication_alt_pdf_lang2 ?
-      wp_get_attachment_url($__publication_alt_pdf_lang2['ID'], TRUE) :
+      wp_get_attachment_url($__publication_alt_pdf_lang2['ID']) :
       $pod->field('publication_alt_pdf_lang2_uri');
     $obj['alt_pdf_filesize_lang2'] = $__publication_alt_pdf_lang2 ?
       sprintf("%0.1f MB", filesize(get_attached_file($__publication_alt_pdf_lang2['ID'], TRUE)) / 1e+6 ) :
