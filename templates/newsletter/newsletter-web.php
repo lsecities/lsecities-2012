@@ -14,7 +14,7 @@ $twig->addExtension(new MtHaml\Support\Twig\Extension());
 
 $haml = new Environment('twig', array('enable_escaper' => false));
 
-$template = __DIR__ . '/newsletter-web.php.haml';
+$template = get_stylesheet_directory() . '/templates/newsletter/newsletter-web.php.haml';
 $compiled = $haml->compileString(file_get_contents($template), $template);
 
 $template_data = $newsletter;
