@@ -223,11 +223,14 @@ function pods_prepare_table_of_contents($pod_slug) {
         }
       }
 
-      $obj['sections'][] = array(
-        'id' => $section['id'],
-        'title' => $section['title'],
-        'articles' => $articles
-      );
+      // only add section if it is not empty (i.e. has 1+ articles)
+      if(count($articles)) {
+        $obj['sections'][] = array(
+          'id' => $section['id'],
+          'title' => $section['title'],
+          'articles' => $articles
+        );
+      }
     }
   }
 
