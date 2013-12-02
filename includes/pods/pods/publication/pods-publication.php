@@ -5,8 +5,141 @@ namespace LSECitiesWPTheme\publication;
 if ( !defined('ABSPATH')) exit;
 
 function pods_prepare_publication($pod_slug) {
-  // empty stub, for the moment
-  return;
+  $pod = pods('publication_wrappers', $pod_slug);
+  
+  var_trace(var_export($pod->fields(), TRUE), 'publication_POD');
+
+  $obj['title'] = $pod->field('name');
+  $obj['subtitle'] = $pod->field('publication_subtitle');
+  $obj['abstract'] = do_shortcode($pod->field('abstract'));
+  $obj['blurb'] = $pod->display('blurb');
+  $obj['issuu_uri'] = $pod->field('issuu_uri');
+  $obj['cover_image_uri'] = pods_image_url($pod->field('snapshot'), 'original');
+
+  $obj['publication_category'] = $pod->field('category.slug');
+
+  // get tiles for heading slider
+  $obj['heading_slides'] = array();
+  $slider_pod = pods('slide', $pod->field('heading_slides.slug'));
+  if($slider_pod->exists()) {
+    foreach((array)$slider_pod->field('tiles.slug') as $tile_slug) {
+      $tile = pods('tile', $tile_slug);
+      if($tile) {
+        $obj['heading_slides'][] = pods_image_url($tile->field('image'), 'original');
+      }
+    }
+  }
+
+  /**
+   * Fetch data for English language publication PDF and extra ('alt') publication PDF
+   */
+  $__publication_pdf = $pod->field('publication_pdf');
+  $__publication_alt_pdf = $pod->field('publication_alt_pdf');
+  $__publication_alt_pdf_label = $pod->field('publication_alt_pdf_label');
+
+  $obj['pdf'] = $__publication_pdf ?
+    wp_get_attachment_url($__publication_pdf['ID'], TRUE) :
+    $pod->field('publication_pdf_uri');
+  $obj['pdf_filesize'] = $__publication_pdf ?
+    sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) :
+    '';
+  $obj['alt_pdf'] = $__publication_alt_pdf ?
+    wp_get_attachment_url($__publication_alt_pdf['ID'], TRUE) :
+    $pod->field('publication_alt_pdf_uri');
+  $obj['alt_pdf_filesize'] = $__publication_alt_pdf ?
+    sprintf("%0.1f MB", filesize(get_attached_file($__publication_alt_pdf['ID'], TRUE)) / 1e+6 ) :
+    '';
+  $obj['alt_pdf_label'] = $__publication_alt_pdf && $__publication_alt_pdf_label ?
+    $__publication_alt_pdf_label :
+    'Download extra content';
+
+  /**
+   * Fetch data for 2nd language publication PDF and extra ('alt') publication PDF
+   */
+  $__publication_pdf_lang2 = $pod->field('publication_pdf_lang2');
+  $__publication_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2');
+  $__publication_alt_pdf_label_lang2 = $pod->field('publication_alt_pdf_label_lang2');
+  
+  if($pod->field('language.slug')) {
+    $obj['pdf_lang2'] = $__publication_pdf_lang2 ?
+      wp_get_attachment_url($__publication_pdf_lang2['ID'], TRUE) :
+      $pod->field('publication_pdf_lang2_uri');
+    $obj['pdf_filesize_lang2'] = $__publication_pdf_lang2 ?
+      sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf_lang2['ID'], TRUE)) / 1e+6 ) :
+      '';
+    $obj['alt_pdf_lang2'] = $__publication_alt_pdf_lang2 ?
+      wp_get_attachment_url($__publication_alt_pdf_lang2['ID'], TRUE) :
+      $pod->field('publication_alt_pdf_lang2_uri');
+    $obj['alt_pdf_filesize_lang2'] = $__publication_alt_pdf_lang2 ?
+      sprintf("%0.1f MB", filesize(get_attached_file($__publication_alt_pdf_lang2['ID'], TRUE)) / 1e+6 ) :
+      '';
+    $obj['alt_pdf_label_lang2'] = $__publication_alt_pdf_label_lang2;
+  }
+
+  $obj['extra_publication_metadata'] = $pod->field('extra_publication_metadata');
+
+  $obj['publication_authors']['list'] = people_list($pod->field('authors'), 'family_name', SORT_ASC);
+  $obj['publication_authors']['string'] = implode(', ', $obj['publication_authors_list']);
+  
+  $obj['publication_editors']['list'] = people_list($pod->field('editors'), 'family_name', SORT_ASC);
+  $obj['publication_editors']['string'] = implode(', ', $obj['publication_editors_list']);
+  
+  $obj['publication_contributors']['list'] = people_list($pod->field('contributors'), 'family_name', SORT_ASC);
+  $obj['publication_contributors']['string'] = implode(', ', $obj['publication_contributors_list']);
+
+  $publication_partners_list = sort_linked_field($pod->field('partner_organizations'), 'name', SORT_ASC);
+  if(is_array($publication_partners_list)) {
+    foreach($publication_partners_list as $publication_partner) {
+      if($publication_partner['web_uri']) {
+        $publication_partners .= '<a href="' . $publication_partner['web_uri'] . '">' . $publication_partner['name'] . '</a>, ';
+      } else {
+        $publication_partners .= $publication_partner['name'] . ', ';
+      }
+    }
+    $publication_partners = substr($publication_partners, 0, -2);
+  }
+  $obj['publication_partners']['string'] = $publication_partners;
+  
+  $obj['publication_catalogue_data'] = $pod->field('catalogue_data');
+  $obj['publishing_date'] = $pod->field('publishing_date');
+
+  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+
+  $obj['wp_posts_reviews'] = array();
+  if($pod->field('reviews_category.term_id')) {
+    $obj['wp_posts_reviews'] = get_posts(array('category' => $pod->field('reviews_category.term_id'), 'numberposts' => 10));
+  }
+  
+  return $obj;
+}
+
+/**
+ * Compile list of people in a specific role (authors, editors, etc.)
+ * @param PodsField $people_field the Pods field containing the list of people to process
+ * @param string $sort_by the linked table's field on which to sort
+ * @param int $sort_order whether to sort ascending or descending (SORT_ASC, SORT_DESC)
+ * @return (bool|array) an array of people full names, or false if no people are found
+ */
+function people_list($people_field, $sort_by, $sort_order = SORT_ASC) {
+  $result = array();
+  
+  // if a sort_by field name is provided, sort the people field
+  if($sort_by and $sort_order) {
+    $list = sort_linked_field($people_field, $sort_by, $sort_order);
+  } else {
+    $list = $people_field;
+  }
+  
+  // if people field is empty, just return false
+  if(!is_array($list)) {
+    return FALSE;
+  }
+  
+  foreach($list as $list_item) {
+    $result[] = $list_item['name'] . ' ' . $list_item['family_name'];
+  }
+  
+  return $result;
 }
 
 /**

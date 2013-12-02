@@ -7,101 +7,15 @@ namespace LSECitiesWPTheme\publication;
  * @package LSECities2012
  */
 
-$obj_sections = pods_prepare_table_of_contents(get_post_meta($post->ID, 'pod_slug', true));
+$post_id = get_post_meta($post->ID, 'pod_slug', true);
+$obj = pods_prepare_publication($post_id);
+$obj_sections = pods_prepare_table_of_contents($post_id);
 
-?><?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'pods-publications';
 
-$publication_slug = get_post_meta($post->ID, 'pod_slug', true);
-var_trace('pod_slug: ' . $publication_slug);
-$pod = pods('publication_wrappers', $publication_slug);
+// the galleria partial expects to find its data in a $gallery variable
+$gallery = $obj['gallery'];
 
-var_trace(var_export($pod->fields(), TRUE), 'publication_POD');
-
-$publication_pod = $pod; // TODO refactor code and move generation of list of articles to sub used both in pods-articles and pods-publication
-$pod_title = $pod->field('name');
-$pod_subtitle = $pod->field('publication_subtitle');
-$pod_issuu_uri = $pod->field('issuu_uri');
-$pod_cover = pods_image_url($pod->field('snapshot'), 'original');
-$pod_abstract = do_shortcode($pod->field('abstract'));
-
-$publication_category = $pod->field('category.slug');
-
-// get tiles for heading slider
-$heading_slides = array();
-var_trace($pod->field('heading_slides.slug'), $TRACE_PREFIX . '--heading_slides.slug');
-$slider_pod = pods('slide', $pod->field('heading_slides.slug'));
-foreach((array)$slider_pod->field('tiles.slug') as $tile_slug) {
-  var_trace($tile_slug, $TRACE_PREFIX. '--tiles.slug');
-  $tile = pods('tile', $tile_slug);
-  if($tile) {
-    array_push($heading_slides, pods_image_url($tile->field('image'), 'original'));
-  }
-}
-
-/**
- * Fetch data for English language publication PDF and extra ('alt') publication PDF
- */
-$pod_pdf = $pod->field('publication_pdf.guid') ? wp_get_attachment_url($pod->field('publication_pdf.ID', TRUE)) : $pod->field('publication_pdf_uri');
-$pod_pdf_filesize = $pod->field('publication_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf.ID', TRUE))) / 1e+6 ) : '';
-$pod_alt_pdf = $pod->field('publication_alt_pdf.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf.ID', TRUE)) : $pod->field('publication_alt_pdf_uri');
-$pod_alt_pdf_filesize = $pod->field('publication_alt_pdf.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf.ID', TRUE))) / 1e+6 ) : '';
-$pod_alt_pdf_label = $pod->field('publication_alt_pdf.guid') && $pod->field('publication_alt_pdf_label') ? $pod->field('publication_alt_pdf_label') : 'Download extra content';
-
-/**
- * Fetch data for 2nd language publication PDF and extra ('alt') publication PDF
- */
-$lang2_language_code = $pod->field('language.slug');
-
-$pod_pdf_lang2 = $pod->field('publication_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_pdf_lang2.ID', TRUE)) : $pod->field('publication_pdf_lang2_uri');
-$pod_pdf_filesize_lang2 = $pod->field('publication_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_pdf_lang2.ID', TRUE))) / 1e+6 ) : '';
-$pod_alt_pdf_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? wp_get_attachment_url($pod->field('publication_alt_pdf_lang2.ID', TRUE)) : $pod->field('publication_alt_pdf_lang2_uri');
-$pod_alt_pdf_filesize_lang2 = $pod->field('publication_alt_pdf_lang2.guid') ? sprintf("%0.1f MB", filesize(get_attached_file($pod->field('publication_alt_pdf_lang2.ID', TRUE))) / 1e+6 ) : '';
-$pod_alt_pdf_label_lang2 = $pod->field('publication_alt_pdf_label_lang2');
-
-$extra_publication_metadata = $pod->field('extra_publication_metadata');
-
-if(is_array($publication_authors_list)) {
-  $publication_authors_list = sort_linked_field($pod->field('authors'), 'family_name', SORT_ASC);
-  foreach($publication_authors_list as $publication_author) {
-    $publication_authors .= $publication_author['name'] . ' ' . $publication_author['family_name'] . ', ';
-  }
-  $publication_authors = substr($publication_authors, 0, -2);
-}
-
-if(is_array($publication_editors_list)) {
-  $publication_editors_list = sort_linked_field($pod->field('editors'), 'family_name', SORT_ASC);
-  foreach($publication_editors_list as $publication_editor) {
-    $publication_editors .= $publication_editor['name'] . ' ' . $publication_editor['family_name'] . ', ';
-  }
-  $publication_editors = substr($publication_editors, 0, -2);
-}
-
-if(is_array($publication_contributors_list)) {
-  $publication_contributors_list = sort_linked_field($pod->field('contributors'), 'family_name', SORT_ASC);
-  foreach($publication_contributors_list as $publication_contributor) {
-    $publication_contributors .= $publication_contributor['name'] . ' ' . $publication_contributor['family_name'] . ', ';
-  }
-  $publication_contributors = substr($publication_contributors, 0, -2);
-}
-
-$publication_partners_list = sort_linked_field($pod->field('partner_organizations'), 'name', SORT_ASC);
-if(is_array($publication_partners_list)) {
-  foreach($publication_partners_list as $publication_partner) {
-    if($publication_partner['web_uri']) {
-      $publication_partners .= '<a href="' . $publication_partner['web_uri'] . '">' . $publication_partner['name'] . '</a>, ';
-    } else {
-      $publication_partners .= $publication_partner['name'] . ', ';
-    }
-  }
-  $publication_partners = substr($publication_partners, 0, -2);
-}
-
-$publication_catalogue_data = $pod->field('catalogue_data');
-$publishing_date = $pod->field('publishing_date');
-
-$gallery = galleria_prepare($pod, 'fullbleed wireframe');
 ?><?php get_header(); ?>
 
 <div role="main">
@@ -117,11 +31,11 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 
         <article class='wireframe eightcol row'>
           <header class='entry-header'>
-            <h1><?php echo $pod_title; ?></h1>
-            <?php if($pod_subtitle): ?><h2><?php echo $pod_subtitle; ?></h2><?php endif ; ?>
+            <h1><?php echo $obj['title']; ?></h1>
+            <?php if($obj['subtitle']): ?><h2><?php echo $obj['subtitle']; ?></h2><?php endif ; ?>
           </header>
           <div class='entry-content article-text'>
-            <?php echo $pod->display('blurb'); ?>
+            <?php echo $obj['blurb']; ?>
           </div>
           <!--
           <?php if(count($obj_sections['sections']) > 1): ?>
@@ -139,74 +53,69 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
           <div>
-            <?php if($pod_cover): ?>
-            <div class='cover-thumbnail'><img src="<?php echo $pod_cover; ?>" /></div>
+            <?php if($obj['cover_image_uri']): ?>
+            <div class='cover-thumbnail'><img src="<?php echo $obj['cover_image_uri']; ?>" /></div>
             <?php endif; ?>
             <ul>
-              <?php if($pod_pdf) : ?>
-              <li><a class="downloadthis pdf button" href="<?php echo $pod_pdf; ?>">Download PDF</a><?php if(!empty($pod_pdf_filesize)) : ?> (<?php echo $pod_pdf_filesize; ?>)<?php endif; ?></li>
+              <?php if($obj['pdf']) : ?>
+              <li><a class="downloadthis pdf button" href="<?php echo $obj['pdf']; ?>">Download PDF</a><?php if(!empty($obj['pdf_filesize'])) : ?> (<?php echo $obj['pdf_filesize']; ?>)<?php endif; ?></li>
+              <?php endif; ?>
+              <?php if($obj['pdf'] and $obj['alt_pdf']) : // do not bother displaying extra PDF if main is not available ?>
+              <li><a class="downloadthis pdf button" href="<?php echo $obj['alt_pdf']; ?>"><?php echo $obj['alt_pdf_label']; ?></a><?php if(!empty($obj['alt_pdf_filesize'])) : ?> (<?php echo $obj['alt_pdf_filesize']; ?>)<?php endif; ?></li>
               <?php endif ; ?>
-              <?php if($pod_pdf and $pod_alt_pdf) : // do not bother displaying extra PDF if main is not available ?>
-              <li><a class="downloadthis pdf button" href="<?php echo $pod_alt_pdf; ?>"><?php echo $pod_alt_pdf_label; ?></a><?php if(!empty($pod_alt_pdf_filesize)) : ?> (<?php echo $pod_alt_pdf_filesize; ?>)<?php endif; ?></li>
-              <?php endif ; ?>
-              <?php if($pod_issuu_uri) : ?>
-              <li><a class="readthis online issuu button" href="<?php echo $pod_issuu_uri; ?>">Browse PDF online</a></li>
+              <?php if($obj['issuu_uri']) : ?>
+              <li><a class="readthis online issuu button" href="<?php echo $obj['issuu_uri']; ?>">Browse PDF online</a></li>
               <?php endif ; ?>
             </ul>
             <dl>
-            <?php if(!$extra_publication_metadata): // switching to only display $extra_publication_metadata if available, until Pods can sort pick items ?>
-            <?php if($publication_authors): ?>
+            <?php if(!$obj['extra_publication_metadata']): // switching to only display $obj['extra_publication_metadata'] if available, until Pods can sort pick items ?>
+            <?php if($obj['publication_authors']['string']): ?>
               <dt>Authors</dt>
-              <dd><?php echo $publication_authors; ?></dd>
+              <dd><?php echo $obj['publication_authors']['string']; ?></dd>
             <?php endif; ?>
-            <?php if($publication_editors): ?>
+            <?php if($obj['publication_editors']['string']): ?>
               <dt>Editors</dt>
-              <dd><?php echo $publication_editors; ?></dd>
+              <dd><?php echo $obj['publication_editors']['string']; ?></dd>
             <?php endif; ?>
-            <?php if($publication_contributors): ?>
+            <?php if($obj['publication_editors']['string']): ?>
               <dt>Contributors</dt>
-              <dd><?php echo $publication_contributors; ?></dd>
+              <dd><?php echo $obj['publication_editors']['string']; ?></dd>
             <?php endif; ?>
-            <?php endif; // (!$extra_publication_metadata) ?>
-            <?php if($extra_publication_metadata): ?>
-            <?php echo $extra_publication_metadata; ?>
-            <?php endif; ?>
-            <?php if($publication_partners): ?>
+            <?php else: // (!$obj['extra_publication_metadata']) ?>
+            <?php echo $obj['extra_publication_metadata']; ?>
+            <?php endif; // (!$obj['extra_publication_metadata']) ?>
+            <?php if($obj['publication_partners']['string']): ?>
               <dt>Partners</dt>
-              <dd></dd><?php echo $publication_partners; ?></dd>
+              <dd></dd><?php echo $obj['publication_partners']['string']; ?></dd>
             <?php endif; ?>
-            <?php if($publishing_date): ?>
+            <?php if($obj['publishing_date']): ?>
               <dt>Publication date</dt>
-              <dd><?php echo $publishing_date; ?></dd>
+              <dd><?php echo $obj['publishing_date']; ?></dd>
             <?php endif; ?>
-            <?php if($publication_catalogue_data): ?>
+            <?php if($obj['publication_catalogue_data']): ?>
               <dt>Catalogue data</dt>
-              <dd><?php echo $publication_catalogue_data; ?></dd>
+              <dd><?php echo $obj['publication_catalogue_data']; ?></dd>
             <?php endif; ?>
             </dl>
           </div>
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->
       <div class='extra-content row'>
-          <?php var_trace(var_export($pod->field('reviews_category.term_id'), true)); ?>
-          <?php if($pod->field('reviews_category.term_id')):
-                  $wp_posts_reviews = get_posts(array('category' => $pod->field('reviews_category.term_id'), 'numberposts' => 10));
-                  if(count($wp_posts_reviews)): ?>
+          <?php if(count($obj['wp_posts_reviews'])): ?>
           <section class="row" id="wp-posts-reviews">
             <header><h1>Reviews</h1></header>
               <dl class="posts">
               <?php
-              foreach($wp_posts_reviews as $post):
+              foreach($obj['wp_posts_reviews'] as $post):
                 setup_postdata($post); ?>
                 <dt><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></dt>
                 <dd><?php the_date(); ?></dd>
               <?php endforeach; ?>
               </dl><!-- .posts -->
           </section><!-- #wp-posts-reviews -->
-            <?php endif; ?>
-          <?php endif; ?>
+          <?php endif; //(count($obj['wp_posts_reviews'])) ?>
           <?php if($obj_sections['sections']) : ?>
-          <section class="row publication-category-<?php echo $publication_category; ?>" id="tableofcontents">
+          <section class="row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
             <header><h1>Articles</h1></header>
             <div class="eightcol">
               <div class="articles">
@@ -221,11 +130,11 @@ $gallery = galleria_prepare($pod, 'fullbleed wireframe');
                      * if this is the ToC entry for an article part of a research-data publication (e.g.
                      * data section of a conference newspaper), show heading image as article teaser.
                      */
-                    if($publication_category == 'research-data' and $article['heading_image']): ?>
+                    if($obj['publication_category'] == 'research-data' and $article['heading_image']): ?>
                     <a href="<?php echo $article['uri']; ?>">
                     <img class='heading-image' src='<?php echo $article['heading_image']; ?>' />
                     </a>
-                    <?php endif; // ($publication_category == 'research-data' and $article['heading_image']) ?>
+                    <?php endif; // ($obj['publication_category'] == 'research-data' and $article['heading_image']) ?>
                     <h1>
                       <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
                       <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
