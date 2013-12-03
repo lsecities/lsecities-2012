@@ -10,6 +10,8 @@ lsecities-theme-alexandria (1.9) experimental; urgency=low
     display additional text by the 'podcast' link on Event pages)
   * [update] refactored Publications pod templates and data management
     code
+  * [update] abstracted MtHaml+Twig integration, allowing easy switching
+    of all templates to MtHaml+Twig
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 11 Nov 2013 16:30:00 +0100
  
