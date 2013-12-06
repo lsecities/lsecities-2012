@@ -166,6 +166,9 @@
           $('.runon li:nth-child(odd)').addClass('alternate');
           $('.accordion').accordion({heightStyle: 'content', active: $(this).find('.active')});
 
+          // enable tabs on #uiTabs and .uiTabs lists
+          $('#uiTabs, .uiTabs').tabs();
+
           // track clicks to binary files hosted in WordPress.
           // based on http://www.wduffy.co.uk/blog/tracking-google-goals-with-no-url-using-jquery/.
           // uses regex jQuery filter (http://james.padolsey.com/javascript/regex-selector-for-jquery/).
