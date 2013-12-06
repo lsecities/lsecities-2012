@@ -581,11 +581,13 @@ div.widget { margin-bottom: 1em; }
 div.widget h2 { margin-bottom: 0.5em; }
 
 /* organic tabs jquery plugin */
-.organictabs { margin-top: 2em; }
-.organictabs.three-per-row > li { width: 30.75%; float: left; margin-right: 3.8%; min-height: 1px; }
-.organictabs.three-per-row > li:nth-of-type(3n) { margin-right: 0; }
-.organictabs > li a, .organictabs > li a:visited, .organictabs > li a:active, .organictabs > li a:focus, .organictabs > li a:hover { color: white; font-weight: bold; display: block; padding: 0.5em; background-color: red; }
-.organictabs > li a.current, .organictabs > li a:visited.current, .organictabs > li a:active.current, .organictabs > li a:focus.current, .organictabs > li a:hover.current { background-color: black; }
+.organictabs, .uiTabs { margin-top: 2em; }
+.organictabs.three-per-row > li, .uiTabs.three-per-row > li { width: 30.75%; float: left; margin-right: 3.8%; min-height: 1px; }
+.organictabs.three-per-row > li:nth-of-type(3n), .uiTabs.three-per-row > li:nth-of-type(3n) { margin-right: 0; }
+.organictabs.three-per-row > li:nth-of-type(3n+1), .uiTabs.three-per-row > li:nth-of-type(3n+1) { clear: left; }
+.organictabs > li a, .organictabs > li a:visited, .organictabs > li a:active, .organictabs > li a:focus, .organictabs > li a:hover, .uiTabs > li a, .uiTabs > li a:visited, .uiTabs > li a:active, .uiTabs > li a:focus, .uiTabs > li a:hover { color: white; font-weight: bold; display: block; padding: 0.5em; background-color: red; }
+.organictabs > li a.current, .organictabs > li a:visited.current, .organictabs > li a:active.current, .organictabs > li a:focus.current, .organictabs > li a:hover.current, .uiTabs > li a.current, .uiTabs > li a:visited.current, .uiTabs > li a:active.current, .uiTabs > li a:focus.current, .uiTabs > li a:hover.current { background-color: black; }
+.organictabs > li.ui-state-active a, .uiTabs > li.ui-state-active a { background-color: black; }
 
 .ui-accordion-header { cursor: pointer; }
 
