@@ -621,6 +621,8 @@ function post_factum_text_for_posts($post_object) {
     $post_object->post_content = $post_factum_content;
     var_trace(var_export($post_object, true), 'replaced post_content');
   }
+  
+  return array(0 => $post_object);
 }
 
 add_action('the_post', 'post_factum_text_for_posts');
