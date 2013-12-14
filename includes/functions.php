@@ -605,27 +605,29 @@ function lsecities_get_archives() {
  *
  * @param $post_object The WordPress post object
  */
-function post_factum_text_for_posts($post_object) {
-  var_trace(var_export($post_object, true), 'post-object');
+function post_factum_text_for_posts($post_array) {
+  var_trace(var_export($post_array, true), 'post_array');
 
-  $pod = pods('post', $post_object->ID);
+  foreach($post_array as $post_object) {
+    $pod = pods('post', $post_object->ID);
 
-  $post_factum_content = $pod->display('post_factum_content');
-  $show_post_factum_text_after = new DateTime($pod->field('show_post_factum_text_after'));
-  $datetime_now = new DateTime('now');
+    $post_factum_content = $pod->display('post_factum_content');
+    $show_post_factum_text_after = new DateTime($pod->field('show_post_factum_text_after'));
+    $datetime_now = new DateTime('now');
 
-  var_trace($show_post_factum_text_after);
-  var_trace($post_factum_content);
+    var_trace($show_post_factum_text_after);
+    var_trace($post_factum_content);
 
-  if(!empty($post_factum_content) and $show_post_factum_text_after < $datetime_now) {
-    $post_object->post_content = $post_factum_content;
-    var_trace(var_export($post_object, true), 'replaced post_content');
+    if(!empty($post_factum_content) and $show_post_factum_text_after < $datetime_now) {
+      $post_object->post_content = $post_factum_content;
+      var_trace(var_export($post_object, true), 'replaced post_content');
+    }
   }
   
-  return array(0 => $post_object);
+  return $post_array;
 }
 
-add_action('the_post', 'post_factum_text_for_posts');
+add_action('the_posts', 'post_factum_text_for_posts');
 
 /**
  * keep hyperlinks in excerpts
