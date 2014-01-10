@@ -10,7 +10,6 @@
  * Pods initialization
  * URI: /media/search/?search=<search_string>
  */
-$TRACE_ENABLED = is_user_logged_in();
 $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 
 // setting search string from post meta is used in WP pages with hardcoded queries
@@ -21,8 +20,8 @@ if(!$search) {
   $search = pods_url_variable('search', 'get');
 }
 
-if($TRACE_ENABLED) { error_log('pod_slug: ' . $pod_slug); }
-if($TRACE_ENABLED) { error_log('search: ' . $search); }
+var_trace($pod_slug, 'media_archive_dev__pod_slug');
+var_trace($search, 'media_archive_dev__search_string');
 
 $params = array(
   'where' => 't.name LIKE "%' . $search . '%" OR session.speakers.family_name LIKE "%' . $search . '%" OR event.speakers.family_name LIKE "%' . $search . '%"'
