@@ -23,10 +23,7 @@ if(!$search) {
 var_trace($pod_slug, 'media_archive_dev__pod_slug');
 var_trace($search, 'media_archive_dev__search_string');
 
-$params = array(
-  'where' => 't.name LIKE "%' . $search . '%" OR session.speakers.family_name LIKE "%' . $search . '%" OR event.speakers.family_name LIKE "%' . $search . '%"'
-);
-$pod = pods('media_item_v0', $params);
+$pod = pods('media_item_v0', array('limit' => -1, 'where' => 'slug IS NOT NULL'));
 
 $media_items = array();
 
@@ -40,7 +37,15 @@ while($pod->fetch()) {
     'audio_uri' => $pod->field('audio_uri'),
     'presentation_uri' => $pod->field('presentation_uri'),
     'tags' => $pod->field('tag.name'),
-    'geotags' => $pod->field('geotags.name')
+    'geotags' => $pod->field('geotags.name'),
+    'related_session' => array(
+      'title' => $pod->field('session.name'),
+      'start' => $pod->field('session.start')
+    ),
+    'related_event' => array(
+      'title' => $pod->field('event.name'),
+      'series' => $pod->field('event.series.name')
+    )
   );
   array_push($media_items, $media_item);
 }
