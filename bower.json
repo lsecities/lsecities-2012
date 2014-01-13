@@ -1,0 +1,28 @@
+{
+  "name": "lsecities-theme-alexandria",
+  "version": "1.10.0",
+  "homepage": "https://github.com/lsecities/lsecities-2012",
+  "authors": [
+    "andrea rota <a.rota@lse.ac.uk>"
+  ],
+  "description": "WordPress theme for lsecities.net",
+  "main": "style.css",
+  "keywords": [
+    "wordpress",
+    "theme",
+    "LSE Cities"
+  ],
+  "license": "AGPL-3.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "*"
+  }
+}
