@@ -9,9 +9,10 @@
 $TRACE_PREFIX = 'pods-media-archive-search';
 $pods_toplevel_ancestor = 306;
 wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_components/angular/angular.min.js', '', '1.2.8', TRUE);
+wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets/js/media-archive-app/js/controllers.js', '', '', TRUE);
 ?><?php get_header(); ?>
 
-<div role="main">
+<div role="main" ng-app="mediaArchiveApp">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-media-archive-search'); ?>>
     <div class='ninecol' id='contentarea'>
@@ -80,6 +81,11 @@ wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_c
                     <h2>Search results</h2>
                     <div id="searchresults"></div>
                   </div>
+                </section>
+                <section class="ngapp" ng-controller="MediaArchiveCtrl">
+                  <ul>
+                    <li ng-repeat="item in items"><a href="http://youtu.be/{{item.youtube_uri}}">{{item.title}}</a></li>
+                  </ul>
                 </section>
               </article>
               
