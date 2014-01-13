@@ -8,7 +8,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
       method: 'GET',
       url: '/media/search-dev'
     }).success(function(data, status) {
-      $scope.items = data;
+      $scope.items = data.items;
     });
   };
   
