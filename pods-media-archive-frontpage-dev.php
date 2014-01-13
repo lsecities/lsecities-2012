@@ -6,9 +6,9 @@
  * @package LSECities2012
  */
 ?><?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'pods-media-archive-search';
 $pods_toplevel_ancestor = 306;
+wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_components/angular/angular.min.js', '', '1.2.8', TRUE);
 ?><?php get_header(); ?>
 
 <div role="main">
