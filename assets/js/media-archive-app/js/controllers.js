@@ -1,6 +1,6 @@
 var mediaArchiveApp = angular.module('mediaArchiveApp', []);
  
-mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope) {
+mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
   
   $scope.loadItems = function() {
