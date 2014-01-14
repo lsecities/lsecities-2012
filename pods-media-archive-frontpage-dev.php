@@ -72,7 +72,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                           </li>
                         </ul>
                       </div>
-                      <input type="text" placeholder="free text search: enter keywords here" name="search" id="query" class="tencol last">
+                      <input ng-model="query" type="text" placeholder="free text search: enter keywords here" name="search" id="query" class="tencol last">
                     </form>
                   </div>
                 </section>
@@ -84,7 +84,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="ngapp" ng-controller="MediaArchiveCtrl">
                   <ul>
-                    <li ng-repeat="item in items"><a href="http://youtu.be/{{item.youtube_uri}}">{{item.title}}</a></li>
+                    <li ng-repeat="item in items | filter:query"><a href="http://youtu.be/{{item.youtube_uri}}">{{item.title}}</a></li>
                   </ul>
                 </section>
               </article>
@@ -146,6 +146,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
     }  
   })();
 
+  /*
   jQuery(document).ready(function($) {
     $('#searchresults').html(Mustache.render(mTemplate, ''));
     $('#searchbutton').click(function(e) {
@@ -156,6 +157,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
       typewatch(runMediaQuery, 500);
     });
   });
+  */
 </script>
 </div><!-- role='main'.row -->
 
