@@ -84,7 +84,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="ngapp" ng-controller="MediaArchiveCtrl">
                   <ul>
-                    <li ng-repeat="item in items | filter:query"><a href="http://youtu.be/{{item.youtube_uri}}"></a></li>
+                    <li ng-repeat="item in items | filter:query">{{item.title}} <a ng-show="{{item.youtube_uri}}" href="http://youtu.be/{{item.youtube_uri}}">Watch</a></li>
                   </ul>
                 </section>
               </article>
