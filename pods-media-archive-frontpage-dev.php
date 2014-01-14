@@ -84,7 +84,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="ngapp" ng-controller="MediaArchiveCtrl">
                   <ul>
-                    <li ng-repeat="item in items | filter:query"><a href="http://youtu.be/{{item.youtube_uri}}">{{item.title}}</a></li>
+                    <li ng-repeat="item in items | filter:query"><a href="http://youtu.be/{{item.youtube_uri}}"></a></li>
                   </ul>
                 </section>
               </article>
@@ -98,67 +98,6 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
       </div><!-- .extra-content -->
     </div><!-- #contentarea -->
   </div><!-- #post-<?php the_ID(); ?> -->
-<?php wp_enqueue_script('mustachejs', get_stylesheet_directory_uri() . '/javascripts/mustache.min.js', array(), '0.7.0', true); ?>
-<script type="text/javascript">
-  // tests: http://jsfiddle.net/xswVa/1/
-  $ = jQuery;
-  
-  var mTemplate = '<ul>\
-  {{#items}}\
-    <li><a href="https://youtu.be/{{youtube_uri}}">{{title}}</a></li>\
-  {{/items}}\
-  </ul>\
-  {{^items}}\
-    <p>No media items match your query.</p>\
-  {{/items}}';
-  
-  function runMediaQuery() {
-    var query = $('#query').val();
-
-    if(query.length) {
-      var datastring = 'search=' + query;
-      
-      $.ajax(
-        {
-          type: "GET",
-          url: "/media/search",
-          data: datastring,
-          dataType: "json",
-          cache: false,
-          success: function(content, status) {
-        <?php if(is_user_logged_in()): ?>
-            console.log('ajax status: ' + status + "\nsearch results: " + content);
-        <?php endif; ?>
-            $('#searchresults').html(Mustache.render(mTemplate, content));
-          }
-        }
-      );
-    } else {
-      $('#searchresults').html(Mustache.render(mTemplate, ''));
-    }
-  }
-  
-  var typewatch = (function(){
-    var timer = 0;
-    return function(callback, ms){
-      clearTimeout (timer);
-      timer = setTimeout(callback, ms);
-    }  
-  })();
-
-  /*
-  jQuery(document).ready(function($) {
-    $('#searchresults').html(Mustache.render(mTemplate, ''));
-    $('#searchbutton').click(function(e) {
-      e.preventDefault();
-      runMediaQuery();
-    });
-    $('#query').keyup(function() {
-      typewatch(runMediaQuery, 500);
-    });
-  });
-  */
-</script>
 </div><!-- role='main'.row -->
 
 <?php get_sidebar(); ?>
