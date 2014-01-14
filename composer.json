@@ -3,8 +3,7 @@
     "description": "LSE Cities WordPress theme",
     "require": {
         "twig/twig": "~1.13",
-        "mthaml/mthaml": "~1.2",
-        "trentrichardson/jquery-timepicker-addon": "~1.4"
+        "mthaml/mthaml": "~1.2"
     },
     "license": "GPL-3.0+",
     "authors": [
