@@ -87,13 +87,14 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                     <li ng-repeat="item in items | filter:query">
                       <h4>{{item.title}}</h4>
                       <div class="media">
-                        <span ng-show="{{item.youtube_uri}}"> - <a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
-                        <span ng-show="{{item.audio_uri}}"> - <a href="{{item.audio_uri}}">Listen</a></span>
+                        <span ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
+                        <span ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
                       </div>
                       <div class="people">
-                        <span ng-show="{{item.session_speakers}}">
-                          <ul>
-                            <li ng-repeat="speaker in item.session_speakers">{{speaker.name}}</li>
+                        <span ng-show="item.session_speakers">
+                          <ul class="run-in comma-separated">
+                            Speakers: 
+                            <li ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
                           </ul>
                         </span>
                       </div>
