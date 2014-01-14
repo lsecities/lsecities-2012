@@ -53,7 +53,8 @@ while($pod->fetch()) {
     ),
     'event_speakers' => $pod->field('event.speakers'),
     'event_chairs' => $pod->field('event.chairs'),
-    'event_respondents' => $pod->field('event.respondents')
+    'event_respondents' => $pod->field('event.respondents'),
+    'event_moderators' => $pod->field('event.moderators')
   );
   array_push($media_items, $media_item);
 }
