@@ -42,6 +42,8 @@ while($pod->fetch()) {
       'title' => $pod->field('session.name'),
       'start' => $pod->field('session.start')
     ),
+    'session_speakers' => $pod->field('session.speakers'),
+    'session_chairs' => $pod->field('session.chairs.name'),
     'related_event' => array(
       'title' => $pod->field('event.name'),
       'series' => $pod->field('event.series.name')
