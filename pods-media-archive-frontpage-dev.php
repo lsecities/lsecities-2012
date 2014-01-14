@@ -29,7 +29,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
         </header>
         <?php endif; ?>
         
-        <article class="wireframe">
+        <article class="wireframe" ng-controller="MediaArchiveCtrl">
                 <section class="clearfix queryarea">
                   <header class="entry-header fourcol">
                     <h1 class="entry-title article-title">Media archive</h1>
@@ -62,12 +62,12 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" disabled="disabled">audio
+                              <input type="checkbox" value="audio" checked="checked" ng-model="typeAudio">audio
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" disabled="disabled">video
+                              <input type="checkbox" value="video" checked="checked" ng-model="typeVideo">video
                             </label>
                           </li>
                         </ul>
@@ -82,7 +82,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                     <div id="searchresults"></div>
                   </div>
                 </section>
-                <section class="ngapp" ng-controller="MediaArchiveCtrl">
+                <section class="ngapp">
                   <ul>
                     <li ng-repeat="item in items | filter:query">
                       <h4>{{item.title}}</h4>
