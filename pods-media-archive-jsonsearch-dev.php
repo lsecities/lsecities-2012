@@ -28,6 +28,8 @@ $pod = pods('media_item_v0', array('limit' => -1, 'where' => 'slug IS NOT NULL')
 $media_items = array();
 
 while($pod->fetch()) {
+  // $related_session = $pod->field('session');
+  
   $media_item = array (
     'id' => $pod->field('slug'),
     'title' => $pod->field('name'),
@@ -43,11 +45,15 @@ while($pod->fetch()) {
       'start' => $pod->field('session.start')
     ),
     'session_speakers' => $pod->field('session.speakers'),
-    'session_chairs' => $pod->field('session.chairs.name'),
+    'session_chairs' => $pod->field('session.chairs'),
+    'session_respondents' => $pod->field('session.respondents'),
     'related_event' => array(
       'title' => $pod->field('event.name'),
-      'series' => $pod->field('event.series.name')
-    )
+      'series' => $pod->field('event.series')
+    ),
+    'event_speakers' => $pod->field('event.speakers'),
+    'event_chairs' => $pod->field('event.chairs'),
+    'event_respondents' => $pod->field('event.respondents')
   );
   array_push($media_items, $media_item);
 }
