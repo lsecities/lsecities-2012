@@ -21,4 +21,4 @@ mediaArchiveApp.filter('mediatypefilter', function() {
     console.log(items);
     console.log(options);
   };
-};
+});
