@@ -62,12 +62,12 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" checked="checked" ng-model="audio_uri">audio
+                              <input type="checkbox" value="audio" checked="checked" ng-model="mediatypes.audio">audio
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" checked="checked" ng-model="youtube_uri">video
+                              <input type="checkbox" value="video" checked="checked" ng-model="mediatypes.video">video
                             </label>
                           </li>
                         </ul>
@@ -84,7 +84,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="ngapp">
                   <ul>
-                    <li ng-repeat="item in items | filter:query | filter:audio_uri | filter:youtube_uri">
+                    <li ng-repeat="item in items | filter:query | mediatypefilter:mediatypes">
                       <h4>{{item.title}}</h4>
                       <div class="media">
                         <span ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
