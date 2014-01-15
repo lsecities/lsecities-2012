@@ -30,8 +30,9 @@ $media_items = array();
 while($pod->fetch()) {
   $related_session = $pod->field('session');
   
-  if ( isset( $related_session[ 'speakers' ][' ID ' ] ) ) {
-    $speakers = array( $related_session['speakers'] );
+  $speakers = $pod->field('session.speakers');
+  if(isset($speakers['id'])) {
+    $speakers = array( $speakers );
   }
   
   $media_item = array (
@@ -46,8 +47,7 @@ while($pod->fetch()) {
     'geotags' => $pod->field('geotags.name'),
     'related_session' => array(
       'title' => $pod->field('session.name'),
-      'start' => $pod->field('session.start'),
-      'data' => $related_session
+      'start' => $pod->field('session.start')
     ),
     'session_speakers' => $speakers,
     'session_chairs' => $pod->field('session.chairs'),
