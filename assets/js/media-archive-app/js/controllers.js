@@ -2,6 +2,7 @@ var mediaArchiveApp = angular.module('mediaArchiveApp', []);
  
 mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
+  $scope.mediatypes = { audio: false, youtube: false};
   
   $scope.loadItems = function() {
     var httpRequest = $http({
@@ -14,3 +15,10 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   
   $scope.loadItems();
 });
+
+mediaArchiveApp.filter('mediatypefilter', function() {
+  return function(items, options) {
+    console.log(items);
+    console.log(options);
+  };
+};
