@@ -15,7 +15,7 @@ $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 function get_media_item_event_info($media_item_pod, $parent_sessions = array()) {
   
   $parent_sessions_count = count($parent_sessions);
-  $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
+  $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count : 0);
 
   // first test whether there is a parent session
   $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
@@ -29,7 +29,7 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count : 0);
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     if($parent_event_programme['id']) {
-      array_unshift($parent_sessions, $parent_event_programme);
+      // array_unshift($parent_sessions, $parent_event_programme);
       $parent_event = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_event');
       $parent_conference = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_conference');
       if($parent_event['id']) {
@@ -40,7 +40,7 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     }
   }
   
-  return array_pop($parent_sessions);
+  return $parent_sessions;
 }
 
 // setting search string from post meta is used in WP pages with hardcoded queries
