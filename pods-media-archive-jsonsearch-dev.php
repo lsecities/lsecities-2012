@@ -58,6 +58,8 @@ $media_items = array();
 
 while($pod->fetch()) {
   // fetch parent sessions up to container event, if applicable
+  // initialise array
+  $parent_sessions = array();
   // first, check if this media item is linked to an event session
   $related_session = $pod->field('session');
   // if so, add process parent sessions
