@@ -12,7 +12,7 @@ wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_c
 wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets/js/media-archive-app/js/controllers.js', '', '', TRUE);
 ?><?php get_header(); ?>
 
-<div role="main" ng-app="mediaArchiveApp">
+<div role="main" data-ng-app="mediaArchiveApp">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-media-archive-search'); ?>>
     <div class='ninecol' id='contentarea'>
@@ -29,7 +29,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
         </header>
         <?php endif; ?>
         
-        <article class="wireframe" ng-controller="MediaArchiveCtrl">
+        <article class="wireframe" data-ng-controller="MediaArchiveCtrl">
                 <section class="clearfix queryarea">
                   <header class="entry-header fourcol">
                     <h1 class="entry-title article-title">Media archive</h1>
@@ -62,17 +62,17 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" checked="checked" ng-model="mediatypes.audio">audio
+                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" checked="checked" ng-model="mediatypes.video">video
+                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video
                             </label>
                           </li>
                         </ul>
                       </div>
-                      <input ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" class="tencol last" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" class="tencol last" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
                     </form>
                   </div>
                 </section>
@@ -84,19 +84,19 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="ngapp">
                   <ul>
-                    <li ng-repeat="item in items | filter:query">
+                    <li data-ng-repeat="item in items | filter:query">
                       <h4>{{item.title}}</h4>
                       <h5 data-ng-show="item.parent_sessions"><span data-ng-repeat="session in item.parent_sessions">{{session.name}} </span></h5>
                       <h5 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h5>
                       <div class="media">
-                        <span ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
-                        <span ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
+                        <span data-ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
+                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
                       </div>
                       <div class="people">
-                        <span ng-show="item.session_speakers">
+                        <span data-ng-show="item.session_speakers">
                           <ul class="run-in comma-separated">
                             Speakers: 
-                            <li ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
+                            <li data-ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
                           </ul>
                         </span>
                       </div>
