@@ -86,6 +86,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   <ul>
                     <li ng-repeat="item in items | filter:query">
                       <h4>{{item.title}}</h4>
+                      <h3><span data-ng-repeat="session in item.parent_sessions">{{session.name}} </span></h3>
                       <div class="media">
                         <span ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
                         <span ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
