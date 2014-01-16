@@ -86,12 +86,8 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   <ul>
                     <li data-ng-repeat="item in items | filter:query">
                       <h3>{{item.title}}</h3>
-                      <h4 data-ng-show="item.parent_sessions">Event session:<span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
+                      <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                       <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
-                      <div class="media">
-                        <span data-ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
-                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
-                      </div>
                       <div class="people">
                         <span data-ng-show="item.session_speakers">
                           <ul class="run-in comma-separated">
@@ -99,6 +95,10 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                             <li data-ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
                           </ul>
                         </span>
+                      </div>
+                      <div class="media">
+                        <span data-ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
+                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
                       </div>
                     </li>
                   </ul>
