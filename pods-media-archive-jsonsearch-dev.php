@@ -12,6 +12,27 @@
  */
 $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 
+function get_media_item_event_info($media_item_pod, $parent_sessions = array()) {
+  
+  $parent_sessions_count = count($parent_sessions);
+  $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
+
+  // first test whether there is a parent session
+  $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
+  if($parent_session['id']) {
+    array_unshift($parent_sessions, $parent_session);
+    $parent_sessions = get_media_item_event_info($media_item_pod, $parent_sessions);
+  } else {
+    // else, test whether a parent event programme is defined (aka the current event session is 'top level')
+    $parent_event_programme = $media_item_pod->field('session.parent_event_programme');
+    if($parent_event_programme['id']) {
+      array_unshift($parent_sessions, $parent_event_programme);
+    }
+  }
+  
+  return $parent_sessions;
+}
+
 // setting search string from post meta is used in WP pages with hardcoded queries
 $search = get_post_meta($post->ID, 'pod_slug', true);
 
@@ -28,12 +49,13 @@ $pod = pods('media_item_v0', array('limit' => -1, 'where' => 'slug IS NOT NULL')
 $media_items = array();
 
 while($pod->fetch()) {
-  // check if this media item is linked to an event session
+  // fetch parent sessions up to container event, if applicable
+  // first, check if this media item is linked to an event session
   $related_session = $pod->field('session');
-  
+  // if so, add process parent sessions
   if($related_session['id']) {
+    $parent_sessions = get_media_item_event_info($pod);
   }
-  
   
   $speakers = $pod->field('session.speakers');
   if(isset($speakers['id'])) {
@@ -54,6 +76,7 @@ while($pod->fetch()) {
       'title' => $pod->field('session.name'),
       'start' => $pod->field('session.start')
     ),
+    'parent_sessions' => $parent_sessions,
     'session_speakers' => $speakers,
     'session_chairs' => $pod->field('session.chairs'),
     'session_respondents' => $pod->field('session.respondents'),
