@@ -2,9 +2,6 @@ var mediaArchiveApp = angular.module('mediaArchiveApp', []);
  
 mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
-  
-  // use GET parameter to populate query input field
-  $scope.search = $location.search('search');
   $scope.mediatypes = { audio: false, video: false};
   
   $scope.loadItems = function() {
