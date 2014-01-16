@@ -78,6 +78,14 @@ while($pod->fetch()) {
     $speakers = array( $speakers );
   }
   
+  // if there are no session speakers listed, try event speakers
+  if(!count($speakers)) {
+    $speakers = $pod->field('event.speakers');
+      if(isset($speakers['id'])) {
+      $speakers = array( $speakers );
+    }
+  }
+  
   $media_item = array (
     'id' => $pod->field('slug'),
     'title' => $pod->field('name'),
