@@ -21,12 +21,20 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
   $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
   if($parent_session['id']) {
     array_unshift($parent_sessions, $parent_session);
+    // call ourselves recursively to add any parent sessions further up the hierarchy
     $parent_sessions = get_media_item_event_info($media_item_pod, $parent_sessions);
   } else {
     // else, test whether a parent event programme is defined (aka the current event session is 'top level')
-    $parent_event_programme = $media_item_pod->field('session.parent_event_programme');
+    $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     if($parent_event_programme['id']) {
       array_unshift($parent_sessions, $parent_event_programme);
+      $parent_event = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_event');
+      $parent_conference = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_conference');
+      if($parent_event['id']) {
+        array_unshift($parent_sessions, $parent_event);
+      } elseif($parent_conference['id']) {
+        array_unshift($parent_sessions, $parent_conference);
+      }
     }
   }
   
