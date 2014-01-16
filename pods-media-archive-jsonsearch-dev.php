@@ -62,9 +62,12 @@ while($pod->fetch()) {
   $parent_sessions = array();
   // first, check if this media item is linked to an event session
   $related_session = $pod->field('session');
+  $related_event = $pod->field('event');
   // if so, add process parent sessions
   if($related_session['id']) {
     $parent_sessions = get_media_item_event_info($pod);
+  } elseif($related_event['id']) {
+    $parent_sessions = array($pod->field('event'));
   }
   
   $speakers = $pod->field('session.speakers');
