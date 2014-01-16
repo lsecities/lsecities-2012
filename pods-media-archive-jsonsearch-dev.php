@@ -60,7 +60,7 @@ while($pod->fetch()) {
   // fetch parent sessions up to container event, if applicable
   // initialise array
   $parent_sessions = array();
-  $parent_event = array();
+  $parent_event = null;
   // first, check if this media item is linked to an event session
   $related_session = $pod->field('session');
   $related_event = $pod->field('event');
@@ -68,7 +68,7 @@ while($pod->fetch()) {
   if($related_session['id']) {
     $parent_sessions = get_media_item_event_info($pod);
   } elseif($related_event['id']) {
-    $parent_event = array($pod->field('event'));
+    $parent_event = $related_event;
   }
   
   $speakers = $pod->field('session.speakers');
