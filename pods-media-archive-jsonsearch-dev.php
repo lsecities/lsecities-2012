@@ -40,7 +40,7 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     }
   }
   
-  return array_slice($parent_sessions, 0, -1);
+  return array_pop($parent_sessions);
 }
 
 // setting search string from post meta is used in WP pages with hardcoded queries
