@@ -7,7 +7,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.loadItems = function() {
     var httpRequest = $http({
       method: 'GET',
-      url: '/media/search-dev'
+      url: '/media/search-dev.json'
     }).success(function(data, status) {
       $scope.items = data.items;
     });

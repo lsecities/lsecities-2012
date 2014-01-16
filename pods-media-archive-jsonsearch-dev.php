@@ -28,7 +28,12 @@ $pod = pods('media_item_v0', array('limit' => -1, 'where' => 'slug IS NOT NULL')
 $media_items = array();
 
 while($pod->fetch()) {
+  // check if this media item is linked to an event session
   $related_session = $pod->field('session');
+  
+  if($related_session['id']) {
+  }
+  
   
   $speakers = $pod->field('session.speakers');
   if(isset($speakers['id'])) {
