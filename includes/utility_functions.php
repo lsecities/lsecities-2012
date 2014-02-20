@@ -74,6 +74,8 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
   foreach($fields as $key => $value) {
     $sorted_fields[$key] = $value[$sort_by];
   }
+  
+  setlocale(LC_COLLATE, 'en_GB.utf8');
   array_multisort($sorted_fields, $sort_order, SORT_LOCALE_STRING, $fields);
   return $fields;
 }
