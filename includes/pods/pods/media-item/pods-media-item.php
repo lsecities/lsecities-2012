@@ -98,9 +98,9 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
   // first test whether there is a parent session
   $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
   if($parent_session['id']) {
-    // for debugging only - dump $field_name within the $parent_sessions array
-    array_unshift($parent_sessions, $field_name);
-    
+    // for debugging only - add to the parent_session item a field with the field_name used here
+    $parent_session['_comment:field_name'] = $field_name;
+
     array_unshift($parent_sessions, $parent_session);
     // call ourselves recursively to add any parent sessions further up the hierarchy
     $parent_sessions = get_media_item_event_info($media_item_pod, $parent_sessions);
@@ -108,19 +108,23 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     // else, test whether a parent event programme is defined (aka the current event session is 'top level')
     $parent_sessions_count = count($parent_sessions);
     $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
-    
-    // for debugging only - dump $field_name within the $parent_sessions array
+        
     array_unshift($parent_sessions, $field_name);
     
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     
     // for debugging only - add event programme to sessions as if it were a session
-    array_unshift($parent_sessions, $parent_event_programme);
+    // array_unshift($parent_sessions, $parent_event_programme);
     
     if($parent_event_programme['id']) {
       // array_unshift($parent_sessions, $parent_event_programme);
       $parent_event = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_event');
       $parent_conference = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_conference');
+      
+      // for debugging only - add to the parent_session item a field with the field_name used here
+      $parent_event['_comment:field_name'] = $field_name;
+      $parent_conference['_comment:field_name'] = $field_name;
+      
       if($parent_event['id']) {
         array_unshift($parent_sessions, $parent_event);
       } elseif($parent_conference['id']) {
