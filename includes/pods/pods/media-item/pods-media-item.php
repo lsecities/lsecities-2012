@@ -46,7 +46,7 @@ function pods_prepare_media_item($query_string = '') {
     }
     
     // for debugging purposes, add timestamp to each element
-    $dt = new DateTime();
+    $dt = new \DateTime();
     
     $media_item = array (
       'id' => $pod->field('slug'),
