@@ -98,6 +98,9 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
   // first test whether there is a parent session
   $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
   if($parent_session['id']) {
+    // for debugging only - dump $field_name within the $parent_sessions array
+    array_unshift($parent_sessions, $field_name);
+    
     array_unshift($parent_sessions, $parent_session);
     // call ourselves recursively to add any parent sessions further up the hierarchy
     $parent_sessions = get_media_item_event_info($media_item_pod, $parent_sessions);
