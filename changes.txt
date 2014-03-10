@@ -1,4 +1,14 @@
-lsecities-theme-alexandria (1.9) experimental; urgency=low
+lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
+
+  release 1.10 "pervenche"
+  
+  * [feature] AngularJS app for media archive search
+  * [feature] full media archive catalogue extraction code (to JSON,
+    for use within the AngularJS app)
+  
+ -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
+ 
+llsecities-theme-alexandria (1.9) experimental; urgency=low
 
   release 1.9 "bacchante"
   
