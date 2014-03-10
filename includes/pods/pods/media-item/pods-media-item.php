@@ -105,6 +105,10 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     // else, test whether a parent event programme is defined (aka the current event session is 'top level')
     $parent_sessions_count = count($parent_sessions);
     $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
+    
+    // for debugging only - dump $field_name within the $parent_sessions array
+    array_unshift($parent_sessions, $field_name);
+    
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     
     // for debugging only - add event programme to sessions as if it were a session
