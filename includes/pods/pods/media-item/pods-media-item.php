@@ -45,6 +45,9 @@ function pods_prepare_media_item($query_string = '') {
       }
     }
     
+    // for debugging purposes, add timestamp to each element
+    $dt = new DateTime();
+    
     $media_item = array (
       'id' => $pod->field('slug'),
       'title' => $pod->field('name'),
@@ -71,7 +74,8 @@ function pods_prepare_media_item($query_string = '') {
       'event_speakers' => $pod->field('event.speakers'),
       'event_chairs' => $pod->field('event.chairs'),
       'event_respondents' => $pod->field('event.respondents'),
-      'event_moderators' => $pod->field('event.moderators')
+      'event_moderators' => $pod->field('event.moderators'),
+      '_comments' => 'generated at ' . $dt->format('Y-m-d H:i:s')
     );
     array_push($media_items, $media_item);
   }
@@ -79,6 +83,13 @@ function pods_prepare_media_item($query_string = '') {
   return $media_items;
 }
 
+/**
+ * Look up a media item's parent event and session(s) information
+ * Calls itself recursively until the container chain is exhausted.
+ * @param Pod $media_item_pod The media item's Pod object
+ * @param array $parent_sessions List of parent sessions
+ * @return array $parent_sessions List of parent sessions; each item is a data structure with the corresponding session's data, as returned by Pod::field()
+ */
 function get_media_item_event_info($media_item_pod, $parent_sessions = array()) {
   
   $parent_sessions_count = count($parent_sessions);
