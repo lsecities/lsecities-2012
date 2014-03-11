@@ -2,7 +2,7 @@ var mediaArchiveApp = angular.module('mediaArchiveApp', []);
 
 mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
-  $scope.mediatypes = { audio: false, video: false};
+  $scope.mediatypes = { audio: false, video: false };
   
   $scope.loadItems = function() {
     var httpRequest = $http({
@@ -18,7 +18,7 @@ mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
 
 mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
-  $scope.mediatypes = { audio: false, video: false};
+  $scope.mediatypes = { audio: false, video: false };
   
   $scope.loadItems = function() {
     var httpRequest = $http({
