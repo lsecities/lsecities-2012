@@ -113,7 +113,7 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     
     // for debugging only - add event programme to sessions as if it were a session
     $parent_event_programme['_comment:no_parent_session:field_name'] = $field_name;
-    array_unshift($parent_sessions, $parent_event_programme);
+    // array_unshift($parent_sessions, $parent_event_programme);
     
     if($parent_event_programme['id']) {
       // array_unshift($parent_sessions, $parent_event_programme);
