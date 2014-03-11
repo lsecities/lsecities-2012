@@ -23,6 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "*"
+    "angular": "*",
+    "underscore": "~1.6"
   }
 }
