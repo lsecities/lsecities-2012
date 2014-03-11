@@ -122,8 +122,8 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
       $parent_conference = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_conference');
       
       // for debugging only - add to the parent_session item a field with the field_name used here
-      $parent_event['_comment:field_name'] = $field_name;
-      $parent_conference['_comment:field_name'] = $field_name;
+      $parent_event['_comment:parent_event:field_name'] = $field_name;
+      $parent_conference['_comment:parent_conference:field_name'] = $field_name;
       
       if($parent_event['id']) {
         array_unshift($parent_sessions, $parent_event);
