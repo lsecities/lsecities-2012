@@ -78,13 +78,13 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="clearfix">
                   <div class="resultsarea">
-                    <h2>Search results</h2>
+                    <h2>Search results<span data-ng-show="filtered.length"> ({{filtered.length}} matching items)</span></h2>
                     <div id="searchresults"></div>
                   </div>
                 </section>
                 <section class="ngapp">
                   <ul>
-                    <li data-ng-repeat="item in items | filter:query">
+                    <li data-ng-repeat="item in filtered = (items | filter:query)">
                       <h3>{{item.title}}</h3>
                       <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                       <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
