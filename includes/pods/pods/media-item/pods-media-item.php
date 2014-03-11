@@ -109,13 +109,11 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
     $parent_sessions_count = count($parent_sessions);
     $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
     
-    // for debugging only - add to the parent_session item a field with the field_name used here
-    $parent_session['_comment:no_parent_session:field_name'] = $field_name;
-    
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     
     // for debugging only - add event programme to sessions as if it were a session
-    // array_unshift($parent_sessions, $parent_event_programme);
+    $parent_event_programme['_comment:no_parent_session:field_name'] = $field_name;
+    array_unshift($parent_sessions, $parent_event_programme);
     
     if($parent_event_programme['id']) {
       // array_unshift($parent_sessions, $parent_event_programme);
