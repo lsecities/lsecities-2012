@@ -78,7 +78,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="clearfix">
                   <div class="resultsarea">
-                    <h2>Search results<span data-ng-show="filtered.length"> ({{filtered.length}} matching item<span data-ng-show="filtered-length > 1">s</span>)</span></h2>
+                    <h2>Search results<span data-ng-show="filtered.length"> ({{filtered.length}} matching item<span data-ng-show="filtered.length > 1">s</span>)</span></h2>
                     <div id="searchresults"></div>
                   </div>
                 </section>
