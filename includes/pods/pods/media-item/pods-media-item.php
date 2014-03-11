@@ -107,7 +107,7 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
   } else {
     // else, test whether a parent event programme is defined (aka the current event session is 'top level')
     $parent_sessions_count = count($parent_sessions);
-    $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
+    $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count : 0);
     
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
     
