@@ -17,8 +17,8 @@ add_action('admin_enqueue_scripts', 'hide_editor_box_when_editing_pods_pages');
 /* event pod */
 function pods_ui_events() {
   $icon = '';
-  add_object_page('Events', 'Events', 'read', 'events', '', $icon);
-  add_submenu_page('events', 'Events', 'Events', 'read', 'events', 'event_page');
+  add_object_page('Events', 'Events', 'pods_add_event', 'events', '', $icon);
+  add_submenu_page('events', 'Events', 'Events', 'pods_add_event', 'events', 'event_page');
 }
 
 function event_page() {
@@ -47,8 +47,8 @@ add_action('admin_menu','pods_ui_events');
 /* event_session pod */
 function pods_ui_event_session() {
   $icon = '';
-  add_object_page('Event session', 'Event session', 'read', 'event_session', '', $icon);
-  add_submenu_page('event_session', 'Event session', 'Event session', 'read', 'event_session', 'event_session_page');
+  add_object_page('Event session', 'Event session', 'pods_add_event_session', 'event_session', '', $icon);
+  add_submenu_page('event_session', 'Event session', 'Event session', 'pods_add_event_session', 'event_session', 'event_session_page');
 }
 
 function event_session_page() {
@@ -73,8 +73,8 @@ add_action('admin_menu','pods_ui_event_session');
 /* people (aka authors) pod */
 function pods_ui_people() {
   $icon = '';
-  add_object_page('People', 'People', 'read', 'people', '', $icon);
-  add_submenu_page('people', 'People', 'People', 'read', 'people', 'person_page');
+  add_object_page('People', 'People', 'pods_add_authors', 'people', '', $icon);
+  add_submenu_page('people', 'People', 'People', 'pods_add_authors', 'people', 'person_page');
 }
 
 function person_page() {
@@ -124,9 +124,9 @@ add_action('admin_menu','pods_ui_people');
 /* tile pod */
 function pods_ui_tiles() {
   $icon = '';
-  add_object_page('Tiles', 'Tiles', 'read', 'tiles', '', $icon);
-  add_submenu_page('tiles', 'Tiles', 'Tiles', 'read', 'tiles', 'tile_page');
-  add_submenu_page('tiles', 'Active tiles', 'Active tiles', 'read', 'active_tiles', 'active_tile_page');
+  add_object_page('Tiles', 'Tiles', 'pods_add_tile', 'tiles', '', $icon);
+  add_submenu_page('tiles', 'Tiles', 'Tiles', 'pods_add_tile', 'tiles', 'tile_page');
+  add_submenu_page('tiles', 'Active tiles', 'Active tiles', 'pods_add_tile', 'active_tiles', 'active_tile_page');
 }
 
 function tile_page() {
@@ -199,8 +199,8 @@ add_action('admin_menu','pods_ui_tiles');
 /* Research project pod */
 function pods_ui_research_projects() {
   $icon = '';
-  add_object_page('Research projects', 'Research projects', 'read', 'research_projects', '', $icon);
-  add_submenu_page('research_projects', 'Research projects', 'Research projects', 'read', 'research_projects', 'research_project_page');
+  add_object_page('Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', '', $icon);
+  add_submenu_page('research_projects', 'Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', 'research_project_page');
 }
 
 function research_project_page() {
@@ -223,8 +223,8 @@ add_action('admin_menu','pods_ui_research_projects');
 /* slides pod */
 function pods_ui_slide() {
   $icon = '';
-  add_object_page('Slides', 'Slides', 'read', 'slide', '', $icon);
-  add_submenu_page('slide', 'Slides', 'Slides', 'read', 'slide', 'slide_page');
+  add_object_page('Slides', 'Slides', 'pods_add_slide', 'slide', '', $icon);
+  add_submenu_page('slide', 'Slides', 'Slides', 'pods_add_slide', 'slide', 'slide_page');
 }
 
 function slide_page() {
