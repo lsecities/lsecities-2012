@@ -57,7 +57,7 @@ function pods_prepare_list($pod_slugs) {
         $items[] = array(
           'title' => $item_pod->field('name'),
           'permalink' => get_permalink($item['ID']),
-          'pod_featured_image_uri' => pods_image_url($item_pod->field('snapshot'), 'original')
+          'pod_featured_image_uri' => pods_image_url($item_pod->field('snapshot'), array(512, 768))
         );
       }
 
