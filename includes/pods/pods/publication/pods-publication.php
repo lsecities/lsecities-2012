@@ -14,7 +14,7 @@ function pods_prepare_publication($pod_slug) {
   $obj['abstract'] = do_shortcode($pod->field('abstract'));
   $obj['blurb'] = $pod->display('blurb');
   $obj['issuu_uri'] = $pod->field('issuu_uri');
-  $obj['cover_image_uri'] = pods_image_url($pod->field('snapshot'), 'original');
+  $obj['cover_image_uri'] = pods_image_url($pod->field('snapshot'), array(200,350));
 
   $obj['publication_category'] = $pod->field('category.slug');
 
