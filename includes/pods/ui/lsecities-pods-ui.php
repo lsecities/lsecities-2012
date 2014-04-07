@@ -69,7 +69,7 @@ function event_session_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_event_session');
+// add_action('admin_menu','pods_ui_event_session');
 
 /* people (aka authors) pod */
 function pods_ui_people() {
@@ -219,7 +219,7 @@ function research_project_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_research_projects');
+// add_action('admin_menu','pods_ui_research_projects');
 
 /* slides pod */
 function pods_ui_slide() {
@@ -243,6 +243,6 @@ function slide_page() {
   pods_ui($object);
 }
 
-add_action('admin_menu','pods_ui_slide');
+// add_action('admin_menu','pods_ui_slide');
 
 ?>
