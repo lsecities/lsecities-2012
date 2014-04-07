@@ -197,30 +197,6 @@ function active_tile_page() {
 
 add_action('admin_menu','pods_ui_tiles');
 
-/* Research project pod */
-function pods_ui_research_projects() {
-  $icon = '';
-  add_object_page('Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', '', $icon);
-  add_submenu_page('research_projects', 'Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', 'research_project_page');
-}
-
-function research_project_page() {
-  $object = pods('research_project');
-  $object->ui = array(
-    'title'   => 'Research project',
-    'columns' => array(
-      'name'         => 'Title',
-      'status'       => 'Status',
-      'research_stream' => 'Research stream',
-      'date_start'   => 'Start date',
-      'date_end'     => 'End date'
-    )
-  );
-  pods_ui_manage($object);
-}
-
-// add_action('admin_menu','pods_ui_research_projects');
-
 /* slides pod */
 function pods_ui_slide() {
   $icon = '';
