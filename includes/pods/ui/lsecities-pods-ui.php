@@ -18,7 +18,8 @@ add_action('admin_enqueue_scripts', 'hide_editor_box_when_editing_pods_pages');
 function pods_ui_events() {
   $icon = '';
   add_object_page('Events', 'Events', 'pods_add_event', 'events', '', $icon);
-  add_submenu_page('events', 'Events', 'Events', 'pods_add_event', 'events', 'event_page');
+  add_submenu_page('events', 'All Events', 'All Events', 'pods_add_event', 'events', 'event_page');
+  add_submenu_page('events', 'Add New', 'Add New', 'pods_add_event', 'events', 'event_page');
 }
 
 function event_page() {
@@ -42,7 +43,7 @@ function event_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_events');
+// add_action('admin_menu','pods_ui_events');
 
 /* event_session pod */
 function pods_ui_event_session() {
