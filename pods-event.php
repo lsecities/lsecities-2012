@@ -165,8 +165,9 @@ $media_items_output_counter = 1;
                 <?php endif; ?>
                     <li id="person-profile-<?php echo $event_speaker['slug'] ?>" class="person fourcol<?php if((($index + 1) % 3) == 0) : ?> last<?php endif ; ?>">
                       <h1><?php echo $event_speaker['name'] ?> <?php echo $event_speaker['family_name'] ?></h1>
-                      <?php echo do_https_shortcode($event_speaker['profile_text']); ?>
+                      <div><?php echo do_https_shortcode($event_speaker['profile_text']); ?></div>
                       <?php if($event_speaker['homepage'] || $event_speaker['twitterhandle']): ?>
+                      <div>
                       <ul class="personal-links">
                       <?php if($event_speaker['homepage']): ?>
                           <li><a href="<?php echo $event_speaker['homepage']; ?>"><?php echo $event_speaker['homepage']; ?></a></li>
@@ -175,6 +176,7 @@ $media_items_output_counter = 1;
                           <li><a href="<?php echo $event_speaker['twitterhandle']; ?>"><?php echo $event_speaker['twitterhandle']; ?></a></li>
                       <?php endif; ?>
                       </ul>
+                      </div>
                       <?php endif; ?>
                     </li>
                 <?php if(($index + 1) % 3 == 0): ?>
