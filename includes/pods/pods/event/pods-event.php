@@ -127,16 +127,39 @@ function pods_prepare_event($pod_slug) {
   $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
   push_media_attribution($attachment_ID);
 
+  /**
+   * event start and end
+   * We only support a single timespan (i.e. an event with a session
+   * per day for three days cannot be represented with this data:
+   * we can only set the initial timestamp and final timestamp).
+   * Events starting and ending on the same day will display
+   * start and end date and time; events spanning over multiple
+   * days will only show start date and end date.
+   * We also output microdata attributes for machine parsing of pages
+   * and better output on search engines supporting this.
+   */
+  // first, create DateTime objects
   $event_date_start = new DateTime($pod->field('date_start'));
   $event_date_end = new DateTime($pod->field('date_end'));
+  // populate variables for microdata output
   $event_dtstart = $event_date_start->format(DATE_ISO8601);
   $event_dtend = $event_date_end->format(DATE_ISO8601);
-
+  // and finally, depending on whether event starts and ends on the
+  // same day or on distinct days (see above), generate strings
+  // for human-readable output, with microdata embedded in as appropriate
+  if($event_date_start.Date == $event_date_end.Date) {
+    $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time> to ';
+    $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_start->format("l j F Y") . '</time>';    
+  } else {
+    $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
+    $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
+    $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
+  }
+  
   $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
   $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
-  $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
-  $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
-  $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
+
+  
   $datetime_now = new DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
 
