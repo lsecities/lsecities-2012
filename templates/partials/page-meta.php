@@ -8,10 +8,10 @@
   <?php
     foreach($media_attributions as $key => $item):
       if($item['author'] and $item['attribution_uri']): ?>
-      <li><?php echo $item['title']; ?> by <a href="<?php echo $item['attribution_uri']; ?>"><?php echo $item['author']; ?></a></li>
+      <li><em><?php echo $item['title']; ?></em> by <a href="<?php echo $item['attribution_uri']; ?>"><?php echo $item['author']; ?></a></li>
   <?php
       elseif($item['author']): ?>
-      <li><?php echo $item['title']; ?> by <?php echo $item['author']; ?></li>
+      <li><em><?php echo $item['title']; ?></em> by <?php echo $item['author']; ?></li>
   <?php
       endif;
     endforeach; ?>
