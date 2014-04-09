@@ -159,7 +159,7 @@ function pods_prepare_event($pod_slug) {
     $obj['event_date_string'] .= ' to ';
     $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
   } else {
-    $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
+    $obj['event_date_string'] = $event_date_start->format("l j F Y") . ' | ';
     $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
     $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
   }
