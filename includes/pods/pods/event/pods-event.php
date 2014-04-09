@@ -150,20 +150,20 @@ function pods_prepare_event($pod_slug) {
 
   $obj['event_info'] = '';
   if($event_type) {
-    $event_info .= '<em>' . ucfirst($event_type) . '</em> ';
+    $obj['event_info'] .= '<em>' . ucfirst($event_type) . '</em> ';
   } else {
-    $event_info .= 'An event ';
+    $obj['event_info'] .= 'An event ';
   }
   if($event_series) {
-    $event_info .= 'of the <em>' . $event_series . '</em> event series ';
+    $obj['event_info'] .= 'of the <em>' . $event_series . '</em> event series ';
   }
   if($event_host_organizations) {
-    $event_info .= 'hosted by ' . $event_host_organizations . ' ';
+    $obj['event_info'] .= 'hosted by ' . $event_host_organizations . ' ';
   } else {
-    $event_info .= 'hosted by LSE Cities ';
+    $obj['event_info'] .= 'hosted by LSE Cities ';
   }
   if($event_partner_organizations) {
-    $event_info .= 'in partnership with ' . $event_partner_organizations;
+    $obj['event_info'] .= 'in partnership with ' . $event_partner_organizations;
   }
 
   $poster_pdf = $pod->field('poster_pdf');
