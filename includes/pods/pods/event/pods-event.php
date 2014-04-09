@@ -37,9 +37,7 @@ function orgs_list($organizations) {
   $output = '';
   $org_count = count($organizations);
   
-  end($organizations);
-  $last_item = each($organizations);
-  reset($organizations);
+  $last_item = $organizations[$org_count - 1];
   
   foreach($organizations as $key => $org) {
     if($key == $last_item['key'] and $org_count > 1) {
