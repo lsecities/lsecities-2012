@@ -230,7 +230,7 @@ function push_media_attribution($attachment_ID) {
 
 /**
  * push to media attribution stack every time an image is used
- * (using filter wp_get_attachment_link)
+ * (using filter wp_get_attachment_url)
  */
 function auto_push_media_attribution($markup, $id) {
   push_media_attribution($id);
