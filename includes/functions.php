@@ -243,7 +243,7 @@ function auto_push_media_attribution($url, $id) {
 /**
  * and connect to filter
  */
-add_filter('wp_get_attachment_url', 'auto_push_media_attribution');
+add_filter('wp_get_attachment_url', 'auto_push_media_attribution', 10);
 
 function format_media_attribution($media_item_id) {
     /**
