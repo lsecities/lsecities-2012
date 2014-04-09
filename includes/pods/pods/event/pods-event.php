@@ -125,7 +125,6 @@ function pods_prepare_event($pod_slug) {
   // grab the image URI from the Pod
   $attachment_ID = $pod->field('heading_image.ID', TRUE);
   $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
-  push_media_attribution($attachment_ID);
 
   /**
    * event start and end

@@ -200,7 +200,6 @@ function compose_slide_content($column_spans, $tiles) {
           )
         )
       );
-      push_media_attribution($tile->field('image.ID'));
     }
     array_push($slide_content['columns'], $slide_column);
   }
