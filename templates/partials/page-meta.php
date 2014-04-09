@@ -13,7 +13,7 @@
       <li><?php echo $item['title']; ?> by <a href="<?php echo $item['attribution_uri']; ?>"><?php echo $item['author']; ?></a></li>
   <?php
       elseif($item['title'] and $item['author']): ?>
-      <li><?php echo $item['title']; ?> by <?php echo $item['author']; ?>
+      <li><?php echo $item['title']; ?> by <?php echo $item['author']; ?></li>
   <?php
       endif; 
     endforeach; ?>
