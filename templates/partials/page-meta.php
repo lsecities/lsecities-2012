@@ -1,7 +1,6 @@
 <?php
-  $media_attributions = lc_data('META_media_attr'); 
-  var_trace(var_export($media_attributions, TRUE), 'media_attributions_data_structure'); ?>
-<div id="hiddenmeta" style="display: none;">
+  $media_attributions = lc_data('META_media_attr'); ?>
+<div id="page-meta" style="display: none;">
   <?php if(count($media_attributions)): ?>
     <h4>Media sources</h4>
     <ul>
