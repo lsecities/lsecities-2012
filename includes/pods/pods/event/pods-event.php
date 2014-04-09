@@ -138,13 +138,20 @@ function pods_prepare_event($pod_slug) {
    * We also output microdata attributes for machine parsing of pages
    * and better output on search engines supporting this.
    */
+  
   // first, create DateTime objects
   $event_date_start = new DateTime($pod->field('date_start'));
   $event_date_end = new DateTime($pod->field('date_end'));
+  
   // populate variables for microdata output
   $event_dtstart = $event_date_start->format(DATE_ISO8601);
   $event_dtend = $event_date_end->format(DATE_ISO8601);
-  // and finally, depending on whether event starts and ends on the
+  
+  // populate variables for iCal output
+  $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
+  $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
+  
+  // depending on whether event starts and ends on the
   // same day or on distinct days (see above), generate strings
   // for human-readable output, with microdata embedded in as appropriate
   if($event_date_start.Date == $event_date_end.Date) {
@@ -156,10 +163,15 @@ function pods_prepare_event($pod_slug) {
     $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
   }
   
-  $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
-  $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
-
-  
+  // AddToCalendar URIs
+  $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
+    $obj['title']
+    .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
+    .'&details=&'
+    .'location='.$obj['event_location']
+    .'&trp=false&'
+    .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
+ 
   $datetime_now = new DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
 
@@ -192,15 +204,6 @@ function pods_prepare_event($pod_slug) {
   $obj['poster_pdf'] = wp_get_attachment_url($poster_pdf[0]['ID']);
   
   $obj['event_page_uri'] = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$obj['slug'];
-  
-    // AddToCalendar URIs
-  $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
-    $obj['title']
-    .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
-    .'&details=&'
-    .'location='.$obj['event_location']
-    .'&trp=false&'
-    .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
-    
+     
   return $obj;
 }
