@@ -8,6 +8,9 @@
  */
 ?>
     <div class="reset-layout">&#160;</div>
+    
+    <?php include_once('templates/partials/page-meta.php'); ?>
+
 	</div><!-- #main -->
 
 	<footer id="footer">
