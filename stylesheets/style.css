@@ -639,6 +639,12 @@ blockquote::before { color: #999999; content: '\00AB'; display: block; font-size
 .watchvideo.onyoutube { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
 .watchvideo.onyoutube:hover { opacity: 0.6; }
 
+.reset-layout { overflow: hidden; *zoom: 1; }
+
+#page-meta { clear: both; margin: 1em 0; opacity: 0.6; font-size: 0.8rem; -webkit-transition: opacity 0.5s ease; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
+#page-meta:hover, #page-meta:focus, #page-meta:active { opacity: 1; -webkit-transition: opacity 0.5s ease; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
+#page-meta h1 { font-size: inherit; font-weight: 900; }
+
 .flexslider { position: relative; box-shadow: none; margin: 0; min-width: 60em; /* Direction Nav */ /* Control Nav */ }
 .flexslider .flex-direction-nav { list-style-type: none; }
 .flexslider .flex-direction-nav li a { width: 33px; height: 64px; text-indent: -9999px; border: 0; margin: -13px 0 0; display: block; /* background: url(theme/bg_direction_nav.png) no-repeat 0 0; */ position: absolute; top: 45%; /* top: 50%; */ opacity: 0.9; }
