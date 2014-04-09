@@ -155,8 +155,9 @@ function pods_prepare_event($pod_slug) {
   // same day or on distinct days (see above), generate strings
   // for human-readable output, with microdata embedded in as appropriate
   if($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) {
-    $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time> to ';
-    $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
+    $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time>';
+    $obj['event_date_string'] .= ' to ';
+    $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
   } else {
     $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
     $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
