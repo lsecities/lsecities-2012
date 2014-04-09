@@ -228,6 +228,19 @@ function push_media_attribution($attachment_ID) {
   }
 }
 
+/**
+ * push to media attribution stack every time an image is used
+ * (using filter wp_get_attachment_link)
+ */
+function auto_push_media_attribution($markup, $id) {
+  push_media_attribution($id);
+}
+
+/**
+ * and connect to filter
+ */
+add_filter('wp_get_attachment_link', 'auto_push_media_attribution', 10, 2);
+
 function format_media_attribution($media_item_id) {
     /**
      * Add image attribution metadata if present in media item
