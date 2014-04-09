@@ -9,13 +9,13 @@
     <ul>
   <?php
     foreach($media_attributions as $key => $item):
-      if($item['attribution_string'] and $item['attribution_uri']): ?>
-    <li><a href="<?php echo $item['attribution_uri']; ?>"><?php echo $item['attribution_string']; ?></a></li>
+      if($item['title'] and $item['attribution_string'] and $item['attribution_uri']): ?>
+      <li><?php echo $item['title']; ?> by <a href="<?php echo $item['attribution_uri']; ?>"><?php echo $item['attribution_string']; ?></a></li>
   <?php
-      elseif($item['attribution_string']): ?>
-      <li><?php echo $item['attribution_string']; ?></li>
+      elseif($item['title'] and $item['attribution_string']): ?>
+      <li><?php echo $item['title']; ?> by <?php echo $item['attribution_string']; ?>
   <?php
-      endif;
+      endif; 
     endforeach; ?>
     </ul>
   <?php
