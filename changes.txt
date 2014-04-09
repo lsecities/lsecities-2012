@@ -5,6 +5,9 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [feature] AngularJS app for media archive search
   * [feature] full media archive catalogue extraction code (to JSON,
     for use within the AngularJS app)
+  * [feature] photo credits automatically added to #page-meta area
+    whenever photos with title and attribution metadata defined
+    in WP's media library are pulled into a template
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
  
