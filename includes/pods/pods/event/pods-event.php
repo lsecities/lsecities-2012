@@ -40,9 +40,8 @@ function orgs_list($organizations) {
   $last_item = $organizations[$org_count - 1];
   
   foreach($organizations as $key => $org) {
-    if($key == $last_item['key'] and $org_count > 1) {
-      $output = substr($output, 0, -3);
-      $output .= " and \n";
+    if($key == ($org_count - 1) and $org_count > 1) {
+      $output .= " and ";
     }
     if($org['web_uri']) {
       $output .= '<a href=' . $org['web_uri'] . '>';
@@ -51,9 +50,11 @@ function orgs_list($organizations) {
     if($org['web_uri']) {
       $output .= '</a>';
     }
-    $output .= ", \n";
+    // add comma up to the second to last element
+    if($key < ($org_count - 2)) {
+      $output .= ", ";
+    }
   }
-  $output = substr($output, 0, -3);
   
   return $output;
 }
