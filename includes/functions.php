@@ -232,12 +232,12 @@ function push_media_attribution($attachment_ID) {
  * push to media attribution stack every time an image is used
  * (using filter wp_get_attachment_url)
  */
-function auto_push_media_attribution($markup, $id) {
+function auto_push_media_attribution($markup, $url, $id) {
   // automatically fetch attribution metadata and push it to the attribution list
   push_media_attribution($id);
 
   // pass through
-  return $id;
+  return $url;
 }
 
 /**
