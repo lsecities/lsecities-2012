@@ -2,7 +2,7 @@
   $media_attributions = lc_data('META_media_attr'); ?>
 <div id="page-meta">
   <?php if(count($media_attributions)): ?>
-    <h1>Media sources</h1>
+    <h1>Photo credits</h1>
     <ul>
   <?php
     foreach($media_attributions as $key => $item):
