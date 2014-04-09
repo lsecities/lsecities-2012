@@ -21,8 +21,8 @@ PRODID:-//lsecities.net/wpcal//NONSGML v1.0//EN
 BEGIN:VEVENT
 UID:" . sha1($obj['slug'], false) . "@lsecities.net
 DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
-DTSTART:".$obj['dtstart']."
-DTEND:".$obj['dtend']."
+DTSTART:".$obj['event_dtstart']."
+DTEND:".$obj['event_dtend']."
 SUMMARY:".$obj['title']."
 URI:".$obj['event_page_uri']."\n";
 if($obj['event_location']) {
