@@ -233,7 +233,11 @@ function push_media_attribution($attachment_ID) {
  * (using filter wp_get_attachment_url)
  */
 function auto_push_media_attribution($markup, $id) {
+  // automatically fetch attribution metadata and push it to the attribution list
   push_media_attribution($id);
+
+  // pass through
+  return $id;
 }
 
 /**
