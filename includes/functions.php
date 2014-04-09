@@ -210,13 +210,22 @@ function push_media_attribution($attachment_ID) {
   $attachment_metadata = wp_get_attachment_metadata($attachment_ID);
   $attribution_uri = get_post_meta($attachment_ID, '_attribution_uri', true);
   $attribution_name = get_post_meta($attachment_ID, '_attribution_name', true);
-  array_push($media_attributions, array(
+
+  $metadata = array(
     'title' => get_the_title($attachment_ID),
     'attribution_uri' => $attribution_uri,
     'author' => $attribution_name,
     'attribution_string' => format_media_attribution($attachment_ID)
-  ));
-  lc_data('META_media_attr', $media_attributions);
+  );
+
+  // only append image attribution data to list if we have at least
+  // title and author - otherwise it's useless (but emit a notice if so)
+  if(!empty($metadata['title']) and !empty($metadata['author'])) {
+    array_push($media_attributions, $metadata);
+    lc_data('META_media_attr', $media_attributions);
+  } else {
+    trigger_error('No title or attribution metadata set for media item with ID ' . $attachment_ID, E_USER_NOTICE);
+  }
 }
 
 function format_media_attribution($media_item_id) {
