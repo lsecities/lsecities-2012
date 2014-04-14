@@ -40,7 +40,7 @@ $active_year = $current_year; // used to set initial active section for jQuery U
 
 for($year = 2005; $year <= $current_year; $year++) {
   $events_pod->find(array(
-    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND (t.hide IS NOT TRUE OR event_calendar.permalink = "lse-cities-events-calendar")',
+    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND (event_calendar.permalink != "other-events" OR event_calendar.permalink = "lse-cities-events-calendar")',
     'orderby' => 'date_start DESC',
     'limit' => -1
   ));
