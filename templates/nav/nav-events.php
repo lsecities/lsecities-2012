@@ -40,7 +40,7 @@ $active_year = $current_year; // used to set initial active section for jQuery U
 
 for($year = 2005; $year <= $current_year; $year++) {
   $events_pod->find(array(
-    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND t.hide IS NOT TRUE',
+    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND (t.hide IS NOT TRUE OR event_calendar.permalink = "lse-cities-events-calendar")',
     'orderby' => 'date_start DESC',
     'limit' => -1
   ));
@@ -51,6 +51,7 @@ for($year = 2005; $year <= $current_year; $year++) {
       if($pod_slug == $events_pod->field('slug')) {
         $active_year = $year;
       }
+      var_trace(var_export($events_pod->field('event_calendar.permalink'), TRUE), 'event.event_calendars');
       $events[$year][] = Array(
         'slug' => $events_pod->field('slug'),
         'name' => $events_pod->field('name'),
