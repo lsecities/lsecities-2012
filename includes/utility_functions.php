@@ -79,3 +79,10 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
   array_multisort($sorted_fields, $sort_order, SORT_LOCALE_STRING, $fields);
   return $fields;
 }
+
+/**
+ * Log microtime and filename+line
+ */
+function log_timestamp() {
+  error_log(microtime(), zend_thread_id() . ' : ' . __FILE__ . ' : ' . __LINE__);
+}
