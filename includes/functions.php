@@ -41,11 +41,18 @@ if(LSECITIES_THEME_DEBUG) {
  */
 function var_trace($var, $prefix = 'pods', $destination = 'error_log') {
   /**
-	 * If LSECITIES_THEME_DEBUG is set to 1 (only trace actions of logged-in users)
-	 * or if LSECITIES_THEME_DEBUG is set to 2 (trace actions of any visitor), then log,
-	 * otherwise do nothing.
+	 * If any of the following is true:
+         * * LSECITIES_THEME_DEBUG is set to 1 and current user is super-admin
+	 * * LSECITIES_THEME_DEBUG is set to 2 and current user is site admin
+         * * LSECITIES_THEME_DEBUG is set to 3 and current user is logged in
+         * * LSECITIES_THEME_DEBUG is set to 4 (trace actions of any visitor)
+         * then log, otherwise do nothing.
 	 */
-	if((LSECITIES_THEME_DEBUG == 1 and is_user_logged_in()) or LSECITIES_THEME_DEBUG == 2) {
+	if(
+          (LSECITIES_THEME_DEBUG == 1 and current_user_can('manage_network')) or
+          (LSECITIES_THEME_DEBUG == 2 and current_user_can('')) or
+          (LSECITIES_THEME_DEBUG == 3 and is_user_logged_in()) or
+           LSECITIES_THEME_DEBUG == 4) {
     $output_string = "tracing $prefix : " . var_export($var, true) . "\n\n";
 
     if($destination == 'page') {
