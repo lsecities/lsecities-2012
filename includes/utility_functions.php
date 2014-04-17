@@ -87,5 +87,5 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
  * @param string $line the caller line (normally caller would pass __LINE__ here)
  */
 function log_timestamp($file = '', $line = '') {
-  var_trace(microtime(), $file . ' : ' . $line);
+  var_trace(microtime(), 'timestamp: ' . $file . ' : ' . $line);
 }
