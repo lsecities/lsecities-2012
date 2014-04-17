@@ -82,7 +82,10 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
 
 /**
  * Log microtime and filename+line
+ *
+ * @param string $file the caller filename (normally caller would pass __FILE__ here)
+ * @param string $line the caller line (normally caller would pass __LINE__ here)
  */
-function log_timestamp() {
-  error_log(microtime(), zend_thread_id() . ' : ' . __FILE__ . ' : ' . __LINE__);
+function log_timestamp($file = '', $line = '') {
+  error_log(microtime(), zend_thread_id() . ' : ' . $file . ' : ' . $line);
 }
