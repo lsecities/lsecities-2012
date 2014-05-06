@@ -179,6 +179,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
   }
 
   $email_address = $pod->field('email_address');
+  $phone_number = $pod->field('phone_number');
   $blurb = $pod->display('staff_pages_blurb');
   $organization = '<span class=\'org\'>' . $pod->field('organization') . '</span>';
   $role = '<span class=\'role\'>' . $pod->field('role') . '</span>';
@@ -223,7 +224,10 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
       $output .= "  <p>$affiliation</p>";
     }
     if($email_address) {
-      $output .= "  <p class='email'>$email_address</p>";
+      $output .= "  <p class='email'>email: <span class='value'>$email_address</span></p>";
+    }
+    if($phone_number) {
+      $output .= "  <p class='tel'>Telephone: <span class='value'>$phone_number</span></p>";
     }
     if($blurb) {
       $output .= "  $blurb";
