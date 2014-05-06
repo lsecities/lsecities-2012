@@ -223,11 +223,15 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     if($affiliation) {
       $output .= "  <p>$affiliation</p>";
     }
-    if($email_address) {
-      $output .= "  <p class='email'>email: <span class='value'>$email_address</span></p>";
-    }
-    if($phone_number) {
-      $output .= "  <p class='tel'>telephone: <span class='value'>$phone_number</span></p>";
+    if($email_address or $phone_number) {
+      $output .= "<dl>";
+      if($email_address) {
+        $output .= "  <dt>email</dt><dd class='email'>$email_address</dd>";
+      }
+      if($phone_number) {
+        $output .= "  <dt>telephone</dt><dd class='tel'>$phone_number</dd>";
+      }
+      $output .= "</dl>";
     }
     if($blurb) {
       $output .= "  $blurb";
