@@ -671,7 +671,7 @@ right: -21px; */ }
 .lc-conference-frontpage .lc-galleria-picasa { width: 100%; max-width: 100%; }
 
 /** UserNoise WordPress plugin */
-#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; }
+#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; left: -6px !important; }
 
 /** on screens smaller than the full page width, when the usernoise button would cover some content, move button to the bottom of the page */
 @media only screen and (max-width: 1206px) { #un-button { left: 20% !important; -webkit-transform: none !important; -moz-transform: none !important; -ms-transform: none !important; -o-transform: none !important; transform: none !important; top: inherit !important; bottom: -6px; opacity: 0.85 !important; } }
