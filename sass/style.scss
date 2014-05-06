@@ -31,6 +31,7 @@
 
 // Final designs - main frame and one SCSS per template
 @import "partials/templates/base";
+@import "partials/templates/page-meta";
 @import "partials/templates/plugins/jquery.flexslider";
 @import "partials/templates/plugins/jquery.galleria";
 @import "partials/templates/plugins/usernoise";
