@@ -227,7 +227,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
       $output .= "  <p class='email'>email: <span class='value'>$email_address</span></p>";
     }
     if($phone_number) {
-      $output .= "  <p class='tel'>Telephone: <span class='value'>$phone_number</span></p>";
+      $output .= "  <p class='tel'>telephone: <span class='value'>$phone_number</span></p>";
     }
     if($blurb) {
       $output .= "  $blurb";
