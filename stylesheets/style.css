@@ -673,6 +673,9 @@ right: -21px; */ }
 /** UserNoise WordPress plugin */
 #un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; }
 
+/** on screens smaller than the full page width, when the usernoise button would cover some content, move button to the bottom of the page */
+@media only screen and (max-width: 1206px) { #un-button { left: 20% !important; -webkit-transform: none; -moz-transform: none; -ms-transform: none; -o-transform: none; transform: none; top: inherit; bottom: -6px; } }
+/** on small screens, just remove the button so that users are not distracted with extra page elements */
 @media only screen and (max-width: 480px) { #un-button { display: none; } }
 .lc-newspaper-article header.heading-image img { max-width: 100%; width: 100%; }
 .lc-newspaper-article .has-pullquote::before { content: attr(data-pullquote); font-weight: bold; opacity: 0.8; float: right; width: 50%; margin: 0.5em -30% 0 0; padding-left: 1.5em; padding-bottom: 0.5em; font-style: italic; position: relative; font-size: 1.5em; line-height: 1.25em; }
