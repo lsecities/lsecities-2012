@@ -217,12 +217,23 @@ function save_media_library_item_custom_form_fields($post, $attachment) {
 
 add_filter('attachment_fields_to_save','save_media_library_item_custom_form_fields', 8, 2);
 
+/**
+ * Given a WordPress attachment ID, read its attribution metadata
+ * and, if this is available, add it to the array of attribution metadata
+ * for the current request
+ * 
+ * @param integer $attachment_ID WordPress attachment ID
+ */
 function push_media_attribution($attachment_ID) {
+  // first read the current metadata array from the request variable
   $media_attributions = lc_data('META_media_attr');
+  
+  // get metadata for requested attachment
   $attachment_metadata = wp_get_attachment_metadata($attachment_ID);
   $attribution_uri = get_post_meta($attachment_ID, '_attribution_uri', true);
   $attribution_name = get_post_meta($attachment_ID, '_attribution_name', true);
 
+  // compose metadata attributes
   $metadata = array(
     'title' => get_the_title($attachment_ID),
     'attribution_uri' => $attribution_uri,
@@ -233,9 +244,11 @@ function push_media_attribution($attachment_ID) {
   // only append image attribution data to list if we have at least
   // title and author - otherwise it's useless (but emit a notice if so)
   if(!empty($metadata['title']) and !empty($metadata['author'])) {
-    array_push($media_attributions, $metadata);
+    // add/update metadata, using $attachment_ID as key (avoiding duplicates)
+    $media_attributions[$attachment_ID] = $metadata;
     lc_data('META_media_attr', $media_attributions);
   } else {
+    // warn if no suitable attribution metadata is defined for this attachment
     trigger_error('No title or attribution metadata set for media item with ID ' . $attachment_ID, E_USER_NOTICE);
   }
 }
