@@ -49,6 +49,7 @@ $obj = prepare_header($post);
 <meta name="description" content="<?php echo esc_html(lc_data('meta_description')); ?>">
 
 <link rel="profile" href="http://gmpg.org/xfn/11" />
+<link href='<?php echo get_stylesheet_directory_uri(); ?>/images/icons/favicon.png' rel='icon'>
 <link href="https://cloud.webtype.com/css/9044dce3-7052-4e0e-9dbb-377978412ca7.css" rel="stylesheet" type="text/css" />
 <?php
   // enqueue styles first
