@@ -98,7 +98,7 @@ $media_items_output_counter = 1;
               <?php if($obj['picasa_gallery_id']) : ?>
               <section class="event-photo-gallery">
               <?php
-                  echo galleria_shortcode(array('picasa_album' => $obj['picasa_gallery_id']));
+                  echo galleria_shortcode(array('picasa_album' => $obj['picasa_gallery_id'], 'height' => '0.5'));
                   if($obj['photo_gallery_credits']) : ?>
                   <p><?php echo $obj['photo_gallery_credits']; ?></p>
                   <?php endif; // ($obj['photo_gallery_credits']) ?>
