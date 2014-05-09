@@ -55,7 +55,7 @@ $media_items_output_counter = 1;
                   <aside class="booking-and-access"><?php echo $obj['event_contact_info']; ?></aside>
                 <?php endif; ?>
                 <?php if($obj['picasa_gallery_id']) :
-                  galleria_shortcode(array('picasa_album' => $obj['picasa_gallery_id']));
+                  echo galleria_shortcode(array('picasa_album' => $obj['picasa_gallery_id']));
                   if($obj['photo_gallery_credits']) : ?>
                   <p><?php echo $obj['photo_gallery_credits']; ?></p>
                   <?php endif; ($obj['photo_gallery_credits']) ?>
