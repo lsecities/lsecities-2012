@@ -31,8 +31,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
         
         <article class="wireframe" data-ng-controller="MediaArchiveCtrl">
           <header class="entry-header">
-            <h1 class="entry-title article-title">Media archive</h1>
-            <h2>Search</h2>
+            <h1 class="entry-title article-title">Search</h1>
           </header>
           
                 <section class="clearfix queryarea">
@@ -43,17 +42,17 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="lecture" disabled="disabled">lecture
+                              <input type="checkbox" value="lecture">lecture</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="talk" disabled="disabled">talk
+                              <input type="checkbox" value="talk">talk</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="conference-session" disabled="disabled">conference session
+                              <input type="checkbox" value="conference-session">conference session</input>
                             </label>
                           </li>
                         </ul>
@@ -63,26 +62,26 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio
+                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video
+                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video</input>
                             </label>
                           </li>
                         </ul>
                       </div>
                       <div class="keywords sixcol last">
                       <h3>Keywords</h3>
-                      <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      <input data-ng-model="query" class="twelvecol last" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
                       </div>
                     </form>
                   </div>
                   
                   <div class="mapsearch">
                     <h3>Search by city</h3>
-                    <iframe width='100%' height='500px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
+                    <iframe width='100%' height='350px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
                   </div>
                   
                 </section>
