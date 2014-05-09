@@ -31,9 +31,13 @@ function galleria_shortcode($args) {
       <?php endif ; ?>
       <?php if($args['responsive']): ?>
       responsive: <?php echo $args['responsive']; ?>,
+      <?php else: ?>
+      responsive: true,
       <?php endif; ?>
       <?php if($args['height']): ?>
       height: '<?php echo $args['height']; ?>',
+      <?php else: ?>
+      height: '0.6',
       <?php endif; ?>
     });
   });
