@@ -72,8 +72,11 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                           </li>
                         </ul>
                       </div>
+                      <div class="fourcol last">&nbsp;</div>
+                      <div class="keywords">
                       <h3>Keywords</h3>
-                      <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" class="tencol last" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      </div>
                     </form>
                   </div>
                   
