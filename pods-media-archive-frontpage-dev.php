@@ -72,12 +72,14 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                           </li>
                         </ul>
                       </div>
+                      <h3>Keywords</h3>
                       <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" class="tencol last" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
                     </form>
                   </div>
                   
                   <div class="mapsearch">
-                  <iframe width='100%' height='500px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
+                    <h3>Search by city</h3>
+                    <iframe width='100%' height='500px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
                   </div>
                   
                 </section>
