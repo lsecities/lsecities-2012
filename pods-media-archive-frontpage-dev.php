@@ -15,7 +15,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
 <div role="main" data-ng-app="mediaArchiveApp">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-media-archive-search'); ?>>
-    <div class='ninecol' id='contentarea'>
+    <div class='twelvecol' id='contentarea'>
       <div class='top-content'>
         <?php if(count($heading_slides)) : ?>
         <header class='heading-image'>
@@ -30,12 +30,13 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
         <?php endif; ?>
         
         <article class="wireframe" data-ng-controller="MediaArchiveCtrl">
+          <header class="entry-header">
+            <h1 class="entry-title article-title">Media archive</h1>
+            <h2>Search</h2>
+          </header>
+          
                 <section class="clearfix queryarea">
-                  <header class="entry-header fourcol">
-                    <h1 class="entry-title article-title">Media archive</h1>
-                    <h2>Search</h2>
-                  </header>
-                  <div class="eightcol last">
+                  <div class="row">
                     <form method="get" action="">
                       <div class="fourcol">
                         <h3>Format</h3>
@@ -72,8 +73,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                           </li>
                         </ul>
                       </div>
-                      <div class="fourcol last">&nbsp;</div>
-                      <div class="keywords">
+                      <div class="keywords eightcol last">
                       <h3>Keywords</h3>
                       <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
                       </div>
