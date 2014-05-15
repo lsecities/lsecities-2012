@@ -182,7 +182,7 @@ foreach($research_output_publications_pod_slugs as $tmp_slug) {
       'title' => $research_output_publication_pod->field('name'),
       'citation' => $research_output_publication_pod->field('name'),
       'date' => date_string($research_output_publication_pod->field('publishing_date')),
-      'uri' => get_permalink(get_post($research_output_publication_pod->field('publication_web_page.ID')))
+      'uri' => get_permalink($linked_wp_page_id)
     );
   } else {
     trigger_error('No WordPress page linked to Publication with ID ' . $research_output_publication_pod->id(), E_USER_NOTICE);
