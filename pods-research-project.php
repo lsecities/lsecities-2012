@@ -170,15 +170,23 @@ var_trace(var_export($research_output_publications_pod_slugs, true), 'research_o
 foreach($research_output_publications_pod_slugs as $tmp_slug) {
   $research_output_publication_pod = pods('publication_wrappers', $tmp_slug);
 
-  var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
-  var_trace($research_output_publication_pod->field('publication_web_page.ID'), 'publication_web_page.ID');
+  // get ID of WordPress page linked to this publication object
+  $linked_wp_page_id = $research_output_publication_pod->field('publication_web_page.ID');
 
-  $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
-    'title' => $research_output_publication_pod->field('name'),
-    'citation' => $research_output_publication_pod->field('name'),
-    'date' => date_string($research_output_publication_pod->field('publishing_date')),
-    'uri' => get_permalink(get_post($research_output_publication_pod->field('publication_web_page.ID')))
-  );
+  var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
+  var_trace($linked_wp_page_id, 'publication_web_page.ID');
+
+  // only add publication to list if publication has a linked WP page; otherwise emit warning
+  if($linked_wp_page_id) {
+    $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
+      'title' => $research_output_publication_pod->field('name'),
+      'citation' => $research_output_publication_pod->field('name'),
+      'date' => date_string($research_output_publication_pod->field('publishing_date')),
+      'uri' => get_permalink(get_post($research_output_publication_pod->field('publication_web_page.ID')))
+    );
+  } else {
+    trigger_error('No WordPress page linked to Publication with ID ' . $research_output_publication_pod->id(), E_USER_NOTICE);
+  }
 }
 
 // select events from the main LSE Cities calendar
