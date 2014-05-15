@@ -41,11 +41,11 @@ $project_duration = '';
 
 // get years from start and date fields
 try {
-  if($pod->field('date_start')) { 
+  if($pod->field('date_start')) {
     $project_start = new DateTime($pod->field('date_start') . '-01-01');
     $project_start = $project_start->format('Y');
   }
-  
+
   if($pod->field('date_end')) {
     $project_end = new DateTime($pod->field('date_end') . '-12-31');
     $project_end = $project_end->format('Y');
@@ -153,7 +153,7 @@ var_trace(var_export($research_output_pod_slugs, true), 'research_output_pod_slu
 $research_outputs = array();
 foreach($research_output_pod_slugs as $research_output_pod_slug) {
   $research_output_pod = pods('research_output', $research_output_pod_slug);
-  
+
   var_trace(var_export($research_output_pod->field('category'), true), 'output category');
 
   $research_outputs[$research_output_pod->field('category.slug')][] = array(
@@ -169,9 +169,10 @@ $research_output_publications_pod_slugs = (array)$pod->field('research_output_pu
 var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
 foreach($research_output_publications_pod_slugs as $tmp_slug) {
   $research_output_publication_pod = pods('publication_wrappers', $tmp_slug);
-  
+
   var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
-  
+  var_trace($research_output_publication_pod->field('publication_web_page.ID'), 'publication_web_page.ID');
+
   $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
     'title' => $research_output_publication_pod->field('name'),
     'citation' => $research_output_publication_pod->field('name'),
@@ -237,7 +238,7 @@ $news_categories = news_categories($pod->field('news_categories'));
           <?php include('templates/partials/galleria.inc.php'); ?>
         </header>
         <?php endif; ?>
-        
+
         <article class='wireframe eightcol row'>
           <header class='entry-header'>
             <h1><?php echo $pod_title; ?></h1>
@@ -245,7 +246,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <?php if($pod_summary): ?>
             <div class="abstract"><?php echo $pod_summary; ?></div>
             <?php endif; ?>
-            
+
             <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries)): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
@@ -352,7 +353,7 @@ $news_categories = news_categories($pod->field('news_categories'));
                     endforeach; // ($publication_list as $publication) ?>
                     </ul>
                   </dd>
-                <?php 
+                <?php
                     endif; // (count($research_outputs[$category_slug]))
                   endforeach; // ($research_output_categories as $category) ?>
 
@@ -374,7 +375,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <?php
             endif; // ($project_has_research_outputs)
             // photo galleries
-            if(count($research_photo_galleries)): 
+            if(count($research_photo_galleries)):
               var_trace($research_photo_galleries, 'research_photo_galleries');
               ?>
             <section id="t-galleries" class="hide later">
