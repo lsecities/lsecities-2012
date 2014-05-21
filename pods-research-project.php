@@ -29,12 +29,7 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-$pod_title = $pod->field('name');
-$pod_tagline = $pod->field('tagline');
-$web_uri = $pod->field('web_uri');
-$pod_summary = do_shortcode($pod->display('summary'));
-$pod_blurb = do_shortcode($pod->display('blurb'));
-$pod_keywords = $pod->field('keywords');
+
 
 // project duration
 $project_duration = '';
@@ -249,11 +244,11 @@ $news_categories = news_categories($pod->field('news_categories'));
 
         <article class='wireframe eightcol row'>
           <header class='entry-header'>
-            <h1><?php echo $pod_title; ?></h1>
-            <?php if($pod_tagline): ?><h2><?php echo $pod_tagline; ?></h2><?php endif ; ?>
-            <?php if($pod_summary): ?>
-            <div class="abstract"><?php echo $pod_summary; ?></div>
-            <?php endif; ?>
+            <h1><?php echo $obj['title']; ?></h1>
+            <?php if($obj['tagline']): ?><h2><?php echo $obj['tagline']; ?></h2><?php endif ; ?>
+            <?php if($obj['summary']): ?>
+            <div class="abstract"><?php echo $obj['summary']; ?></div>
+            <?php endif; // ($obj['summary'])?>
 
             <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries)): ?>
             <!--[if gt IE 8]><!-->
@@ -281,7 +276,7 @@ $news_categories = news_categories($pod->field('news_categories'));
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
-              <?php echo $pod_blurb; ?>
+              <?php echo $obj['blurb']; ?>
             </section>
             <?php
               if(count($events)):
@@ -403,9 +398,9 @@ $news_categories = news_categories($pod->field('news_categories'));
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
           <dl>
-          <?php if($web_uri): ?>
+          <?php if($obj['web_uri']): ?>
             <dt>Website</dt>
-            <dd><a href="<?php echo $web_uri; ?>"><?php echo $web_uri; ?></a></dd>
+            <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
           <?php endif; ?>
           <?php if($project_coordinators): ?>
             <dt>Project <?php echo $project_coordinators_count > 1 ?'coordinators' : 'coordinator'; ?></dt>
@@ -431,9 +426,9 @@ $news_categories = news_categories($pod->field('news_categories'));
             <dt>Duration</dt>
             <dd><?php echo $project_duration; ?></dd>
           <?php endif; ?>
-          <?php if($pod_keywords): ?>
+          <?php if($obj['keywords']): ?>
             <dt>Keywords</dt>
-            <dd><?php echo $pod_keywords; ?></dd>
+            <dd><?php echo $obj['keywords']; ?></dd>
           <?php endif; ?>
           <?php if($featured_post['ID']): ?>
             <dt>Highlights</dt>
