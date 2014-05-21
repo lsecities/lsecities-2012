@@ -1,4 +1,5 @@
 <?php
+namespace LSECitiesWPTheme\research_project;
 /**
  * Template Name: Pods - Research project
  * Description: The template used for Research projects
@@ -9,7 +10,6 @@
 /* URI: /objects/research-projects */
 $BASE_URI = PODS_BASEURI_RESEARCH_PROJECTS;
 global $IN_CONTENT_AREA, $HIDE_CURRENT_PROJECTS, $HIDE_PAST_PROJECTS;
-$TRACE_PREFIX = 'pods-research-projects';
 lc_data('pods_toplevel_ancestor', 306);
 
 $pod_slug = get_post_meta($post->ID, 'pod_slug', true);
@@ -24,110 +24,11 @@ if(!$pod_from_page) {
   lc_data('pods_toplevel_ancestor', 306);
 }
 
-var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
 
-
-// project duration
-$project_duration = '';
-
-// get years from start and date fields
-try {
-  if($pod->field('date_start')) {
-    $project_start = new DateTime($pod->field('date_start') . '-01-01');
-    $project_start = $project_start->format('Y');
-  }
-
-  if($pod->field('date_end')) {
-    $project_end = new DateTime($pod->field('date_end') . '-12-31');
-    $project_end = $project_end->format('Y');
-  }
-} catch (Exception $e) {}
-
-// get freeform duration text, if available
-$project_duration_freeform = $pod->field('duration');
-
-// if freeform duration is available, use this
-if($project_duration_freeform) {
-  $project_duration = $project_duration_freeform;
-} elseif($project_start and $project_end) { // otherwise use start and end year
-  $project_duration = $project_start . ' - ' . $project_end;
-}
-
-// build a list of all current members of staff
-$staff = pods('people_group', 'lsecities-staff');
-$all_staff = $staff->field('members.slug');
-var_trace($all_staff, 'all_staff');
-
-$project_coordinators_list = $pod->field('coordinators');
-$project_coordinators_count = count($project_coordinators_list);
-if($project_coordinators_count > 0) {
-  foreach($project_coordinators_list as $project_coordinator) {
-    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-      $project_coordinators .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_coordinator['slug'] . '">';
-    }
-    $project_coordinators .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
-    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-      $project_coordinators .= '</a>';
-    }
-    $project_coordinators .= ', ';
-  }
-}
-$project_coordinators = substr($project_coordinators, 0, -2);
-
-$project_researchers_list = $pod->field('researchers');
-$project_researchers_count = count($project_researchers_list);
-if($project_researchers_count > 0) {
-  foreach($project_researchers_list as $project_researcher) {
-    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-      $project_researchers .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_researcher['slug'] . '">';
-    }
-    $project_researchers .= $project_researcher['name'] . ' ' . $project_researcher['family_name'];
-    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-      $project_researchers .= '</a>';
-    }
-    $project_researchers .= ', ';
-  }
-}
-$project_researchers = substr($project_researchers, 0, -2);
-
-// generate list of research partners
-$project_partners_list = sort_linked_field($pod->field('partners'), 'name', SORT_ASC);
-
-$project_partners_count = count($project_partners_list);
-if($project_partners_count > 0) {
-  foreach($project_partners_list as $project_partner) {
-    if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
-      $project_partners .= '<a href="' . $project_partner['web_uri'] . '">' . $project_partner['name'] . '</a>, ';
-    } else {
-      $project_partners .= $project_partner['name'] . ', ';
-    }
-  }
-}
-$project_partners = substr($project_partners, 0, -2);
-
-// generate list of research funders
-$project_funders_list = sort_linked_field($pod->field('funders'), 'name', SORT_ASC);
-
-$project_funders_count = count($project_funders_list);
-if($project_funders_count > 0) {
-  foreach($project_funders_list as $project_funder) {
-    if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
-      $project_funders .= '<a href="' . $project_funder['web_uri'] . '">' . $project_funder['name'] . '</a>, ';
-    } else {
-      $project_funders .= $project_funder['name'] . ', ';
-    }
-  }
-}
-$project_funders = substr($project_funders, 0, -2);
-
-$research_strand_title = $pod->field('research_strand.name');
-$research_strand_summary = $pod->display('research_strand.summary');
-
-$project_status = $pod->field('project_status.name');
 
 $featured_post['ID'] = $pod->field('featured_post.ID');
 if($featured_post['ID']) {
@@ -402,29 +303,29 @@ $news_categories = news_categories($pod->field('news_categories'));
             <dt>Website</dt>
             <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
           <?php endif; ?>
-          <?php if($project_coordinators): ?>
-            <dt>Project <?php echo $project_coordinators_count > 1 ?'coordinators' : 'coordinator'; ?></dt>
-            <dd><?php echo $project_coordinators; ?></dd>
+          <?php if(count($obj['project_coordinators'])): ?>
+            <dt>Project <?php echo count($obj['project_coordinators']) > 1 ?'coordinators' : 'coordinator'; ?></dt>
+            <dd><?php echo $obj['project_coordinators_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_researchers): ?>
-            <dt><?php echo $project_researchers_count > 1 ? 'Researchers' : 'Researcher'; ?></dt>
-            <dd><?php echo $project_researchers; ?></dd>
+          <?php if(count($obj['project_researchers'])): ?>
+            <dt><?php echo count($obj['project_researchers']) > 1 ? 'Researchers' : 'Researcher'; ?></dt>
+            <dd><?php echo $obj['project_researchers_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_partners): ?>
-            <dt>Project <?php echo $project_partners_count > 1 ? 'partners' : 'partner'; ?></dt>
-            <dd><?php echo $project_partners; ?></dd>
+          <?php if(count($obj['project_partners'])): ?>
+            <dt>Project <?php echo count($obj['project_partners']) > 1 ? 'partners' : 'partner'; ?></dt>
+            <dd><?php echo $obj['project_partners_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_funders): ?>
-            <dt>Project <?php echo $project_funders_count > 1 ? 'funders' : 'funder'; ?></dt>
-            <dd><?php echo $project_funders; ?></dd>
+          <?php if(count($obj['project_funders'])): ?>
+            <dt>Project <?php echo count($obj['project_funders']) > 1 ? 'funders' : 'funder'; ?></dt>
+            <dd><?php echo $obj['project_funders_string']; ?></dd>
           <?php endif; ?>
-          <?php if($research_strand_title): ?>
+          <?php if($obj['research_strand_title']): ?>
             <dt>Research strand</dt>
-            <dd><?php echo $research_strand_title; ?></dd>
+            <dd><?php echo $obj['research_strand_title']; ?></dd>
           <?php endif; ?>
-          <?php if($project_duration): ?>
+          <?php if($obj['project_timespan']): ?>
             <dt>Duration</dt>
-            <dd><?php echo $project_duration; ?></dd>
+            <dd><?php echo $obj['project_timespan']; ?></dd>
           <?php endif; ?>
           <?php if($obj['keywords']): ?>
             <dt>Keywords</dt>
