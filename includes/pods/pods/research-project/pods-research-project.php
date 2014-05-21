@@ -199,7 +199,7 @@ function get_project_research_outputs($pod) {
         'uri' => get_permalink($linked_wp_page_id)
       );
     } else {
-      trigger_error('No WordPress page linked to Publication with ID ' . $research_output_publication_pod->id(), E_USER_NOTICE);
+      trigger_error('No WordPress page linked to Publication with ID ' . $research_output->id(), E_USER_NOTICE);
     }
   }
   
