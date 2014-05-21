@@ -16,7 +16,7 @@ function pods_prepare_research_project($pod_slug) {
 
   // for menus etc.
   global $this_pod;
-  $this_pod = new LC\PodObject($pod, 'Research');
+  $this_pod = new \LC\PodObject($pod, 'Research');
 
   // prepare array for return data structure
   $obj = array();
