@@ -191,7 +191,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <?php
               if($project_has_research_events or (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
               // latest news in categories defined for this research project
-              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
+              $more_news = new \WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
               <section id="t-news" class="hide">
                 <?php if(is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0): ?>
                 <header><h1>Project news</h1></header>
