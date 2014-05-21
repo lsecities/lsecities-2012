@@ -53,6 +53,11 @@ function pods_prepare_research_project($pod_slug) {
     $obj['featured_post']['title'] = get_the_title($featured_post['ID']);
   }
 
+  // hardcoded list of WP categories used to group research outputs linked to a research project
+  $obj['research_output_categories'] = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article');
+
+  $obj['research_outputs'] = get_project_research_outputs($pod);
+  
   return $obj;
 }
 
@@ -144,4 +149,59 @@ function get_project_organizations($pod, $role) {
   }
   $project_organizations_string = substr($project_organizations_string, 0, -2);
   return array($project_organizations, $project_organizations_string);
+}
+
+function get_project_research_outputs($pod) {
+  // initialize result array
+  $research_outputs = array();
+  
+  /**
+   * First add all the research outputs linked as 'research_outputs'
+   * These are mostly publications for which a full 'publication' Pod
+   * hasn't been created
+   */
+  $research_output_slugs = (array)$pod->field('research_outputs.slug');
+
+  foreach($research_output_slugs as $research_output_slug) {
+    $research_output = pods('research_output', $research_output_slug);
+
+    var_trace(var_export($research_output->field('category'), true), 'output category');
+
+    $research_outputs[$research_output->field('category.slug')][] = array(
+      'title' => $research_output->field('name'),
+      'citation' => $research_output->field('citation'),
+      'date' => date_string($research_output->field('date')),
+      'uri' => $research_output->field('uri')
+    );
+  }
+
+  /**
+   * Now add to the research outputs found so far all the publications
+   * from the publication_wrappers aka Publications pod
+   */
+  $publication_slugs = (array)$pod->field('research_output_publications.slug');
+
+  foreach($publication_slugs as $publication_slug) {
+    $research_output = pods('publication_wrappers', $publication_slug);
+
+    // get ID of WordPress page linked to this publication object
+    $linked_wp_page_id = $research_output->field('publication_web_page.ID');
+
+    var_trace(var_export($research_output->field('category'), true), 'output category');
+    var_trace($linked_wp_page_id, 'publication_web_page.ID');
+
+    // only add publication to list if publication has a linked WP page; otherwise emit warning
+    if($linked_wp_page_id) {
+      $research_outputs[$research_output->field('category.slug')][] = array(
+        'title' => $research_output->field('name'),
+        'citation' => $research_output->field('name'),
+        'date' => date_string($research_output->field('publishing_date')),
+        'uri' => get_permalink($linked_wp_page_id)
+      );
+    } else {
+      trigger_error('No WordPress page linked to Publication with ID ' . $research_output_publication_pod->id(), E_USER_NOTICE);
+    }
+  }
+  
+  return $research_outputs;
 }
