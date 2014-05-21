@@ -28,50 +28,12 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-$research_output_categories = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article');
+
+// hardcoded list of WP categories used to group events linked to a research project
 $research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
+
+// hardcoded list of WP categories used to group event calendars linked to a research project
 $event_calendar_categories = array('lse-cities-event');
-
-$research_output_pod_slugs = (array)$pod->field('research_outputs.slug');
-var_trace(var_export($research_output_pod_slugs, true), 'research_output_pod_slugs');
-$research_outputs = array();
-foreach($research_output_pod_slugs as $research_output_pod_slug) {
-  $research_output_pod = pods('research_output', $research_output_pod_slug);
-
-  var_trace(var_export($research_output_pod->field('category'), true), 'output category');
-
-  $research_outputs[$research_output_pod->field('category.slug')][] = array(
-    'title' => $research_output_pod->field('name'),
-    'citation' => $research_output_pod->field('citation'),
-    'date' => date_string($research_output_pod->field('date')),
-    'uri' => $research_output_pod->field('uri')
-  );
-}
-
-// now add publications from the publication_wrappers aka Publications pod
-$research_output_publications_pod_slugs = (array)$pod->field('research_output_publications.slug');
-var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
-foreach($research_output_publications_pod_slugs as $tmp_slug) {
-  $research_output_publication_pod = pods('publication_wrappers', $tmp_slug);
-
-  // get ID of WordPress page linked to this publication object
-  $linked_wp_page_id = $research_output_publication_pod->field('publication_web_page.ID');
-
-  var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
-  var_trace($linked_wp_page_id, 'publication_web_page.ID');
-
-  // only add publication to list if publication has a linked WP page; otherwise emit warning
-  if($linked_wp_page_id) {
-    $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
-      'title' => $research_output_publication_pod->field('name'),
-      'citation' => $research_output_publication_pod->field('name'),
-      'date' => date_string($research_output_publication_pod->field('publishing_date')),
-      'uri' => get_permalink($linked_wp_page_id)
-    );
-  } else {
-    trigger_error('No WordPress page linked to Publication with ID ' . $research_output_publication_pod->id(), E_USER_NOTICE);
-  }
-}
 
 // select events from the main LSE Cities calendar
 $events = array();
@@ -89,8 +51,8 @@ if($pod->field('events')) {
 // now create a single array with all the research events
 $research_events = array();
 foreach($research_event_categories as $category_slug) {
-  if(is_array($research_outputs[$category_slug])) {
-    foreach($research_outputs[$category_slug] as $event) {
+  if(is_array($obj['research_outputs'][$category_slug])) {
+    foreach($obj['research_outputs'][$category_slug] as $event) {
       array_push($research_events, $event);
     }
   }
@@ -102,10 +64,10 @@ foreach($research_events as $key => $val) {
 }
 array_multisort($date, SORT_DESC, $research_events);
 
-var_trace($research_outputs, 'research_outputs');
+var_trace($obj['research_outputs'], 'research_outputs');
 
-foreach($research_output_categories as $category) {
-  if(count($research_outputs[$category])) {
+foreach($obj['research_output_categories'] as $category) {
+  if(count($obj['research_outputs'][$category])) {
     $project_has_research_outputs = true;
   }
 }
@@ -229,13 +191,13 @@ $news_categories = news_categories($pod->field('news_categories'));
               <header><h1>Publications</h1></header>
               <dl>
                 <?php
-                  foreach($research_output_categories as $category_slug):
-                    if(count($research_outputs[$category_slug])):
+                  foreach($obj['research_output_categories'] as $category_slug):
+                    if(count($obj['research_outputs'][$category_slug])):
                   ?>
                   <dt><?php $category_object = get_category_by_slug($category_slug); echo $category_object->cat_name; ?></dt>
                   <dd>
                     <ul>
-                    <?php foreach($research_outputs[$category_slug] as $publication): ?>
+                    <?php foreach($obj['research_outputs'][$category_slug] as $publication): ?>
                       <li>
                         <?php if($publication['uri']): ?><a href="<?php echo $publication['uri']; ?>"><?php endif; ?>
                         <?php echo $publication['citation']; ?>
@@ -246,8 +208,8 @@ $news_categories = news_categories($pod->field('news_categories'));
                     </ul>
                   </dd>
                 <?php
-                    endif; // (count($research_outputs[$category_slug]))
-                  endforeach; // ($research_output_categories as $category) ?>
+                    endif; // (count($obj['research_outputs'][$category_slug]))
+                  endforeach; // ($obj['research_output_categories'] as $category) ?>
 
                 <?php if(FALSE): // TODO: check legacy code below and either update it or remove it ?>
                 <?php foreach($publications as $publications_in_category): ?>
