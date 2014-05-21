@@ -32,9 +32,6 @@ $research_output_categories = array('book', 'journal-article', 'book-chapter', '
 $research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
 $event_calendar_categories = array('lse-cities-event');
 
-$research_output_publications_pod_slugs = (array)$pod->field('research_outputs_publications.slug');
-var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
-
 $research_output_pod_slugs = (array)$pod->field('research_outputs.slug');
 var_trace(var_export($research_output_pod_slugs, true), 'research_output_pod_slugs');
 $research_outputs = array();
