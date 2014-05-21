@@ -110,7 +110,7 @@ function get_project_people($pod, $role) {
       if($project_person['slug'] and array_search($project_person['slug'], $all_staff) !== FALSE) {
         $project_people_string .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_person['slug'] . '">';
       }
-      $project_coordinators .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
+      $project_people_string .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
       if($project_person['slug'] and array_search($project_person['slug'], $all_staff) !== FALSE) {
         $project_people_string .= '</a>';
       }
