@@ -63,12 +63,12 @@ function get_project_timespan($pod) {
   // get years from start and date fields
   try {
     if($pod->field('date_start')) {
-      $project_start = new DateTime($pod->field('date_start') . '-01-01');
+      $project_start = new \DateTime($pod->field('date_start') . '-01-01');
       $project_start = $project_start->format('Y');
     }
 
     if($pod->field('date_end')) {
-      $project_end = new DateTime($pod->field('date_end') . '-12-31');
+      $project_end = new \DateTime($pod->field('date_end') . '-12-31');
       $project_end = $project_end->format('Y');
     }
   } catch (Exception $e) {}
