@@ -44,6 +44,14 @@ function pods_prepare_research_project($pod_slug) {
   $obj['research_strand_summary'] = $pod->display('research_strand.summary');
 
   $obj['project_status'] = $pod->field('project_status.name');
+  
+  // featured post
+  $featured_post['ID'] = $pod->field('featured_post.ID');
+  if($featured_post['ID']) {
+    $obj['featured_post']['permalink'] = get_permalink($featured_post['ID']);
+    $obj['featured_post']['thumbnail_url'] = wp_get_attachment_url(get_post_thumbnail_id($featured_post['ID']));
+    $obj['featured_post']['title'] = get_the_title($featured_post['ID']);
+  }
 
   return $obj;
 }
