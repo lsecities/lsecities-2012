@@ -25,7 +25,14 @@ function pods_prepare_research_project($pod_slug) {
   var_trace('pod_slug: ' . $pod_slug);
 
   $obj['title'] = $pod->field('name');
+  $obj['tagline'] = $pod->field('tagline');
+  $obj['summary'] = do_shortcode($pod->display('summary'));
+  $obj['blurb'] = do_shortcode($pod->display('blurb'));
+  $obj['keywords'] = $pod->field('keywords');
+  $obj['web_uri'] = $pod->field('web_uri');
+  
   $obj['events_blurb'] = $pod->display('events_blurb');
+  
   
   return $obj;
 }
