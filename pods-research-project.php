@@ -28,15 +28,6 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-
-
-$featured_post['ID'] = $pod->field('featured_post.ID');
-if($featured_post['ID']) {
-  $featured_post['permalink'] = get_permalink($featured_post['ID']);
-  $featured_post['thumbnail_url'] = wp_get_attachment_url(get_post_thumbnail_id($featured_post['ID']));
-  $featured_post['title'] = get_the_title($featured_post['ID']);
-}
-
 $research_output_categories = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article');
 $research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
 $event_calendar_categories = array('lse-cities-event');
@@ -331,19 +322,19 @@ $news_categories = news_categories($pod->field('news_categories'));
             <dt>Keywords</dt>
             <dd><?php echo $obj['keywords']; ?></dd>
           <?php endif; ?>
-          <?php if($featured_post['ID']): ?>
+          <?php if($obj['featured_post']): ?>
             <dt>Highlights</dt>
             <dd class="highlights">
-              <a href="<?php echo $featured_post['permalink']; ?>" title="">
-                <?php if($featured_post['thumbnail_url']): ?>
-                <img src="<?php echo $featured_post['thumbnail_url']; ?>" />
-                <?php endif; // ($featured_post['thumbnail_url']) ?>
-                <?php if($featured_post['title']): ?>
-                <h1 style=""><?php echo $featured_post['title']; ?></h1>
-                <?php endif; // ($featured_post['title']) ?>
+              <a href="<?php echo $obj['featured_post']['permalink']; ?>" title="">
+                <?php if($obj['featured_post']['thumbnail_url']): ?>
+                <img src="<?php echo $obj['featured_post']['thumbnail_url']; ?>" />
+                <?php endif; // ($obj['featured_post']['thumbnail_url']) ?>
+                <?php if($obj['featured_post']['title']): ?>
+                <h1 style=""><?php echo $obj['featured_post']['title']; ?></h1>
+                <?php endif; // ($obj['featured_post']['title']) ?>
               </a>
             </dd>
-          <?php endif; // ($featured_post['ID'])?>
+          <?php endif; // ($obj['featured_post'])?>
           </dl>
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->
