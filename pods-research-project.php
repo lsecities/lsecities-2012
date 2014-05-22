@@ -28,13 +28,9 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-// prepare heading gallery
-$gallery = galleria_prepare($pod, 'fullbleed wireframe');
-
-// if we have research photo galleries/photo essays, prepare them
-$research_photo_galleries = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
-
-$news_categories = news_categories($pod->field('news_categories'));
+// we need - for now - this data in a variable called $gallery in order
+// for the galleria.inc.php include to see the gallery data
+$gallery = $obj['gallery'];
 
 ?><?php get_header(); ?>
 
@@ -57,7 +53,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries) or count($obj['research_outputs'])): ?>
+            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -75,7 +71,7 @@ $news_categories = news_categories($pod->field('news_categories'));
               <?php if(count($obj['research_outputs'])): ?>
               <li class="threecol"><a href="#t-publications">Publications</a></li>
               <?php endif; ?>
-              <?php if(count($research_photo_galleries)): ?>
+              <?php if(count($obj['research_photo_galleries'])): ?>
               <li class="threecol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
@@ -140,7 +136,7 @@ $news_categories = news_categories($pod->field('news_categories'));
                 <?php endif; // (count($obj['research_events'])) ?>
               </section> <!-- #news_area -->
             <?php
-             endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries) or count($obj['research_outputs']))
+             endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($obj['research_photo_galleries']) or count($obj['research_outputs']))
              
             // publications
             if(count($obj['research_outputs'])): ?>
@@ -186,22 +182,22 @@ $news_categories = news_categories($pod->field('news_categories'));
             <?php
             endif; // ($project_has_research_outputs)
             // photo galleries
-            if(count($research_photo_galleries)):
-              var_trace($research_photo_galleries, 'research_photo_galleries');
+            if(count($obj['research_photo_galleries'])):
+              var_trace($obj['research_photo_galleries'], 'research_photo_galleries');
               ?>
             <section id="t-galleries" class="hide later">
               <header><h1>Photo essays</h1></header>
               <?php
-              foreach($research_photo_galleries as $key => $gallery): ?>
+              foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
                 <div class="sixcol<?php if((($key + 1) % 2) == 0): ?> last<?php endif; ?>">
                 <?php
                 include('templates/partials/galleria.inc.php'); ?>
                 </div>
                 <?php
-              endforeach; // ($research_photo_galleries as $key => $gallery) ?>
+              endforeach; // ($obj['research_photo_galleries'] as $key => $gallery) ?>
             </section>
             <?php
-            endif; // (count($research_photo_galleries)) ?>
+            endif; // (count($obj['research_photo_galleries'])) ?>
           </div> <!-- .entry-content.article-text -->
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
