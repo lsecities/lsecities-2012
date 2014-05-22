@@ -28,35 +28,6 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-// select events from the main LSE Cities calendar
-$events = array();
-if($pod->field('events')) {
-  foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
-    $events[] = array(
-      'title' => $event['name'],
-      'citation' => $event['name'],
-      'date' => $event['date_start'],
-      'uri' => PODS_BASEURI_EVENTS . '/' . $event['slug']
-    );
-  }
-}
-
-// now create a single array with all the research events
-$research_events = array();
-foreach($obj['research_event_categories'] as $category_slug) {
-  if(is_array($obj['research_outputs'][$category_slug])) {
-    foreach($obj['research_outputs'][$category_slug] as $event) {
-      array_push($research_events, $event);
-    }
-  }
-}
-
-// and sort research events by date descending
-foreach($research_events as $key => $val) {
-  $date[$key] = $val['date'];
-}
-array_multisort($date, SORT_DESC, $research_events);
-
 // prepare heading gallery
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 
@@ -98,7 +69,7 @@ $news_categories = news_categories($pod->field('news_categories'));
               <?php if(count($events)): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($research_events)): ?>
+              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($obj['research_events'])): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if(count($obj['research_outputs'])): ?>
@@ -136,7 +107,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             </section>
             <?php endif; // (count($events)) ?>
             <?php
-              if($project_has_research_events or (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
+              if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
               // latest news in categories defined for this research project
               $more_news = new \WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
               <section id="t-news" class="hide">
@@ -153,20 +124,20 @@ $news_categories = news_categories($pod->field('news_categories'));
                 ?>
                 </ul>
                 <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
-                <?php if(count($research_events)): ?>
+                <?php if(count($obj['research_events'])): ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
                 <?php
-                foreach($research_events as $event): ?>
+                foreach($obj['research_events'] as $event): ?>
                 <li>
                   <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                   <?php echo date_string($event['date'], 'jFY') . ' | ';
                         echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                   <?php if($event['uri']): ?></a><?php endif; ?>
                 </li>
-                <?php endforeach; // ($research_events as $event) ?>
+                <?php endforeach; // ($obj['research_events'] as $event) ?>
                 </ul>
-                <?php endif; // (count($research_events)) ?>
+                <?php endif; // (count($obj['research_events'])) ?>
               </section> <!-- #news_area -->
             <?php
              endif; // ($pod->field('news_categories')) and count($pod->field('news_categories')) > 0 or count($events))
