@@ -65,7 +65,7 @@ function pods_prepare_research_project($pod_slug) {
   // (this variable is currently not used)
   $obj['event_calendar_categories'] = array('lse-cities-event');
   
-  $obj['research_events'] = get_project_research_events($pod);
+  $obj['research_events'] = get_project_events($pod);
   
   // prepare heading gallery
   $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
