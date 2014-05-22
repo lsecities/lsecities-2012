@@ -179,7 +179,7 @@ $gallery = $obj['gallery'];
               <header><h1>Photo essays</h1></header>
               <?php
               foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
-                <div class="sixcol<?php if((($key + 1) % 2) == 0): ?> last<?php endif; ?>">
+                <div class="sixcol photo-essay">
                 <?php
                 include('templates/partials/galleria.inc.php'); ?>
                 </div>
