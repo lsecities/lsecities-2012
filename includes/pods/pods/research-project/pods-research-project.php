@@ -261,7 +261,7 @@ function get_project_events($pod, $research_event_categories, $research_outputs)
 function get_project_news($pod) {
   $project_news = array();
   
-  if(!count($pod->field('news_categories'))) {
+  if(empty($pod->field('news_categories'))) {
     return FALSE;
   }
   
