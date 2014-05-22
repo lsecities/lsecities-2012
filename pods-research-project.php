@@ -28,13 +28,6 @@ $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-
-// hardcoded list of WP categories used to group events linked to a research project
-$research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
-
-// hardcoded list of WP categories used to group event calendars linked to a research project
-$event_calendar_categories = array('lse-cities-event');
-
 // select events from the main LSE Cities calendar
 $events = array();
 if($pod->field('events')) {
@@ -50,7 +43,7 @@ if($pod->field('events')) {
 
 // now create a single array with all the research events
 $research_events = array();
-foreach($research_event_categories as $category_slug) {
+foreach($obj['research_event_categories'] as $category_slug) {
   if(is_array($obj['research_outputs'][$category_slug])) {
     foreach($obj['research_outputs'][$category_slug] as $event) {
       array_push($research_events, $event);
