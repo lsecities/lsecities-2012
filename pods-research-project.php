@@ -62,10 +62,10 @@ $gallery = $obj['gallery'];
             <!--<![endif]-->
             <ul class="nav organictabs row">
               <li class="threecol"><a class="current" href="#t-project-info">Profile</a></li>
-              <?php if(count($events)): ?>
+              <?php if(count($obj['research_events'])): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($obj['research_events'])): ?>
+              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if(count($obj['research_outputs'])): ?>
@@ -82,7 +82,7 @@ $gallery = $obj['gallery'];
               <?php echo $obj['blurb']; ?>
             </section>
             <?php
-              if(count($events)):
+              if(count($obj['research_events'])):
             ?>
             <section id="t-events" class="hide">
               <header><h1>Events</h1></header>
@@ -91,7 +91,7 @@ $gallery = $obj['gallery'];
               <?php endif; // ($obj['events_blurb']) ?>
               <ul>
               <?php
-              foreach($events as $event): ?>
+              foreach($obj['research_events'] as $event): ?>
               <li>
                 <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                 <?php echo date_string($event['date'], 'jFY') . ' | ';
@@ -101,7 +101,7 @@ $gallery = $obj['gallery'];
               <?php endforeach; // ($events as $event) ?>
               </ul>
             </section>
-            <?php endif; // (count($events)) ?>
+            <?php endif; // (count($obj['research_events'])) ?>
             <?php
               if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
               // latest news in categories defined for this research project
