@@ -58,7 +58,7 @@ function pods_prepare_research_project($pod_slug) {
   $obj['research_outputs'] = get_project_research_outputs($pod);
   
   // news
-  $obj['proiect_news'] = get_project_news($pod);
+  $obj['project_news'] = get_project_news($pod);
   $obj['news_categories'] = news_categories($pod->field('news_categories'));
     
   // hardcoded list of WP categories used to group events linked to a research project
