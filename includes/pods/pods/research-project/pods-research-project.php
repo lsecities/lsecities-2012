@@ -272,5 +272,7 @@ function get_project_news($pod) {
     );
   }
   
+  var_trace(var_export($project_news, true), 'project_news');
+  
   return $project_news;
 }
