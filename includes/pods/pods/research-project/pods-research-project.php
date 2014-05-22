@@ -58,6 +58,13 @@ function pods_prepare_research_project($pod_slug) {
 
   $obj['research_outputs'] = get_project_research_outputs($pod);
   
+  // hardcoded list of WP categories used to group events linked to a research project
+  $obj['research_event_categories'] = array('conference', 'presentation', 'public-lecture', 'workshop');
+
+  // hardcoded list of WP categories used to group event calendars linked to a research project
+  // (this variable is currently not used)
+  $obj['event_calendar_categories'] = array('lse-cities-event');
+  
   return $obj;
 }
 
