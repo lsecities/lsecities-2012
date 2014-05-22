@@ -154,20 +154,6 @@ $gallery = $obj['gallery'];
                 <?php
                     endif; // (count($obj['research_outputs'][$category_slug]))
                   endforeach; // ($obj['research_output_categories'] as $category) ?>
-
-                <?php if(FALSE): // TODO: check legacy code below and either update it or remove it ?>
-                <?php foreach($publications as $publications_in_category): ?>
-                <dt></dt>
-                <dd>
-                  <ul>
-                  <?php foreach($publications_in_category as $publication): ?>
-                    <li><?php echo $publication['authors']; ?> - <?php echo $publication['title']; ?> <!-- - <? echo $publication['date']; ?> --> [<?php echo $publication['category']; ?>]</li>
-                  <?php endforeach; // ($publication_list as $publication) ?>
-                  </ul>
-                </dd>
-                <?php endforeach; // ($publications as $publication_category) ?>
-                <?php endif; // (FALSE) ?>
-
               </dl>
             </section>
             <?php endif; // (count($obj['research_outputs'])) ?>
