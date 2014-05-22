@@ -53,7 +53,7 @@ $gallery = $obj['gallery'];
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
+            <?php if(count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -65,7 +65,7 @@ $gallery = $obj['gallery'];
               <?php if(count($obj['research_events'])): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)): ?>
+              <?php if(count($obj['project_news'])): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if(count($obj['research_outputs'])): ?>
@@ -75,15 +75,15 @@ $gallery = $obj['gallery'];
               <li class="threecol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
-            <?php endif; ?>
+            <?php endif; // (count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
+            
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
               <?php echo $obj['blurb']; ?>
             </section>
-            <?php
-              if(count($obj['research_events'])):
-            ?>
+            
+            <?php if(count($obj['research_events'])): ?>
             <section id="t-events" class="hide">
               <header><h1>Events</h1></header>
               <?php if($obj['events_blurb']): ?>
@@ -116,9 +116,9 @@ $gallery = $obj['gallery'];
                 <?php endif; // (FALSE) ?>
             </section>
             <?php endif; // (count($obj['research_events'])) ?>
-            <?php
-              if(count($obj['project_news'])):
-              ?>
+            
+            
+            <?php if(count($obj['project_news'])): ?>
               <section id="t-news" class="hide">
                 <header><h1>Project news</h1></header>
                 <ul>
@@ -127,10 +127,9 @@ $gallery = $obj['gallery'];
                 <?php endforeach; // ($obj['project_news'] as $news_item)?>
                 </ul>
               </section> <!-- #news_area -->
-            <?php
-             endif; // (count($obj['project_news']))
+            <?php endif; // (count($obj['project_news'])) ?>
              
-            // publications
+            <?php // publications
             if(count($obj['research_outputs'])): ?>
             <section id="t-publications" class="hide">
               <header><h1>Publications</h1></header>
@@ -171,12 +170,11 @@ $gallery = $obj['gallery'];
 
               </dl>
             </section>
+            <?php endif; // (count($obj['research_outputs'])) ?>
+            
             <?php
-            endif; // ($project_has_research_outputs)
             // photo galleries
-            if(count($obj['research_photo_galleries'])):
-              var_trace($obj['research_photo_galleries'], 'research_photo_galleries');
-              ?>
+            if(count($obj['research_photo_galleries'])): ?>
             <section id="t-galleries" class="hide later">
               <header><h1>Photo essays</h1></header>
               <?php
@@ -188,8 +186,7 @@ $gallery = $obj['gallery'];
                 <?php
               endforeach; // ($obj['research_photo_galleries'] as $key => $gallery) ?>
             </section>
-            <?php
-            endif; // (count($obj['research_photo_galleries'])) ?>
+            <?php endif; // (count($obj['research_photo_galleries'])) ?>
           </div> <!-- .entry-content.article-text -->
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
