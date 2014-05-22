@@ -67,6 +67,14 @@ function pods_prepare_research_project($pod_slug) {
   
   $obj['research_events'] = get_project_research_events($pod);
   
+  // prepare heading gallery
+  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+
+  // if we have research photo galleries/photo essays, prepare them
+  $obj['research_photo_galleries'] = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
+
+  $obj['news_categories'] = news_categories($pod->field('news_categories'));
+
   return $obj;
 }
 
