@@ -32,7 +32,6 @@ function pods_prepare_research_project($pod_slug) {
   $obj['keywords'] = $pod->field('keywords');
   $obj['web_uri'] = $pod->field('web_uri');
   
-  $obj['events_blurb'] = $pod->display('events_blurb');
   $obj['project_timespan'] = get_project_timespan($pod);
 
   list($obj['project_coordinators'], $obj['project_coordinators_string']) = get_project_people($pod, 'coordinators');
@@ -65,6 +64,8 @@ function pods_prepare_research_project($pod_slug) {
   // (this variable is currently not used)
   $obj['event_calendar_categories'] = array('lse-cities-event');
   
+  // events
+  $obj['events_blurb'] = $pod->display('events_blurb');
   $obj['research_events'] = get_project_events($pod);
   
   // prepare heading gallery
