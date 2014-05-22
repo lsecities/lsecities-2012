@@ -57,14 +57,6 @@ foreach($research_events as $key => $val) {
 }
 array_multisort($date, SORT_DESC, $research_events);
 
-var_trace($obj['research_outputs'], 'research_outputs');
-
-foreach($obj['research_output_categories'] as $category) {
-  if(count($obj['research_outputs'][$category])) {
-    $project_has_research_outputs = true;
-  }
-}
-
 // prepare heading gallery
 $gallery = galleria_prepare($pod, 'fullbleed wireframe');
 
@@ -109,7 +101,7 @@ $news_categories = news_categories($pod->field('news_categories'));
               <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($research_events)): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
-              <?php if($project_has_research_outputs): ?>
+              <?php if(count($obj['research_outputs'])): ?>
               <li class="threecol"><a href="#t-publications">Publications</a></li>
               <?php endif; ?>
               <?php if(count($research_photo_galleries)): ?>
@@ -179,7 +171,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <?php
              endif; // ($pod->field('news_categories')) and count($pod->field('news_categories')) > 0 or count($events))
             // publications
-            if($project_has_research_outputs): ?>
+            if(count($obj['research_outputs'])): ?>
             <section id="t-publications" class="hide">
               <header><h1>Publications</h1></header>
               <dl>
