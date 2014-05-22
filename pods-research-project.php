@@ -98,29 +98,9 @@ $gallery = $obj['gallery'];
                       echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                 <?php if($event['uri']): ?></a><?php endif; ?>
               </li>
-              <?php endforeach; // ($events as $event) ?>
+              <?php endforeach; // ($obj['research_events'] as $event) ?>
               </ul>
-            </section>
-            <?php endif; // (count($obj['research_events'])) ?>
-            <?php
-              if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
-              // latest news in categories defined for this research project
-              $more_news = new \WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
-              <section id="t-news" class="hide">
-                <?php if(is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0): ?>
-                <header><h1>Project news</h1></header>
-                <ul>
-                <?php
-                    while ($more_news->have_posts()) :
-                      $more_news->the_post();
-                ?>
-                  <li><a href="<?php the_permalink(); ?>"><?php the_time('j M Y'); ?> | <?php the_title() ?></a></li>
-                <?php
-                    endwhile;
-                ?>
-                </ul>
-                <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
-                <?php if(count($obj['research_events'])): ?>
+              <?php if(FALSE) : // legacy code - check and remove ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
                 <?php
@@ -133,7 +113,20 @@ $gallery = $obj['gallery'];
                 </li>
                 <?php endforeach; // ($obj['research_events'] as $event) ?>
                 </ul>
-                <?php endif; // (count($obj['research_events'])) ?>
+                <?php endif; // (FALSE) ?>
+            </section>
+            <?php endif; // (count($obj['research_events'])) ?>
+            <?php
+              if(count($obj['project_news'])):
+              ?>
+              <section id="t-news" class="hide">
+                <header><h1>Project news</h1></header>
+                <ul>
+                <?php foreach($obj['project_news'] as $news_item) : ?>
+                  <li><a href="<?php echo $news_item['permalink'] ?>"><?php echo $news_item['date']; ?> | <?php echo $news_item['title'] ?></a></li>
+                <?php endforeach; // ($obj['project_news'] as $news_item)?>
+                </ul>
+                <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
               </section> <!-- #news_area -->
             <?php
              endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($obj['research_photo_galleries']) or count($obj['research_outputs']))
