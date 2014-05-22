@@ -59,7 +59,8 @@ function pods_prepare_research_project($pod_slug) {
   
   // news
   $obj['proiect_news'] = get_project_news($pod);
-  
+  $obj['news_categories'] = news_categories($pod->field('news_categories'));
+    
   // hardcoded list of WP categories used to group events linked to a research project
   $obj['research_event_categories'] = array('conference', 'presentation', 'public-lecture', 'workshop');
 
@@ -76,8 +77,6 @@ function pods_prepare_research_project($pod_slug) {
 
   // if we have research photo galleries/photo essays, prepare them
   $obj['research_photo_galleries'] = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
-
-  $obj['news_categories'] = news_categories($pod->field('news_categories'));
 
   return $obj;
 }
