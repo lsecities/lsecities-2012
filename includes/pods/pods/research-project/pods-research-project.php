@@ -57,6 +57,9 @@ function pods_prepare_research_project($pod_slug) {
 
   $obj['research_outputs'] = get_project_research_outputs($pod);
   
+  // news
+  $obj['proiect_news'] = get_project_news($pod);
+  
   // hardcoded list of WP categories used to group events linked to a research project
   $obj['research_event_categories'] = array('conference', 'presentation', 'public-lecture', 'workshop');
 
@@ -226,11 +229,11 @@ function get_project_research_outputs($pod) {
 
 function get_project_events($pod, $research_event_categories, $research_outputs) {
   // select events from the main LSE Cities calendar
-  $events = array();
+  $research_events = array();
 
   if($pod->field('events')) {
     foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
-      $events[] = array(
+      $research_events[] = array(
         'title' => $event['name'],
         'citation' => $event['name'],
         'date' => $event['date_start'],
@@ -239,8 +242,6 @@ function get_project_events($pod, $research_event_categories, $research_outputs)
     }
   }
 
-  // now create a single array with all the research events
-  $research_events = array();
   foreach($research_event_categories as $category_slug) {
     if(is_array($research_outputs[$category_slug])) {
       foreach($research_outputs[$category_slug] as $event) {
@@ -256,4 +257,21 @@ function get_project_events($pod, $research_event_categories, $research_outputs)
   array_multisort($date, SORT_DESC, $research_events);
   
   return $research_events;
+}
+
+function get_project_news($pod) {
+  $project_news = array();
+  
+  $more_news = new \WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories')));
+  
+  while ($more_news->have_posts()) {
+    $more_news->the_post();
+    $project_news[] = array(
+      'permalink' => get_permalink(),
+      'title' => get_the_title(),
+      'date' => get_the_time('j M Y')
+    );
+  }
+  
+  return $project_news;
 }
