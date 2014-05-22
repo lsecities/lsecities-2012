@@ -66,7 +66,7 @@ function pods_prepare_research_project($pod_slug) {
   
   // events
   $obj['events_blurb'] = $pod->display('events_blurb');
-  $obj['research_events'] = get_project_events($pod);
+  $obj['research_events'] = get_project_events($pod, $obj['research_event_categories'], $obj['research_outputs']);
   
   // prepare heading gallery
   $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
@@ -224,7 +224,7 @@ function get_project_research_outputs($pod) {
   return $research_outputs;
 }
 
-function get_project_events($pod) {
+function get_project_events($pod, $research_event_categories, $research_outputs) {
   // select events from the main LSE Cities calendar
   $events = array();
 
@@ -241,9 +241,9 @@ function get_project_events($pod) {
 
   // now create a single array with all the research events
   $research_events = array();
-  foreach($obj['research_event_categories'] as $category_slug) {
-    if(is_array($obj['research_outputs'][$category_slug])) {
-      foreach($obj['research_outputs'][$category_slug] as $event) {
+  foreach($research_event_categories as $category_slug) {
+    if(is_array($research_outputs[$category_slug])) {
+      foreach($research_outputs[$category_slug] as $event) {
         array_push($research_events, $event);
       }
     }
