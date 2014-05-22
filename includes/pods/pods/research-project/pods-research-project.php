@@ -261,7 +261,7 @@ function get_project_events($pod, $research_event_categories, $research_outputs)
 function get_project_news($pod) {
   $project_news = array();
   
-  $more_news = new \WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories')));
+  $more_news = new \WP_Query('posts_per_page=10' . \news_categories($pod->field('news_categories')));
   
   while ($more_news->have_posts()) {
     $more_news->the_post();
