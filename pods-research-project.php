@@ -57,7 +57,7 @@ $news_categories = news_categories($pod->field('news_categories'));
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries)): ?>
+            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -140,7 +140,8 @@ $news_categories = news_categories($pod->field('news_categories'));
                 <?php endif; // (count($obj['research_events'])) ?>
               </section> <!-- #news_area -->
             <?php
-             endif; // ($pod->field('news_categories')) and count($pod->field('news_categories')) > 0 or count($events))
+             endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries) or count($obj['research_outputs']))
+             
             // publications
             if(count($obj['research_outputs'])): ?>
             <section id="t-publications" class="hide">
