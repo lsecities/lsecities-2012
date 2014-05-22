@@ -65,6 +65,8 @@ function pods_prepare_research_project($pod_slug) {
   // (this variable is currently not used)
   $obj['event_calendar_categories'] = array('lse-cities-event');
   
+  $obj['research_events'] = get_project_research_events($pod);
+  
   return $obj;
 }
 
@@ -211,4 +213,38 @@ function get_project_research_outputs($pod) {
   }
   
   return $research_outputs;
+}
+
+function get_project_events($pod) {
+  // select events from the main LSE Cities calendar
+  $events = array();
+
+  if($pod->field('events')) {
+    foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
+      $events[] = array(
+        'title' => $event['name'],
+        'citation' => $event['name'],
+        'date' => $event['date_start'],
+        'uri' => PODS_BASEURI_EVENTS . '/' . $event['slug']
+      );
+    }
+  }
+
+  // now create a single array with all the research events
+  $research_events = array();
+  foreach($obj['research_event_categories'] as $category_slug) {
+    if(is_array($obj['research_outputs'][$category_slug])) {
+      foreach($obj['research_outputs'][$category_slug] as $event) {
+        array_push($research_events, $event);
+      }
+    }
+  }
+
+  // and sort research events by date descending
+  foreach($research_events as $key => $val) {
+    $date[$key] = $val['date'];
+  }
+  array_multisort($date, SORT_DESC, $research_events);
+  
+  return $research_events;
 }
