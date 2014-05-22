@@ -126,10 +126,9 @@ $gallery = $obj['gallery'];
                   <li><a href="<?php echo $news_item['permalink'] ?>"><?php echo $news_item['date']; ?> | <?php echo $news_item['title'] ?></a></li>
                 <?php endforeach; // ($obj['project_news'] as $news_item)?>
                 </ul>
-                <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
               </section> <!-- #news_area -->
             <?php
-             endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($obj['research_photo_galleries']) or count($obj['research_outputs']))
+             endif; // (count($obj['project_news']))
              
             // publications
             if(count($obj['research_outputs'])): ?>
