@@ -214,7 +214,7 @@ $media_items_output_counter = 1;
 
 <script type="text/javascript">
 jQuery(function($) {
-  $('.event-materials audio, .event-materials video').mediaelementplayer({
+  $('.event-materials audio').mediaelementplayer({
     audiowidth: '100%',
     defaultVideoWidth: '100%'
   });
