@@ -149,31 +149,42 @@ function pods_prepare_event($pod_slug) {
   // populate variables for iCal output
   $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
   $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
-  
-  // depending on whether event starts and ends on the
-  // same day or on distinct days (see above), generate strings
-  // for human-readable output, with microdata embedded in as appropriate
-  if($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) {
-    $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time>';
-    $obj['event_date_string'] .= ' to ';
-    $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
-  } else {
-    $obj['event_date_string'] = $event_date_start->format("l j F Y") . ' | ';
-    $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
-    $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
-  }
-  
-  // AddToCalendar URIs
-  $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
-    $obj['title']
-    .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
-    .'&details=&'
-    .'location='.$obj['event_location']
-    .'&trp=false&'
-    .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
- 
+
   $datetime_now = new DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
+  
+  /**
+   * if the free_form_event_date field is filled in and the event is a
+   * future event, this means that the event is planned for some
+   * approximate time in the future but an exact date/time hasn't been
+   * set yet, we just use the value of this field as event_date_string
+   */
+  $free_form_event_date = $pod->field('free_form_event_date');
+  if($free_form_event_date and $obj['is_future_event']) {
+    $obj['event_date_string'] = $free_form_event_date;
+  } else {
+    // depending on whether event starts and ends on the
+    // same day or on distinct days (see above), generate strings
+    // for human-readable output, with microdata embedded in as appropriate
+    if($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) {
+      $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time>';
+      $obj['event_date_string'] .= ' to ';
+      $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
+    } else {
+      $obj['event_date_string'] = $event_date_start->format("l j F Y") . ' | ';
+      $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
+      $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
+    }
+    
+    // AddToCalendar URIs
+    $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
+      $obj['title']
+      .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
+      .'&details=&'
+      .'location='.$obj['event_location']
+      .'&trp=false&'
+      .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
+  }
 
   $obj['event_location'] = $pod->field('venue.name');
 
