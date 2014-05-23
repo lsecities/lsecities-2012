@@ -1,5 +1,4 @@
 <?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'nav-events';
 $current_post_id = $post->ID;
 
