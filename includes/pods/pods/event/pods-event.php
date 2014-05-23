@@ -161,7 +161,7 @@ function pods_prepare_event($pod_slug) {
    */
   $free_form_event_date = $pod->field('free_form_event_date');
   if($free_form_event_date and $obj['is_future_event']) {
-    $obj['event_date_string'] = $free_form_event_date;
+    $obj['event_date_string'] = $obj['free_form_event_data'] = $free_form_event_date;
   } else {
     // depending on whether event starts and ends on the
     // same day or on distinct days (see above), generate strings
