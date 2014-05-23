@@ -22,7 +22,7 @@
 .PHONY: clean mktmp sync-theme vendor-install go-live deploy check-env
 
 clean: check-env
-  rm -rf $(THEME_TMPDIR)/*
+	rm -rf $(THEME_TMPDIR)/*
   
 mktmp: check-env
 	mkdir -p $(THEME_TMPDIR)/$(DEPLOY_BRANCH)
@@ -36,7 +36,7 @@ vendor-install: check-env sync-theme
 	cd $(THEME_TMPDIR)/$(DEPLOY_BRANCH) && bower install
 	
 go-live: check-env vendor-install
-  mkdir -p $(THEME_LIVEDIR)
+	mkdir -p $(THEME_LIVEDIR)
 	rsync -rav --delete $(THEME_TMPDIR)/$(DEPLOY_BRANCH)/ $(THEME_LIVEDIR)
 
 deploy: check-env mktmp sync-theme vendor-install go-live
