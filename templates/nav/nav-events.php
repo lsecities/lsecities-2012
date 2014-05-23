@@ -31,9 +31,15 @@ while($events_pod->fetch()) {
    * 'date_start' field
    */
   $free_form_event_date = $events_pod->field('free_form_event_date');
+  // first, create DateTime objects
+  $event_date_start = new DateTime($pod->field('date_start'));
+  $event_date_end = new DateTime($pod->field('date_end'));
+  
   $display_date = ! empty($free_form_event_date) ?
     $free_form_event_date :
-    date('d F', strtotime($events_pod->field('date_start')));
+    ($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) ?
+      $event_date_start->format("j F") . '&mdash;' . $event_date_end->format("j F") :
+      date('d F', strtotime($events_pod->field('date_start')));
   
   array_push($upcoming_events, array(
     'slug' => $events_pod->field('slug'),
