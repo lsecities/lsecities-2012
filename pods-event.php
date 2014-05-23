@@ -132,6 +132,15 @@ $media_items_output_counter = 1;
                     </dd>
                   </div>
                   <?php endif; ?>
+                  <?php if($event_media_item['video_uri']): ?>
+                  <div class="fourcol<?php echo ' ' . class_if_last_item('last', $media_items_output_counter, 3); ?>">
+                    <dt>Video</dt>
+                    <dd>
+                      <video width="100%" preload="metadata" controls="controls" src="<?php echo $event_media_item['video_uri']; ?>" />
+                      <?php $media_items_output_counter++; ?>
+                    </dd>
+                  </div>
+                  <?php endif; ?>
                   <?php if($event_media_item['audio_uri']): ?>
                   <div class="fourcol<?php echo ' ' . class_if_last_item('last', $media_items_output_counter, 3); ?>">
                     <dt>Audio</dt>
