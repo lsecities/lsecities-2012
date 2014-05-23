@@ -28,7 +28,8 @@ while($events_pod->fetch()) {
   /**
    * if a provisional date is set (via the 'free_form_event_data' field)
    * then use this as date to be displayed, else use real date from
-   * 'date_start' field
+   * 'date_start' field; this only applies for future events,
+   * as past events are supposed to have happened at a set time :)
    */
   $free_form_event_date = $events_pod->field('free_form_event_date');
   // first, create DateTime objects
