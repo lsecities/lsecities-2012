@@ -185,6 +185,10 @@ function get_project_research_outputs($pod) {
   foreach($research_output_slugs as $research_output_slug) {
     $research_output = pods('research_output', $research_output_slug);
 
+    if(!$research_output->exists()) {
+      continue;
+    }
+    
     var_trace(var_export($research_output->field('category'), true), 'output category');
 
     $research_outputs[$research_output->field('category.slug')][] = array(
@@ -204,6 +208,10 @@ function get_project_research_outputs($pod) {
   foreach($publication_slugs as $publication_slug) {
     $research_output = pods('publication_wrappers', $publication_slug);
 
+    if(!$research_output->exists()) {
+      continue;
+    }
+    
     // get ID of WordPress page linked to this publication object
     $linked_wp_page_id = $research_output->field('publication_web_page.ID');
 
