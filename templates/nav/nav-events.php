@@ -25,10 +25,20 @@ $events_pod->find(array(
   'limit' => -1
 ));
 while($events_pod->fetch()) {
+  /**
+   * if a provisional date is set (via the 'free_form_event_data' field)
+   * then use this as date to be displayed, else use real date from
+   * 'date_start' field
+   */
+  $free_form_event_date = $events_pod->field('free_form_event_date');
+  $display_date = ! empty($free_form_event_date) ?
+    $free_form_event_date :
+    date('d F', strtotime($events_pod->field('date_start')));
+  
   array_push($upcoming_events, array(
     'slug' => $events_pod->field('slug'),
     'name' => $events_pod->field('name'),
-    'date' => date('d F', strtotime($events_pod->field('date_start')))
+    'date' => $display_date
   ));
 }
 
