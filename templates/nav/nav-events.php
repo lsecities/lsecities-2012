@@ -39,7 +39,7 @@ while($events_pod->fetch()) {
   $display_date = ! empty($free_form_event_date) ?
     $free_form_event_date :
     ($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) ?
-      $event_date_start->format("j F") . '&mdash;' . $event_date_end->format("j F") :
+      $event_date_start->format("j F") . '&nbsp;&ndash;&nbsp;' . $event_date_end->format("j F") :
       date('d F', strtotime($events_pod->field('date_start')));
   
   array_push($upcoming_events, array(
