@@ -32,8 +32,8 @@ while($events_pod->fetch()) {
    */
   $free_form_event_date = $events_pod->field('free_form_event_date');
   // first, create DateTime objects
-  $event_date_start = new DateTime($pod->field('date_start'));
-  $event_date_end = new DateTime($pod->field('date_end'));
+  $event_date_start = new DateTime($events_pod->field('date_start'));
+  $event_date_end = new DateTime($events_pod->field('date_end'));
   
   $display_date = ! empty($free_form_event_date) ?
     $free_form_event_date :
