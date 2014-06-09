@@ -45,9 +45,6 @@ function pods_prepare_media_item($query_string = '') {
       }
     }
     
-    // for debugging purposes, add timestamp to each element
-    $dt = new \DateTime();
-    
     $media_item = array (
       'id' => $pod->field('slug'),
       'title' => $pod->field('name'),
@@ -74,8 +71,7 @@ function pods_prepare_media_item($query_string = '') {
       'event_speakers' => $pod->field('event.speakers'),
       'event_chairs' => $pod->field('event.chairs'),
       'event_respondents' => $pod->field('event.respondents'),
-      'event_moderators' => $pod->field('event.moderators'),
-      '_comments' => 'generated at ' . $dt->format('Y-m-d H:i:s')
+      'event_moderators' => $pod->field('event.moderators')
     );
     array_push($media_items, $media_item);
   }
@@ -83,13 +79,6 @@ function pods_prepare_media_item($query_string = '') {
   return $media_items;
 }
 
-/**
- * Look up a media item's parent event and session(s) information
- * Calls itself recursively until the container chain is exhausted.
- * @param Pod $media_item_pod The media item's Pod object
- * @param array $parent_sessions List of parent sessions
- * @return array $parent_sessions List of parent sessions; each item is a data structure with the corresponding session's data, as returned by Pod::field()
- */
 function get_media_item_event_info($media_item_pod, $parent_sessions = array()) {
   
   $parent_sessions_count = count($parent_sessions);
@@ -98,32 +87,18 @@ function get_media_item_event_info($media_item_pod, $parent_sessions = array()) 
   // first test whether there is a parent session
   $parent_session = $media_item_pod->field('session' . $field_name . '.parent_session');
   if($parent_session['id']) {
-    // for debugging only - add to the parent_session item a field with the field_name used here
-    $parent_session['_comment:field_name'] = $field_name;
-
     array_unshift($parent_sessions, $parent_session);
     // call ourselves recursively to add any parent sessions further up the hierarchy
     $parent_sessions = get_media_item_event_info($media_item_pod, $parent_sessions);
   } else {
     // else, test whether a parent event programme is defined (aka the current event session is 'top level')
     $parent_sessions_count = count($parent_sessions);
-    $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count : 0);
-    
+    $field_name = str_repeat('.parent_session', $parent_sessions_count > 0 ? $parent_sessions_count - 1 : 0);
     $parent_event_programme = $media_item_pod->field('session' . $field_name . '.parent_event_programme');
-    
-    // for debugging only - add event programme to sessions as if it were a session
-    $parent_event_programme['_comment:no_parent_session:field_name'] = $field_name;
-    // array_unshift($parent_sessions, $parent_event_programme);
-    
     if($parent_event_programme['id']) {
       // array_unshift($parent_sessions, $parent_event_programme);
       $parent_event = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_event');
       $parent_conference = $media_item_pod->field('session' . $field_name . '.parent_event_programme.for_conference');
-      
-      // for debugging only - add to the parent_session item a field with the field_name used here
-      $parent_event['_comment:parent_event:field_name'] = $field_name;
-      $parent_conference['_comment:parent_conference:field_name'] = $field_name;
-      
       if($parent_event['id']) {
         array_unshift($parent_sessions, $parent_event);
       } elseif($parent_conference['id']) {

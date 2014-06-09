@@ -1,5 +1,4 @@
 <?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'nav-events';
 $current_post_id = $post->ID;
 
@@ -21,15 +20,32 @@ var_trace('datetime_now: ' . $datetime_now->format(DATE_ATOM), $TRACE_PREFIX);
 // prepare array with list of upcoming events
 $upcoming_events = Array();
 $events_pod->find(array(
-  'where' => 't.date_end > NOW() AND t.hide IS NOT TRUE',
+  'where' => 't.date_end > NOW() AND event_calendar.permalink = "lse-cities-events-calendar"',
   'orderby' => 't.date_start ASC',
   'limit' => -1
 ));
 while($events_pod->fetch()) {
+  /**
+   * if a provisional date is set (via the 'free_form_event_data' field)
+   * then use this as date to be displayed, else use real date from
+   * 'date_start' field; this only applies for future events,
+   * as past events are supposed to have happened at a set time :)
+   */
+  $free_form_event_date = $events_pod->field('free_form_event_date');
+  // first, create DateTime objects
+  $event_date_start = new DateTime($events_pod->field('date_start'));
+  $event_date_end = new DateTime($events_pod->field('date_end'));
+  
+  $display_date = ! empty($free_form_event_date) ?
+    $free_form_event_date :
+    ($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) ?
+      $event_date_start->format("j F") . '&nbsp;&ndash;&nbsp;' . $event_date_end->format("j F") :
+      date('d F', strtotime($events_pod->field('date_start')));
+  
   array_push($upcoming_events, array(
     'slug' => $events_pod->field('slug'),
     'name' => $events_pod->field('name'),
-    'date' => date('d F', strtotime($events_pod->field('date_start')))
+    'date' => $display_date
   ));
 }
 
@@ -40,7 +56,7 @@ $active_year = $current_year; // used to set initial active section for jQuery U
 
 for($year = 2005; $year <= $current_year; $year++) {
   $events_pod->find(array(
-    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND t.hide IS NOT TRUE',
+    'where' => 'YEAR(t.date_start) = ' . $year . ' AND t.date_end < NOW() AND event_calendar.permalink = "lse-cities-events-calendar"',
     'orderby' => 'date_start DESC',
     'limit' => -1
   ));
@@ -51,6 +67,7 @@ for($year = 2005; $year <= $current_year; $year++) {
       if($pod_slug == $events_pod->field('slug')) {
         $active_year = $year;
       }
+      var_trace(var_export($events_pod->field('event_calendar.permalink'), TRUE), 'event.event_calendars');
       $events[$year][] = Array(
         'slug' => $events_pod->field('slug'),
         'name' => $events_pod->field('name'),

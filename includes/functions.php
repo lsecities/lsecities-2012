@@ -41,13 +41,25 @@ if(LSECITIES_THEME_DEBUG) {
  */
 function var_trace($var, $prefix = 'pods', $destination = 'error_log') {
   /**
-	 * If LSECITIES_THEME_DEBUG is set to 1 (only trace actions of logged-in users)
-	 * or if LSECITIES_THEME_DEBUG is set to 2 (trace actions of any visitor), then log,
-	 * otherwise do nothing.
-	 */
-	if((LSECITIES_THEME_DEBUG == 1 and is_user_logged_in()) or LSECITIES_THEME_DEBUG == 2) {
+   * If any of the following is true:
+   * * LSECITIES_THEME_DEBUG is set to 1 and current user is super-admin
+   * * LSECITIES_THEME_DEBUG is set to 2 and current user is site admin
+   * * LSECITIES_THEME_DEBUG is set to 4 and current user is logged in
+   * * LSECITIES_THEME_DEBUG is set to 8 (trace actions of any visitor)
+   * then log, otherwise do nothing.
+   */
+  if(
+    (LSECITIES_THEME_DEBUG & 1 and current_user_can('manage_network')) or
+    (LSECITIES_THEME_DEBUG & 2 and current_user_can('')) or
+    (LSECITIES_THEME_DEBUG & 4 and is_user_logged_in()) or
+     LSECITIES_THEME_DEBUG & 8
+    ) {
     $output_string = "tracing $prefix : " . var_export($var, true) . "\n\n";
 
+    // if LSECITIES_THEME_DEBUG has bitmask 128 set, add debug backtrace
+    if(LSECITIES_THEME_DEBUG & 128) {
+      $output_string .= "\n" . var_export(debug_backtrace(), TRUE);
+    }
     if($destination == 'page') {
       return "<!-- $output_string -->";
     } elseif($destination == 'error_log') {
@@ -205,19 +217,58 @@ function save_media_library_item_custom_form_fields($post, $attachment) {
 
 add_filter('attachment_fields_to_save','save_media_library_item_custom_form_fields', 8, 2);
 
+/**
+ * Given a WordPress attachment ID, read its attribution metadata
+ * and, if this is available, add it to the array of attribution metadata
+ * for the current request
+ * 
+ * @param integer $attachment_ID WordPress attachment ID
+ */
 function push_media_attribution($attachment_ID) {
+  // first read the current metadata array from the request variable
   $media_attributions = lc_data('META_media_attr');
+  
+  // get metadata for requested attachment
   $attachment_metadata = wp_get_attachment_metadata($attachment_ID);
   $attribution_uri = get_post_meta($attachment_ID, '_attribution_uri', true);
   $attribution_name = get_post_meta($attachment_ID, '_attribution_name', true);
-  array_push($media_attributions, array(
+
+  // compose metadata attributes
+  $metadata = array(
     'title' => get_the_title($attachment_ID),
     'attribution_uri' => $attribution_uri,
     'author' => $attribution_name,
     'attribution_string' => format_media_attribution($attachment_ID)
-  ));
-  lc_data('META_media_attr', $media_attributions);
+  );
+
+  // only append image attribution data to list if we have at least
+  // title and author - otherwise it's useless (but emit a notice if so)
+  if(!empty($metadata['title']) and !empty($metadata['author'])) {
+    // add/update metadata, using $attachment_ID as key (avoiding duplicates)
+    $media_attributions[$attachment_ID] = $metadata;
+    lc_data('META_media_attr', $media_attributions);
+  } else {
+    // warn if no suitable attribution metadata is defined for this attachment
+    trigger_error('No title or attribution metadata set for media item with ID ' . $attachment_ID, E_USER_NOTICE);
+  }
 }
+
+/**
+ * push to media attribution stack every time an image is used
+ * (using filter wp_get_attachment_url)
+ */
+function auto_push_media_attribution($url, $id) {
+  // automatically fetch attribution metadata and push it to the attribution list
+  push_media_attribution($id);
+
+  // pass through
+  return $url;
+}
+
+/**
+ * and connect to filter
+ */
+add_filter('wp_get_attachment_url', 'auto_push_media_attribution', 10, 2);
 
 function format_media_attribution($media_item_id) {
     /**

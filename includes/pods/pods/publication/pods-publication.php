@@ -14,7 +14,7 @@ function pods_prepare_publication($pod_slug) {
   $obj['abstract'] = do_shortcode($pod->field('abstract'));
   $obj['blurb'] = $pod->display('blurb');
   $obj['issuu_uri'] = $pod->field('issuu_uri');
-  $obj['cover_image_uri'] = pods_image_url($pod->field('snapshot'), 'original');
+  $obj['cover_image_uri'] = pods_image_url($pod->field('snapshot'), array(200,350));
 
   $obj['publication_category'] = $pod->field('category.slug');
 
@@ -76,7 +76,7 @@ function pods_prepare_publication($pod_slug) {
     $obj['alt_pdf_label_lang2'] = $__publication_alt_pdf_label_lang2;
   }
 
-  $obj['extra_publication_metadata'] = $pod->field('extra_publication_metadata');
+  $obj['extra_publication_metadata'] = $pod->display('extra_publication_metadata');
 
   $obj['publication_authors']['list'] = people_list($pod->field('authors'), 'family_name', SORT_ASC);
   $obj['publication_authors']['string'] = implode(', ', $obj['publication_authors_list']);

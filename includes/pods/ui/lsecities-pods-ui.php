@@ -18,7 +18,8 @@ add_action('admin_enqueue_scripts', 'hide_editor_box_when_editing_pods_pages');
 function pods_ui_events() {
   $icon = '';
   add_object_page('Events', 'Events', 'pods_add_event', 'events', '', $icon);
-  add_submenu_page('events', 'Events', 'Events', 'pods_add_event', 'events', 'event_page');
+  add_submenu_page('events', 'All Events', 'All Events', 'pods_add_event', 'events', 'event_page');
+  add_submenu_page('events', 'Add New', 'Add New', 'pods_add_event', 'events', 'event_page');
 }
 
 function event_page() {
@@ -42,7 +43,7 @@ function event_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_events');
+// add_action('admin_menu','pods_ui_events');
 
 /* event_session pod */
 function pods_ui_event_session() {
@@ -68,7 +69,7 @@ function event_session_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_event_session');
+// add_action('admin_menu','pods_ui_event_session');
 
 /* people (aka authors) pod */
 function pods_ui_people() {
@@ -196,30 +197,6 @@ function active_tile_page() {
 
 add_action('admin_menu','pods_ui_tiles');
 
-/* Research project pod */
-function pods_ui_research_projects() {
-  $icon = '';
-  add_object_page('Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', '', $icon);
-  add_submenu_page('research_projects', 'Research projects', 'Research projects', 'pods_add_research_project', 'research_projects', 'research_project_page');
-}
-
-function research_project_page() {
-  $object = pods('research_project');
-  $object->ui = array(
-    'title'   => 'Research project',
-    'columns' => array(
-      'name'         => 'Title',
-      'status'       => 'Status',
-      'research_stream' => 'Research stream',
-      'date_start'   => 'Start date',
-      'date_end'     => 'End date'
-    )
-  );
-  pods_ui_manage($object);
-}
-
-add_action('admin_menu','pods_ui_research_projects');
-
 /* slides pod */
 function pods_ui_slide() {
   $icon = '';
@@ -242,6 +219,6 @@ function slide_page() {
   pods_ui($object);
 }
 
-add_action('admin_menu','pods_ui_slide');
+// add_action('admin_menu','pods_ui_slide');
 
 ?>

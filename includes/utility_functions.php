@@ -79,3 +79,13 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
   array_multisort($sorted_fields, $sort_order, SORT_LOCALE_STRING, $fields);
   return $fields;
 }
+
+/**
+ * Log microtime and filename+line
+ *
+ * @param string $file the caller filename (normally caller would pass __FILE__ here)
+ * @param string $line the caller line (normally caller would pass __LINE__ here)
+ */
+function log_timestamp($file = '', $line = '') {
+  var_trace(microtime(), 'timestamp: ' . $file . ' : ' . $line);
+}

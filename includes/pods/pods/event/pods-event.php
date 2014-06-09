@@ -37,14 +37,11 @@ function orgs_list($organizations) {
   $output = '';
   $org_count = count($organizations);
   
-  end($organizations);
-  $last_item = each($organizations);
-  reset($organizations);
+  $last_item = $organizations[$org_count - 1];
   
   foreach($organizations as $key => $org) {
-    if($key == $last_item['key'] and $org_count > 1) {
-      $output = substr($output, 0, -3);
-      $output .= " and \n";
+    if($key == ($org_count - 1) and $org_count > 1) {
+      $output .= " and ";
     }
     if($org['web_uri']) {
       $output .= '<a href=' . $org['web_uri'] . '>';
@@ -53,9 +50,11 @@ function orgs_list($organizations) {
     if($org['web_uri']) {
       $output .= '</a>';
     }
-    $output .= ", \n";
+    // add comma up to the second to last element
+    if($key < ($org_count - 2)) {
+      $output .= ", ";
+    }
   }
-  $output = substr($output, 0, -3);
   
   return $output;
 }
@@ -126,21 +125,66 @@ function pods_prepare_event($pod_slug) {
   // grab the image URI from the Pod
   $attachment_ID = $pod->field('heading_image.ID', TRUE);
   $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
-  push_media_attribution($attachment_ID);
 
+  /**
+   * event start and end
+   * We only support a single timespan (i.e. an event with a session
+   * per day for three days cannot be represented with this data:
+   * we can only set the initial timestamp and final timestamp).
+   * Events starting and ending on the same day will display
+   * start and end date and time; events spanning over multiple
+   * days will only show start date and end date.
+   * We also output microdata attributes for machine parsing of pages
+   * and better output on search engines supporting this.
+   */
+  
+  // first, create DateTime objects
   $event_date_start = new DateTime($pod->field('date_start'));
   $event_date_end = new DateTime($pod->field('date_end'));
+  
+  // populate variables for microdata output
   $event_dtstart = $event_date_start->format(DATE_ISO8601);
   $event_dtend = $event_date_end->format(DATE_ISO8601);
-
+  
+  // populate variables for iCal output
   $obj['event_dtstart'] = $event_date_start->format('Ymd').'T'.$event_date_start->format('His').'Z';
   $obj['event_dtend'] = $event_date_end->format('Ymd').'T'.$event_date_end->format('His').'Z';
-  // $event_date_string = $pod->field('date_freeform');
-  $obj['event_date_string'] = $event_date_start->format("l j F Y | ");
-  $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
-  $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
+
   $datetime_now = new DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
+  
+  /**
+   * if the free_form_event_date field is filled in and the event is a
+   * future event, this means that the event is planned for some
+   * approximate time in the future but an exact date/time hasn't been
+   * set yet, we just use the value of this field as event_date_string
+   */
+  $free_form_event_date = $pod->field('free_form_event_date');
+  if($free_form_event_date and $obj['is_future_event']) {
+    $obj['event_date_string'] = $obj['free_form_event_data'] = $free_form_event_date;
+  } else {
+    // depending on whether event starts and ends on the
+    // same day or on distinct days (see above), generate strings
+    // for human-readable output, with microdata embedded in as appropriate
+    if($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) {
+      $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time>';
+      $obj['event_date_string'] .= ' to ';
+      $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
+    } else {
+      $obj['event_date_string'] = $event_date_start->format("l j F Y") . ' | ';
+      $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
+      $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
+    }
+    
+    // AddToCalendar URIs
+    $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
+      $obj['title']
+      .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
+      .'&details=&'
+      .'location='.$obj['event_location']
+      .'&trp=false&'
+      .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
+  }
 
   $obj['event_location'] = $pod->field('venue.name');
 
@@ -151,20 +195,20 @@ function pods_prepare_event($pod_slug) {
 
   $obj['event_info'] = '';
   if($event_type) {
-    $event_info .= '<em>' . ucfirst($event_type) . '</em> ';
+    $obj['event_info'] .= '<em>' . ucfirst($event_type) . '</em> ';
   } else {
-    $event_info .= 'An event ';
+    $obj['event_info'] .= 'An event ';
   }
   if($event_series) {
-    $event_info .= 'of the <em>' . $event_series . '</em> event series ';
+    $obj['event_info'] .= 'of the <em>' . $event_series . '</em> event series ';
   }
   if($event_host_organizations) {
-    $event_info .= 'hosted by ' . $event_host_organizations . ' ';
+    $obj['event_info'] .= 'hosted by ' . $event_host_organizations . ' ';
   } else {
-    $event_info .= 'hosted by LSE Cities ';
+    $obj['event_info'] .= 'hosted by LSE Cities ';
   }
   if($event_partner_organizations) {
-    $event_info .= 'in partnership with ' . $event_partner_organizations;
+    $obj['event_info'] .= 'in partnership with ' . $event_partner_organizations;
   }
 
   $poster_pdf = $pod->field('poster_pdf');
@@ -172,14 +216,8 @@ function pods_prepare_event($pod_slug) {
   
   $obj['event_page_uri'] = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$obj['slug'];
   
-    // AddToCalendar URIs
-  $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
-    $obj['title']
-    .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
-    .'&details=&'
-    .'location='.$obj['event_location']
-    .'&trp=false&'
-    .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
-    
+  $obj['picasa_gallery_id'] = $pod->field('picasa_gallery_id');
+  $obj['photo_gallery_credits'] = $pod->field('photo_gallery_credits');
+  
   return $obj;
 }

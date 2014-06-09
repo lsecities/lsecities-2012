@@ -8,7 +8,6 @@
 ?><?php
 $TRACE_PREFIX = 'pods-media-archive-search';
 $pods_toplevel_ancestor = 306;
-wp_enqueue_script('underscorejs', get_stylesheet_directory_uri() . '/assets/bower_components/underscore/underscore.js', '', '1.6.0', TRUE);
 wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_components/angular/angular.min.js', '', '1.2.8', TRUE);
 wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets/js/media-archive-app/js/controllers.js', '', '', TRUE);
 ?><?php get_header(); ?>
