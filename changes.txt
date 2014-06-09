@@ -11,7 +11,7 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
  
-llsecities-theme-alexandria (1.9) experimental; urgency=low
+lsecities-theme-alexandria (1.9) experimental; urgency=low
 
   release 1.9 "bacchante"
   
