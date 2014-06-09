@@ -23,6 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "*"
+    "angular": "1.2.8",
+    "galleria": "aino/galleria#cc0caad2a699afce9d080224850853572c964093"
   }
 }

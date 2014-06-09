@@ -64,7 +64,7 @@ $media_items_output_counter = 1;
                     ?>
                     <?php if($obj['event_date_string']): ?>
                       <dt>When</dt>
-                      <dd class="date"><?php echo $obj['event_date_string']; ?> <span class="calendar-link">[add to calendar: <a href="<?php echo $obj['slug']; ?>/ical">ical</a> | <a href="<?php echo $obj['addtocal_uri_google']; ?>" target="_blank">google</a>]</span></dd>
+                      <dd class="date"><?php echo $obj['event_date_string']; ?><?php if(empty($obj['free_form_event_data'])): ?> <span class="calendar-link">[add to calendar: <a href="<?php echo $obj['slug']; ?>/ical">ical</a> | <a href="<?php echo $obj['addtocal_uri_google']; ?>" target="_blank">google</a>]</span><?php endif; // (empty($obj['free_form_event_data'])) ?></dd>
                     <?php endif; ?>
                     <?php if($obj['event_location']): ?>
                       <dt>Where</dt>
@@ -95,6 +95,16 @@ $media_items_output_counter = 1;
             </div><!-- .top-content -->
 
             <div class='extra-content twelvecol'>
+              <?php if($obj['picasa_gallery_id']) : ?>
+              <section class="event-photo-gallery">
+              <?php
+                  echo galleria_shortcode(array('picasa_album' => $obj['picasa_gallery_id'], 'height' => '0.5'));
+                  if($obj['photo_gallery_credits']) : ?>
+                  <p><?php echo $obj['photo_gallery_credits']; ?></p>
+                  <?php endif; // ($obj['photo_gallery_credits']) ?>
+              </section>
+              <?php endif; // ($obj['picasa_gallery_id']) ?>
+              
               <?php if(is_array($obj['event_media']) and count($obj['event_media'])): ?>
               <section class="event-materials clearfix">
                 <header>
@@ -119,6 +129,15 @@ $media_items_output_counter = 1;
                         <source type="video/youtube" src="http://www.youtube.com/watch?v=<?php echo $event_media_item['youtube_uri']; ?>" />
                       </video>
                       <?php $media_items_output_counter++; endif; ?>
+                    </dd>
+                  </div>
+                  <?php endif; ?>
+                  <?php if($event_media_item['video_uri']): ?>
+                  <div class="fourcol<?php echo ' ' . class_if_last_item('last', $media_items_output_counter, 3); ?>">
+                    <dt>Video</dt>
+                    <dd>
+                      <video width="100%" preload="metadata" controls="controls" src="<?php echo $event_media_item['video_uri']; ?>" />
+                      <?php $media_items_output_counter++; ?>
                     </dd>
                   </div>
                   <?php endif; ?>
@@ -195,7 +214,7 @@ $media_items_output_counter = 1;
 
 <script type="text/javascript">
 jQuery(function($) {
-  $('.event-materials audio, .event-materials video').mediaelementplayer({
+  $('.event-materials audio').mediaelementplayer({
     audiowidth: '100%',
     defaultVideoWidth: '100%'
   });

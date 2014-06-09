@@ -1,5 +1,4 @@
 <?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'nav-events';
 $current_post_id = $post->ID;
 
@@ -26,10 +25,27 @@ $events_pod->find(array(
   'limit' => -1
 ));
 while($events_pod->fetch()) {
+  /**
+   * if a provisional date is set (via the 'free_form_event_data' field)
+   * then use this as date to be displayed, else use real date from
+   * 'date_start' field; this only applies for future events,
+   * as past events are supposed to have happened at a set time :)
+   */
+  $free_form_event_date = $events_pod->field('free_form_event_date');
+  // first, create DateTime objects
+  $event_date_start = new DateTime($events_pod->field('date_start'));
+  $event_date_end = new DateTime($events_pod->field('date_end'));
+  
+  $display_date = ! empty($free_form_event_date) ?
+    $free_form_event_date :
+    ($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) ?
+      $event_date_start->format("j F") . '&nbsp;&ndash;&nbsp;' . $event_date_end->format("j F") :
+      date('d F', strtotime($events_pod->field('date_start')));
+  
   array_push($upcoming_events, array(
     'slug' => $events_pod->field('slug'),
     'name' => $events_pod->field('name'),
-    'date' => date('d F', strtotime($events_pod->field('date_start')))
+    'date' => $display_date
   ));
 }
 

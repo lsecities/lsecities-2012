@@ -15,7 +15,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
 <div role="main" data-ng-app="mediaArchiveApp">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-media-archive-search'); ?>>
-    <div class='ninecol' id='contentarea'>
+    <div class='twelvecol' id='contentarea'>
       <div class='top-content'>
         <?php if(count($heading_slides)) : ?>
         <header class='heading-image'>
@@ -30,51 +30,60 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
         <?php endif; ?>
         
         <article class="wireframe" data-ng-controller="MediaArchiveCtrl">
+          <header class="entry-header">
+            <h1 class="entry-title article-title">Search</h1>
+          </header>
+          
                 <section class="clearfix queryarea">
-                  <header class="entry-header fourcol">
-                    <h1 class="entry-title article-title">Media archive</h1>
-                    <h2>Search</h2>
-                  </header>
-                  <div class="eightcol last">
+                  <div class="row">
                     <form method="get" action="">
-                      <div class="fourcol">
+                      <div class="threecol">
                         <h3>Format</h3>
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="lecture" disabled="disabled">lecture
+                              <input type="checkbox" value="lecture">lecture</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="talk" disabled="disabled">talk
+                              <input type="checkbox" value="talk">talk</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="conference-session" disabled="disabled">conference session
+                              <input type="checkbox" value="conference-session">conference session</input>
                             </label>
                           </li>
                         </ul>
                       </div>
-                      <div class="fourcol">
+                      <div class="threecol">
                         <h3>Media</h3>
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio
+                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video
+                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video</input>
                             </label>
                           </li>
                         </ul>
                       </div>
-                      <input data-ng-model="query" type="text" placeholder="free text search: enter keywords/speaker names here" name="search" id="query" class="tencol last" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      <div class="keywords sixcol last">
+                      <h3>Search by topic/name/keyword</h3>
+                      <input data-ng-model="query" class="twelvecol last" type="text" placeholder="free text search: enter topic/speaker names/keywords here" name="search" id="query" value="<?php echo((isset($_GET["search"])) ? htmlspecialchars($_GET["search"]) : ""); ?>">
+                      </div>
                     </form>
                   </div>
+                  
+                  <div class="mapsearch">
+                    <h3>Search by city</h3>
+                    <iframe width='100%' height='350px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
+                  </div>
+                  
                 </section>
                 <section class="clearfix">
                   <div class="resultsarea">

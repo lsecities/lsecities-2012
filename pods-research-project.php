@@ -1,4 +1,5 @@
 <?php
+namespace LSECitiesWPTheme\research_project;
 /**
  * Template Name: Pods - Research project
  * Description: The template used for Research projects
@@ -9,7 +10,6 @@
 /* URI: /objects/research-projects */
 $BASE_URI = PODS_BASEURI_RESEARCH_PROJECTS;
 global $IN_CONTENT_AREA, $HIDE_CURRENT_PROJECTS, $HIDE_PAST_PROJECTS;
-$TRACE_PREFIX = 'pods-research-projects';
 lc_data('pods_toplevel_ancestor', 306);
 
 $pod_slug = get_post_meta($post->ID, 'pod_slug', true);
@@ -24,206 +24,13 @@ if(!$pod_from_page) {
   lc_data('pods_toplevel_ancestor', 306);
 }
 
-var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
 $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
 
-$pod_title = $pod->field('name');
-$pod_tagline = $pod->field('tagline');
-$web_uri = $pod->field('web_uri');
-$pod_summary = do_shortcode($pod->display('summary'));
-$pod_blurb = do_shortcode($pod->display('blurb'));
-$pod_keywords = $pod->field('keywords');
-
-// project duration
-$project_duration = '';
-
-// get years from start and date fields
-try {
-  if($pod->field('date_start')) { 
-    $project_start = new DateTime($pod->field('date_start') . '-01-01');
-    $project_start = $project_start->format('Y');
-  }
-  
-  if($pod->field('date_end')) {
-    $project_end = new DateTime($pod->field('date_end') . '-12-31');
-    $project_end = $project_end->format('Y');
-  }
-} catch (Exception $e) {}
-
-// get freeform duration text, if available
-$project_duration_freeform = $pod->field('duration');
-
-// if freeform duration is available, use this
-if($project_duration_freeform) {
-  $project_duration = $project_duration_freeform;
-} elseif($project_start and $project_end) { // otherwise use start and end year
-  $project_duration = $project_start . ' - ' . $project_end;
-}
-
-// build a list of all current members of staff
-$staff = pods('people_group', 'lsecities-staff');
-$all_staff = $staff->field('members.slug');
-var_trace($all_staff, 'all_staff');
-
-$project_coordinators_list = $pod->field('coordinators');
-$project_coordinators_count = count($project_coordinators_list);
-if($project_coordinators_count > 0) {
-  foreach($project_coordinators_list as $project_coordinator) {
-    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-      $project_coordinators .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_coordinator['slug'] . '">';
-    }
-    $project_coordinators .= $project_coordinator['name'] . ' ' . $project_coordinator['family_name'];
-    if($project_coordinator['slug'] and array_search($project_coordinator['slug'], $all_staff) !== FALSE) {
-      $project_coordinators .= '</a>';
-    }
-    $project_coordinators .= ', ';
-  }
-}
-$project_coordinators = substr($project_coordinators, 0, -2);
-
-$project_researchers_list = $pod->field('researchers');
-$project_researchers_count = count($project_researchers_list);
-if($project_researchers_count > 0) {
-  foreach($project_researchers_list as $project_researcher) {
-    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-      $project_researchers .= "\n" . '<a href="/' . get_page_uri(2177) . '#p-' . $project_researcher['slug'] . '">';
-    }
-    $project_researchers .= $project_researcher['name'] . ' ' . $project_researcher['family_name'];
-    if($project_researcher['slug'] and array_search($project_researcher['slug'], $all_staff) !== FALSE) {
-      $project_researchers .= '</a>';
-    }
-    $project_researchers .= ', ';
-  }
-}
-$project_researchers = substr($project_researchers, 0, -2);
-
-// generate list of research partners
-$project_partners_list = sort_linked_field($pod->field('partners'), 'name', SORT_ASC);
-
-$project_partners_count = count($project_partners_list);
-if($project_partners_count > 0) {
-  foreach($project_partners_list as $project_partner) {
-    if($project_partner['web_uri'] and preg_match('/^https?:\/\//', $project_partner['web_uri'])) {
-      $project_partners .= '<a href="' . $project_partner['web_uri'] . '">' . $project_partner['name'] . '</a>, ';
-    } else {
-      $project_partners .= $project_partner['name'] . ', ';
-    }
-  }
-}
-$project_partners = substr($project_partners, 0, -2);
-
-// generate list of research funders
-$project_funders_list = sort_linked_field($pod->field('funders'), 'name', SORT_ASC);
-
-$project_funders_count = count($project_funders_list);
-if($project_funders_count > 0) {
-  foreach($project_funders_list as $project_funder) {
-    if($project_funder['web_uri'] and preg_match('/^https?:\/\//', $project_funder['web_uri'])) {
-      $project_funders .= '<a href="' . $project_funder['web_uri'] . '">' . $project_funder['name'] . '</a>, ';
-    } else {
-      $project_funders .= $project_funder['name'] . ', ';
-    }
-  }
-}
-$project_funders = substr($project_funders, 0, -2);
-
-$research_strand_title = $pod->field('research_strand.name');
-$research_strand_summary = $pod->display('research_strand.summary');
-
-$project_status = $pod->field('project_status.name');
-
-$featured_post['ID'] = $pod->field('featured_post.ID');
-if($featured_post['ID']) {
-  $featured_post['permalink'] = get_permalink($featured_post['ID']);
-  $featured_post['thumbnail_url'] = wp_get_attachment_url(get_post_thumbnail_id($featured_post['ID']));
-  $featured_post['title'] = get_the_title($featured_post['ID']);
-}
-
-$research_output_categories = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article');
-$research_event_categories = array('conference', 'presentation', 'public-lecture', 'workshop');
-$event_calendar_categories = array('lse-cities-event');
-
-$research_output_publications_pod_slugs = (array)$pod->field('research_outputs_publications.slug');
-var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
-
-$research_output_pod_slugs = (array)$pod->field('research_outputs.slug');
-var_trace(var_export($research_output_pod_slugs, true), 'research_output_pod_slugs');
-$research_outputs = array();
-foreach($research_output_pod_slugs as $research_output_pod_slug) {
-  $research_output_pod = pods('research_output', $research_output_pod_slug);
-  
-  var_trace(var_export($research_output_pod->field('category'), true), 'output category');
-
-  $research_outputs[$research_output_pod->field('category.slug')][] = array(
-    'title' => $research_output_pod->field('name'),
-    'citation' => $research_output_pod->field('citation'),
-    'date' => date_string($research_output_pod->field('date')),
-    'uri' => $research_output_pod->field('uri')
-  );
-}
-
-// now add publications from the publication_wrappers aka Publications pod
-$research_output_publications_pod_slugs = (array)$pod->field('research_output_publications.slug');
-var_trace(var_export($research_output_publications_pod_slugs, true), 'research_output_publications_pod_slugs');
-foreach($research_output_publications_pod_slugs as $tmp_slug) {
-  $research_output_publication_pod = pods('publication_wrappers', $tmp_slug);
-  
-  var_trace(var_export($research_output_publication_pod->field('category'), true), 'output category');
-  
-  $research_outputs[$research_output_publication_pod->field('category.slug')][] = array(
-    'title' => $research_output_publication_pod->field('name'),
-    'citation' => $research_output_publication_pod->field('name'),
-    'date' => date_string($research_output_publication_pod->field('publishing_date')),
-    'uri' => get_permalink($research_output_publication_pod->field('publication_web_page.ID'))
-  );
-}
-
-// select events from the main LSE Cities calendar
-$events = array();
-if($pod->field('events')) {
-  foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
-    $events[] = array(
-      'title' => $event['name'],
-      'citation' => $event['name'],
-      'date' => $event['date_start'],
-      'uri' => PODS_BASEURI_EVENTS . '/' . $event['slug']
-    );
-  }
-}
-
-// now create a single array with all the research events
-$research_events = array();
-foreach($research_event_categories as $category_slug) {
-  if(is_array($research_outputs[$category_slug])) {
-    foreach($research_outputs[$category_slug] as $event) {
-      array_push($research_events, $event);
-    }
-  }
-}
-
-// and sort research events by date descending
-foreach($research_events as $key => $val) {
-  $date[$key] = $val['date'];
-}
-array_multisort($date, SORT_DESC, $research_events);
-
-var_trace($research_outputs, 'research_outputs');
-
-foreach($research_output_categories as $category) {
-  if(count($research_outputs[$category])) {
-    $project_has_research_outputs = true;
-  }
-}
-
-// prepare heading gallery
-$gallery = galleria_prepare($pod, 'fullbleed wireframe');
-
-// if we have research photo galleries/photo essays, prepare them
-$research_photo_galleries = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
-
-$news_categories = news_categories($pod->field('news_categories'));
+// we need - for now - this data in a variable called $gallery in order
+// for the galleria.inc.php include to see the gallery data
+$gallery = $obj['gallery'];
 
 ?><?php get_header(); ?>
 
@@ -237,16 +44,16 @@ $news_categories = news_categories($pod->field('news_categories'));
           <?php include('templates/partials/galleria.inc.php'); ?>
         </header>
         <?php endif; ?>
-        
+
         <article class='wireframe eightcol row'>
           <header class='entry-header'>
-            <h1><?php echo $pod_title; ?></h1>
-            <?php if($pod_tagline): ?><h2><?php echo $pod_tagline; ?></h2><?php endif ; ?>
-            <?php if($pod_summary): ?>
-            <div class="abstract"><?php echo $pod_summary; ?></div>
-            <?php endif; ?>
-            
-            <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($events) or count($research_photo_galleries)): ?>
+            <h1><?php echo $obj['title']; ?></h1>
+            <?php if($obj['tagline']): ?><h2><?php echo $obj['tagline']; ?></h2><?php endif ; ?>
+            <?php if($obj['summary']): ?>
+            <div class="abstract"><?php echo $obj['summary']; ?></div>
+            <?php endif; // ($obj['summary'])?>
+
+            <?php if(count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -255,28 +62,28 @@ $news_categories = news_categories($pod->field('news_categories'));
             <!--<![endif]-->
             <ul class="nav organictabs row">
               <li class="threecol"><a class="current" href="#t-project-info">Profile</a></li>
-              <?php if(count($events)): ?>
+              <?php if(count($obj['research_events'])): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($events))?>
-              <?php if((is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) or count($research_events)): ?>
+              <?php if(count($obj['project_news'])): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
-              <?php if($project_has_research_outputs): ?>
+              <?php if(count($obj['research_outputs'])): ?>
               <li class="threecol"><a href="#t-publications">Publications</a></li>
               <?php endif; ?>
-              <?php if(count($research_photo_galleries)): ?>
+              <?php if(count($obj['research_photo_galleries'])): ?>
               <li class="threecol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
-            <?php endif; ?>
+            <?php endif; // (count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
+            
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info">
-              <?php echo $pod_blurb; ?>
+              <?php echo $obj['blurb']; ?>
             </section>
-            <?php
-              if(count($events)):
-            ?>
+            
+            <?php if(count($obj['research_events'])): ?>
             <section id="t-events" class="hide">
               <header><h1>Events</h1></header>
               <?php if($obj['events_blurb']): ?>
@@ -284,65 +91,57 @@ $news_categories = news_categories($pod->field('news_categories'));
               <?php endif; // ($obj['events_blurb']) ?>
               <ul>
               <?php
-              foreach($events as $event): ?>
+              foreach($obj['research_events'] as $event): ?>
               <li>
                 <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                 <?php echo date_string($event['date'], 'jFY') . ' | ';
                       echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                 <?php if($event['uri']): ?></a><?php endif; ?>
               </li>
-              <?php endforeach; // ($events as $event) ?>
+              <?php endforeach; // ($obj['research_events'] as $event) ?>
               </ul>
-            </section>
-            <?php endif; // (count($events)) ?>
-            <?php
-              if($project_has_research_events or (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0)):
-              // latest news in categories defined for this research project
-              $more_news = new WP_Query('posts_per_page=10' . news_categories($pod->field('news_categories'))); ?>
-              <section id="t-news" class="hide">
-                <?php if(is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0): ?>
-                <header><h1>Project news</h1></header>
-                <ul>
-                <?php
-                    while ($more_news->have_posts()) :
-                      $more_news->the_post();
-                ?>
-                  <li><a href="<?php the_permalink(); ?>"><?php the_time('j M Y'); ?> | <?php the_title() ?></a></li>
-                <?php
-                    endwhile;
-                ?>
-                </ul>
-                <?php endif; // (is_array($pod->field('news_categories')) and count($pod->field('news_categories')) > 0) ?>
-                <?php if(count($research_events)): ?>
+              <?php if(FALSE) : // legacy code - check and remove ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
                 <?php
-                foreach($research_events as $event): ?>
+                foreach($obj['research_events'] as $event): ?>
                 <li>
                   <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                   <?php echo date_string($event['date'], 'jFY') . ' | ';
                         echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                   <?php if($event['uri']): ?></a><?php endif; ?>
                 </li>
-                <?php endforeach; // ($research_events as $event) ?>
+                <?php endforeach; // ($obj['research_events'] as $event) ?>
                 </ul>
-                <?php endif; // (count($research_events)) ?>
+                <?php endif; // (FALSE) ?>
+            </section>
+            <?php endif; // (count($obj['research_events'])) ?>
+            
+            
+            <?php if(count($obj['project_news'])): ?>
+              <section id="t-news" class="hide">
+                <header><h1>Project news</h1></header>
+                <ul>
+                <?php foreach($obj['project_news'] as $news_item) : ?>
+                  <li><a href="<?php echo $news_item['permalink'] ?>"><?php echo $news_item['date']; ?> | <?php echo $news_item['title'] ?></a></li>
+                <?php endforeach; // ($obj['project_news'] as $news_item)?>
+                </ul>
               </section> <!-- #news_area -->
-            <?php
-             endif; // ($pod->field('news_categories')) and count($pod->field('news_categories')) > 0 or count($events))
-            // publications
-            if($project_has_research_outputs): ?>
+            <?php endif; // (count($obj['project_news'])) ?>
+             
+            <?php // publications
+            if(count($obj['research_outputs'])): ?>
             <section id="t-publications" class="hide">
               <header><h1>Publications</h1></header>
               <dl>
                 <?php
-                  foreach($research_output_categories as $category_slug):
-                    if(count($research_outputs[$category_slug])):
+                  foreach($obj['research_output_categories'] as $category_slug):
+                    if(count($obj['research_outputs'][$category_slug])):
                   ?>
                   <dt><?php $category_object = get_category_by_slug($category_slug); echo $category_object->cat_name; ?></dt>
                   <dd>
                     <ul>
-                    <?php foreach($research_outputs[$category_slug] as $publication): ?>
+                    <?php foreach($obj['research_outputs'][$category_slug] as $publication): ?>
                       <li>
                         <?php if($publication['uri']): ?><a href="<?php echo $publication['uri']; ?>"><?php endif; ?>
                         <?php echo $publication['citation']; ?>
@@ -352,93 +151,77 @@ $news_categories = news_categories($pod->field('news_categories'));
                     endforeach; // ($publication_list as $publication) ?>
                     </ul>
                   </dd>
-                <?php 
-                    endif; // (count($research_outputs[$category_slug]))
-                  endforeach; // ($research_output_categories as $category) ?>
-
-                <?php if(FALSE): // TODO: check legacy code below and either update it or remove it ?>
-                <?php foreach($publications as $publications_in_category): ?>
-                <dt></dt>
-                <dd>
-                  <ul>
-                  <?php foreach($publications_in_category as $publication): ?>
-                    <li><?php echo $publication['authors']; ?> - <?php echo $publication['title']; ?> <!-- - <? echo $publication['date']; ?> --> [<?php echo $publication['category']; ?>]</li>
-                  <?php endforeach; // ($publication_list as $publication) ?>
-                  </ul>
-                </dd>
-                <?php endforeach; // ($publications as $publication_category) ?>
-                <?php endif; // (FALSE) ?>
-
+                <?php
+                    endif; // (count($obj['research_outputs'][$category_slug]))
+                  endforeach; // ($obj['research_output_categories'] as $category) ?>
               </dl>
             </section>
+            <?php endif; // (count($obj['research_outputs'])) ?>
+            
             <?php
-            endif; // ($project_has_research_outputs)
             // photo galleries
-            if(count($research_photo_galleries)): 
-              var_trace($research_photo_galleries, 'research_photo_galleries');
-              ?>
+            if(count($obj['research_photo_galleries'])): ?>
             <section id="t-galleries" class="hide later">
               <header><h1>Photo essays</h1></header>
               <?php
-              foreach($research_photo_galleries as $key => $gallery): ?>
-                <div class="sixcol<?php if((($key + 1) % 2) == 0): ?> last<?php endif; ?>">
+              foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
+                <div class="sixcol photo-essay">
                 <?php
                 include('templates/partials/galleria.inc.php'); ?>
                 </div>
                 <?php
-              endforeach; // ($research_photo_galleries as $key => $gallery) ?>
+              endforeach; // ($obj['research_photo_galleries'] as $key => $gallery) ?>
             </section>
-            <?php
-            endif; // (count($research_photo_galleries)) ?>
+            <?php endif; // (count($obj['research_photo_galleries'])) ?>
           </div> <!-- .entry-content.article-text -->
         </article>
         <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
           <dl>
-          <?php if($web_uri): ?>
+          <?php if($obj['web_uri']): ?>
             <dt>Website</dt>
-            <dd><a href="<?php echo $web_uri; ?>"><?php echo $web_uri; ?></a></dd>
+            <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
           <?php endif; ?>
-          <?php if($project_coordinators): ?>
-            <dt>Project <?php echo $project_coordinators_count > 1 ?'coordinators' : 'coordinator'; ?></dt>
-            <dd><?php echo $project_coordinators; ?></dd>
+          <?php if(count($obj['project_coordinators'])): ?>
+            <dt>Project <?php echo count($obj['project_coordinators']) > 1 ?'coordinators' : 'coordinator'; ?></dt>
+            <dd><?php echo $obj['project_coordinators_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_researchers): ?>
-            <dt><?php echo $project_researchers_count > 1 ? 'Researchers' : 'Researcher'; ?></dt>
-            <dd><?php echo $project_researchers; ?></dd>
+          <?php if(count($obj['project_researchers'])): ?>
+            <dt><?php echo count($obj['project_researchers']) > 1 ? 'Researchers' : 'Researcher'; ?></dt>
+            <dd><?php echo $obj['project_researchers_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_partners): ?>
-            <dt>Project <?php echo $project_partners_count > 1 ? 'partners' : 'partner'; ?></dt>
-            <dd><?php echo $project_partners; ?></dd>
+          <?php if(count($obj['project_partners'])): ?>
+            <dt>Project <?php echo count($obj['project_partners']) > 1 ? 'partners' : 'partner'; ?></dt>
+            <dd><?php echo $obj['project_partners_string']; ?></dd>
           <?php endif; ?>
-          <?php if($project_funders): ?>
-            <dt>Project <?php echo $project_funders_count > 1 ? 'funders' : 'funder'; ?></dt>
-            <dd><?php echo $project_funders; ?></dd>
+          <?php if(count($obj['project_funders'])): ?>
+            <dt>Project <?php echo count($obj['project_funders']) > 1 ? 'funders' : 'funder'; ?></dt>
+            <dd><?php echo $obj['project_funders_string']; ?></dd>
           <?php endif; ?>
-          <?php if($research_strand_title): ?>
+          <?php if($obj['research_strand_title']): ?>
             <dt>Research strand</dt>
-            <dd><?php echo $research_strand_title; ?></dd>
+            <dd><?php echo $obj['research_strand_title']; ?></dd>
           <?php endif; ?>
-          <?php if($project_duration): ?>
+          <?php if($obj['project_timespan']): ?>
             <dt>Duration</dt>
-            <dd><?php echo $project_duration; ?></dd>
+            <dd><?php echo $obj['project_timespan']; ?></dd>
           <?php endif; ?>
-          <?php if($pod_keywords): ?>
+          <?php if($obj['keywords']): ?>
             <dt>Keywords</dt>
-            <dd><?php echo $pod_keywords; ?></dd>
+            <dd><?php echo $obj['keywords']; ?></dd>
           <?php endif; ?>
-          <?php if($featured_post['ID']): ?>
+          <?php if($obj['featured_post']): ?>
             <dt>Highlights</dt>
             <dd class="highlights">
-              <a href="<?php echo $featured_post['permalink']; ?>" title="">
-                <?php if($featured_post['thumbnail_url']): ?>
-                <img src="<?php echo $featured_post['thumbnail_url']; ?>" />
-                <?php endif; // ($featured_post['thumbnail_url']) ?>
-                <?php if($featured_post['title']): ?>
-                <h1 style=""><?php echo $featured_post['title']; ?></h1>
-                <?php endif; // ($featured_post['title']) ?>
+              <a href="<?php echo $obj['featured_post']['permalink']; ?>" title="">
+                <?php if($obj['featured_post']['thumbnail_url']): ?>
+                <img src="<?php echo $obj['featured_post']['thumbnail_url']; ?>" />
+                <?php endif; // ($obj['featured_post']['thumbnail_url']) ?>
+                <?php if($obj['featured_post']['title']): ?>
+                <h1 style=""><?php echo $obj['featured_post']['title']; ?></h1>
+                <?php endif; // ($obj['featured_post']['title']) ?>
               </a>
             </dd>
-          <?php endif; // ($featured_post['ID'])?>
+          <?php endif; // ($obj['featured_post'])?>
           </dl>
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->

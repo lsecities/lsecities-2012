@@ -5,7 +5,7 @@
  * Shortcode and base configuration for galleria.io integration with LSE Cities' WordPress theme.
 */
 
-define(LC_GALLERIA_BASE_PATH, lc_data('theme_base_path') . '/javascripts/vendor/galleria.io/src');
+define(LC_GALLERIA_BASE_PATH, lc_data('theme_base_path') . '/assets/bower_components/galleria/src');
 
 function galleria_shortcode($args) {
   ob_start();
@@ -31,9 +31,13 @@ function galleria_shortcode($args) {
       <?php endif ; ?>
       <?php if($args['responsive']): ?>
       responsive: <?php echo $args['responsive']; ?>,
+      <?php else: ?>
+      responsive: true,
       <?php endif; ?>
       <?php if($args['height']): ?>
       height: '<?php echo $args['height']; ?>',
+      <?php else: ?>
+      height: '0.6',
       <?php endif; ?>
     });
   });

@@ -671,9 +671,12 @@ right: -21px; */ }
 .lc-conference-frontpage .lc-galleria-picasa { width: 100%; max-width: 100%; }
 
 /** UserNoise WordPress plugin */
-#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; }
+#un-button { font-size: 0.85em; line-height: 1em; font-weight: bold; padding-bottom: 6px; padding-top: 8px; left: -6px !important; }
 
-@media only screen and (max-width: 480px) { #un-button { display: none; } }
+/** on screens smaller than the full page width, when the usernoise button would cover some content, move button to the bottom of the page */
+@media only screen and (max-width: 1206px) { #un-button { left: 20% !important; -webkit-transform: none !important; -moz-transform: none !important; -ms-transform: none !important; -o-transform: none !important; transform: none !important; top: inherit !important; bottom: -6px; opacity: 0.85 !important; } }
+/** on small screens, just remove the button so that users are not distracted with extra page elements */
+@media only screen and (max-width: 800px) { #un-button { display: none; } }
 .lc-newspaper-article header.heading-image img { max-width: 100%; width: 100%; }
 .lc-newspaper-article .has-pullquote::before { content: attr(data-pullquote); font-weight: bold; opacity: 0.8; float: right; width: 50%; margin: 0.5em -30% 0 0; padding-left: 1.5em; padding-bottom: 0.5em; font-style: italic; position: relative; font-size: 1.5em; line-height: 1.25em; }
 .lc-newspaper-article .has-pullquote::before::before { content: '\00AB'; color: #ff0000; }
@@ -744,7 +747,7 @@ right: -21px; */ }
 
 .lc-article.lc-list { /** depending on how many items we want per row (say N), make every Nth item last of row by setting margin-right: 0 and floating it right, then clear floats to the left on every N+1th element. */ }
 .lc-article.lc-list section.list.by-four ul li:nth-of-type(4n) { margin-right: 0; float: right; }
-.lc-article.lc-list section.list.by-four ul li:nth-of-type(4n+1) { clear: left; }
+.lc-article.lc-list section.list.by-four ul li:nth-of-type(4n+1) { clear: both; }
 
 .lc-media-archive-search input[type="checkbox"] { margin-right: 0.5em; }
 .lc-media-archive-search .queryarea { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -webkit-box-shadow: 1px 1px 10px #cccccc; -moz-box-shadow: 1px 1px 10px #cccccc; box-shadow: 1px 1px 10px #cccccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
@@ -777,7 +780,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-people-list #contentarea section.people-list h1 { font-size: 1.5em; margin-bottom: 1.5em; }
 .lc-people-list #contentarea section.people-list .person { margin-bottom: 2em; }
 .lc-people-list #contentarea section.people-list .person .profile-photo { text-align: center; }
-.lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; }
+.lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
 .lc-people-list #contentarea section.people-list .person h1 { font-size: 1.2em; font-weight: bold; }
 
 .lc-publication #keyfacts p { margin-bottom: 0.2em; margin-top: 0.5em; }
@@ -803,6 +806,8 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project #keyfacts .highlights > a h1 { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: absolute; bottom: 0; color: white; background: rgba(0, 0, 0, 0.6); width: 100%; padding: 0.3em; }
 .lc-research-project .organictabs li.threecol:nth-of-type(4n) { margin-right: 0; }
 .lc-research-project .organictabs li.threecol:nth-of-type(4n+1) { clear: left; }
+.lc-research-project #t-galleries .photo-essay:nth-of-type(2n) { margin-right: 0; }
+.lc-research-project #t-galleries .photo-essay:nth-of-type(2n+1) { clear: left; }
 
 nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em; }
 
