@@ -106,7 +106,12 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         </span>
                       </div>
                       <div class="media">
-                        <span data-ng-show="item.youtube_uri"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
+                        <span data-ng-show="item.youtube_uri">
+                          <a href="http://youtu.be/{{item.youtube_uri}}">
+                            <img src="//i1.ytimg.com/vi/nBdJTzvR9qQ/mqdefault.jpg">
+                            <span>Watch</span>
+                          </a>
+                        </span>
                         <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
                       </div>
                     </li>
