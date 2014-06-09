@@ -1,4 +1,9 @@
 <?php
+/**
+ * Data management for Research Projects
+ *
+ * @package LSECities2012
+ */
 namespace LSECitiesWPTheme\research_project;
 
 // Exit if accessed directly
