@@ -13,6 +13,8 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [feature] staff profiles can now include a phone number
   * [feature] a Picasa photo album can be linked to events and will
     be displayed via the Galleria plugin
+  * [update] refactored Research projects pod templates and data
+    management code
   * [tooling] fast, robust deployment via Makefile; previous
     git push-based deployment was too brittle
   
