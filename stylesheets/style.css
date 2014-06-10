@@ -797,6 +797,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication #tableofcontents .articles > section .article > h1 { font-size: 1em; }
 .lc-publication #tableofcontents .articles > section .article .excerpt { font-size: 1em; }
 
+.lc-research-project .entry-header .abstract { font-style: italic; }
 .lc-research-project #linked-galleries > div { margin-bottom: 1em; }
 .lc-research-project section { margin-top: 2em; }
 .lc-research-project section > header { border-top: 1px solid red; line-height: 1em; }
