@@ -97,7 +97,7 @@ function get_project_timespan($pod) {
       $project_start = $project_start->format('Y');
     }
   } catch (\Exception $e) {
-    error_log('Project start year must be a 4-digit number, "' . $pod-field('date_start') . '" was provided.');
+    error_log('Project start year must be a 4-digit number, "' . $pod->field('date_start') . '" was provided.');
   }
   
   try {
@@ -106,7 +106,7 @@ function get_project_timespan($pod) {
       $project_end = $project_end->format('Y');
     }
   } catch (\Exception $e) {
-    error_log('Project end year must be a 4-digit number, "' . $pod-field('date_start') . '" was provided.');
+    error_log('Project end year must be a 4-digit number, "' . $pod->field('date_end') . '" was provided.');
   }
 
   // get freeform duration text, if available
