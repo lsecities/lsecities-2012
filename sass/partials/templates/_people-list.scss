@@ -17,6 +17,7 @@
             width: 144px;
             max-width: 144px;
             @include border-radius(2px);
+            @include filter-grayscale;
           }
         }
         
