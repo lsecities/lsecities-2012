@@ -40,6 +40,16 @@
       clear: left;
     }
   }
+
+  #t-galleries .photo-essay {
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+
+    &:nth-of-type(2n+1) {
+      clear: left;
+    }
+  }
 }
 
 nav#projectsmenu {
