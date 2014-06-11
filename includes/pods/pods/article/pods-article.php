@@ -22,7 +22,7 @@ function pods_prepare_article($post_id) {
 }
 
 function pods_prepare_article_list() {
-  $pod = pods('article');
+  $pod = pods('article')->find(['limit' => -1]);
   $articles = array();
   
   while($pod->fetch()) {
