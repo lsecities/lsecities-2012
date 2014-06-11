@@ -26,8 +26,10 @@ function pods_prepare_article_list() {
   $articles = array();
   
   while($pod->fetch()) {
-    $articles[] = get_article_data($pod->field('id'));
+    $articles[] = get_article_data($pod->field('slug'));
   }
+  
+  return $articles;
 }
 
 function get_article_data($pod) {
