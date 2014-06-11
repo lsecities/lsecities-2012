@@ -753,6 +753,8 @@ right: -21px; */ }
 .lc-media-archive-search .queryarea { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -webkit-box-shadow: 1px 1px 10px #cccccc; -moz-box-shadow: 1px 1px 10px #cccccc; box-shadow: 1px 1px 10px #cccccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
 .lc-media-archive-search .queryarea h3 { font-weight: bold; margin-bottom: 0.5em; }
 .lc-media-archive-search #query { border: none; background-color: #fcfcfc; color: #999; line-height: 2em; padding: 0.5em 1em; font-style: italics; }
+.lc-media-archive-search .results li { clear: both; }
+.lc-media-archive-search .results .audio-video-items .media > span { display: block; float: left; width: 10rem; }
 
 body#newsletter-2013 { width: 841px; margin-left: auto; margin-right: auto; }
 body#newsletter-2013 .logo { display: block; width: 250px; margin-top: 1em; }
