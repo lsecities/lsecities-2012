@@ -754,7 +754,7 @@ right: -21px; */ }
 .lc-media-archive-search .queryarea h3 { font-weight: bold; margin-bottom: 0.5em; }
 .lc-media-archive-search #query { border: none; background-color: #fcfcfc; color: #999; line-height: 2em; padding: 0.5em 1em; font-style: italics; }
 .lc-media-archive-search .results li { clear: both; }
-.lc-media-archive-search .results .audio-video-items .media > span { display: block; float: left; width: 10rem; }
+.lc-media-archive-search .results.audio-video-items .media > span { display: block; float: left; width: 10rem; }
 
 body#newsletter-2013 { width: 841px; margin-left: auto; margin-right: auto; }
 body#newsletter-2013 .logo { display: block; width: 250px; margin-top: 1em; }
