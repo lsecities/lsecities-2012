@@ -120,7 +120,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   <h2>Articles</h2>
                    <ul class="results articles">
                     <li data-ng-repeat="article in articles | filter:query" class="clearfix">
-                      <h3>{{article.name}}</h3>
+                      <h3>{{article.article_title}}</h3>
                       <div class="people">
                         <span data-ng-show="article.article_authors">
                           <ul class="run-in comma-separated">
