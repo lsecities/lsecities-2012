@@ -9,7 +9,8 @@ mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
       method: 'GET',
       url: '/wp-content/themes/lsecities-2012/assets/js/media-archive-app/media_archive_data.json'
     }).success(function(data, status) {
-      $scope.items = data.items;
+      $scope.audio_video_items = data.audio_video_items;
+      $scope.articles = data.articles;
     });
   };
   
@@ -25,7 +26,8 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
       method: 'GET',
       url: '/media/search-dev.json'
     }).success(function(data, status) {
-      $scope.items = data.items;
+      $scope.audio_video_items = data.audio_video_items;
+      $scope.articles = data.articles;
     });
   };
   

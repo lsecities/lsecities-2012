@@ -14,6 +14,7 @@ namespace LSECitiesWPTheme\media_item;
 $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 
 $media_items = pods_prepare_media_item();
+$articles = \pods_prepare_article_list();
 
-echo json_encode(array('items' => $media_items));
+echo json_encode(array('audio_video_items' => $media_items, 'articles' => $articles));
 ?>
