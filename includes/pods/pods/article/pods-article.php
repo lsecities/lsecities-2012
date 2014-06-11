@@ -15,10 +15,22 @@ function pods_prepare_article($post_id) {
     $pod = pods('article', pods_var(3, 'url'));
     $pod_from_page = false;
   }
-
   var_trace('article pod - var 3: '. pods_var(3, 'url'));
   var_trace('article pod - var 4: '. pods_var(4, 'url'));
   
+  return get_article_data($pod);
+}
+
+function pods_prepare_article_list() {
+  $pod = pods('article');
+  $articles = array();
+  
+  while($pod->fetch()) {
+    $articles[] = get_article_data($pod->field('id'));
+  }
+}
+
+function get_article_data($pod) {
   global $this_pod;
   $this_pod = new LC\PodObject($pod, 'Articles');
 
