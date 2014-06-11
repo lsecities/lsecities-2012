@@ -754,7 +754,7 @@ right: -21px; */ }
 .lc-media-archive-search .queryarea h3 { font-weight: bold; margin-bottom: 0.5em; }
 .lc-media-archive-search #query { border: none; background-color: #fcfcfc; color: #999; line-height: 2em; padding: 0.5em 1em; font-style: italics; }
 .lc-media-archive-search .results li { clear: both; margin-top: 1.5rem; }
-.lc-media-archive-search .results.audio-video-items .media > span { display: block; float: left; height: 6rem; position: relative; }
+.lc-media-archive-search .results.audio-video-items .media > span { display: block; float: left; height: 6rem; position: relative; margin-right: 2rem; }
 .lc-media-archive-search .results.audio-video-items .media > span .action { position: absolute; bottom: 0; padding: 0.25rem; background: rgba(0, 0, 0, 0.6); width: 100%; box-sizing: border-box; color: white; font-weight: bold; }
 
 body#newsletter-2013 { width: 841px; margin-left: auto; margin-right: auto; }

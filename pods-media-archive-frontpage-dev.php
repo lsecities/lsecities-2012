@@ -112,7 +112,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                             <span class="action">Watch</span>
                           </a>
                         </span>
-                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}">Listen</a></span>
+                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}"><span class="action">Listen</a></span>
                       </div>
                     </li>
                   </ul>
