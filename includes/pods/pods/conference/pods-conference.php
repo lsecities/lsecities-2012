@@ -65,12 +65,12 @@ function pods_prepare_conference($pod_slug) {
     }
     // MONKEYPATCH_END
     
-    array_push($obj['media_partners'], array(
+    $obj['media_partners'][] = array(
         'id' => $media_organization_pod->field('slug'),
         'name' => $media_organization_pod->field('name'),
         'logo_uri' => $logo_uri,
         'web_uri' => $media_organization_pod->field('web_uri')
-    ));
+    );
   }
   $obj['conference_publication_blurb'] = $pod->display('conference_newspaper.blurb');
   $obj['conference_publication_cover'] = wp_get_attachment_url($pod->field('conference_newspaper.snapshot.ID'));
