@@ -73,6 +73,7 @@ function get_article_data($pod) {
     }
   } else {
     $obj['article_title'] = $pod->field('name');
+    $obj['permalink'] = $pod->field('slug');
     $obj['article_subtitle'] = $pod->field('article_subtitle');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract'));
     $obj['article_summary'] = do_shortcode($pod->display('summary'));

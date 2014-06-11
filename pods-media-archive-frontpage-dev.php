@@ -130,7 +130,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         </span>
                       </div>
                       <div>
-                        <p><a href="/media/objects/articles/{{article.slug}}">Read the article</a></p>
+                        <p><a href="/media/objects/articles/{{article.permalink}}">Read the article</a></p>
                       </div>
                     </li>
                   </ul>                 
