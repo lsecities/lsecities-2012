@@ -92,8 +92,9 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   </div>
                 </section>
                 <section class="ngapp">
+                  <h2>Audio and video</h2>
                   <ul class="results audio-video-items">
-                    <li data-ng-repeat="item in items | filter:query" class="clearfix">
+                    <li data-ng-repeat="item in audio_video_items | filter:query" class="clearfix">
                       <h3>{{item.title}}</h3>
                       <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                       <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
@@ -116,6 +117,23 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                       </div>
                     </li>
                   </ul>
+                  <h2>Articles</h2>
+                   <ul class="results articles">
+                    <li data-ng-repeat="item in articles | filter:query" class="clearfix">
+                      <h3>{{item.title}}</h3>
+                      <div class="people">
+                        <span data-ng-show="item.authors">
+                          <ul class="run-in comma-separated">
+                            Authors: 
+                            <li data-ng-repeat="author in item.authors">{{author.name}} {{author.family_name}}</li>
+                          </ul>
+                        </span>
+                      </div>
+                      <div>
+                        <p><a href="/media/objects/articles/{{item.slug}}">Read the article</a></p>
+                      </div>
+                    </li>
+                  </ul>                 
                 </section>
               </article>
               
