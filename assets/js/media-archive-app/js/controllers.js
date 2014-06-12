@@ -1,4 +1,4 @@
-var mediaArchiveApp = angular.module('mediaArchiveApp', []);
+var mediaArchiveApp = angular.module('mediaArchiveApp', ['mediatypefilter']);
 
 mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
@@ -45,15 +45,15 @@ mediaArchiveApp.filter('mediatypefilter', function() {
     var filtered = [];
 
     angular.forEach(items, function(item) {
-       if(mediatypes.audio == false && mediatypes.video == false) {
-          filtered.push(item);
-        }
-        else if(mediatypes.audio == true && item.youtube_uri.length > 0){
-          filtered.push(item);
-        }
-        else if(mediatypes.video == true && item.audio_uri.length > 0){
-          filtered.push(item);
-        }
+      if(mediatypes.audio == false && mediatypes.video == false) {
+        filtered.push(item);
+      }
+      else if(mediatypes.audio == true && item.youtube_uri.length > 0){
+        filtered.push(item);
+      }
+      else if(mediatypes.video == true && item.audio_uri.length > 0){
+        filtered.push(item);
+      }
     });
 
     return filtered;
