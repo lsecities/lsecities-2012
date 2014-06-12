@@ -87,12 +87,15 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 </section>
                 <section class="clearfix">
                   <div class="resultsarea">
-                    <h2>Search results</h2>
+                    <h1>Search results</h1>
                     <div id="searchresults"></div>
+                    <div class="search-result-summary" data-ng-show="(audio_video_items | filter:query).length or (articles | filter:query).length">
+                      <p><span><a href="#articles-results">{{(audio_video_items | filter:query).length}} audio/video items</a></span> and <span><a href="#articles-results">{{(articles | filter:query).length}} articles</a></span> found.</p>
+                    </div>
                   </div>
                 </section>
                 <section class="ngapp">
-                  <h2>Audio and video</h2>
+                  <h2 id="audio-video-items-results">Audio and video</h2>
                   <ul class="results audio-video-items">
                     <li data-ng-repeat="item in audio_video_items | filter:query" class="clearfix">
                       <h3>{{item.title}}</h3>
@@ -117,7 +120,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                       </div>
                     </li>
                   </ul>
-                  <h2>Articles</h2>
+                  <h2 id="articles-results">Articles</h2>
                    <ul class="results articles">
                     <li data-ng-repeat="article in articles | filter:query" class="clearfix">
                       <h3>{{article.article_title}}</h3>
