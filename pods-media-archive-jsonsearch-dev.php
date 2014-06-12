@@ -6,7 +6,6 @@ namespace LSECitiesWPTheme\media_item;
  *
  * @package LSECities2012
  */
-?><?php
 /**
  * Pods initialization
  * URI: /media/search/?search=<search_string>
