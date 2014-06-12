@@ -2,7 +2,8 @@
 /**
  * Return list of Pods objects based on URL parameter
  * /search/<pod>
- * Template: JSON endpoint
+ * Template Name: JSON endpoint
+ * Description: Unified JSON endpoint for search interface
  * @package LSECities2012
  */
 
