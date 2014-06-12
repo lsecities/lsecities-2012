@@ -20,7 +20,8 @@ mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
 mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
   $scope.mediatypes = { "audio" : true, "video" : true };
-  
+  $scope.talktypes = { "lecture" : true, "conference_session" : true };
+    
   $scope.loadItems = function() {
     var avItemsRequest = $http({
       method: 'GET',
@@ -55,6 +56,23 @@ mediaArchiveApp.filter('mediatypefilter', function() {
         filtered.push(item);
       }
       else if(mediatypes.video == true && item.audio_uri.length > 0){
+        filtered.push(item);
+      }
+    });
+
+    return filtered;
+  };
+});
+
+mediaArchiveApp.filter('talkTypeFilter', function() {
+  return function(items, talktypes) {
+    var filtered = [];
+    
+    angular.forEach(items, function(item) {
+      if(talktypes.lecture == true && item.parent_event !== null && typeof item.parent_event === 'object'){
+        filtered.push(item);
+      }
+      else if(talktypes.conference_session == true && item.related_session !== null && typeof item.related_session === 'object'){
         filtered.push(item);
       }
     });

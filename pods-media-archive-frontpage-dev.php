@@ -42,17 +42,12 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="lecture">lecture</input>
+                              <input type="checkbox" value="lecture" data-ng-model="talktypes.lecture">lecture</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="talk">talk</input>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="checkbox" value="conference-session">conference session</input>
+                              <input type="checkbox" value="conference_session" data-ng-model="talktypes.conference_session">conference session</input>
                             </label>
                           </li>
                         </ul>
@@ -62,12 +57,12 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         <ul>
                           <li>
                             <label>
-                              <input type="checkbox" value="audio" checked="checked" data-ng-model="mediatypes.audio">audio</input>
+                              <input type="checkbox" value="audio" data-ng-model="mediatypes.audio">audio</input>
                             </label>
                           </li>
                           <li>
                             <label>
-                              <input type="checkbox" value="video" checked="checked" data-ng-model="mediatypes.video">video</input>
+                              <input type="checkbox" value="video" data-ng-model="mediatypes.video">video</input>
                             </label>
                           </li>
                         </ul>
