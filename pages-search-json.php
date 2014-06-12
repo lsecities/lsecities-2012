@@ -20,5 +20,6 @@ if ( 'audio_video_items' === $pod_type ) {
   $obj = \pods_prepare_article_list();
 }
 
+header("Content-Type: application/json");
 echo json_encode( array( 'items' => $obj ) );
 ?>
