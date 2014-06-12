@@ -17,7 +17,7 @@ mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
   $scope.loadItems();
 });
 
-mediaArchiveApp.controller('MediaArchiveCtrl', ['mediatypefilter', function ($scope, $http) {
+mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
   $scope.mediatypes = { "audio" : true, "video" : true };
   
@@ -38,7 +38,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', ['mediatypefilter', function ($sc
   };
   
   $scope.loadItems();
-}]);
+});
 
 mediaArchiveApp.filter('mediatypefilter', function() {
   return function(items, mediatypes) {
