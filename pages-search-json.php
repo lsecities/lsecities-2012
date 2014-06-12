@@ -2,7 +2,7 @@
 /**
  * Return list of Pods objects based on URL parameter
  * /search/<pod>
- * 
+ * Template: JSON endpoint
  * @package LSECities2012
  */
 
