@@ -1,4 +1,4 @@
-var mediaArchiveApp = angular.module('mediaArchiveApp');
+var mediaArchiveApp = angular.module('mediaArchiveApp', []);
 
 mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
