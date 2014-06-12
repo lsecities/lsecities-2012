@@ -26,13 +26,14 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
       method: 'GET',
       url: '/search/audio_video_items'
     }).success(function(data, status) {
-      $scope.audio_video_items = data.audio_video_items;
+      $scope.audio_video_items = data.items;
     });
+    
     var articleItemsRequest = $http({
       method: 'GET',
       url: '/search/articles'
     }).success(function(data, status) {
-      $scope.articles = data.articles;
+      $scope.articles = data.items;
     });
   };
   
