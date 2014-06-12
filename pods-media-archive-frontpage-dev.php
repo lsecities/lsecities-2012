@@ -9,7 +9,7 @@
 $TRACE_PREFIX = 'pods-media-archive-search';
 $pods_toplevel_ancestor = 306;
 wp_enqueue_script('angularjs', get_stylesheet_directory_uri() . '/assets/bower_components/angular/angular.min.js', '', '', TRUE);
-wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets/js/media-archive-app/js/controllers.js', '', '', TRUE);
+wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets/js/media-archive-app/js/controllers.js', 'angularjs', '', TRUE);
 ?><?php get_header(); ?>
 
 <div role="main" data-ng-app="mediaArchiveApp">
