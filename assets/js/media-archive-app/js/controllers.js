@@ -19,7 +19,7 @@ mediaArchiveApp.controller('StaticMediaArchiveCtrl', function ($scope, $http) {
 
 mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
-  $scope.mediatypes = { audio: false, video: false};
+  $scope.mediatypes = { audio: true, video: true };
   
   $scope.loadItems = function() {
     var avItemsRequest = $http({
