@@ -44,11 +44,14 @@ mediaArchiveApp.filter('mediatypefilter', function() {
   return function(items, mediatypes) {
     var filtered = [];
 
+    // If no specific media type has been selected, return everything
+    if(mediatypes.audio == false && mediatypes.video == false) {
+        return items;
+    }
+    
+    // Otherwise, filter by media type
     angular.forEach(items, function(item) {
-      if(mediatypes.audio == false && mediatypes.video == false) {
-        filtered.push(item);
-      }
-      else if(mediatypes.audio == true && item.youtube_uri.length > 0){
+      if(mediatypes.audio == true && item.youtube_uri.length > 0){
         filtered.push(item);
       }
       else if(mediatypes.video == true && item.audio_uri.length > 0){
