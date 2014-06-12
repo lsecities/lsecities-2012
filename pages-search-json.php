@@ -13,7 +13,7 @@
  
 $pod_type = pods_v( 'last', 'uri' );
 
-if ( 'audio-video-items' === $pod_type ) {
+if ( 'audio_video_items' === $pod_type ) {
   $obj = LSECitiesWPTheme\media_item\pods_prepare_media_item();
 } elseif ( 'articles' === $pod_type ) {
   $obj = \pods_prepare_article_list();

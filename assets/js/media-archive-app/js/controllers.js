@@ -22,11 +22,16 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.mediatypes = { audio: false, video: false};
   
   $scope.loadItems = function() {
-    var httpRequest = $http({
+    var avItemsRequest = $http({
       method: 'GET',
-      url: '/media/search-dev.json'
+      url: '/search/audio_video_items'
     }).success(function(data, status) {
       $scope.audio_video_items = data.audio_video_items;
+    });
+    var articleItemsRequest = $http({
+      method: 'GET',
+      url: '/search/articles'
+    }).success(function(data, status) {
       $scope.articles = data.articles;
     });
   };
