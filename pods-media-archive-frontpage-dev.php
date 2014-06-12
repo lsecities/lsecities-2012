@@ -71,7 +71,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                             </label>
                           </li>
                         </ul>
-                        <pre>{{types|json}}</pre>
+                        <pre>{{mediatypes|json}}</pre>
                       </div>
                       <div class="keywords sixcol last">
                       <h3>Search by topic/name/keyword</h3>
