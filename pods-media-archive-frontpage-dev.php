@@ -91,7 +91,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                     <h1>Search results</h1>
                     <div id="searchresults"></div>
                     <div class="search-result-summary" data-ng-show="(audio_video_items | filter:query | mediatypefilter:mediatypes).length or (articles | filter:query).length">
-                      <p><span><a href="#articles-results">{{(audio_video_items | filter:query).length}} audio/video items</a></span> and <span><a href="#articles-results">{{(articles | filter:query).length}} articles</a></span> found.</p>
+                      <p><span><a href="#articles-results">{{(audio_video_items | filter:query | mediatypefilter:mediatypes).length}} audio/video items</a></span> and <span><a href="#articles-results">{{(articles | filter:query).length}} articles</a></span> found.</p>
                     </div>
                   </div>
                 </section>
