@@ -43,9 +43,6 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
 mediaArchiveApp.filter('mediatypefilter', function() {
   return function(items, mediatypes) {
     var filtered = [];
-
-    console.log('in mediatypefilter');
-    console.log(mediatypes);
     
     // If no specific media type has been selected, return everything
     if(mediatypes.audio == false && mediatypes.video == false) {
