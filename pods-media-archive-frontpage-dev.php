@@ -71,6 +71,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                             </label>
                           </li>
                         </ul>
+                        <pre>{{types|json}}</pre>
                       </div>
                       <div class="keywords sixcol last">
                       <h3>Search by topic/name/keyword</h3>
@@ -89,7 +90,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   <div class="resultsarea">
                     <h1>Search results</h1>
                     <div id="searchresults"></div>
-                    <div class="search-result-summary" data-ng-show="(audio_video_items | filter:query).length or (articles | filter:query).length">
+                    <div class="search-result-summary" data-ng-show="(audio_video_items | filter:query | mediatypefilter:mediatypes).length or (articles | filter:query).length">
                       <p><span><a href="#articles-results">{{(audio_video_items | filter:query).length}} audio/video items</a></span> and <span><a href="#articles-results">{{(articles | filter:query).length}} articles</a></span> found.</p>
                     </div>
                   </div>
@@ -97,7 +98,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 <section class="ngapp">
                   <h2 id="audio-video-items-results">Audio and video</h2>
                   <ul class="results audio-video-items">
-                    <li data-ng-repeat="item in audio_video_items | filter:query" class="clearfix">
+                    <li data-ng-repeat="item in audio_video_items | filter:query  | mediatypefilter:mediatypes" class="clearfix">
                       <h3>{{item.title}}</h3>
                       <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                       <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>

@@ -41,8 +41,21 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
 });
 
 mediaArchiveApp.filter('mediatypefilter', function() {
-  return function(items, options) {
-    console.log(items);
-    console.log(options);
+  return function(items, mediatypes) {
+    var filtered = [];
+
+    angular.forEach(items, function(item) {
+       if(mediatypes.audio == false && mediatypes.video == false) {
+          filtered.push(item);
+        }
+        else if(mediatypes.audio == true && item.youtube_uri.length > 0){
+          filtered.push(item);
+        }
+        else if(mediatypes.video == true && item.audio_uri.length > 0){
+          filtered.push(item);
+        }
+    });
+
+    return filtered;
   };
 });
