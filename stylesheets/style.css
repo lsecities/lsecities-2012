@@ -759,8 +759,10 @@ right: -21px; */ }
 @media only screen and (min-device-width: 480px) { .lc-media-archive-search .results > ul > li { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0.5rem; clear: right; float: left; display: block; width: 49%; margin-right: 1%; background-color: #bf3030; color: white; }
   .lc-media-archive-search .results > ul > li:nth-child(2n) { margin-right: 0; clear: both; }
   .lc-media-archive-search .results > ul > li a, .lc-media-archive-search .results > ul > li a:visited, .lc-media-archive-search .results > ul > li a:hover { color: white; font-weight: bold; }
-  .lc-media-archive-search .results > ul > li .opacity-overlay { -webkit-filter: grayscale(97%) blur(2px); -moz-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); background-color: #F64634; height: 100%; left: 0; opacity: 0.8; position: absolute; top: 0; width: 100%; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }
-  .lc-media-archive-search .results > ul > li:hover .opacity-overlay { -webkit-filter: grayscale(0%) blur(0); -moz-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); opacity: 0.2; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; } }
+  .lc-media-archive-search .results > ul > li .video-thumbnail img { -webkit-filter: grayscale(97%) blur(2px); -moz-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); }
+  .lc-media-archive-search .results > ul > li:hover .video-thumbmail img { -webkit-filter: grayscale(0%) blur(0); -moz-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); }
+  .lc-media-archive-search .results > ul > li .opacity-overlay { background-color: #F64634; height: 100%; left: 0; opacity: 0.8; position: absolute; top: 0; width: 100%; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }
+  .lc-media-archive-search .results > ul > li:hover .opacity-overlay { opacity: 0.2; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; } }
 @media only screen and (min-device-width: 960px) { .lc-media-archive-search .results > ul > li { width: 24%; margin-right: 1%; }
   .lc-media-archive-search .results > ul > li:nth-child(2n) { margin-right: 1%; clear: none; }
   .lc-media-archive-search .results > ul > li:nth-child(4n) { margin-right: none; clear: both; } }
