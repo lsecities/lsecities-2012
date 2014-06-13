@@ -41,6 +41,9 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http, $locatio
  */
 mediaArchiveApp.filter('textFilter', function($filter) {
   return function(items, search_query) {
+    console.log(items);
+    console.log('search_query: ' . search_query);
+    
     if(search_query !== null && search_query.length == 0) {
       return items;
     } else {
