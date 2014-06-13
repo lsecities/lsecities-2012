@@ -107,13 +107,13 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         </div>
                         <div class="media clearfix">
                           <span data-ng-show="item.youtube_uri or item.audio_uri">
-                            <img data-ng-show="item.youtube_uri" src="//i1.ytimg.com/vi/{{item.youtube_uri}}/mqdefault.jpg">
-                            <a data-ng-show="item.youtube_uri" href="http://youtu.be/{{item.youtube_uri}}">
-                              <span class="action">Watch</span>
-                            </a>
-                            <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}"><span class="action">Listen</a></span>
+                            <span data-ng-show="item.youtube_uri" >
+                              <div class="opacity-overlay"></div>
+                              <img src="//i1.ytimg.com/vi/{{item.youtube_uri}}/mqdefault.jpg">
+                            </span>
+                            <span data-ng-show="item.youtube_uri" class="action"><a href="http://youtu.be/{{item.youtube_uri}}">Watch</a></span>
+                            <span data-ng-show="item.audio_uri" class="action"><a href="{{item.audio_uri}}">Listen</a></span>
                           </span>
-                          
                         </div>
                       </li>
                     </ul>
