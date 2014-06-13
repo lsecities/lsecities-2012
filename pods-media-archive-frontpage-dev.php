@@ -107,7 +107,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                         </div>
                         <div class="media">
                           <span data-ng-show="item.youtube_uri or item.audio_uri">
-                            <span data-ng-show="item.youtube_uri" >
+                            <span class="video-thumbnail" data-ng-show="item.youtube_uri" >
                               <div class="opacity-overlay"></div>
                               <img src="//i1.ytimg.com/vi/{{item.youtube_uri}}/mqdefault.jpg">
                             </span>

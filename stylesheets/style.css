@@ -766,8 +766,8 @@ right: -21px; */ }
   .lc-media-archive-search .results > ul > li:nth-child(4n) { margin-right: none; clear: both; } }
 .lc-media-archive-search .results > ul > li .article-link, .lc-media-archive-search .results > ul > li .people { clear: both; }
 .lc-media-archive-search .results.audio-video-items .media { margin-top: 0.5rem; margin-bottom: 1rem; }
-.lc-media-archive-search .results.audio-video-items .media > span { display: block; position: relative; }
-.lc-media-archive-search .results.audio-video-items .media > span .action { position: absolute; top: 0; left: 0; right: 0; padding: 0.25rem; background: rgba(0, 0, 0, 0.6); width: 100%; box-sizing: border-box; color: white; font-weight: bold; }
+.lc-media-archive-search .results.audio-video-items .media .video-thumbnail { display: block; position: relative; }
+.lc-media-archive-search .results.audio-video-items .media .action { padding: 0.25rem; background: rgba(0, 0, 0, 0.6); width: 100%; box-sizing: border-box; color: white; font-weight: bold; }
 
 body#newsletter-2013 { width: 841px; margin-left: auto; margin-right: auto; }
 body#newsletter-2013 .logo { display: block; width: 250px; margin-top: 1em; }
