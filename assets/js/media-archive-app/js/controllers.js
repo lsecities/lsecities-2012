@@ -1,6 +1,6 @@
 var mediaArchiveApp = angular.module('mediaArchiveApp', []);
 
-mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
+mediaArchiveApp.controller('MediaArchiveCtrl', ['$scope', '$location', function ($scope, $http) {
   $scope.items = [];
   $scope.mediatypes = { "audio" : true, "video" : true };
   $scope.talktypes = { "lecture" : true, "conference_session" : true };
@@ -33,7 +33,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   };
   
   $scope.loadItems();
-});
+}]);
 
 mediaArchiveApp.filter('mediatypefilter', function() {
   return function(items, mediatypes) {
