@@ -35,6 +35,20 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http, $locatio
   $scope.loadItems();
 });
 
+/**
+ * override standard filter to return everything when no input text
+ * is provided
+ */
+mediaArchiveApp.filter('textFilter', function($filter) {
+  return function(items, search_query) {
+    if(search_query !== null && search_query.length == 0) {
+      return items;
+    } else {
+      return $filter('filter');
+    }
+  }
+});
+
 mediaArchiveApp.filter('mediatypefilter', function() {
   return function(items, mediatypes) {
     var filtered = [];
