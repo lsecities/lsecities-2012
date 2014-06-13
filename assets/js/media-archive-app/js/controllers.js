@@ -4,6 +4,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
   $scope.items = [];
   $scope.mediatypes = { "audio" : true, "video" : true };
   $scope.talktypes = { "lecture" : true, "conference_session" : true };
+  var use_static_data = true;
   
   $scope.loadItems = function() {
     if(use_static_data === 'false') {
