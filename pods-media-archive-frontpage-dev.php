@@ -93,7 +93,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   <section class="results audio-video-items" id="audio-video-items-results">
                     <h2>Audio and video</h2>
                     <ul>
-                      <li data-ng-repeat="item in (audio_video_items | filter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes)" class="clearfix">
+                      <li data-ng-repeat="item in (audio_video_items | filter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes)">
                         <h3>{{item.title}}</h3>
                         <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                         <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
@@ -105,7 +105,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                             </ul>
                           </span>
                         </div>
-                        <div class="media clearfix">
+                        <div class="media">
                           <span data-ng-show="item.youtube_uri or item.audio_uri">
                             <span data-ng-show="item.youtube_uri" >
                               <div class="opacity-overlay"></div>
