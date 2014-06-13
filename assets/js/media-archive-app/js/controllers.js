@@ -44,7 +44,7 @@ mediaArchiveApp.filter('textFilter', function($filter) {
     if(search_query !== null && search_query.length == 0) {
       return items;
     } else {
-      return $filter('filter');
+      return $filter('filter')(search_query);
     }
   }
 });
