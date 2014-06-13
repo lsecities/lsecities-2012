@@ -40,14 +40,14 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http, $locatio
  * is provided
  */
 mediaArchiveApp.filter('textFilter', function($filter) {
-  return function(items, search_query) {
+  return function(items, query) {
     console.log(items);
-    console.log('search_query: ' . search_query);
+    console.log('search_query: ' . query);
     
-    if(search_query !== null && search_query.length == 0) {
+    if(query == null || (query !== null && query.length == 0)) {
       return items;
     } else {
-      return $filter('filter')(search_query);
+      return $filter('filter')(query);
     }
   }
 });
