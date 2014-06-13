@@ -753,13 +753,14 @@ right: -21px; */ }
 .lc-media-archive-search .queryarea { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -webkit-box-shadow: 1px 1px 10px #cccccc; -moz-box-shadow: 1px 1px 10px #cccccc; box-shadow: 1px 1px 10px #cccccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
 .lc-media-archive-search .queryarea h3 { font-weight: bold; margin-bottom: 0.5em; }
 .lc-media-archive-search #query { border: none; background-color: #fcfcfc; color: #999; line-height: 2em; padding: 0.5em 1em; font-style: italics; }
-.lc-media-archive-search .results li { clear: both; margin-top: 1rem; }
-@media only screen and (min-device-width: 480px) { .lc-media-archive-search .results li { clear: right; float: left; display: block; width: 49%; margin-right: 1%; background-color: #bf3030; color: white; }
-  .lc-media-archive-search .results li:nth-child(2n) { margin-right: 0; clear: both; }
-  .lc-media-archive-search .results li a, .lc-media-archive-search .results li a:visited, .lc-media-archive-search .results li a:hover { color: white; font-weight: bold; } }
-@media only screen and (min-device-width: 960px) { .lc-media-archive-search .results li { width: 24%; margin-right: 1%; }
-  .lc-media-archive-search .results li:nth-child(2n) { margin-right: inherit; clear: none; }
-  .lc-media-archive-search .results li:nth-child(4n) { margin-right: none; clear: both; } }
+.lc-media-archive-search .results > li { clear: both; margin-top: 1rem; }
+@media only screen and (min-device-width: 480px) { .lc-media-archive-search .results > li { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 0.5rem; clear: right; float: left; display: block; width: 49%; margin-right: 1%; background-color: #bf3030; color: white; }
+  .lc-media-archive-search .results > li:nth-child(2n) { margin-right: 0; clear: both; }
+  .lc-media-archive-search .results > li a, .lc-media-archive-search .results > li a:visited, .lc-media-archive-search .results > li a:hover { color: white; font-weight: bold; } }
+@media only screen and (min-device-width: 960px) { .lc-media-archive-search .results > li { width: 24%; margin-right: 1%; }
+  .lc-media-archive-search .results > li:nth-child(2n) { margin-right: 1%; clear: none; }
+  .lc-media-archive-search .results > li:nth-child(4n) { margin-right: none; clear: both; } }
+.lc-media-archive-search .results > li .article-link, .lc-media-archive-search .results > li .people { clear: both; }
 .lc-media-archive-search .results.audio-video-items .media { margin-top: 0.5rem; margin-bottom: 1rem; }
 .lc-media-archive-search .results.audio-video-items .media > span { display: block; float: left; width: 15rem; position: relative; margin-right: 2rem; }
 .lc-media-archive-search .results.audio-video-items .media > span .action { position: absolute; top: 0; left: 0; right: 0; padding: 0.25rem; background: rgba(0, 0, 0, 0.6); width: 100%; box-sizing: border-box; color: white; font-weight: bold; }

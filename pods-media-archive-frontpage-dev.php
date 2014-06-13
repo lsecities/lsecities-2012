@@ -121,13 +121,13 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                       <h3>{{article.article_title}}</h3>
                       <div class="people">
                         <span data-ng-show="article.article_authors">
+                          Authors: 
                           <ul class="run-in comma-separated">
-                            Authors: 
                             <li data-ng-repeat="author in article.article_authors">{{author.name}} {{author.family_name}}</li>
                           </ul>
                         </span>
                       </div>
-                      <div>
+                      <div class="article-link">
                         <p><a href="/media/objects/articles/{{article.permalink}}">Read the article</a></p>
                       </div>
                     </li>
