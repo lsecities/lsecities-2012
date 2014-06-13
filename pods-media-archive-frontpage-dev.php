@@ -90,48 +90,53 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   </div>
                 </section>
                 <section class="ngapp">
-                  <h2 id="audio-video-items-results">Audio and video</h2>
-                  <ul class="results audio-video-items">
-                    <li data-ng-repeat="item in (audio_video_items | filter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes)" class="clearfix">
-                      <h3>{{item.title}}</h3>
-                      <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
-                      <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
-                      <div class="people">
-                        <span data-ng-show="item.session_speakers">
-                          <ul class="run-in comma-separated">
-                            Speakers: 
-                            <li data-ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
-                          </ul>
-                        </span>
-                      </div>
-                      <div class="media clearfix">
-                        <span data-ng-show="item.youtube_uri">
-                          <a href="http://youtu.be/{{item.youtube_uri}}">
-                            <img src="//i1.ytimg.com/vi/{{item.youtube_uri}}/mqdefault.jpg">
-                            <span class="action">Watch</span>
-                          </a>
-                        </span>
-                        <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}"><span class="action">Listen</a></span>
-                      </div>
-                    </li>
-                  </ul>
-                  <h2 id="articles-results">Articles</h2>
-                   <ul class="results articles">
-                    <li data-ng-repeat="article in articles | filter:query">
-                      <h3>{{article.article_title}}</h3>
-                      <div class="people">
-                        <span data-ng-show="article.article_authors">
-                          Authors: 
-                          <ul class="run-in comma-separated">
-                            <li data-ng-repeat="author in article.article_authors">{{author.name}} {{author.family_name}}</li>
-                          </ul>
-                        </span>
-                      </div>
-                      <div class="article-link">
-                        <p><a href="/media/objects/articles/{{article.permalink}}">Read the article</a></p>
-                      </div>
-                    </li>
-                  </ul>                 
+                  <section class="results audio-video-items" id="audio-video-items-results">
+                    <h2>Audio and video</h2>
+                    <ul>
+                      <li data-ng-repeat="item in (audio_video_items | filter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes)" class="clearfix">
+                        <h3>{{item.title}}</h3>
+                        <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
+                        <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
+                        <div class="people">
+                          <span data-ng-show="item.session_speakers">
+                            <ul class="run-in comma-separated">
+                              Speakers: 
+                              <li data-ng-repeat="speaker in item.session_speakers">{{speaker.name}} {{speaker.family_name}}</li>
+                            </ul>
+                          </span>
+                        </div>
+                        <div class="media clearfix">
+                          <span data-ng-show="item.youtube_uri or item.audio_uri">
+                            <img data-ng-show="item.youtube_uri" src="//i1.ytimg.com/vi/{{item.youtube_uri}}/mqdefault.jpg">
+                            <a data-ng-show="item.youtube_uri" href="http://youtu.be/{{item.youtube_uri}}">
+                              <span class="action">Watch</span>
+                            </a>
+                            <span data-ng-show="item.audio_uri"><a href="{{item.audio_uri}}"><span class="action">Listen</a></span>
+                          </span>
+                          
+                        </div>
+                      </li>
+                    </ul>
+                  </section>
+                  <section class="results articles">
+                    <h2 id="articles-results">Articles</h2>
+                    <ul>
+                      <li data-ng-repeat="article in articles | filter:query">
+                        <h3>{{article.article_title}}</h3>
+                        <div class="people">
+                          <span data-ng-show="article.article_authors">
+                            Authors: 
+                            <ul class="run-in comma-separated">
+                              <li data-ng-repeat="author in article.article_authors">{{author.name}} {{author.family_name}}</li>
+                            </ul>
+                          </span>
+                        </div>
+                        <div class="article-link">
+                          <p><a href="/media/objects/articles/{{article.permalink}}">Read the article</a></p>
+                        </div>
+                      </li>
+                    </ul>
+                  </section>             
                 </section>
               </article>
               
