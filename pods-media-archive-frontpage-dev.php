@@ -85,9 +85,9 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                 <section class="ngapp">
                   <h1>Search results</h1>
                   <section class="results audio-video-items" id="audio-video-items-results">
-                    <h2>Audio and video <span>({{filtered_audio_video_items = (audio_video_items | textFilter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes)}})</span></h2>
+                    <h2>Audio and video</h2>
                     <ul>
-                      <li data-ng-repeat="item in filtered_audio_video_items">
+                      <li data-ng-repeat="item in audio_video_items | filter:query | mediatypefilter:mediatypes | talkTypeFilter:talktypes">
                         <h3>{{item.title}}</h3>
                         <h4 data-ng-show="item.parent_sessions">Event session: <span data-ng-repeat="session in item.parent_sessions">{{session.name}}<span data-ng-show=" ! $last "> &raquo; </span></span></h4>
                         <h4 data-ng-show="item.parent_event">Event: <a href="/media/objects/events/{{item.parent_event.slug}}">{{item.parent_event.name}}</a></h4>
@@ -113,9 +113,9 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                     </ul>
                   </section>
                   <section class="results articles">
-                    <h2 id="articles-results">Articles <span>({{filtered_articles = articles | filter:query}})</span></h2>
+                    <h2 id="articles-results">Articles</h2>
                     <ul>
-                      <li data-ng-repeat="article in filtered_articles">
+                      <li data-ng-repeat="article in articles | filter:query">
                         <h3>{{article.article_title}}</h3>
                         <div class="people">
                           <span data-ng-show="article.article_authors">
