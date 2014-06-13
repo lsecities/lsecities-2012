@@ -76,7 +76,7 @@ wp_enqueue_script('media_archive_app', get_stylesheet_directory_uri() . '/assets
                   
                   <div class="mapsearch">
                     <h3>Search by city</h3>
-                    <iframe width='100%' height='350px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
+                    <iframe width='100%' height='350px' frameBorder='0' src='http://a.tiles.mapbox.com/v3/lsecities.i6knp3n1/attribution,zoompan,geocoder,share.html'></iframe>
                   </div>
                   
                 </section>
