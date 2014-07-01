@@ -126,7 +126,7 @@ function pods_prepare_conference($pod_slug) {
         'title' => ($menu_conference_title and $item_pod->field('show_title_in_navigation')) ? $menu_conference_title . '<br/>' . $menu_conference_city_year : $menu_conference_city_year
       );
     }
-    ksort($obj['conferences_menu_items']);
+    krsort($obj['conferences_menu_items']);
   }
   
   $obj['gallery'] = array(
