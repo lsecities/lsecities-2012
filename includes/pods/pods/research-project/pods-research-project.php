@@ -96,12 +96,18 @@ function get_project_timespan($pod) {
       $project_start = new \DateTime($pod->field('date_start') . '-01-01');
       $project_start = $project_start->format('Y');
     }
-
+  } catch (\Exception $e) {
+    error_log('Project start year must be a 4-digit number, "' . $pod->field('date_start') . '" was provided.');
+  }
+  
+  try {
     if($pod->field('date_end')) {
       $project_end = new \DateTime($pod->field('date_end') . '-12-31');
       $project_end = $project_end->format('Y');
     }
-  } catch (Exception $e) {}
+  } catch (\Exception $e) {
+    error_log('Project end year must be a 4-digit number, "' . $pod->field('date_end') . '" was provided.');
+  }
 
   // get freeform duration text, if available
   $project_duration_freeform = $pod->field('duration');

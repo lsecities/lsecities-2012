@@ -8,6 +8,15 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [feature] photo credits automatically added to #page-meta area
     whenever photos with title and attribution metadata defined
     in WP's media library are pulled into a template
+  * [feature] it is now possible to provide a tentative date for
+    upcoming events whose exact times haven't been set
+  * [feature] staff profiles can now include a phone number
+  * [feature] a Picasa photo album can be linked to events and will
+    be displayed via the Galleria plugin
+  * [update] refactored Research projects pod templates and data
+    management code
+  * [tooling] fast, robust deployment via Makefile; previous
+    git push-based deployment was too brittle
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
  
