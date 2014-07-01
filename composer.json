@@ -3,7 +3,8 @@
     "description": "LSE Cities WordPress theme",
     "require": {
         "twig/twig": "~1.13",
-        "mthaml/mthaml": "~1.2"
+        "mthaml/mthaml": "~1.2",
+        "drewm/mailchimp-api": "dev-master"
     },
     "license": "GPL-3.0+",
     "authors": [
