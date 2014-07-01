@@ -6,7 +6,6 @@ namespace LSECitiesWPTheme\media_item;
  *
  * @package LSECities2012
  */
-?><?php
 /**
  * Pods initialization
  * URI: /media/search/?search=<search_string>
@@ -16,5 +15,6 @@ $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 $media_items = pods_prepare_media_item();
 $articles = \pods_prepare_article_list();
 
+header("Content-Type: application/json");
 echo json_encode(array('audio_video_items' => $media_items, 'articles' => $articles));
 ?>

@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Pods - Media Archive search (dev)
- * Description: Media Archive search webapp (dev)
+ * Template Name: Pods - Media Archive search
+ * Description: Media Archive search webapp
  *
  * @package LSECities2012
  */
