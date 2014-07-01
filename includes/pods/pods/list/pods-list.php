@@ -46,19 +46,27 @@ function pods_prepare_list($pod_slugs) {
       ));
     } else {
       // Otherwise, we get all the pages selected in the list_pages multi-select pick field
-      $item_pages = sort_linked_field($this_pod->field('list_pages'), 'menu_order', $sort_order === 'ASC' ? SORT_ASC : SORT_DESC);
-      
+      $item_pages = $this_pod->field('list_pages');
+
       $items = array();
       
       foreach($item_pages as $item) {
         $item_pod = pods($this_pod->field('pod_type.slug'), get_post_meta($item['ID'], 'pod_slug', true));
         var_trace(var_export($item_pod, true), 'ITEM_POD');
         
-        $items[] = array(
+        // push each page to array, with page's menu_order as key
+        $items[$item['menu_order']] = array(
           'title' => $item_pod->field('name'),
           'permalink' => get_permalink($item['ID']),
           'pod_featured_image_uri' => pods_image_url($item_pod->field('snapshot'), array(512, 768))
         );
+      }
+
+      // now sort according to key - and ascending or descending as requested
+      if('DESC' === $sort_order) {
+        krsort($items);
+      } else {
+        ksort($items);
       }
 
       array_push($lists, array(
