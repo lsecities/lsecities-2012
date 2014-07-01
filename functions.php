@@ -29,6 +29,7 @@ require_fragment('/includes/theme_initialization.php');
 require_fragment('/includes/functions.php' );
 require_fragment('/includes/utility_functions.php' );
 require_fragment('/includes/templating.php' );
+require_fragment('/includes/cf7-mailchimp.php' );
 
 // Function files for WP partials go here
 require_fragment('/includes/partials/header.php' );
