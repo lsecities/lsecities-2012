@@ -112,7 +112,7 @@ function pods_prepare_conference($pod_slug) {
   
   $conference_list = pods('list', 'urban-age-conferences');
   $pod_type = $conference_list->field('pod_type.slug');
-  $pod_list = sort_linked_field($conference_list->field('list_pages'), 'menu_order', SORT_DESC);
+  $pod_list = $conference_list->field('list_pages');
 
   $obj['conferences_menu_items'] = array();
   
@@ -121,11 +121,12 @@ function pods_prepare_conference($pod_slug) {
       $item_pod = pods($pod_type, get_post_meta($item['ID'], 'pod_slug', true));
       $menu_conference_title = $item_pod->field('conference_title');
       $menu_conference_city_year = $item_pod->field('city') . ' | ' . $item_pod->field('year');
-      $obj['conferences_menu_items'][] = array(
+      $obj['conferences_menu_items'][$item['menu_order']] = array(
         'permalink' => get_permalink($item['ID']),
         'title' => ($menu_conference_title and $item_pod->field('show_title_in_navigation')) ? $menu_conference_title . '<br/>' . $menu_conference_city_year : $menu_conference_city_year
       );
     }
+    ksort($obj['conferences_menu_items']);
   }
   
   $obj['gallery'] = array(

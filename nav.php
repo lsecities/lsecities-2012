@@ -7,6 +7,6 @@
  * @package LSECities2012
  */
  
-// get_template_part('templates/nav/nav');
+get_template_part('templates/nav/nav');
 
 ?>
