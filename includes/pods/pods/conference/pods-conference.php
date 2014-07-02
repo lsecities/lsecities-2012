@@ -22,56 +22,10 @@ function pods_prepare_conference($pod_slug) {
   }
 
   /* process list of partners */
-  $obj['partners'] = array();
-  $conference_partners_slugs = (array) $pod->field('partners.slug');
-  // MONKEYPATCH_BEGIN: sort by slug
-  asort($conference_partners_slugs);
-  // MONKEYPATCH_END
-
-  foreach($conference_partners_slugs as $conference_partners_slug) {
-    $organization_pod = pods('organization', $conference_partners_slug);
-    
-    // MONKEYPATCH_BEGIN
-    if($_GET["siteid"] == 'ec2012') {
-      $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), 'original');
-    } else {
-      $logo_uri = pods_image_url($organization_pod->field('logo'), 'original');
-    }
-    // MONKEYPATCH_END
-    
-    array_push($obj['partners'], array(
-        'id' => $organization_pod->field('slug'),
-        'name' => $organization_pod->field('name'),
-        'logo_uri' => $logo_uri,
-        'web_uri' => $organization_pod->field('web_uri')
-    ));
-  }
-
+  $obj['partners'] = get_conference_partners($pod, 'partners');
   /* process list of media partners */
-  $obj['media_partners'] = array();
-  $conference_media_partners_slugs = (array) $pod->field('media_partners.slug');
-  // MONKEYPATCH_BEGIN: sort by slug
-  asort($conference_media_partners_slugs);
-  // MONKEYPATCH_END
+  $obj['media_partners'] = get_conference_partners($pod, 'media_partners');
 
-  foreach($conference_media_partners_slugs as $conference_media_partners_slug) {
-    $media_organization_pod = pods('organization', $conference_media_partners_slug);
-    
-    // MONKEYPATCH_BEGIN
-    if($_GET["siteid"] == 'ec2012') {
-      $logo_uri = pods_image_url($media_organization_pod->field('logo_white_raster'), 'original');
-    } else {
-      $logo_uri = pods_image_url($media_organization_pod->field('logo'), 'original');
-    }
-    // MONKEYPATCH_END
-    
-    $obj['media_partners'][] = array(
-        'id' => $media_organization_pod->field('slug'),
-        'name' => $media_organization_pod->field('name'),
-        'logo_uri' => $logo_uri,
-        'web_uri' => $media_organization_pod->field('web_uri')
-    );
-  }
   $obj['conference_publication_blurb'] = $pod->display('conference_newspaper.blurb');
   $obj['conference_publication_cover'] = wp_get_attachment_url($pod->field('conference_newspaper.snapshot.ID'));
   $obj['conference_publication_wp_page'] = get_permalink($pod->field('conference_newspaper.publication_web_page.ID'));
@@ -161,4 +115,41 @@ function parent_conference_page($post_id) {
   // If no ancestor page with template set to conference template,
   // return false.
   return false;
+}
+
+/**
+ * Build array with conference partner data
+ *
+ * @param Object $pod The conference Pod object
+ * @param string $partner_field The pick field used for this type of partners within the conference Pod object (must be linked to Organizations pod)
+ * @return array The list of requested partners
+ */
+function get_conference_partners($pod, $partner_field) {
+  /* process list of partners */
+  $partners = array();
+  $conference_partners_slugs = $pod->field($partner_field . '.slug');
+  // MONKEYPATCH_BEGIN: sort by slug
+  asort($conference_partners_slugs);
+  // MONKEYPATCH_END
+
+  foreach($conference_partners_slugs as $conference_partners_slug) {
+    $organization_pod = pods('organization', $conference_partners_slug);
+
+    // MONKEYPATCH_BEGIN
+    if($_GET["siteid"] == 'ec2012') {
+      $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), 'original');
+    } else {
+      $logo_uri = pods_image_url($organization_pod->field('logo'), 'original');
+    }
+    // MONKEYPATCH_END
+
+    $partners[] = [
+        'id' => $organization_pod->field('slug'),
+        'name' => $organization_pod->field('name'),
+        'logo_uri' => $logo_uri,
+        'web_uri' => $organization_pod->field('web_uri')
+    ];
+  }
+
+  return $partners;
 }
