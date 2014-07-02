@@ -17,6 +17,10 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
     management code
   * [tooling] fast, robust deployment via Makefile; previous
     git push-based deployment was too brittle
+  * [fixed] sorting of UA conferences in conference pages sidenav
+  * [fixed] sorting of items in lists of pages template
+  * [feature] added integration of WP Contact Forms 7 with Mailchimp
+    via Mailchimp API
   
  -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
  
