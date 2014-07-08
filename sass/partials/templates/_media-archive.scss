@@ -2,6 +2,8 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-shadow";
 @import "compass/css3/border-radius";
+@import "compass/css3/filter";
+@import "compass/utilities/general/clearfix";
 
 .lc-media-archive-search {
   input[type="checkbox"] {
@@ -32,5 +34,115 @@
     line-height: 2em;
     padding: 0.5em 1em;
     font-style: italics;
+  }
+  
+  // Results areas
+  .results {
+    @include pie-clearfix;
+        
+    & > ul > li {
+      clear: both;
+      margin-top: 1rem;
+      
+      @media only screen and (min-device-width: 480px) {
+        @include box-sizing(border-box);
+        padding: 0.5rem;
+        clear: none;
+        float: left;
+        display: block;
+        width: 49.75%;
+        margin-right: 0.25%;
+        background-color: #bf3030;
+        color: white;
+        
+        &:nth-child(2n) {
+          margin-right: 0;
+          
+        }
+        
+        &:nth-child(2n+1) {
+          clear: both;
+        }
+        
+        a, a:visited, a:hover {
+          color: white;
+          font-weight: bold;
+        }
+        
+        .video-thumbnail {
+          display: block;
+          position: relative;
+          
+          img {
+            @include filter(grayscale(97%));
+            @include transition(all 1s ease);
+          }
+        }
+        
+        .opacity-overlay {
+          background-color: #F64634;
+          height: 100%;
+          left: 0;
+          opacity: 0.8;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          @include transition(all 1s ease);
+        }
+
+        &:hover {
+          .video-thumbmail img {
+            @include filter(grayscale(0%));
+            @include transition(all 1s ease);
+          }
+          
+          .opacity-overlay {
+            opacity: 0.2;
+            @include transition(all 1s ease);
+          }
+        }
+      }
+      
+      @media only screen and (min-device-width: 960px) {
+        width: 24.75%;
+        margin-right: 0.25%;
+        
+        &:nth-child(2n) {
+          margin-right: 0.25%;
+        }
+        
+        &:nth-child(2n+1) {
+          clear: none;
+        }
+        
+        &:nth-child(4n) {
+          margin-right: none;
+        }
+        
+        &:nth-child(4n+1) {
+          clear: both;
+        }
+      }
+      
+      .article-link, .people {
+        clear: both;
+      }
+    }
+        
+    &.audio-video-items {
+      .media {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+
+        .action {
+          padding: 0.25rem;
+          background: rgba(0,0,0,0.6);
+          width: 100%;
+          box-sizing: border-box;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
