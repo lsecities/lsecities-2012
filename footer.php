@@ -166,7 +166,6 @@
 <?php if(lc_data('slider_jquery_options')) { echo lc_data('slider_jquery_options'); } ?>
 
           }));
-          $('.runon li:nth-child(odd)').addClass('alternate');
           $('.accordion').accordion({heightStyle: 'content', active: $(this).find('.active')});
 
           // enable tabs on #uiTabs and .uiTabs lists
