@@ -181,6 +181,9 @@ $gallery = $obj['gallery'];
             <dt>Website</dt>
             <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
           <?php endif; ?>
+          <?php if(!empty($obj['free_form_project_teams'])) {
+            echo $obj['free_form_project_teams']; 
+          } ?>
           <?php if(count($obj['project_coordinators'])): ?>
             <dt>Project <?php echo count($obj['project_coordinators']) > 1 ?'coordinators' : 'coordinator'; ?></dt>
             <dd><?php echo $obj['project_coordinators_string']; ?></dd>
