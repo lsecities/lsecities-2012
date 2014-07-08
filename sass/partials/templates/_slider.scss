@@ -240,30 +240,44 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
           text-transform: uppercase;
         }
       }
-      
-      &.citieslist ul {
-        display: inline;
-        text-transform: uppercase;
-        font-family: $grotesque-font-family;
-        font-size: 1.95em;
-      
-        li {
+     
+      &.citieslist .inner-box {
+        padding: 0;
+      }
+    
+      &.citieslist {
+        .inner-box {
+          padding: 0;
+        }
+        
+        &.onetile.tall ul {
+          font-size: 1.91em;
+        }
+
+        ul {
           display: inline;
-          
-          &::after {
-            content: "\2002";
-          }
-          
-          &:nth-of-type(2n) {
-            color: #999;
-          }
-        
-          a, a:active, a:visited {
-            color: inherit;
-          }
-        
-          a:hover {
-            color: #990000;
+          text-transform: uppercase;
+          font-family: $grotesque-font-family;
+          font-size: 2em;
+              
+          li {
+            display: inline;
+            
+            &::after {
+              content: "\2009";
+            }
+                  
+            &:nth-of-type(2n) {
+              color: #999;
+            }
+                
+            a, a:active, a:visited {
+              color: inherit;
+            }
+                
+            a:hover {
+              color: #990000;
+            }
           }
         }
       }
