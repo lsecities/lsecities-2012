@@ -869,10 +869,10 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-slider-page .flexslider .tile.databox { font-family: BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif; }
 .lc-slider-page .flexslider .tile.databox h1 { font-family: BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif; text-transform: uppercase; font-weight: bold; font-size: 6em !important; display: inline; line-height: 1em; margin-bottom: inherit !important; }
 .lc-slider-page .flexslider .tile.databox p { font-size: 1.4em !important; display: inline; text-transform: uppercase; }
-.lc-slider-page .flexslider .tile.citieslist ul { display: inline; text-transform: uppercase; font-family: BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif; font-size: 2em; }
+.lc-slider-page .flexslider .tile.citieslist ul { display: inline; text-transform: uppercase; font-family: BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif; font-size: 1.95em; }
 .lc-slider-page .flexslider .tile.citieslist ul li { display: inline; }
-.lc-slider-page .flexslider .tile.citieslist ul li::after { content: ' '; }
-.lc-slider-page .flexslider .tile.citieslist ul li.alternate { color: #999; }
+.lc-slider-page .flexslider .tile.citieslist ul li::after { content: "\2002"; }
+.lc-slider-page .flexslider .tile.citieslist ul li:nth-of-type(2n) { color: #999; }
 .lc-slider-page .flexslider .tile.citieslist ul li a, .lc-slider-page .flexslider .tile.citieslist ul li a:active, .lc-slider-page .flexslider .tile.citieslist ul li a:visited { color: inherit; }
 .lc-slider-page .flexslider .tile.citieslist ul li a:hover { color: #990000; }
 .lc-slider-page .flexslider .tile.introbox { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); }
