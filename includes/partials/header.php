@@ -105,6 +105,22 @@ function prepare_header() {
     var_trace($obj['level2nav'], 'header_level2nav');
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/rio2013.appcache';
+  } elseif(lc_data('x-site-id') === 'delhi2014') {
+    // If we are navigating the Delhi 2014 minisite via reverse proxy, display appropriate menu
+    $obj['level1nav'] = '';
+    $class_for_current_page = $post->ID == 6918 ? ' current_page_item' : '';
+    
+    // only show selected subpages in top navmenu
+    $only_include_top_pages_ids = '&include=6918';
+    
+    $obj['level2nav'] = '<li class="page-item page-item-6918' . $class_for_current_page . '">' .
+      '<a href="/">Home</a></li>' . 
+      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
+    // And strip prefix
+    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2014-delhi\/site/', '', $obj['level2nav']);
+    var_trace($obj['level2nav'], 'header_level2nav');
+    // enable appcache manifest, if needed
+    // $appcache_manifest = '/appcache-manifests/delhi2014.appcache';
   }
   /* if within Newsletter section, do not populate level2nav: otherwise,
      all the children pages will be listd there! */
