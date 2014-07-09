@@ -1,7 +1,7 @@
     <img class="full-background-photo loading" src="data:image/gif;base64,R0lGODdhAQABAIAAAP///////ywAAAAAAQABAAACAkQBADs=" /> <!-- start with white pixel gif; if js is on, load random image from pool -->
     <header id='header'>
       <div>
-        <h1 id="rio2013title" class='row'><a href="/">City Transformations</a></h1>
+        <h1 class='conference-title row'><a href="/">City Transformations</a></h1>
         <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%23UARio&src=typd&f=realtime">#UARio</a></span>
         <div class='row' id='mainmenus'>
           <nav class='twelvecol section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
