@@ -53,7 +53,7 @@ $gallery = $obj['gallery'];
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if(count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
+            <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -75,7 +75,7 @@ $gallery = $obj['gallery'];
               <li class="threecol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
-            <?php endif; // (count($obj['project_news']) or count($obj['events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
+            <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
             
           </header>
           <div class='entry-content article-text list-wrap'>
