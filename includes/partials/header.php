@@ -111,11 +111,11 @@ function prepare_header() {
     $class_for_current_page = $post->ID == 6918 ? ' current_page_item' : '';
     
     // only show selected subpages in top navmenu
-    $only_include_top_pages_ids = '&include=6918';
+    $only_include_top_pages_ids = '&include=';
     
     $obj['level2nav'] = '<li class="page-item page-item-6918' . $class_for_current_page . '">' .
-      '<a href="/">Home</a></li>' . 
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
+      '<a href="/">Home</a></li>' /*. 
+      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids)*/ ;
     // And strip prefix
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2014-delhi\/site/', '', $obj['level2nav']);
     var_trace($obj['level2nav'], 'header_level2nav');
