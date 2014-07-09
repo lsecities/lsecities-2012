@@ -114,11 +114,14 @@ function prepare_header() {
     $only_include_top_pages_ids = '&include=';
     
     $obj['level2nav'] = '<li class="page-item page-item-6918' . $class_for_current_page . '">' .
-      '<a href="/">Home</a></li>' /*. 
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids)*/ ;
+      '<a href="/">Home</a></li>' . 
+      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids) ;
     // And strip prefix
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2014-delhi\/site/', '', $obj['level2nav']);
-    var_trace($obj['level2nav'], 'header_level2nav');
+
+    // except we actually completely clear level2nav until we move past the launch page stage
+    $obj['level2nav'] = '';
+    
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/delhi2014.appcache';
   }
