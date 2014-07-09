@@ -116,6 +116,8 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
   // for rio2013 microsite, we need a full-frame header: outside of #container
   if(lc_data('x-site-id') === 'rio2013') {
     locate_template('templates/partials/header/header-rio2013.php', true, true);
+  } elseif(lc_data('x-site-id') === 'delhi2014') {
+    locate_template('templates/partials/header/header-delhi2014.php', true, true);
   }
 ?>
 

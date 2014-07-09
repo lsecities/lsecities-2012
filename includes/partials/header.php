@@ -59,6 +59,9 @@ function prepare_header() {
   } elseif(lc_data('x-site-id') === 'rio2013') {
     $obj['body_class_extra'] = 'rio2013';
     lc_data('microsite_id', 'rio2013');
+  } elseif(lc_data('x-site-id') === 'delhi2014') {
+    $obj['body_class_extra'] = 'delhi2014';
+    lc_data('microsite_id', 'delhi2014');
   }
 
   $obj['level2nav'] = wp_list_pages('child_of=' . $obj['toplevel_ancestor'] . '&depth=1&sort_column=menu_order&title_li=&echo=0');
