@@ -23,7 +23,7 @@ function cf7mailchimp_delhi2014_submission($cf7_data) {
         'COUNTRY' => $cf7_data->posted_data['country'],
         'TOPICS' => $cf7_data->posted_data['topics'],
         '2014CONF' => $cf7_data->posted_data['interest-in-ua2014-conference'],
-        '2014UANEWS' => ! $cf7_data->posted_data['subscribe-to-all-updates']
+        '2014UANEWS' => $cf7_data->posted_data['subscribe-to-all-updates'] ? 'All LSE Cities news' : 'Urban Age 2014 conference news only'
       ],
       'double_optin' => FALSE,
       'update_existing' => TRUE,
