@@ -9,7 +9,7 @@ function cf7mailchimp_delhi2014_submission($cf7_data) {
   var_trace(var_export($cf7_data, TRUE), 'cf7_data');
 
   // only do this if the form being submitted is the Delhi 2014 register your interest one
-  if(6844 == $cf7_data->id and TRUE == $cf7_data->posted_data['lsecities-updates-subscription']) {
+  if(6844 == $cf7_data->id) {
     $Mailchimp = new \Drewm\MailChimp(LSECITIES_MAILCHIMP_API_KEY);
     $result = $Mailchimp->call('lists/subscribe', [
       'id' => '1f3b65491d',
@@ -22,9 +22,10 @@ function cf7mailchimp_delhi2014_submission($cf7_data) {
         'CITY' => $cf7_data->posted_data['city'],
         'COUNTRY' => $cf7_data->posted_data['country'],
         'TOPICS' => $cf7_data->posted_data['topics'],
-        '2014CONF' => $cf7_data->posted_data['interest-in-ua2014-conference']
+        '2014CONF' => $cf7_data->posted_data['interest-in-ua2014-conference'],
+        '2014UANEWS' => ! $cf7_data->posted_data['subscribe-to-all-updates']
       ],
-      'double_optin' => TRUE,
+      'double_optin' => FALSE,
       'update_existing' => TRUE,
     ]);
 
