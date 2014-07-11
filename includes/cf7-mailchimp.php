@@ -48,12 +48,11 @@ add_action('wpcf7_before_send_mail', 'cf7mailchimp_delhi2014_submission');
  * manage the CF7 submissions.
  */
 function lsecities_flamingo_map_meta_cap( $meta_caps ) {
-  $meta_caps = array(
+  return [
     'flamingo_edit_inbound_messages' => 'flamingo_edit_inbound_messages',
     'flamingo_spam_inbound_message' => 'flamingo_edit_inbound_messages',
     'flamingo_unspam_inbound_message' => 'flamingo_edit_inbound_messages'
-  );
- return $meta_caps;
+  ];
 }
 
 /**
