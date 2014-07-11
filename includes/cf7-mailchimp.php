@@ -39,3 +39,25 @@ function cf7mailchimp_delhi2014_submission($cf7_data) {
  * Register action
  */
 add_action('wpcf7_before_send_mail', 'cf7mailchimp_delhi2014_submission');
+
+
+/**
+ * Override default capabilities for the Inbound Messages page of the
+ * Flamingo plugin: default is edit_users, but we need to make the page
+ * accessible to non-privileged users who should only be able to
+ * manage the CF7 submissions.
+ */
+function lsecities_flamingo_map_meta_cap( $meta_caps ) {
+  $meta_caps = array(
+    'flamingo_edit_inbound_messages' => 'publish_posts',
+    'flamingo_spam_inbound_message' => 'publish_posts',
+    'flamingo_unspam_inbound_message' => 'publish_posts'
+  );
+ return $meta_caps;
+}
+
+/**
+ * Register filter
+ */
+add_filter( 'flamingo_map_meta_cap', 'lsecities_flamingo_map_meta_cap' );
+
