@@ -164,6 +164,8 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
   }
   
   $qualifications_list = array_map(function($string) { return trim($string); }, explode("\n", $pod->field('qualifications')));
+
+  $lse_research_online_uri = $pod->field('lse_research_online_uri');
   
   // get photo and related attribution, push attribution to attribution list
   if($photo_id = $pod->field('photo.ID', TRUE)) {
@@ -239,6 +241,11 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
 
     // project involvement (i.e. list of projects this person is involved in as coordinator or researcher), if applicable
     $output .= person_data__project_involvement($pod);
+
+    // publications page on LSE Research Online, if applicable
+    if($lse_research_online_uri) {
+      $output .= "<dl><dt>Publications</dt><dd><a href='" . $lse_research_online_uri . "'>Full publications list on LSE Research Online</a></dd></dl>";
+    }
 
     $output .= "  </div>";
     $output .= "</li>";
