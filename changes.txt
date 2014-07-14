@@ -11,6 +11,8 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [feature] it is now possible to provide a tentative date for
     upcoming events whose exact times haven't been set
   * [feature] staff profiles can now include a phone number
+  * [feature] staff profiles can now include a link to the relevant
+    publications page on LSE Research Online (http://eprints.lse.ac.uk)
   * [feature] a Picasa photo album can be linked to events and will
     be displayed via the Galleria plugin
   * [update] refactored Research projects pod templates and data
