@@ -117,14 +117,8 @@ function pods_prepare_event($pod_slug) {
     }
   }
   
-  $obj['slider'] = $pod->field('slider');
-  if(!$obj['slider']) {
-    $obj['featured_image_uri'] = get_the_post_thumbnail(get_the_ID(), array(960,367));
-  }
-
-  // grab the image URI from the Pod
-  $attachment_ID = $pod->field('heading_image.ID', TRUE);
-  $obj['featured_image_uri'] = wp_get_attachment_url($attachment_ID);
+  // Set featured image, forcing 960px width and 2.5:1 ratio
+  $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), [960,384]);
 
   /**
    * event start and end
