@@ -27,7 +27,7 @@ if(!$pod_from_page) {
 $pod = pods('research_project', $pod_slug);
 
 $obj = pods_prepare_research_project($pod_slug);
-
+  
 // we need - for now - this data in a variable called $gallery in order
 // for the galleria.inc.php include to see the gallery data
 $gallery = $obj['gallery'];
@@ -53,7 +53,7 @@ $gallery = $obj['gallery'];
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
+            <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_external_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -62,9 +62,9 @@ $gallery = $obj['gallery'];
             <!--<![endif]-->
             <ul class="nav organictabs row">
               <li class="threecol"><a class="current" href="#t-project-info">Profile</a></li>
-              <?php if(count($obj['research_events'])): ?>
+              <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
               <li class="threecol"><a href="#t-events">Events</a></li>
-              <?php endif; // (count($events))?>
+              <?php endif; // (count($obj['research_events']) or count($obj['research_external_events']))?>
               <?php if(count($obj['project_news'])): ?>
               <li class="threecol"><a href="#t-news">News</a></li>
               <?php endif; ?>
@@ -79,19 +79,19 @@ $gallery = $obj['gallery'];
             
           </header>
           <div class='entry-content article-text list-wrap'>
-            <section id="t-project-info">
+            <section id="t-project-info" class="project-tab">
               <?php echo $obj['blurb']; ?>
             </section>
             
             <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
-            <section id="t-events" class="hide">
+            <section id="t-events" class="project-tab hide">
               <header><h1>Events</h1></header>
               <?php if($obj['events_blurb']): ?>
               <div><?php echo $obj['events_blurb']; ?></div>
               <?php endif; // ($obj['events_blurb']) ?>
               <dl>
-                <?php if($obj['research_events']) : ?>
-                <dt>LSE Cities events</dt>
+                <?php if(count($obj['research_events'])) : ?>
+                <dt><?php if(count($obj['research_external_events'])): ?>LSE Cities events<?php endif; ?></dt>
                 <dd>
                   <ul>
                   <?php foreach($obj['research_events'] as $event): ?>
@@ -104,28 +104,28 @@ $gallery = $obj['gallery'];
                   <?php endforeach; // ($obj['research_events']) ?>
                   </ul>
                 </dd>
-                <?php endif; // ($obj['research_events']) ?>
+                <?php endif; // (count($obj['research_events'])) ?>
                 <?php
-                  foreach($obj['research_event_categories'] as $event_category_slug):
-                    if(count($obj['research_external_events'][$event_category_slug])):
+                  foreach($obj['research_external_events'] as $event_category_slug => $category_events):
+                    if(count($category_events)):
                   ?>
                   <dt><?php $event_category_object = get_category_by_slug($event_category_slug); echo $event_category_object->cat_name; ?></dt>
                   <dd>
                     <ul>
               <?php
-              foreach($obj['research_external_events'][$event_category_slug] as $event): ?>
+              foreach($category_events as $event): ?>
               <li>
                 <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                 <?php echo date_string($event['date'], 'jFY') . ' | ';
                       echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                 <?php if($event['uri']): ?></a><?php endif; ?>
               </li>
-              <?php endforeach; // ($obj['research_external_events'][$event_category_slug] as $event) ?>
+              <?php endforeach; // ($category_events as $event) ?>
               </ul>
                   </dd>
                 <?php
-                    endif; // (count($obj['research_external_events'][$research_category_slug]))
-                  endforeach; // ($obj['research_event_categories'] as $event_category) ?>
+                    endif; // (count($category_events))
+                  endforeach; // ($obj['research_external_events'] as $event_category_slug => $category_events) ?>
               </dl>
               <?php if(FALSE) : // legacy code - check and remove ?>
                 <header><h1>Conferences</h1></header>
@@ -142,11 +142,11 @@ $gallery = $obj['gallery'];
                 </ul>
                 <?php endif; // (FALSE) ?>
             </section>
-            <?php endif; // (count($obj['research_events'])) ?>
+            <?php endif; // (count($obj['research_events']) or count($obj['research_external_events'])) ?>
             
             
             <?php if(count($obj['project_news'])): ?>
-              <section id="t-news" class="hide">
+              <section id="t-news" class="project-tab hide">
                 <header><h1>Project news</h1></header>
                 <ul>
                 <?php foreach($obj['project_news'] as $news_item) : ?>
@@ -158,7 +158,7 @@ $gallery = $obj['gallery'];
              
             <?php // publications
             if(count($obj['research_outputs'])): ?>
-            <section id="t-publications" class="hide">
+            <section id="t-publications" class="project-tab hide">
               <header><h1>Publications</h1></header>
               <dl>
                 <?php
@@ -188,7 +188,7 @@ $gallery = $obj['gallery'];
             <?php
             // photo galleries
             if(count($obj['research_photo_galleries'])): ?>
-            <section id="t-galleries" class="hide later">
+            <section id="t-galleries" class="project-tab hide later">
               <header><h1>Photo essays</h1></header>
               <?php
               foreach($obj['research_photo_galleries'] as $key => $gallery): ?>

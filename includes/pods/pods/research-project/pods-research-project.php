@@ -276,13 +276,13 @@ function get_project_research_outputs($pod) {
  * @return array The list of events associated to the project, grouped
  *    by category
  */
-function get_project_events($pod, $include_events_from_main_calendar, $research_event_categories, $research_outputs) {
+function get_project_events($pod, $include_events_from_main_calendar = FALSE, $research_event_categories = [], $research_outputs = []) {
   $research_events = [];
 
   // Only include events from the main calendar if asked to do so
   if($include_events_from_main_calendar and $pod->field('events')) {
     foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
-      $research_events['lsecities_events'] = array(
+      $research_events[0][] = array(
         'title' => $event['name'],
         'citation' => $event['name'],
         'date' => $event['date_start'],
@@ -294,7 +294,7 @@ function get_project_events($pod, $include_events_from_main_calendar, $research_
   foreach($research_event_categories as $category_slug) {
     if(is_array($research_outputs[$category_slug])) {
       foreach($research_outputs[$category_slug] as $event) {
-        array_push($research_events[$category_slug], $event);
+        $research_events[$category_slug][] = $event;
       }
     }
   }
@@ -309,7 +309,7 @@ function get_project_events($pod, $include_events_from_main_calendar, $research_
     
     $sorted_research_events[$category] = $evs;
   }
-  
+    
   return $sorted_research_events;
 }
 
