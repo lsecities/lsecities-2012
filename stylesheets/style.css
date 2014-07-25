@@ -822,6 +822,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project section { margin-top: 2em; }
 .lc-research-project section > header { border-top: 1px solid red; line-height: 1em; }
 .lc-research-project section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
+.lc-research-project section > header { margin-bottom: 1em; }
 .lc-research-project section > header > h1 { margin-bottom: 0; }
 .lc-research-project #keyfacts .highlights > a { position: relative; }
 .lc-research-project #keyfacts .highlights > a h1 { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: absolute; bottom: 0; color: white; background: rgba(0, 0, 0, 0.6); width: 100%; padding: 0.3em; }
