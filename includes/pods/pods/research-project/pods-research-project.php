@@ -244,7 +244,19 @@ function get_project_research_outputs($pod) {
     }
   }
   
-  return $research_outputs;
+  // Now sort publications within each category, by date first, then by title
+  foreach($research_outputs as $category => $ros) {
+    foreach($ros as $key => $value) {
+      $ro_date[$key] = $value['date'];
+      $ro_title[$key] = $value['title'];
+    }
+    
+    array_multisort($ro_date, SORT_DESC, $ro_title, SORT_ASC, $ros);
+    
+    $sorted_research_outputs[$category] = $ros;
+  }
+  
+  return $sorted_research_outputs;
 }
 
 function get_project_events($pod, $research_event_categories, $research_outputs) {
