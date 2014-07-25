@@ -69,7 +69,7 @@ function pods_prepare_research_project($pod_slug) {
   $obj['news_categories'] = news_categories($pod->field('news_categories'));
     
   // hardcoded list of WP categories used to group events linked to a research project
-  $obj['research_event_categories'] = array('conference', 'presentation', 'public-lecture', 'workshop');
+  $obj['research_external_event_categories'] = array('conference', 'presentation', 'public-lecture', 'workshop');
 
   // hardcoded list of WP categories used to group event calendars linked to a research project
   // (this variable is currently not used)
@@ -77,7 +77,9 @@ function pods_prepare_research_project($pod_slug) {
   
   // events
   $obj['events_blurb'] = $pod->display('events_blurb');
-  $obj['research_events'] = get_project_events($pod, $obj['research_event_categories'], $obj['research_outputs']);
+  $main_calendar_events = get_project_events($pod, TRUE);
+  $obj['research_events'] = $main_calendar_events[0];
+  $obj['research_external_events'] = get_project_events($pod, FALSE, $obj['research_external_event_categories'], $obj['research_outputs']);
   
   // prepare heading gallery
   $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
@@ -259,13 +261,28 @@ function get_project_research_outputs($pod) {
   return $sorted_research_outputs;
 }
 
-function get_project_events($pod, $research_event_categories, $research_outputs) {
-  // select events from the main LSE Cities calendar
-  $research_events = array();
+/**
+ * Fetch lists of events associated to the project, grouped by category
+ * Events from the main LSE Events calendar and events defined as
+ * Research outputs can be fetched here.
+ * 
+ * @param Object $pod The Research Project pod
+ * @param bool $include_events_from_main_calendar Whether to fetch any
+ *    associated events from the main events calendar (Events pod)
+ * @param array $research_event_categories An array of slugs of
+ *    WP categories under which additional events are grouped
+ * @param array $research_outputs A list of research outputs associated
+ *    to the project, from which events are selected
+ * @return array The list of events associated to the project, grouped
+ *    by category
+ */
+function get_project_events($pod, $include_events_from_main_calendar, $research_event_categories, $research_outputs) {
+  $research_events = [];
 
-  if($pod->field('events')) {
+  // Only include events from the main calendar if asked to do so
+  if($include_events_from_main_calendar and $pod->field('events')) {
     foreach($pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
-      $research_events[] = array(
+      $research_events['lsecities_events'] = array(
         'title' => $event['name'],
         'citation' => $event['name'],
         'date' => $event['date_start'],
@@ -277,18 +294,23 @@ function get_project_events($pod, $research_event_categories, $research_outputs)
   foreach($research_event_categories as $category_slug) {
     if(is_array($research_outputs[$category_slug])) {
       foreach($research_outputs[$category_slug] as $event) {
-        array_push($research_events, $event);
+        array_push($research_events[$category_slug], $event);
       }
     }
   }
 
-  // and sort research events by date descending
-  foreach($research_events as $key => $val) {
-    $date[$key] = $val['date'];
+  // Now sort events within each category, by date
+  foreach($research_events as $category => $evs) {
+    foreach($evs as $key => $value) {
+      $ev_date[$key] = $value['date'];
+    }
+    
+    array_multisort($ev_date, SORT_DESC, $evs);
+    
+    $sorted_research_events[$category] = $evs;
   }
-  array_multisort($date, SORT_DESC, $research_events);
   
-  return $research_events;
+  return $sorted_research_events;
 }
 
 function get_project_news($pod) {

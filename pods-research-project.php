@@ -83,23 +83,50 @@ $gallery = $obj['gallery'];
               <?php echo $obj['blurb']; ?>
             </section>
             
-            <?php if(count($obj['research_events'])): ?>
+            <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
             <section id="t-events" class="hide">
               <header><h1>Events</h1></header>
               <?php if($obj['events_blurb']): ?>
               <div><?php echo $obj['events_blurb']; ?></div>
               <?php endif; // ($obj['events_blurb']) ?>
-              <ul>
+              <dl>
+                <?php if($obj['research_events']) : ?>
+                <dt>LSE Cities events</dt>
+                <dd>
+                  <ul>
+                  <?php foreach($obj['research_events'] as $event): ?>
+                    <li>
+                    <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
+                      <?php echo date_string($event['date'], 'jFY') . ' | ';
+                        echo $event['title']; ?>
+                    <?php if($event['uri']): ?></a><?php endif; ?>
+                  </li>
+                  <?php endforeach; // ($obj['research_events']) ?>
+                  </ul>
+                </dd>
+                <?php endif; // ($obj['research_events']) ?>
+                <?php
+                  foreach($obj['research_event_categories'] as $event_category_slug):
+                    if(count($obj['research_external_events'][$event_category_slug])):
+                  ?>
+                  <dt><?php $event_category_object = get_category_by_slug($event_category_slug); echo $event_category_object->cat_name; ?></dt>
+                  <dd>
+                    <ul>
               <?php
-              foreach($obj['research_events'] as $event): ?>
+              foreach($obj['research_external_events'][$event_category_slug] as $event): ?>
               <li>
                 <?php if($event['uri']): ?><a href="<?php echo $event['uri']; ?>"><?php endif; ?>
                 <?php echo date_string($event['date'], 'jFY') . ' | ';
                       echo $event['citation'] ? $event['citation'] : $event['title']; ?>
                 <?php if($event['uri']): ?></a><?php endif; ?>
               </li>
-              <?php endforeach; // ($obj['research_events'] as $event) ?>
+              <?php endforeach; // ($obj['research_external_events'][$event_category_slug] as $event) ?>
               </ul>
+                  </dd>
+                <?php
+                    endif; // (count($obj['research_external_events'][$research_category_slug]))
+                  endforeach; // ($obj['research_event_categories'] as $event_category) ?>
+              </dl>
               <?php if(FALSE) : // legacy code - check and remove ?>
                 <header><h1>Conferences</h1></header>
                 <ul>
