@@ -13,7 +13,7 @@ if ( !defined('ABSPATH')) exit;
 $TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'pages-people-list';
 
-$people_list = pages_prepare_people_list(get_post_meta($post->ID, 'people_list', true));
+$people_list = pages_prepare_people_list(get_post_meta($post->ID, 'pod_slug', true));
 
 /**
  * Set query var with our data - this is used by the nav template
