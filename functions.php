@@ -20,7 +20,7 @@ function require_fragment($file) {
 }
 
 // Autoloader
-require_fragment('/includes/autoloader.php' );
+require_fragment('/lib/autoloader.php' );
 
 // Foundation functions and classes
 require_fragment('/includes/theme_configuration.php' );
@@ -46,7 +46,8 @@ require_fragment('/includes/pages/people-list/pages-people-list.php' );
 // Pods UI
 require_fragment('/includes/pods/ui/lsecities-pods-ui.php' );
 
-// Pods document types
+// Pods document types and classes
+require_fragment('/lib/pods-object.php');
 require_fragment('/includes/pods/pods/article/pods-article.php' );
 require_fragment('/includes/pods/pods/conference/pods-conference.php' );
 require_fragment('/includes/pods/pods/conference/pods-conference-live.php' );

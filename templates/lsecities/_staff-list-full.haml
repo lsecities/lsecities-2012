@@ -1,0 +1,12 @@
+- macro people_list_section(section)
+  %section( class = "people-list #{section.permalink}"
+    %h1 #{section.title}
+    %ul
+    - for person in section.people
+      - include "_person-profile-full.haml"
+%article.wireframe.row
+  %header.entry-header
+    %h1 #{people_list.title}
+  .entry-content.article-text
+  - for section in people_list.sections
+    = _self.people_list_section(section)
