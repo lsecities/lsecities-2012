@@ -1,7 +1,7 @@
 %li.person.row.vcard( id = "p-#{person.permalink}")
   .fourcol.profile-photo
   - if person.photo.uri
-    %img.photo( title = person.photo.title, alt = "#{person.permalink} - photo", src = person.photo.uri
+    %img.photo( title = person.photo.title, alt = "#{person.full_name} - photo", src = person.photo.uri
   - else
     &nbsp;
   .eightcol.last
