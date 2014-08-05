@@ -1,5 +1,5 @@
 <?php
-namespace \LSECitiesWPTheme;
+namespace LSECitiesWPTheme;
 
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
