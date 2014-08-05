@@ -41,6 +41,8 @@ class Group extends PodsObject {
     $this->sub_groups = initialize_related_object($pod, 'sub_groups');
 
     $this->active_members = array_filter($this->members, [$this, 'is_member_active']);
+
+    split_members_into_groups();
   }
 
   /**
@@ -63,4 +65,57 @@ class Group extends PodsObject {
     // Test if member is active at given timestamp
     return $display_after <= $datetime_now and $datetime_now <= $display_until;
   }
+
+  /**
+   * Given the group's list of all members and its sub-groups, prepare
+   * a data structure to be used in templates:
+   * * if the group doesn't have any sub-groups or only has one, all
+   *   members will be listed under a single group
+   *   * if no sub-groups are defined, use the group's *label* as group title;
+   *   * if a single sub-group is defined, use the sub-group's *label*
+   *     as group title
+   * * if the group has two or more sub-groups:
+   *   * create a group for each sub-group using the sub-group's *label*
+   *     as title;
+   *   * starting with the first group, populate each group with all
+   *     the related sub-group's members, except those who are in
+   *     a group already processed
+   *   * finally, if there are any group members left who weren't included
+   *     in any of the sub-groups, create a further group using the group's
+   *     *label* as group title, then add all the remaining group members
+   *     to this group.
+   */
+  function split_members_into_groups() {
+    $tmp_groups = [];
+
+    foreach($this->sub_groups as $sub_group) {
+      $tmp_groups[] = populate_group($sub_group);
+    }
+
+    $this->people_list = $tmp_groups;
+  }
+
+  function populate_group($sub_group) {
+    // TECHNICAL DEBT: deal with possible infinite recursion
+    // (this would only happen if data is incorrectly entered
+    // in Pods, by making a group a sub-group of itself)
+    $sub_group_object = new Group($sub_group['slug']);
+
+    // Start building result data structure
+    $group['name'] = $sub_group['label'];
+
+    foreach($sub_group_object->members as $member) {
+      $group['members'][] = $member;
+    }
+  }
+}
+
+/**
+ * Build data object to be used in templating
+ * @param string $permalink The group's permalink
+ * @return array Data structure with the group's full data
+ */
+function group_get_data($permalink) {
+  $group = new Group($permalink);
+  return $group->people_list;
 }
