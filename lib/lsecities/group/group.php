@@ -35,8 +35,9 @@ class Group extends PodsObject {
     $this->name = $pod->field('name');
     $this->label = $pod->field('label');
 
-    $this->members = initialize_related_object($pod, 'members');
+    $members = initialize_related_object($pod, 'members');
 
+    $this->members = uasort($members, function($a, $b) { return ($a['family_name'] < $b['family_name']) ? -1 : 1; });
     $this->sub_groups = initialize_related_object($pod, 'sub_groups');
 
     $this->active_members = array_filter($this->members, [$this, 'is_member_active']);
