@@ -1,6 +1,6 @@
 <?php
 
-namespace \LSECitiesWPTheme;
+namespace LSECitiesWPTheme;
 
 class PodsObject {
 
