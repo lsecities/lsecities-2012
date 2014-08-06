@@ -133,4 +133,26 @@ class Person extends PodsObject {
 
     return array_map(function($project) { return [ $project['slug'], $project['name'] ]; }, $projects_list);
   }
+  
+  /**
+   * Given a timestamp (or the current time if none is provided),
+   * check if the person is currently active.
+   * This is mainly useful for staff members, as we use start/end dates
+   * to automatically display/hide staff according to start/end dates.
+   *
+   * @param string $timestamp The timestamp against which to check
+   *   if the person is active
+   * @return bool Whether the person is active at the given time
+   */
+  function is_active($timestamp = 'now') {
+    // Initialize start/end timestamps
+    $display_after = new \DateTime($this->display_after . 'T00:00:00.0');
+    $display_until = new \DateTime($this->display_until . 'T23:59:59.0');
+
+    // Initialize timestamp against which to test
+    $datetime_requested = new \DateTime($timestamp);
+
+    // Test if member is active at given timestamp
+    return $display_after <= $datetime_now and $datetime_now <= $display_until;
+  }
 }
