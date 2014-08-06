@@ -1,9 +1,10 @@
+{% haml %}
 %li.person.row.vcard( id = "p-#{person.permalink}")
   .fourcol.profile-photo
-  - if person.photo.uri
-    %img.photo( title = person.photo.title, alt = "#{person.full_name} - photo", src = person.photo.uri
-  - else
-    &nbsp;
+    - if person.photo.uri
+      %img.photo{ :title => person.photo.title, :alt => "#{person.full_name} - photo", :src => person.photo.uri }
+    - else
+      .placeholder &nbsp;
   .eightcol.last
     %h1.fn
       = person.full_name
