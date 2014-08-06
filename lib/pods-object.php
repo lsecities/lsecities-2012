@@ -15,11 +15,9 @@ class PodsObject {
     $related = $pod->field($field_name);
 
     if(!empty($related) and is_array($related)) {
-      foreach($related as $item) {
-        $obj[] = $item;
-      }
+      return $related;
     }
 
-    return $obj;
+    return null;
   }
 }
