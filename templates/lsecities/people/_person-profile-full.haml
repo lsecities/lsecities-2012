@@ -34,6 +34,5 @@
             %dd #{research_project}
         - if person.bibliography_uri
           %dt Publications
-          %dd #{bibliography_uri}
-        
-      
+          %dd
+            %a{ :href => person.bibliography_uri } Full publications list on LSE Research Online
