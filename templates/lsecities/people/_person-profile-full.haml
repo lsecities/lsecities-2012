@@ -10,30 +10,30 @@
       = person.full_name
     - if person.qualifications
       %ul.qualifications
-      - for qualification in person.qualifications
-        %li #{qualification}
-    - if person.roles
+        - for qualification in person.qualifications
+          %li =qualification
+    - if person.all_roles
       %ul.roles
-      -for role in person.all_roles
-        %li #{role}
+        -for role in person.all_roles
+          %li #{role}
     - if person.email_address or person.phone_number
       %dl.contact-details
-      - if person.email_address
-        %dt email
-        %dd #{person.email_address}
-      - if person.phone_number
-        %dt telephone
-        %dd #{person.phone_number}
+        - if person.email_address
+          %dt email
+          %dd #{person.email_address}
+        - if person.phone_number
+          %dt telephone
+          %dd #{person.phone_number}
     .profile-blurb
-      = person.staff_profile_text
+      = person.staff_profile_text|raw
     - if person.research_projects or person.bibliography_uri
       %dl.research
-      - if person.research_projects
-        %dt Research projects
-        - for research_project in person.research_projects
-          %dd #{research_project}
-      - if person.bibliography_uri
-        %dt Publications
-        %dd #{bibliography_uri}
+        - if person.all_research_projects
+          %dt Research projects
+          - for research_project in person.all_research_projects
+            %dd #{research_project}
+        - if person.bibliography_uri
+          %dt Publications
+          %dd #{bibliography_uri}
         
       
