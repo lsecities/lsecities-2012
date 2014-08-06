@@ -14,16 +14,19 @@ namespace FoundootsWPTheme\Templating;
  * @return string the rendered page
  */
 function render_template($template_file, $template_data) {
-  $loader = new \Twig_Loader_String();
-  $twig = new \Twig_Environment($loader);
-  $twig->addExtension(new \MtHaml\Support\Twig\Extension());
+  $haml = new \MtHaml\Environment('twig', [ 'enable_escaper' => false ]);
 
-  $haml = new \MtHaml\Environment('twig', array('enable_escaper' => false));
+  $loader = new \Twig_Loader_Filesystem([
+    get_stylesheet_directory()
+  ]);
+  
+  $hamlLoader = new \MtHaml\Support\Twig\Loader($haml, $loader);
+  
+  $twig = new \Twig_Environment($hamlLoader);
+  
+  $twig->addExtension(new \MtHaml\Support\Twig\Extension($haml));
 
-  $template = get_stylesheet_directory() . '/' . $template_file;
-  $compiled = $haml->compileString(file_get_contents($template), $template);
-
-  return $twig->render($compiled, $template_data);
+  return $twig->render($template_file, $template_data);
 }
 
 /**
