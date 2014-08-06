@@ -56,7 +56,8 @@ class Person extends PodsObject {
     }
     */
 
-    $this->qualifications = array_map(function($string) { return trim($string); }, explode("\n", $pod->field('qualifications')));
+    $qualifications = $pod->field('qualifications');
+    $this->qualifications = $qualifications ? array_map(function($string) { return trim($string); }, explode("\n", $qualifications)) : NULL;
 
     $this->bibliography_uri = $pod->field('lse_research_online_uri');
 
