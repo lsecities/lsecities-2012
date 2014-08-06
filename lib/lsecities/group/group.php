@@ -156,5 +156,6 @@ class Group extends PodsObject {
  */
 function group_get_data($permalink) {
   $group = new Group($permalink);
-  return $group->people_list;
+
+  return [ 'people_list' => $group->people_list ];
 }
