@@ -129,10 +129,13 @@ class Group extends PodsObject {
   }
 
   function populate_group($sub_group) {
-    // TECHNICAL DEBT: deal with possible infinite recursion
-    // (this would only happen if data is incorrectly entered
-    // in Pods, by making a group a sub-group of itself)
-    $sub_group_object = new Group($sub_group['slug']);
+    // Avoid infinite recursion
+    if($sub_group['slug'] != $this->permalink) {
+      $sub_group_object = new Group($sub_group['slug']);
+      $members = $sub_group_object->members;
+    } else {
+      $members = $this->members;
+    }
 
     // Start building result data structure
     $group['name'] = $sub_group['label'];
