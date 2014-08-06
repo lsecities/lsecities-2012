@@ -129,6 +129,6 @@ class Person extends PodsObject {
     // sort merged list by project name
     uasort($projects_list, function($a, $b) { return ($a['name'] < $b['name']) ? -1 : 1; });
 
-    return array_map($projects_list, function($project) { return [ $project['slug'], $project['name'] ]; });
+    return array_map(function($project) { return [ $project['slug'], $project['name'] ]; }, $projects_list);
   }
 }
