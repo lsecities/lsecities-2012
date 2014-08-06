@@ -139,10 +139,13 @@ class Group extends PodsObject {
 
     // Start building result data structure
     $group['name'] = $sub_group['label'];
+    $group['permalink'] = $sub_group['slug'];
 
-    foreach($sub_group_object->members as $member) {
+    foreach($members as $member) {
       $group['members'][] = $member;
     }
+
+    return $group;
   }
 }
 
