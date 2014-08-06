@@ -98,9 +98,9 @@ class Person extends PodsObject {
       }
     }
 
-    $this->research_projects = research_project_involvement($pod, [ 'research_projects' ]);
-    $this->projects_coordinated = research_project_involvement($pod, [ 'projects_coordinated' ]);
-    $this->all_research_projects = research_project_involvement($pod, [ 'research_projects', 'projects_coordinated' ]);
+    $this->research_projects = self::research_project_involvement($pod, [ 'research_projects' ]);
+    $this->projects_coordinated = self::research_project_involvement($pod, [ 'projects_coordinated' ]);
+    $this->all_research_projects = self::research_project_involvement($pod, [ 'research_projects', 'projects_coordinated' ]);
   }
 
 
