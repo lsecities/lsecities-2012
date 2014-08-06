@@ -1,6 +1,6 @@
 - macro people_list_section(group)
-  %section( class = "people-list #{group.permalink}"
-    %h1 #{group.title}
+  %section( class = "people-list #{group.permalink}")
+    %h1 #{group.name}
     %ul
     - for person in section.members
       - include "_person-profile-full.haml"
