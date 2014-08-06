@@ -7,11 +7,12 @@ namespace FoundootsWPTheme\Templating;
 
 /**
  * Load and render a Twig+MtHaml template
- * @param string $template_file path to the HAML template file (relative
+ * @param string $template_root The full path to template root
+ * @param string $template_file Path to the HAML template file (relative
  *        to the theme's root)
- * @param mixed $template_data data structure to pass to the template
+ * @param mixed $template_data Data structure to pass to the template
  *        renderer
- * @return string the rendered page
+ * @return string The rendered template
  */
 function render_template($template_root, $template_file, $template_data) {
   $haml = new \MtHaml\Environment('twig', [ 'enable_escaper' => false ]);
