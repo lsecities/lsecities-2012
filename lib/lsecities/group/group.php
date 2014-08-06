@@ -22,6 +22,7 @@ class Group extends PodsObject {
   public $permalink;
   public $name;
   public $label;
+  public $use_start_end_dates;
   public $members;
   public $active_members;
   public $sub_groups;
@@ -48,6 +49,11 @@ class Group extends PodsObject {
   /**
    * Given a timestamp (or the current time if none is provided),
    * check if the given member of the group is currently active.
+   * Checking active members is only done if the group's
+   * 'use_start_end_dates' flag is set, otherwise this function
+   * does nothing.
+   * This is mainly useful for staff members, as we use start/end dates
+   * to automatically display/hide staff according to start/end dates.
    *
    * @param string $member_permalink The member to check
    * @param string $timestamp The timestamp against which to check
@@ -55,6 +61,11 @@ class Group extends PodsObject {
    * @return bool Whether the member is active at the given time
    */
   function is_member_active($member, $timestamp = 'now') {
+    // Only perform the check if the group's 'use_start_end_dates' flag is set
+    if(! $this->use_start_end_dates) {
+      return true;
+    }
+
     // Initialize start/end timestamps
     $display_after = new DateTime($member['display_after'] . 'T00:00:00.0');
     $display_until = new DateTime($member['display_until'] . 'T23:59:59.0');
