@@ -15,7 +15,7 @@ class Person extends PodsObject {
   public $title;
   public $email_address;
   public $phone_number;
-  public $photo_uri;
+  public $photo;
   public $profile_text;
   public $staff_profile_text;
   public $extended_blurb;
@@ -63,14 +63,14 @@ class Person extends PodsObject {
 
     // get photo and related attribution, push attribution to attribution list
     if($photo_id = $pod->field('photo.ID', TRUE)) {
-      $this->photo_uri = pods_image_url($photo_id);
+      $this->photo['uri'] = pods_image_url($photo_id);
       push_media_attribution($photo_id);
     }
 
     // if no media library photo is associated to this person,
     // and legacy photo URI is set, use this
-    if(empty($this->photo_uri) and $pod->field('photo_legacy')) {
-      $this->photo_uri = self::LEGACY_PHOTO_URI_PREFIX . '/' . $pod->field('photo_legacy');
+    if(empty($this->photo['uri']) and $pod->field('photo_legacy')) {
+      $this->photo['uri'] = self::LEGACY_PHOTO_URI_PREFIX . '/' . $pod->field('photo_legacy');
     }
 
     $this->email_address = $pod->field('email_address');
