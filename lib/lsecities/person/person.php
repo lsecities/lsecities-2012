@@ -78,10 +78,10 @@ class Person extends PodsObject {
     $this->staff_profile_text = $pod->display('staff_pages_blurb');
     $this->primary_organization = $pod->field('organization');
     $this->role = $pod->field('role');
-    if(!empty($this->role) and !empty($this->organization)) {
-      $this->primary_affiliation = $this->role . ', ' . $this->organization;
-    } elseif(!empty($this->organization)) {
-      $this->primary_affiliation = $this->organization;
+    if(!empty($this->role) and !empty($this->primary_organization)) {
+      $this->primary_affiliation = $this->role . ', ' . $this->primary_organization;
+    } elseif(!empty($this->primary_organization)) {
+      $this->primary_affiliation = $this->primary_organization;
     } elseif(!empty($this->role)) {
       $this->primary_affiliation = $this->role;
     }
@@ -92,7 +92,7 @@ class Person extends PodsObject {
     // If additional affiliations are defined, add these to the all_roles member
     $additional_affiliations_string = $pod->field('additional_affiliations');
     if(!empty($additional_affiliations_string)) {
-      $additional_affiliations = explode('\n', $additional_affiliations_string);
+      $additional_affiliations = array_map(function($string) { return trim($string); }, explode("\n", $additional_affiliations_string));
       foreach($additional_affiliations as $additional_affiliation) {
         $this->all_roles[] = $additional_affiliation;
       }
