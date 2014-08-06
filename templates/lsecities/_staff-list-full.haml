@@ -3,7 +3,7 @@
     %h1 #{group.name}
     %ul
     - for person in group.members
-      - include("templates/lsecities/people/_person-profile-full.haml")
+      - include("people/_person-profile-full.haml")
 .entry-content.article-text
 - for group in people_list.groups
   = _self.people_list_section(group)

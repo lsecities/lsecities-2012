@@ -13,11 +13,11 @@ namespace FoundootsWPTheme\Templating;
  *        renderer
  * @return string the rendered page
  */
-function render_template($template_file, $template_data) {
+function render_template($template_root, $template_file, $template_data) {
   $haml = new \MtHaml\Environment('twig', [ 'enable_escaper' => false ]);
 
   $loader = new \Twig_Loader_Filesystem([
-    get_stylesheet_directory()
+    $template_root
   ]);
   
   $hamlLoader = new \MtHaml\Support\Twig\Loader($haml, $loader);
@@ -39,5 +39,5 @@ function render_template($template_file, $template_data) {
 function foundoots_get_template_part($template_file, $data) {
   // echo '<!-- ' . var_export($data, TRUE) . ' -->';
 
-  echo render_template($template_file . '.haml', $data);
+  echo render_template(lc_data('template_root'), $template_file . '.haml', $data);
 }
