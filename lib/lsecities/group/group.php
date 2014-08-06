@@ -33,17 +33,28 @@ class Group extends PodsObject {
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
 
+    // If no such Pod is found, return false
+    if(!$pod->exists()) {
+      return FALSE;
+    }
+
+    $this->permalink = $pod->field('slug');
     $this->name = $pod->field('name');
-    $this->label = $pod->field('label');
+    $label = $pod->field('section_label');
+    $this->label = $label ? $label : $this->name;
+    
+    echo '<!-- label: ' . var_export($pod->field('section_label'), TRUE) . ' -->';
+    $this->use_start_end_dates = $pod->field('use_start_end_dates');
 
-    $members = initialize_related_object($pod, 'members');
+    $this->members = self::initialize_related_object($pod, 'members');
 
-    $this->members = uasort($members, function($a, $b) { return ($a['family_name'] < $b['family_name']) ? -1 : 1; });
-    $this->sub_groups = initialize_related_object($pod, 'sub_groups');
+    uasort($this->members, function($a, $b) { return ($a['family_name'] < $b['family_name']) ? -1 : 1; });
+
+    $this->sub_groups = parent::initialize_related_object($pod, 'sub_groups');
 
     $this->active_members = array_filter($this->members, [$this, 'is_member_active']);
 
-    split_members_into_groups();
+    self::split_members_into_groups();
   }
 
   /**
