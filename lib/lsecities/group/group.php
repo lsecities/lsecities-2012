@@ -91,11 +91,6 @@ class Group extends PodsObject {
   /**
    * Given the group's list of all members and its sub-groups, prepare
    * a data structure to be used in templates:
-   * * if the group doesn't have any sub-groups or only has one, all
-   *   members will be listed under a single group
-   *   * if no sub-groups are defined, use the group's *label* as group title;
-   *   * if a single sub-group is defined, use the sub-group's *label*
-   *     as group title
    * * if the group has two or more sub-groups:
    *   * create a group for each sub-group using the sub-group's *label*
    *     as title;
@@ -110,11 +105,27 @@ class Group extends PodsObject {
   function split_members_into_groups() {
     $tmp_groups = [];
 
-    foreach($this->sub_groups as $sub_group) {
-      $tmp_groups[] = populate_group($sub_group);
+    /**
+     * * if the group doesn't have any sub-groups or only has one, all
+     *   members will be listed under a single group
+     *   * if no sub-groups are defined, use the group's *label* as group title;
+     */
+    if(empty($this->sub_groups)) {
+      $this->sub_groups[] = [ 'slug' => $this->permalink, 'label' => $this->label ];
     }
 
-    $this->people_list = $tmp_groups;
+    /**
+     *   * if a single sub-group is defined, use the sub-group's *label*
+     *     as group title
+     */
+    foreach($this->sub_groups as $sub_group) {
+      $tmp_groups[] = self::populate_group($sub_group);
+    }
+
+    $this->people_list = [
+      'title' => $this->label,
+      'groups' => $tmp_groups
+    ];
   }
 
   function populate_group($sub_group) {
