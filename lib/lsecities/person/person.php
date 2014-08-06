@@ -114,17 +114,19 @@ class Person extends PodsObject {
   function research_project_involvement($pod, $fields = []) {
     // fetch list of projects on which this person is a researcher
     foreach($fields as $field) {
-      $pod_project_list[] = $pod->field($field) ? $pod->field($field) : [];
+      $pod_project_list[] = $pod->field($field) ? $pod->field($field) : NULL;
     }
     // initialize full project list
-    $projects_list = [];
+    $all_projects = [];
 
     // merge the project lists
-    foreach(array_merge($pod_project_list) as $project) {
-      $projects_list[$project['slug']] = array (
-        'slug' => $project['slug'],
-        'name' => $project['name']
-      );
+    foreach($pod_project_list as $project_list) {
+      foreach($project_list as $project) {
+        $all_projects[$project['slug']] = array (
+          'slug' => $project['slug'],
+          'name' => $project['name']
+        );
+      }
     }
     // sort merged list by project name
     uasort($projects_list, function($a, $b) { return ($a['name'] < $b['name']) ? -1 : 1; });
