@@ -42,13 +42,12 @@ class Group extends PodsObject {
     $this->name = $pod->field('name');
     $label = $pod->field('section_label');
     $this->label = $label ? $label : $this->name;
-    
-    echo '<!-- label: ' . var_export($pod->field('section_label'), TRUE) . ' -->';
+
     $this->use_start_end_dates = $pod->field('use_start_end_dates');
 
-    $this->members = self::initialize_related_object($pod, 'members');
+    $this->members = self::initialize_related_object($pod, 'members', 'LSECitiesWPTheme\Person');
 
-    uasort($this->members, function($a, $b) { return ($a['family_name'] < $b['family_name']) ? -1 : 1; });
+    usort($this->members, function($a, $b) { return ($a->family_name < $b->family_name) ? -1 : 1; });
 
     $this->sub_groups = parent::initialize_related_object($pod, 'sub_groups');
 
