@@ -78,11 +78,11 @@ class Group extends PodsObject {
     }
 
     // Initialize start/end timestamps
-    $display_after = new DateTime($member['display_after'] . 'T00:00:00.0');
-    $display_until = new DateTime($member['display_until'] . 'T23:59:59.0');
+    $display_after = new \DateTime($member['display_after'] . 'T00:00:00.0');
+    $display_until = new \DateTime($member['display_until'] . 'T23:59:59.0');
 
     // Initialize timestamp against which to test
-    $datetime_requested = new DateTime($timestamp);
+    $datetime_requested = new \DateTime($timestamp);
 
     // Test if member is active at given timestamp
     return $display_after <= $datetime_now and $datetime_now <= $display_until;
