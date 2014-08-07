@@ -250,7 +250,7 @@ function people_list_generate_person_profile($slug, $extra_title, $mode = 'full_
     $output .= "  </div>";
     $output .= "</li>";
   } elseif($mode === 'summary') {
-    $output = "<li class='person row' id='p-$slug-link'>";
+    $output = "<li class='person' id='p-$slug-link'>";
     $output .= "<a href='#p-$slug'>$fullname</a>";
     $output .= "</li>";
   }
