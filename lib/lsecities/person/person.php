@@ -40,6 +40,7 @@ class Person extends PodsObject {
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
 
+    $this->permalink = $pod->field('slug');
     $this->name = $pod->field('name');
     $this->family_name = $pod->field('family_name');
     $this->full_name = trim($this->name . ' ' . $this->family_name);
