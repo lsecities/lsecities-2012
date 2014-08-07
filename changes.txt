@@ -17,6 +17,9 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
     be displayed via the Galleria plugin
   * [update] refactored Research projects pod templates and data
     management code
+  * [update] refactored People and Groups pods and related templates:
+    * using OO classes for each of these two Pods
+    * using MtHAML+Twig templates
   * [tooling] fast, robust deployment via Makefile; previous
     git push-based deployment was too brittle
   * [fixed] sorting of UA conferences in conference pages sidenav
