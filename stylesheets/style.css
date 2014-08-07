@@ -799,6 +799,10 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 
 .lc-people-list #contentarea section.people-list h1 { font-size: 1.5em; margin-bottom: 1.5em; }
 .lc-people-list #contentarea section.people-list .person { margin-bottom: 2em; }
+.lc-people-list #contentarea section.people-list .person .qualifications { display: inline; display: block; margin-bottom: 1em; }
+.lc-people-list #contentarea section.people-list .person .qualifications > li { display: inline; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:after { content: ', '; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:last-child:after { content: '' !important; }
 .lc-people-list #contentarea section.people-list .person .profile-photo { text-align: center; }
 .lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
 .lc-people-list #contentarea section.people-list .person h1 { font-size: 1.2em; font-weight: bold; }
