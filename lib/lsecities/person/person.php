@@ -146,6 +146,13 @@ class Person extends PodsObject {
    * @return bool Whether the person is active at the given time
    */
   function is_active($timestamp = 'now') {
+    // If neither display_after nor display_until dates are set,
+    // we can assume start/end dates aren't used for this person,
+    // so just consider this person as active.
+    if(empty($this->display_after) and empty($this->display_until)) {
+      return true;
+    }
+    
     // Initialize start/end timestamps
     $display_after = new \DateTime($this->display_after . 'T00:00:00.0');
     $display_until = new \DateTime($this->display_until . 'T23:59:59.0');
