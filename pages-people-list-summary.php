@@ -31,13 +31,14 @@ set_query_var('people_list', $people_list);
           <header class='entry-header'>
             <h1><?php the_title(); ?></h1>
           </header>
-          <div class='entry-content article-text'>
           
           <?php 
           lc_data('page_data', LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true)));
-          FoundootsWPTheme\Templating\foundoots_get_template_part('_staff-list-summary', lc_data('page_data')); ?>
-          
-          </div>
+          FoundootsWPTheme\Templating\foundoots_get_template_part('_staff-list-summary', lc_data('page_data'));
+          // Reset lc_data('page_data') to suppress navbar output
+          lc_data('page_data', NULL);
+          ?>
+        
           <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </article>
       </div><!-- .top-content -->
