@@ -87,37 +87,48 @@ class Group extends PodsObject {
   /**
    * Given the group's list of all members and its sub-groups, prepare
    * a data structure to be used in templates:
-   * * if the group has two or more sub-groups:
-   *   * create a group for each sub-group using the sub-group's *label*
-   *     as title;
-   *   * starting with the first group, populate each group with all
-   *     the related sub-group's members, except those who are in
-   *     a group already processed
-   *   * finally, if there are any group members left who weren't included
-   *     in any of the sub-groups, create a further group using the group's
-   *     *label* as group title, then add all the remaining group members
-   *     to this group.
    */
   function split_members_into_groups() {
     $tmp_groups = [];
 
     /**
-     * * if the group doesn't have any sub-groups or only has one, all
-     *   members will be listed under a single group
-     *   * if no sub-groups are defined, use the group's *label* as group title;
-     */
-    if(empty($this->sub_groups)) {
-      $this->sub_groups[] = [ 'slug' => $this->permalink, 'label' => $this->label ];
-    }
-
-    /**
      *   * if a single sub-group is defined, use the sub-group's *label*
      *     as group title
+     * * if the group has two or more sub-groups:
+     *   * create a group for each sub-group using the sub-group's *label*
+     *     as title;
+     *   * starting with the first group, populate each group with all
+     *     the related sub-group's members, except those who are in
+     *     a group already processed
+     *   * finally, if there are any group members left who weren't included
+     *     in any of the sub-groups, create a further group using the group's
+     *     *label* as group title, then add all the remaining group members
+     *     to this group.
      */
     foreach($this->sub_groups as $sub_group) {
       $tmp_groups[] = self::populate_group($sub_group);
     }
 
+    /**
+     * * if the group doesn't have any sub-groups or only has one, all
+     *   members will be listed under a single group
+     * * if no sub-groups are defined, use the group's *label* as group title;
+     */
+    if(empty($this->sub_groups) or (count($this->active_members) > count($this->members_in_groups))) {
+      $this->sub_groups[] = [ 'slug' => $this->permalink, 'section_label' => $this->label ];
+    }
+    
+    /**
+     * If any members of the group have not been placed in any sub-group
+     * so far, add them to the 'all others' sub-group, whose title
+     * is the same as the group itself.
+     */
+    foreach($this->active_members as $member) {
+      if(!in_array($member, $this->members_in_groups)) {
+        $tmp_groups[] = self::populate_group($this->sub_groups[count($this->sub_groups) - 1]);
+      }
+    }
+   
     $this->people_list = [
       'title' => $this->label,
       'groups' => $tmp_groups
@@ -134,8 +145,8 @@ class Group extends PodsObject {
     }
 
     // Start building result data structure
-    $group['name'] = $sub_group['label'];
-    $group['permalink'] = $sub_group['slug'];
+    $group['label'] = $sub_group['section_label'];
+    $group['permalink'] = $sub_group['permalink'];
 
     foreach($members as $member) {
       if(!in_array($member, $this->members_in_groups)) {
