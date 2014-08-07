@@ -140,6 +140,8 @@ ol.article-references {
 }
   
 .entry-content {
+  min-height: 20rem;
+
   section, section > section {
     @include red-flag-header;
     
