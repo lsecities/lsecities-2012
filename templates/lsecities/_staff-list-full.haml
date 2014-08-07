@@ -1,9 +1,9 @@
 - macro people_list_section(group)
   %section( class = "people-list #{group.permalink}")
-    %h1 #{group.name}
+    %h1 #{group.label}
     %ul
-    - for person in group.members
-      - include("people/_person-profile-full.haml")
+      - for person in group.members
+        - include("people/_person-profile-full.haml")
 .entry-content.article-text
-- for group in people_list.groups
-  = _self.people_list_section(group)
+  - for group in people_list.groups
+    = _self.people_list_section(group)
