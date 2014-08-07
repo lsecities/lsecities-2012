@@ -9,17 +9,6 @@ if ( !defined('ABSPATH')) exit;
  *
  * @package LSECities2012
  */
-?><?php
-$TRACE_ENABLED = is_user_logged_in();
-$TRACE_PREFIX = 'pages-people-list';
-
-$people_list = pages_prepare_people_list(get_post_meta($post->ID, 'pod_slug', true));
-
-/**
- * Set query var with our data - this is used by the nav template
- */
-set_query_var('people_list', $people_list);
-
 ?><?php get_header(); ?>
 
 <div role="main">
