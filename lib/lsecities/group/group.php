@@ -33,7 +33,7 @@ class Group extends PodsObject {
 
   private $pod;
 
-  function __construct($permalink) {
+  function __construct($permalink, $recurse = FALSE) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
 
     // If no such Pod is found, return false
@@ -55,8 +55,10 @@ class Group extends PodsObject {
     $this->sub_groups = parent::initialize_related_object($pod, 'sub_groups');
 
     $this->active_members = array_filter($this->members, [$this, 'is_member_active']);
-
-    self::split_members_into_groups();
+    
+    if($recurse) {
+      self::split_members_into_groups();
+    }
   }
 
   /**
@@ -125,7 +127,7 @@ class Group extends PodsObject {
   function populate_group($sub_group) {
     // Avoid infinite recursion
     if($sub_group['slug'] != $this->permalink) {
-      $sub_group_object = new Group($sub_group['slug']);
+      $sub_group_object = new Group($sub_group['slug'], FALSE);
       $members = $sub_group_object->members;
     } else {
       $members = $this->members;
@@ -152,7 +154,7 @@ class Group extends PodsObject {
  * @return array Data structure with the group's full data
  */
 function group_get_data($permalink) {
-  $group = new Group($permalink);
+  $group = new Group($permalink, TRUE);
 
   return [ 'people_list' => $group->people_list ];
 }
