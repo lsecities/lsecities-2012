@@ -26,13 +26,16 @@
           %dd #{person.phone_number}
     .profile-blurb
       = person.staff_profile_text|raw
-    - if person.research_projects or person.bibliography_uri
+    - if person.all_research_projects or person.bibliography_uri
       %dl.research
         - if person.all_research_projects
           %dt Research projects
-          - for research_project in person.all_research_projects
-            %dd #{research_project}
+          %dd
+            %ul.research-projects
+              - for research_project in person.all_research_projects
+                %li
+                  %a{ :href => research_project.uri } #{research_project.name}
         - if person.bibliography_uri
-          %dt Publications
+          %dt.publications Publications
           %dd
             %a{ :href => person.bibliography_uri } Full publications list on LSE Research Online
