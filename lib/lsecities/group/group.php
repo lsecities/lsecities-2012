@@ -12,6 +12,8 @@ class Group extends PodsObject {
    * @var string $name The group's name
    * @var string $label The group's label (to be used in generated lists)
    * @var array $members All the members of the group
+   * @var array $members_in_groups Used while splitting members in groups;
+   *   holds list of members already put in a group
    * @var array $active_members If start/end dates for members are defined,
    *   only the currently active among the members are listed here
    * @var array $sub_groups Sub-groups of this group
@@ -24,6 +26,7 @@ class Group extends PodsObject {
   public $label;
   public $use_start_end_dates;
   public $members;
+  public $members_in_groups;
   public $active_members;
   public $sub_groups;
   public $people_list;
@@ -133,7 +136,10 @@ class Group extends PodsObject {
     $group['permalink'] = $sub_group['slug'];
 
     foreach($members as $member) {
-      $group['members'][] = $member;
+      if(!in_array($member, $this->members_in_groups)) {
+        $group['members'][] = $member;
+        $this->members_in_groups[] = $member;
+      }
     }
 
     return $group;
