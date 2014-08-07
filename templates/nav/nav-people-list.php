@@ -11,4 +11,8 @@ if($people_list):
   </dd>
 </dl>
 </nav>
-<?php endif; ?>
+<?php elseif(lc_data('page_data')):
+
+FoundootsWPTheme\Templating\foundoots_get_template_part('nav/_people-list', lc_data('page_data'));
+
+endif; ?>

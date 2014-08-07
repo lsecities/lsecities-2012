@@ -1,0 +1,14 @@
+- macro people_list_section(group)
+  %section{ :class => "people-list #{group.permalink}" }
+    %h1 #{group.label}
+    %ul
+      - for person in group.members
+        %li{ :id => "p-#{person.permalink}-link", :class => 'person' }
+          %a{ :href => "#p-#{person.permalink}" } #{person.full_name}
+- if people_list.groups|length
+  %nav#whoswho-side-toc
+    %dl.in-page-navigation
+      %dt
+      %dd
+        - for group in people_list.groups
+          = _self.people_list_section(group)
