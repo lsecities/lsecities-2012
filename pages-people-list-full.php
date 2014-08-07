@@ -31,8 +31,8 @@ if ( !defined('ABSPATH')) exit;
         </article>
       </div><!-- .top-content -->
     </div><!-- #contentarea -->
+    <?php get_template_part('nav'); ?>
   </div><!-- #post-<?php the_ID(); ?> -->
-<?php get_template_part('nav'); ?>
 
 </div><!-- role='main'.row -->
 
