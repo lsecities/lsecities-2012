@@ -117,6 +117,7 @@ class Person extends PodsObject {
     foreach($fields as $field) {
       $pod_project_list[] = $pod->field($field) ? $pod->field($field) : NULL;
     }
+    
     // initialize full project list
     $all_projects = [];
 
@@ -124,15 +125,16 @@ class Person extends PodsObject {
     foreach($pod_project_list as $project_list) {
       foreach($project_list as $project) {
         $all_projects[$project['slug']] = array (
-          'slug' => $project['slug'],
+          'uri' => ResearchProject::PODS_PAGES_BASE_PATH . '/' . $project['slug'],
           'name' => $project['name']
         );
       }
     }
-    // sort merged list by project name
-    uasort($projects_list, function($a, $b) { return ($a['name'] < $b['name']) ? -1 : 1; });
 
-    return array_map(function($project) { return [ $project['slug'], $project['name'] ]; }, $projects_list);
+    // sort merged list by project name
+    uasort($all_projects, function($a, $b) { return ($a['name'] < $b['name']) ? -1 : 1; });
+    
+    return array_map(function($project) { return [ 'uri' => $project['uri'], 'name' => $project['name'] ]; }, $all_projects);
   }
   
   /**
