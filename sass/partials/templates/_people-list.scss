@@ -11,6 +11,12 @@
       .person {
         margin-bottom: 2em;
         
+        .qualifications {
+          @include inline-lists;
+          display: block;
+          margin-bottom: 1em;
+        }
+
         .profile-photo {
           text-align: center;
           img {
