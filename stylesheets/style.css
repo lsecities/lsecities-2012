@@ -553,6 +553,7 @@ ol.article-references li:target { background-color: #ffeeee; }
 .extra-content > section > header > h1, .extra-content > aside > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
 .extra-content.multi-section > section { clear: none; }
 
+.entry-content { min-height: 20rem; }
 .entry-content section, .entry-content section > section { margin-top: 2em; }
 .entry-content section > header, .entry-content section > section > header { border-top: 1px solid red; line-height: 1em; }
 .entry-content section > header > h1, .entry-content section > section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
