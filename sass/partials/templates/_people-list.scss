@@ -27,11 +27,22 @@
           }
         }
         
+        .research-projects {
+          @include inline-lists;
+        }
+
         h1 {
           font-size: 1.2em;
           font-weight: bold;
         }
       }
+    }
+  }
+
+  #whoswho-side-toc {
+    li.person {
+      margin-bottom: 0.25rem;
+      line-height: 1rem;
     }
   }
 }
