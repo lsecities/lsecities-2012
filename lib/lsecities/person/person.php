@@ -26,6 +26,7 @@ class Person extends PodsObject {
   public $all_roles;
   public $qualifications;
   public $bibliography_uri;
+  public $visiting_years;
   public $office_location;
   public $groups;
   public $projects_coordinated;
@@ -62,6 +63,8 @@ class Person extends PodsObject {
 
     $this->bibliography_uri = $pod->field('lse_research_online_uri');
 
+    $this->visiting_years = $pod->field('visiting_years');
+    
     // get photo and related attribution, push attribution to attribution list
     if($photo_id = $pod->field('photo.ID', TRUE)) {
       $this->photo['uri'] = pods_image_url($photo_id);
