@@ -26,7 +26,7 @@ if ( !defined('ABSPATH')) exit;
             'post_title' => get_the_title(),
             'people_list' => LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true))
           ]);
-          FoundootsWPTheme\Templating\foundoots_get_template_part('_people-list-summary', lc_data('page_data'));
+          SemanticWP\Templating::get_template_part('lsecities/_people-list-summary', lc_data('page_data'));
           // Reset lc_data('page_data') to suppress navbar output
           lc_data('page_data', NULL);
           ?>

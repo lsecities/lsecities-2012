@@ -1,9 +1,14 @@
 {
     "name": "lsecities/lsecities-theme-alexandria",
     "description": "LSE Cities WordPress theme",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/semanticwp/twig-haml-templating"
+        }
+    ],
     "require": {
-        "twig/twig": "~1.13",
-        "mthaml/mthaml": "~1.2",
+        "semanticwp/twig-haml-templating": "dev-develop",
         "drewm/mailchimp-api": "dev-master"
     },
     "license": "GPL-3.0+",

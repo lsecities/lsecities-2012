@@ -51,7 +51,6 @@ require_fragment('/lib/pods-object.php');
 require_fragment('/lib/lsecities/person/person.php');
 require_fragment('/lib/lsecities/group/group.php');
 require_fragment('/lib/lsecities/research-project/research-project.php');
-require_fragment('/lib/foundoots/templating.php');  // TECHNICAL_DEBT: this needs to go into its own Composer package
 require_fragment('/includes/pods/pods/article/pods-article.php' );
 require_fragment('/includes/pods/pods/conference/pods-conference.php' );
 require_fragment('/includes/pods/pods/conference/pods-conference-live.php' );

@@ -52,7 +52,7 @@ function lc_data($key, $value = false) {
 /**
  * MtHAML templating
  */
-lc_data('template_root', get_stylesheet_directory() . '/templates/lsecities/');
+lc_data('template_root', get_stylesheet_directory() . '/templates');
 
 /**
  * Filename for the template used for conference frontpage WP Pages.

@@ -4,7 +4,7 @@
       %h1 #{group.label}
     %ul
       - for person in group.members
-        - include("people/_person-profile-full.haml")
+        - include("lsecities/people/_person-profile-full.haml")
 .entry-content.article-text
   - for group in people_list.groups
     = _self.people_list_section(group, people_list.groups|length)
