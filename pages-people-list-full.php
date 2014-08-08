@@ -22,7 +22,10 @@ if ( !defined('ABSPATH')) exit;
           </header>
             
           <?php 
-          lc_data('page_data', LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true)));
+          lc_data('page_data', [ 
+            'post_title' => get_the_title(),
+            'people_list' => LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true))
+          ]);
           FoundootsWPTheme\Templating\foundoots_get_template_part('_staff-list-full', lc_data('page_data')); ?>
           
           <?php get_template_part('templates/partials/socialmedia-share'); ?>

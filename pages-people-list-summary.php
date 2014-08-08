@@ -33,7 +33,10 @@ set_query_var('people_list', $people_list);
           </header>
           
           <?php 
-          lc_data('page_data', LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true)));
+          lc_data('page_data', [ 
+            'post_title' => get_the_title(),
+            'people_list' => LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true))
+          ]);
           FoundootsWPTheme\Templating\foundoots_get_template_part('_staff-list-summary', lc_data('page_data'));
           // Reset lc_data('page_data') to suppress navbar output
           lc_data('page_data', NULL);
