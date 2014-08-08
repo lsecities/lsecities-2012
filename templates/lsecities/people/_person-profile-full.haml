@@ -31,10 +31,11 @@
         - if person.all_research_projects
           %dt Research projects
           %dd
-            %ul.research-projects
-              - for research_project in person.all_research_projects
-                %li
-                  %a{ :href => research_project.uri } #{research_project.name}
+            - spaceless
+              %ul.research-projects
+                - for research_project in person.all_research_projects
+                  %li
+                    %a{ :href => research_project.uri } #{research_project.name}
         - if person.bibliography_uri
           %dt.publications Publications
           %dd
