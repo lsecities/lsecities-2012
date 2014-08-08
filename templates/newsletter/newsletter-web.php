@@ -1,3 +1,2 @@
 <?php
-
-echo LSECitiesWPTheme\Templating\render_template('templates/newsletter/newsletter-web.php.haml', $newsletter);
+SemanticWP\Templating::get_template_part('newsletter/newsletter-web.php', $newsletter);
