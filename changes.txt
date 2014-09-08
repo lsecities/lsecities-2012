@@ -20,6 +20,9 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [update] refactored People and Groups pods and related templates:
     * using OO classes for each of these two Pods
     * using MtHAML+Twig templates
+  * [update] refactored Frontpages pod and related templates:
+    * using MtHAML+Twig templates
+  * [feature] added fields for post-factum content on slide tiles
   * [tooling] fast, robust deployment via Makefile; previous
     git push-based deployment was too brittle
   * [fixed] sorting of UA conferences in conference pages sidenav
