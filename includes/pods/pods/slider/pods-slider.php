@@ -218,7 +218,7 @@ function compose_slide_content($column_spans, $tiles) {
           'id' => $tile->field('slug'),
           'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
           'noblurb_class' => $noblurb_class,
-          'title' => $tile_name,
+          'title' => $tile_title,
           'display_title' => $tile->field('display_title'),
           'subtitle' => $tile_tagline,
           'blurb' => $tile_blurb,
