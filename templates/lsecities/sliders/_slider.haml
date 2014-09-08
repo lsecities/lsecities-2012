@@ -1,0 +1,43 @@
+-macro tile_content(tile)
+- if tile.image
+  .crop
+    %img(src = tile.image, title = tile.image_attribution)
+- if tile.plain_content
+  %div(class = tile.element_class)
+    .inner-box
+      - if tile.display_title
+        %h1 = tile.title
+      %div = tile.plain_content
+- elseif tile.posts_category
+  %div(class = "#{tile.element_class} categoryarchive")
+    / recent news go here - not implemented yet
+- elseif tile.title or tile.subtitle or tile.blurb
+  %div(class = [ 'feature-info', ('noblurb' unless tile.blurb) ])
+    - if tile.title or tile.subtitle
+      .feature-key-info
+        - if tile.target_event.month and tile.target_event.day
+          .feature-date
+            .month = tile.target_event.month
+            .day = tile.target_event.day
+      %header
+        - if tile.title
+          .feature-title = tile.title
+        - if tile.subtitle
+          .feature-caption = tile.subtitle
+      - if tile.blurb
+        .feature-blurb = tile.blurb
+    #contentarea.twelvecol
+      .flexslider
+        %ul.slides
+          - for slide_content in slides
+            %li
+              .slide-inner.row
+                - for slide_column in slide_content.columns
+                  %div(class = "#{slide_column.layout} column")
+                    - for tile in slide_column.tiles
+                      %div(id = "slidetile-#{tile.id}", class = "tile #{tile.element_class}")
+                        - if tile.target_uri
+                          %a( href = tile.target_uri)
+                            = _self.tile_content(tile)
+                        - else
+                          = _self.tile_content(tile)
