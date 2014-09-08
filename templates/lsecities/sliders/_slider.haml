@@ -19,11 +19,11 @@
             .feature-date
               .month = tile.target_event.month
               .day = tile.target_event.day
-        %header
-          - if tile.title
-            .feature-title = tile.title
-          - if tile.subtitle
-            .feature-caption = tile.subtitle
+          %header
+            - if tile.title
+              .feature-title = tile.title
+            - if tile.subtitle
+              .feature-caption = tile.subtitle
         - if tile.blurb
           .feature-blurb = tile.blurb|raw
 .flexslider
