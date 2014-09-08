@@ -181,18 +181,47 @@ function compose_slide_content($column_spans, $tiles) {
        */
       $image_attribution = format_media_attribution($tile->field('image.id'));
 
-      $blurb = $tile->field('blurb');
-      $noblurb_class = empty($blurb) ? 'noblurb' : '';
+      // Read tile title, subtitle (tagline) and blurb
+      $tile_title = $tile->field('name');
+      $tile_tagline = $tile->field('tagline');
+      $tile_blurb = $tile->field('blurb');
+
+      /**
+       * If a timestamp is set after which an updated title/subtitle/blurb
+       * hould be displayed, if any of these updated fields are set
+       * override the main fields.
+       */
+      $show_post_factum_tile_text_after = new DateTime($pod->field('show_post_factum_tile_text_after'));
+      $datetime_now = new DateTime('now');
+      if($show_post_factum_tile_text_after < $datetime_now) {
+        $post_factum_tile_title = $tile->field('post_factum_title');
+        $post_factum_tile_tagline = $tile->field('post_factum_tagline');
+        $post_factum_tile_blurb = $tile->field('post_factum_blurb');
+
+        list($tile_title, $tile_tagline, $tile_blurb) = array_map(
+          function($item) {
+            // if the post_factum value is set, return that; otherwise return the original value
+            return !empty($item[1]) ? $item[1] : $item[0];
+          },
+          [
+            [$tile_title,$post_factum_tile_title],
+            [$tile_tagline,$post_factum_tile_tagline],
+            [$tile_blurb,$post_factum_tile_blurb]
+          ]);
+      }
+
+      // If no blurb is set, set relevant tile property to be used in element classes
+      $noblurb_class = empty($tile_blurb) ? 'noblurb' : '';
 
       array_push($slide_column['tiles'],
         array(
           'id' => $tile->field('slug'),
           'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
           'noblurb_class' => $noblurb_class,
-          'title' => $tile->field('name'),
+          'title' => $tile_name,
           'display_title' => $tile->field('display_title'),
-          'subtitle' => $tile->field('tagline'),
-          'blurb' => $blurb,
+          'subtitle' => $tile_tagline,
+          'blurb' => $tile_blurb,
           'plain_content' => $tile->field('plain_content'),
           'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
