@@ -12,7 +12,7 @@
     %div(class = "#{tile.element_class} categoryarchive")
       / recent news go here - not implemented yet
   - elseif tile.title or tile.subtitle or tile.blurb
-    %div(class = [ 'feature-info', 'noblurb' ])
+    %div(class = "feature-info #{tile.noblurb_class}")
       - if tile.title or tile.subtitle
         .feature-key-info
           - if tile.target_event.month and tile.target_event.day

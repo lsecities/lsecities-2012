@@ -180,15 +180,19 @@ function compose_slide_content($column_spans, $tiles) {
        * Add image attribution metadata if present in media item
        */
       $image_attribution = format_media_attribution($tile->field('image.id'));
-      
+
+      $blurb = $tile->field('blurb');
+      $noblurb_class = empty($blurb) ? 'noblurb' : '';
+
       array_push($slide_column['tiles'],
         array(
           'id' => $tile->field('slug'),
           'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
+          'noblurb_class' => $noblurb_class,
           'title' => $tile->field('name'),
           'display_title' => $tile->field('display_title'),
           'subtitle' => $tile->field('tagline'),
-          'blurb' => $tile->field('blurb'),
+          'blurb' => $blurb,
           'plain_content' => $tile->field('plain_content'),
           'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
