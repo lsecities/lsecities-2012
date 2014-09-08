@@ -191,25 +191,29 @@ function compose_slide_content($column_spans, $tiles) {
        * hould be displayed, if any of these updated fields are set
        * override the main fields.
        */
-      $show_post_factum_tile_text_after = new DateTime($pod->field('show_post_factum_tile_text_after'));
-      $datetime_now = new DateTime('now');
-      if($show_post_factum_tile_text_after < $datetime_now) {
-        $post_factum_tile_title = $tile->field('post_factum_title');
-        $post_factum_tile_tagline = $tile->field('post_factum_tagline');
-        $post_factum_tile_blurb = $tile->field('post_factum_blurb');
+      $show_post_factum_tile_text_after = $tile->field('show_post_factum_tile_text_after');
+      if(!preg_match('/^0000/', $show_post_factum_tile_text_after)) { // NOOP if we get Pods' default value of 0000-00-00 00:00
+		$post_factum_after = new DateTime($show_post_factum_tile_text_after);
+		$datetime_now = new DateTime('now');
+		if($post_factum_after < $datetime_now) {
+		  $post_factum_tile_title = $tile->field('post_factum_title');
+		  $post_factum_tile_tagline = $tile->field('post_factum_tagline');
+		  $post_factum_tile_blurb = $tile->field('post_factum_blurb');
 
-        list($tile_title, $tile_tagline, $tile_blurb) = array_map(
-          function($item) {
-            // if the post_factum value is set, return that; otherwise return the original value
-            return !empty($item[1]) ? $item[1] : $item[0];
-          },
-          [
-            [$tile_title,$post_factum_tile_title],
-            [$tile_tagline,$post_factum_tile_tagline],
-            [$tile_blurb,$post_factum_tile_blurb]
-          ]);
-      }
-
+		  list($tile_title, $tile_tagline, $tile_blurb) = array_map(
+		    function($item) {
+			  // if the post_factum value is set, return that; otherwise return the original value
+			  return !empty($item[1]) ? $item[1] : $item[0];
+		    },
+		    [
+			  [$tile_title,$post_factum_tile_title],
+			  [$tile_tagline,$post_factum_tile_tagline],
+			  [$tile_blurb,$post_factum_tile_blurb]
+		    ]
+		  );
+		}
+	  }
+	  
       // If no blurb is set, set relevant tile property to be used in element classes
       $noblurb_class = empty($tile_blurb) ? 'noblurb' : '';
 
