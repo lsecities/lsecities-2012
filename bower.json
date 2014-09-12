@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "angular": "1.2.17",
-    "galleria": "aino/galleria#cc0caad2a699afce9d080224850853572c964093"
+    "galleria": "aino/galleria#cc0caad2a699afce9d080224850853572c964093",
+    "foundation": "~5.4"
   }
 }
