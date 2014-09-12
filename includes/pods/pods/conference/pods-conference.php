@@ -18,7 +18,8 @@ function pods_prepare_conference($pod_slug) {
 
   $slider = $pod->field('slider');
   if(!$slider) {
-    $obj['featured_image_uri'] = get_the_post_thumbnail(get_the_ID(), array(960,367));
+    $post_thumbnail_uri_data = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), array(960,367) );
+    $obj['featured_image_uri'] = $post_thumbnail_uri_data[0];
   }
 
   /* process list of partners */
