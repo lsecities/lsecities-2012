@@ -35,7 +35,7 @@ $gallery = $obj['gallery'];
               <?php if($obj['featured_image_uri']) : ?>
               <header class='heading-image'>
                 <div class='photospread wireframe'>
-                  <?php echo $obj['featured_image_uri']; ?>
+                  <img src="<?php echo $obj['featured_image_uri']; ?>" />
                 </div>
               </header>
               <?php endif; ?>
