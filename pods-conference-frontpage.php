@@ -9,8 +9,6 @@
 /**
  * Pods initialization
  */
-$TRACE_ENABLED = is_user_logged_in();
-$TRACE_PREFIX = 'pods-conference';
 
 $obj = pods_prepare_conference(get_post_meta($post->ID, 'pod_slug', true));
 
@@ -28,6 +26,7 @@ $gallery = $obj['gallery'];
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-conference-frontpage'); ?>>
 
+  <?php SemanticWP\Templating::get_template_part('lsecities/_conference', $obj); ?>
 
           <div class='ninecol' id='contentarea'>
             <div class='top-content clearfix'>
