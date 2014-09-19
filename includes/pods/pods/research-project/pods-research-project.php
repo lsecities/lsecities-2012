@@ -60,7 +60,8 @@ function pods_prepare_research_project($pod_slug) {
   }
 
   // hardcoded list of WP categories used to group research outputs linked to a research project
-  $obj['research_output_categories'] = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article');
+  // TODO: get this list via get_categories()
+  $obj['research_output_categories'] = array('book', 'journal-article', 'book-chapter', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article', 'essay', 'book-review');
 
   $obj['research_outputs'] = get_project_research_outputs($pod);
   
