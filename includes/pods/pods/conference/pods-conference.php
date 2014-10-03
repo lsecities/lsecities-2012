@@ -138,9 +138,9 @@ function get_conference_partners($pod, $partner_field) {
 
     // MONKEYPATCH_BEGIN
     if($_GET["siteid"] == 'ec2012') {
-      $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), 'original');
+      $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), [ 600, 300 ]);
     } else {
-      $logo_uri = pods_image_url($organization_pod->field('logo'), 'original');
+      $logo_uri = pods_image_url($organization_pod->field('logo'), [ 600, 300 ]);
     }
     // MONKEYPATCH_END
 
