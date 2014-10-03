@@ -1,9 +1,15 @@
+-macro partner_name_and_logo(partner)
+  - if partner.logo_uri
+    %img( src = partner.logo_uri alt = partner.name)
+  - else
+    = partner.name
 -macro partner_profile(partner)
   %dd( id = "media-partner-#{partner.id}" )
     - if partner.web_uri
-      %a( href = partner.web_uri ) = partner.name
+      %a( href = partner.web_uri )
+        = _self.partner_name_and_logo(partner)
     - else
-      = partner.name
+      = _self.partner_name_and_logo(partner)
 #contentarea.ninecol
   .top-content.clearfix
     %article
@@ -11,34 +17,34 @@
         %header.heading-image
           .photospread
             %img( src = featured_image_uri )
-        .eightcol
-          %header
-            %h1 = conference_title
-            - if conference_tagline
-              %h2 = conference_tagline
-          - if event_blurb
-            .blurb = event_blurb
-          - if event_contact_info and is_future_event
-            %aside.booking-and-access = event_contact_info
-        %aside#keyfacts.fourcol.last
-          .event-info = event_info
-          - if event_programme_pdf
-            %dl#programme
-              %dt Programme
-              %dd.downloadthis.pdf( href = event_programme_pdf ) Download (PDF)
-          - if partners
-            %dl#conference-partners
-              %dt Partners
-              - for partner in partners
-                _self.partner_profile(partner)
-          - if media_partners
-            %dl#conference-media-partners
-              %dt Media partners
-              - for partner in media_partners
-                _self.partner_profile(partner)
-          - if event_hashtag
-            .twitterbox
-              %a( href = "https://twitter.com/#!/search/##{event_hashtag}" ) = "##{event_hashtag}"
+      .eightcol
+        %header
+          %h1 = conference_title
+          - if conference_tagline
+            %h2 = conference_tagline
+        - if event_blurb
+          .blurb = event_blurb|raw
+        - if event_contact_info and is_future_event
+          %aside.booking-and-access = event_contact_info
+      %aside#keyfacts.fourcol.last
+        .event-info = event_info|raw
+        - if event_programme_pdf
+          %dl#programme
+            %dt Programme
+            %dd.downloadthis.pdf( href = event_programme_pdf ) Download (PDF)
+        - if partners
+          %dl.conference-partners.institutional-partners
+            %dt Partners
+            - for partner in partners
+              = _self.partner_profile(partner)
+        - if media_partners
+          %dl.conference-partners.media-partners
+            %dt Media partners
+            - for partner in media_partners
+              = _self.partner_profile(partner)
+        - if event_hashtag
+          .twitterbox
+            %a( href = "https://twitter.com/#!/search/##{event_hashtag}" ) = "##{event_hashtag}"
   .extra-content
     - if research_summary_title and research_summary_blurb and research_summary_tile_image
       %section#research-summary
@@ -47,26 +53,32 @@
         %div
           %aside#research-blurb.fourcol
             %h3 = research_summary_title
-            .blurb = research_summary_blurb
+            .blurb = research_summary_blurb|raw
             - if research_summary_pdf_uri
               %p
-                %a.downloadthis.pdf.button( href = research_summary_pdf_uri ) = Download research summary
+                %a.downloadthis.pdf.button( href = research_summary_pdf_uri ) Download research summary
           %aside#research-visualizations.eightcol.last
-            %img( src = research_summary_tile_image
-      %aside#photoarea.eightcol
-        - include("lsecities/partials/_galleria.haml")
-      %aside#publicationsarea.fourcol.last
-        - if conference_publication_cover and conference_publication_blurb
-          %div
-            %ul.sixcol
-              - if conference_publication_wp_page
-                %li
-                  %a.readthis.online( href = conference_publication_wp_page ) = Read online
-              - if conference_publication_pdf
-                %li
-                  %a.downloadthis.pdf( href = conference_publication_pdf ) = Download (PDF)
-              - if conference_publication_issuu
-                %li
-                  %a.readthis.online( href = conference_publication_issuu ) = Browse PDF online
-            %img.sixcol.last( src = conference_publication_cover']
-      %div = conference_publication_blurb
+            %img( src = research_summary_tile_image )
+    %aside#photoarea
+      -# include("lsecities/partials/_galleria.haml")
+    - if conference_publication_cover and conference_publication_blurb
+      %aside#publicationsarea.row
+        %h2 Conference research
+        %div.fourcol
+          %p
+            - if conference_publication_wp_page
+              %a( href = conference_publication_wp_page )
+                %img( src = conference_publication_cover )
+            - else
+              %img( src = conference_publication_cover )
+          %ul
+            - if conference_publication_wp_page
+              %li
+                %a.readthis.online( href = conference_publication_wp_page ) Read online
+            - if conference_publication_pdf
+              %li
+                %a.downloadthis.pdf( href = conference_publication_pdf ) Download (PDF)
+            - if conference_publication_issuu
+              %li
+                %a.readthis.online( href = conference_publication_issuu ) Browse PDF online
+        %div.eightcol.last = conference_publication_blurb|raw
