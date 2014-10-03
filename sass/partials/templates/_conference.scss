@@ -24,10 +24,8 @@
     }
   }
   
-  #keyfacts #conference-partners {
-    ul li {
-      display: list-item;
-      
+  #keyfacts .conference-partners {
+    dd {
       &:after {
         content: '';
       }
