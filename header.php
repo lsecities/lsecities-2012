@@ -8,9 +8,6 @@
  */
 namespace LSECitiesWPTheme\page_header;
 
-$TRACE_ENABLED = is_user_logged_in();
-var_trace('header.php starting for post with ID' . $post->ID);
-
 $obj = prepare_header($post);
 
 ?><!DOCTYPE html>
