@@ -93,6 +93,7 @@ function prepare_header() {
       wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $pages_included_in_navmenu);
       
     // And strip prefix
+    // TODO: get full URI from WP's get_page_uri()
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/' . $microsite_configuration['conference_pod_slug']. '\/site/', '', $obj['level2nav']);
 
     // Enable appcache manifest, if needed
