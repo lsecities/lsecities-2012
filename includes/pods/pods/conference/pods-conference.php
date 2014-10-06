@@ -3,19 +3,64 @@
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
 
+/**
+ * Return page id from a WordPress page object
+ * @param Object $page the WordPress page
+ * @return integer The page's ID
+ */
+function page_id($page) {
+  return $page['ID'];
+}
+
 function pods_prepare_conference($pod_slug) {
   $pod = pods('conference', $pod_slug);
   $is_conference = true;
 
+  // core conference data
   $obj['conference_title'] = $pod->field('name');
   $obj['conference_tagline'] = $pod->display('tagline');
-  $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
+  $obj['conference_year'] = $pod->field('year');
+  $obj['start_date'] = $pod->field('start_date');
+  $obj['end_date'] = $pod->field('end_date');
   $obj['event_info'] = $pod->display('info');
+  $obj['event_blurb'] = do_shortcode($pod->display('abstract'));
   
+  $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
+    
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
 
-  $obj['event_blurb'] = do_shortcode($pod->display('abstract'));
-
+  $obj['conference_live_now'] = $pod->field('conference_live_now');
+  
+  // Microsite navigation menus (pre/during/after conference), if applicable
+  $obj['microsite_navmenu_pages_pre'] = array_map('page_id', $pod->field('microsite_navmenu_pages_pre'));
+  $obj['microsite_navmenu_pages_live'] = array_map('page_id', $pod->field('microsite_navmenu_pages_live'));
+  $obj['microsite_navmenu_pages_post'] = array_map('page_id', $pod->field('microsite_navmenu_pages_post'));
+  
+  /**
+   * depending on whether the conference is upcoming, live or past,
+   * generate list of pages for top nav menu from related
+   * page list from Conference pod
+   */
+  $timezone = new DateTimeZone('Europe/London'); // TODO: add timezone handling in Conference pod
+  $conference_date_start = new DateTime($pod->field('start_date'), $timezone);
+  $conference_date_start_utc = clone $conference_date_start;
+  $conference_date_start_utc->setTimezone(new DateTimeZone('UTC'));
+  $conference_date_end = new DateTime($pod->field('end_date'), $timezone);
+  $conference_date_end_utc = clone $conference_date_end;
+  $conference_date_end_utc->setTimezone(new DateTimeZone('UTC'));
+  $datetime_now = new DateTime('now');
+  
+  if($obj['conference_live_now']) {
+    // If the conference is live, use the live menu
+    $obj['microsite_navmenu_pages'] = $obj['microsite_navmenu_pages_live'];
+  } elseif($conference_date_end > $datetime_now) {
+    // If the conference is upcoming, use the pre-conference menu
+    $obj['microsite_navmenu_pages'] = $obj['microsite_navmenu_pages_pre'];
+  } else {
+    // Otherwise - if the conference has happened - use the post-conference menu
+    $obj['microsite_navmenu_pages'] = $obj['microsite_navmenu_pages_post'];
+  }
+  
   $slider = $pod->field('slider');
   if(!$slider) {
     $post_thumbnail_uri_data = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), array(960,367) );
