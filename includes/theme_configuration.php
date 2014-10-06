@@ -83,15 +83,18 @@ lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012
 lc_data('conference_microsites', [
   'ec2012' => [
     'x-site-id' => 'ec2012',
-    'conference_pod_slug' => '2012-london'
+    'conference_pod_slug' => '2012-london',
+    'appcache_manifest' => NULL // no appcache manifest for this microsite
   ],
   'rio2013' => [
     'x-site-id' => 'rio2013',
-    'conference_pod_slug' => '2013-rio'
+    'conference_pod_slug' => '2013-rio',
+    'appcache_manifest' => NULL // no appcache manifest for this microsite
   ],
   'delhi2014' => [
     'x-site-id' => 'delhi2014',
-    'conference_pod_slug' => '2014-delhi'
+    'conference_pod_slug' => '2014-delhi',
+    'appcache_manifest' => NULL // no appcache manifest for this microsite
   ]
 ]);
 
