@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f41fea9af5e692719b26a5fe1b47c727",
+    "hash": "aaeccd00fd449cd3d085e81edf0f4b8f",
     "packages": [
         {
             "name": "drewm/mailchimp-api",
@@ -45,16 +45,16 @@
         },
         {
             "name": "mthaml/mthaml",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arnaud-lb/MtHaml.git",
-                "reference": "f65f7e2b49d97aad65635fe392e84895ef0d44ac"
+                "reference": "7c5de50f82636dfd7fd91e79257ceeb0add78134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arnaud-lb/MtHaml/zipball/f65f7e2b49d97aad65635fe392e84895ef0d44ac",
-                "reference": "f65f7e2b49d97aad65635fe392e84895ef0d44ac",
+                "url": "https://api.github.com/repos/arnaud-lb/MtHaml/zipball/7c5de50f82636dfd7fd91e79257ceeb0add78134",
+                "reference": "7c5de50f82636dfd7fd91e79257ceeb0add78134",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
             "keywords": [
                 "HAML"
             ],
-            "time": "2014-07-08 08:06:05"
+            "time": "2014-08-16 09:00:50"
         },
         {
             "name": "semanticwp/twig-haml-templating",
@@ -106,12 +106,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/semanticwp/twig-haml-templating.git",
-                "reference": "fc23f40a7f9923c2531fe69e29c99fa132d15383"
+                "reference": "0369f168dac90a8af58bee323885ace3fc22f29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/semanticwp/twig-haml-templating/zipball/fc23f40a7f9923c2531fe69e29c99fa132d15383",
-                "reference": "fc23f40a7f9923c2531fe69e29c99fa132d15383",
+                "url": "https://api.github.com/repos/semanticwp/twig-haml-templating/zipball/0369f168dac90a8af58bee323885ace3fc22f29c",
+                "reference": "0369f168dac90a8af58bee323885ace3fc22f29c",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,7 @@
                 }
             },
             "license": [
-                "AGPL-3.0"
+                "AGPL-3.0+"
             ],
             "description": "Twig templating for WordPress, using HAML syntax",
             "homepage": "http://github.com/semanticwp/twig-haml-templating",
@@ -141,7 +141,7 @@
                 "source": "https://github.com/semanticwp/twig-haml-templating/tree/develop",
                 "issues": "https://github.com/semanticwp/twig-haml-templating/issues"
             },
-            "time": "2014-08-08 13:20:52"
+            "time": "2014-08-27 22:28:42"
         },
         {
             "name": "twig/twig",
@@ -212,9 +212,10 @@
         "semanticwp/twig-haml-templating": 20,
         "drewm/mailchimp-api": 20
     },
-    "platform": [
-
-    ],
+    "prefer-stable": false,
+    "platform": {
+        "php": ">=5.4.0"
+    },
     "platform-dev": [
 
     ]
