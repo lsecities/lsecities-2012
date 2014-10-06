@@ -91,7 +91,7 @@ if($current_post_id === 489 or in_array(1890, $ancestors_and_self)) {
 }
 
 // /ua/conferences/
-if(lc_data('nav_show_conferences') or is_array(parent_conference_page($current_post_id))) {
+if(lc_data('nav_show_conferences') or is_array(\LSECitiesWPTheme\conference\parent_conference_page($current_post_id))) {
   get_template_part('templates/nav/nav', 'conference');
   $nav_generated = true;
 }

@@ -56,12 +56,15 @@ function prepare_header() {
     lc_data('microsite_id', 'ec2012');
     // TODO: use microsite_id all over, remove site-ec2012
     lc_data('site-ec2012', true);
+    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2012-london');
   } elseif(lc_data('x-site-id') === 'rio2013') {
     $obj['body_class_extra'] = 'rio2013';
     lc_data('microsite_id', 'rio2013');
+    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2013-rio');
   } elseif(lc_data('x-site-id') === 'delhi2014') {
     $obj['body_class_extra'] = 'delhi2014';
     lc_data('microsite_id', 'delhi2014');
+    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2014-delhi');
   }
 
   $obj['level2nav'] = wp_list_pages('child_of=' . $obj['toplevel_ancestor'] . '&depth=1&sort_column=menu_order&title_li=&echo=0');
@@ -77,7 +80,7 @@ function prepare_header() {
     $obj['level1nav'] = '';
     $class_for_current_page = $post->ID == 2701 ? ' current_page_item' : '';
     if(!is_user_logged_in()) {
-      $only_include_top_pages_ids = '&include=2714,2716,3288,3290,3294,2949,3160,3098';
+      $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
     } else {
       $only_include_top_pages_ids = '&child_of=2701';
     }
@@ -95,7 +98,7 @@ function prepare_header() {
     $class_for_current_page = $post->ID == 5449 ? ' current_page_item' : '';
     
     // only show selected subpages in top navmenu
-    $only_include_top_pages_ids = '&include=5523,5455,5458,5530,5532';
+    $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
     
     $obj['level2nav'] = '<li class="page-item page-item-5449' . $class_for_current_page . '">' .
       '<a href="/">Home</a></li>' . 
@@ -111,7 +114,7 @@ function prepare_header() {
     $class_for_current_page = $post->ID == 6918 ? ' current_page_item' : '';
     
     // only show selected subpages in top navmenu
-    $only_include_top_pages_ids = '&include=';
+    $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
     
     $obj['level2nav'] = '<li class="page-item page-item-6918' . $class_for_current_page . '">' .
       '<a href="/">Home</a></li>' . 
@@ -120,7 +123,7 @@ function prepare_header() {
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2014-delhi\/site/', '', $obj['level2nav']);
 
     // except we actually completely clear level2nav until we move past the launch page stage
-    $obj['level2nav'] = '';
+    // $obj['level2nav'] = '';
     
     // enable appcache manifest, if needed
     // $appcache_manifest = '/appcache-manifests/delhi2014.appcache';

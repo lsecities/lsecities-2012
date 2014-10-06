@@ -5,12 +5,13 @@
  *
  * @package LSECities2012
  */
+namespace LSECitiesWPTheme\conference;
 
 /**
  * Pods initialization
  */
 
-$obj = pods_prepare_conference(get_post_meta($post->ID, 'pod_slug', true));
+$obj = prepare_conference(get_post_meta($post->ID, 'pod_slug', true));
 
 /**
  * Copy gallery object to own variable for compatibility with
@@ -26,7 +27,7 @@ $gallery = $obj['gallery'];
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-conference-frontpage'); ?>>
 
-  <?php SemanticWP\Templating::get_template_part('lsecities/_conference', $obj); ?>
+  <?php \SemanticWP\Templating::get_template_part('lsecities/_conference', $obj); ?>
 
           <?php get_template_part('nav'); ?>
 
