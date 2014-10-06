@@ -212,7 +212,7 @@ function get_conference_partners($pod, $partner_field) {
 
   foreach($conference_partners_slugs as $conference_partners_slug) {
     $organization_pod = pods('organization', $conference_partners_slug);
-
+   
     // MONKEYPATCH_BEGIN
     if('ec2012' === lc_data('microsite_id')) {
       $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), [ 600, 300 ]);

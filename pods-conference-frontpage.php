@@ -7,6 +7,7 @@
  */
 namespace LSECitiesWPTheme\conference;
 
+?><?php get_header(); 
 /**
  * Pods initialization
  */
@@ -19,7 +20,7 @@ $obj = prepare_conference(get_post_meta($post->ID, 'pod_slug', true));
  */
 $gallery = $obj['gallery'];
 
-?><?php get_header(); ?>
+?>
 
 <div role="main">
 
