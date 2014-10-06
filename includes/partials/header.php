@@ -53,8 +53,6 @@ function prepare_header() {
   if('ec2012' === lc_data('x-site-id')) { // we are being called via the ec2012 microsite
     $obj['body_class_extra'] = 'ec2012';
     lc_data('microsite_id', 'ec2012');
-    // TODO: use microsite_id all over, remove site-ec2012
-    lc_data('site-ec2012', true);
     $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2012-london');
   } elseif(lc_data('x-site-id') === 'rio2013') {
     $obj['body_class_extra'] = 'rio2013';
