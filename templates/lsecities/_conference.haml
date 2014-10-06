@@ -42,9 +42,9 @@
             %dt Media partners
             - for partner in media_partners
               = _self.partner_profile(partner)
-        - if event_hashtag
+        - if twitter_hashtag
           .twitterbox
-            %a( href = "https://twitter.com/#!/search/##{event_hashtag}" ) = "##{event_hashtag}"
+            %a( href = "https://twitter.com/#!/search/#{event_hashtag}" ) = "#{event_hashtag}"
   .extra-content
     - if research_summary_title and research_summary_blurb and research_summary_tile_image
       %section#research-summary

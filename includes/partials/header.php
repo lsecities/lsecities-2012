@@ -141,6 +141,7 @@ function prepare_header() {
   set_query_var('lc_toplevel_ancestor', $obj['toplevel_ancestor']);
   set_query_var('lc_level1nav', $obj['level1nav']);
   set_query_var('lc_level2nav', $obj['level2nav']);
+  set_query_var('lc_conference_obj', $obj);
       
   return $obj;
 }

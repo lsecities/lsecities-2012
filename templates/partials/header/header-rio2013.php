@@ -2,7 +2,7 @@
     <header id='header'>
       <div>
         <h1 class='conference-title row'><a href="/">City Transformations</a></h1>
-        <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%23UARio&src=typd&f=realtime">#UARio</a></span>
+        <span class="twitter-hashtag"><a href="<?php echo $lc_conference_obj['conference_data']['twitter_hashtag_uri']; ?>"><?php echo $lc_conference_obj['conference_data']['twitter_hashtag']; ?></a></span>
         <div class='row' id='mainmenus'>
           <nav class='twelvecol section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
             <ul>

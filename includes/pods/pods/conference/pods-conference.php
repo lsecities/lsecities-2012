@@ -31,9 +31,7 @@ function prepare_conference($pod_slug) {
   $obj['event_info'] = $pod->display('info');
   $obj['event_blurb'] = do_shortcode($pod->display('abstract'));
   
-  $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
-    
-  $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
+  $obj['event_programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));;
 
   $obj['conference_live_now'] = $pod->field('conference_live_now');
   
@@ -84,6 +82,10 @@ function prepare_conference($pod_slug) {
   $obj['conference_publication_pdf'] = $pod->field('conference_newspaper.publication_pdf_uri');
   $obj['conference_publication_issuu'] = $pod->field('conference_newspaper.issuu_uri');
 
+  // Twitter hashtag
+  $obj['twitter_hashtag'] = $pod->field('hashtag');
+  $obj['twitter_hashtag_uri'] = 'https://twitter.com/search?q=' . urlencode($obj['twitter_hashtag']) . '&src=typd&f=realtime';
+  
   $obj['research_summary_title'] = $pod->field('research_summary.name');
   $obj['research_summary_blurb'] = $pod->display('research_summary.blurb');
 
