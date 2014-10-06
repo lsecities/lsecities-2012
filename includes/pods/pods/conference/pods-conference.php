@@ -214,7 +214,7 @@ function get_conference_partners($pod, $partner_field) {
     $organization_pod = pods('organization', $conference_partners_slug);
 
     // MONKEYPATCH_BEGIN
-    if($_GET["siteid"] == 'ec2012') {
+    if('ec2012' === lc_data('microsite_id')) {
       $logo_uri = pods_image_url($organization_pod->field('logo_white_raster'), [ 600, 300 ]);
     } else {
       $logo_uri = pods_image_url($organization_pod->field('logo'), [ 600, 300 ]);

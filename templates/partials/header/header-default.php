@@ -1,7 +1,7 @@
 		<header id='header'>
 			<div class='row'>
 				
-          <?php if($_GET["siteid"] == 'ec2012'): ?>
+          <?php if('ec2012' === lc_data('microsite_id')): ?>
           <a href="/">
             <div class='threecol' id='lclogo'>
               <img src="<?php bloginfo('stylesheet_directory'); ?>/images/logos/logo_lsecities_full_white.png" alt="LSE Cities logo">
@@ -19,10 +19,10 @@
               <img src="<?php bloginfo('stylesheet_directory'); ?>/images/logo_lsecities_fullred.png" alt="LSE Cities logo">
             </div>
           </a>
-          <?php endif; // ($_GET["siteid"] == 'ec2012') ?>
+          <?php endif; // ('ec2012' === lc_data('microsite_id')) ?>
         <?php
           if(lc_data('urban_age_section')):
-            if($_GET["siteid"] == 'ec2012'): ?>
+            if('ec2012' === lc_data('microsite_id')): ?>
               <a href="/ua/">
                 <div class='threecol' id='ualogo'><img src="<?php bloginfo('stylesheet_directory'); ?>/images/logos/logo_urbanage_nostrapline_white.png" alt="Urban Age logo"></div>
               </a>
@@ -31,7 +31,7 @@
                 <div class='threecol' id='ualogo'><img src="<?php bloginfo('stylesheet_directory'); ?>/images/logo_urbanage_nostrapline.gif" alt="Urban Age logo"></div>
               </a>
         <?php
-          endif; // ($_GET["siteid"] == 'ec2012') ?>
+          endif; // ('ec2012' === lc_data('microsite_id')) ?>
         <?php elseif(lc_data('site-labs')): ?>
 				<?php else: ?>
         <span class='threecol'>&nbsp;</span>

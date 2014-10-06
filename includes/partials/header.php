@@ -48,10 +48,9 @@ function prepare_header() {
   $http_req_headers = getallheaders();
   if(strlen($http_req_headers["X-Site-Id"]) > 0) {
     lc_data('x-site-id', $http_req_headers["X-Site-Id"]);
-    var_trace(lc_data('x-site-id'), 'lc_x-site-id');
   }
 
-  if($_GET["siteid"] == 'ec2012') { // we are being called via the ec2012 microsite
+  if('ec2012' === lc_data('x-site-id')) { // we are being called via the ec2012 microsite
     $obj['body_class_extra'] = 'ec2012';
     lc_data('microsite_id', 'ec2012');
     // TODO: use microsite_id all over, remove site-ec2012
