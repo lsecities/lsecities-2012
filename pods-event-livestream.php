@@ -9,11 +9,12 @@
  * 
  * @package LSECities2012
  */
+namespace LSECitiesWPTheme\conference;
 
 /**
  * Pods initialization
  */
-$obj = pods_prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
+$obj = prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
 
 ?><?php get_header(); ?>
 
