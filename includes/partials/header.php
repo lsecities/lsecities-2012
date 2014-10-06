@@ -33,6 +33,15 @@ function prepare_header() {
     $obj['toplevel_ancestor'] = lc_data('pods_toplevel_ancestor');
   }
 
+  // Set level2nav: children pages of the toplevel ancestor
+  $obj['level2nav'] = wp_list_pages('child_of=' . $obj['toplevel_ancestor'] . '&depth=1&sort_column=menu_order&title_li=&echo=0');
+
+  // check if we are in the Urban Age section
+  lc_data('urban_age_section', ($obj['toplevel_ancestor'] == 94) ? true : false);
+  
+  // TODO: the following code doesn't seem to be used - check and remove
+  // $logo_element_id = lc_data('urban_age_section') ? 'ualogo' : 'logo';
+
   var_trace(var_export($ancestors, true), 'ancestors (array)');
   var_trace($ancestors[0], 'ancestor[0]');
   var_trace($obj['toplevel_ancestor'], 'toplevel_ancestor');
@@ -44,87 +53,54 @@ function prepare_header() {
    * conference) we get a custom HTTP header from the frontend reverse
    * proxy, which is used to set up the microsite: e.g. custom
    * templates, extra classes for HTML elements, menus, etc.
+   * 
+   * If the X-Site-Id HTTP request header is set, we configure several
+   * settings of the microsite via the lc_data('conference_microsites')
+   * configuration array.
    */ 
   $http_req_headers = getallheaders();
-  if(strlen($http_req_headers["X-Site-Id"]) > 0) {
-    lc_data('x-site-id', $http_req_headers["X-Site-Id"]);
-  }
-
-  if('ec2012' === lc_data('x-site-id')) { // we are being called via the ec2012 microsite
-    $obj['body_class_extra'] = 'ec2012';
-    lc_data('microsite_id', 'ec2012');
-    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2012-london');
-  } elseif(lc_data('x-site-id') === 'rio2013') {
-    $obj['body_class_extra'] = 'rio2013';
-    lc_data('microsite_id', 'rio2013');
-    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2013-rio');
-  } elseif(lc_data('x-site-id') === 'delhi2014') {
-    $obj['body_class_extra'] = 'delhi2014';
-    lc_data('microsite_id', 'delhi2014');
-    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference('2014-delhi');
-  }
-
-  $obj['level2nav'] = wp_list_pages('child_of=' . $obj['toplevel_ancestor'] . '&depth=1&sort_column=menu_order&title_li=&echo=0');
-
-  // check if we are in the Urban Age section
-  lc_data('urban_age_section', ($obj['toplevel_ancestor'] == 94) ? true : false);
-  
-  // TODO: the following code doesn't seem to be used - check and remove
-  // $logo_element_id = lc_data('urban_age_section') ? 'ualogo' : 'logo';
-
-  if(lc_data('x-site-id') === 'ec2012') { // Electric City conference minisite
-    // If we are navigating the EC2012 minisite via reverse proxy, display appropriate menu
+  $x_site_id = strtolower($http_req_headers['X-Site-Id']);
+  if(strlen($x_site_id) > 0) {
+    lc_data('x-site-id', $x_site_id);
+    
+    $microsite_configuration = array_shift(array_filter(lc_data('conference_microsites'), function($microsite) use ($x_site_id) { return $x_site_id === $microsite['x-site-id']; }));
+    
+    $obj['body_class_extra'] = $microsite_configuration['x-site-id'];
+    lc_data('microsite_id', $microsite_configuration['x-site-id']);
+    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference($microsite_configuration['conference_pod_slug']);
+    
+    // Now set microsite nav menus
+    
+    // We only use level2nav - set level1nav to empty string
     $obj['level1nav'] = '';
-    $class_for_current_page = $post->ID == 2701 ? ' current_page_item' : '';
-    if(!is_user_logged_in()) {
-      $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
+    
+    // Check whether the current page is the microsite's homepage
+    $microsite_homepage_id = $obj['conference_data']['conference_wp_page']['ID'];
+    $on_microsite_homepage = $post->ID == $microsite_homepage_id ? TRUE : FALSE;
+    // And set classes for home item li accordingly
+    $home_item_classes = 'page-item page-item-' . $microsite_homepage_id . $on_microsite_homepage ? ' current_page_item' : '';
+    
+    if(is_user_logged_in()) {
+      // Add all subpages of microsite's homepage to navmenu for logged-in users
+      $pages_included_in_navmenu = '&child_of=' . $microsite_homepage_id;
     } else {
-      $only_include_top_pages_ids = '&child_of=2701';
+      // Whereas for all other users, add pages from lists configured within the conference Pod
+      $pages_included_in_navmenu = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
     }
-    $obj['level2nav'] = '<li class="page-item page-item-2701' . $class_for_current_page . '">' .
-      '<a href="/">Home</a></li>' . 
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
-    // And strip prefix
-    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2012-london\/site/', '', $obj['level2nav']);
 
-    // enable appcache manifest, if needed
-    // $appcache_manifest = '/appcache-manifests/ec2012.appcache';
-  } elseif(lc_data('x-site-id') === 'rio2013') {
-    // If we are navigating the Rio 2013 minisite via reverse proxy, display appropriate menu
-    $obj['level1nav'] = '';
-    $class_for_current_page = $post->ID == 5449 ? ' current_page_item' : '';
-    
-    // only show selected subpages in top navmenu
-    $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
-    
-    $obj['level2nav'] = '<li class="page-item page-item-5449' . $class_for_current_page . '">' .
-      '<a href="/">Home</a></li>' . 
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids);
+    $obj['level2nav'] = '<li class="' . $home_item_classes . '">' .
+      '<a href="/">Home</a></li>' .
+      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $pages_included_in_navmenu);
+      
     // And strip prefix
-    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2013-rio\/site/', '', $obj['level2nav']);
-    var_trace($obj['level2nav'], 'header_level2nav');
-    // enable appcache manifest, if needed
-    // $appcache_manifest = '/appcache-manifests/rio2013.appcache';
-  } elseif(lc_data('x-site-id') === 'delhi2014') {
-    // If we are navigating the Delhi 2014 minisite via reverse proxy, display appropriate menu
-    $obj['level1nav'] = '';
-    $class_for_current_page = $post->ID == 6918 ? ' current_page_item' : '';
-    
-    // only show selected subpages in top navmenu
-    $only_include_top_pages_ids = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
-    
-    $obj['level2nav'] = '<li class="page-item page-item-6918' . $class_for_current_page . '">' .
-      '<a href="/">Home</a></li>' . 
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $only_include_top_pages_ids) ;
-    // And strip prefix
-    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/2014-delhi\/site/', '', $obj['level2nav']);
+    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/' . $microsite_configuration['conference_pod_slug']. '\/site/', '', $obj['level2nav']);
 
-    // except we actually completely clear level2nav until we move past the launch page stage
-    // $obj['level2nav'] = '';
-    
-    // enable appcache manifest, if needed
-    // $appcache_manifest = '/appcache-manifests/delhi2014.appcache';
+    // Enable appcache manifest, if needed
+    if($microsite_configuration['appcache_manifest']) {
+      $appcache_manifest = '/appcache-manifests/' . $microsite_configuration['appcache_manifest'];
+    }
   }
+  
   /* if within Newsletter section, do not populate level2nav: otherwise,
      all the children pages will be listd there! */
   elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) {
