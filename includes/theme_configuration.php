@@ -77,6 +77,25 @@ lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/wp-content/themes/
 lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012');
 
 /**
+ * Conference microsites configuration map
+ */
+ 
+lc_data('conference_microsites', [
+  'ec2012' => [
+    'x-site-id' => 'ec2012',
+    'conference_pod_slug' => '2012-london'
+  ],
+  'rio2013' => [
+    'x-site-id' => 'rio2013',
+    'conference_pod_slug' => '2013-rio'
+  ],
+  'delhi2014' => [
+    'x-site-id' => 'delhi2014',
+    'conference_pod_slug' => '2014-delhi'
+  ]
+]);
+
+/**
  * rio2013 microsite configuration
  */
 
