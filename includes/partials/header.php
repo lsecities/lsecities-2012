@@ -75,7 +75,7 @@ function prepare_header() {
     $obj['level1nav'] = '';
     
     // Check whether the current page is the microsite's homepage
-    $microsite_homepage_id = $obj['conference_data']['conference_wp_page']['ID'];
+    $microsite_homepage_id = $obj['conference_data']['conference_microsite_frontpage_wp_page']['ID'];
     $on_microsite_homepage = $post->ID == $microsite_homepage_id ? TRUE : FALSE;
     // And set classes for home item li accordingly
     $home_item_classes = 'page-item page-item-' . $microsite_homepage_id;

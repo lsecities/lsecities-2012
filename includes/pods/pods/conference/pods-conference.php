@@ -65,6 +65,10 @@ function prepare_conference($pod_slug) {
     $obj['microsite_navmenu_pages'] = $obj['microsite_navmenu_pages_post'];
   }
   
+  // Conference WP page and microsite WP page
+  $obj['conference_wp_page'] = $pod->field('conference_wp_page');
+  $obj['conference_microsite_frontpage_wp_page'] = $pod->field('conference_microsite_frontpage_wp_page');
+  
   $slider = $pod->field('slider');
   if(!$slider) {
     $post_thumbnail_uri_data = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), array(960,367) );
