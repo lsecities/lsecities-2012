@@ -645,6 +645,9 @@ blockquote::before { color: #999999; content: '\00AB'; display: block; font-size
 #page-meta { clear: both; margin: 1em 0; opacity: 0.6; font-size: 0.8rem; -webkit-transition: opacity 0.5s ease; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
 #page-meta:hover, #page-meta:focus, #page-meta:active { opacity: 1; -webkit-transition: opacity 0.5s ease; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
 #page-meta h1 { font-size: inherit; font-weight: 900; }
+#page-meta .photo-credits li { display: inline; }
+#page-meta .photo-credits li:after { content: '; '; }
+#page-meta .photo-credits li:last-child:after { content: '.'; }
 
 .flexslider { position: relative; box-shadow: none; margin: 0; min-width: 60em; /* Direction Nav */ /* Control Nav */ }
 .flexslider .flex-direction-nav { list-style-type: none; }
