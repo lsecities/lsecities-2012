@@ -15,4 +15,16 @@
     font-size: inherit;
     font-weight: 900;
   }
+
+  .photo-credits li {
+    display: inline;
+    
+    &:after {
+      content: '; ';
+    }
+
+    &:last-child:after {
+      content: '.';
+    }
+  }
 }
