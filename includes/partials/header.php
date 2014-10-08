@@ -78,7 +78,8 @@ function prepare_header() {
     $microsite_homepage_id = $obj['conference_data']['conference_wp_page']['ID'];
     $on_microsite_homepage = $post->ID == $microsite_homepage_id ? TRUE : FALSE;
     // And set classes for home item li accordingly
-    $home_item_classes = 'page-item page-item-' . $microsite_homepage_id . $on_microsite_homepage ? ' current_page_item' : '';
+    $home_item_classes = 'page-item page-item-' . $microsite_homepage_id;
+    $home_item_classes .= ($on_microsite_homepage == TRUE) ? ' current_page_item' : '';
     
     if(is_user_logged_in()) {
       // Add all subpages of microsite's homepage to navmenu for logged-in users
