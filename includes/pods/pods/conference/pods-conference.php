@@ -22,6 +22,13 @@ function prepare_conference($pod_slug) {
   $pod = pods('conference', $pod_slug);
   $is_conference = true;
 
+  // stop if no pod with such $pod_slug was found
+  if(0 === $pod->total_found()) {
+    return false;
+  }
+  
+  $pod_slug = $pod->field('slug');
+  
   // core conference data
   $obj['conference_title'] = $pod->field('name');
   $obj['conference_tagline'] = $pod->display('tagline');
