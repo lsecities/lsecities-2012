@@ -82,6 +82,17 @@ function prepare_conference($pod_slug) {
     $obj['featured_image_uri'] = $post_thumbnail_uri_data[0];
   }
 
+  /**
+   * Background photos for conference microsite, if applicable
+   */
+  $background_photos = pods('media', [ 'where' => "conference_microsite.slug = '" . $pod_slug . "'", 'orderby' => 'RAND()' ]);
+  while($background_photos->fetch()) {
+    $obj['microsite_background_photos'][] = [
+      'uri' => pods_image_url($background_photos->field('id'), 'full'),
+      'title' => $background_photos->field('title')
+    ];
+  }
+  
   /* process list of partners */
   $obj['partners'] = get_conference_partners($pod, 'partners');
   /* process list of media partners */
