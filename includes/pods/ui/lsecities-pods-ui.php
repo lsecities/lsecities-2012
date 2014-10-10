@@ -120,7 +120,7 @@ function person_page() {
   pods_ui_manage($object);
 }
 
-add_action('admin_menu','pods_ui_people');
+// add_action('admin_menu','pods_ui_people');
 
 /* tile pod */
 function pods_ui_tiles() {
