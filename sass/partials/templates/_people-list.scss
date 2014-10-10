@@ -45,4 +45,19 @@
       line-height: 1rem;
     }
   }
+
+  ul.people-list.grid {
+    li {
+      width: 22.05%;
+      margin-right: 3.8%;
+      float: left;
+      min-height: 1px;
+    }
+    li:nth-child(4n) {
+      margin-right: 0;
+    }
+    li:nth-child(4n+1) {
+      clear: left;
+    }
+  } 
 }
