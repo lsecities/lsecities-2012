@@ -2,7 +2,7 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
 
   release 1.10 "pervenche"
   
-  * [feature] AngularJS app for media archive search
+  * [feature] AngularJS app for media archive search (alpha)
   * [feature] full media archive catalogue extraction code (to JSON,
     for use within the AngularJS app)
   * [feature] photo credits automatically added to #page-meta area
@@ -22,6 +22,8 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
     * using MtHAML+Twig templates
   * [update] refactored Frontpages pod and related templates:
     * using MtHAML+Twig templates
+  * [update] refactored Conference frontpage pod and related templates:
+    * using MtHAML+Twig templates
   * [feature] added fields for post-factum content on slide tiles
   * [tooling] fast, robust deployment via Makefile; previous
     git push-based deployment was too brittle
@@ -30,7 +32,7 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
   * [feature] added integration of WP Contact Forms 7 with Mailchimp
     via Mailchimp API
   
- -- andrea rota <a.rota@lse.ac.uk>  Mon, 31 Mar 2014 16:30:00 +0100
+ -- andrea rota <a.rota@lse.ac.uk>  Mon, 20 Oct 2014 16:30:00 +0100
  
 lsecities-theme-alexandria (1.9) experimental; urgency=low
 
