@@ -1,19 +1,31 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    chunky_png (1.2.8)
-    compass (0.12.2)
+    chunky_png (1.3.2)
+    compass (1.0.1)
       chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-h5bp (0.1.0)
+      compass-core (~> 1.0.1)
+      compass-import-once (~> 1.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      sass (>= 3.3.13, < 3.5)
+    compass-core (1.0.1)
+      multi_json (~> 1.0)
+      sass (>= 3.3.0, < 3.5)
+    compass-h5bp (0.1.2)
       compass
-    fssm (0.2.10)
+    compass-import-once (1.0.5)
+      sass (>= 3.2, < 3.5)
+    ffi (1.9.6)
     html5-boilerplate (2.1.0)
       compass
       compass-h5bp
-    sass (3.2.7)
-    susy (1.0.8)
+    multi_json (1.10.1)
+    rb-fsevent (0.9.4)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
+    sass (3.4.6)
+    susy (1.0.9)
       compass (>= 0.12.2)
       sass (>= 3.2.0)
 
@@ -21,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  compass (~> 0.12.2)
+  compass (~> 1.0)
   compass-h5bp
   html5-boilerplate (~> 2.1.0)
-  susy (~> 1.0.8)
+  susy (~> 1.0)
