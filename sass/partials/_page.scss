@@ -155,7 +155,7 @@ small {
 input:valid, textarea:valid {}
 input:invalid, textarea:invalid {
   @include border-radius(1px);
-  @include single-box-shadow(red, 0, 0, 5px, 0);
+  @include single-box-shadow(0, 0, 5px, 0, red);
 }
 .no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid { background-color: #f0dddd; }
