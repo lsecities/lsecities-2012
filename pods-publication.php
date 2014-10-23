@@ -27,19 +27,20 @@ $gallery = $obj['gallery'];
 <div role="main">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-publication'); ?>>
-    <div class='ninecol' id='contentarea'>
+    <div class='fullwidth' id='contentarea'>
       <div class='top-content'>
         <?php if(count($gallery['slides'])) : ?>
-        <header class='heading-image'>
+        <div class='heading-image'>
           <?php include('templates/partials/galleria.inc.php'); ?>
-        </header>
+        </div>
         <?php endif; ?>
 
-        <article class='wireframe eightcol row'>
-          <header class='entry-header'>
-            <h1><?php echo $obj['title']; ?></h1>
-            <?php if($obj['subtitle']): ?><h2><?php echo $obj['subtitle']; ?></h2><?php endif ; ?>
-          </header>
+        <header class='entry-header'>
+          <h1><?php echo $obj['title']; ?></h1>
+          <?php if($obj['subtitle']): ?><h2><?php echo $obj['subtitle']; ?></h2><?php endif ; ?>
+        </header>
+
+        <article class='wireframe ninecol row'>
           <div class='entry-content article-text'>
             <?php echo $obj['blurb']; ?>
           </div>
@@ -55,9 +56,8 @@ $gallery = $obj['gallery'];
           </section>
           <?php endif; // (count($obj_sections['sections']) > 1)?>
           -->
-          <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </article>
-        <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
+        <aside class='wireframe threecol last entry-meta' id='keyfacts'>
           <div>
             <?php if($obj['cover_image_uri']): ?>
             <div class='cover-thumbnail'><img src="<?php echo $obj['cover_image_uri']; ?>" /></div>
@@ -104,6 +104,7 @@ $gallery = $obj['gallery'];
             <?php endif; ?>
             </dl>
           </div>
+          <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </aside><!-- #keyfacts -->
       </div><!-- .top-content -->
       <div class='extra-content row'>
@@ -121,58 +122,56 @@ $gallery = $obj['gallery'];
           </section><!-- #wp-posts-reviews -->
           <?php endif; //(count($obj['wp_posts_reviews'])) ?>
           <?php if($obj_sections['sections']) : ?>
-          <section class="row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
-            <header><h1>Articles</h1></header>
-            <div class="eightcol">
-              <div class="articles">
-              <?php
-              foreach($obj_sections['sections'] as $section) : ?>
-                <section id="publication-section-<?php echo $section['id']; ?>">
-                <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
-                foreach($section['articles'] as $article) : ?>
-                  <div class="article">
-                    <?php
-                    /**
-                     * if this is the ToC entry for an article part of a research-data publication (e.g.
-                     * data section of a conference newspaper), show heading image as article teaser.
-                     */
-                    if($obj['publication_category'] == 'research-data' and $article['heading_image']): ?>
+          <section class="toc row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
+            <div class="articles">
+            <?php
+            foreach($obj_sections['sections'] as $section) : ?>
+              <section id="publication-section-<?php echo $section['id']; ?>">
+              <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
+              foreach($section['articles'] as $article) : ?>
+                <div class="article">
+                  <?php
+                  /**
+                   * if this is the ToC entry for an article part of a research-data publication (e.g.
+                   * data section of a conference newspaper), we should have a cover image for each
+                   * article, if this is provided, to be shown in ToC here.
+                   */
+                  if($article['cover_image_uri']): ?>
+                  <div class='cover-image'>
                     <a href="<?php echo $article['uri']; ?>">
-                    <img class='heading-image' src='<?php echo $article['heading_image']; ?>' />
+                      <img src='<?php echo $article['cover_image_uri']; ?>' />
                     </a>
-                    <?php endif; // ($obj['publication_category'] == 'research-data' and $article['heading_image']) ?>
-                    <h1>
-                      <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
-                      <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
-                      | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
-                      <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
-                    </h1>
-                    <?php if($article['authors']): ?>
-                    <div class="authors">
-                      <?php echo implode(', ', $article['authors']) ; ?>
-                    </div>
-                    <?php endif; ?>
-                    <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
-                    <div class="excerpt">
-                      <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
-                    </div>
-                    <?php endif; ?>
-                  </div><!-- .article -->
-                <?php
-                endforeach; ?>
-                </section><!-- publication-section-<?php echo $section['title']; ?> -->
+                  </div>
+                  <?php endif; // ($article['cover_image_uri']) ?>
+                  <h1>
+                    <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
+                    <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
+                    | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
+                    <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
+                  </h1>
+                  <?php if($article['authors']): ?>
+                  <div class="authors">
+                    <?php echo implode(', ', $article['authors']) ; ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
+                  <div class="excerpt">
+                    <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
+                  </div>
+                  <?php endif; ?>
+                </div><!-- .article -->
               <?php
               endforeach; ?>
-              </div><!-- .articles -->
-            </div><!-- .eightcol -->
-            <div class="fourcol last">
-            </div><!-- .fourcol.last -->
+              </section><!-- publication-section-<?php echo $section['title']; ?> -->
+            <?php
+            endforeach; ?>
+            </div><!-- .articles -->
           </section><!-- .row -->
         <?php endif ?>
       </div><!-- .extra-content -->
     </div><!-- #contentarea -->
   </div><!-- #post-<?php the_ID(); ?> -->
-<?php get_template_part('nav'); ?>
+
 
 </div><!-- role='main'.row -->
 
