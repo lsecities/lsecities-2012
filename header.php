@@ -72,6 +72,13 @@ $obj = prepare_header($post);
   wp_enqueue_script('rfc3339date', get_stylesheet_directory_uri() . '/javascripts/rfc3339date.js', false, false, true);
   wp_enqueue_script('jquery-addtocal', get_stylesheet_directory_uri() . '/javascripts/jquery.addtocal.js', array('jquery', 'jquery-ui-core', 'jquery-ui-menu'), false, true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
+  
+  /**
+   * if we have a subtheme-specific JS, enqueue it now
+   */
+  if(is_array($obj['theme_js'])) {
+    wp_enqueue_script($obj['theme_js']['handle'], $obj['theme_js']['src'], $obj['theme_js']['deps'], $obj['theme_js']['ver'], $obj['theme_js']['in_footer']);
+  }
  ?>
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
