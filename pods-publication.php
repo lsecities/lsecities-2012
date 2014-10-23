@@ -7,7 +7,13 @@ namespace LSECitiesWPTheme\publication;
  * @package LSECities2012
  */
 
+// Get Pod slug from post meta
 $post_id = get_post_meta($post->ID, 'pod_slug', true);
+// If this template is invoked via a Pods page, no post meta will
+// be available: read slug from URI
+if(empty($post_id)) {
+  $post_id = pods_v('last', 'url');
+}
 $obj = pods_prepare_publication($post_id);
 $obj_sections = pods_prepare_table_of_contents($post_id);
 
