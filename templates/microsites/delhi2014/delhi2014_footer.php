@@ -6,3 +6,8 @@
             attribution_name: '" . $background_photo['attribution_name'] . "',
             description: '" . $background_photo['description'] . "' },\n "; } ?> ];
 </script>
+
+<div id="background-photo-explorer">
+  <div class="caption"></div>
+  <div class="trigger">Show background photo</div>
+</div>
