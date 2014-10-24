@@ -7,6 +7,13 @@
     max-width: 100%;
     width: 100%;
   }
+        
+  #keyfacts {
+    width: 30.75%; // aka fourcol in cssgrid.net
+    margin-left: 3.8%; // aka the fourcol margin-right in cssgrid.net
+    float: right;
+    margin-bottom: 2rem;
+  }
 
   .has-pullquote::before {
     content: attr(data-pullquote);
@@ -55,7 +62,7 @@
       }
     }
     
-    .entry-content, .extra-content {
+    .entry-content, .extra-content {      
 /* // TODO: re-enable once all the article photos have been double checked
       img {
         float: right;
