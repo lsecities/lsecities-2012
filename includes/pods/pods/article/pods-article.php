@@ -54,9 +54,9 @@ function get_article_data($pod) {
   $publication_pod = pods('publication_wrappers', $obj['parent_publication_id']);
   lc_data('publication_pod', $publication_pod);
 
-  // grab the image URI from the Pod
+  // grab the featured image URI
   $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), 'original');
-
+    
   var_trace($obj['request_language'], 'request_language');
   var_trace($obj['lang2_slug'], 'article_lang2');
 

@@ -89,7 +89,9 @@ function prepare_conference($pod_slug) {
   while($background_photos->fetch()) {
     $obj['microsite_background_photos'][] = [
       'uri' => pods_image_url($background_photos->field('id'), 'full'),
-      'title' => $background_photos->field('title')
+      'title' => $background_photos->field('title'),
+      'attribution_name' => get_post_meta($background_photos->field('id'), '_attribution_name', true),
+      'description' => $background_photos->field('post_content')
     ];
   }
   

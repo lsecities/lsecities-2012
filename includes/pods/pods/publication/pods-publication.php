@@ -161,6 +161,10 @@ function pods_prepare_table_of_contents($pod_slug) {
   // initialize output array
   $obj = array();
 
+  // Check category of publication; this is used to check whether
+  // cover images for ToCs are needed
+  $obj['publication_category'] = $pod->field('category.slug');
+  
   $obj['title'] = $pod->field('name');
 
   if(count($pod->field('articles'))) {
@@ -206,16 +210,22 @@ function pods_prepare_table_of_contents($pod_slug) {
             $this_article['authors'][] = $author['name'] . ' ' . $author['family_name'];
           }
 
-          /**
-           * TODO:
-           * add fields:
-           * heading_image
-           */
+          // If this is the ToC for a data publication, add ToC cover
+          // images for each article
+          if('research-data' == $obj['publication_category']) {
+            // grab the cover image image URI, 1000x1000px crop
+            $cover_image_uri = pods_image_url($article_pod->field('cover_image'), [ 1000, 1000 ]);
+            // if none is set and a featured image is available, use that (but crop it as it may be very large)
+            if(empty($cover_image_uri) and $article_pod->field('heading_image')) {
+              $cover_image_uri = pods_image_url($article_pod->field('heading_image'), [ 1000, 1000 ]);
+            }
+          }
+
           $articles[] = array(
             'title' => $this_article['title'],
             'uri' => $this_article['uri'],
             'authors' => $this_article['authors'],
-            'heading_image' => pods_image_url($article_pod->field('heading_image'), 'original'),
+            'cover_image_uri' => $cover_image_uri,
             'lang2_title' => $this_article['lang2_title'],
             'lang2_uri' => $this_article['lang2_uri'],
             'lang2_langname' => $this_article['lang2_langname']
