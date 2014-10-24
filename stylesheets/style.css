@@ -998,10 +998,21 @@ body.ec2012 .lc-newspaper-article #navigationarea #publication-side-toc h1 { fon
 body.ec2012 .lc-event-speaker-list .speaker-card { -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; background-color: #424242; color: white; }
 body.ec2012 #un-button { display: none; }
 
-body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; }
+@-webkit-keyframes $animation-name { 0% { opacity: 1; }
+  90% { opacity: 0; } }
+@-moz-keyframes $animation-name { 0% { opacity: 1; }
+  90% { opacity: 0; } }
+@keyframes $animation-name { 0% { opacity: 1; }
+  90% { opacity: 0; } }
+body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 { position: relative; color: black; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; font-weight: 100; pointer-events: none; /* Hide WP admin bar to avoi clash with our fixed-position header */ /* hide background-photo-explorer by default; only show on large screens (1024+) */ }
+body.urban-age-twentyfifteen #wpadminbar, body.rio2013 #wpadminbar, body.delhi2014 #wpadminbar { display: none; }
 body.urban-age-twentyfifteen .full-background-photo, body.rio2013 .full-background-photo, body.delhi2014 .full-background-photo { /* do not show on mobile-first */ display: none; /* Set rules to fill background */ min-height: 100%; min-width: 1024px; /* Set up proportionate scaling */ width: 100%; height: auto; /* Set up positioning */ position: fixed; top: 0; left: 0; background-color: #555; pointer-events: auto; -webkit-filter: grayscale(97%) blur(2px); filter: grayscale(97%) blur(2px); -moz-transition: all 5s ease; -o-transition: all 5s ease; -webkit-transition: all 5s ease; transition: all 5s ease; -webkit-backface-visibility: hidden; /* Fix for transition flickering */ opacity: 0.2; }
-body.urban-age-twentyfifteen .full-background-photo:hover, body.urban-age-twentyfifteen .full-background-photo.just-loaded, body.rio2013 .full-background-photo:hover, body.rio2013 .full-background-photo.just-loaded, body.delhi2014 .full-background-photo:hover, body.delhi2014 .full-background-photo.just-loaded { -webkit-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); -moz-transition: all 5s ease; -o-transition: all 5s ease; -webkit-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
+body.urban-age-twentyfifteen .full-background-photo:hover, body.urban-age-twentyfifteen .full-background-photo.just-loaded, body.urban-age-twentyfifteen .full-background-photo.foreground, body.rio2013 .full-background-photo:hover, body.rio2013 .full-background-photo.just-loaded, body.rio2013 .full-background-photo.foreground, body.delhi2014 .full-background-photo:hover, body.delhi2014 .full-background-photo.just-loaded, body.delhi2014 .full-background-photo.foreground { -webkit-filter: grayscale(0%) blur(0); filter: grayscale(0%) blur(0); -moz-transition: all 5s ease; -o-transition: all 5s ease; -webkit-transition: all 5s ease; transition: all 5s ease; opacity: 1; }
 body.urban-age-twentyfifteen .full-background-photo.loading, body.rio2013 .full-background-photo.loading, body.delhi2014 .full-background-photo.loading { opacity: 0; }
+body.urban-age-twentyfifteen #background-photo-explorer, body.rio2013 #background-photo-explorer, body.delhi2014 #background-photo-explorer { display: none; position: fixed; bottom: 1rem; left: 1rem; pointer-events: auto; }
+body.urban-age-twentyfifteen #background-photo-explorer > div, body.rio2013 #background-photo-explorer > div, body.delhi2014 #background-photo-explorer > div { background: #ffee00; padding: 0 0.25rem; }
+body.urban-age-twentyfifteen #background-photo-explorer .trigger, body.rio2013 #background-photo-explorer .trigger, body.delhi2014 #background-photo-explorer .trigger { -webkit-animation: slide-down 5s; display: inline-block; }
+body.urban-age-twentyfifteen #background-photo-explorer .caption, body.rio2013 #background-photo-explorer .caption, body.delhi2014 #background-photo-explorer .caption { display: none; max-width: 33%; }
 @media screen and (max-width: 1024px) { body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 { /* Specific to this particular image */ }
   body.urban-age-twentyfifteen img.bg, body.rio2013 img.bg, body.delhi2014 img.bg { left: 50%; margin-left: -512px; /* 50% */ } }
 body.urban-age-twentyfifteen .heading-image, body.rio2013 .heading-image, body.delhi2014 .heading-image { display: none; }
@@ -1040,6 +1051,7 @@ body.urban-age-twentyfifteen #content article.sixcol, body.rio2013 #content arti
 body.urban-age-twentyfifteen [role='main'], body.rio2013 [role='main'], body.delhi2014 [role='main'] { padding-bottom: 10em; }
 body.urban-age-twentyfifteen [role='main'] > article.ninecol, body.rio2013 [role='main'] > article.ninecol, body.delhi2014 [role='main'] > article.ninecol { width: 100%; }
 body.urban-age-twentyfifteen [role='main'], body.urban-age-twentyfifteen #main, body.rio2013 [role='main'], body.rio2013 #main, body.delhi2014 [role='main'], body.delhi2014 #main { overflow: visible; }
+body.urban-age-twentyfifteen #contentarea, body.rio2013 #contentarea, body.delhi2014 #contentarea { margin-top: 2em; }
 body.urban-age-twentyfifteen #contentarea .top-content article header h1, body.rio2013 #contentarea .top-content article header h1, body.delhi2014 #contentarea .top-content article header h1 { font-family: BureauGrotesque-ThreeSeven, "Open Sans", Sans-Serif; text-transform: uppercase; }
 body.urban-age-twentyfifteen #contentarea.ninecol, body.rio2013 #contentarea.ninecol, body.delhi2014 #contentarea.ninecol { width: 100%; }
 body.urban-age-twentyfifteen #contentarea > h1, body.rio2013 #contentarea > h1, body.delhi2014 #contentarea > h1 { display: none; }
@@ -1104,9 +1116,12 @@ body.urban-age-twentyfifteen #un-button, body.rio2013 #un-button, body.delhi2014
 */
 /*/mediaquery*/
 /*/mediaquery*/
-@media only screen and (min-width: 1024px) { body.urban-age-twentyfifteen .full-background-photo { display: block; /* and now for the background photo awe */ }
+@media only screen and (min-width: 1024px) { body.urban-age-twentyfifteen { /* show background-photo-explorer only on 1024+ screens and only if js is detected */ }
+  body.urban-age-twentyfifteen .full-background-photo { display: block; /* and now for the background photo awe */ }
   body.urban-age-twentyfifteen .full-background-photo.foreground ~ #header { opacity: 0.3; -moz-transition: 5s; -o-transition: 5s; -webkit-transition: 5s; transition: 5s; }
   body.urban-age-twentyfifteen .full-background-photo.foreground ~ #container, body.urban-age-twentyfifteen .full-background-photo.foreground ~ #footer { opacity: 0; -moz-transition: opacity 5s; -o-transition: opacity 5s; -webkit-transition: opacity 5s; transition: opacity 5s; }
+  body.urban-age-twentyfifteen .full-background-photo.foreground ~ #background-photo-explorer .caption { display: block; }
+  html.js body.urban-age-twentyfifteen #background-photo-explorer { display: inline-block; }
   body.urban-age-twentyfifteen #header, body.urban-age-twentyfifteen #container, body.urban-age-twentyfifteen #footer { /* needed for graceful fading on background photo awe */ -moz-transition: opacity 5s; -o-transition: opacity 5s; -webkit-transition: opacity 5s; transition: opacity 5s; }
   body.urban-age-twentyfifteen #header { z-index: 11; position: fixed; top: 0; width: 100%; /* when scrolled past top, make header less conspicuous */ }
   body.urban-age-twentyfifteen #header.sticky { padding-top: 0.25rem; box-shadow: 0px 0px 5px #333; }
