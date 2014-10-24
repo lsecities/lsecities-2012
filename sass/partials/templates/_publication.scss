@@ -6,6 +6,13 @@
 @import "compass/css3/border-radius";
 
 .lc-publication {
+  // TECHNICAL DEBT
+  // border-box should be the overall default; until that
+  // has been thoroughly tested, we can set it per template
+  & * {
+    box-sizing: border-box;
+  }
+  
   #keyfacts {
     p {
       margin-bottom: 0.2em;
@@ -50,28 +57,64 @@
   #tableofcontents {
     .articles {
       & > section {
-        margin-bottom: 1em;
+        margin-bottom: 1.5rem;
         
         & > h1 {
-          font-size: 1.125em;
-          line-height: 2em;
+          font-size: 1.75rem;
           font-weight: bold;
         }
         
         .article {
-          margin-bottom: 0.5em;
+          margin-bottom: 1rem;
 
           .heading-image {
           width: 100%;
             max-width: 100%;
           }
           & > h1 {
-            font-size: 1em;
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
           }
           
           .excerpt {
-            font-size: 1em;
+            font-size: 1rem;
           }
+        }
+      }
+    }
+  }
+  
+  /**
+   * For ToC of research data/data sections, use a block grid
+   */
+  .toc.publication-category-research-data {
+    .article {
+      float: left;
+      width: 32%;
+      margin-right: 2%;
+      padding: 0.5rem;
+      background-color: rgba(240, 240, 240, 0.9);
+      
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      
+      &:nth-child(3n+1) {
+        clear: both;
+      }
+      
+      .cover-image {
+        overflow: hidden;
+        
+        img {
+          @include transition(0.5s);
+        }
+        
+        img:hover, img:focus {
+          @include scale(1.5);
+          @include transition(0.5s);
         }
       }
     }
