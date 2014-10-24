@@ -21,7 +21,70 @@
 @media only screen and (min-width: 1024px) {
   body.urban-age-twentyfifteen {
     .full-background-photo {
-      display: none;
+      display: block;
+    
+      /* and now for the background photo awe */
+      &.foreground {
+        & ~ #header {
+          opacity: 0.3;
+          @include transition(5s);
+        }
+
+        & ~ #container, & ~ #footer {
+          opacity: 0;
+          @include transition(opacity 5s);
+        }
+
+        & ~ #background-photo-explorer .caption {
+          display: block;
+        }
+      }
+    }
+
+    /* show background-photo-explorer only on 1024+ screens and only if js is detected */
+    // html.js &.logged-in #background-photo-explorer {
+    html.js & #background-photo-explorer {
+      display: inline-block;
+    }
+
+    #header, #container, #footer {
+      /* needed for graceful fading on background photo awe */
+      @include transition(opacity 5s);
+    }
+
+    #header {
+      z-index: 11;
+      position: fixed;
+      top: 0;
+      width: 100%;
+
+      /* when scrolled past top, make header less conspicuous */
+      &.sticky {
+        padding-top: 0.25rem;
+        box-shadow: 0px 0px 5px #333;
+
+        & ~ #container {
+          margin-top: 5rem;
+        }
+
+        .conference-title {
+          @include transition(font-size 0.25s);
+          font-size: 2em;
+        }
+        
+        #mainmenus {
+          @include transition(font-size 0.25s);
+          font-size: 0.90rem;
+        }
+      }
+    }
+
+    #container {
+      margin-top: 7rem;
+    }
+    
+    #footer {
+      width: auto;
     }
   }
 }/*/mediaquery*/
