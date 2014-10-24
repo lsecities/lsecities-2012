@@ -6,20 +6,20 @@
 
 @media only screen and (min-width: 480px) {
   // Style adjustments for viewports 480px and over go here
-  body.rio2013 {
+  body.urban-age-twentyfifteen {
 
   }
 }/*/mediaquery*/
 
 @media only screen and (min-width: 768px) {
   // Style adjustments for viewports 768px and over go here
-  body.rio2013 {
+  body.urban-age-twentyfifteen {
 
   }
 }/*/mediaquery*/
 
-@media only screen and (max-width: 1024px) {
-  body.rio2013 {
+@media only screen and (min-width: 1024px) {
+  body.urban-age-twentyfifteen {
     .full-background-photo {
       display: none;
     }
@@ -28,7 +28,7 @@
 
 @media only screen and (max-width: 768px) {
   // Style adjustments for viewports 768px and less go here
-  body.rio2013 {
+  body.urban-age-twentyfifteen {
     .lc-newspaper-article {
       #navigationarea {
         position: static;
