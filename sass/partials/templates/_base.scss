@@ -48,7 +48,6 @@ $keyfacts-font-size: 0.9em;
 
 #main {
   margin-top: 1em;
-  min-height: 18em;
 }
 
 .twitterbox {
@@ -140,7 +139,7 @@ ol.article-references {
 }
   
 .entry-content {
-  min-height: 20rem;
+  min-height: 5rem;
 
   section, section > section {
     @include red-flag-header;
