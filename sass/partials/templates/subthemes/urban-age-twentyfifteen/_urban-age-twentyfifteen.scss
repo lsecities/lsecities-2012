@@ -158,17 +158,17 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
   
   header {    
     &.entry-header {
+      padding-top: 1rem;
       display: none;
-      
-      h1 {
-        color: $link-color;
-      }
     }
     
     h1, h2 {
-      color: $link-color;
       font-weight: bold;
       font-size: 2em;
+    }
+    h1 {
+      font-family: $site-font;
+      text-transform: uppercase;
     }
   }
   
@@ -187,6 +187,7 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
   }
   
   #header {
+    width: 100%;
     background-color: $header-background-color;
     pointer-events: auto;
     
@@ -212,15 +213,22 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
   }
   
   .conference-title {
+    /* for sticky header transitions */
+    @include transition(font-size 0.25s);
+
     font-family: $site-font;
     letter-spacing: 2px;
     font-size: 3em;
-    margin-bottom: 0.5em;
     text-transform: uppercase;
     
     a, a:active, a:hover, a:visited {
       color: $text-color;
     }
+  }
+
+  #mainmenus {
+    /* for sticky header transitions */
+    @include transition(font-size 1s);
   }
   
   #level1nav, #level2nav {
@@ -275,10 +283,6 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     }
   }
   
-  #mainmenus {
-    margin-bottom: 1em;
-  }
-  
   // Language selector
   .inline-language-switch ul {
     display: inline-block;
@@ -323,9 +327,10 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
   
   #contentarea {
     margin-top: 2em;
-    
+
     .top-content article header h1 {
-      color: $link-color;
+      font-family: $site-font;
+      text-transform: uppercase;
     }
     
     &.ninecol {
@@ -425,6 +430,7 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
               margin-bottom: 4em !important;
               
               & > h1 {
+                font-family: $site-font;
                 font-size: 2em;
                 font-weight: bold;
               }
