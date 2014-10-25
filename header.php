@@ -66,7 +66,6 @@ $obj = prepare_header($post);
   wp_enqueue_script('jquery-ui-core', '', 'jquery', '', true);
   wp_enqueue_script('jquery-ui-accordion', '', 'jquery', '', true);
   wp_enqueue_script('jquery-ui-tabs', '', 'jquery', '', true);
-  wp_enqueue_script('jquery-sticky', get_stylesheet_directory_uri() . '/javascripts/jquery.sticky.min.js', 'jquery', false, true);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
   wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', false);
   wp_enqueue_script('rfc3339date', get_stylesheet_directory_uri() . '/javascripts/rfc3339date.js', false, false, true);
