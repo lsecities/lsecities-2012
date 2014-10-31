@@ -62,4 +62,14 @@ jQuery(function($) {
       e.stopPropagation();
       $('.full-background-photo').toggleClass('foreground');
     });
+
+  /**
+   * Return from full-screen photos to normal layout when
+   * the background photo is clicked while in full-screen mode
+   */
+/*  $('.full-background-photo.foreground').click(function(event) { 
+      event.preventDefault();
+      $('.full-background-photo').removeClass('foreground'); 
+  });
+*/
 });
