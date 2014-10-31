@@ -9,5 +9,5 @@
 
 <div id="background-photo-explorer">
   <div class="caption"></div>
-  <div class="trigger">Show background photo</div>
+  <div class="trigger"><a class="icon-resize-full-alt" title="Full screen"></a></div>
 </div>
