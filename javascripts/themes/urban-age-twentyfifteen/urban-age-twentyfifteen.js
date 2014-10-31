@@ -58,7 +58,8 @@ jQuery(function($) {
    * on background photo explorer button
    */
   $('#background-photo-explorer .trigger')
-    .click(function() {
+    .click(function(e) {
+      e.stopPropagation();
       $('.full-background-photo').toggleClass('foreground');
     });
 });
