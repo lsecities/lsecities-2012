@@ -5,6 +5,7 @@
 @import "compass/css3/transform";
 @import "compass/css3/filter";
 @import "compass/css3/border-radius";
+@import "compass/css3/animation";
 @import "../../../mixins";
 @import "../../palette";
 
@@ -30,25 +31,9 @@ $font-weight: 100;
   color: $link-hover-color;
 }
 
-@mixin keyframes($animation-name) {
-  @-webkit-keyframes $animation-name {
-    @content;
-  }
-  @-moz-keyframes $animation-name {
-    @content;
-  }
-  @keyframes $animation-name {
-    @content;
-  }
-}
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-}
-
-@include keyframes(slide-down) {
+@include keyframes(pulse) {
   0% { opacity: 1; }
-  90% { opacity: 0; }
+  100% { opacity: 0.5; }
 }
 
 body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
@@ -113,8 +98,17 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     }
 
     .trigger {
-      @include animation('slide-down 5s');
       display: inline-block;
+      cursor: pointer;
+      line-height: 1.8rem;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      @include transition(background-color 1s);
+
+      a {
+        color: black;
+        @include transition(color 1s);
+      }
     }
 
     .caption {

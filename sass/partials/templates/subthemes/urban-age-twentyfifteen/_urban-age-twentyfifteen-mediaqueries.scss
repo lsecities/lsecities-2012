@@ -38,6 +38,20 @@
         & ~ #background-photo-explorer .caption {
           display: block;
         }
+
+        & ~ #background-photo-explorer .trigger {
+          background-color: black;
+          @include transition(background-color 1s);
+          @include animation-name(pulse);
+          @include animation-duration(2s);
+          @include animation-iteration-count(infinite);
+          @include animation-direction(alternate);
+
+          a {
+            color: $header-background-color;
+            @include transition(color 1s);
+          }
+        }
       }
     }
 
