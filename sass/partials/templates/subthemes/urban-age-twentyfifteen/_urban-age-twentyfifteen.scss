@@ -68,8 +68,7 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     background-color: #555;
     pointer-events: auto;
     
-    @include filter(grayscale(97%) blur(2px));
-    @include transition(all 5s ease);
+    @include transition(all 7s ease);
     -webkit-backface-visibility: hidden; /* Fix for transition flickering */
     opacity: 0.2;
     
