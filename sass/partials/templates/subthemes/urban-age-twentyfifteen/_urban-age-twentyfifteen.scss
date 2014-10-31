@@ -90,6 +90,7 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     bottom: 1rem;
     left: 1rem;
     pointer-events: auto;
+    z-index: 11;
     
     & > div {
       background: $header-background-color;
