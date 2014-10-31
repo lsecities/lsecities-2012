@@ -43,7 +43,6 @@ jQuery(function($) {
 
     $('.full-background-photo')
       .attr('src', image.uri)
-      .attr('title', image.title)
       .removeClass('loading')
       .addClass('just-loaded');
 
