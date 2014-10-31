@@ -60,8 +60,5 @@ jQuery(function($) {
   $('#background-photo-explorer .trigger')
     .click(function() {
       $('.full-background-photo').toggleClass('foreground');
-      $(this).text(function(i, text){
-        return text === "Show background photo" ? "Hide background photo" : "Show background photo";
-      })
     });
 });
