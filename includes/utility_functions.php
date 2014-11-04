@@ -60,7 +60,7 @@ function abspath_to($file) {
  * @param mixed $sort_order (default: SORT_ASC) SORT_ASC or SORT_DESC
  * @return array The fields array, sorted as requested, or FALSE if an error occurs
  */
-function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
+function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC, $sort_flags = SORT_REGULAR) {
   if(!(count($fields) > 0) or !is_array($fields)) {
     error_log('Array to sort is not an array or is an empty array');
     return FALSE;
@@ -76,7 +76,7 @@ function sort_linked_field($fields, $sort_by = NULL, $sort_order = SORT_ASC) {
   }
   
   setlocale(LC_COLLATE, 'en_GB.utf8');
-  array_multisort($sorted_fields, $sort_order, SORT_LOCALE_STRING, $fields);
+  array_multisort($sorted_fields, $sort_order, $sort_flags, $fields);
   return $fields;
 }
 
