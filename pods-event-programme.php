@@ -39,6 +39,9 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
         <?php process_session_templates($obj['sessions']); ?>
         </div>
         <div class="threecol last">
+          <?php if($obj['is_programme_tentative']): ?>
+          <p>This programme is subject to change; not all participants are confirmed/included.</p>
+          <?php endif; // ($obj['is_programme_tentative']) ?>
           <?php if($obj['timezone_notice']): ?>
           <dl>
             <dt>Timezone</dt>

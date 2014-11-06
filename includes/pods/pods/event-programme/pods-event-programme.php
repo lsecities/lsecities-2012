@@ -52,6 +52,7 @@ function pods_prepare_event_programme($pod_slug) {
   $for_conference = $pod->field('for_conference.slug');
   $for_event = $pod->field('for_event.slug');
   
+  $obj['is_programme_tentative'] = $pod->field('is_programme_tentative');
   $obj['timezone_notice'] = $pod->field('timezone_notice');
   
   $all_speakers = array();
