@@ -45,7 +45,13 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
         foreach($obj['all_speakers'] as $key => $speaker): ?>
         <div id="speaker-profile-<?php echo $key; ?>" class="speaker-profile twocol<?php if((($index + 1) % 6) == 0) : ?> last<?php endif ; ?>">
           <div>
-            <img src="<?php echo $speaker['photo_uri']; ?>" />
+            <div class="sameheight-box">
+              <div>
+                <?php if($speaker['photo_uri']) : ?>
+                  <img src="<?php echo $speaker['photo_uri']; ?>" />
+                <?php endif; // ($speaker['photo_uri']) ?>
+              </div>
+            </div>
             <strong><?php echo $speaker['name'] . ' ' . $speaker['family_name']; ?></strong>
           </div>
           <div style="display:none;" class="speaker-card" id="speaker-card-<?php echo $key; ?>">
