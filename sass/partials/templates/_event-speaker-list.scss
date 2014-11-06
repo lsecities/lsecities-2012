@@ -29,6 +29,8 @@
     img {
       display: block;
       max-width: 100%;
+      @include border-radius(2px);
+      @include filter-grayscale;
       width: 100%;
     }
   }
