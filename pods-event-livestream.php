@@ -24,7 +24,7 @@ $obj = prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
     <div class='twelvecol last' id='contentarea'>
       <div class='top-content clearfix'>
         <article class="wireframe">
-        <div class='wireframe eightcol'>
+        <div class='wireframe ninecol'>
           <div class='livestream-box'>
             <?php
             if($obj['live_streaming_video_embedcode']) {
@@ -45,7 +45,7 @@ $obj = prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
             ?>
           </div>
         </div>
-        <aside class='wireframe fourcol last tweetfeed-box'>
+        <aside class='wireframe threecol last tweetfeed-box'>
           <?php
           if($obj['live_streaming_video_embedcode']): ?>
          <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=<?php echo urlencode($obj['live_twitter_querystring']); ?>"<?php if($obj['live_twitter_widget_id']) { ?> data-widget-id="<?php echo $obj['live_twitter_widget_id']; ?>"<?php } ?>>Tweets about "<?php echo $obj['live_twitter_querystring']; ?>"</a>
