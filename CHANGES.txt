@@ -4,7 +4,14 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
 
   * [feature] new MtHAML+Twig template: index page for conference
     newspaper data section publications
-  
+  * [feature] conference microsites - manage pre, live and post menus
+  * [feature] event programmes: add flag to mark tentative programmes
+  * [feature] conference microsite theme: urbanage-twentyfifteen
+    * sticky topnav, shrinks on scroll
+    * background photos can now be seen in full and with description
+      label by clicking button to fade out content
+    * general awe
+
  -- andrea rota <a.rota@lse.ac.uk>  Friday, 31 Oct 2014 16:30:00 +0100
 
 lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
