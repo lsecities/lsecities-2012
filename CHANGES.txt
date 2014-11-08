@@ -6,6 +6,9 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
     newspaper data section publications
   * [feature] conference microsites - manage pre, live and post menus
   * [feature] event programmes: add flag to mark tentative programmes
+  * [feature] event speaker list: prepend parent session title to
+    title of sessions which are panel discussions to clarify which
+    panel discussion a speaker is involved in
   * [feature] conference microsite theme: urbanage-twentyfifteen
     * sticky topnav, shrinks on scroll
     * background photos can now be seen in full and with description
