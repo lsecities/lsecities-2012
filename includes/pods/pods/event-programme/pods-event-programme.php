@@ -102,7 +102,7 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
   $session_respondents = $pod->field('respondents');
   $session_start_datetime = new \DateTime($pod->field('start'));
   $session_end_datetime = $pod->field('end') === '0000-00-00 00:00:00' ? null : new \DateTime($pod->field('end'));
-  $session_type = $pod->field('session_type.slug');
+  $session_type = $session_type_slug = $pod->field('session_type.slug');
   if($session_type != 'session') { $session_type = "session $session_type"; }
 
   // get link to PDF of slides: try pick field of file type first
@@ -113,10 +113,10 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
   }
   
   if(is_array($session_speakers)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc, $session_type, $session_parent_session);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc, $session_type_slug, $session_parent_session);
   }
   if(is_array($session_chairs)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_chairs, $session_id, $session_title, $session_is_tbc, $session_type, $session_parent_session);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_chairs, $session_id, $session_title, $session_is_tbc, $session_type_slug, $session_parent_session);
   }
   
   /**
@@ -238,7 +238,7 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
   return $session_people_blurb;
 }
 
-function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc = FALSE, $session_type = '', $parent_session = null) {
+function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc = FALSE, $session_type_slug = '', $parent_session = null) {
   if(!is_array($session_speakers)) return $all_speakers;
   
   foreach($session_speakers as $session_speaker) {
@@ -259,7 +259,15 @@ function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_s
       $all_speakers[$session_speaker['slug']]['photo_uri'] = 'http://v0.urban-age.net' . $session_speaker['photo_legacy'];
     }
     $all_speakers[$session_speaker['slug']]['affiliation'] = $speaker_blurb_and_affiliation['affiliation'];
-    $all_speakers[$session_speaker['slug']]['speaker_in'][] = array($session_id, $session_title);
+
+    // if session is a panel discussion ($session_type_slug == 'sessiontype-panel', include parent name session in session title to clarify
+    // for which session this speaker is a panellist
+    if('sessiontype-panel' === $session_type_slug and !empty($parent_session['name'])) {
+      $this_session_title = $parent_session['name'] . ' - ' . $session_title;
+    } else {
+      $this_session_title = $session_title;
+    }
+    $all_speakers[$session_speaker['slug']]['speaker_in'][] = array($session_id, $this_session_title, $session_is_tbc);
   }
   
   return $all_speakers;
