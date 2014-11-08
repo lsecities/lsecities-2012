@@ -95,6 +95,8 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
   $pod = pods('event_session', $session_slug);
   $session_id = $pod->field('slug');
   $session_title = $pod->field('name' . $lang_suffix);
+  $session_parent_session = $pod->field('parent_session');
+  $session_is_tbc = $pod->field('is_session_tbc');
   $session_speakers = $pod->field('speakers');
   $session_chairs = $pod->field('chairs');
   $session_respondents = $pod->field('respondents');
@@ -111,10 +113,10 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
   }
   
   if(is_array($session_speakers)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_speakers, $session_id, $session_title);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc, $session_type, $session_parent_session);
   }
   if(is_array($session_chairs)) {
-    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_chairs, $session_id, $session_title);
+    $all_speakers = add_speakers_to_stash($special_fields_prefix, $is_lang2, $all_speakers, $session_chairs, $session_id, $session_title, $session_is_tbc, $session_type, $session_parent_session);
   }
   
   /**
@@ -144,6 +146,7 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
     'title' => $session_title,
     'subtitle' => $pod->field('sub_title'),
     'blurb' => $pod->field('extra_session_blurb'),
+    'is_session_tbc' => $pod->field('is_session_tbc'),
     'show_times' => $pod->field('show_times'),
     'start_datetime' => $session_start_datetime->format('H:i'),
     'end_datetime' => is_null($session_end_datetime) ? NULL : $session_end_datetime->format('H:i'),
@@ -235,7 +238,7 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
   return $session_people_blurb;
 }
 
-function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_speakers, $session_speakers, $session_id, $session_title) {
+function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_speakers, $session_speakers, $session_id, $session_title, $session_is_tbc = FALSE, $session_type = '', $parent_session = null) {
   if(!is_array($session_speakers)) return $all_speakers;
   
   foreach($session_speakers as $session_speaker) {
@@ -243,6 +246,9 @@ function add_speakers_to_stash($special_fields_prefix, $is_lang2 = FALSE, $all_s
     // we need to list all the sessions they are taking part in.
     $this_speaker = pods('authors', $session_speaker['slug']);
     $speaker_blurb_and_affiliation = generate_speaker_card_data($special_fields_prefix, $is_lang2, $session_speaker['slug']);
+
+    // if speaker is to be confirmed on any sessions, mark them as to-be-confirmed
+    $all_speakers[$session_speaker['slug']]['to-be-confirmed'] = $session_is_tbc;
 
     $all_speakers[$session_speaker['slug']]['name'] = $session_speaker['name'];
     $all_speakers[$session_speaker['slug']]['family_name'] = $session_speaker['family_name'];

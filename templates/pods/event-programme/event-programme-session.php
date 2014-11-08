@@ -1,5 +1,5 @@
 <?php namespace LSECitiesWPTheme\event_programme; ?>
-<section id='<?php echo $session['id']; ?>' class='<?php echo $session['type']; ?>'>
+<section id='<?php echo $session['id']; ?>' class='<?php echo $session['type']; ?><?php if($session['is_session_tbc']): ?> to-be-confirmed<?php endif; ?>'>
 <?php if($session['title'] and !$session['hide_title']): ?>
   <header><h1>
     <?php if($session['show_times']): ?>
@@ -45,4 +45,5 @@
 <?php
   process_session_templates($session['sessions']);
 ?>    
+<?php if($session['is_session_tbc']): ?>(to be confirmed)<?php endif; ?>
 </section><!-- #<?php echo $session['id']; ?> -->

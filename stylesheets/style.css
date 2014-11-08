@@ -708,6 +708,7 @@ right: -21px; */ }
 
 .lc-event-programme .entry-content section.sessiontype-day > header { border-top: none; }
 .lc-event-programme .entry-content section.sessiontype-day > header > h1 { font-size: 1.5em; color: inherit; background-color: inherit; padding-left: 0; }
+.lc-event-programme .entry-content section.to-be-confirmed { opacity: 0.7; }
 .lc-event-programme .entry-content section.sessiontype-session > header > h1 span:last-of-type { margin-right: 1em; }
 .lc-event-programme .entry-content section.sessiontype-session .session > header > h1 { background-color: inherit; color: inherit; padding-left: 0; }
 .lc-event-programme .entry-content section.sessiontype-session .session .session > header { border-top: none; }
@@ -721,6 +722,7 @@ right: -21px; */ }
 .lc-event-speaker-list .clearline.halfway { display: none; }
 .lc-event-speaker-list .speaker-profile { position: relative; /** force height same as width: http://www.mademyday.de/css-height-equals-width-with-pure-css.html */ }
 .lc-event-speaker-list .speaker-profile.last { margin-right: 0; }
+.lc-event-speaker-list .speaker-profile .to-be-confirmed { font-size: 0.75em; }
 .lc-event-speaker-list .speaker-profile .sameheight-box { position: relative; width: 100%; background: #f6f6f6; overflow: hidden; }
 .lc-event-speaker-list .speaker-profile .sameheight-box:before { content: ""; display: block; padding-top: 100%; }
 .lc-event-speaker-list .speaker-profile .sameheight-box > div { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
