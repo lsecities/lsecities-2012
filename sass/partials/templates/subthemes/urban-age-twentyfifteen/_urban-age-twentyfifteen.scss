@@ -446,6 +446,23 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
           color: #222;
         }
       }
+
+      /**
+       * In the UA2015 microsite theme, we use a fixed header navmenu:
+       * when jumping to a session from a link (e.g. from a speaker
+       * card), we need to offset the link target down the page so that
+       * it doesn't get covered by the fixed navmenu.
+       * We use the technique explained here:
+       * http://css-tricks.com/hash-tag-links-padding/
+       * (the 'Fancier (Clean HTML) Method'
+       */
+      .session:before {
+        display: block; 
+        content: " "; 
+        margin-top: -80px; 
+        height: 80px; 
+        visibility: hidden; 
+      }
       
       .sessiontype-session {
         .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {

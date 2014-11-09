@@ -26,11 +26,16 @@
       margin-right: 0;
     }
     
+    .to-be-confirmed {
+      font-size: 0.75em;
+    }
+
     /** force height same as width: http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
     .sameheight-box {
       position: relative;
       width: 100%;
       background: #f6f6f6;
+      overflow: hidden;
 
       &:before {
         content: "";
