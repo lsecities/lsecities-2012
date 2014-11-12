@@ -60,14 +60,14 @@ $obj = prepare_header($post);
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_directory'); ?>/stylesheets/style.css" />
 
 <?php
-  // enqueue scripts after styles (with flag to have them put in header, whenever possible)
-  wp_enqueue_script('jquery', '', 'json2', '', false);
+  // enqueue scripts after styles (with flag to have them put in footer, whenever possible)
+  wp_enqueue_script('jquery', '', 'json2', '', true);
   wp_enqueue_script('jquery.flexslider', get_stylesheet_directory_uri() . '/javascripts/jquery.flexslider.min.js', 'jquery', false, true);
   wp_enqueue_script('jquery-ui-core', '', 'jquery', '', true);
   wp_enqueue_script('jquery-ui-accordion', '', 'jquery', '', true);
   wp_enqueue_script('jquery-ui-tabs', '', 'jquery', '', true);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
-  wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', false);
+  wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', true);
   wp_enqueue_script('rfc3339date', get_stylesheet_directory_uri() . '/javascripts/rfc3339date.js', false, false, true);
   wp_enqueue_script('jquery-addtocal', get_stylesheet_directory_uri() . '/javascripts/jquery.addtocal.js', array('jquery', 'jquery-ui-core', 'jquery-ui-menu'), false, true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
