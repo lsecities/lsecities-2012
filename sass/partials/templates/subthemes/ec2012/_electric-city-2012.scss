@@ -249,22 +249,23 @@ body.ec2012 {
       display: none;
     }
     
-    #tableofcontents {
-      &.publication-category-research-data {
-        .articles {
-          & > section {
-            .article {
-              margin-bottom: 4em !important;
-              background-color: transparent;
+    
+    &.publication-category-research-data  {
+      #tableofcontents {
+          .articles {
+            & > section {
+              .article {
+                margin-bottom: 4em !important;
+                background-color: transparent;
               
-              & > h1 {
-                font-size: 2em;
-                font-weight: bold;
+                & > h1 {
+                  font-size: 2em;
+                  font-weight: bold;
+                }
               }
             }
           }
         }
-      }
     }
   }
   

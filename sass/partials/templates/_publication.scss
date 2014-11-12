@@ -107,7 +107,7 @@
   /**
    * For ToC of research data/data sections, use a block grid
    */
-  .toc.publication-category-research-data {
+  &.publication-category-research-data .toc {
     .article {
       float: left;
       width: 32%;
