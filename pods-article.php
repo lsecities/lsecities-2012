@@ -120,6 +120,11 @@ $gallery = $obj['gallery'];
                     <?php if($obj['article_extra_content']): ?>
                     <div class="extra-content"><?php echo $obj['article_extra_content']; ?></div>
                     <?php endif; ?>
+                    <?php if($obj['article_author_info']): ?>
+                    <div class="author-info">
+                      <?php echo $obj['article_author_info']; ?>
+                    </div>
+                    <?php endif; // ($obj['article_author_info'])?>
                   </div>
                     
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>

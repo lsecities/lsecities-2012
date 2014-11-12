@@ -67,6 +67,7 @@ function get_article_data($pod) {
     $obj['article_summary'] = do_shortcode($pod->display('summary_lang2'));
     $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
     $obj['article_extra_content'] = do_shortcode($pod->display('extra_content_lang2'));
+    $obj['article_author_info'] = do_shortcode($pod->display('author_info_lang2'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri_lang2');
@@ -79,6 +80,7 @@ function get_article_data($pod) {
     $obj['article_summary'] = do_shortcode($pod->display('summary'));
     $obj['article_text'] = do_shortcode($pod->display('text'));
     $obj['article_extra_content'] = do_shortcode($pod->display('extra_content'));
+    $obj['article_author_info'] = do_shortcode($pod->display('author_info'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf.ID', TRUE));
     if(empty($obj['pdf_uri'])) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri');
