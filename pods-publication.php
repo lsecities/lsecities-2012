@@ -26,7 +26,7 @@ $gallery = $obj['gallery'];
 
 <div role="main">
   <?php if ( have_posts() ) : the_post(); endif; ?>
-  <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-publication'); ?>>
+  <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-publication publication-category-' . $obj['publication_category']); ?>>
     <div class='fullwidth' id='contentarea'>
       <div class='top-content'>
         <?php if(count($gallery['slides'])) : ?>
@@ -44,6 +44,9 @@ $gallery = $obj['gallery'];
           <div class='entry-content article-text'>
             <?php echo $obj['blurb']; ?>
           </div>
+          <?php if($obj_sections['sections'] and 'research-data' !== $obj['publication_category']):
+            include('templates/pods/publication/publication-toc.php');
+          endif; // ($obj_sections['sections'] and 'research-data' !== $obj['publication_category']) ?>
           <!--
           <?php if(count($obj_sections['sections']) > 1): ?>
           <section class='publication-sections'>
@@ -74,26 +77,6 @@ $gallery = $obj['gallery'];
               <?php endif ; ?>
             </ul>
             <dl>
-            <?php if(!$obj['extra_publication_metadata']): // switching to only display $obj['extra_publication_metadata'] if available, until Pods can sort pick items ?>
-            <?php if($obj['publication_authors']['string']): ?>
-              <dt>Authors</dt>
-              <dd><?php echo $obj['publication_authors']['string']; ?></dd>
-            <?php endif; ?>
-            <?php if($obj['publication_editors']['string']): ?>
-              <dt>Editors</dt>
-              <dd><?php echo $obj['publication_editors']['string']; ?></dd>
-            <?php endif; ?>
-            <?php if($obj['publication_editors']['string']): ?>
-              <dt>Contributors</dt>
-              <dd><?php echo $obj['publication_editors']['string']; ?></dd>
-            <?php endif; ?>
-            <?php else: // (!$obj['extra_publication_metadata']) ?>
-            <?php echo $obj['extra_publication_metadata']; ?>
-            <?php endif; // (!$obj['extra_publication_metadata']) ?>
-            <?php if($obj['publication_partners']['string']): ?>
-              <dt>Partners</dt>
-              <dd></dd><?php echo $obj['publication_partners']['string']; ?></dd>
-            <?php endif; ?>
             <?php if($obj['publishing_date']): ?>
               <dt>Publication date</dt>
               <dd><?php echo $obj['publishing_date']; ?></dd>
@@ -103,6 +86,9 @@ $gallery = $obj['gallery'];
               <dd><?php echo $obj['publication_catalogue_data']; ?></dd>
             <?php endif; ?>
             </dl>
+            <?php if('research-data' !== $obj['publication_category']) {
+              include('templates/pods/publication/publication-metadata-people.php');
+            } ?>
           </div>
           <?php get_template_part('templates/partials/socialmedia-share'); ?>
         </aside><!-- #keyfacts -->
@@ -121,53 +107,13 @@ $gallery = $obj['gallery'];
               </dl><!-- .posts -->
           </section><!-- #wp-posts-reviews -->
           <?php endif; //(count($obj['wp_posts_reviews'])) ?>
-          <?php if($obj_sections['sections']) : ?>
-          <section class="toc row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
-            <div class="articles">
-            <?php
-            foreach($obj_sections['sections'] as $section) : ?>
-              <section id="publication-section-<?php echo $section['id']; ?>">
-              <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
-              foreach($section['articles'] as $article) : ?>
-                <div class="article">
-                  <?php
-                  /**
-                   * if this is the ToC entry for an article part of a research-data publication (e.g.
-                   * data section of a conference newspaper), we should have a cover image for each
-                   * article, if this is provided, to be shown in ToC here.
-                   */
-                  if($article['cover_image_uri']): ?>
-                  <div class='cover-image'>
-                    <a href="<?php echo $article['uri']; ?>">
-                      <img src='<?php echo $article['cover_image_uri']; ?>' />
-                    </a>
-                  </div>
-                  <?php endif; // ($article['cover_image_uri']) ?>
-                  <h1>
-                    <a href="<?php echo $article['uri'] ; ?>"><?php echo $article['title']; ?></a>
-                    <?php if($article['lang2_title'] and $article['lang2_uri']): ?>
-                    | <a href="<?php echo $article['lang2_uri']; ?>"><?php echo $article['lang2_title']; ?></a>
-                    <?php endif; // ($article['lang2_title'] and $article['lang2_uri']) ?>
-                  </h1>
-                  <?php if($article['authors']): ?>
-                  <div class="authors">
-                    <?php echo implode(', ', $article['authors']) ; ?>
-                  </div>
-                  <?php endif; ?>
-                  <?php if(false and $article['abstract']): //disable until we can generate plain text only ?>
-                  <div class="excerpt">
-                    <?php echo shorten_string($article['abstract'], 30); ?><a href="<?php echo $article['uri']; ?>">...</a>
-                  </div>
-                  <?php endif; ?>
-                </div><!-- .article -->
-              <?php
-              endforeach; ?>
-              </section><!-- publication-section-<?php echo $section['title']; ?> -->
-            <?php
-            endforeach; ?>
-            </div><!-- .articles -->
-          </section><!-- .row -->
-        <?php endif ?>
+          <?php if($obj_sections['sections'] and 'research-data' === $obj['publication_category']):
+            include('templates/pods/publication/publication-toc.php');
+          endif; // ($obj_sections['sections'] and 'research-data' === $obj['publication_category']) ?>
+          <?php if('research-data' === $obj['publication_category']): ?>
+          <h2>Credits</h2>
+          <?php  include('templates/pods/publication/publication-metadata-people.php'); ?>
+          <?php endif; // ('research-data' === $obj['publication_category'])?>
       </div><!-- .extra-content -->
     </div><!-- #contentarea -->
   </div><!-- #post-<?php the_ID(); ?> -->
