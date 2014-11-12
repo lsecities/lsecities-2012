@@ -87,6 +87,24 @@
   }
   
   /**
+   * For research data/data section publications, display credits inline rather than as vertical list
+   */
+  &.publication-category-research-data .publication-credits {
+    h3 {
+      clear: both;
+    }
+    ul li {
+      float: left;
+
+      &::after {
+        content: ";\00a0";
+      }
+      &:last-child::after {
+        content: "";
+      }
+    }
+  }
+  /**
    * For ToC of research data/data sections, use a block grid
    */
   .toc.publication-category-research-data {
