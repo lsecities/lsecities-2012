@@ -68,6 +68,7 @@ function prepare_header() {
     $obj['theme_js'] = $microsite_configuration['theme_js'];
     $obj['body_class_extra'] = $microsite_configuration['body_class_extra'];
     lc_data('microsite_id', $microsite_configuration['x-site-id']);
+    lc_data('body_class_extra', $microsite_configuration['body_class_extra']);
     $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference($microsite_configuration['conference_pod_slug']);
     
     // Now set microsite nav menus
