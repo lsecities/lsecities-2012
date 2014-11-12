@@ -43,6 +43,6 @@ $element_id = 'pods-form-ui-pods-field-' . $field_name . ($position + 1);
 </div>
 
 <div>
-  <p><a target="_blank" href="<?php echo $PODS_BASEURI_NEW_ITEM . 'people' . '&action=add' ; ?>">Add a new person</a></p>
+  <p><a target="_blank" href="<?php echo $PODS_BASEURI_NEW_ITEM . 'pods-add-new-authors' ; ?>">Add a new person</a></p>
   <p>After adding a new person, save this document and refresh the page in order to see the updated list of people.</p>
 </div>
