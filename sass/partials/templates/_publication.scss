@@ -103,6 +103,12 @@
         content: "";
       }
     }
+    
+    section {
+      clear: both;
+      margin-top: 1rem;
+      @include clearfix;
+    }
   }
   /**
    * For ToC of research data/data sections, use a block grid
