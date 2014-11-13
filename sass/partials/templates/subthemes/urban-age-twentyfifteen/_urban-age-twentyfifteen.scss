@@ -498,6 +498,24 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
       display: block;
     }
 
+    .lc-galleria {
+      width: 100%;
+      
+      .galleria-container, .galleria-thumbnails .galleria-image {
+        background-color: transparent;
+      }
+      
+      .galleria-info {
+        opacity: 0;
+        @include transition(opacity 1s);
+      }
+      
+      .galleria-thumbnails-container:hover + .galleria-info {
+        opacity: 1;
+        @include transition(opacity 1s);
+      }
+    }
+    
     #navigationarea {                                                                                                                                                   
       position: absolute;
       top: 0;
