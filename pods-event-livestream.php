@@ -48,8 +48,10 @@ $obj = prepare_conference_live(get_post_meta($post->ID, 'pod_slug', true));
         <aside class='wireframe threecol last tweetfeed-box'>
           <?php
           if($obj['live_streaming_video_embedcode']): ?>
-         <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=<?php echo urlencode($obj['live_twitter_querystring']); ?>"<?php if($obj['live_twitter_widget_id']) { ?> data-widget-id="<?php echo $obj['live_twitter_widget_id']; ?>"<?php } ?>>Tweets about "<?php echo $obj['live_twitter_querystring']; ?>"</a>
-         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
+            <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=<?php echo urlencode($obj['live_twitter_querystring']); ?>" <?php if($obj['live_twitter_widget_id']) { ?> data-widget-id="<?php echo $obj['live_twitter_widget_id']; ?>"<?php } ?>><?php echo $obj['live_twitter_querystring']; ?> Tweets</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
           <?php endif; //($live_streaming_video_embedcode) ?>
         </aside><!-- .tweetfeed-box -->
         </article><!-- .wireframe -->
