@@ -402,6 +402,14 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     }
   }
   
+  .lc-conference-live-page {
+    .livestream-box iframe {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+  
   .lc-publication {
     #share-on-social-media {
       display: none;
