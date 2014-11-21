@@ -35,7 +35,7 @@
 <?php if($session['youtube_video'] or $session['slides']): ?>
   <ul class="mediaitems">
   <?php if($session['youtube_video']): ?>
-    <li class='link video'><a class='watchvideo onyoutube' href='http://youtube.com/watch?v=<?php echo $session['youtube_video']; ?>'>Watch video</a></li>
+    <li class='link video'><a class='watchvideo onyoutube' href='https://www.youtube.com/watch?v=<?php echo $session['youtube_video']; ?>'>Watch video</a></li>
   <?php endif; ?>
   <?php if($session['slides']): ?>
     <li class='link slides'><a class='downloadthis pdf' href='<?php echo $session['slides']; ?>'>Browse slides</a></li>
