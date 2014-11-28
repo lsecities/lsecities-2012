@@ -1,4 +1,4 @@
-          <section class="toc row" id="tableofcontents">
+          <section class="toc row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
             <h1>Contents</h1>
             <div class="articles">
             <?php
