@@ -213,6 +213,7 @@ function get_project_research_outputs($pod) {
     var_trace(var_export($research_output->field('category'), true), 'output category');
 
     $research_outputs[$research_output->field('category.slug')][] = array(
+      'slug' => 'research_outputs__' . $research_output->field('slug'),
       'title' => $research_output->field('name'),
       'citation' => $research_output->field('citation'),
       'date' => date_string($research_output->field('date')),
@@ -242,6 +243,7 @@ function get_project_research_outputs($pod) {
     // only add publication to list if publication has a linked WP page; otherwise emit warning
     if($linked_wp_page_id) {
       $research_outputs[$research_output->field('category.slug')][] = array(
+        'slug' => $research_output->field('category.slug') . '__' . $research_output->field('slug'),
         'title' => $research_output->field('name'),
         'citation' => $research_output->field('name'),
         'date' => date_string($research_output->field('publishing_date')),
