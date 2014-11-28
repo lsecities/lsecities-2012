@@ -37,9 +37,6 @@ jQuery(function($) {
       if(caption.length > 0) caption += ' - ';
       caption += 'Photo by ' + image.attribution_name + '.';
     }
-    // Add link to full size photo
-    if(caption.length > 0) caption += ' ';
-    caption += '(<a href="' + image.uri + '" target="_blank">View full size</a>)';
 
     $('.full-background-photo')
       .attr('src', image.uri)
