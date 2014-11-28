@@ -169,7 +169,7 @@ $gallery = $obj['gallery'];
                   <dd>
                     <ul>
                     <?php foreach($obj['research_outputs'][$category_slug] as $publication): ?>
-                      <li>
+                      <li class='<?php echo $publication['slug']; ?>'>
                         <?php if($publication['uri']): ?><a href="<?php echo $publication['uri']; ?>"><?php endif; ?>
                         <?php echo $publication['citation']; ?>
                         <?php if($publication['uri']): ?></a><?php endif; ?>
