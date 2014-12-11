@@ -834,6 +834,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 
 .lc-publication { /** For research data/data section publications, display credits inline rather than as vertical list */ /** For ToC of research data/data sections, use a block grid */ }
 .lc-publication * { box-sizing: border-box; }
+.lc-publication .heading-image { margin-bottom: 1rem; }
 .lc-publication #keyfacts p { margin-bottom: 0.2em; margin-top: 0.5em; }
 .lc-publication #keyfacts .cover-thumbnail { padding: 0 4em; }
 .lc-publication #keyfacts .cover-thumbnail img { margin: 1em 0; -moz-transform: rotate(3deg); -ms-transform: rotate(3deg); -webkit-transform: rotate(3deg); transform: rotate(3deg); -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 3px 3px 3px #ccc; -webkit-box-shadow: 3px 3px 3px #ccc; box-shadow: 3px 3px 3px #ccc; }
