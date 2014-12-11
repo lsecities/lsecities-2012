@@ -37,7 +37,7 @@ $gallery = $obj['gallery'];
 <div role="main">
   <?php if ( have_posts() ) : the_post(); endif; ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-research-project'); ?>>
-    <div class='ninecol' id='contentarea'>
+    <div class='twelvecol' id='contentarea'>
       <div class='top-content'>
         <?php if(count($gallery['slides'])) : ?>
         <header class='heading-image'>
@@ -258,20 +258,8 @@ $gallery = $obj['gallery'];
       <div class='extra-content twelvecol'>
       </div><!-- .extra-content -->
     </div><!-- #contentarea -->
-    <?php
-      $IN_CONTENT_AREA = false;
-      if($project_status == 'active') {
-        $HIDE_CURRENT_PROJECTS = false;
-        $HIDE_PAST_PROJECTS = true;
-      } else {
-        $HIDE_CURRENT_PROJECTS = true;
-        $HIDE_PAST_PROJECTS = false;
-      }
-      get_template_part('nav'); ?>
   </div><!-- #post-<?php the_ID(); ?> -->
 
 </div><!-- role='main'.row -->
-
-<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
