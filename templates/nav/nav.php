@@ -62,10 +62,7 @@ if($current_post_id === 94) {
 }
 
 // /research (the whole Research section) or individual Research project pod items
-if($current_post_id === 306 or in_array(306, $ancestors_and_self) or (lc_data('pods_toplevel_ancestor') === 306)) {
-  get_template_part('templates/nav/nav', 'research');
-  $nav_generated = true;
-}
+// no sidebar is needed anymore (see issue #33)
 
 // /publications (the whole Publications section)
 if($current_post_id === 309 or in_array(309, $ancestors_and_self)) {
