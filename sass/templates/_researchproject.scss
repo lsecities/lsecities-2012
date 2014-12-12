@@ -1,7 +1,13 @@
 @import "compass/css3";
 
 .lc-research-project {
-
+  // TECHNICAL DEBT
+  // border-box should be the overall default; until that
+  // has been thoroughly tested, we can set it per template
+  & * {
+    box-sizing: border-box;
+  }
+  
   .entry-header .abstract {
     font-style: italic;
   }
