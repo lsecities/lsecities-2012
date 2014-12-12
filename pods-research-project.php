@@ -81,58 +81,58 @@ $gallery = $obj['gallery'];
               <div class="eightcol"
               <?php echo $obj['blurb']; ?>
               </div>
-        <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
-          <dl>
-          <?php if($obj['web_uri']): ?>
-            <dt>Website</dt>
-            <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
-          <?php endif; ?>
-          <?php if(!empty($obj['free_form_project_teams'])) {
-            echo $obj['free_form_project_teams']; 
-          } ?>
-          <?php if(count($obj['project_coordinators'])): ?>
-            <dt>Project <?php echo count($obj['project_coordinators']) > 1 ?'coordinators' : 'coordinator'; ?></dt>
-            <dd><?php echo $obj['project_coordinators_string']; ?></dd>
-          <?php endif; ?>
-          <?php if(count($obj['project_researchers'])): ?>
-            <dt><?php echo count($obj['project_researchers']) > 1 ? 'Researchers' : 'Researcher'; ?></dt>
-            <dd><?php echo $obj['project_researchers_string']; ?></dd>
-          <?php endif; ?>
-          <?php if(count($obj['project_partners'])): ?>
-            <dt>Project <?php echo count($obj['project_partners']) > 1 ? 'partners' : 'partner'; ?></dt>
-            <dd><?php echo $obj['project_partners_string']; ?></dd>
-          <?php endif; ?>
-          <?php if(count($obj['project_funders'])): ?>
-            <dt>Project <?php echo count($obj['project_funders']) > 1 ? 'funders' : 'funder'; ?></dt>
-            <dd><?php echo $obj['project_funders_string']; ?></dd>
-          <?php endif; ?>
-          <?php if($obj['research_strand_title']): ?>
-            <dt>Research strand</dt>
-            <dd><?php echo $obj['research_strand_title']; ?></dd>
-          <?php endif; ?>
-          <?php if($obj['project_timespan']): ?>
-            <dt>Duration</dt>
-            <dd><?php echo $obj['project_timespan']; ?></dd>
-          <?php endif; ?>
-          <?php if($obj['keywords']): ?>
-            <dt>Keywords</dt>
-            <dd><?php echo $obj['keywords']; ?></dd>
-          <?php endif; ?>
-          <?php if($obj['featured_post']): ?>
-            <dt>Highlights</dt>
-            <dd class="highlights">
-              <a href="<?php echo $obj['featured_post']['permalink']; ?>" title="">
-                <?php if($obj['featured_post']['thumbnail_url']): ?>
-                <img src="<?php echo $obj['featured_post']['thumbnail_url']; ?>" />
-                <?php endif; // ($obj['featured_post']['thumbnail_url']) ?>
-                <?php if($obj['featured_post']['title']): ?>
-                <h1 style=""><?php echo $obj['featured_post']['title']; ?></h1>
-                <?php endif; // ($obj['featured_post']['title']) ?>
-              </a>
-            </dd>
-          <?php endif; // ($obj['featured_post'])?>
-          </dl>
-        </aside><!-- #keyfacts -->
+              <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
+                <dl>
+                <?php if($obj['web_uri']): ?>
+                  <dt>Website</dt>
+                  <dd><a href="<?php echo $obj['web_uri']; ?>"><?php echo $obj['web_uri']; ?></a></dd>
+                <?php endif; ?>
+                <?php if(!empty($obj['free_form_project_teams'])) {
+                  echo $obj['free_form_project_teams']; 
+                } ?>
+                <?php if(count($obj['project_coordinators'])): ?>
+                  <dt>Project <?php echo count($obj['project_coordinators']) > 1 ?'coordinators' : 'coordinator'; ?></dt>
+                  <dd><?php echo $obj['project_coordinators_string']; ?></dd>
+                <?php endif; ?>
+                <?php if(count($obj['project_researchers'])): ?>
+                  <dt><?php echo count($obj['project_researchers']) > 1 ? 'Researchers' : 'Researcher'; ?></dt>
+                  <dd><?php echo $obj['project_researchers_string']; ?></dd>
+                <?php endif; ?>
+                <?php if(count($obj['project_partners'])): ?>
+                  <dt>Project <?php echo count($obj['project_partners']) > 1 ? 'partners' : 'partner'; ?></dt>
+                  <dd><?php echo $obj['project_partners_string']; ?></dd>
+                <?php endif; ?>
+                <?php if(count($obj['project_funders'])): ?>
+                  <dt>Project <?php echo count($obj['project_funders']) > 1 ? 'funders' : 'funder'; ?></dt>
+                  <dd><?php echo $obj['project_funders_string']; ?></dd>
+                <?php endif; ?>
+                <?php if($obj['research_strand_title']): ?>
+                  <dt>Research strand</dt>
+                  <dd><?php echo $obj['research_strand_title']; ?></dd>
+                <?php endif; ?>
+                <?php if($obj['project_timespan']): ?>
+                  <dt>Duration</dt>
+                  <dd><?php echo $obj['project_timespan']; ?></dd>
+                <?php endif; ?>
+                <?php if($obj['keywords']): ?>
+                  <dt>Keywords</dt>
+                  <dd><?php echo $obj['keywords']; ?></dd>
+                <?php endif; ?>
+                <?php if($obj['featured_post']): ?>
+                  <dt>Highlights</dt>
+                  <dd class="highlights">
+                    <a href="<?php echo $obj['featured_post']['permalink']; ?>" title="">
+                      <?php if($obj['featured_post']['thumbnail_url']): ?>
+                      <img src="<?php echo $obj['featured_post']['thumbnail_url']; ?>" />
+                      <?php endif; // ($obj['featured_post']['thumbnail_url']) ?>
+                      <?php if($obj['featured_post']['title']): ?>
+                      <h1 style=""><?php echo $obj['featured_post']['title']; ?></h1>
+                      <?php endif; // ($obj['featured_post']['title']) ?>
+                    </a>
+                  </dd>
+                <?php endif; // ($obj['featured_post'])?>
+                </dl>
+              </aside><!-- #keyfacts -->
             </section>
             
             <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
