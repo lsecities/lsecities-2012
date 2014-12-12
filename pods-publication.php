@@ -45,7 +45,8 @@ $gallery = $obj['gallery'];
         <?php endif; ?>
 
         <header class='entry-header'>
-          <h1><?php echo $obj['title']; ?></h1>
+          
+<h1><?php echo $obj['title']; ?></h1>
           <?php if($obj['subtitle']): ?><h2><?php echo $obj['subtitle']; ?></h2><?php endif ; ?>
         </header>
 
