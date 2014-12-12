@@ -255,7 +255,6 @@ $gallery = $obj['gallery'];
             // photo galleries
             if(count($obj['research_photo_galleries'])): ?>
             <section id="t-galleries" class="project-tab hide later">
-              <header><h1>Photo essays</h1></header>
               <?php
               foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
                 <div class="sixcol photo-essay">
