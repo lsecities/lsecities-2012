@@ -58,6 +58,10 @@
       clear: left;
     }
   }
+
+  #t-dataviz .toc {
+    @include data-publication-toc-article;
+  }
 }
 
 nav#projectsmenu {

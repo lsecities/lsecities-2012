@@ -118,33 +118,6 @@
    * For ToC of research data/data sections, use a block grid
    */
   &.publication-category-research-data .toc {
-    .article {
-      float: left;
-      width: 32%;
-      margin-right: 2%;
-      padding: 0.5rem;
-      background-color: rgba(240, 240, 240, 0.9);
-      
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      
-      &:nth-child(3n+1) {
-        clear: both;
-      }
-      
-      .cover-image {
-        overflow: hidden;
-        
-        img {
-          @include transition(0.5s);
-        }
-        
-        img:hover, img:focus {
-          @include scale(1.5);
-          @include transition(0.5s);
-        }
-      }
-    }
+    @include data-publication-toc-article;
   }
 }
