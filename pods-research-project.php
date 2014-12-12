@@ -137,7 +137,6 @@ $gallery = $obj['gallery'];
             
             <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
             <section id="t-events" class="project-tab hide">
-              <header><h1>Events</h1></header>
               <?php if($obj['events_blurb']): ?>
               <div><?php echo $obj['events_blurb']; ?></div>
               <?php endif; // ($obj['events_blurb']) ?>
@@ -199,7 +198,6 @@ $gallery = $obj['gallery'];
             
             <?php if(count($obj['project_news'])): ?>
               <section id="t-news" class="project-tab hide">
-                <header><h1>Project news</h1></header>
                 <ul>
                 <?php foreach($obj['project_news'] as $news_item) : ?>
                   <li><a href="<?php echo $news_item['permalink'] ?>"><?php echo $news_item['date']; ?> | <?php echo $news_item['title'] ?></a></li>
@@ -211,7 +209,6 @@ $gallery = $obj['gallery'];
             <?php // publications
             if(count($obj['research_outputs'])): ?>
             <section id="t-publications" class="project-tab hide">
-              <header><h1>Publications</h1></header>
               <dl>
                 <?php
                   foreach($obj['research_output_categories'] as $category_slug):
