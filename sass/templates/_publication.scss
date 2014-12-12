@@ -13,6 +13,10 @@
     box-sizing: border-box;
   }
   
+  .heading-image {
+    margin-bottom: 1rem;
+  }
+
   #keyfacts {
     p {
       margin-bottom: 0.2em;
@@ -68,7 +72,7 @@
           margin-bottom: 1rem;
 
           .heading-image {
-          width: 100%;
+            width: 100%;
             max-width: 100%;
           }
           & > h1 {

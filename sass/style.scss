@@ -30,31 +30,31 @@
 @import "partials/wordpress/single";
 
 // Final designs - main frame and one SCSS per template
-@import "partials/templates/base";
-@import "partials/templates/page-meta";
-@import "partials/templates/plugins/jquery.flexslider";
-@import "partials/templates/plugins/jquery.galleria";
-@import "partials/templates/plugins/usernoise";
-@import "partials/templates/article";
-@import "partials/templates/event";
-@import "partials/templates/event-programme";
-@import "partials/templates/event-speaker-list";
-@import "partials/templates/event-speaker-list-mediaqueries";
-@import "partials/templates/conference";
-@import "partials/templates/conference-live";
-@import "partials/templates/list";
-@import "partials/templates/media-archive";
-@import "partials/templates/newsletter";
-@import "partials/templates/people-list";
-@import "partials/templates/publication";
-@import "partials/templates/researchproject";
-@import "partials/templates/slider";
+@import "templates/base";
+@import "templates/page-meta";
+@import "templates/plugins/jquery.flexslider";
+@import "templates/plugins/jquery.galleria";
+@import "templates/plugins/usernoise";
+@import "templates/article";
+@import "templates/event";
+@import "templates/event-programme";
+@import "templates/event-speaker-list";
+@import "templates/event-speaker-list-mediaqueries";
+@import "templates/conference";
+@import "templates/conference-live";
+@import "templates/list";
+@import "templates/media-archive";
+@import "templates/newsletter";
+@import "templates/people-list";
+@import "templates/publication";
+@import "templates/researchproject";
+@import "templates/slider";
 
 // Microsites
-@import "partials/templates/subthemes/ec2012/electric-city-2012";
-@import "partials/templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen";
+@import "templates/subthemes/ec2012/electric-city-2012";
+@import "templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen";
 
 // Media queries should be imported last
 @import "partials/media";
-@import "partials/templates/subthemes/ec2012/electric-city-2012-mediaqueries";
-@import "partials/templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen-mediaqueries";
+@import "templates/subthemes/ec2012/electric-city-2012-mediaqueries";
+@import "templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen-mediaqueries";
