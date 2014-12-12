@@ -17,6 +17,15 @@ if(empty($post_id)) {
 $obj = pods_prepare_publication($post_id);
 $obj_sections = pods_prepare_table_of_contents($post_id);
 
+/**
+ * assign list of sections to own variable, to be used by included template
+ * TECHNICAL_DEBT: everything must be moved to Twig+HAML, and the included
+ * template must be refactored to make it context-independent (no reliance
+ * on variable names), as it is used both here and in the research projects
+ * template.
+ */
+$publication_sections = $obj_sections['sections'];
+
 $TRACE_PREFIX = 'pods-publications';
 
 // the galleria partial expects to find its data in a $gallery variable

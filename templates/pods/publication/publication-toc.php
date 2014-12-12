@@ -2,7 +2,7 @@
             <h1>Contents</h1>
             <div class="articles">
             <?php
-            foreach($obj_sections['sections'] as $section) : ?>
+            foreach($publication_sections as $section) : ?>
               <section id="publication-section-<?php echo $section['id']; ?>">
               <?php if($section['title']) { ?><h1><?php echo $section['title']; ?></h1><?php }
               foreach($section['articles'] as $article) : ?>
