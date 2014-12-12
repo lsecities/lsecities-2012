@@ -61,8 +61,16 @@ if($current_post_id === 94) {
   $nav_generated = true;
 }
 
-// /research (the whole Research section) or individual Research project pod items
-// no sidebar is needed anymore (see issue #33)
+/**
+ * /research (the whole Research section) or individual Research project pod items
+ * no sidebar is needed anymore for the actual /research/whatever/ pages (see issue #33)
+ * we only show the sidebar on individual research project pages for now - until
+ * a full drop-down menu for easier navigation is available
+ */
+if((lc_data('pods_toplevel_ancestor') === 306)) {
+  get_template_part('templates/nav/nav', 'research');
+  $nav_generated = true;
+}
 
 // /publications (the whole Publications section)
 if($current_post_id === 309 or in_array(309, $ancestors_and_self)) {
