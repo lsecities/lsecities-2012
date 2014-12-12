@@ -1,5 +1,4 @@
-          <section class="toc row publication-category-<?php echo $obj['publication_category']; ?>" id="tableofcontents">
-            <h1>Contents</h1>
+          <section class="toc row publication-category-<?php echo $obj['publication_category']; ?>">
             <div class="articles">
             <?php
             foreach($publication_sections as $section) : ?>
