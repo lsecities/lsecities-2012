@@ -61,18 +61,18 @@ $gallery = $obj['gallery'];
             </script>
             <!--<![endif]-->
             <ul class="nav organictabs row">
-              <li class="threecol"><a class="current" href="#t-project-info">Profile</a></li>
+              <li class="twocol"><a class="current" href="#t-project-info">Profile</a></li>
               <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
-              <li class="threecol"><a href="#t-events">Events</a></li>
+              <li class="twocol"><a href="#t-events">Events</a></li>
               <?php endif; // (count($obj['research_events']) or count($obj['research_external_events']))?>
               <?php if(count($obj['project_news'])): ?>
-              <li class="threecol"><a href="#t-news">News</a></li>
+              <li class="twocol"><a href="#t-news">News</a></li>
               <?php endif; ?>
               <?php if(count($obj['research_outputs'])): ?>
-              <li class="threecol"><a href="#t-publications">Publications</a></li>
+              <li class="twocol"><a href="#t-publications">Publications</a></li>
               <?php endif; ?>
               <?php if(count($obj['research_photo_galleries'])): ?>
-              <li class="threecol"><a href="#t-galleries">Galleries</a></li>
+              <li class="twocol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
             <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
