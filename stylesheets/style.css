@@ -884,6 +884,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project #t-dataviz .toc .article .cover-image { overflow: hidden; }
 .lc-research-project #t-dataviz .toc .article .cover-image img { -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 .lc-research-project #t-dataviz .toc .article .cover-image img:hover, .lc-research-project #t-dataviz .toc .article .cover-image img:focus { -moz-transform: scale(1.5, 1.5); -ms-transform: scale(1.5, 1.5); -webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
+.lc-research-project #t-dataviz .toc .article h1 { font-size: 1.25rem; }
 
 nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em; }
 
