@@ -343,6 +343,7 @@ body.ec2012 .lc-event-speaker-list .speaker-card { -moz-box-shadow: none; -webki
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; } }
+/** publications-related mixins */
 .row .row { min-width: inherit; }
 
 /** Define default font sizes for base elements */
@@ -842,24 +843,25 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication .publication-sections { margin-top: 2em; }
 .lc-publication .publication-sections h1 { margin-bottom: 0.5em; }
 .lc-publication .publication-sections ul li { line-height: 1.125em; margin-bottom: 0.5em; }
-.lc-publication #tableofcontents .articles > section { margin-bottom: 1.5rem; }
-.lc-publication #tableofcontents .articles > section > h1 { font-size: 1.75rem; font-weight: bold; }
-.lc-publication #tableofcontents .articles > section .article { margin-bottom: 1rem; }
-.lc-publication #tableofcontents .articles > section .article .heading-image { width: 100%; max-width: 100%; }
-.lc-publication #tableofcontents .articles > section .article > h1 { font-size: 1.25rem; margin-top: 0.25rem; font-weight: bold; text-transform: uppercase; }
-.lc-publication #tableofcontents .articles > section .article .excerpt { font-size: 1rem; }
+.lc-publication .toc .articles > section { margin-bottom: 1.5rem; }
+.lc-publication .toc .articles > section > h1 { font-size: 1.75rem; font-weight: bold; }
+.lc-publication .toc .articles > section .article { margin-bottom: 1rem; }
+.lc-publication .toc .articles > section .article .heading-image { width: 100%; max-width: 100%; }
+.lc-publication .toc .articles > section .article > h1 { font-size: 1.25rem; margin-top: 0.25rem; font-weight: bold; text-transform: uppercase; }
+.lc-publication .toc .articles > section .article .excerpt { font-size: 1rem; }
 .lc-publication.publication-category-research-data .publication-credits h3 { clear: both; }
 .lc-publication.publication-category-research-data .publication-credits ul li { float: left; }
 .lc-publication.publication-category-research-data .publication-credits ul li::after { content: ";\00a0"; }
 .lc-publication.publication-category-research-data .publication-credits ul li:last-child::after { content: ""; }
 .lc-publication.publication-category-research-data .publication-credits section { clear: both; margin-top: 1rem; overflow: hidden; *zoom: 1; }
-.lc-publication.publication-category-research-data .toc .article { float: left; width: 32%; margin-right: 2%; padding: 0.5rem; background-color: rgba(240, 240, 240, 0.9); }
+.lc-publication.publication-category-research-data .toc .article { float: left; width: 32%; margin-right: 2%; padding: 0.5rem; background-color: rgba(240, 240, 240, 0.9); margin-bottom: 2rem; }
 .lc-publication.publication-category-research-data .toc .article:nth-child(3n) { margin-right: 0; }
 .lc-publication.publication-category-research-data .toc .article:nth-child(3n+1) { clear: both; }
 .lc-publication.publication-category-research-data .toc .article .cover-image { overflow: hidden; }
 .lc-publication.publication-category-research-data .toc .article .cover-image img { -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 .lc-publication.publication-category-research-data .toc .article .cover-image img:hover, .lc-publication.publication-category-research-data .toc .article .cover-image img:focus { -moz-transform: scale(1.5, 1.5); -ms-transform: scale(1.5, 1.5); -webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 
+.lc-research-project * { box-sizing: border-box; }
 .lc-research-project .entry-header .abstract { font-style: italic; }
 .lc-research-project #linked-galleries > div { margin-bottom: 1em; }
 .lc-research-project section { margin-top: 2em; }
@@ -873,6 +875,12 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project .organictabs li.threecol:nth-of-type(4n+1) { clear: left; }
 .lc-research-project #t-galleries .photo-essay:nth-of-type(2n) { margin-right: 0; }
 .lc-research-project #t-galleries .photo-essay:nth-of-type(2n+1) { clear: left; }
+.lc-research-project #t-dataviz .toc .article { float: left; width: 32%; margin-right: 2%; padding: 0.5rem; background-color: rgba(240, 240, 240, 0.9); margin-bottom: 2rem; }
+.lc-research-project #t-dataviz .toc .article:nth-child(3n) { margin-right: 0; }
+.lc-research-project #t-dataviz .toc .article:nth-child(3n+1) { clear: both; }
+.lc-research-project #t-dataviz .toc .article .cover-image { overflow: hidden; }
+.lc-research-project #t-dataviz .toc .article .cover-image img { -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
+.lc-research-project #t-dataviz .toc .article .cover-image img:hover, .lc-research-project #t-dataviz .toc .article .cover-image img:focus { -moz-transform: scale(1.5, 1.5); -ms-transform: scale(1.5, 1.5); -webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 
 nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em; }
 
@@ -1085,8 +1093,8 @@ body.urban-age-twentyfifteen .lc-conference-live-page .livestream-box iframe, bo
 body.urban-age-twentyfifteen .lc-publication #share-on-social-media, body.rio2013 .lc-publication #share-on-social-media, body.delhi2014 .lc-publication #share-on-social-media { display: none; }
 body.urban-age-twentyfifteen .lc-publication header.entry-header, body.rio2013 .lc-publication header.entry-header, body.delhi2014 .lc-publication header.entry-header { display: block; }
 body.urban-age-twentyfifteen .lc-publication header.entry-header h2, body.rio2013 .lc-publication header.entry-header h2, body.delhi2014 .lc-publication header.entry-header h2 { font-size: 1.25em; font-weight: normal; }
-body.urban-age-twentyfifteen .lc-publication #tableofcontents.publication-category-research-data .articles > section .article, body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article, body.delhi2014 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
-body.urban-age-twentyfifteen .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1, body.rio2013 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1, body.delhi2014 .lc-publication #tableofcontents.publication-category-research-data .articles > section .article > h1 { font-family: BureauGrotesque-ThreeSeven, "Open Sans", Sans-Serif; font-size: 2em; font-weight: bold; }
+body.urban-age-twentyfifteen .lc-publication .toc.publication-category-research-data .articles > section .article, body.rio2013 .lc-publication .toc.publication-category-research-data .articles > section .article, body.delhi2014 .lc-publication .toc.publication-category-research-data .articles > section .article { margin-bottom: 4em !important; }
+body.urban-age-twentyfifteen .lc-publication .toc.publication-category-research-data .articles > section .article > h1, body.rio2013 .lc-publication .toc.publication-category-research-data .articles > section .article > h1, body.delhi2014 .lc-publication .toc.publication-category-research-data .articles > section .article > h1 { font-family: BureauGrotesque-ThreeSeven, "Open Sans", Sans-Serif; font-size: 2em; font-weight: bold; }
 body.urban-age-twentyfifteen .lc-event-programme .entry-content, body.rio2013 .lc-event-programme .entry-content, body.delhi2014 .lc-event-programme .entry-content { /** In the UA2015 microsite theme, we use a fixed header navmenu: when jumping to a session from a link (e.g. from a speaker card), we need to offset the link target down the page so that it doesn't get covered by the fixed navmenu. We use the technique explained here: http://css-tricks.com/hash-tag-links-padding/ (the 'Fancier (Clean HTML) Method' */ }
 body.urban-age-twentyfifteen .lc-event-programme .entry-content section:first-child, body.rio2013 .lc-event-programme .entry-content section:first-child, body.delhi2014 .lc-event-programme .entry-content section:first-child { margin-top: 0; }
 body.urban-age-twentyfifteen .lc-event-programme .entry-content .session a, body.rio2013 .lc-event-programme .entry-content .session a, body.delhi2014 .lc-event-programme .entry-content .session a { color: #222; }

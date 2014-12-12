@@ -51,7 +51,7 @@ $gallery = $obj['gallery'];
             <div class="abstract"><?php echo $obj['summary']; ?></div>
             <?php endif; // ($obj['summary'])?>
 
-            <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_external_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])): ?>
+            <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_external_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections'])): ?>
             <!--[if gt IE 8]><!-->
             <script>jQuery(function($) {
               $("article").organicTabs();
@@ -69,11 +69,14 @@ $gallery = $obj['gallery'];
               <?php if(count($obj['research_outputs'])): ?>
               <li class="twocol"><a href="#t-publications">Publications</a></li>
               <?php endif; ?>
+              <?php if(count($obj['data_visualization_collections'])): ?>
+              <li class="twocol"><a href="#t-dataviz">Data</a></li>
+              <?php endif; ?>
               <?php if(count($obj['research_photo_galleries'])): ?>
               <li class="twocol"><a href="#t-galleries">Galleries</a></li>
               <?php endif; ?>
             </ul>
-            <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs'])) ?>
+            <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections'])) ?>
             
           </header>
           <div class='entry-content article-text list-wrap'>
@@ -233,6 +236,20 @@ $gallery = $obj['gallery'];
               </dl>
             </section>
             <?php endif; // (count($obj['research_outputs'])) ?>
+            
+            <?php
+            // data visualization collections
+            if(count($obj['data_visualization_collections'])): ?>
+            <section id="t-dataviz" class="project-tab hide later">
+              <?php
+              foreach($obj['data_visualization_collections'] as $data_visualization_collection): ?>
+                <?php 
+                  $publication_sections = $data_visualization_collection['publication_sections']['sections'];
+                  include('templates/pods/publication/publication-toc.php'); ?>
+                <?php
+              endforeach; // ($obj['data_visualization_collections'] as $data_visualization_collection) ?>
+            </section>
+            <?php endif; // (count($obj['data_visualization_collections'])) ?>
             
             <?php
             // photo galleries
