@@ -24,8 +24,6 @@ if(!$pod_from_page) {
   lc_data('pods_toplevel_ancestor', 306);
 }
 
-$pod = pods('research_project', $pod_slug);
-
 $obj = pods_prepare_research_project($pod_slug);
   
 // we need - for now - this data in a variable called $gallery in order

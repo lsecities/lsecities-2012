@@ -1,18 +1,10 @@
 <?php
-$TRACE_ENABLED = is_user_logged_in();
 $TRACE_PREFIX = 'nav-research';
 $current_post_id = $post->ID;
 
 global $IN_CONTENT_AREA;
 global $HIDE_CURRENT_PROJECTS, $HIDE_PAST_PROJECTS;
 $BASE_URI = PODS_BASEURI_RESEARCH_PROJECTS;
-
-var_trace('HIDE_CURRENT_PROJECTS: '. $HIDE_CURRENT_PROJECTS, $TRACE_PREFIX);
-var_trace('HIDE_PAST_PROJECTS: '. $HIDE_PAST_PROJECTS, $TRACE_PREFIX);
-
-var_trace('post ID: ' . $current_post_id, $TRACE_PREFIX);
-var_trace(var_export($pod, true), $TRACE_PREFIX);
-
 
 $current_projects_by_strand = compose_project_list_by_strand('active');
 var_trace(var_export($current_projects_by_strand, true), $TRACE_PREFIX . ' - active projects (by strand): ');
