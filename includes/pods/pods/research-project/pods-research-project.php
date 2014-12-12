@@ -65,6 +65,9 @@ function pods_prepare_research_project($pod_slug) {
 
   $obj['research_outputs'] = get_project_research_outputs($pod);
   
+  // Data visualization collections
+  $obj['data_visualization_collections'] = get_project_data_visualization_collections($pod);
+  
   // news
   $obj['project_news'] = get_project_news($pod);
   $obj['news_categories'] = news_categories($pod->field('news_categories'));
@@ -88,6 +91,29 @@ function pods_prepare_research_project($pod_slug) {
   // if we have research photo galleries/photo essays, prepare them
   $obj['research_photo_galleries'] = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
 
+  return $obj;
+}
+
+/**
+ * Generate list of data visualization collections linked to this
+ * research project, each including metadata and table of contents
+ * 
+ * @param Object $pod the Research project Pod object
+ * @return Object The data structure with collections of data
+ *    visualization collections
+ */
+function get_project_data_visualization_collections($pod) {
+  $data_visualization_collections = $pod->field('data_visualization_collections');
+  
+  $obj = [];
+  
+  foreach($data_visualization_collections as $data_visualization_collection) {
+    $obj[] = [
+      'publication' => \LSECitiesWPTheme\publication\pods_prepare_publication($data_visualization_collection['slug']),
+      'publication_sections' => \LSECitiesWPTheme\publication\pods_prepare_table_of_contents($data_visualization_collection['slug'])
+    ];
+  }
+  
   return $obj;
 }
 
