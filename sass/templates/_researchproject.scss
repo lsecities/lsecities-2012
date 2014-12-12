@@ -67,6 +67,11 @@
 
   #t-dataviz .toc {
     @include data-publication-toc-article;
+    
+    // override mixin style for font size until we go full-width
+    .article h1 {
+      font-size: 1.25rem;
+    }
   }
 }
 
