@@ -14,6 +14,10 @@ lsecities-theme-alexandria (1.10) lsecities-experimental; urgency=low
     * background photos can now be seen in full and with description
       label by clicking button to fade out content
     * general awe
+  * [feature] research projects: add support for data publications
+    in new tab
+  * [update] research projects: wider layout (75% rather than 50%) for
+    core content
 
  -- andrea rota <a.rota@lse.ac.uk>  Friday, 31 Oct 2014 16:30:00 +0100
 
