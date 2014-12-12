@@ -507,17 +507,7 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
       display: block;
     }
 
-    .lc-galleria {
-      width: 100%;
-      
-      .galleria-container, .galleria-thumbnails .galleria-image {
-        background-color: transparent;
-      }
-      
-      .galleria-info {
-        display: none !important;
-      }
-    }
+    @include galleria-data-slides-on-light-backgrounds;
     
     #navigationarea {                                                                                                                                                   
       position: absolute;

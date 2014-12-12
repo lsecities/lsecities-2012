@@ -44,6 +44,8 @@
     font-size: 0.83em;
   }
   
+  @include galleria-data-slides-on-light-backgrounds;
+  
   article .article {
     section {
       margin-bottom: 2em;

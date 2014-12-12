@@ -1,0 +1,48 @@
+/**
+ * publications-related mixins
+ */
+@mixin data-publication-toc-article {
+  .article {
+    float: left;
+    width: 32%;
+    margin-right: 2%;
+    padding: 0.5rem;
+    background-color: rgba(240, 240, 240, 0.9);
+    margin-bottom: 2rem;
+    
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+    
+    .cover-image {
+      overflow: hidden;
+      
+      img {
+        @include transition(0.5s);
+      }
+      
+      img:hover, img:focus {
+        @include scale(1.5);
+        @include transition(0.5s);
+      }
+    }
+  }
+}
+
+@mixin galleria-data-slides-on-light-backgrounds {
+  .lc-galleria {
+    width: 100%;
+    
+    .galleria-container, .galleria-thumbnails .galleria-image {
+      background-color: transparent;
+    }
+    
+    .galleria-info {
+      display: none !important;
+    }
+  }
+}
