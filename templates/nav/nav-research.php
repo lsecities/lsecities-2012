@@ -12,6 +12,7 @@ $past_projects_by_strand = compose_project_list_by_strand('completed');
 var_trace(var_export($past_projects_by_strand, true), $TRACE_PREFIX . ' - completed projects (by strand): ');
 
 ?>
+<div class="navbar">
   <?php if(($IN_CONTENT_AREA and !$HIDE_CURRENT_PROJECTS) or (!$IN_CONTENT_AREA and $HIDE_CURRENT_PROJECTS)): ?>
   <nav id="projectsmenu">
     <div id="current-projects">
@@ -42,4 +43,4 @@ var_trace(var_export($past_projects_by_strand, true), $TRACE_PREFIX . ' - comple
     </div>
   </nav> <!-- #projectsmenu -->
   <?php endif; ?>
-</nav>
+</div>
