@@ -16,6 +16,27 @@
     margin-bottom: 1em;
   }
   
+  /**
+   * TECHNICAL DEBT:
+   * once everything is moved over to susy, this must be moved to a mixin
+   */
+  ul.organictabs > li {
+    min-width: 13.45%;
+    float: left;
+    margin-right: 0.25rem;
+    min-height: 1px;
+    text-align: center;
+    
+    &:nth-of-type(6n) {
+      margin-right: 0;
+    }
+    
+    a {
+      border-top-right-radius: 0.5rem;
+      border-top-left-radius: 0.125rem;
+    }
+  }
+   
   section {
     @include red-flag-header;
   
@@ -41,17 +62,6 @@
         width: 100%;
         padding: 0.3em;
       }
-    }
-  }
-  
-  .organictabs li.threecol {
-  
-    &:nth-of-type(4n) {
-      margin-right: 0;
-    }
-    
-    &:nth-of-type(4n+1) {
-      clear: left;
     }
   }
 
