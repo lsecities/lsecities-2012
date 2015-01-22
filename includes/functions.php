@@ -202,7 +202,7 @@ function get_media_library_item_custom_form_fields($form_fields, $post) {
   return $form_fields;
 }
 
-add_filter('attachment_fields_to_edit', "get_media_library_item_custom_form_fields", null, 2);
+// add_filter('attachment_fields_to_edit', "get_media_library_item_custom_form_fields", null, 2);
 
 function save_media_library_item_custom_form_fields($post, $attachment) {
   if(isset($attachment['attribution_name'])) {
@@ -215,7 +215,7 @@ function save_media_library_item_custom_form_fields($post, $attachment) {
   return $post;
 }
 
-add_filter('attachment_fields_to_save','save_media_library_item_custom_form_fields', 8, 2);
+// add_filter('attachment_fields_to_save','save_media_library_item_custom_form_fields', 8, 2);
 
 /**
  * Given a WordPress attachment ID, read its attribution metadata
