@@ -110,7 +110,7 @@ function prepare_header() {
   elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) {
     $obj['level2nav'] = '';
   } else {
-    $include_pages = '617,306,309,311,94,629,3338';
+    $include_pages = '617,306,309,311,94,8871,3338';
     $obj['level1nav'] = '<li><a href="/" title="Home">Home</a></li>' . wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=&include=' . $include_pages);
   }
   
