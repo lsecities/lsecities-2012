@@ -153,14 +153,14 @@ function pods_prepare_event($pod_slug) {
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
   
   /**
-   * if the free_form_event_date field is filled in and the event is a
+   * if the free_form_dates field is filled in and the event is a
    * future event, this means that the event is planned for some
    * approximate time in the future but an exact date/time hasn't been
    * set yet, we just use the value of this field as event_date_string
    */
-  $free_form_event_date = $pod->field('free_form_event_date');
-  if($free_form_event_date and $obj['is_future_event']) {
-    $obj['event_date_string'] = $obj['free_form_event_data'] = $free_form_event_date;
+  $free_form_dates = $pod->field('free_form_dates');
+  if($free_form_dates and $obj['is_future_event']) {
+    $obj['event_date_string'] = $obj['free_form_dates'] = $free_form_dates;
   } else {
     // depending on whether event starts and ends on the
     // same day or on distinct days (see above), generate strings

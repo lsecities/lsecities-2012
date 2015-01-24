@@ -64,7 +64,7 @@ $media_items_output_counter = 1;
                     ?>
                     <?php if($obj['event_date_string']): ?>
                       <dt>When</dt>
-                      <dd class="date"><?php echo $obj['event_date_string']; ?><?php if(empty($obj['free_form_event_data'])): ?> <span class="calendar-link">[add to calendar: <a href="<?php echo $obj['slug']; ?>/ical">ical</a> | <a href="<?php echo $obj['addtocal_uri_google']; ?>" target="_blank">google</a>]</span><?php endif; // (empty($obj['free_form_event_data'])) ?></dd>
+                      <dd class="date"><?php echo $obj['event_date_string']; ?><?php if(empty($obj['free_form_dates'])): ?> <span class="calendar-link">[add to calendar: <a href="<?php echo $obj['slug']; ?>/ical">ical</a> | <a href="<?php echo $obj['addtocal_uri_google']; ?>" target="_blank">google</a>]</span><?php endif; // (empty($obj['free_form_dates'])) ?></dd>
                     <?php endif; ?>
                     <?php if($obj['event_location']): ?>
                       <dt>Where</dt>
