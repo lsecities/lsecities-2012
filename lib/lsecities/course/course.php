@@ -5,6 +5,10 @@ namespace LSECitiesWPTheme;
 if ( !defined('ABSPATH')) exit;
 
 class Course extends PodsObject {
+  use ObjectWithTimespan {
+    ObjectWithTimespan::__construct as private __ObjectWithTimespanConstructor;
+  }
+  
   const PODS_NAME = 'course';
 
   public $permalink;
@@ -27,9 +31,12 @@ class Course extends PodsObject {
     $this->permalink = $pod->field('permalink');
     $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
-    $this->date_start = new \DateTime($this->date_start);
-    $this->date_end = new \DateTime($this->date_end);
+    $this->date_start = $pod->field('date_start');
+    $this->date_end = $pod->field('date_end');
     $this->free_form_course_dates = $pod->field('free_form_dates');
+    
+    $this->__ObjectWithTimespanConstructor($this->date_start, $this->date_end, $this->free_form_course_dates);
+    
     $this->heading_image = $pod->field('heading_image');
     $this->course_description = wpautop($pod->field('course_description'));
     $this->external_uri = $pod->field('external_uri');
