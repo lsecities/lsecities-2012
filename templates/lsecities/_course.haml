@@ -1,0 +1,22 @@
+-macro partner_name_and_logo(partner)
+  - if partner.logo_uri
+    %img( src = partner.logo_uri alt = partner.name)
+  - else
+    = partner.name
+#contentarea
+  .top-content.clearfix
+    %article
+      - if featured_image_uri
+        %header.heading-image
+          .photospread
+            %img( src = featured_image_uri )
+      %header
+        %h1 = course.title
+        - if course.tagline
+          %h2 = course.tagline
+      .ninecol
+        - if course.course_description
+          .blurb = course.course_description|raw
+      %aside#keyfacts.threecol.last
+        .event-info = event_info|raw
+        
