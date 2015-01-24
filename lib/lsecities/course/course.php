@@ -31,7 +31,7 @@ class Course extends PodsObject {
     $this->date_end = new \DateTime($this->date_end);
     $this->free_form_course_dates = $pod->field('free_form_dates');
     $this->heading_image = $pod->field('heading_image');
-    $this->course_description = $pod->field('course_description');
+    $this->course_description = wpautop($pod->field('course_description'));
     $this->external_uri = $pod->field('external_uri');
     $this->faculty = $pod->field('faculty');
   }
