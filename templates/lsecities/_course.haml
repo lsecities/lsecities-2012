@@ -18,5 +18,15 @@
         - if course.course_description
           .blurb = course.course_description|raw
       %aside#keyfacts.threecol.last
-        .event-info = event_info|raw
+        - if course.event_info
+          .event-info = course.event_info|raw
+        - if course.event_date_string or course.external_uri
+          %dl
+            - if course.event_date_string
+              %dt When
+              %dd.date = course.event_date_string|raw
+            - if course.external_uri
+              %dt Further information
+              %dd
+                %a( href = course.external_uri ) Course website
         
