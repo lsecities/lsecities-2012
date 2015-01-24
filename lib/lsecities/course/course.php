@@ -36,14 +36,3 @@ class Course extends PodsObject {
     $this->faculty = $pod->field('faculty');
   }
 }
-
-/**
- * Build data object to be used in templating
- * @param string $permalink The course's permalink
- * @return array Data structure with the course's full data
- */
-function course_get_data($permalink) {
-  $course = new Course($permalink);
-
-  return $course;
-}
