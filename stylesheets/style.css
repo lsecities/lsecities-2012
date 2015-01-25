@@ -545,9 +545,11 @@ ul.run-in.comma-separated > li { display: inline; }
 ul.run-in.comma-separated li:after { content: ', '; }
 ul.run-in.comma-separated li:last-child:after { content: '' !important; }
 
-header.heading-image { margin-bottom: 1em; }
-header.heading-image .flexslider .flex-direction-nav li a { top: 144 px; }
-header.heading-image img { width: 100%; max-width: 100%; height: auto; }
+.heading-image { margin-bottom: 1em; }
+.heading-image .flexslider .flex-direction-nav li a { top: 144 px; }
+.heading-image img { width: 100%; max-width: 100%; height: auto; }
+
+article header { margin-bottom: 1.5rem; }
 
 header.entry-header { margin-bottom: 1.5em; }
 header.entry-header h1 { font-family: "Open Sans", sans-serif; font-weight: 900; color: #22273b; }
