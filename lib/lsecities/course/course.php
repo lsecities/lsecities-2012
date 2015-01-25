@@ -27,6 +27,10 @@ class Course extends PodsObject {
 
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
+    
+    if(!$pod->exists()) {
+      redirect_to_404();
+    }
 
     $this->permalink = $pod->field('permalink');
     $this->title = $pod->field('name');
