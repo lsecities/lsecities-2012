@@ -96,7 +96,7 @@ trait ObjectWithTimespan {
         $this->event_date_string .= ' to ';
         $this->event_date_string .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $this->event_end->format("l j F Y") . '</time>';    
       } else {
-        $this->event_date_string = $event_date_start->format("l j F Y") . ' | ';
+        $this->event_date_string = $this->event_start->format("l j F Y") . ' | ';
         $this->event_date_string .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $this->event_start->format("H:i") . '</time>';
         $this->event_date_string .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $this->event_end->format("H:i") . '</time>';
       }
