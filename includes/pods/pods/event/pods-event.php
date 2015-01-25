@@ -61,15 +61,8 @@ function orgs_list($organizations) {
   return $output;
 }
 
-function pods_prepare_event($pod_slug) {
-  $pod = pods('event');
-  $pod->find(array('where' => "t.slug = '" . $pod_slug . "'"));
-
-  if(!$pod->total_found()) {
-    redirect_to_404();
-  }
-
-  $pod->fetch();
+function pods_prepare_event($permalink) {
+  $pod = pods('event', $permalink);
 
   // for menus etc.
   global $this_pod;
@@ -80,9 +73,7 @@ function pods_prepare_event($pod_slug) {
 
   lc_data('META_last_modified', $pod->field('modified'));
 
-  var_trace('pod_slug: ' . $pod_slug, $TRACE_PREFIX);
-  
-  $obj['slug'] = $pod_slug;
+  $obj['slug'] = $permalink;
   $obj['title'] = $pod->field('name');
   
   $event_speakers = sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
