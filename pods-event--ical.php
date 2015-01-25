@@ -10,6 +10,9 @@
  * Pods initialization
  * URI: /media/objects/events/[id]/ical
  */
+
+namespace LSECitiesWPTheme;
+
 $obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
 
 $ical = "BEGIN:VCALENDAR
