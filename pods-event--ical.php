@@ -10,9 +10,6 @@
  * Pods initialization
  * URI: /media/objects/events/[id]/ical
  */
-$TRACE_ENABLED = is_user_logged_in();
-$TRACE_PREFIX = 'pods-event--ical';
-
 $obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
 
 $ical = "BEGIN:VCALENDAR
