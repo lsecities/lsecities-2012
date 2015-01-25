@@ -1,3 +1,12 @@
+lsecities-theme-alexandria (1.12) lsecities-experimental; urgency=low
+
+  release 1.12 "brocoli"
+
+  * [feature] new Pod and related template: Course
+  * [feature] new Pod: Course programme
+
+ -- andrea rota <a.rota@lse.ac.uk>  Saturday, 31 January 2015 16:30:00 +0100
+
 lsecities-theme-alexandria (1.11) lsecities-experimental; urgency=low
 
   release 1.11 "granit"
