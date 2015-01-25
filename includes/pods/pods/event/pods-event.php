@@ -1,5 +1,7 @@
 <?php
 
+namespace LSECitiesWPTheme;
+
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
 
@@ -71,7 +73,7 @@ function pods_prepare_event($pod_slug) {
 
   // for menus etc.
   global $this_pod;
-  $this_pod = new LC\PodObject($pod, 'Events');
+  $this_pod = new \LC\PodObject($pod, 'Events');
 
   // prepare array for return data structure
   $obj = array();
@@ -133,13 +135,13 @@ function pods_prepare_event($pod_slug) {
    */
   
   // first, create DateTime objects
-  $timezone = new DateTimeZone('Europe/London'); // TODO: add timezone handling in Events pod
-  $event_date_start = new DateTime($pod->field('date_start'), $timezone);
+  $timezone = new \DateTimeZone('Europe/London'); // TODO: add timezone handling in Events pod
+  $event_date_start = new \DateTime($pod->field('date_start'), $timezone);
   $event_date_start_ical = clone $event_date_start;
-  $event_date_start_ical->setTimezone(new DateTimeZone('UTC'));
-  $event_date_end = new DateTime($pod->field('date_end'), $timezone);
+  $event_date_start_ical->setTimezone(new \DateTimeZone('UTC'));
+  $event_date_end = new \DateTime($pod->field('date_end'), $timezone);
   $event_date_end_ical = clone $event_date_end;
-  $event_date_end_ical->setTimezone(new DateTimeZone('UTC'));
+  $event_date_end_ical->setTimezone(new \DateTimeZone('UTC'));
   
   // populate variables for microdata output
   $event_dtstart = $event_date_start_ical->format(DATE_ISO8601);
@@ -149,7 +151,7 @@ function pods_prepare_event($pod_slug) {
   $obj['event_dtstart'] = $event_date_start_ical->format('Ymd').'T'.$event_date_start_ical->format('His').'Z';
   $obj['event_dtend'] = $event_date_end_ical->format('Ymd').'T'.$event_date_end_ical->format('His').'Z';
 
-  $datetime_now = new DateTime('now');
+  $datetime_now = new \DateTime('now');
   $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
   
   /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace LSECitiesWPTheme;
+
 /**
  * Retrieve permalink for Pod object depending on configuration
  * @param Array $config
