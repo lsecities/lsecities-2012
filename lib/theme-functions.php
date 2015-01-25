@@ -14,12 +14,12 @@ function get_pod_permalink($config) {
   }
   
   // If callee wants to retrieve permalink from post meta, try to do so
-  if($config['from_post_meta'] and $config['post_id'] and $permalink = get_post_meta($config['post_id'], 'pod_slug', TRUE)) {
+  if($config['from_post_meta'] === TRUE and $config['post_id'] and $permalink = get_post_meta($config['post_id'], 'pod_slug', TRUE)) {
     return $permalink;
   }
   
   // If callee wants to retrieve permalink from URI, try to do so
-  if($config['from_uri'] and $permalink = pods_v($config['uri_var_position'], 'url')) {
+  if($config['from_uri'] === TRUE and $permalink = pods_v($config['uri_var_position'], 'url')) {
     return $permalink;
   }
 }
