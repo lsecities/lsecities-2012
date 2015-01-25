@@ -16,7 +16,7 @@ namespace LSECitiesWPTheme;
 
 lc_data('pods_toplevel_ancestor', 311);
 
-$obj = pods_prepare_event(pods_url_variable(3));
+$obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
 $media_items_output_counter = 1;
 ?>
 
