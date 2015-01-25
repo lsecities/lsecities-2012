@@ -7,6 +7,8 @@
  */
 namespace LSECitiesWPTheme;
 
+$permalink = get_pod_permalink([ 'from_post_meta' => TRUE, 'from_uri' => TRUE, 'post_id' => $post->ID ]);
+
 ?><?php get_header();
 ?>
 
@@ -19,7 +21,7 @@ namespace LSECitiesWPTheme;
   <?php 
   lc_data('page_data', [ 
     'post_title' => get_the_title(),
-    'course' => new Course(get_post_meta($post->ID, 'pod_slug', true))
+    'course' => new Course($permalink)
   ]);
   \SemanticWP\Templating::get_template_part('lsecities/_course', lc_data('page_data'));
   ?>
