@@ -6,11 +6,10 @@
 #contentarea
   .top-content.clearfix
     %article
-      - if featured_image_uri
-        %header.heading-image
-          .photospread
-            %img( src = featured_image_uri )
       %header
+        - if course.heading_image_uri
+          .heading-image.photospread
+            %img( src = course.heading_image_uri )
         %h1 = course.title
         - if course.tagline
           %h2 = course.tagline

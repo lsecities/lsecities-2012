@@ -18,7 +18,7 @@ class Course extends PodsObject {
   public $date_start;
   public $date_end;
   public $free_form_course_dates;
-  public $heading_image;
+  public $heading_image_uri;
   public $course_description;
   public $external_uri;
   public $faculty;
@@ -37,7 +37,7 @@ class Course extends PodsObject {
     
     $this->__ObjectWithTimespanConstructor($this->date_start, $this->date_end, $this->free_form_course_dates);
     
-    $this->heading_image = $pod->field('heading_image');
+    $this->heading_image_uri = pods_image_url($pod->field('heading_image'), [1280,512]);
     $this->course_description = wpautop($pod->field('course_description'));
     $this->external_uri = $pod->field('external_uri');
     $this->faculty = $pod->field('faculty');
