@@ -48,6 +48,7 @@ require_fragment('/includes/pods/ui/lsecities-pods-ui.php' );
 require_fragment('/lib/theme-functions.php');
 require_fragment('/lib/pods-object.php');
 require_fragment('/lib/lsecities/course/course.php');
+require_fragment('/lib/lsecities/event/event.php');
 require_fragment('/lib/lsecities/person/person.php');
 require_fragment('/lib/lsecities/group/group.php');
 require_fragment('/lib/lsecities/research-project/research-project.php');

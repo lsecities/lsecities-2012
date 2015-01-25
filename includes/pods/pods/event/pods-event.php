@@ -68,6 +68,8 @@ function pods_prepare_event($permalink) {
     redirect_to_404();
   }
 
+  $event_object = new Event($permalink); // used to bring in stuff from OO-style Event, which will eventually replace this whole function
+  
   // for menus etc.
   global $this_pod;
   $this_pod = new \LC\PodObject($pod, 'Events');
@@ -143,45 +145,20 @@ function pods_prepare_event($permalink) {
   $event_dtend = $event_date_end_ical->format(DATE_ISO8601);
   
   // populate variables for iCal output
-  $obj['event_dtstart'] = $event_date_start_ical->format('Ymd').'T'.$event_date_start_ical->format('His').'Z';
-  $obj['event_dtend'] = $event_date_end_ical->format('Ymd').'T'.$event_date_end_ical->format('His').'Z';
+  $obj['event_dtstart'] = $event_object->event_dtstart; // uses new Event class: obsolete once Events are switched to OO
+  $obj['event_dtend'] = $event_object->event_dtend; // uses new Event class: obsolete once Events are switched to OO
 
   $datetime_now = new \DateTime('now');
-  $obj['is_future_event'] = ($event_date_start > $datetime_now) ? true : false;
+  $obj['is_future_event'] = $event_object->is_future_event; // uses new Event class: obsolete once Events are switched to OO
   
-  /**
-   * if the free_form_dates field is filled in and the event is a
-   * future event, this means that the event is planned for some
-   * approximate time in the future but an exact date/time hasn't been
-   * set yet, we just use the value of this field as event_date_string
-   */
-  $free_form_dates = $pod->field('free_form_dates');
-  if($free_form_dates and $obj['is_future_event']) {
-    $obj['event_date_string'] = $obj['free_form_dates'] = $free_form_dates;
-  } else {
-    // depending on whether event starts and ends on the
-    // same day or on distinct days (see above), generate strings
-    // for human-readable output, with microdata embedded in as appropriate
-    if($event_date_start->format('Y-m-d') != $event_date_end->format('Y-m-d')) {
-      $obj['event_date_string'] = '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("l j F Y") . '</time>';
-      $obj['event_date_string'] .= ' to ';
-      $obj['event_date_string'] .= '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("l j F Y") . '</time>';    
-    } else {
-      $obj['event_date_string'] = $event_date_start->format("l j F Y") . ' | ';
-      $obj['event_date_string'] .= '<time class="dt-start dtstart" itemprop="startDate" datetime="' . $event_dtstart . '">' . $event_date_start->format("H:i") . '</time>';
-      $obj['event_date_string'] .=  '-' . '<time class="dt-end dtend" itemprop="endDate" datetime="' . $event_dtend . '">' . $event_date_end->format("H:i") . '</time>';
-    }
-    
-    // AddToCalendar URIs
-    $obj['addtocal_uri_google'] = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
-      $obj['title']
-      .'&dates='.$obj['event_dtstart'].'/'.$obj['event_dtend']
-      .'&details=&'
-      .'location='.$obj['event_location']
-      .'&trp=false&'
-      .'sprop='.urlencode($obj['event_page_uri']).'&sprop=name:';
+  $obj['free_form_dates'] = $event_object->event_free_form_dates; // uses new Event class: obsolete once Events are switched to OO
+  $obj['event_date_string'] = $event_object->event_date_string; // uses new Event class: obsolete once Events are switched to OO
+  
+  // uses new Event class: obsolete once Events are switched to OO
+  if(empty($event_object->event_free_form_dates) or !$event_object->is_future_event) {
+    $obj['addtocal_uri_google'] = $event_object->addtocal_uri_google;
   }
-
+  
   $obj['event_location'] = $pod->field('venue.name');
 
   $event_type = $pod->field('event_type.name');
