@@ -63,6 +63,10 @@ function orgs_list($organizations) {
 
 function pods_prepare_event($permalink) {
   $pod = pods('event', $permalink);
+  
+  if(!$pod->exists()) {
+    redirect_to_404();
+  }
 
   // for menus etc.
   global $this_pod;
