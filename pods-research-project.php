@@ -25,7 +25,7 @@ if(!$pod_from_page) {
 }
 
 $obj = pods_prepare_research_project($pod_slug);
-  
+
 // we need - for now - this data in a variable called $gallery in order
 // for the galleria.inc.php include to see the gallery data
 $gallery = $obj['gallery'];
@@ -222,9 +222,12 @@ $gallery = $obj['gallery'];
                     <ul>
                     <?php foreach($obj['research_outputs'][$category_slug] as $publication): ?>
                       <li class='<?php echo $publication['slug']; ?>'>
-                        <?php if($publication['uri']): ?><a href="<?php echo $publication['uri']; ?>"><?php endif; ?>
+                        <?php if($publication['uri'] and empty($publication['pdf_uri'])): ?><a href="<?php echo $publication['uri']; ?>"><?php endif; ?>
                         <?php echo $publication['citation']; ?>
-                        <?php if($publication['uri']): ?></a><?php endif; ?>
+                        <?php if($publication['uri'] and empty($publication['pdf_uri'])): ?></a><?php endif; ?>
+                        <?php if($publication['uri'] and $publication['pdf_uri']): ?>
+                        &mdash; <a href="<?php echo $publication['uri']; ?>">publication details</a> | <a href="<?php echo $publication['pdf_uri']; ?>">download full PDF</a> (<?php echo $publication['pdf_filesize']; ?>)
+                        <?php endif; // ($publication['uri'] and $publication['pdf_uri']) ?>
                       </li>
                     <?php
                     endforeach; // ($publication_list as $publication) ?>

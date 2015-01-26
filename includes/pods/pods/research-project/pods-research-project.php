@@ -266,6 +266,10 @@ function get_project_research_outputs($pod) {
     var_trace(var_export($research_output->field('category'), true), 'output category');
     var_trace($linked_wp_page_id, 'publication_web_page.ID');
 
+    $__publication_pdf = $research_output->field('publication_pdf');
+    $pdf_uri = $__publication_pdf ? wp_get_attachment_url($__publication_pdf['ID']) : '';
+    $pdf_filesize = $__publication_pdf ? sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) : '';
+      
     // only add publication to list if publication has a linked WP page; otherwise emit warning
     if($linked_wp_page_id) {
       $research_outputs[$research_output->field('category.slug')][] = array(
@@ -273,7 +277,9 @@ function get_project_research_outputs($pod) {
         'title' => $research_output->field('name'),
         'citation' => $research_output->field('name'),
         'date' => date_string($research_output->field('publishing_date')),
-        'uri' => get_permalink($linked_wp_page_id)
+        'uri' => get_permalink($linked_wp_page_id),
+        'pdf_uri' => $pdf_uri,
+        'pdf_filesize' => $pdf_filesize
       );
     } else {
       trigger_error('No WordPress page linked to Publication with ID ' . $research_output->id(), E_USER_NOTICE);
