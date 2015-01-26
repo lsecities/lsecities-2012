@@ -243,6 +243,7 @@ $gallery = $obj['gallery'];
             <section id="t-dataviz" class="project-tab hide later">
               <?php
               foreach($obj['data_visualization_collections'] as $data_visualization_collection): ?>
+                <?php \SemanticWP\Templating::get_template_part('lsecities/publications/_heading-with-download', $data_visualization_collection); ?>
                 <?php 
                   $publication_sections = $data_visualization_collection['publication_sections']['sections'];
                   include('templates/pods/publication/publication-toc.php'); ?>

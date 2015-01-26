@@ -1,0 +1,7 @@
+%heading
+  %h1 = publication.title
+  .full-content
+    - if publication.pdf
+      %a.downloadthis.pdf( href = publication.pdf ) Download full PDF
+      - if publication.pdf_filesize
+        %span.filesize (#{publication.pdf_filesize})
