@@ -73,7 +73,7 @@ trait ObjectWithTimespan {
 
     // check whether this is a future event
     $datetime_now = new \DateTime('now');
-    $this->is_future_event = ($this->event_date_start > $datetime_now) ? true : false;
+    $this->is_future_event = ($this->event_end > $datetime_now) ? true : false;
     
     // check whether the event starts and ends on same day
     $this->event_starts_and_ends_on_same_day = $this->event_start->format('Y-m-d') != $this->event_end->format('Y-m-d');
