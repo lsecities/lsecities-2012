@@ -21,8 +21,33 @@ function pods_prepare_article($post_id) {
   return get_article_data($pod);
 }
 
-function pods_prepare_article_list() {
-  $pod = pods('article')->find(['limit' => -1]);
+/**
+ * Return a data structure with all the articles of a specific type.
+ * By default, all articles are added to the list; to filter by
+ * type (plain articles or data articles), the optional $type
+ * parameter must be used.
+ * 
+ * @param $type string The type of article: all, plain, data
+ * @return Array The data structure with all the good stuff
+ */
+function pods_prepare_article_list($type = 'all') {
+  // check that type parameter is one of the expected values, else return
+  if(!empty($type) and 'all' !== $type and 'plain' !== $type and 'data' !== $type) {
+    echo 'invalid type parameter';
+    //trigger_error('invalid type parameter');
+    return;
+  }
+  
+  // set default parameter
+  $find_params = ['limit' => -1 ];
+  
+  if('plain' === $type) {
+    $find_params['where'] = 'data_package.id IS NULL';
+  } elseif('data' === $type) {
+    $find_params['where'] = 'data_package.id IS NOT NULL';
+  }
+  
+  $pod = pods('article')->find($find_params);
   $articles = array();
   
   while($pod->fetch()) {
@@ -56,7 +81,10 @@ function get_article_data($pod) {
 
   // grab the featured image URI
   $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), 'original');
-    
+  
+  // grab the ToC image URI
+  $obj['toc_image_uri'] = pods_image_url($pod->field('cover_image'), 'original');
+  
   var_trace($obj['request_language'], 'request_language');
   var_trace($obj['lang2_slug'], 'article_lang2');
 
