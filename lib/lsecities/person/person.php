@@ -4,6 +4,9 @@ namespace LSECitiesWPTheme;
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
 
+/**
+ * The main Person class
+ */
 class Person extends PodsObject {
   const PODS_NAME = 'authors';
 
