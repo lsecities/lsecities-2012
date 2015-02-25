@@ -1,0 +1,11 @@
+.row
+  %article( id = page.id class = page.post_class )
+    %header.entry-header
+      .photospread.wireframe
+        %img( src = page.featured_image.uri )
+      %h1.entry-title = page.title
+    .entry-content( class = page.main_content_class )
+      = page.main_content | raw
+    - if page.extra_content
+      %aside.fourcol.last
+        = page.extra_content | raw
