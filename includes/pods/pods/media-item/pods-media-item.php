@@ -9,7 +9,12 @@ if ( !defined('ABSPATH')) exit;
  * @param string $query_string a query string for search filter
  * @return (bool|array) an array of media items, or false if no people are found
  */
-function pods_prepare_media_item($query_string = '') {
+function pods_prepare_media_item($query_string = '', $options = []) {
+  // set defaults
+  if(!array_key_exists('shallow', $options)) {
+    $options['shallow'] = FALSE;
+  }
+  
   var_trace($query_string, 'media_archive_dev__search_string');
 
   // TODO: once cross-check of all media items is done, use media_item pod (rather than media_item_v0)
@@ -61,17 +66,17 @@ function pods_prepare_media_item($query_string = '') {
       ),
       'parent_sessions' => $parent_sessions,
       'parent_event' => $parent_event,
-      'session_speakers' => $speakers,
-      'session_chairs' => $pod->field('session.chairs'),
-      'session_respondents' => $pod->field('session.respondents'),
+      'session_speakers' => FALSE == $options['shallow'] ? $speakers : \LSECitiesWPTheme\filter_items((array)$speakers, ['name', 'family_name']),
+      'session_chairs' => FALSE == $options['shallow'] ? $pod->field('session.chairs') : \LSECitiesWPTheme\filter_items((array) $pod->field('session.chairs'), ['name', 'family_name']),
+      'session_respondents' => FALSE == $options['shallow'] ? $pod->field('session.respondents') : \LSECitiesWPTheme\filter_items((array) $pod->field('session.respondents'), ['name', 'family_name']),
       'related_event' => array(
         'title' => $pod->field('event.name'),
         'series' => $pod->field('event.series')
       ),
-      'event_speakers' => $pod->field('event.speakers'),
-      'event_chairs' => $pod->field('event.chairs'),
-      'event_respondents' => $pod->field('event.respondents'),
-      'event_moderators' => $pod->field('event.moderators')
+      'event_speakers' => FALSE == $options['shallow'] ? $pod->field('event.speakers') : \LSECitiesWPTheme\filter_items((array) $pod->field('event.speakers'), ['name', 'family_name']),
+      'event_chairs' => FALSE == $options['shallow'] ? $pod->field('event.chairs') : \LSECitiesWPTheme\filter_items((array) $pod->field('event.chairs'), ['name', 'family_name']),
+      'event_respondents' => FALSE == $options['shallow'] ? $pod->field('event.respondents') : \LSECitiesWPTheme\filter_items((array) $pod->field('event.respondents'), ['name', 'family_name']),
+      'event_moderators' => FALSE == $options['shallow'] ? $pod->field('event.moderators') : \LSECitiesWPTheme\filter_items((array) $pod->field('event.moderators'), ['name', 'family_name']),
     );
     array_push($media_items, $media_item);
   }

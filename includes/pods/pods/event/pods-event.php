@@ -61,7 +61,12 @@ function orgs_list($organizations) {
   return $output;
 }
 
-function pods_prepare_event($permalink) {
+function pods_prepare_event($permalink, $options = []) {
+  // set defaults
+  if(!array_key_exists('shallow', $options)) {
+    $options['shallow'] = FALSE;
+  }
+  
   $pod = pods('event', $permalink);
   
   if(!$pod->exists()) {
@@ -86,7 +91,14 @@ function pods_prepare_event($permalink) {
   $event_respondents = sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
   $event_chairs = sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
   $event_moderators = sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
-  $obj['event_all_the_people'] = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
+  
+  $__event_all_the_people = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
+  if($options['shallow']) {
+    $obj['event_all_the_people'] = \LSECitiesWPTheme\filter_items($__event_all_the_people, ['name', 'family_name']);
+  } else {
+    $obj['event_all_the_people'] = $__event_all_the_people;
+  }
+  
   var_trace($event_all_the_people, $TRACE_PREFIX);
   $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
   $obj['event_story_id'] = $pod->field('storify_id');

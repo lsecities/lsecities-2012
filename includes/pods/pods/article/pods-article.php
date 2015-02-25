@@ -27,23 +27,39 @@ function pods_prepare_article($post_id) {
  * type (plain articles or data articles), the optional $type
  * parameter must be used.
  * 
- * @param $type string The type of article: all, plain, data
+ * @param Array $options An associative array of configuration options
+ *   'type' (string) default:"all' - The type of article: all, plain, data
+ *   'shallow' (bool) default:FALSE - Whether to generate shallow or
+ *      full objects for each item (see documentation for get_article_data()
+ *      for details
  * @return Array The data structure with all the good stuff
  */
-function pods_prepare_article_list($type = 'all') {
+function pods_prepare_article_list($options = []) {
   // check that type parameter is one of the expected values, else return
-  if(!empty($type) and 'all' !== $type and 'plain' !== $type and 'data' !== $type) {
-    echo 'invalid type parameter';
-    //trigger_error('invalid type parameter');
+  if(array_key_exists('type', $options) and 'all' !== $options['type'] and 'plain' !== $options['type'] and 'data' !== $options['type']) {
+    trigger_error('invalid type parameter');
     return;
+  }
+  
+  if(!array_key_exists('type', $options)) {
+    $options['type'] = 'all';
+  }
+  
+  if(array_key_exists('shallow', $options) and !is_bool($options['shallow'])) {
+    trigger_error("'shallow' parameter must be bool");
+    return;
+  }
+  
+  if(!array_key_exists('shallow', $options)) {
+    $options['shallow'] = FALSE;
   }
   
   // set default parameter
   $find_params = ['limit' => -1 ];
   
-  if('plain' === $type) {
+  if('plain' === $options['type']) {
     $find_params['where'] = 'data_package.id IS NULL';
-  } elseif('data' === $type) {
+  } elseif('data' === $options['type']) {
     $find_params['where'] = 'data_package.id IS NOT NULL';
   }
   
@@ -51,13 +67,29 @@ function pods_prepare_article_list($type = 'all') {
   $articles = array();
   
   while($pod->fetch()) {
-    $articles[] = get_article_data($pod);
+    $articles[] = get_article_data($pod, [ 'shallow' => TRUE ]);
   }
   
   return $articles;
 }
 
-function get_article_data($pod) {
+/**
+ * Retrieve article data and pack it as an array
+ * 
+ * @param Object $pod The pod object for this article
+ * @param Array $options An associative array of options:
+ *   'shallow' (bool) default: FALSE - If false, most details of linked
+ *      objects (people details, etc.) will be added to the returned data
+ *      structure; otherwise, only basic data from linked objects will
+ *      be added (e.g. people names only)
+ * @return Array The data structure with data on the requested article
+ */
+function get_article_data($pod, $options = []) {
+  // set defaults
+  if(!array_key_exists('shallow', $options)) {
+    $options['shallow'] = FALSE;
+  }
+  
   global $this_pod;
   $this_pod = new LC\PodObject($pod, 'Articles');
 
@@ -93,7 +125,11 @@ function get_article_data($pod) {
     $obj['article_subtitle'] = $pod->field('subtitle_lang2');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract_lang2'));
     $obj['article_summary'] = do_shortcode($pod->display('summary_lang2'));
-    $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
+    
+    // do not include full article text if we are generating shallow data
+    if(TRUE !== $options['shallow']) {
+      $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
+    }
     $obj['article_extra_content'] = do_shortcode($pod->display('extra_content_lang2'));
     $obj['article_author_info'] = do_shortcode($pod->display('author_info_lang2'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf_lang2.ID', TRUE));
@@ -106,7 +142,10 @@ function get_article_data($pod) {
     $obj['article_subtitle'] = $pod->field('article_subtitle');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract'));
     $obj['article_summary'] = do_shortcode($pod->display('summary'));
-    $obj['article_text'] = do_shortcode($pod->display('text'));
+    // do not include full article text if we are generating shallow data
+    if(TRUE !== $options['shallow']) {
+      $obj['article_text'] = do_shortcode($pod->display('text'));
+    }
     $obj['article_extra_content'] = do_shortcode($pod->display('extra_content'));
     $obj['article_author_info'] = do_shortcode($pod->display('author_info'));
     $obj['pdf_uri'] = wp_get_attachment_url($pod->field('article_pdf.ID', TRUE));
@@ -130,7 +169,18 @@ function get_article_data($pod) {
     $obj['article_publishing_date'] = $publication_pod->field('publishing_date');
   }
   $obj['article_tags'] = $pod->field('tags');
-  $obj['article_authors'] = $pod->field('authors');
+  
+  $__article_authors = $pod->field('authors');
+  
+  if($options['shallow'] and is_array($__article_authors)) {
+    // if preparing a shallow object, filter out the array items we don't need
+    $obj['article_authors'] = \LSECitiesWPTheme\filter_items($__article_authors, ['name', 'family_name']);
+  } elseif(is_array($__article_authors)) {
+    // otherwise, just add the set of full linked objects
+    $obj['article_authors'] = $__article_authors;
+  } else {
+    $obj['article_authors'] = NULL;
+  }
 
   // fetch any attachments, replace hostname until we switch to WP+Pods for the whole website
   $obj['attachments'] = $pod->field('attachments');

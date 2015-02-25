@@ -12,9 +12,9 @@ namespace LSECitiesWPTheme\media_item;
  */
 $PODS_BASEURI_MEDIA_ARCHIVE_SEARCH = '/media/search/';
 
-$media_items = pods_prepare_media_item();
-$articles = \pods_prepare_article_list('plain');
-$data_articles = \pods_prepare_article_list('data');
+$media_items = pods_prepare_media_item('', [ 'shallow' => TRUE ]);
+$articles = \pods_prepare_article_list([ 'type' => 'plain', 'shallow' => TRUE]);
+$data_articles = \pods_prepare_article_list(['type' => 'data', 'shallow' => TRUE]);
 
 header("Content-Type: application/json");
 echo json_encode(array('audio_video_items' => $media_items, 'articles' => $articles, 'data_articles' => $data_articles));

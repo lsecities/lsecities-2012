@@ -79,13 +79,13 @@ function pods_prepare_publication($pod_slug) {
   $obj['extra_publication_metadata'] = $pod->display('extra_publication_metadata');
 
   $obj['publication_authors']['list'] = people_list($pod->field('authors'), 'family_name', SORT_ASC);
-  $obj['publication_authors']['string'] = implode(', ', $obj['publication_authors_list']);
+  $obj['publication_authors']['string'] = implode(', ', $obj['publication_authors']['list']);
   
   $obj['publication_editors']['list'] = people_list($pod->field('editors'), 'family_name', SORT_ASC);
-  $obj['publication_editors']['string'] = implode(', ', $obj['publication_editors_list']);
+  $obj['publication_editors']['string'] = implode(', ', $obj['publication_editors']['list']);
   
   $obj['publication_contributors']['list'] = people_list($pod->field('contributors'), 'family_name', SORT_ASC);
-  $obj['publication_contributors']['string'] = implode(', ', $obj['publication_contributors_list']);
+  $obj['publication_contributors']['string'] = implode(', ', $obj['publication_contributors']['list']);
 
   $publication_partners_list = sort_linked_field($pod->field('partner_organizations'), 'name', SORT_ASC);
   if(is_array($publication_partners_list)) {
