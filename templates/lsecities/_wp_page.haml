@@ -1,3 +1,8 @@
+- macro page_section(section)
+  %section
+    %header
+      %h1 = section.title
+    = section.main_content | raw
 .row
   %article( id = page.id class = page.post_class )
     %header.entry-header
@@ -6,6 +11,8 @@
       %h1.entry-title = page.title
     .entry-content( class = page.main_content_class )
       = page.main_content | raw
+      - for section in page.sections
+        = _self.page_section(section)
     - if page.extra_content
       %aside.fourcol.last
         = page.extra_content | raw

@@ -16,7 +16,7 @@ class WPPage extends PodsObject {
   public $main_content;
   public $extra_content;
   public $featured_image;
-  public $tabs;
+  public $sections;  // for page sections generated from sub-pages whose template is Page Section
   
   private $pod;
   
@@ -29,9 +29,28 @@ class WPPage extends PodsObject {
     $this->id = $id;
     $this->pod = pods('page', $id);
     $this->title = get_the_title($this->id);
-    $this->main_content = do_shortcode(wpautop(get_the_content($this->id)));
+  
+    $this->main_content = do_shortcode(wpautop(get_the_content($this->id), FALSE));
+    // extra_content is a Pods field, so get this via pod->get_field
     $this->extra_content = honor_ssl_for_attachments(do_shortcode($this->pod->get_field('extra_content')));
     
+    // subpages whose template is 'Page Tab' are displayed as tabs within this page
+    $__sections = get_pages([
+      'parent' => $this->id,
+      'post_type' => 'page',
+      'sort_column'  => 'menu_order',
+      'meta_key' => '_wp_page_template',
+      'meta_value' => lc_data('template_filename_page_tab'),
+      'hierarchical' => 0
+    ]);
+    
+    foreach($__sections as $__section) {
+      $this->sections[] = [
+        'title' => $__section->post_title,
+        'main_content' => wpautop($__section->post_content, FALSE)
+      ];
+    }
+  
     $__post_thumbnail_id = get_post_thumbnail_id($this->id);
     
     $this->featured_image = [
