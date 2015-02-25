@@ -226,7 +226,7 @@ function compose_slide_content($column_spans, $tiles) {
           'display_title' => $tile->field('display_title'),
           'subtitle' => $tile_tagline,
           'blurb' => $tile_blurb,
-          'plain_content' => $tile->field('plain_content'),
+          'plain_content' => wpautop($tile->field('plain_content')),
           'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
           'image' => pods_image_url($tile->field('image.ID'), 'original'),
