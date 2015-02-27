@@ -540,14 +540,16 @@ table { border-bottom: 1px solid #fff; }
 
 label { display: block; }
 
-ul.run-in.comma-separated { display: inline; }
-ul.run-in.comma-separated > li { display: inline; }
-ul.run-in.comma-separated li:after { content: ', '; }
-ul.run-in.comma-separated li:last-child:after { content: '' !important; }
+ul.run-in.comma-separated dt { clear: both; }
+ul.run-in.comma-separated > li, ul.run-in.comma-separated > dd { display: inline; }
+ul.run-in.comma-separated li:after, ul.run-in.comma-separated dd:after { content: ", "; }
+ul.run-in.comma-separated li:last-child:after, ul.run-in.comma-separated dd:last-child { content: '' !important; }
 
 .heading-image { margin-bottom: 1em; }
 .heading-image .flexslider .flex-direction-nav li a { top: 144 px; }
 .heading-image img { width: 100%; max-width: 100%; height: auto; }
+
+.over-two-col { columns: 2; -moz-columns: 2; -webkit-columns: 2; }
 
 article header { margin-bottom: 1.5rem; }
 
@@ -594,11 +596,19 @@ ol.article-references li:target { background-color: #ffeeee; }
 div.widget { margin-bottom: 1em; }
 div.widget h2 { margin-bottom: 0.5em; }
 
-/* organic tabs jquery plugin */
-.organictabs, .uiTabs { margin-top: 2em; }
+/** organic tabs jquery plugin */
+html.js .organictabs-container .list-wrap > section { display: none; }
+html.js .organictabs-container .list-wrap > section:first-of-type { display: inherit; }
+html.js .organictabs-container .list-wrap > section header { display: none; }
+
+.organictabs, .uiTabs { margin-top: 2em; display: none; /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
+html.js .organictabs, html.js .uiTabs { display: inline-block; }
 .organictabs.three-per-row > li, .uiTabs.three-per-row > li { width: 30.75%; float: left; margin-right: 3.8%; min-height: 1px; }
 .organictabs.three-per-row > li:nth-of-type(3n), .uiTabs.three-per-row > li:nth-of-type(3n) { margin-right: 0; }
 .organictabs.three-per-row > li:nth-of-type(3n+1), .uiTabs.three-per-row > li:nth-of-type(3n+1) { clear: left; }
+.organictabs > li, .uiTabs > li { min-width: 13.45%; float: left; margin-right: 0.25rem; min-height: 1px; text-align: center; }
+.organictabs > li:nth-of-type(6n), .uiTabs > li:nth-of-type(6n) { margin-right: 0; }
+.organictabs > li a, .uiTabs > li a { border-top-right-radius: 0.5rem; border-top-left-radius: 0.125rem; }
 .organictabs > li a, .organictabs > li a:visited, .organictabs > li a:active, .organictabs > li a:focus, .organictabs > li a:hover, .uiTabs > li a, .uiTabs > li a:visited, .uiTabs > li a:active, .uiTabs > li a:focus, .uiTabs > li a:hover { color: white; font-weight: bold; display: block; padding: 0.5em; background-color: red; }
 .organictabs > li a.current, .organictabs > li a:visited.current, .organictabs > li a:active.current, .organictabs > li a:focus.current, .organictabs > li a:hover.current, .uiTabs > li a.current, .uiTabs > li a:visited.current, .uiTabs > li a:active.current, .uiTabs > li a:focus.current, .uiTabs > li a:hover.current { background-color: black; }
 .organictabs > li.ui-state-active a, .uiTabs > li.ui-state-active a { background-color: black; }
@@ -625,15 +635,15 @@ div.widget h2 { margin-bottom: 0.5em; }
 
 #keyfacts-short dl dt { float: left; margin-right: 0.5em; }
 #keyfacts-short dl dt:after { content: ': '; }
-#keyfacts-short dl ul { display: inline; }
-#keyfacts-short dl ul > li { display: inline; }
-#keyfacts-short dl ul li:after { content: ', '; }
-#keyfacts-short dl ul li:last-child:after { content: '' !important; }
+#keyfacts-short dl ul dt { clear: both; }
+#keyfacts-short dl ul > li, #keyfacts-short dl ul > dd { display: inline; }
+#keyfacts-short dl ul li:after, #keyfacts-short dl ul dd:after { content: ", "; }
+#keyfacts-short dl ul li:last-child:after, #keyfacts-short dl ul dd:last-child { content: '' !important; }
 
-#keyfacts dl dd ul { display: inline; }
-#keyfacts dl dd ul > li { display: inline; }
-#keyfacts dl dd ul li:after { content: ', '; }
-#keyfacts dl dd ul li:last-child:after { content: '' !important; }
+#keyfacts dl dd ul dt { clear: both; }
+#keyfacts dl dd ul > li, #keyfacts dl dd ul > dd { display: inline; }
+#keyfacts dl dd ul li:after, #keyfacts dl dd ul dd:after { content: ", "; }
+#keyfacts dl dd ul li:last-child:after, #keyfacts dl dd ul dd:last-child { content: '' !important; }
 
 #share-on-social-media { margin-top: 1em; }
 #share-on-social-media span { font-size: 1em; display: inline; padding: 0 0.25em; }
@@ -826,16 +836,17 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 
 .lc-people-list #contentarea section.people-list h1 { font-size: 1.5em; margin-bottom: 1.5em; }
 .lc-people-list #contentarea section.people-list .person { margin-bottom: 2em; }
-.lc-people-list #contentarea section.people-list .person .qualifications { display: inline; display: block; margin-bottom: 1em; }
-.lc-people-list #contentarea section.people-list .person .qualifications > li { display: inline; }
-.lc-people-list #contentarea section.people-list .person .qualifications li:after { content: ', '; }
-.lc-people-list #contentarea section.people-list .person .qualifications li:last-child:after { content: '' !important; }
+.lc-people-list #contentarea section.people-list .person .qualifications { display: block; margin-bottom: 1em; }
+.lc-people-list #contentarea section.people-list .person .qualifications dt { clear: both; }
+.lc-people-list #contentarea section.people-list .person .qualifications > li, .lc-people-list #contentarea section.people-list .person .qualifications > dd { display: inline; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:after, .lc-people-list #contentarea section.people-list .person .qualifications dd:after { content: ", "; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:last-child:after, .lc-people-list #contentarea section.people-list .person .qualifications dd:last-child { content: '' !important; }
 .lc-people-list #contentarea section.people-list .person .profile-photo { text-align: center; }
 .lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
-.lc-people-list #contentarea section.people-list .person .research-projects { display: inline; }
-.lc-people-list #contentarea section.people-list .person .research-projects > li { display: inline; }
-.lc-people-list #contentarea section.people-list .person .research-projects li:after { content: ', '; }
-.lc-people-list #contentarea section.people-list .person .research-projects li:last-child:after { content: '' !important; }
+.lc-people-list #contentarea section.people-list .person .research-projects dt { clear: both; }
+.lc-people-list #contentarea section.people-list .person .research-projects > li, .lc-people-list #contentarea section.people-list .person .research-projects > dd { display: inline; }
+.lc-people-list #contentarea section.people-list .person .research-projects li:after, .lc-people-list #contentarea section.people-list .person .research-projects dd:after { content: ", "; }
+.lc-people-list #contentarea section.people-list .person .research-projects li:last-child:after, .lc-people-list #contentarea section.people-list .person .research-projects dd:last-child { content: '' !important; }
 .lc-people-list #contentarea section.people-list .person h1 { font-size: 1.2em; font-weight: bold; }
 .lc-people-list #whoswho-side-toc li.person { margin-bottom: 0.25rem; line-height: 1rem; }
 .lc-people-list ul.people-list.grid li { width: 22.05%; margin-right: 3.8%; float: left; min-height: 1px; }
@@ -848,7 +859,11 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication #keyfacts p { margin-bottom: 0.2em; margin-top: 0.5em; }
 .lc-publication #keyfacts .cover-thumbnail { padding: 0 4em; }
 .lc-publication #keyfacts .cover-thumbnail img { margin: 1em 0; -moz-transform: rotate(3deg); -ms-transform: rotate(3deg); -webkit-transform: rotate(3deg); transform: rotate(3deg); -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 3px 3px 3px #ccc; -webkit-box-shadow: 3px 3px 3px #ccc; box-shadow: 3px 3px 3px #ccc; }
-.lc-publication #keyfacts dl dt { border-bottom: none; }
+.lc-publication #keyfacts dl dt { border-bottom: none; clear: both; }
+.lc-publication #keyfacts dl dd dt { clear: both; }
+.lc-publication #keyfacts dl dd > li, .lc-publication #keyfacts dl dd > dd { display: inline; }
+.lc-publication #keyfacts dl dd li:after, .lc-publication #keyfacts dl dd dd:after { content: ", "; }
+.lc-publication #keyfacts dl dd li:last-child:after, .lc-publication #keyfacts dl dd dd:last-child { content: '' !important; }
 .lc-publication .publication-sections { margin-top: 2em; }
 .lc-publication .publication-sections h1 { margin-bottom: 0.5em; }
 .lc-publication .publication-sections ul li { line-height: 1.125em; margin-bottom: 0.5em; }
@@ -870,13 +885,9 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication.publication-category-research-data .toc .article .cover-image img { -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 .lc-publication.publication-category-research-data .toc .article .cover-image img:hover, .lc-publication.publication-category-research-data .toc .article .cover-image img:focus { -moz-transform: scale(1.5, 1.5); -ms-transform: scale(1.5, 1.5); -webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 
-.lc-research-project { /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
 .lc-research-project * { box-sizing: border-box; }
 .lc-research-project .entry-header .abstract { font-style: italic; }
 .lc-research-project #linked-galleries > div { margin-bottom: 1em; }
-.lc-research-project ul.organictabs > li { min-width: 13.45%; float: left; margin-right: 0.25rem; min-height: 1px; text-align: center; }
-.lc-research-project ul.organictabs > li:nth-of-type(6n) { margin-right: 0; }
-.lc-research-project ul.organictabs > li a { border-top-right-radius: 0.5rem; border-top-left-radius: 0.125rem; }
 .lc-research-project section { margin-top: 2em; }
 .lc-research-project section > header { border-top: 1px solid red; line-height: 1em; }
 .lc-research-project section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }

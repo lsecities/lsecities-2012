@@ -1,33 +1,17 @@
 <?php
+namespace LSECitiesWPTheme;
 /**
  * The template used for displaying page content in page.php
  *
  * @package LSECities2012
  */
 
-$wide_layout = strtolower(get_post_meta(get_the_ID(), "layout", true)) == 'wide' ? 1 : 0;
-$main_area_class = $wide_layout ? 'ninecol' : 'sixcol';
+$wp_page = new WPPage(get_the_ID());
+
+lc_data('page_data', [
+  'post_title' => $wp_page->title,
+  'page' => $wp_page
+]);
+\SemanticWP\Templating::get_template_part('lsecities/_wp_page', lc_data('page_data'));
+
 ?>
-
-<div>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class($main_area_class); ?>>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
-	</header><!-- .entry-header -->
-	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
-	</div><!-- .entry-content -->
-</article><!-- #post-<?php the_ID(); ?> -->
-<?php if($wide_layout == false) : ?>
-<aside class="threecol">
-  <?php
-    echo honor_ssl_for_attachments(get_post_meta(get_the_ID(), "aside", true));
-  ?>
-</aside>
-<?php endif; ?>
-
-<?php get_template_part('nav'); ?>
-
-</div><!-- .row -->

@@ -77,6 +77,11 @@ lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/wp-content/themes/
 lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012');
 
 /**
+ * Template configuration
+ */
+lc_data('template_filename_page_tab', 'pages-section.php');
+
+/**
  * Conference microsites configuration map
  */
  
