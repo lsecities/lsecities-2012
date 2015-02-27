@@ -139,7 +139,7 @@ $gallery = $obj['gallery'];
             </section>
             
             <?php if(count($obj['research_events']) or count($obj['research_external_events'])): ?>
-            <section id="t-events" class="project-tab hide">
+            <section id="t-events" class="project-tab">
               <?php if($obj['events_blurb']): ?>
               <div><?php echo $obj['events_blurb']; ?></div>
               <?php endif; // ($obj['events_blurb']) ?>
@@ -200,7 +200,7 @@ $gallery = $obj['gallery'];
             
             
             <?php if(count($obj['project_news'])): ?>
-              <section id="t-news" class="project-tab hide">
+              <section id="t-news" class="project-tab">
                 <ul>
                 <?php foreach($obj['project_news'] as $news_item) : ?>
                   <li><a href="<?php echo $news_item['permalink'] ?>"><?php echo $news_item['date']; ?> | <?php echo $news_item['title'] ?></a></li>
@@ -211,7 +211,7 @@ $gallery = $obj['gallery'];
              
             <?php // publications
             if(count($obj['research_outputs'])): ?>
-            <section id="t-publications" class="project-tab hide">
+            <section id="t-publications" class="project-tab">
               <dl>
                 <?php
                   foreach($obj['research_output_categories'] as $category_slug):
@@ -243,7 +243,7 @@ $gallery = $obj['gallery'];
             <?php
             // data visualization collections
             if(count($obj['data_visualization_collections'])): ?>
-            <section id="t-dataviz" class="project-tab hide later">
+            <section id="t-dataviz" class="project-tab">
               <?php
               foreach($obj['data_visualization_collections'] as $data_visualization_collection): ?>
                 <?php \SemanticWP\Templating::get_template_part('lsecities/publications/_heading-with-download', $data_visualization_collection); ?>
@@ -258,7 +258,7 @@ $gallery = $obj['gallery'];
             <?php
             // photo galleries
             if(count($obj['research_photo_galleries'])): ?>
-            <section id="t-galleries" class="project-tab hide later">
+            <section id="t-galleries" class="project-tab">
               <?php
               foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
                 <div class="sixcol photo-essay">
