@@ -2,6 +2,7 @@ lsecities-theme-alexandria (1.12) lsecities-experimental; urgency=low
 
   release 1.12 "brocoli"
 
+  * [feature] support for tabbed content in WP Pages using subpages
   * [feature] new Pod and related template: Course
   * [feature] new Pod: Course programme
 
