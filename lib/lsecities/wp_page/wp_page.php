@@ -46,6 +46,7 @@ class WPPage extends PodsObject {
     
     foreach($__sections as $__section) {
       $this->sections[] = [
+        'post_id' => $__section->ID,
         'title' => $__section->post_title,
         'main_content' => wpautop($__section->post_content, FALSE)
       ];
