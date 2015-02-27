@@ -549,6 +549,8 @@ ul.run-in.comma-separated li:last-child:after, ul.run-in.comma-separated dd:last
 .heading-image .flexslider .flex-direction-nav li a { top: 144 px; }
 .heading-image img { width: 100%; max-width: 100%; height: auto; }
 
+.over-two-col { columns: 2; -moz-columns: 2; -webkit-columns: 2; }
+
 article header { margin-bottom: 1.5rem; }
 
 header.entry-header { margin-bottom: 1.5em; }
