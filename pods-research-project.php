@@ -81,7 +81,7 @@ $gallery = $obj['gallery'];
           </header>
           <div class='entry-content article-text list-wrap'>
             <section id="t-project-info" class="project-tab row">
-              <div class="eightcol"
+              <div class="eightcol">
               <?php echo $obj['blurb']; ?>
               </div>
               <aside class='wireframe fourcol last entry-meta' id='keyfacts'>
