@@ -625,15 +625,15 @@ div.widget h2 { margin-bottom: 0.5em; }
 
 #keyfacts-short dl dt { float: left; margin-right: 0.5em; }
 #keyfacts-short dl dt:after { content: ': '; }
-#keyfacts-short dl ul { display: inline; }
-#keyfacts-short dl ul > li { display: inline; }
-#keyfacts-short dl ul li:after { content: ', '; }
-#keyfacts-short dl ul li:last-child:after { content: '' !important; }
+#keyfacts-short dl ul dt { clear: both; }
+#keyfacts-short dl ul > li, #keyfacts-short dl ul > dd { display: inline; }
+#keyfacts-short dl ul li:after, #keyfacts-short dl ul dd:after { content: ", "; }
+#keyfacts-short dl ul li:last-child:after, #keyfacts-short dl ul dd:last-child { content: '' !important; }
 
-#keyfacts dl dd ul { display: inline; }
-#keyfacts dl dd ul > li { display: inline; }
-#keyfacts dl dd ul li:after { content: ', '; }
-#keyfacts dl dd ul li:last-child:after { content: '' !important; }
+#keyfacts dl dd ul dt { clear: both; }
+#keyfacts dl dd ul > li, #keyfacts dl dd ul > dd { display: inline; }
+#keyfacts dl dd ul li:after, #keyfacts dl dd ul dd:after { content: ", "; }
+#keyfacts dl dd ul li:last-child:after, #keyfacts dl dd ul dd:last-child { content: '' !important; }
 
 #share-on-social-media { margin-top: 1em; }
 #share-on-social-media span { font-size: 1em; display: inline; padding: 0 0.25em; }
@@ -826,16 +826,17 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 
 .lc-people-list #contentarea section.people-list h1 { font-size: 1.5em; margin-bottom: 1.5em; }
 .lc-people-list #contentarea section.people-list .person { margin-bottom: 2em; }
-.lc-people-list #contentarea section.people-list .person .qualifications { display: inline; display: block; margin-bottom: 1em; }
-.lc-people-list #contentarea section.people-list .person .qualifications > li { display: inline; }
-.lc-people-list #contentarea section.people-list .person .qualifications li:after { content: ', '; }
-.lc-people-list #contentarea section.people-list .person .qualifications li:last-child:after { content: '' !important; }
+.lc-people-list #contentarea section.people-list .person .qualifications { display: block; margin-bottom: 1em; }
+.lc-people-list #contentarea section.people-list .person .qualifications dt { clear: both; }
+.lc-people-list #contentarea section.people-list .person .qualifications > li, .lc-people-list #contentarea section.people-list .person .qualifications > dd { display: inline; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:after, .lc-people-list #contentarea section.people-list .person .qualifications dd:after { content: ", "; }
+.lc-people-list #contentarea section.people-list .person .qualifications li:last-child:after, .lc-people-list #contentarea section.people-list .person .qualifications dd:last-child { content: '' !important; }
 .lc-people-list #contentarea section.people-list .person .profile-photo { text-align: center; }
 .lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
-.lc-people-list #contentarea section.people-list .person .research-projects { display: inline; }
-.lc-people-list #contentarea section.people-list .person .research-projects > li { display: inline; }
-.lc-people-list #contentarea section.people-list .person .research-projects li:after { content: ', '; }
-.lc-people-list #contentarea section.people-list .person .research-projects li:last-child:after { content: '' !important; }
+.lc-people-list #contentarea section.people-list .person .research-projects dt { clear: both; }
+.lc-people-list #contentarea section.people-list .person .research-projects > li, .lc-people-list #contentarea section.people-list .person .research-projects > dd { display: inline; }
+.lc-people-list #contentarea section.people-list .person .research-projects li:after, .lc-people-list #contentarea section.people-list .person .research-projects dd:after { content: ", "; }
+.lc-people-list #contentarea section.people-list .person .research-projects li:last-child:after, .lc-people-list #contentarea section.people-list .person .research-projects dd:last-child { content: '' !important; }
 .lc-people-list #contentarea section.people-list .person h1 { font-size: 1.2em; font-weight: bold; }
 .lc-people-list #whoswho-side-toc li.person { margin-bottom: 0.25rem; line-height: 1rem; }
 .lc-people-list ul.people-list.grid li { width: 22.05%; margin-right: 3.8%; float: left; min-height: 1px; }
@@ -848,7 +849,11 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication #keyfacts p { margin-bottom: 0.2em; margin-top: 0.5em; }
 .lc-publication #keyfacts .cover-thumbnail { padding: 0 4em; }
 .lc-publication #keyfacts .cover-thumbnail img { margin: 1em 0; -moz-transform: rotate(3deg); -ms-transform: rotate(3deg); -webkit-transform: rotate(3deg); transform: rotate(3deg); -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 3px 3px 3px #ccc; -webkit-box-shadow: 3px 3px 3px #ccc; box-shadow: 3px 3px 3px #ccc; }
-.lc-publication #keyfacts dl dt { border-bottom: none; }
+.lc-publication #keyfacts dl dt { border-bottom: none; clear: both; }
+.lc-publication #keyfacts dl dd dt { clear: both; }
+.lc-publication #keyfacts dl dd > li, .lc-publication #keyfacts dl dd > dd { display: inline; }
+.lc-publication #keyfacts dl dd li:after, .lc-publication #keyfacts dl dd dd:after { content: ", "; }
+.lc-publication #keyfacts dl dd li:last-child:after, .lc-publication #keyfacts dl dd dd:last-child { content: '' !important; }
 .lc-publication .publication-sections { margin-top: 2em; }
 .lc-publication .publication-sections h1 { margin-bottom: 0.5em; }
 .lc-publication .publication-sections ul li { line-height: 1.125em; margin-bottom: 0.5em; }
