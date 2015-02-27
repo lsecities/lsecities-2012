@@ -1,8 +1,28 @@
+- macro sections_index(sections)
+  %div
+    %ul.nav.organictabs
+      - for section in sections
+        %li
+          - if loop.first
+            %a.current( href = "#tab_#{section.post_id}" ) = section.title
+          - else
+            %a( href = "#tab_#{section.post_id}" ) = section.title
 - macro page_section(section)
-  %section
+  %section( id = "tab_#{section.post_id}" class = "project-tab")
     %header
       %h1 = section.title
     = section.main_content | raw
+- macro sections_content(sections)
+  .list-wrap
+    - for section in sections
+      = _self.page_section(section)
+- macro page_sections(sections)
+  - if sections
+    :javascript
+      jQuery(function($) { $(".organictabs-container").organicTabs(); });
+    .organictabs-container
+      = _self.sections_index(sections)
+      = _self.sections_content(sections)
 .row
   %article( id = page.id class = page.post_class )
     %header.entry-header
@@ -11,8 +31,7 @@
       %h1.entry-title = page.title
     .entry-content( class = page.main_content_class )
       = page.main_content | raw
-      - for section in page.sections
-        = _self.page_section(section)
+      = _self.page_sections(page.sections)
     - if page.extra_content
       %aside.fourcol.last
         = page.extra_content | raw
