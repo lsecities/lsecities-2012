@@ -540,10 +540,10 @@ table { border-bottom: 1px solid #fff; }
 
 label { display: block; }
 
-ul.run-in.comma-separated { display: inline; }
-ul.run-in.comma-separated > li { display: inline; }
-ul.run-in.comma-separated li:after { content: ', '; }
-ul.run-in.comma-separated li:last-child:after { content: '' !important; }
+ul.run-in.comma-separated dt { clear: both; }
+ul.run-in.comma-separated > li, ul.run-in.comma-separated > dd { display: inline; }
+ul.run-in.comma-separated li:after, ul.run-in.comma-separated dd:after { content: ", "; }
+ul.run-in.comma-separated li:last-child:after, ul.run-in.comma-separated dd:last-child { content: '' !important; }
 
 .heading-image { margin-bottom: 1em; }
 .heading-image .flexslider .flex-direction-nav li a { top: 144 px; }
