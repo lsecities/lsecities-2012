@@ -596,11 +596,19 @@ ol.article-references li:target { background-color: #ffeeee; }
 div.widget { margin-bottom: 1em; }
 div.widget h2 { margin-bottom: 0.5em; }
 
-/* organic tabs jquery plugin */
-.organictabs, .uiTabs { margin-top: 2em; }
+/** organic tabs jquery plugin */
+html.js .organictabs-container .list-wrap > section { display: none; }
+html.js .organictabs-container .list-wrap > section:first-of-type { display: inherit; }
+html.js .organictabs-container .list-wrap > section header { display: none; }
+
+.organictabs, .uiTabs { margin-top: 2em; display: none; /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
+html.js .organictabs, html.js .uiTabs { display: inline-block; }
 .organictabs.three-per-row > li, .uiTabs.three-per-row > li { width: 30.75%; float: left; margin-right: 3.8%; min-height: 1px; }
 .organictabs.three-per-row > li:nth-of-type(3n), .uiTabs.three-per-row > li:nth-of-type(3n) { margin-right: 0; }
 .organictabs.three-per-row > li:nth-of-type(3n+1), .uiTabs.three-per-row > li:nth-of-type(3n+1) { clear: left; }
+.organictabs > li, .uiTabs > li { min-width: 13.45%; float: left; margin-right: 0.25rem; min-height: 1px; text-align: center; }
+.organictabs > li:nth-of-type(6n), .uiTabs > li:nth-of-type(6n) { margin-right: 0; }
+.organictabs > li a, .uiTabs > li a { border-top-right-radius: 0.5rem; border-top-left-radius: 0.125rem; }
 .organictabs > li a, .organictabs > li a:visited, .organictabs > li a:active, .organictabs > li a:focus, .organictabs > li a:hover, .uiTabs > li a, .uiTabs > li a:visited, .uiTabs > li a:active, .uiTabs > li a:focus, .uiTabs > li a:hover { color: white; font-weight: bold; display: block; padding: 0.5em; background-color: red; }
 .organictabs > li a.current, .organictabs > li a:visited.current, .organictabs > li a:active.current, .organictabs > li a:focus.current, .organictabs > li a:hover.current, .uiTabs > li a.current, .uiTabs > li a:visited.current, .uiTabs > li a:active.current, .uiTabs > li a:focus.current, .uiTabs > li a:hover.current { background-color: black; }
 .organictabs > li.ui-state-active a, .uiTabs > li.ui-state-active a { background-color: black; }
@@ -877,13 +885,9 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-publication.publication-category-research-data .toc .article .cover-image img { -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 .lc-publication.publication-category-research-data .toc .article .cover-image img:hover, .lc-publication.publication-category-research-data .toc .article .cover-image img:focus { -moz-transform: scale(1.5, 1.5); -ms-transform: scale(1.5, 1.5); -webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); -moz-transition: 0.5s; -o-transition: 0.5s; -webkit-transition: 0.5s; transition: 0.5s; }
 
-.lc-research-project { /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
 .lc-research-project * { box-sizing: border-box; }
 .lc-research-project .entry-header .abstract { font-style: italic; }
 .lc-research-project #linked-galleries > div { margin-bottom: 1em; }
-.lc-research-project ul.organictabs > li { min-width: 13.45%; float: left; margin-right: 0.25rem; min-height: 1px; text-align: center; }
-.lc-research-project ul.organictabs > li:nth-of-type(6n) { margin-right: 0; }
-.lc-research-project ul.organictabs > li a { border-top-right-radius: 0.5rem; border-top-left-radius: 0.125rem; }
 .lc-research-project section { margin-top: 2em; }
 .lc-research-project section > header { border-top: 1px solid red; line-height: 1em; }
 .lc-research-project section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
