@@ -598,7 +598,7 @@ div.widget h2 { margin-bottom: 0.5em; }
 
 /** organic tabs jquery plugin */
 html.js .organictabs-container .list-wrap > section { display: none; }
-html.js .organictabs-container .list-wrap > section:first-of-type { display: inherit; }
+html.js .organictabs-container .list-wrap > section.current { display: inherit; }
 html.js .organictabs-container .list-wrap > section header { display: none; }
 
 .organictabs, .uiTabs { margin-top: 2em; display: none; /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
