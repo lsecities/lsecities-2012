@@ -247,9 +247,33 @@ div.widget {
   }
 }
 
-/* organic tabs jquery plugin */
+/**
+ * organic tabs jquery plugin
+ */
+
+// hide all organictab sections except for the one marked as current (via .current class)
+// do this only if js is enabled (as detected by modernizr)
+.organictabs-container .list-wrap > section {
+  html.js & {
+    display: none;
+  
+    &.current {
+      display: inherit;
+    }
+    
+    header {
+      display: none;
+    }
+  }
+}
+
 .organictabs, .uiTabs {
   margin-top: 2em;
+  display: none; // do not display when JS is not detected
+  
+  html.js & {
+    display: inline-block; // display when JS is detected
+  }
   
   &.three-per-row > li {
     width: 30.75%;
@@ -266,6 +290,27 @@ div.widget {
     }
   }
 
+  /**
+   * TECHNICAL DEBT:
+   * once everything is moved over to susy, this must be moved to a mixin
+   */
+  & > li {
+    min-width: 13.45%;
+    float: left;
+    margin-right: 0.25rem;
+    min-height: 1px;
+    text-align: center;
+    
+    &:nth-of-type(6n) {
+      margin-right: 0;
+    }
+    
+    a {
+      border-top-right-radius: 0.5rem;
+      border-top-left-radius: 0.125rem;
+    }
+  }
+  
   & >  li {
     a, a:visited, a:active, a:focus, a:hover {
       color: white;
