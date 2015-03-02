@@ -94,6 +94,12 @@ ul.run-in.comma-separated {
   }
 }
 
+.over-two-col {
+  columns: 2;
+  -moz-columns: 2;
+  -webkit-columns: 2;
+}
+
 article header {
   margin-bottom: 1.5rem;
 }
