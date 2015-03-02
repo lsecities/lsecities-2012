@@ -36,6 +36,10 @@
     
     dl dt {
       border-bottom: none;
+      clear: both;
+    }
+    dl dd {
+      @include inline-lists;
     }
   }
   

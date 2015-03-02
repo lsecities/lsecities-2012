@@ -10,18 +10,29 @@ $list_divider: unquote('1px solid #eee');
 $nav-and-keyfacts-h1-size: 1em;
 $keyfacts-font-size: 0.9em;
 
-@mixin inline-lists {
-    display: inline;
-    
-    & > li {
+@mixin inline-lists($separator_character: ',') {
+    $separator: ', ';
+    @if $separator_character == ',' {
+      $separator: ', ';
+    } @elseif $separator_character == ';' {
+      $separator: '; ';
+    } @else {
+      $separator: ', ';
+    }
+
+    dt {
+      clear: both;
+    }
+
+    & > li, & > dd {
       display: inline;
     }
     
-    li:after {
-      content: ', ';
+    li:after, dd:after {
+      content: $separator;
     }
-    
-    li:last-child:after {
+
+    li:last-child:after, dd:last-child {
       content: '' !important;
     }
 }
