@@ -111,6 +111,9 @@ function get_article_data($pod, $options = []) {
   $publication_pod = pods('publication_wrappers', $obj['parent_publication_id']);
   lc_data('publication_pod', $publication_pod);
 
+  // research programmes
+  $obj['research_programmes'] = array_map(function($item) { return $item['permalink']; }, $pod->field('research_programmes'));
+  
   // grab the featured image URI
   $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), 'original');
   
