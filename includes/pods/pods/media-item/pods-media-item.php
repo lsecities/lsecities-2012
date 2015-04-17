@@ -33,8 +33,12 @@ function pods_prepare_media_item($query_string = '', $options = []) {
     // if so, add process parent sessions
     if($related_session['id']) {
       $parent_sessions = get_media_item_event_info($pod);
+      $research_programmes = array_map(
+        function($item) { return $item['permalink']; },
+        $pod->field('session' . str_repeat('.parent_session', count($parent_sessions)) . '.parent_event_programme.for_conference.research_programmes'));
     } elseif($related_event['id']) {
       $parent_event = $related_event;
+      $research_programmes = $related_event['research_programmes'];
     }
     
     $speakers = $pod->field('session.speakers');
@@ -54,6 +58,7 @@ function pods_prepare_media_item($query_string = '', $options = []) {
       'id' => $pod->field('slug'),
       'title' => $pod->field('name'),
       'date' => $pod->field('date'),
+      'research_programmes' => $research_programmes,
       'youtube_uri' => $pod->field('youtube_uri'),
       'video_uri' => $pod->field('video_uri'),
       'audio_uri' => $pod->field('audio_uri'),
