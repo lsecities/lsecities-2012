@@ -8,14 +8,18 @@
           - else
             %a( href = "#tab_#{section.post_id}" ) = section.title
 - macro page_section(section)
-  %section( id = "tab_#{section.post_id}" class = "project-tab")
-    %header
-      %h1 = section.title
-    = section.main_content | raw
+  %header
+    %h1 = section.title
+  = section.main_content | raw
 - macro sections_content(sections)
   .list-wrap
     - for section in sections
-      = _self.page_section(section)
+      - if loop.first
+        %section( id = "tab_#{section.post_id}" class = "project-tab current")
+          = _self.page_section(section)
+      - else
+        %section( id = "tab_#{section.post_id}" class = "project-tab")
+          = _self.page_section(section)
 - macro page_sections(sections)
   - if sections
     :javascript

@@ -83,7 +83,7 @@ $gallery = $obj['gallery'];
               <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections'])) ?>
               
               <div class='list-wrap'>
-                <section id="t-project-info" class="project-tab row">
+                <section id="t-project-info" class="project-tab row current">
                   <div class="eightcol">
                   <?php echo $obj['blurb']; ?>
                   </div>
