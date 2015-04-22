@@ -36,14 +36,21 @@ class PhotoGallery extends PodsObject {
     // populate slides array; slide count starts from 1, not 0 (because content editors don't start counting from zero)
     foreach(range(1, self::MAX_SLIDE_COUNT) as $slide_index) {
       $slide = $pod->field(sprintf('slide%02d', $slide_index));
-      if($slide->ID) {
+      
+      echo '<!-- slide: ' . var_export($slide, TRUE) . ' -->';
+
+      if($slide['ID']) {
         $this->slides[] = [
-          'id' => $slide->ID,
-          'uri' => wp_get_attachment_url($slide->ID),
+          'id' => $slide['ID'],
+          'uri' => wp_get_attachment_url($slide['ID']),
           'slide' => $slide
         ];
+        
+        echo '<!-- slide: ' . var_export($slide, TRUE) . ' -->';
       }
     }
+    
+    echo '<!-- slides: ' . var_export($this->slides, TRUE) . ' -->';
   }
   
   function get_galleria_data() {
