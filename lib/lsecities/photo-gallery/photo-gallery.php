@@ -53,10 +53,12 @@ class PhotoGallery extends PodsObject {
     echo '<!-- slides: ' . var_export($this->slides, TRUE) . ' -->';
   }
   
-  function get_galleria_data() {
+  function get_galleria_data($class) {
+    $class = count($this->slides) == 1 ? $class . ' single' : $class;
+      
     return [
       'permalink' => $this->permalink,
-      'class' => count($this->slides) == 1 ? 'single' : '',
+      'class' => $class,
       'slides' => $this->slides
     ];
   }
@@ -65,14 +67,15 @@ class PhotoGallery extends PodsObject {
 /**
  * Build data object to be used in templating
  * @param string $permalink The photo gallery's permalink
+ * @param string $extra_classes Any extra classes to use for the gallery
  * @param bool $random_slide_order Whether to shuffle slides randomly
  * @return array Data structure with the photo gallery's full data
  */
-function photo_gallery_get_galleria_data($permalink, $random_slide_order = FALSE) {
+function photo_gallery_get_galleria_data($permalink, $extra_classes = '', $random_slide_order = FALSE) {
   $photo_gallery = new PhotoGallery($permalink, TRUE);
 
   if(is_object($photo_gallery)) {
-    return $photo_gallery->get_galleria_data();
+    return $photo_gallery->get_galleria_data($extra_classes);
   } else {
     return NULL;
   }

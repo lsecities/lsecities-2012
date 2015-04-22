@@ -135,8 +135,7 @@ function pods_prepare_event($permalink, $options = []) {
   $heading_gallery_permalink = $pod->field('heading_gallery.slug');
   
   if($heading_gallery_permalink) {
-    $obj['heading_gallery'] = photo_gallery_get_galleria_data($heading_gallery_permalink);
-    echo '<!-- heading_gallery ' . var_export($obj['heading_gallery'], TRUE) . ' -->';
+    $obj['heading_gallery'] = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
   }
 
   /**
