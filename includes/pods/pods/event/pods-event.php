@@ -130,6 +130,9 @@ function pods_prepare_event($permalink, $options = []) {
   
   // Set featured image, forcing 960px width and 2.5:1 ratio
   $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), [960,384]);
+  
+  // If a heading photo gallery is provided, use it instead of the single featured image
+  $obj['heading_gallery'] = photo_gallery_get_galleria_data($pod->field('heading_gallery.permalink'));
 
   /**
    * event start and end

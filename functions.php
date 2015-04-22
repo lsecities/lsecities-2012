@@ -51,6 +51,7 @@ require_fragment('/lib/lsecities/course/course.php');
 require_fragment('/lib/lsecities/event/event.php');
 require_fragment('/lib/lsecities/person/person.php');
 require_fragment('/lib/lsecities/group/group.php');
+require_fragment('/lib/lsecities/photo-gallery/photo-gallery.php');
 require_fragment('/lib/lsecities/research-project/research-project.php');
 require_fragment('/lib/lsecities/wp_page/wp_page.php');
 require_fragment('/includes/pods/pods/article/pods-article.php' );
