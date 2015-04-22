@@ -60,7 +60,7 @@ class WPPage extends PodsObject {
     ];
 
     $this->post_class = get_post_class($this->id);
-    $this->main_content_class = empty($this->extra_content) ? 'twelvecol' : 'eightcol';  // TECH_DEBT: this won't be needed when we move away from 1140px css grid (legacy cssgrid.net)
+    $this->main_content_class = empty($this->extra_content) ? 'twelvecol' : 'eightcol';  // TECHNICAL_DEBT: this won't be needed when we move away from 1140px css grid (legacy cssgrid.net)
     
   }
 }
