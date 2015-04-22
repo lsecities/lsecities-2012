@@ -35,7 +35,13 @@ class PhotoGallery extends PodsObject {
 
     // populate slides array; slide count starts from 1, not 0 (because content editors don't start counting from zero)
     foreach(range(1, self::MAX_SLIDE_COUNT) as $slide_index) {
-      $slide = $pod->field(sprintf('slide%02d', $slide_index));
+      /*
+       * TECHNICAL_DEBT: either make each Pod field single-value
+       * (and remove the following array slicing on return value)
+       * or handle multi-value fields here (migrating older data)
+       * and remove slide02+ Pod fields
+       */
+      $slide = $pod->field(sprintf('slide%02d', $slide_index))[0];
       
       echo '<!-- slide: ' . var_export($slide, TRUE) . ' -->';
 
