@@ -58,36 +58,7 @@
       <div class="row">
         <div class="threecol">
           <h1>Subscribe to our updates</h1>
-          <!-- Begin MailChimp Signup Form -->
-          <div id="mc_embed_signup">
-          <form action="//lsecities.us4.list-manage.com/subscribe/post?u=6a19b1b794ce991fff919b68d&amp;id=1f3b65491d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-              <div id="mc_embed_signup_scroll">
-            <div class="mc-field-group">
-              <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-            </label>
-              <input value="" name="EMAIL" class="required email" id="mce-EMAIL" type="email">
-            </div>
-            <div class="mc-field-group">
-              <label for="mce-FNAME">First Name  <span class="asterisk">*</span>
-            </label>
-              <input value="" name="FNAME" class="required" id="mce-FNAME" type="text">
-            </div>
-            <div class="mc-field-group">
-              <label for="mce-LNAME">Last Name  <span class="asterisk">*</span>
-            </label>
-              <input value="" name="LNAME" class="required" id="mce-LNAME" type="text">
-            </div>
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-            <div id="mce-responses" class="clear">
-              <div class="response" id="mce-error-response" style="display:none"></div>
-              <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;"><input name="b_6a19b1b794ce991fff919b68d_1f3b65491d" tabindex="-1" value="" type="text"></div>
-              <div class="clear"><input value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" type="submit"></div>
-            </div>
-          </form>
-          </div>
-          <!--End mc_embed_signup-->
+          <?php SemanticWP\Templating::get_template_part('lsecities/partials/_mailchimp-embed-signup', []); ?>
         </div>
         <div class="threecol">
           <h1>Keep in touch</h1>

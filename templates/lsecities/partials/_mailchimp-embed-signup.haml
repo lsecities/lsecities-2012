@@ -1,0 +1,37 @@
+/ Begin MailChimp Signup Form
+#mc_embed_signup
+  %form#mc-embedded-subscribe-form.validate{:action => "//lsecities.us4.list-manage.com/subscribe/post?u=6a19b1b794ce991fff919b68d&id=1f3b65491d", :method => "post", :name => "mc-embedded-subscribe-form", :novalidate => "", :target => "_blank"}
+    #mc_embed_signup_scroll
+      .mc-field-group
+        %label{:for => "mce-EMAIL"}
+          Email Address
+          %span.asterisk *
+        %input#mce-EMAIL.required.email{:name => "EMAIL", :type => "email", :value => ""}/
+      .mc-field-group
+        %label{:for => "mce-FNAME"}
+          First Name
+          %span.asterisk *
+        %input#mce-FNAME.required{:name => "FNAME", :type => "text", :value => ""}/
+      .mc-field-group
+        %label{:for => "mce-LNAME"}
+          Last Name
+          %span.asterisk *
+        %input#mce-LNAME.required{:name => "LNAME", :type => "text", :value => ""}/
+      .mc-field-group
+        %label{:for => "mce-ROLE"} Role
+        %input#mce-ROLE{:name => "ROLE", :type => "text", :value => ""}/
+      .mc-field-group
+        %label{:for => "mce-ORG"} Organisation
+        %input#mce-ORG{:name => "ORG", :type => "text", :value => ""}/
+      .indicates-required
+        %span.asterisk *
+        indicates required
+      #mce-responses.clear
+        #mce-error-response.response{:style => "display:none"}
+        #mce-success-response.response{:style => "display:none"}
+      / real people should not fill this in and expect good things - do not remove this or risk form bot signups
+      %div{:style => "position: absolute; left: -5000px;"}
+        %input{:name => "b_6a19b1b794ce991fff919b68d_1f3b65491d", :tabindex => "-1", :type => "text", :value => ""}/
+      .clear
+        %input#mc-embedded-subscribe.button{:name => "subscribe", :type => "submit", :value => "Subscribe"}/
+/ End mc_embed_signup

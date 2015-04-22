@@ -625,9 +625,6 @@ html.js .organictabs, html.js .uiTabs { display: inline-block; }
 #navigationarea nav dl dt.ui-accordion-header.ui-state-active:before { background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-vertical.gif") no-repeat 0; padding-left: 0.75em; }
 #navigationarea #whoswho-side-toc h1 { font-weight: bold; }
 #navigationarea #whoswho-side-toc h1 + ul { margin-bottom: 1.5em; }
-#navigationarea #mailing-list-subscription:not(:first-child) h1 { margin-top: 4em; }
-#navigationarea #mailing-list-subscription > h1 { cursor: pointer; }
-#navigationarea #mailing-list-subscription #mailchimp-form { display: none; }
 
 #conferencepagesnav nav.conferencemenu ul li { color: #fff; background-color: #000; padding: 0.5em; }
 #conferencepagesnav nav.conferencemenu ul li a { color: #fff; }
@@ -987,7 +984,6 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 body.ec2012.custom-background { background-color: black !important; }
 
 body.ec2012 { background-color: black; color: white; font-family: "Open Sans", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
-body.ec2012 #mailing-list-subscription { display: none; }
 body.ec2012 .reset-layout { clear: both; overflow: hidden; }
 body.ec2012 #container { max-width: 960px; margin-left: auto; margin-right: auto; }
 body.ec2012.page-id-393 #container { max-width: inherit; }
@@ -1067,7 +1063,6 @@ body.urban-age-twentyfifteen #background-photo-explorer .caption, body.rio2013 #
 @media screen and (max-width: 1024px) { body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 { /* Specific to this particular image */ }
   body.urban-age-twentyfifteen img.bg, body.rio2013 img.bg, body.delhi2014 img.bg { left: 50%; margin-left: -512px; /* 50% */ } }
 body.urban-age-twentyfifteen .heading-image, body.rio2013 .heading-image, body.delhi2014 .heading-image { display: none; }
-body.urban-age-twentyfifteen #mailing-list-subscription, body.rio2013 #mailing-list-subscription, body.delhi2014 #mailing-list-subscription { display: none; }
 body.urban-age-twentyfifteen .reset-layout, body.rio2013 .reset-layout, body.delhi2014 .reset-layout { clear: both; overflow: hidden; }
 body.urban-age-twentyfifteen #container, body.rio2013 #container, body.delhi2014 #container { max-width: 960px; margin-left: auto; margin-right: auto; margin-top: 2em; background: white; pointer-events: auto; opacity: 0.99; position: relative; z-index: 10; }
 body.urban-age-twentyfifteen header.entry-header, body.rio2013 header.entry-header, body.delhi2014 header.entry-header { padding-top: 1rem; display: none; }
