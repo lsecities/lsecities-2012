@@ -6,7 +6,7 @@
 @import "compass/css3/border-radius";
 
 .lc-publication {
-  // TECHNICAL DEBT
+  // TECHNICAL_DEBT
   // border-box should be the overall default; until that
   // has been thoroughly tested, we can set it per template
   & * {
