@@ -65,4 +65,21 @@
       }
     }
   }
+
+  .indicates-required {
+    text-align: right;
+  }
+
+  input, button {
+    margin-bottom: 0.5rem;
+    border: none;
+  }
+
+  input {
+    width: 100%;
+
+    &.button {
+      width: auto;
+    }
+  }
 }
