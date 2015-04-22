@@ -1,6 +1,6 @@
-%div(class = "lc-galleria #{gallery.class}", id = "lc-galleria-#{gallery.permalink}")
+%div(class = "lc-galleria #{gallery.class}" id = "lc-galleria-#{gallery.permalink}")
   %ul
-    - for gallery.slides as slide
+    - for slide in gallery.slides
       %li
         %a(href = slide.uri)
-          %img(title = slide.slide.post_title, src = slide.uri, alt = slide.slide.post_title, data-title = slide.slide.post_title, data-description = slide.slide.post_excerpt)
+          %img(title = slide.slide.post_title src = slide.uri alt = slide.slide.post_title data-title = slide.slide.post_title data-description = slide.slide.post_excerpt)
