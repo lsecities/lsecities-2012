@@ -35,7 +35,7 @@ $media_items_output_counter = 1;
                   <?php if(false): ?>
                   <a href="https://www.youtube.com/watch?v=<?php echo $obj['event_media'][0]['youtube_uri'] ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/stylesheets/mediaelement/bigplay.png'; ?>" style="background: url('<?php echo $obj['featured_image_uri']; ?>'); center center black" alt="event photo" /></a>
                   <?php elseif(is_array($obj['heading_gallery'])): ?>
-                  <?php \SemanticWP\Templating::get_template_part('lsecities/partials/galleria', $obj['heading_gallery']); ?>
+                  <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', $obj['heading_gallery']); ?>
                   <?php else: ?>
                   <img src="<?php echo $obj['featured_image_uri']; ?>" alt="event photo" />
                   <?php endif; ?>
