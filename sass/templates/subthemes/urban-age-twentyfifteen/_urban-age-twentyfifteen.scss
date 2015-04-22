@@ -10,8 +10,8 @@
 
 $background-color: transparent;
 $header-background-color: #ffee00;
-$header-form-input-background-color: lighten($header-background-color, 40);
-$header-form-button-background-color: darken($header-background-color, 10);
+$footer-form-input-background-color: lighten($header-background-color, 40);
+$footer-form-button-background-color: darken($header-background-color, 10);
 $header-text-color: black;
 $menu-current-background-color: rgba(33,33,33,0.5);
 $menu-current-color: $header-background-color;
@@ -389,11 +389,11 @@ body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
     }
     
     input {
-      background-color: $header-form-input-background-color;
+      background-color: $footer-form-input-background-color;
     }
 
     input.button {
-      background-color: $header-form-button-background-color;
+      background-color: $footer-form-button-background-color;
     }
   }
   
