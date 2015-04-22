@@ -30,7 +30,7 @@ var_trace(var_export($pod_list, true), $TRACE_PREFIX . ' - pod_list');
 		<h1 class="entry-title"><?php the_title(); ?></h1>
   </header><!-- .entry-header -->
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class('ninecol lc-article lc-list'); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class('twelvecol lc-article lc-list'); ?>>
     <div class="entry-content">
     <?php
     foreach($obj['lists'] as $list) {
@@ -47,7 +47,7 @@ var_trace(var_export($pod_list, true), $TRACE_PREFIX . ' - pod_list');
 	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->
 
-<?php get_template_part('nav'); ?>
+<!-- no sidenav -->
 
 </div><!-- .main.row -->
 
