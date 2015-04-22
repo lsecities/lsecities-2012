@@ -150,11 +150,14 @@
             }
           } catch(error) { }
 
-          // enable Galleria for research pages photo slider
+          // enable Galleria for research/publication/event pages photo slider
           try {
-            if(jQuery('.lc-research-project .lc-galleria, .lc-publication .lc-galleria').length > 0) {
-              jQuery('.lc-research-project .lc-galleria, .lc-publication .lc-galleria').galleria({responsive: true, height: 0.4, transition: 'fade', transitionSpeed: 600, carousel: false, thumbnails: false, autoplay: 5000, showInfo: false, preload: 'all', debug: <?php echo is_user_logged_in() ? 'true' : 'false'; ?>});
-              jQuery('.lc-research-project .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-publication .lc-galleria .lc-galleria.fullbleed .galleria-thumbnails-container').hide();
+            var selector = '.lc-research-project .lc-galleria, .lc-publication .lc-galleria, .lc-event .lc-galleria',
+                fullbleed_selector = '.lc-research-project .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-publication .lc-galleria .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-event .lc-galleria.fullbleed .galleria-thumbnails-container';
+
+            if(jQuery(selector).length > 0) {
+              jQuery(selector).galleria({responsive: true, height: 0.4, transition: 'fade', transitionSpeed: 600, carousel: false, thumbnails: false, autoplay: 5000, showInfo: false, preload: 'all', debug: <?php echo is_user_logged_in() ? 'true' : 'false'; ?>});
+              jQuery(fullbleed_selector).hide();
             }
           } catch(error) { }
 

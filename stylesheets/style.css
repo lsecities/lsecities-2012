@@ -605,7 +605,7 @@ html.js .organictabs-container .list-wrap > section { display: none; }
 html.js .organictabs-container .list-wrap > section.current { display: inherit; }
 html.js .organictabs-container .list-wrap > section header { display: none; }
 
-.organictabs, .uiTabs { margin-top: 2em; display: none; /** TECHNICAL DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
+.organictabs, .uiTabs { margin-top: 2em; display: none; /** TECHNICAL_DEBT: once everything is moved over to susy, this must be moved to a mixin */ }
 html.js .organictabs, html.js .uiTabs { display: inline-block; }
 .organictabs.three-per-row > li, .uiTabs.three-per-row > li { width: 30.75%; float: left; margin-right: 3.8%; min-height: 1px; }
 .organictabs.three-per-row > li:nth-of-type(3n), .uiTabs.three-per-row > li:nth-of-type(3n) { margin-right: 0; }
