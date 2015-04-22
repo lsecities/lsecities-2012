@@ -121,9 +121,6 @@ if($nav_generated === false) {
   get_template_part('templates/nav/nav', 'generic');
 }
 
-// include mailing list subscription template part
-get_template_part('templates/nav/nav', 'mailing-list-subscription');
-
 endif; // (is_single() or is_archive())
 ?>
 </div>
