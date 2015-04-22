@@ -43,20 +43,14 @@ class PhotoGallery extends PodsObject {
        */
       $slide = $pod->field(sprintf('slide%02d', $slide_index))[0];
       
-      echo '<!-- slide: ' . var_export($slide, TRUE) . ' -->';
-
       if($slide['ID']) {
         $this->slides[] = [
           'id' => $slide['ID'],
           'uri' => wp_get_attachment_url($slide['ID']),
           'slide' => $slide
         ];
-        
-        echo '<!-- slide: ' . var_export($slide, TRUE) . ' -->';
       }
     }
-    
-    echo '<!-- slides: ' . var_export($this->slides, TRUE) . ' -->';
   }
   
   function get_galleria_data($class) {
