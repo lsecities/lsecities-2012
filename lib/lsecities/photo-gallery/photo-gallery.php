@@ -71,5 +71,9 @@ class PhotoGallery extends PodsObject {
 function photo_gallery_get_galleria_data($permalink, $random_slide_order = FALSE) {
   $photo_gallery = new PhotoGallery($permalink, TRUE);
 
-  return $group->get_galleria_data();
+  if(is_object($photo_gallery)) {
+    return $photo_gallery->get_galleria_data();
+  } else {
+    return NULL;
+  }
 }
