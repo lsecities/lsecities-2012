@@ -86,7 +86,7 @@ function pods_prepare_research_project($pod_slug) {
   $obj['research_external_events'] = get_project_events($pod, FALSE, $obj['research_external_event_categories'], $obj['research_outputs']);
   
   // prepare heading gallery
-  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+  $obj['gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($pod->field('gallery.slug'), 'fullbleed');
 
   // if we have research photo galleries/photo essays, prepare them
   $obj['research_photo_galleries'] = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');

@@ -39,7 +39,7 @@ $gallery = $obj['gallery'];
       <div class='top-content'>
         <?php if(count($gallery['slides'])) : ?>
         <header class='heading-image'>
-          <?php include('templates/partials/galleria.inc.php'); ?>
+          <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['gallery'] ]); ?>
         </header>
         <?php endif; ?>
 
