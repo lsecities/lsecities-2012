@@ -38,7 +38,7 @@ function pods_prepare_slider($pod_slug) {
    * Read any jquery options and set global variable accordingly; these
    * options are used in the footer.php template.
    */
-  lc_data('slider_jquery_options', $pod->field('jquery_options'));
+  $obj['slider_options'] = $pod->field('jquery_options');
 
   $obj['slides'] = array();
 

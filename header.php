@@ -73,6 +73,11 @@ $obj = prepare_header($post);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
   
   /**
+   * Finally enqueue our own app.js
+   */
+  wp_enqueue_script('app-js', get_stylesheet_directory_uri() . '/assets/js/app.js', 'jquery', false, true); // TECHNICAL_DEBT: preprocess via gulp, put in /stylesheets, enqueue from there
+  
+  /**
    * if we have a subtheme-specific JS, enqueue it now
    */
   if(is_array($obj['theme_js'])) {
