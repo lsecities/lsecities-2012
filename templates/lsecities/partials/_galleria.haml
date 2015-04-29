@@ -1,4 +1,4 @@
-- if(gallery.class and gallery.permalink and gallery.slides|length > 0)
+- if gallery.slides|length > 0
   %div(class = "lc-galleria #{gallery.class}" id = "lc-galleria-#{gallery.permalink}")
     %ul
       - for slide in gallery.slides
