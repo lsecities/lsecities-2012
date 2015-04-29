@@ -104,6 +104,7 @@ jQuery(document).ready(function($) {
       mousewheel: false,
       controlNav: false,
       directionNav: true,
+      pauseOnHover: true
     },
     /**
      * First read data attribute as string (i.e. via $.attr() rather
