@@ -86,10 +86,17 @@ function pods_prepare_research_project($pod_slug) {
   $obj['research_external_events'] = get_project_events($pod, FALSE, $obj['research_external_event_categories'], $obj['research_outputs']);
   
   // prepare heading gallery
-  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+  $heading_gallery_permalink = $pod->field('gallery.slug');
+  $obj['heading_gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
 
   // if we have research photo galleries/photo essays, prepare them
-  $obj['research_photo_galleries'] = galleria_prepare_multi($pod, 'fullbleed wireframe wait', 'photo_galleries');
+  $photo_galleries = $pod->field('photo_galleries');
+  
+  if(is_array($photo_galleries)) {
+    foreach($photo_galleries as $photo_gallery) {
+      $obj['research_photo_galleries'][] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($photo_gallery['slug'], 'fullbleed wait');
+    }
+  }
 
   return $obj;
 }
