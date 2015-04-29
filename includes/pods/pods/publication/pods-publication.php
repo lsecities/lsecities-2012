@@ -103,7 +103,8 @@ function pods_prepare_publication($pod_slug) {
   $obj['publication_catalogue_data'] = $pod->field('catalogue_data');
   $obj['publishing_date'] = $pod->field('publishing_date');
 
-  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+  $gallery_permalink = $pod->field('gallery.slug');
+  $obj['gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($gallery_permalink, 'fullbleed');
 
   $obj['wp_posts_reviews'] = array();
   if($pod->field('reviews_category.term_id')) {

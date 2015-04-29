@@ -28,9 +28,6 @@ $publication_sections = $obj_sections['sections'];
 
 $TRACE_PREFIX = 'pods-publications';
 
-// the galleria partial expects to find its data in a $gallery variable
-$gallery = $obj['gallery'];
-
 ?><?php get_header(); ?>
 
 <div role="main">
@@ -38,11 +35,11 @@ $gallery = $obj['gallery'];
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-publication publication-category-' . $obj['publication_category']); ?>>
     <div class='fullwidth' id='contentarea'>
       <div class='top-content'>
-        <?php if(count($gallery['slides'])) : ?>
+        <?php if(count($obj['gallery']['slides'])) : ?>
         <div class='heading-image'>
-          <?php include('templates/partials/galleria.inc.php'); ?>
+          <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['gallery'] ]); ?>
         </div>
-        <?php endif; ?>
+        <?php endif; // (count($obj['gallery']['slides'])) ?>
 
         <header class='entry-header'>
           
