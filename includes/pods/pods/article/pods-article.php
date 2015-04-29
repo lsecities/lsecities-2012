@@ -188,7 +188,8 @@ function get_article_data($pod, $options = []) {
   // fetch any attachments, replace hostname until we switch to WP+Pods for the whole website
   $obj['attachments'] = $pod->field('attachments');
 
-  $obj['gallery'] = galleria_prepare($pod);
+  $data_gallery_permalink = $pod->field('gallery.slug');
+  $obj['data_gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($data_gallery_permalink);
 
   return $obj;
 }
