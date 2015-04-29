@@ -11,37 +11,26 @@ function galleria_shortcode($args) {
   ob_start();
   $gallery_uniqid = uniqid();
   ?>
-  <div id="galleria_<?php echo $gallery_uniqid; ?>" style="width: <?php echo ($args['container-width'] ? $args['container-width'] : '100%'); ?>;"></div>
-  <script type="text/javascript">
-  jQuery(document).ready(function() {
-    Galleria.loadTheme('<?php echo LC_GALLERIA_BASE_PATH . '/themes/classic/galleria.classic.js'; ?>');
-    Galleria.run('#galleria_<?php echo $gallery_uniqid; ?>', {
-      wait: true,
-      debug: <?php echo is_user_logged_in() ? 'true' : 'false'; ?>,
-      <?php if($args['picasa_album']) : ?>
-      picasa: 'useralbum:<?php echo $args['picasa_album'] ; ?>',
-      picasaOptions: {
-        sort: 'date-posted-asc'
-      },
-      <?php elseif($args['flickr_set_id']) : ?>
-      flickr: 'set:<?php echo $args['flickr_set_id'] ?>',
-      flickrOptions: {
-        sort: 'date-posted-asc'
-      },
-      <?php endif ; ?>
-      <?php if($args['responsive']): ?>
-      responsive: <?php echo $args['responsive']; ?>,
+  <div class="galleria-tag" id="galleria_<?php echo $gallery_uniqid; ?>" style="width: <?php echo ($args['container-width'] ? $args['container-width'] : '100%'); ?>;"
+    data-debug="<?php echo is_user_logged_in() ? 'true' : 'false'; ?>"
+    <?php if($args['picasa_album']): ?>
+      data-picasa-selector="useralbum:<?php echo $args['picasa_album']; ?>"
+      data-picasa-options="{ sort: 'date-posted-asc' }"
+    <?php elseif($args['flickr_set_id']) : ?>
+      data-flickr-selector="set:<?php echo $args['flickr_set_id'] ?>"
+      data-flickr-options="{ sort: 'date-posted-asc' }"
+    <?php endif ; ?>
+    <?php if($args['responsive']): ?>
+      data-responsive="<?php echo $args['responsive']; ?>"
       <?php else: ?>
-      responsive: true,
-      <?php endif; ?>
-      <?php if($args['height']): ?>
-      height: '<?php echo $args['height']; ?>',
+      data-responsive="true"
+    <?php endif; // ($args['responsive']) ?>
+    <?php if($args['height']): ?>
+      data-height="<?php echo $args['height']; ?>"
       <?php else: ?>
-      height: '0.6',
-      <?php endif; ?>
-    });
-  });
-  </script>  
+      data-height="0.6",
+    <?php endif; ?>
+    ></div>
   <?php
   $c = ob_get_contents();
   ob_end_clean();

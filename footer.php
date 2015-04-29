@@ -162,6 +162,30 @@
           } catch(error) { }
 
           try {
+            $('.galleria-tag').each(function(index) {
+              var galleria_options = {
+                wait: true,
+                debug: $(this).data('debug'),
+                responsive: $(this).data('responsive'),
+                height: $(this).data('height')
+              };
+              
+              Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
+            
+              if($(this).data('picasaSelector')) {
+                galleria_options['picasa'] = $(this).data('picasaSelector');
+                galleria_options['picasaOptions'] = $(this).data('picasaOptions');
+              }
+              if($(this).data('flickrSelector')) {
+                galleria_options['flickr'] = $(this).data('flickrSelector');
+                galleria_options['flickrOptions'] = $(this).data('flickrOptions');
+              }
+            
+              Galleria.run("#" + $(this).attr('id'), galleria_options);
+            });
+          } catch(error) {}
+          
+          try {
             if(jQuery('.lc-galleria.single .galleria-image-nav')) {
               jQuery('.lc-galleria.single .galleria-image-nav').hide();
             }
