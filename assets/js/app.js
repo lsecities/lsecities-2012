@@ -58,6 +58,8 @@ jQuery(document).ready(function($) {
 
   // Run Galleria for galleria shortcodes
   try {
+    Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
+    
     $('.galleria-tag').each(function(index) {
       var galleria_options = {
         wait: true,
@@ -66,8 +68,6 @@ jQuery(document).ready(function($) {
         height: $(this).data('height')
       };
       
-      Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
-    
       if($(this).data('picasaSelector')) {
         galleria_options['picasa'] = $(this).data('picasaSelector');
         galleria_options['picasaOptions'] = $(this).data('picasaOptions');
