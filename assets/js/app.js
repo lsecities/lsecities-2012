@@ -105,7 +105,19 @@ jQuery(document).ready(function($) {
       controlNav: false,
       directionNav: true,
     },
-    slider_options = $(this).data('sliderOptions');
+    /**
+     * First read data attribute as string (i.e. via $.attr() rather
+     * than via $.data(), then replace single quotes with double quotes
+     * so that the resulting string is valid JSON.
+     * Unfortunately we can't avoid replacing double quotes with single
+     * quotes in PHP and then single quotes with double quotes here, as
+     * MtHAML outputs HTML attributes delimited by double quotes (it
+     * may be possible to change that, but there doesn't seem to be any
+     * per-template configuration option at least in the current
+     * version of MtHAML.
+     */
+    slider_options_string = $(this).attr('data-slider-options'),
+    slider_options = $.parseJSON(slider_options_string.replace(/'/g, '"'))
     
     $(this).flexslider($.extend(base_slider_options, slider_options));
   });
