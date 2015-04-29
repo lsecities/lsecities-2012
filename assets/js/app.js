@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
     var
     base_slider_options = {
       animation: 'slide',
-      slideshow: false,
+      slideshow: true,
       mousewheel: false,
       controlNav: false,
       directionNav: true,
