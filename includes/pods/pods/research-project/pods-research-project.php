@@ -107,11 +107,13 @@ function get_project_data_visualization_collections($pod) {
   
   $obj = [];
   
-  foreach($data_visualization_collections as $data_visualization_collection) {
-    $obj[] = [
-      'publication' => \LSECitiesWPTheme\publication\pods_prepare_publication($data_visualization_collection['slug']),
-      'publication_sections' => \LSECitiesWPTheme\publication\pods_prepare_table_of_contents($data_visualization_collection['slug'])
-    ];
+  if(is_array($data_visualization_collections)) {
+    foreach($data_visualization_collections as $data_visualization_collection) {
+      $obj[] = [
+        'publication' => \LSECitiesWPTheme\publication\pods_prepare_publication($data_visualization_collection['slug']),
+        'publication_sections' => \LSECitiesWPTheme\publication\pods_prepare_table_of_contents($data_visualization_collection['slug'])
+      ];
+    }
   }
   
   return $obj;
@@ -227,62 +229,64 @@ function get_project_research_outputs($pod) {
    * These are mostly publications for which a full 'publication' Pod
    * hasn't been created
    */
-  $research_output_slugs = (array)$pod->field('research_outputs.slug');
+  $linked_publications = (array)$pod->field('research_outputs');
+  
+  if(is_array($linked_publications)) {
+    foreach($linked_publications as $publication) {
+      $research_output = pods('research_output', $publication['slug']);
 
-  foreach($research_output_slugs as $research_output_slug) {
-    $research_output = pods('research_output', $research_output_slug);
+      if(!$research_output->exists()) {
+        continue;
+      }
 
-    if(!$research_output->exists()) {
-      continue;
+      $research_outputs[$research_output->field('category.slug')][] = array(
+        'slug' => 'research_outputs__' . $research_output->field('slug'),
+        'title' => $research_output->field('name'),
+        'citation' => $research_output->field('citation'),
+        'date' => date_string($research_output->field('date')),
+        'uri' => $research_output->field('uri')
+      );
     }
-    
-    var_trace(var_export($research_output->field('category'), true), 'output category');
-
-    $research_outputs[$research_output->field('category.slug')][] = array(
-      'slug' => 'research_outputs__' . $research_output->field('slug'),
-      'title' => $research_output->field('name'),
-      'citation' => $research_output->field('citation'),
-      'date' => date_string($research_output->field('date')),
-      'uri' => $research_output->field('uri')
-    );
   }
 
   /**
    * Now add to the research outputs found so far all the publications
    * from the publication_wrappers aka Publications pod
    */
-  $publication_slugs = (array)$pod->field('research_output_publications.slug');
+  $linked_publications = $pod->field('research_output_publications');
+  
+  if(is_array($linked_publications)) {
+    foreach($linked_publications as $publication) {
+      $research_output = pods('publication_wrappers', $publication['slug']);
 
-  foreach($publication_slugs as $publication_slug) {
-    $research_output = pods('publication_wrappers', $publication_slug);
-
-    if(!$research_output->exists()) {
-      continue;
-    }
-    
-    // get ID of WordPress page linked to this publication object
-    $linked_wp_page_id = $research_output->field('publication_web_page.ID');
-
-    var_trace(var_export($research_output->field('category'), true), 'output category');
-    var_trace($linked_wp_page_id, 'publication_web_page.ID');
-
-    $__publication_pdf = $research_output->field('publication_pdf');
-    $pdf_uri = $__publication_pdf ? wp_get_attachment_url($__publication_pdf['ID']) : '';
-    $pdf_filesize = $__publication_pdf ? sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) : '';
+      if(!$research_output->exists()) {
+        continue;
+      }
       
-    // only add publication to list if publication has a linked WP page; otherwise emit warning
-    if($linked_wp_page_id) {
-      $research_outputs[$research_output->field('category.slug')][] = array(
-        'slug' => $research_output->field('category.slug') . '__' . $research_output->field('slug'),
-        'title' => $research_output->field('name'),
-        'citation' => $research_output->field('name'),
-        'date' => date_string($research_output->field('publishing_date')),
-        'uri' => get_permalink($linked_wp_page_id),
-        'pdf_uri' => $pdf_uri,
-        'pdf_filesize' => $pdf_filesize
-      );
-    } else {
-      trigger_error('No WordPress page linked to Publication with ID ' . $research_output->id(), E_USER_NOTICE);
+      // get ID of WordPress page linked to this publication object
+      $linked_wp_page_id = $research_output->field('publication_web_page.ID');
+      
+      var_trace(var_export($research_output->field('category'), true), 'output category');
+      var_trace($linked_wp_page_id, 'publication_web_page.ID');
+
+      $__publication_pdf = $research_output->field('publication_pdf');
+      $pdf_uri = $__publication_pdf ? wp_get_attachment_url($__publication_pdf['ID']) : '';
+      $pdf_filesize = $__publication_pdf ? sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) : '';
+        
+      // only add publication to list if publication has a linked WP page; otherwise emit warning
+      if($linked_wp_page_id) {
+        $research_outputs[$research_output->field('category.slug')][] = array(
+          'slug' => $research_output->field('category.slug') . '__' . $research_output->field('slug'),
+          'title' => $research_output->field('name'),
+          'citation' => $research_output->field('name'),
+          'date' => date_string($research_output->field('publishing_date')),
+          'uri' => get_permalink($linked_wp_page_id),
+          'pdf_uri' => $pdf_uri,
+          'pdf_filesize' => $pdf_filesize
+        );
+      } else {
+        trigger_error('No WordPress page linked to Publication with ID ' . $research_output->id(), E_USER_NOTICE);
+      }
     }
   }
   
