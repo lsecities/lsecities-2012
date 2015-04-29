@@ -66,7 +66,11 @@ function prepare_header() {
     $microsite_configuration = array_shift(array_filter(lc_data('conference_microsites'), function($microsite) use ($x_site_id) { return $x_site_id === $microsite['x-site-id']; }));
     
     $obj['theme_js'] = $microsite_configuration['theme_js'];
-    $obj['body_class_extra'] = $microsite_configuration['body_class_extra'] . is_user_logged_in() ? ' user_logged_in' : '';
+    $obj['body_class_extra'] = $microsite_configuration['body_class_extra'];
+    if(is_user_logged_in()) {
+      $obj['body_class_extra'] .= ' user_logged_in';
+    }
+    
     lc_data('microsite_id', $microsite_configuration['x-site-id']);
     lc_data('body_class_extra', $microsite_configuration['body_class_extra']);
     $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference($microsite_configuration['conference_pod_slug']);
