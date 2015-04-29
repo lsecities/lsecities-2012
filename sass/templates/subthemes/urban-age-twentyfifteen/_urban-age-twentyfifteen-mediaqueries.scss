@@ -1,0 +1,132 @@
+//
+// Placeholder media queries for responsive design. Modify as design requires.
+// These follow after, and will override, the primary ('mobile first') styles
+// The closing /mediaquery comment is required by respond.js min/max-width Media Query polyfill
+//
+
+@media only screen and (min-width: 480px) {
+  // Style adjustments for viewports 480px and over go here
+  body.urban-age-twentyfifteen {
+
+  }
+}/*/mediaquery*/
+
+@media only screen and (min-width: 768px) {
+  // Style adjustments for viewports 768px and over go here
+  body.urban-age-twentyfifteen {
+
+  }
+}/*/mediaquery*/
+
+@media only screen and (min-width: 1024px) {
+  body.urban-age-twentyfifteen {
+    .full-background-photo {
+      display: block;
+    
+      /* and now for the background photo awe */
+      &.foreground {
+        & ~ #header {
+          opacity: 0.3;
+          @include transition(5s);
+        }
+
+        & ~ #container, & ~ #footer {
+          opacity: 0;
+          @include transition(opacity 5s);
+        }
+
+        & ~ #background-photo-explorer .caption {
+          display: block;
+        }
+
+        & ~ #background-photo-explorer .trigger {
+          background-color: black;
+          @include transition(background-color 1s);
+          @include animation-name(pulse);
+          @include animation-duration(2s);
+          @include animation-iteration-count(infinite);
+          @include animation-direction(alternate);
+
+          a {
+            color: $header-background-color;
+            @include transition(color 1s);
+          }
+        }
+      }
+    }
+
+    /* show background-photo-explorer only on 1024+ screens and only if js is detected */
+    // html.js &.logged-in #background-photo-explorer {
+    html.js & #background-photo-explorer {
+      display: inline-block;
+    }
+
+    #header, #container, #footer {
+      /* needed for graceful fading on background photo awe */
+      @include transition(opacity 5s);
+    }
+
+    #header {
+      z-index: 11;
+      position: fixed;
+      top: 0;
+      width: 100%;
+
+      /* when scrolled past top, make header less conspicuous */
+      &.sticky {
+        padding-top: 0.25rem;
+        box-shadow: 0px 0px 5px #333;
+
+        & ~ #container {
+          margin-top: 5rem;
+        }
+
+        .conference-title {
+          @include transition(font-size 0.25s);
+          font-size: 2em;
+        }
+        
+        #mainmenus {
+          @include transition(font-size 0.25s);
+          font-size: 0.90rem;
+        }
+      }
+    }
+
+    #container {
+      margin-top: 7rem;
+    }
+    
+    #footer {
+      width: auto;
+    }
+  }
+}/*/mediaquery*/
+
+@media only screen and (max-width: 768px) {
+  // Style adjustments for viewports 768px and less go here
+  body.urban-age-twentyfifteen {
+    .lc-newspaper-article {
+      #navigationarea {
+        position: static;
+        
+        .hide, .show {
+          display: none !important;
+        }
+        
+        #publication-side-toc {
+          position: static;
+          display: block;
+        }
+      }
+    }
+  }
+}/*/mediaquery*/
+
+// Print styles
+// Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+/*
+@media print {
+  @include media-print;
+}
+*/

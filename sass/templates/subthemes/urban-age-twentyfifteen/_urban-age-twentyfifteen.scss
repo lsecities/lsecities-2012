@@ -1,0 +1,591 @@
+@import "compass/utilities/general/clearfix";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transform";
+@import "compass/css3/filter";
+@import "compass/css3/border-radius";
+@import "compass/css3/animation";
+@import "../../palette";
+
+$background-color: transparent;
+$header-background-color: #ffee00;
+$footer-form-input-background-color: lighten($header-background-color, 40);
+$footer-form-button-background-color: darken($header-background-color, 10);
+$header-text-color: black;
+$menu-current-background-color: rgba(33,33,33,0.5);
+$menu-current-color: $header-background-color;
+$text-color: black;
+$link-color: #900;
+$link-hover-color: #444;
+$navigation-link-color: #310;
+$site-font: BureauGrotesque-ThreeSeven, 'Open Sans', Sans-Serif;
+$rio2013-font-family: 'Open Sans', $base-font-family;
+$font-weight: 100;
+
+@mixin basic-link {
+  background-color: inherit;
+  color: $link-color;
+}
+
+@mixin basic-link-hover {
+  @include basic-link;
+  color: $link-hover-color;
+}
+
+@include keyframes(pulse) {
+  0% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+body.urban-age-twentyfifteen, body.rio2013, body.delhi2014 {
+  position: relative;
+  color: $text-color;
+  font-family: $rio2013-font-family;
+  font-weight: $font-weight;
+  pointer-events: none;
+  
+  /* Hide WP admin bar to avoi clash with our fixed-position header */
+  #wpadminbar {
+   display: none;
+  }
+
+  .full-background-photo {
+    /* do not show on mobile-first */
+    display: none;
+
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+	
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+	
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    background-color: #555;
+    pointer-events: auto;
+    
+    @include transition(all 7s ease);
+    -webkit-backface-visibility: hidden; /* Fix for transition flickering */
+    opacity: 0.2;
+    
+    &:hover, &.just-loaded, &.foreground {
+      @include filter(grayscale(0%) blur(0));
+      @include transition(all 5s ease);
+      opacity: 1;
+    }
+    
+    &.loading {
+      opacity: 0;
+    }
+  }
+  
+  /* hide background-photo-explorer by default; only show on large screens (1024+) */
+  #background-photo-explorer {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    pointer-events: auto;
+    z-index: 11;
+    
+    & > div {
+      background: $header-background-color;
+      padding: 0 0.25rem;
+    }
+
+    .trigger {
+      display: inline-block;
+      cursor: pointer;
+      line-height: 1.8rem;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      @include transition(background-color 1s);
+
+      a {
+        color: black;
+        @include transition(color 1s);
+      }
+    }
+
+    .caption {
+      display: none;
+      max-width: 33%;
+    }
+  }
+
+  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img.bg {
+      left: 50%;
+      margin-left: -512px;   /* 50% */
+    }
+  }
+  
+  // TODO - just for testing: remove following ruleset when done with tests
+  .heading-image {
+    display: none;
+  }
+  
+  .reset-layout {
+    clear: both;
+    overflow: hidden;
+  }
+  
+  #container {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    background: rgba(255, 255, 255, 1);
+    pointer-events: auto;
+    opacity: 0.99;
+    position: relative;
+    z-index: 10;
+  }
+  
+  header {    
+    &.entry-header {
+      padding-top: 1rem;
+      display: none;
+    }
+    
+    h1, h2 {
+      font-weight: bold;
+      font-size: 2em;
+    }
+    h1 {
+      font-family: $site-font;
+      text-transform: uppercase;
+    }
+  }
+  
+  #header, #footer {
+    opacity: 0.90;
+  }
+
+  #footer {
+    opacity: 0.70;
+    transition: opacity 1s ease;
+
+    &:hover {
+      opacity: 0.90;
+      transition: opacity 1s ease;
+    }
+  }
+  
+  #header {
+    width: 100%;
+    background-color: $header-background-color;
+    pointer-events: auto;
+    
+    & > div {
+      position: relative;
+      @include center960;
+    }
+    
+    .twitter-hashtag {
+      position: absolute;
+      top: 10%;
+      line-height: 1em;
+      right: 0;
+      background-color: #555;
+      padding: 0.2em 0.5em;
+      @include border-radius(0.2em);
+      font-weight: bold;
+      
+      a, a:active, a:visited {
+        color: $header-background-color;
+      }
+    }
+  }
+  
+  .conference-title {
+    /* for sticky header transitions */
+    @include transition(font-size 0.25s);
+
+    font-family: $site-font;
+    letter-spacing: 2px;
+    font-size: 3em;
+    text-transform: uppercase;
+    
+    a, a:active, a:hover, a:visited {
+      color: $text-color;
+    }
+  }
+
+  #mainmenus {
+    /* for sticky header transitions */
+    @include transition(font-size 1s);
+  }
+  
+  #level1nav, #level2nav {
+    font-family: $rio2013-font-family;
+    letter-spacing: 1px;
+  }
+  
+  #level2nav {
+    background-color: transparent;
+    
+    ul {
+      float: left;
+      
+      li {
+        @include transition(background-color 0.3s ease);
+        a {
+          @include basic-link;
+          color: $navigation-link-color;
+          padding: 0 0.6em;
+          @include transition(color 0.3s ease);
+        }
+      }
+
+      li:hover {
+        background: fade-in($menu-current-background-color, 0.1);
+        @include transition(background-color 0.3s ease);
+        
+        a {
+          color: lighten($menu-current-color, 10%);
+          @include transition(color 0.3s ease);
+        }
+      }
+      
+      li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
+        background-color: $menu-current-background-color;
+        @include border-radius(2px);
+        
+        a {
+          color: $menu-current-color;
+          
+          &:hover {
+            @include basic-link-hover;
+          }
+        }
+        
+        &:hover {
+          a {
+            background-color: inherit;
+            color: $menu-current-color;
+          }
+        }
+      }      
+    }
+  }
+  
+  // Language selector
+  .inline-language-switch ul {
+    display: inline-block;
+    
+    li {
+      display: inline;
+      margin-right: 0.5em;
+      font-weight: bold;
+      @include border-radius(0.2em);
+      background-color: $menu-current-background-color;
+      
+      a, a:hover, a:active, a:visited, a:focus {
+        color: white;
+        padding: 0 0.5em;
+      }
+      
+      &.active {
+        a, a:hover, a:active, a:visited, a:focus {
+          color: $header-background-color;
+        }
+      }
+    }
+  }
+  // MONKEYPATCH: this is only needed for tests
+  #content article.sixcol {
+    width: 74.05%;
+  }
+  
+  // this is a workaround until we switch to a susy-style grid that does
+  // not rely on elements' classes
+  [role='main'] {
+    padding-bottom: 10em;
+    & > article.ninecol {
+      width: 100%;
+    }
+  }
+  // same as above (until we switch to a susy-style grid) but re
+  // overflow
+  [role='main'], #main {
+    overflow: visible;
+  }
+  
+  #contentarea {
+    margin-top: 2em;
+
+    .top-content article header h1 {
+      font-family: $site-font;
+      text-transform: uppercase;
+    }
+    
+    &.ninecol {
+      width: 100%;
+    }
+    &>h1 {
+      display:none;
+    }
+  }
+  
+  .entry-content {  
+    h1, h2, h3 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    
+    ul {
+      margin-bottom: 1em;
+    }
+  }
+  
+  .entry-content section, .extra-content > section, .extra-content > aside {
+    & > header {
+      border-top: 1px solid $header-background-color;
+      
+      & > h1 {
+        color: black; // TODO: use variable
+        background-color: $header-background-color;
+        font-family: $site-font;
+        text-transform: uppercase;
+      }
+    }
+  }
+  
+  a, a:focus, a:active {
+    color: $link-color;
+  }
+  
+  a:hover {
+    color: $link-hover-color;
+  }
+  
+  #footer {
+    background-color: $header-background-color;
+    color: $text-color;
+    background-image: none;
+    border-top: none;
+    pointer-events: auto;
+    
+    h1 {
+      font-size: 1.4em;
+      font-family: $site-font;
+      text-transform: uppercase;
+      color: black;
+    }
+    
+    a, a:visited, a:active {
+      color: $navigation-link-color;
+    }
+    
+    a:hover {
+      color: $link-hover-color;
+    }
+    
+    input {
+      background-color: $footer-form-input-background-color;
+    }
+
+    input.button {
+      background-color: $footer-form-button-background-color;
+    }
+  }
+  
+  #navigationarea {
+    display: none;
+  }
+  
+  // Pods
+  .lc-conference-frontpage {
+    #contentarea {
+      .extra-content {
+        display: none;
+      }
+    }
+  }
+  
+  .lc-conference-live-page {
+    .livestream-box iframe {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+  
+  .lc-publication {
+    #share-on-social-media {
+      display: none;
+    }
+    
+    header.entry-header {
+      display: block;
+      
+      h2 {
+        font-size: 1.25em;
+        font-weight: normal;
+      }
+    }
+    
+    .toc {
+      &.publication-category-research-data {
+        .articles {
+          & > section {
+            .article {
+              margin-bottom: 4em !important;
+              
+              & > h1 {
+                font-family: $site-font;
+                font-size: 2em;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .lc-event-programme {
+    .entry-content {
+      section:first-child {
+        margin-top: 0;
+      }
+      
+      .session {
+        a {
+          color: #222;
+        }
+      }
+
+      /**
+       * In the UA2015 microsite theme, we use a fixed header navmenu:
+       * when jumping to a session from a link (e.g. from a speaker
+       * card), we need to offset the link target down the page so that
+       * it doesn't get covered by the fixed navmenu.
+       * We use the technique explained here:
+       * http://css-tricks.com/hash-tag-links-padding/
+       * (the 'Fancier (Clean HTML) Method'
+       */
+      .session:before {
+        display: block; 
+        content: " "; 
+        margin-top: -80px; 
+        height: 80px; 
+        visibility: hidden; 
+      }
+      
+      .sessiontype-session {
+        .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
+          & > header {
+            border-top: none;
+            border-bottom: 1px solid black; // TODO: use variable
+          }
+        }
+      }
+      
+      .sessiontype-presentation {
+        header {
+          border-top: none;
+          
+          h1 {
+            color: black; // TODO: use variable
+            background-color: inherit;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+  
+  .lc-newspaper-article {
+    position: relative;
+    
+    header.heading-image {
+      display: none;
+    }
+    
+    header.entry-header {
+      display: block;
+    }
+
+    @include galleria-data-slides-on-light-backgrounds;
+    
+    #navigationarea {                                                                                                                                                   
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      display: inherit;
+      margin-top: 1em;
+
+      img.show, img.hide {
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        display: none;
+      }
+      
+      img.show {
+        display: inline;
+      }                                                                                                                                                       
+
+      #publication-side-toc {
+        display: none;
+        position: absolute;
+        right: 15px;
+        background: #EEE111;
+        padding: 1em;
+        width: 300px;
+        top: -22px;
+        z-index: 3;
+
+        h1, li, a, a:hover, a:active, a:visited {
+          color: black;
+        }
+        
+        ul li {
+          margin-bottom: 1em;
+        }
+        
+        h1 {
+          font-weight: bold;
+          font-size: 1.5em;
+        }                                                                                                                                                               
+      }                                                                                                                                                                 
+
+    }                                                                                                                                                                   
+  }
+
+  // plugins
+  
+  // jquery.hovercard plugin styles
+  .lc-event-speaker-list {
+    .speaker-card {
+      @include box-shadow(none);
+      background-color: #424242;
+      color: white;
+      
+      a, a:active, a:hover, a:visited {
+        color: $header-background-color;
+        font-weight: bold;
+      }
+    }
+    
+    .speaker-profile:hover > div > strong {
+      color: inherit;
+    }
+  }
+  
+  // wordpress usernoise plugin styles
+  #un-button {
+    display: none;
+  }
+  
+  // widgets
+}

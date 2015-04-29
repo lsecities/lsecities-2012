@@ -1,0 +1,423 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "palette";
+
+@function percent($element_width, $context_width) {
+  @return $element_width / $context_width * 100%;
+}
+$slider_pxwidth: 1140;
+$columns: 5;
+$gutter_pxwidth: 5;
+$slider_base_font_pxsize: 14;
+$tile_pxwidth: ($slider_pxwidth - (($columns - 1) * $gutter_pxwidth)) / $columns;
+$tile_pxheight: $tile_pxwidth;
+$tile_emheight: $tile_pxheight / $slider_base_font_pxsize;
+$tile_plus_margin_pxwidth: $tile_pxwidth + $gutter_pxwidth;
+
+$tile_margin: ($gutter_pxwidth / $slider_base_font_pxsize);
+$tile_padding: 0;
+
+$col1_onetile_width: ($tile_pxwidth / $tile_plus_margin_pxwidth) * 100%;
+$col1last_onetile_width: 100%;
+$col2_onetile_width: ($tile_pxwidth / (2 * $tile_plus_margin_pxwidth)) * 100%;
+$col2_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (2 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_onetile_width: (($tile_pxwidth + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_twotiles_width: (((2 * $tile_pxwidth) + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
+$col4_fourtiles_width: (((4 * $tile_pxwidth) + $gutter_pxwidth) / (4 * $tile_plus_margin_pxwidth)) * 100%;
+
+$col1_gutter_width: percent($gutter_pxwidth, $tile_plus_margin_pxwidth);
+$col2_gutter_width: percent($gutter_pxwidth, (2 * $tile_plus_margin_pxwidth));
+$col4_gutter_width: percent($gutter_pxwidth, (4 * $tile_plus_margin_pxwidth));
+
+$col1_column_width: percent($tile_plus_margin_pxwidth, $slider_pxwidth);
+$col1last_column_width: percent($tile_pxwidth, $slider_pxwidth);
+$col2_column_width: percent((2 * $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col2last_column_width: percent(($tile_pxwidth + $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col4_column_width: percent((4 * $tile_plus_margin_pxwidth), $slider_pxwidth);
+$col4last_column_width: percent(($tile_pxwidth + (3 * $tile_plus_margin_pxwidth)), $slider_pxwidth);
+
+$tile_tall_emheight: ((2 * $tile_pxheight) + $gutter_pxwidth) / $slider_base_font_pxsize;
+$innersliderborder: 0px solid transparent;
+
+// take two - responsive version
+$slider_full_pcwidth: 100;
+$sides_margin: 0; // left margin of first column tiles, right margin of last column tiles
+
+.lc-slider-page {
+  #main {
+    margin-top: 0;
+  }
+  
+  .flexslider {
+    // Font-family: $base-font-family;
+    position: relative;
+    font-size: 0.875em;
+    border: 0;
+    background: transparent;
+    @include box-shadow(none);
+    
+    .flex-direction-nav {
+      
+      li a {
+        @include transition-property(none);
+        top: ((467-64)/2)px;
+      }
+    }
+    
+    .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
+      margin-right: 0;
+    }
+  
+    .slides > li {
+      width: 100%;
+    }
+    
+    .col1 {
+      width: $col1_column_width;
+      float: left;
+
+      .tile {
+        margin-right: $col1_gutter_width;
+        margin-bottom: $col1_gutter_width;
+
+        &.onetile {
+          width: $col1_onetile_width;
+        }
+      }
+      
+      &.last {
+        width: $col1last_column_width;
+        
+        .tile {
+          &.onetile {
+            width: $col1last_onetile_width;
+          }
+        }        
+      }
+    }
+
+    .col2 {
+      width: $col2_column_width;
+      float: left;
+      
+      &.last {
+        width: $col2last_column_width;
+      }
+
+      .tile {
+        margin-right: $col2_gutter_width;
+        margin-bottom: $col2_gutter_width;
+        
+        &.onetile {
+          width: $col2_onetile_width;
+        }
+        &.twotiles {
+          width: $col2_twotiles_width;
+        }
+      }
+    }
+    
+    .col4 {
+      width: $col4_column_width;
+      float: left;
+      
+      &.last {
+        width: $col4last_column_width;
+      }
+
+      .tile {
+        margin-right: $col4_gutter_width;
+        margin-bottom: $col4_gutter_width;
+        
+        &.onetile {
+          width: $col4_onetile_width;
+        }
+        &.twotiles {
+          width: $col4_twotiles_width;
+        }
+        &.fourtiles {
+          width: $col4_fourtiles_width;
+        }
+      }
+    }
+
+    .slide-inner {
+      border-left: $innersliderborder;                         // DELETE
+      border-bottom: $innersliderborder;                       // DELETE
+    }
+
+    .tile {
+      // background-color: #ccc; // for tests only
+      border-right: $innersliderborder;                        // DELETE
+      border-top: $innersliderborder;                          // DELETE
+      float: left;
+      padding: #{$tile_padding}em;
+      overflow: hidden;
+      position: relative;
+      min-height: 210px;
+      height: #{$tile_emheight}em;
+      
+      a, a:hover, a:active, a:visited {
+        color: inherit;
+      }
+      
+      &.tall {
+        height: #{$tile_tall_emheight}em;
+      }
+      
+      &:hover {
+        header, .feature-title, .feature-caption, .feature-date {
+          //-moz-transition: visibility 0.2s ease-in-out 0.5s;
+          //transition: visibility 0.2s ease-in-out 0.5s;
+          display: none;
+        }
+        
+        .feature-info.noblurb {
+          header, .feature-title, .feature-caption, .feature-date {
+            display: inherit;
+          }
+        }
+  
+        .feature-info.textonly  {
+          .feature-title, .feature-caption {
+          display: block;
+          }
+        }
+  
+        .feature-blurb {
+          //-moz-transition: max-height 0.2s ease-in-out 0s;
+          //transition: max-height 0.2s ease-in-out 0s;
+          max-height: 75%;
+          background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+        }
+        
+        .feature-info {
+          @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+          background-color: #000;
+          background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+          max-height: 75%;
+        }
+        
+        .feature-info.textonly {
+          @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+          background-color: #000;
+          max-height: inherit;
+        }
+      }
+
+      .inner-box {
+        padding: 0.714285714em;
+      }
+      
+      .crop {
+        position: relative;
+        overflow: hidden;
+        
+        img {
+          /* position: absolute; */
+          margin: 0;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      
+      &.databox {
+        
+        font-family: $grotesque-font-family;
+        
+        h1 {
+          font-family: $grotesque-font-family;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 6em !important;
+          display: inline;
+          line-height: 1em;
+          margin-bottom: inherit !important;
+        }
+        p {
+          font-size: 1.4em !important;
+          display: inline;
+          text-transform: uppercase;
+        }
+      }
+     
+      &.citieslist .inner-box {
+        padding: 0;
+      }
+    
+      &.citieslist {
+        .inner-box {
+          padding: 0;
+        }
+        
+        &.onetile.tall ul {
+          font-size: 1.91em;
+        }
+
+        ul {
+          display: inline;
+          text-transform: uppercase;
+          font-family: $grotesque-font-family;
+          font-size: 2em;
+              
+          li {
+            display: inline;
+            
+            &::after {
+              content: "\2009";
+            }
+                  
+            &:nth-of-type(2n) {
+              color: #999;
+            }
+                
+            a, a:active, a:visited {
+              color: inherit;
+            }
+                
+            a:hover {
+              color: #990000;
+            }
+          }
+        }
+      }
+      
+      &.introbox {
+        background: url('//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
+
+        h1 {
+          border-bottom: 1px $palette_red solid;
+          margin-bottom: 0.225em;
+        }
+        
+        .inner-box {
+          color: #fff;
+      
+          p {
+            font-size: 0.9em;
+            line-height: 1.3em;
+          }
+        }
+      }
+    }
+  
+    .feature-info {
+      @include single-transition(background-color, 0.5s, ease-in-out, 0s);
+      bottom: 0;
+      color: #F8F8F8;
+      cursor: pointer;
+      line-height: 1em;
+      padding-left: 0.714285em;
+      padding-right: 0.714285em;
+      padding-top: 0.714285em;
+      padding-bottom: 0.3571428em;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+
+      &:before {
+       content:"";
+       position:absolute;
+       z-index:-1;
+       top:0;
+       bottom:0;
+       left:0;
+       right:0;
+       background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+       opacity:0.7;
+      }
+      
+      p {
+        margin: 0;
+      }
+      
+      header {
+        display: table-cell;
+        vertical-align: middle;
+        
+        .feature-title, .feature-caption {
+          //-moz-transition: visibility 0.2s ease-in-out 0.5s;
+          //transition: visibility 0.2s ease-in-out 0.5s;
+        }
+      }
+
+      .feature-date {
+        border-right: 1px solid $palette_red;
+        display: table-cell;
+        padding-right: 0.714285em;
+        padding-left: 0;
+        vertical-align: middle;
+        text-align: center;
+
+        
+        & + header {
+          padding-left: 0.714285em;
+        }
+                
+        .month {
+          font-size: 0.8em;
+        }
+        
+        .day {
+          font-size: 1.5em;
+          font-weight: bold;
+          line-height: 1em;
+        }
+      }
+      
+      .feature-title {
+        font-weight: bold;
+      }
+      
+      .feature-caption {
+        font-weight: normal;
+      }
+      
+      .feature-blurb {
+        float: left;
+        line-height: 1.08em;
+        max-height: 0;
+        overflow: hidden;
+        width: 100%;
+      }
+    }
+    
+    ul {
+      list-style-type: none;
+      
+      li {
+        list-style-type: inherit;
+      }
+    }
+  }
+  
+  .extra-content {
+    font-size: 1em;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.feature-info {
+  padding-top: 0.5em;
+  
+  .feature-date {
+    display: table-cell;
+    padding: 0 0.714285em;
+    text-align: center;
+    vertical-align: top;
+    line-height: 1em;
+    
+    .day {
+      font-size: 1.2em;
+      font-weight: bold;
+      padding-top: 0.1em;
+    }
+  }
+  
+  .feature-date + header {
+    display: table-cell;
+  }
+}

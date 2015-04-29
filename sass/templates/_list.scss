@@ -1,0 +1,19 @@
+@import "compass/css3";
+@import "palette";
+
+.lc-article.lc-list {
+  /**
+   * depending on how many items we want per row (say N), make every Nth
+   * item last of row by setting margin-right: 0 and floating it right,
+   * then clear floats to the left on every N+1th element.
+   */
+  section.list.by-four {
+    ul li:nth-of-type(4n) {
+      margin-right: 0;
+      float: right;
+    }
+    ul li:nth-of-type(4n+1) {
+      clear: both;
+    }
+  }
+}

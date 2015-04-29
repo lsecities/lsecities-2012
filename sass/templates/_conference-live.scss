@@ -1,0 +1,13 @@
+@import "compass/css3";
+@import "compass/css3/text-shadow";
+
+.lc-conference-live-page {
+  .livestream-box > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .storify-box {
+    margin-top: 6em;
+  }
+}

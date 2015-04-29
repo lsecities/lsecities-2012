@@ -1,0 +1,365 @@
+@import "compass/utilities/general/clearfix";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transform";
+@import "../../palette";
+
+$background-color: black;
+$text-color: white;
+$link-color: #eee111;
+$link-hover-color: darken($link-color, 20%);
+$site-font: theovandregular;
+$ec2012-font-family: 'Open Sans', $base-font-family;
+
+@mixin basic-link {
+  background-color: inherit;
+  color: $link-color;
+}
+
+@mixin basic-link-hover {
+  @include basic-link;
+  color: $link-hover-color;
+}
+
+/**
+ * MONKEYPATCH - while we investigate why WP decided to override this
+ * all of a sudden
+ */  
+body.ec2012.custom-background {
+  background-color: black !important;
+}
+
+body.ec2012 {
+  background-color: black;
+  color: $text-color;
+  font-family: $ec2012-font-family;
+
+  .reset-layout {
+    clear: both;
+    overflow: hidden;
+  }
+  
+  #container {
+    @include center960;
+  }
+
+  &.page-id-393 { // takeover of frontpage on lsecities.net
+    #container {
+      max-width: inherit;
+    }
+  }
+  
+  header {    
+    &.entry-header {
+      display: none;
+      
+      h1 {
+        color: $link-color;
+      }
+    }
+    
+    h1, h2 {
+      color: $link-color;
+      font-weight: bold;
+      font-size: 2em;
+    }
+  }
+  
+  #header {
+    position: relative;
+    
+    .twitter-hashtag {
+      position: absolute;
+      top: 30%;
+      line-height: 1em;
+      right: 0;
+      background-color: #eee111;
+      padding: 0.2em 0.5em;
+      border-radius: 0.2em;
+      font-weight: bold;
+      
+      a, a:active, a:visited {
+        color: $background-color;
+      }
+    }
+  }
+  
+  #ec2012title {
+    font-family: $site-font;
+    letter-spacing: 2px;
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    
+    a, a:active, a:hover, a:visited {
+      color: $text-color;
+    }
+  }
+  
+  #level1nav, #level2nav {
+    font-family: $site-font;
+    letter-spacing: 1px;
+  }
+  
+  #level1nav {
+    ul {
+      li {
+        &:hover {
+          background-color: transparent;
+          a, a:active, a:visited {
+            color: $text-color;
+          }
+          a:hover {
+            color: $link-color;
+          }
+        }
+        
+        a, a:active, a:visited {
+          color: $text-color;
+        }
+        a:hover {
+          color: $link-color;
+        }
+      }
+    }
+  }
+  
+  #level2nav {
+    background-color: transparent;
+    
+    ul {
+      float: left;
+
+      li {
+        a:hover {
+          @include basic-link-hover;
+        }
+      }
+      
+      li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
+        background-color: inherit;
+        
+        a {
+          @include basic-link;
+          
+          &:hover {
+            @include basic-link-hover;
+          }
+        }
+        
+        &:hover {
+          a {
+            background-color: inherit;
+            color: $link-hover-color;
+          }
+        }
+      }
+      
+      li a {
+        padding-left: 0;
+        padding-right: 1em;
+      }
+    }
+  }
+  
+  #mainmenus {
+    margin-bottom: 1em;
+  }
+  
+  // this is a workaround until we switch to a susy-style grid that does
+  // not rely on elements' classes
+  [role='main'] {
+    padding-bottom: 10em;
+    & > article.ninecol {
+      width: 100%;
+    }
+  }
+  // same as above (until we switch to a susy-style grid) but re
+  // overflow
+  [role='main'], #main {
+    overflow: visible;
+  }
+  
+  #contentarea {
+    .top-content article header h1 {
+      color: $link-color;
+    }
+    
+    &.ninecol {
+      width: 100%;
+    }
+    &>h1 {
+      display:none;
+    }
+  }
+  
+  .entry-content {  
+    h1, h2, h3 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    
+    ul {
+      margin-bottom: 1em;
+    }
+  }
+  
+  .entry-content section, .extra-content > section, .extra-content > aside {
+    & > header {
+      border-top: 1px solid $link-color;
+      
+      & > h1 {
+        color: $background-color;
+        background-color: $link-color;
+      }
+    }
+  }
+  
+  a, a:focus, a:active {
+    color: $link-color;
+  }
+  
+  a:hover {
+    color: $link-hover-color;
+  }
+  
+  footer#footer {
+  
+    a, a:visited, a:active {
+      color: $link-color;
+    }
+    
+    a:hover {
+      color: $link-hover-color;
+    }
+  }
+  
+  #navigationarea {
+    display: none;
+  }
+  
+  // Pods
+  .lc-publication {
+    #share-on-social-media {
+      display: none;
+    }
+    
+    
+    &.publication-category-research-data  {
+      #tableofcontents {
+          .articles {
+            & > section {
+              .article {
+                margin-bottom: 4em !important;
+                background-color: transparent;
+              
+                & > h1 {
+                  font-size: 2em;
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+    }
+  }
+  
+  .lc-event-programme {
+    .entry-content {
+      .sessiontype-session {
+        .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
+          & > header {
+            border-top: none;
+            border-bottom: 1px solid $link-color;
+          }
+        }
+      }
+      
+      .sessiontype-presentation {
+        header {
+          border-top: none;
+          
+          h1 {
+            color: $link-color;
+            background-color: inherit;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+  
+  .lc-newspaper-article {
+    position: relative;
+    
+    header.heading-image {
+      display: none;
+    }
+    
+    header.entry-header {
+      display: block;
+    }
+
+    #navigationarea {                                                                                                                                                   
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      display: inherit;
+
+      img.show, img.hide {
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        display: none;
+      }
+      
+      img.show {
+        display: inline;
+      }                                                                                                                                                       
+
+      #publication-side-toc {
+        display: none;
+        position: absolute;
+        right: 15px;
+        background: #EEE111;
+        padding: 1em;
+        width: 300px;
+        top: -22px;
+        z-index: 3;
+
+        h1, li, a, a:hover, a:active, a:visited {
+          color: black;
+        }
+        
+        ul li {
+          margin-bottom: 1em;
+        }
+        
+        h1 {
+          font-weight: bold;
+          font-size: 1.5em;
+        }                                                                                                                                                               
+      }                                                                                                                                                                 
+
+    }                                                                                                                                                                   
+  }
+
+  // plugins
+  
+  // jquery.hovercard plugin styles
+  .lc-event-speaker-list {
+    .speaker-card {
+      @include box-shadow(none);
+      background-color: #424242;
+      color: white;
+    }
+  }
+  
+  // wordpress usernoise plugin styles
+  #un-button {
+    display: none;
+  }
+  
+  // widgets
+}

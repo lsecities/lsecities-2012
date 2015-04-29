@@ -1,0 +1,21 @@
+// Print styles
+@media print {
+  // do not display much header nor footer stuff
+  #toolbox, #level1nav, #level2nav, #footer {
+    display: none;
+  }
+  
+  // same goes for usernoise, sidebars and stuff
+  #un-button, #navigationarea {
+    display: none;
+  }
+  
+  // now the hrefs - first, reset the reset as we don't want to
+  // *always* display link hrefs (e.g. navmenus, prev/next blog post...)
+  a[href]:after { content: ""; }
+  // then re-enable the smart thing only for links occurring within
+  // the main content body
+  article p {
+    a[href]:after { content: " (" attr(href) ")"; }
+  }
+}

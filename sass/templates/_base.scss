@@ -1,0 +1,510 @@
+@import "compass/utilities/general/clearfix";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transform";
+@import "palette";
+
+$section_divider: unquote('1px solid $palette_red');
+$list_divider: unquote('1px solid #eee');
+$nav-and-keyfacts-h1-size: 1em;
+$keyfacts-font-size: 0.9em;
+
+@mixin inline-lists($separator_character: ',') {
+    $separator: ', ';
+    @if $separator_character == ',' {
+      $separator: ', ';
+    } @elseif $separator_character == ';' {
+      $separator: '; ';
+    } @else {
+      $separator: ', ';
+    }
+
+    dt {
+      clear: both;
+    }
+
+    & > li, & > dd {
+      display: inline;
+    }
+    
+    li:after, dd:after {
+      content: $separator;
+    }
+
+    li:last-child:after, dd:last-child {
+      content: '' !important;
+    }
+}
+
+@mixin red-flag-header {
+  margin-top: 2em;
+  
+  & > header {
+    border-top: 1px solid $palette_red;
+    line-height: 1em;
+  
+    & > h1 {
+      color: #fff;
+      background-color: $palette_red;
+      display: inline-block;
+      padding: 0 0.5em;
+      margin-bottom: 1em;
+      font-size: 1.125em;
+      line-height: 1.3em;
+      font-weight: bold;
+    }
+  }
+}
+
+#main {
+  margin-top: 1em;
+}
+
+.twitterbox {
+  background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_twitter-v1darkblue_24x24.png") no-repeat scroll 0 50% transparent;
+  line-height: 2em;
+  padding-left: 2em;
+}
+
+th, td {
+  padding: 0.25em;
+  border-left: 1px dashed #eee;
+}
+
+tr {
+  border-bottom: 1px dashed #eee;
+  border-left: 1px solid #fff;
+}
+
+table {
+  border-bottom: 1px solid #fff;
+}
+
+label {
+  display: block;
+}
+
+ul.run-in.comma-separated {
+  @include inline-lists;
+}
+
+.heading-image {
+  margin-bottom: 1em;
+  
+  .flexslider {
+    .flex-direction-nav li a {
+      top: ((352-64)/2)px;
+    }
+  }
+  
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.over-two-col {
+  columns: 2;
+  -moz-columns: 2;
+  -webkit-columns: 2;
+}
+
+article header {
+  margin-bottom: 1.5rem;
+}
+
+header.entry-header { // TODO : remove once all templates have been refactored to new scheme
+  margin-bottom: 1.5em;
+  
+  h1 {
+    font-family: $main-headings-font-family;
+    font-weight: 900;
+    color: $headings-font-color;
+  }
+}
+
+ol.article-references {
+  list-style-position: inside;
+  
+  li {
+    margin-bottom: 0.25em;
+    &:target { 
+      background-color: #ffeeee;
+    }
+  }
+}
+
+.top-content {
+  .entry-content .abstract {
+    font-size: 0.9375em;
+    font-style: italic;
+  }
+}
+
+.extra-content {
+  margin-top: 3em;
+  padding-top: 1em;
+  font-size: 0.875em;
+  clear: both;
+
+  & > section, & > aside {
+    @include red-flag-header;
+  }
+  
+  &.multi-section > section {
+    clear: none;
+  }
+  
+}
+  
+.entry-content {
+  min-height: 5rem;
+
+  section, section > section {
+    @include red-flag-header;
+    
+    & > header > h1 {
+      margin-bottom: 0;
+    }
+  }
+  
+  .list-wrap {
+    section, section > section {
+      margin-top: 0; // overrides red-flag-header mixin when in .list-wrap aka organictabs
+    }
+  }
+
+  section {
+    clear: both;
+    
+    & > h1 {
+      font-weight: bold;
+      font-size: 1.2em;
+     }
+  }
+
+  .top-content {
+  
+    & > header {
+      margin-bottom: 1em;
+    }
+
+    article {
+      header {
+        margin-bottom: 1em;
+        
+        h1.entry-title {
+          font-family: $main-headings-font-family;
+          font-weight: 900;
+          color: $headings-font-color;
+        }
+      }
+    }
+
+    margin-bottom: 1em;
+  }
+}
+
+#keyfacts, #navigationarea {
+  font-size: $keyfacts-font-size;
+  
+  h1 {
+    font-size: $nav-and-keyfacts-h1-size;
+    font-weight: bold;
+  }
+  
+  dl {
+    dt {
+      border-bottom: $list_divider;
+      margin-top: 0.5em;
+      margin-bottom: 0.2em;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    dd {
+      line-height: 1.5em;
+      margin-bottom: 0.2em;
+    }
+    
+    &:not(:first-child) {
+      margin-top: 0.5em;
+    }
+  }
+  
+  &.minorfacts {
+    dl dt {
+      border-bottom: none;
+    }
+  }
+}
+
+/* // keyfacts should always be displayed in smaller font
+#contentarea {
+  #keyfacts, #navigationarea {
+    font-size: 100%;
+  }
+}
+*/
+
+div.widget {
+  margin-bottom: 1em;
+  
+  h2 {
+    margin-bottom: 0.5em;
+  }
+}
+
+/**
+ * organic tabs jquery plugin
+ */
+
+// hide all organictab sections except for the one marked as current (via .current class)
+// do this only if js is enabled (as detected by modernizr)
+.organictabs-container .list-wrap > section {
+  html.js & {
+    display: none;
+  
+    &.current {
+      display: inherit;
+    }
+    
+    header {
+      display: none;
+    }
+  }
+}
+
+.organictabs, .uiTabs {
+  margin-top: 2em;
+  display: none; // do not display when JS is not detected
+  
+  html.js & {
+    display: inline-block; // display when JS is detected
+  }
+  
+  &.three-per-row > li {
+    width: 30.75%;
+    float: left;
+    margin-right: 3.8%;
+    min-height: 1px;
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+
+    &:nth-of-type(3n+1) {
+      clear: left;
+    }
+  }
+
+  /**
+   * TECHNICAL_DEBT:
+   * once everything is moved over to susy, this must be moved to a mixin
+   */
+  & > li {
+    min-width: 13.45%;
+    float: left;
+    margin-right: 0.25rem;
+    min-height: 1px;
+    text-align: center;
+    
+    &:nth-of-type(6n) {
+      margin-right: 0;
+    }
+    
+    a {
+      border-top-right-radius: 0.5rem;
+      border-top-left-radius: 0.125rem;
+    }
+  }
+  
+  & >  li {
+    a, a:visited, a:active, a:focus, a:hover {
+      color: white;
+      font-weight: bold;
+      display: block;
+      padding: 0.5em;
+      background-color: $palette_red;
+      
+      &.current {
+        background-color: black;
+      }
+    }
+
+    &.ui-state-active a {
+       background-color: black;
+    }
+  }
+}
+
+.ui-accordion-header {
+  cursor: pointer;
+}
+
+#navigationarea {
+  nav {
+    margin-top: 2.5em;
+    
+    &:first-child {
+      margin-top: inherit;
+    }
+    
+    dl {
+      dt.ui-accordion-header:before {
+        content: '';
+        background: url('//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-horizontal.gif') no-repeat 0;
+        padding-left: 0.75em;
+      }
+      dt.ui-accordion-header.ui-state-active:before {
+        background: url('//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/bullet-vertical.gif') no-repeat 0;
+        padding-left: 0.75em;
+        // @include transform(rotate(90deg));
+      }
+    }
+  }
+  
+  #whoswho-side-toc {
+    h1 {
+      font-weight: bold;
+    }
+    
+    h1 + ul {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+#conferencepagesnav {
+  nav.conferencemenu ul li {
+    color: #fff;
+    background-color: #000;
+    padding: 0.5em;
+    
+    a {
+      color: #fff;
+    }
+  }
+  
+  nav dl {
+    dt {
+      color: #fff;
+      background-color: #000;
+      padding: 0.5em;
+      font-weight: normal;
+    }
+    dd {
+      padding: 0.5em;
+    }
+  }
+  
+  .citieslist li {
+    text-transform: uppercase;
+    font-family: $grotesque-font-family;
+    font-size: 1.2em;
+    line-height: 1em;
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+      
+      &:hover {
+        color: #990000;
+      }
+    }
+  }
+}
+  
+#keyfacts-short {
+  dl {
+    dt {
+      float: left;
+      margin-right: 0.5em;
+      
+      &:after {
+        content: ': ';
+      }
+    }
+    
+    ul {
+      @include inline-lists;
+    }
+  }
+}
+
+#keyfacts {
+  dl dd {
+    ul {
+      @include inline-lists;
+    }
+  }
+}
+
+#share-on-social-media {
+  margin-top: 1em;
+  
+  span {
+    font-size: 1em;
+    display: inline;
+    padding: 0 0.25em;
+    
+    a {
+      vertical-align: middle;
+      @include round-button-effects;
+      
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+blockquote {
+  margin: 1.5em 0 0.75em 3em;
+  @include box-shadow(rgba(black, 0.5) 0 0 6px);
+  border-left: 0.5em solid #DDDDDD;
+  padding: 0 0.5em;
+  
+  &::before {
+    color: #999999;
+    content: '\00AB';
+    display: block;
+    font-size: 4em;
+    font-style: italic;
+    line-height: 1em;
+    height: 0;
+    margin-left: -0.8em;
+  }
+}
+
+.downloadthis.pdf {
+  background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
+  
+  @include round-button-effects;
+}
+
+.readthis.online {
+  background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
+  
+  @include round-button-effects;
+}
+
+.watchvideo.onyoutube {
+  background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent;
+  padding-left: 28px;
+  padding-bottom: 8px;
+  
+  @include round-button-effects;
+}
+
+.reset-layout {
+  @include clearfix;
+}

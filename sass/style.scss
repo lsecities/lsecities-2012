@@ -1,0 +1,62 @@
+@charset "UTF-8";
+// Here's where we define some default constants
+@import "partials/base";
+
+// Then we'll import the compass extension
+@import "h5bp";
+
+@include h5bp-normalize;
+@include h5bp-base-styles;
+@include h5bp-media;
+@include h5bp-chromeframe;
+
+@import "compass/utilities/general/clearfix";
+
+// Finally, put your own styles in these partials
+// and add more as needed (i.e. forms, tables, nav)
+@import "partials/resets";
+@import "partials/print";
+@import "partials/mixins";
+@import "partials/mixins-publications";
+@import "partials/grid";
+@import "partials/fonts";
+@import "partials/page";
+@import "partials/header";
+@import "partials/main";
+@import "partials/flashes";
+@import "partials/footer";
+@import "partials/articles";
+
+// Styles for base WordPress content types
+// Add more as needed
+@import "partials/wordpress/single";
+
+// Final designs - main frame and one SCSS per template
+@import "templates/base";
+@import "templates/page-meta";
+@import "templates/plugins/jquery.flexslider";
+@import "templates/plugins/jquery.galleria";
+@import "templates/plugins/usernoise";
+@import "templates/article";
+@import "templates/event";
+@import "templates/event-programme";
+@import "templates/event-speaker-list";
+@import "templates/event-speaker-list-mediaqueries";
+@import "templates/conference";
+@import "templates/conference-live";
+@import "templates/list";
+@import "templates/media-archive";
+@import "templates/newsletter";
+@import "templates/people-list";
+@import "templates/publication";
+@import "templates/researchproject";
+@import "templates/slider";
+
+// Microsites
+@import "templates/subthemes/ec2012/electric-city-2012";
+@import "templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen";
+
+// Media queries should be imported last
+@import "partials/media";
+@import "templates/subthemes/ec2012/electric-city-2012-mediaqueries";
+@import "templates/subthemes/urban-age-twentyfifteen/urban-age-twentyfifteen-mediaqueries";

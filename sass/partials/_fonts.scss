@@ -1,0 +1,14 @@
+// font-face fonts
+// see http://compass-style.org/docs/reference/compass/css3/font_face/
+
+@import "compass/css3/font-face";
+
+$flash-font-family: arial, sans-serif;
+
+/**
+ * Define default font sizes for base elements
+ */
+$h1-font-size: 2em;
+$h2-font-size: 1.5em;
+$h3-font-size: 1.125em;
+

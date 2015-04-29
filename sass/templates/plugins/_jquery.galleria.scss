@@ -1,0 +1,33 @@
+.lc-newspaper-article {
+  .lc-galleria {
+    @media only screen and (min-width: 480px) {
+      // Style adjustments for viewports 480px and over go here
+      width: 100%;
+    }/*/mediaquery*/
+    
+    @media only screen and (min-width: 768px) {
+      // Style adjustments for viewports 768px and over go here
+      width: 150%;
+    }/*/mediaquery*/
+  }
+}
+
+.lc-research-project {
+  .heading-image .lc-galleria {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  section {
+    .lc-galleria, .lc-galleria-picasa {
+      margin: 1em 0;
+    }
+  }
+}
+
+.lc-conference-frontpage {
+  .lc-galleria-picasa {
+    width: 100%;
+    max-width: 100%;
+  }
+}

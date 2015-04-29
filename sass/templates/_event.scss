@@ -1,0 +1,24 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+
+.lc-event {
+  .event-info {
+    font-size: $keyfacts-font-size;
+    margin-top: 1em;
+  }
+  
+  #speaker-profiles {
+    .people-list {
+      .person {
+        h1 {
+          font-size: 1.125em;
+          font-weight: bold;
+          text-transform: inherit;
+          border-bottom: $list-divider;
+          margin-bottom: 0.444444444em;
+        }
+      }
+    }
+  }
+}

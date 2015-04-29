@@ -1,0 +1,127 @@
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+@import "compass/css3/columns";
+@import "compass/css3/transform";
+@import "compass/css3/border-radius";
+
+.lc-publication {
+  // TECHNICAL_DEBT
+  // border-box should be the overall default; until that
+  // has been thoroughly tested, we can set it per template
+  & * {
+    box-sizing: border-box;
+  }
+  
+  .heading-image {
+    margin-bottom: 1rem;
+  }
+
+  #keyfacts {
+    p {
+      margin-bottom: 0.2em;
+      margin-top: 0.5em;
+    }
+    
+    .cover-thumbnail {
+      padding: 0 4em;
+      
+      img {
+        margin: 1em 0;
+        @include transform(rotate(3deg));
+        @include border-radius(3px);
+        @include box-shadow(3px 3px 3px #ccc);
+      }
+    }
+    
+    dl dt {
+      border-bottom: none;
+      clear: both;
+    }
+    dl dd {
+      @include inline-lists;
+    }
+  }
+  
+  .publication-sections {
+    margin-top: 2em;
+    
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    
+    ul li {
+      line-height: 1.125em;
+      margin-bottom: 0.5em;
+    }
+  }
+  
+  #wp-posts-reviews {
+    dl.posts {
+      // @include column-count(2);
+    }
+  }
+  
+  .toc {
+    .articles {
+      & > section {
+        margin-bottom: 1.5rem;
+        
+        & > h1 {
+          font-size: 1.75rem;
+          font-weight: bold;
+        }
+        
+        .article {
+          margin-bottom: 1rem;
+
+          .heading-image {
+            width: 100%;
+            max-width: 100%;
+          }
+          & > h1 {
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+          
+          .excerpt {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+  
+  /**
+   * For research data/data section publications, display credits inline rather than as vertical list
+   */
+  &.publication-category-research-data .publication-credits {
+    h3 {
+      clear: both;
+    }
+    ul li {
+      float: left;
+
+      &::after {
+        content: ";\00a0";
+      }
+      &:last-child::after {
+        content: "";
+      }
+    }
+    
+    section {
+      clear: both;
+      margin-top: 1rem;
+      @include clearfix;
+    }
+  }
+  /**
+   * For ToC of research data/data sections, use a block grid
+   */
+  &.publication-category-research-data .toc {
+    @include data-publication-toc-article;
+  }
+}

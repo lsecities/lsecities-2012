@@ -1,0 +1,88 @@
+.flexslider {
+  position: relative;
+  box-shadow: none;
+  margin: 0;
+  min-width: 60em;
+  
+  /* Direction Nav */
+  .flex-direction-nav {
+    list-style-type: none;
+  
+    li {
+    
+      a {
+        width:33px;
+        height:64px;
+        text-indent:-9999px;
+        border:0;
+        margin: -13px 0 0;
+        display: block;
+        /* background: url(theme/bg_direction_nav.png) no-repeat 0 0; */
+        position: absolute;
+        top: 45%; // generic approximation - set exact position according to container height where needed
+        /* top: 50%; */
+        opacity: 0.9;
+        
+        &:hover {
+          background-position: 0px -65px;
+          opacity: 1;
+        }
+    
+        &:active {
+          background-position: 0px -130px;
+        }
+      }
+      
+      .flex-next {
+        background: transparent url('flexslider/arrow-right.png') no-repeat;
+        right: 0px;
+        /* background-position: -52px 0;
+        right: -21px; */
+      }
+      
+      .flex-prev {
+        /* left: -20px; */
+        background: transparent url('flexslider/arrow-left.png') no-repeat;
+        left: -2px;
+      }
+      
+      .flex-disabled {
+        opacity: .3; filter:alpha(opacity=30);
+        cursor: default;
+      }
+    }
+  }
+  
+  /* Control Nav */
+  .flex-control-nav {
+    width: 100%;
+    position: absolute;
+    bottom: -30px; 
+    text-align: center;
+   
+    li {
+      margin: 0 0 0 5px;
+      display: inline-block;
+      zoom: 1;
+      *display: inline;
+  
+      &:first-child {margin: 0;}
+      a {
+        width: 13px;
+        height: 13px;
+        display: block;
+        background: url(theme/bg_control_nav.png) no-repeat 0 0;
+        cursor: pointer;
+        text-indent: -9999px;
+        
+        &:hover {
+          background-position: 0 -13px;
+        }
+        
+        &.active {
+          background-position: 0 -26px; cursor: default;
+        }
+      }      
+    }
+  }
+}

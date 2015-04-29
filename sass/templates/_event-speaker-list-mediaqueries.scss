@@ -1,0 +1,79 @@
+
+    
+//
+// Placeholder media queries for responsive design. Modify as design requires.
+// These follow after, and will override, the primary ('mobile first') styles
+// The closing /mediaquery comment is required by respond.js min/max-width Media Query polyfill
+//
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  // Style adjustments for viewports 480px and over go here
+  .lc-event-speaker-list {
+    max-width: 480px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    
+    .speaker-profile {
+      width: 30.75%;
+      float: left;
+      padding-left: 0;
+      padding-right: 0;
+      margin-right: 3.8%;
+      min-height: 1px;
+      
+      &:nth-of-type(3n) {
+        margin-right: 0;
+        
+        .speaker-card {
+          @include last-in-row-speaker-card;
+        }
+      }
+    }
+    
+     .clearline, .clearline.halfway {
+      display: block;
+      clear: both;
+    }
+  }
+}/*/mediaquery*/
+
+@media only screen and (max-width: 480px) {
+  .lc-event-speaker-list {
+    .speaker-profile img {
+      display: none;
+    }
+    .clearline, .clearline.halfway {
+      display: none;
+    }
+    
+    .speaker-profile:hover > div > strong {
+      color: inherit;
+    }
+    
+    .speaker-card {
+      left: inherit;
+      right: 0;
+      width: 80%;
+    }
+  }
+}/*/mediaquery*/
+
+@media only screen and (min-width: 768px) {
+  // Style adjustments for viewports 768px and over go here
+  .lc-event-speaker-list {
+    .speaker-profile {
+      width: 13.45%;
+    }
+  }
+}/*/mediaquery*/
+
+
+// Print styles
+// Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+/*
+@media print {
+  @include media-print;
+}
+*/

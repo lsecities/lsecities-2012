@@ -1,0 +1,63 @@
+@import "compass/css3";
+@import "compass/css3/border-radius";
+
+.lc-people-list {
+  #contentarea {
+    section.people-list {
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      .person {
+        margin-bottom: 2em;
+        
+        .qualifications {
+          @include inline-lists;
+          display: block;
+          margin-bottom: 1em;
+        }
+
+        .profile-photo {
+          text-align: center;
+          img {
+            width: 144px;
+            max-width: 144px;
+            @include border-radius(2px);
+            @include filter-grayscale;
+          }
+        }
+        
+        .research-projects {
+          @include inline-lists;
+        }
+
+        h1 {
+          font-size: 1.2em;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  #whoswho-side-toc {
+    li.person {
+      margin-bottom: 0.25rem;
+      line-height: 1rem;
+    }
+  }
+
+  ul.people-list.grid {
+    li {
+      width: 22.05%;
+      margin-right: 3.8%;
+      float: left;
+      min-height: 1px;
+    }
+    li:nth-child(4n) {
+      margin-right: 0;
+    }
+    li:nth-child(4n+1) {
+      clear: left;
+    }
+  } 
+}

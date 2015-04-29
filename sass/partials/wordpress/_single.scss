@@ -1,0 +1,30 @@
+.single-post {
+  .nav-single {    
+    margin-top: 1em;
+    margin-bottom: 2em;
+    @include clearfix;
+
+    .nav-previous, .nav-next {
+      display: block;
+      width: 49%;
+    }
+    .nav-previous {
+      float: left;
+      text-align: left;
+    }
+    .nav-next {
+      float: right;
+      text-align: right;
+    }
+  }
+  
+  .comments-area {
+    h2 {
+      font-size: $h3-font-size;
+    }
+    
+    .commentlist p {
+      margin-bottom: 0;
+    }
+  }
+}

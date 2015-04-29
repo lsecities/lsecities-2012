@@ -1,0 +1,70 @@
+.lc-event-programme {
+  .entry-content {
+    
+    section.sessiontype-day {
+      & > header {
+        border-top: none;
+        
+        & > h1 {
+          font-size: 1.5em;
+          color: inherit;
+          background-color: inherit;
+          padding-left: 0;
+        }
+      }
+    }
+    
+    section.to-be-confirmed {
+      opacity: 0.7;
+    }
+
+    section.sessiontype-session {
+      
+      & > header > h1 span:last-of-type {
+        margin-right: 1em;
+      }
+      
+      .session  {
+        & > header {
+          & > h1 {
+            background-color: inherit;
+            color: inherit;
+            padding-left: 0;
+          }
+        }
+        
+        .session {
+          & > header {
+            border-top: none;
+          }
+        }
+      }
+
+      .sessiontype-session, .sessiontype-panel, .sessiontype-discussion {
+        & > header {
+          border-top: none;
+          border-bottom: 1px solid $palette_red;
+        }
+      }
+    }
+    
+    .sessiontype-presentation {
+      margin-left: 2em;
+    }
+  }
+  
+  .session-chairs {
+    dt, dd {
+      display: inline;
+    }
+  }
+  
+  ul.mediaitems {
+    display: inline;
+    
+    & > li {
+      display: inline;
+      margin-right: 1em;
+    }
+  }
+}

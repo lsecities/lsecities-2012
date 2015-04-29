@@ -1,0 +1,40 @@
+//
+// Placeholder media queries for responsive design. Modify as design requires.
+// These follow after, and will override, the primary ('mobile first') styles
+// The closing /mediaquery comment is required by respond.js min/max-width Media Query polyfill
+//
+
+@media only screen and (min-width: 480px) {
+  // Style adjustments for viewports 480px and over go here
+  
+}/*/mediaquery*/
+
+@media only screen and (min-width: 768px) {
+  // Style adjustments for viewports 768px and over go here
+  
+}/*/mediaquery*/
+
+@media only screen and (max-width: 768px) {
+  #footer #organizer-logos img {
+    max-width: 12em;
+  }
+  
+  // hide cookie tab on smaller screens; we have privacy policy in footer anyways
+  #cccwr {
+    display: none;
+  }
+}/*/mediaquery*/
+
+@media only screen and (max-width: 480px) {
+  .row {
+    .onecol, .twocol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol, .twelvecol {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}/*/mediaquery*/

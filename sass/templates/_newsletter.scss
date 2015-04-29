@@ -1,0 +1,114 @@
+@import "compass/css3";
+
+@mixin flag-title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.2em;
+  line-height: 0.8em;
+  margin-bottom: 1em;
+  
+  span {
+    color: white;
+    background-color: rgb(255, 0, 0);
+    padding: 0 0.2em;
+  }
+}
+
+@mixin two-column-content {
+  width: 48%;
+  margin-right: 4%;
+  float: left;
+  
+  &:nth-of-type(even) {
+    margin-right: 0;
+  }
+}
+
+body#newsletter-2013 {
+  width: 841px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  .logo {
+    display: block;
+    width: 250px;
+    margin-top: 1em;
+  }
+  
+  .page-header > h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin: 1em 0 1.5em;
+    color: rgb(255, 0, 0);
+    font-weight: 900;
+  }
+  
+  .toc-section {
+    @include two-column-content;
+    
+    h1 {
+      @include flag-title;
+      line-height: 0.6em;
+    }
+  }
+    
+  img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+  
+  .page-header, .page-body {
+    clear: both;
+  }
+  
+  .page-body {
+    margin-bottom: 4em;
+    
+    .newsletter-section {
+      clear:both;
+      padding-top: 3em;
+      
+      & > h1 {
+        @include flag-title;
+        border-top: 1px solid rgb(255, 0, 0);
+        line-height: 1.1em;
+      }
+      
+      .section-item {
+        margin-bottom: 2em;
+        
+        &.narrow {
+          @include two-column-content;
+        }
+        
+        &.wide {
+          width: 100%;
+          margin-left: 0;
+          margin-bottom: 2em;
+          display: block; /* this would normally be a span,
+            to allow nth-of-type(even) to work with narrow divs,
+            so we need to set block display */
+        }
+        
+        h1 {
+          font-size: 1em;
+          font-weight: bold;
+        }
+        
+        .content {
+          line-height: 1.25em;
+        }
+      }
+      
+      &.news-section {
+        .section-item {
+          width: 100%;
+          float: none;
+          margin-right: 0;
+          margin-bottom: 2em;
+        }
+      }
+    }
+  }
+}

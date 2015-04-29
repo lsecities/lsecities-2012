@@ -1,0 +1,83 @@
+@import "compass/css3";
+
+.lc-research-project {
+  // TECHNICAL_DEBT
+  // border-box should be the overall default; until that
+  // has been thoroughly tested, we can set it per template
+  & * {
+    box-sizing: border-box;
+  }
+  
+  .entry-header .abstract {
+    font-style: italic;
+  }
+  
+  #linked-galleries > div {
+    margin-bottom: 1em;
+  }
+   
+  section {
+    @include red-flag-header;
+  
+    & > header {
+      margin-bottom: 1em;
+
+      & > h1 {
+      	margin-bottom: 0;
+      }
+    }
+  }
+  
+  #keyfacts .highlights {
+    & > a {
+      position: relative;
+      
+      h1 {
+        @include box-sizing(border-box);
+        position: absolute;
+        bottom: 0;
+        color: white;
+        background: rgba(0,0,0,0.6);
+        width: 100%;
+        padding: 0.3em;
+      }
+    }
+  }
+
+  #t-galleries .photo-essay {
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+
+    &:nth-of-type(2n+1) {
+      clear: left;
+    }
+  }
+
+  #t-dataviz {
+    section.toc {
+      margin-top: 1rem;
+
+      section {
+        margin-top: 0;
+      }
+    }
+
+    .toc {
+      @include data-publication-toc-article;
+    
+      // override mixin style for font size until we go full-width
+      .article h1 {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+nav#projectsmenu {
+  h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+}

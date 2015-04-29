@@ -1,0 +1,35 @@
+// This file must be imported before loading html5-boilerplate
+
+$main-headings-font-family: "Open Sans", sans-serif;
+
+$navmenu-font-family: $main-headings-font-family;
+
+$base-font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;  // default font-family
+
+$article-font-family: $base-font-family; // default font-family for page body
+
+$headings-font-family: $base-font-family;
+
+$grotesque-font-family: unquote('BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif'); // for Urban Age cities
+
+$base-font-size: 16px;  // default font-size for YUI fonts
+
+$base-line-height: 1.5;  // default line-height for YUI fonts
+
+$font-color: #000;
+
+$headings-font-color: #22273b;
+
+$link-color: #900;
+
+$link-hover-color: #555;
+
+$link-active-color: #900;
+
+$link-visited-color: #900;
+
+$selected-font-color: #fff;  // color for selected text
+
+$selected-background-color: #a8d1ff;  // bg-color for selected text
+
+$list-left-margin: 0;  // left margin for ul an ol
