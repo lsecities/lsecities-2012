@@ -4,10 +4,7 @@
  * Description: The template used for Event Pods
  *
  * @package LSECities2012
- */
-?>
-<?php
-/**
+ *
  * Pods initialization
  * URI: /media/objects/events/
  */
@@ -187,7 +184,7 @@ $media_items_output_counter = 1;
                 <?php endif; ?>
                     <li id="person-profile-<?php echo $event_speaker['slug'] ?>" class="person fourcol<?php if((($index + 1) % 3) == 0) : ?> last<?php endif ; ?>">
                       <h1><?php echo $event_speaker['name'] ?> <?php echo $event_speaker['family_name'] ?></h1>
-                      <div><?php echo do_https_shortcode(wpautop($event_speaker['profile_text'])); ?></div>
+                      <div><?php echo $event_speaker['profile_text']; ?></div>
                       <?php if($event_speaker['homepage'] || $event_speaker['twitterhandle']): ?>
                       <div>
                       <ul class="personal-links">
