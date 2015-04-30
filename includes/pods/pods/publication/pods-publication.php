@@ -153,6 +153,13 @@ function people_list($people_field, $sort_by, $sort_order = SORT_ASC) {
 function pods_prepare_table_of_contents($pod_slug) {
   // retrieve pod by slug
   $pod = pods('publication_wrappers', $pod_slug);
+  
+  // if hide_table_of_contents flag is set for this publication and user
+  // is not logged in, don't generate any ToC
+  if(!is_user_logged_in() and $pod->field('hide_table_of_contents')) {
+    echo '<!-- hide_table_of_contents: ' . $pod->field('hide_table_of_contents') . ' -->';
+    return;
+  }
 
   // return if no such pod was found
   if(!$pod->exists()) {
