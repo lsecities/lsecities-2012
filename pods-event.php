@@ -214,12 +214,7 @@ $media_items_output_counter = 1;
           </div>
 
           <?php get_template_part('nav'); ?>
-
-<script type="text/javascript">
-jQuery(function($) {
-
-});
-</script>
+          
 </div><!-- #contentarea -->
 </div>
 
