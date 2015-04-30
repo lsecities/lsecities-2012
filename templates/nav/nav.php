@@ -111,12 +111,6 @@ if($current_post_id === 421 or in_array(421, $ancestors_and_self)) {
   $nav_generated = true;
 }
 
-// /urban-at-lse/
-if($current_post_id === 3338 or in_array(3338, $ancestors_and_self)) {
-  get_template_part('templates/nav/nav', 'urbanatlse');
-  $nav_generated = true;
-}
-
 if($nav_generated === false) {
   get_template_part('templates/nav/nav', 'generic');
 }
