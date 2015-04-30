@@ -103,7 +103,8 @@ function pods_prepare_publication($pod_slug) {
   $obj['publication_catalogue_data'] = $pod->field('catalogue_data');
   $obj['publishing_date'] = $pod->field('publishing_date');
 
-  $obj['gallery'] = galleria_prepare($pod, 'fullbleed wireframe');
+  $gallery_permalink = $pod->field('gallery.slug');
+  $obj['gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($gallery_permalink, 'fullbleed');
 
   $obj['wp_posts_reviews'] = array();
   if($pod->field('reviews_category.term_id')) {
@@ -152,6 +153,13 @@ function people_list($people_field, $sort_by, $sort_order = SORT_ASC) {
 function pods_prepare_table_of_contents($pod_slug) {
   // retrieve pod by slug
   $pod = pods('publication_wrappers', $pod_slug);
+  
+  // if hide_table_of_contents flag is set for this publication and user
+  // is not logged in, don't generate any ToC
+  if(!is_user_logged_in() and $pod->field('hide_table_of_contents')) {
+    echo '<!-- hide_table_of_contents: ' . $pod->field('hide_table_of_contents') . ' -->';
+    return;
+  }
 
   // return if no such pod was found
   if(!$pod->exists()) {

@@ -26,10 +26,6 @@ if(!$pod_from_page) {
 
 $obj = pods_prepare_research_project($pod_slug);
 
-// we need - for now - this data in a variable called $gallery in order
-// for the galleria.inc.php include to see the gallery data
-$gallery = $obj['gallery'];
-
 ?><?php get_header(); ?>
 
 <div role="main">
@@ -37,9 +33,9 @@ $gallery = $obj['gallery'];
   <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-research-project'); ?>>
     <div class='ninecol' id='contentarea'>
       <div class='top-content'>
-        <?php if(count($gallery['slides'])) : ?>
+        <?php if(count($obj['heading_gallery']['slides'])) : ?>
         <header class='heading-image'>
-          <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['gallery'] ]); ?>
+          <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['heading_gallery'] ]); ?>
         </header>
         <?php endif; ?>
 
@@ -263,10 +259,9 @@ $gallery = $obj['gallery'];
                 if(count($obj['research_photo_galleries'])): ?>
                 <section id="t-galleries" class="project-tab">
                   <?php
-                  foreach($obj['research_photo_galleries'] as $key => $gallery): ?>
+                  foreach($obj['research_photo_galleries'] as $research_photo_gallery): ?>
                     <div class="sixcol photo-essay">
-                    <?php
-                    include('templates/partials/galleria.inc.php'); ?>
+                    <?php echo '<!-- photo-gallery: ' . var_export($research_photo_gallery, TRUE) . ' -->'; \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $research_photo_gallery ]); ?>
                     </div>
                     <?php
                   endforeach; // ($obj['research_photo_galleries'] as $key => $gallery) ?>

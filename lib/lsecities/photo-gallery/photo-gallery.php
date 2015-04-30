@@ -59,7 +59,8 @@ class PhotoGallery extends PodsObject {
     return [
       'permalink' => $this->permalink,
       'class' => $class,
-      'slides' => $this->slides
+      'slides' => $this->slides,
+      'picasa_gallery_id' => $this->picasa_gallery_id
     ];
   }
 }

@@ -37,8 +37,17 @@ function pods_prepare_slider($pod_slug) {
   /**
    * Read any jquery options and set global variable accordingly; these
    * options are used in the footer.php template.
+   * These options need to be stored as valid JSON; as this JSON
+   * fragment is ultimately used in an HTML5 data attribute and then
+   * parsed by jQuery.data() via jQuery.parseJSON(), but MtHAML outputs
+   * HTML attributes delimited by double quotes ("), we need to first
+   * replace here all the JSON double quotes with single quotes so that
+   * JSON is 'correctly' stored as data attribute, then in the JS code
+   * we replace back all single quotes with double quotes before
+   * loading the JSON fragment...
+   * Twisted, but that's the only way i can think of.
    */
-  lc_data('slider_jquery_options', $pod->field('jquery_options'));
+  $obj['slider_options'] = str_replace('"', "'", $pod->field('jquery_options'));
 
   $obj['slides'] = array();
 

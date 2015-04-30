@@ -67,6 +67,10 @@ function prepare_header() {
     
     $obj['theme_js'] = $microsite_configuration['theme_js'];
     $obj['body_class_extra'] = $microsite_configuration['body_class_extra'];
+    if(is_user_logged_in()) {
+      $obj['body_class_extra'] .= ' user_logged_in';
+    }
+    
     lc_data('microsite_id', $microsite_configuration['x-site-id']);
     lc_data('body_class_extra', $microsite_configuration['body_class_extra']);
     $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference($microsite_configuration['conference_pod_slug']);

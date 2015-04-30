@@ -11,12 +11,6 @@ $obj = pods_prepare_article($post->ID);
 
 set_query_var('parent_publication_id', $obj['parent_publication_id']);
 
-/**
- * Copy gallery object to own variable for compatibility with
- * gallery partial.
- */
-$gallery = $obj['gallery'];
-
 ?><?php get_header(); ?>
 
 <div role="main">
@@ -116,7 +110,7 @@ $gallery = $obj['gallery'];
                       <?php echo $obj['article_summary']; ?>
                     <?php endif; ?>
                     </div>
-                    <?php include('templates/partials/galleria.inc.php'); ?>
+                    <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
                     <?php if($obj['article_extra_content']): ?>
                     <div class="extra-content"><?php echo $obj['article_extra_content']; ?></div>
                     <?php endif; ?>
