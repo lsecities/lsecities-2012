@@ -30,6 +30,8 @@ jQuery(document).ready(function($) {
     };
   })(jQuery);
 
+  Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
+    
   // enable Galleria for embedded slideshows
   try {
     if(jQuery('.lc-newspaper-article .lc-galleria').length > 0) {
@@ -58,8 +60,6 @@ jQuery(document).ready(function($) {
 
   // Run Galleria for galleria shortcodes
   try {
-    Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
-    
     $('.galleria-tag').each(function(index) {
       var galleria_options = {
         wait: true,
