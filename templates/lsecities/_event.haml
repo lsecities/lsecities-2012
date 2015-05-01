@@ -30,11 +30,11 @@
           %dd.date
             = event_date_string | raw
             - if free_form_dates is empty
-              %span.calendar-link
+              .calendar-link
                 [add to calendar: 
-                %a(href = "#{slug}/ical")
+                %a(href = "#{slug}/ical")><
                   ical
-                |
+                = " | "
                 %a(href = addtocal_uri_google target = "_blank")><
                   google
                 ]
