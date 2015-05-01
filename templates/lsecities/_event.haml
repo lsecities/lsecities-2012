@@ -1,0 +1,110 @@
+#contentarea.ninecol
+  .top-content
+    - if heading_gallery or featured_image_uri
+      %header.heading-image
+        .photospread
+          - if heading_gallery|length > 0
+            - include 'lsecities/partials/_galleria.haml' with { 'gallery': heading_gallery }
+          - else
+            %img{ :src => featured_image_uri, :alt => 'event photo'}
+    %header
+      %h1{ :class => "hentry-title p-name summary" }
+        = title
+      %p.event-info
+        = event_info | raw
+    %article(class = "eightcol")
+      - if is_future_event and event_blurb_after_event
+        .blurb.after-event = event_blurb_after_event | raw
+      - elseif event_blurb
+        .blurb.description = event_blurb | raw
+      - if is_future_event and event_contact_info
+        %aside.booking-and-access = event_contact_info | raw
+    %aside#keyfacts.fourcol.last
+      %dl
+        = speakers_output.output | raw
+        = respondents_output.output | raw
+        = chairs_output.output | raw
+        = moderators_output.output | raw
+        - if event_date_string
+          %dt When
+          %dd.date
+            = event_date_string | raw
+            - if free_form_dates is empty
+              .calendar-link
+                [add to calendar: 
+                %a(href = "#{slug}/ical")><
+                  ical
+                = " | "
+                %a(href = addtocal_uri_google target = "_blank")><
+                  google
+                ]
+        - if event_location
+          %dt Where
+          %dd.h-card.vcard
+            %span.p-location.location = event_location
+        - if poster_pdf
+          %dt Downloads
+          %dd
+            %a(href = poster_pdf) Event poster (PDF)
+        - if is_future_event == false and event_story_id
+          %dt Twitter archive
+          %dd
+            %(href="https://storify.com/#{event_story_id}" Read on Storify
+      - if ((is_future_event and event_hashtag) or (event_story_id == false and event_hashtag))
+        .twitterbox
+          %a(href="https://twitter.com/#!/search/#{event_hashtag}")
+            = "##{event_hashtag}"
+  .extra-content.twelvecol
+    - if picasa_gallery_id
+      %section.event-photo-gallery
+        - include 'lsecities/partials/_galleria.haml' with { 'gallery': event_photo_gallery }
+        - if photo_gallery_credits
+          .photo-gallery-credits = photo_gallery_credits
+    - if event_media
+      %section.event-materials
+        %header
+          %h1 Event materials
+        .items
+          - for item in event_media
+            - if item.youtube_uri
+              .item.video.youtube
+                %h1 Video
+                .content
+                  %iframe(width = "100%" src = "https://www.youtube.com/embed/#{item.youtube_uri}?rel=0" frameborder = "0" allowfullscreen = "allowfullscreen")
+            - if item.video_uri
+              .item.video
+                %h1 Video
+                .content
+                  %video(width="100%" preload="metadata" controls="controls" src=item.video_uri)
+            - if item.audio_uri
+              .item.audio
+                %h1 Audio
+                .content
+                  Listen to 
+                  %a.link.mp3(href=item.audio_uri)podcast
+                  - if item.label
+                    = "(#{item.label})"
+            - if item.slides_pdf_uri
+              .item.slides.pdf
+                %h1 item.name
+                .content
+                  %a.link.pdf(href=item.slides_pdf_uri)Download PDF
+    - if people_with_blurb
+      %section.speaker-profiles
+        %header
+          %h1 Profiles
+        %ul.people-list
+          - for person in event_all_the_people
+            - if person.profile_text
+              %li.item.person(id = "person-profile#{person.slug}")
+                %h1 = "#{person.name} #{person.family_name}"
+                .content = person.profile_text | raw
+                - if person.homepage or person.twitterhandle
+                  .personal-links
+                    %ul
+                      - if person.homepage
+                        %li
+                          %a(href = person.homepage) = person.homepage
+                      - if person.twitterhandle
+                        %li
+                          %a(href = person.twitterhandle) = person.twitterhandle

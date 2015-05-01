@@ -67,6 +67,23 @@ function pods_prepare_event($permalink, $options = []) {
     $options['shallow'] = FALSE;
   }
   
+  /**
+   * Apply do_https_shortcode() and wpautop() to profile_text field of
+   * person profile; to be used via array_map.
+   * @param Array $person The person data structure
+   * @return Array The person data structure with filters applied to
+   *   its profile_text field
+   */
+  $event_speaker_profile_wpautop_fn = function($person) {
+    // NOOP if no data is passed in
+    if(!is_array($person)) {
+      return;
+    }
+    
+    $person['profile_text'] = do_https_shortcode(wpautop($person['profile_text']));
+    return $person;
+  };
+
   $pod = pods('event', $permalink);
   
   if(!$pod->exists()) {
@@ -92,7 +109,8 @@ function pods_prepare_event($permalink, $options = []) {
   $event_chairs = sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
   $event_moderators = sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
   
-  $__event_all_the_people = array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators);
+  $__event_all_the_people = array_map($event_speaker_profile_wpautop_fn, array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators));
+  
   if($options['shallow']) {
     $obj['event_all_the_people'] = \LSECitiesWPTheme\filter_items($__event_all_the_people, ['name', 'family_name']);
   } else {

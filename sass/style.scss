@@ -10,6 +10,8 @@
 @include h5bp-media;
 @include h5bp-chromeframe;
 
+@import "susy";
+
 @import "compass/utilities/general/clearfix";
 
 // Finally, put your own styles in these partials

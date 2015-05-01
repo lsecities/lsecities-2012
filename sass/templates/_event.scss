@@ -8,17 +8,19 @@
     margin-top: 1em;
   }
   
-  #speaker-profiles {
-    .people-list {
-      .person {
-        h1 {
-          font-size: 1.125em;
-          font-weight: bold;
-          text-transform: inherit;
-          border-bottom: $list-divider;
-          margin-bottom: 0.444444444em;
-        }
-      }
+  .extra-content .item h1 {
+    font-size: 1.125em;
+    font-weight: bold;
+    text-transform: inherit;
+    border-bottom: $list-divider;
+    margin-bottom: 0.444444444em;
+  }
+    
+  .event-materials, .speaker-profiles {
+    clear: both;
+    
+    .item {
+      @include gallery(4 of 12);
     }
   }
 }

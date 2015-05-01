@@ -567,13 +567,13 @@ ol.article-references li:target { background-color: #ffeeee; }
 .top-content .entry-content .abstract { font-size: 0.9375em; font-style: italic; }
 
 .extra-content { margin-top: 3em; padding-top: 1em; font-size: 0.875em; clear: both; }
-.extra-content > section, .extra-content > aside { margin-top: 2em; }
+.extra-content > section, .extra-content > aside { overflow: hidden; *zoom: 1; margin-top: 2em; }
 .extra-content > section > header, .extra-content > aside > header { border-top: 1px solid red; line-height: 1em; }
 .extra-content > section > header > h1, .extra-content > aside > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
 .extra-content.multi-section > section { clear: none; }
 
 .entry-content { min-height: 5rem; }
-.entry-content section, .entry-content section > section { margin-top: 2em; }
+.entry-content section, .entry-content section > section { overflow: hidden; *zoom: 1; margin-top: 2em; }
 .entry-content section > header, .entry-content section > section > header { border-top: 1px solid red; line-height: 1em; }
 .entry-content section > header > h1, .entry-content section > section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
 .entry-content section > header > h1, .entry-content section > section > header > h1 { margin-bottom: 0; }
@@ -727,7 +727,12 @@ right: -21px; */ }
 #publication-side-toc ul li { line-height: 1.125em; margin-bottom: 0.3em; }
 
 .lc-event .event-info { font-size: 0.9em; margin-top: 1em; }
-.lc-event #speaker-profiles .people-list .person h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
+.lc-event .extra-content .item h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
+.lc-event .event-materials, .lc-event .speaker-profiles { clear: both; }
+.lc-event .event-materials .item, .lc-event .speaker-profiles .item { width: 32.20339%; float: left; }
+.lc-event .event-materials .item:nth-child(3n + 1), .lc-event .speaker-profiles .item:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; margin-left: 0; }
+.lc-event .event-materials .item:nth-child(3n + 2), .lc-event .speaker-profiles .item:nth-child(3n + 2) { margin-left: 33.89831%; margin-right: -100%; clear: none; }
+.lc-event .event-materials .item:nth-child(3n + 3), .lc-event .speaker-profiles .item:nth-child(3n + 3) { margin-left: 67.79661%; margin-right: -100%; clear: none; }
 
 .lc-event-programme .entry-content section.sessiontype-day > header { border-top: none; }
 .lc-event-programme .entry-content section.sessiontype-day > header > h1 { font-size: 1.5em; color: inherit; background-color: inherit; padding-left: 0; }
@@ -889,7 +894,7 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project * { box-sizing: border-box; }
 .lc-research-project .entry-header .abstract { font-style: italic; }
 .lc-research-project #linked-galleries > div { margin-bottom: 1em; }
-.lc-research-project section { margin-top: 2em; }
+.lc-research-project section { overflow: hidden; *zoom: 1; margin-top: 2em; }
 .lc-research-project section > header { border-top: 1px solid red; line-height: 1em; }
 .lc-research-project section > header > h1 { color: #fff; background-color: red; display: inline-block; padding: 0 0.5em; margin-bottom: 1em; font-size: 1.125em; line-height: 1.3em; font-weight: bold; }
 .lc-research-project section > header { margin-bottom: 1em; }
