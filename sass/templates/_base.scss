@@ -38,6 +38,7 @@ $keyfacts-font-size: 0.9em;
 }
 
 @mixin red-flag-header {
+  @include clearfix;
   margin-top: 2em;
   
   & > header {
