@@ -6,13 +6,13 @@
           - if heading_gallery|length > 0
             - include 'lsecities/partials/_galleria.haml' with { 'gallery': heading_gallery }
           - else
-            %img{ :src => featured_image_uri, :alt => 'event photo'}
+            %img( src = featured_image_uri alt = 'event photo')
     %header
-      %h1{ :class => "hentry-title p-name summary" }
+      %h1.hentry-title.p-name.summary
         = title
       %p.event-info
         = event_info | raw
-    %article(class = "eightcol")
+    %article.eightcol
       .blurb.description = blurb | raw
       - if is_future_event and event_contact_info
         %aside.booking-and-access = event_contact_info | raw
