@@ -91,7 +91,7 @@ class Event extends PodsObject {
     $event_blurb = do_https_shortcode($pod->display('blurb'));
     $event_blurb_after_event = do_https_shortcode($pod->display('blurb_after_event'));
     
-    if($this->is_future_event) {
+    if($this->is_future_event or empty($event_blurb_after_event)) {
       $this->blurb = $event_blurb;
     } elseif(!empty($event_blurb_after_event)) {
       $this->blurb = $event_blurb_after_event;
