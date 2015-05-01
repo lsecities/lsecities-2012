@@ -261,7 +261,7 @@ $obj = pods_prepare_research_project($pod_slug);
                   <?php
                   foreach($obj['research_photo_galleries'] as $research_photo_gallery): ?>
                     <div class="sixcol photo-essay">
-                    <?php echo '<!-- photo-gallery: ' . var_export($research_photo_gallery, TRUE) . ' -->'; \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $research_photo_gallery ]); ?>
+                    <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $research_photo_gallery ]); ?>
                     </div>
                     <?php
                   endforeach; // ($obj['research_photo_galleries'] as $key => $gallery) ?>
