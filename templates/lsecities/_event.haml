@@ -91,17 +91,17 @@
                 %h1 item.name
                 .content
                   %a.link.pdf(href=item.slides_pdf_uri)Download PDF
-      - if people_with_blurb
-        %section#speaker-profiles
-          %header
-            %h1 Profiles
-          %ul.people-list
-            - foreach person in event_all_the_people
-              - if person.profile_text
-                %li.person(id = "person-profile#{person.slug}")
-                  %h1 = "#{person.name} #{person.family_name}"
-                  .content = person.profile_text
-                  - if person.homepage or person.twitterhandle
+    - if people_with_blurb
+      %section#speaker-profiles
+        %header
+          %h1 Profiles
+        %ul.people-list
+          - for person in event_all_the_people
+            - if person.profile_text
+              %li.person(id = "person-profile#{person.slug}")
+                %h1 = "#{person.name} #{person.family_name}"
+                .content = person.profile_text | raw
+                - if person.homepage or person.twitterhandle
                   .personal-links
                     %ul
                       - if person.homepage
@@ -110,8 +110,3 @@
                       - if person.twitterhandle
                         %li
                           %a(href = person.twitterhandle) = person.twitterhandle
-          
-          
-                    
-              
-              
