@@ -101,8 +101,8 @@ function pods_prepare_event($permalink, $options = []) {
 
   lc_data('META_last_modified', $pod->field('modified'));
 
-  $obj['slug'] = $permalink;
-  $obj['title'] = $pod->field('name');
+  $obj['permalink'] = $event_object->permalink;
+  $obj['title'] = $event_object->title;
   
   $event_speakers = sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
   $event_respondents = sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
@@ -118,8 +118,8 @@ function pods_prepare_event($permalink, $options = []) {
   }
   
   var_trace($event_all_the_people, $TRACE_PREFIX);
-  $obj['event_hashtag'] = ltrim($pod->field('hashtag'), '#');
-  $obj['event_story_id'] = $pod->field('storify_id');
+  $obj['event_hashtag'] = $event_object->event_hashtag;
+  $obj['event_story_id'] = $event_object->event_story_id;
 
   $obj['speakers_output'] = people_list($event_speakers, "Speaker", "Speakers");
   $obj['respondents_output'] = people_list($event_respondents, "Respondent", "Respondents");
