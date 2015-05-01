@@ -13,7 +13,7 @@ namespace LSECitiesWPTheme;
 
 lc_data('pods_toplevel_ancestor', 311);
 
-$obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
+$obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
 ?>
 
 <?php get_header(); ?>
@@ -23,7 +23,7 @@ $obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_posit
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-event h-event vevent'); ?>>
-  <?php \SemanticWP\Templating::get_template_part('lsecities/_event', $obj); ?>
+  <?php \SemanticWP\Templating::get_template_part('lsecities/_event', get_object_vars($obj)); ?>
 </div>
 
 <?php get_template_part('nav'); ?>
