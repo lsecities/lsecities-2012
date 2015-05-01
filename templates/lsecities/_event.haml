@@ -13,10 +13,7 @@
       %p.event-info
         = event_info | raw
     %article(class = "eightcol")
-      - if is_future_event and event_blurb_after_event
-        .blurb.after-event = event_blurb_after_event | raw
-      - elseif event_blurb
-        .blurb.description = event_blurb | raw
+      .blurb.description = blurb | raw
       - if is_future_event and event_contact_info
         %aside.booking-and-access = event_contact_info | raw
     %aside#keyfacts.fourcol.last
@@ -32,7 +29,7 @@
             - if free_form_dates is empty
               .calendar-link
                 [add to calendar: 
-                %a(href = "#{slug}/ical")><
+                %a(href = "#{permalink}/ical")><
                   ical
                 = " | "
                 %a(href = addtocal_uri_google target = "_blank")><
@@ -89,12 +86,12 @@
                 %h1 item.name
                 .content
                   %a.link.pdf(href=item.slides_pdf_uri)Download PDF
-    - if people_with_blurb
+    - if actants.people_with_blurb
       %section.speaker-profiles
         %header
           %h1 Profiles
         %ul.people-list
-          - for person in event_all_the_people
+          - for person in all_actants
             - if person.profile_text
               %li.item.person(id = "person-profile#{person.slug}")
                 %h1 = "#{person.name} #{person.family_name}"
