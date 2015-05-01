@@ -23,7 +23,7 @@ $obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_posit
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-event h-event vevent'); ?>>
-  <?php \SemanticWP\Templating::get_template_part('lsecities/_conference', $obj); ?>
+  <?php \SemanticWP\Templating::get_template_part('lsecities/_event', $obj); ?>
 </div>
 
 <?php get_template_part('nav'); ?>
