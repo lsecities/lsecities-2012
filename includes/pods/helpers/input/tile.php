@@ -23,7 +23,7 @@ jQuery(function($) { $('.pods_form').css({overflow: 'visible'}); });
 <div id="<?php echo $name; ?>_container">
 <select name="<?php echo $name; ?>" id="<?php echo $element_id; ?>" data-name-clean="<?php echo $data_name_clean; ?>" data-label="<?php echo $data_label; ?>" class="pods-form-ui-field-type-pick pods-form-ui-field-name-<?php echo $pods_name_clean; ?> pods-validate pods-validate-required">
   <option value="">-- Select one --</option>
-  <?php if ( !empty( $options['data'] ) ) : ?>
+  <?php if ( is_array( $options['data'] ) ) : ?>
 
     <?php foreach ($options['data'] as $key => $val) : ?>
       <?php
