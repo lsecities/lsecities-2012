@@ -231,7 +231,8 @@ function get_media_attribution($attachment_ID) {
   $attribution_uri = $pod->field('attribution_uri');
   $author_person = $pod->field('attribution_author_person');
   $author_org = $pod->field('attribution_author_org');
-  $attribution_name = implode(' ', [ $author_person['name'], $author_person['family_name'] ]);
+  // trim after implode to squash strings consisting of implode's glue character only
+  $attribution_name = trim(implode(' ', [ $author_person['name'], $author_person['family_name'] ]));
 
   return [ 
     'uri' => $attribution_uri,
