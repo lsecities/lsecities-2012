@@ -188,7 +188,7 @@ function compose_slide_content($column_spans, $tiles) {
       /**
        * Add image attribution metadata if present in media item
        */
-      $image_attribution = format_media_attribution($tile->field('image.id'));
+      $image_attribution = format_media_attribution(get_media_attribution($tile->field('image.id')));
 
       // Read tile title, subtitle (tagline) and blurb
       $tile_title = $tile->field('name');

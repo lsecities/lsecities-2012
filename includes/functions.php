@@ -219,6 +219,27 @@ function save_media_library_item_custom_form_fields($post, $attachment) {
 
 /**
  * Given a WordPress attachment ID, read its attribution metadata
+ * and return it as an array.
+ *
+ * @param integer $attachment_ID WordPress attachment ID
+ * @return Array The attribution metadata
+ */
+function get_media_attribution($attachment_ID) {
+  $pod = pods('media', $attachment_ID);
+
+  // get metadata for requested attachment
+  $attribution_uri = $pod->field('attribution_uri');
+  $author_person = $pod->field('attribution_author_person');
+  $author_org = $pod->field('attribution_author_org');
+  $attribution_name = implode(' ', [ $author_person['name'], $author_person['family_name'] ]);
+
+  return [ 
+    'uri' => $attribution_uri,
+    'author' => $attribution_name
+  ];
+}
+/**
+ * Given a WordPress attachment ID, read its attribution metadata
  * and, if this is available, add it to the array of attribution metadata
  * for the current request
  * 
@@ -228,19 +249,17 @@ function push_media_attribution($attachment_ID) {
   // first read the current metadata array from the request variable
   $media_attributions = lc_data('META_media_attr');
   
-  // get metadata for requested attachment
-  $attachment_metadata = wp_get_attachment_metadata($attachment_ID);
-  $attribution_uri = get_post_meta($attachment_ID, '_attribution_uri', true);
-  $attribution_name = get_post_meta($attachment_ID, '_attribution_name', true);
+  $attribution_metadata = get_media_attribution($attachment_ID);
 
   // compose metadata attributes
   $metadata = array(
     'title' => get_the_title($attachment_ID),
-    'attribution_uri' => $attribution_uri,
-    'author' => $attribution_name,
-    'attribution_string' => format_media_attribution($attachment_ID)
+    'attribution_uri' => $attribution_metadata['uri'],
+    'author' => $attribution_metadata['author'],
+    'attribution_string' => format_media_attribution($attribution_metadata)
   );
 
+  echo '<!-- metadata: ' . var_export($metadata, TRUE) . ' -->';
   // only append image attribution data to list if we have at least
   // title and author - otherwise it's useless (but emit a notice if so)
   if(!empty($metadata['title']) and !empty($metadata['author'])) {
@@ -270,13 +289,21 @@ function auto_push_media_attribution($url, $id) {
  */
 add_filter('wp_get_attachment_url', 'auto_push_media_attribution', 10, 2);
 
-function format_media_attribution($media_item_id) {
+/**
+ * Given an array of attribution name and URI, format it as string to
+ * be used for artwork attribution.
+ *
+ * @param Array $attribution_metadata An array with attribution URI and name
+ * @return String The formatted attribution string
+ */
+function format_media_attribution($attribution_metadata) {
     /**
      * Add image attribution metadata if present in media item
      */
     $image_attribution = '';
-    $image_attribution_name = get_post_meta($media_item_id, '_attribution_name', true);
-    $image_attribution_uri = get_post_meta($media_item_id, '_attribution_uri', true);
+    $image_attribution_name = $attribution_metadata['author'];
+    $image_attribution_uri = $attribution_metadata['uri'];
+
     if($image_attribution_name and $image_attribution_uri) {
       $image_attribution = 'Photo credits: ' . $image_attribution_name . ' - ' . $image_attribution_uri;
     } elseif($image_attribution_name or $image_attribution_uri) {
