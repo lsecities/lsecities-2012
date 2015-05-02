@@ -29,7 +29,6 @@ $obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3
 <?php get_template_part('nav'); ?>
           
 </div><!-- #contentarea -->
-</div>
 
 <?php get_sidebar(); ?>
 
