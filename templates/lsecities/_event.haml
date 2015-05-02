@@ -14,8 +14,8 @@
         = event_info | raw
     %article.eightcol
       .blurb.description = blurb | raw
-      - if is_future_event and event_contact_info
-        %aside.booking-and-access = event_contact_info | raw
+      - if is_future_event and contact_info
+        %aside.booking-and-access = contact_info | raw
     %aside#keyfacts.fourcol.last
       %dl
         = speakers_output.output | raw
