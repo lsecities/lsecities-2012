@@ -260,7 +260,6 @@ function push_media_attribution($attachment_ID) {
     'attribution_string' => format_media_attribution($attribution_metadata)
   );
 
-  echo '<!-- metadata: ' . var_export($metadata, TRUE) . ' -->';
   // only append image attribution data to list if we have at least
   // title and author - otherwise it's useless (but emit a notice if so)
   if(!empty($metadata['title']) and !empty($metadata['author'])) {
