@@ -45,5 +45,5 @@ function galleria_init() {
   wp_enqueue_style('galleria_theme_classic_lsecities', lc_data('theme_base_path') . '/stylesheets/plugins/galleria.io/galleria.classic.lsecities.css');
 }
 
-add_action('init', 'galleria_init' );
+add_action('wp_enqueue_scripts', 'galleria_init' );
 add_shortcode('galleria', 'galleria_shortcode');
