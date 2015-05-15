@@ -13,27 +13,27 @@
 
 namespace LSECitiesWPTheme;
 
-$obj = pods_prepare_event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
+$event = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
 
 $ical = "BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lsecities.net/wpcal//NONSGML v1.0//EN
 BEGIN:VEVENT
-UID:" . sha1($obj['slug'], false) . "@lsecities.net
+UID:" . sha1($event->permalink, false) . "@lsecities.net
 DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
-DTSTART:".$obj['event_dtstart']."
-DTEND:".$obj['event_dtend']."
-SUMMARY:".$obj['title']."
-URI:".$obj['event_page_uri']."\n";
-if($obj['event_location']) {
-  $ical .= "LOCATION:".$obj['event_location']."\n";
+DTSTART:".$event->event_dtstart."
+DTEND:".$event->event_dtend."
+SUMMARY:".$event->title."
+URI:".$event->event_page_uri."\n";
+if($event->event_location) {
+  $ical .= "LOCATION:".$event->event_location."\n";
 }
 $ical .= "END:VEVENT
 END:VCALENDAR";
 
 //set correct content-type-header
 header('Content-type: text/calendar; charset=utf-8');
-header('Content-Disposition: inline; filename=lsecities_event_'.$obj['slug'].'.ics');
+header('Content-Disposition: inline; filename=lsecities_event_'.$event->permalink.'.ics');
 echo $ical;
 exit;
 ?>
