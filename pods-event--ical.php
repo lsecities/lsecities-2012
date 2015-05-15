@@ -19,7 +19,7 @@ $ical = "BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//lsecities.net/wpcal//NONSGML v1.0//EN
 BEGIN:VEVENT
-UID:" . sha1($obj['slug'], false) . "@lsecities.net
+UID:" . sha1($obj['permalink'], false) . "@lsecities.net
 DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
 DTSTART:".$obj['event_dtstart']."
 DTEND:".$obj['event_dtend']."
@@ -33,7 +33,7 @@ END:VCALENDAR";
 
 //set correct content-type-header
 header('Content-type: text/calendar; charset=utf-8');
-header('Content-Disposition: inline; filename=lsecities_event_'.$obj['slug'].'.ics');
+header('Content-Disposition: inline; filename=lsecities_event_'.$obj['permalink'].'.ics');
 echo $ical;
 exit;
 ?>

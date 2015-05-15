@@ -150,7 +150,7 @@ class Event extends PodsObject {
     $poster_pdf = $pod->field('poster_pdf');
     $this->poster_pdf = wp_get_attachment_url($poster_pdf[0]['ID']);
     
-    $this->event_page_uri = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$obj['slug'];
+    $this->event_page_uri = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$this->permalink;
     
     $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
     $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
