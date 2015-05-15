@@ -56,7 +56,6 @@ require_fragment('/lib/lsecities/research-project/research-project.php');
 require_fragment('/lib/lsecities/wp_page/wp_page.php');
 require_fragment('/includes/pods/pods/article/pods-article.php' );
 require_fragment('/includes/pods/pods/conference/pods-conference.php' );
-require_fragment('/includes/pods/pods/event/pods-event.php' );
 require_fragment('/includes/pods/pods/event-programme/pods-event-programme.php' );
 require_fragment('/includes/pods/pods/list/pods-list.php' );
 require_fragment('/includes/pods/pods/media-item/pods-media-item.php' );
