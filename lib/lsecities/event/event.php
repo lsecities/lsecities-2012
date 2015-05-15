@@ -88,6 +88,8 @@ class Event extends PodsObject {
     $this->datetime_end = $pod->field('date_end');
     $this->free_form_event_dates = $pod->field('free_form_dates');
 
+    $this->event_location = $pod->field('venue.name');
+
     $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
     
     $event_blurb = do_https_shortcode($pod->display('blurb'));
@@ -124,8 +126,6 @@ class Event extends PodsObject {
       $this->heading_gallery = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
     }
     
-    $this->event_location = $pod->field('venue.name');
-
     $event_type = $pod->field('event_type.name');
     $event_series = $pod->field('event_series.name');
     $event_host_organizations = orgs_list((array) $pod->field('hosted_by'));
