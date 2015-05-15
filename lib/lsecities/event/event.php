@@ -48,6 +48,8 @@ class Event extends PodsObject {
     $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
     
+    $this->event_page_uri = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . PODS_BASEURI_EVENTS . "/" . $this->permalink;
+
     $this->event_hashtag = ltrim($pod->field('hashtag'), '#');
     $this->event_story_id = $pod->field('storify_id');
   
@@ -150,8 +152,7 @@ class Event extends PodsObject {
     $poster_pdf = $pod->field('poster_pdf');
     $this->poster_pdf = wp_get_attachment_url($poster_pdf[0]['ID']);
     
-    $this->event_page_uri = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$this->permalink;
-    
+
     $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
     $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
   }
