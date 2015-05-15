@@ -224,7 +224,7 @@ function pods_prepare_event($permalink, $options = []) {
   $poster_pdf = $pod->field('poster_pdf');
   $obj['poster_pdf'] = wp_get_attachment_url($poster_pdf[0]['ID']);
   
-  $obj['event_page_uri'] = $_SERVER['SERVER_NAME'].PODS_BASEURI_EVENTS."/".$obj['slug'];
+  $obj['event_page_uri'] = $event_object->event_page_uri;
   
   $obj['picasa_gallery_id'] = $pod->field('picasa_gallery_id');
   $obj['photo_gallery_credits'] = $pod->field('photo_gallery_credits');
