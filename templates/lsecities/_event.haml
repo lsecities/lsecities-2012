@@ -18,10 +18,10 @@
         %aside.booking-and-access = contact_info | raw
     %aside#keyfacts.fourcol.last
       %dl
-        = speakers_output.output | raw
-        = respondents_output.output | raw
-        = chairs_output.output | raw
-        = moderators_output.output | raw
+        = actants.speakers.output | raw
+        = actants.respondents.output | raw
+        = actants.chairs.output | raw
+        = actants.moderators.output | raw
         - if event_date_string
           %dt When
           %dd.date
