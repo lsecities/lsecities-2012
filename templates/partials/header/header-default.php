@@ -52,7 +52,7 @@
 							<ul>
 								<li>
 									<a title="Follow us on Twitter" href="https://twitter.com/#!/LSECities">
-										<img src="<?php bloginfo('stylesheet_directory'); ?>/images/icons/mal/icon_twitter-v1lightblue_24x24.png" alt="Follow us on Twitter">
+										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/icons/mal/icon_twitter-v1lightblue_24x24.png" alt="Follow us on Twitter">
 									</a>
 								</li>
 								<li>
