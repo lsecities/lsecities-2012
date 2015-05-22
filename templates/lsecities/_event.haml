@@ -93,7 +93,7 @@
         %ul.people-list
           - for person in all_actants
             - if person.profile_text
-              %li.item.person(id = "person-profile#{person.slug}")
+              %li.item.person(id = "person-profile-#{person.slug}")
                 %h1 = "#{person.name} #{person.family_name}"
                 .content = person.profile_text | raw
                 - if person.homepage or person.twitterhandle
