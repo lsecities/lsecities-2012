@@ -67,19 +67,19 @@ class Event extends PodsObject {
   
     $this->actants['speakers'] = [
       'list' => $event_speakers,
-      'output' => people_list($event_speakers, "Speaker", "Speakers")
+      'output' => $this->people_list($event_speakers, "Speaker", "Speakers")
     ];
     $this->actants['respondents'] = [
       'list' => $event_respondents,
-      'output' => people_list($event_respondents, "Respondent", "Respondents")
+      'output' => $this->people_list($event_respondents, "Respondent", "Respondents")
     ];
     $this->actants['chairs'] = [
       'list' => $event_chairs,
-      'output' => people_list($event_chairs, "Chair", "Chairs")
+      'output' => $this->people_list($event_chairs, "Chair", "Chairs")
     ];
     $this->actants['moderators'] = [
       'list' => $event_moderators,
-      'output' => people_list($event_moderators, "Moderator", "Moderators")
+      'output' => $this->people_list($event_moderators, "Moderator", "Moderators")
     ];
     
     $this->actants['people_with_blurb'] = $this->actants['speakers']['output']['with_blurb'] + $this->actants['respondents']['output']['with_blurb'] + $this->actants['chairs']['output']['with_blurb'] + $this->actants['moderators']['output']['with_blurb'];
@@ -128,8 +128,8 @@ class Event extends PodsObject {
     
     $event_type = $pod->field('event_type.name');
     $event_series = $pod->field('event_series.name');
-    $event_host_organizations = orgs_list((array) $pod->field('hosted_by'));
-    $event_partner_organizations = orgs_list((array) $pod->field('partners'));
+    $event_host_organizations = $this->orgs_list((array) $pod->field('hosted_by'));
+    $event_partner_organizations = $this->orgs_list((array) $pod->field('partners'));
 
     $this->event_info = '';
     if($event_type) {
