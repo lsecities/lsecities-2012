@@ -104,11 +104,9 @@ trait ObjectWithTimespan {
       // AddToCalendar URIs
       $this->addtocal_uri_google = 'http://www.google.com/calendar/event?action=TEMPLATE&text='.
         $this->title
-        .'&dates='.$this->event_dtstart.'/'.$this->event_dtend
-        .'&details=&'
-        .'location='.$this->event_location
-        .'&trp=false&'
-        .'sprop='.urlencode($this->event_page_uri).'&sprop=name:';
+        .'&dates=' . $this->event_dtstart.'/'.$this->event_dtend
+        .'&location=' . urlencode($this->event_location)
+        .'&sprop=' . urlencode($this->event_page_uri).'&sprop=name:';
     }
 
   }
