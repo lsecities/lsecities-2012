@@ -18,7 +18,7 @@ $obj = prepare_header($post);
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=0.5" />
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
