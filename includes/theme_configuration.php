@@ -77,6 +77,18 @@ lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/wp-content/themes/
 lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012');
 
 /**
+ * Mapping from URIs (later: Pods types) to data to be used
+ * in Pods index template
+ */
+lc_data('pods_routes', [
+  '/research/projects/' => [
+    'pod' => 'research_project',
+    'factory_function' => 'research_project_pods',
+    'template' => 'lsecities/research_projects/_index'
+  ]
+]);
+
+/**
  * Template configuration
  */
 lc_data('template_filename_page_tab', 'pages-section.php');
