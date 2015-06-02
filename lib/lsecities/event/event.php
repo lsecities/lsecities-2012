@@ -65,24 +65,32 @@ class Event extends PodsObject {
   
     $this->all_actants = array_map([$this, 'event_speaker_profile_wpautop_fn'], array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators));
   
-    $this->actants['speakers'] = [
-      'list' => $event_speakers,
-      'output' => people_list($event_speakers, "Speaker", "Speakers")
-    ];
-    $this->actants['respondents'] = [
-      'list' => $event_respondents,
-      'output' => people_list($event_respondents, "Respondent", "Respondents")
-    ];
-    $this->actants['chairs'] = [
-      'list' => $event_chairs,
-      'output' => people_list($event_chairs, "Chair", "Chairs")
-    ];
-    $this->actants['moderators'] = [
-      'list' => $event_moderators,
-      'output' => people_list($event_moderators, "Moderator", "Moderators")
-    ];
+    /** TECHNICAL_DEBT: assemble the four arrays before in a sensible
+     * way - requires either incorporating the code above in
+     * people_list() or cleaning up anyways the way these lists are
+     * generated
+     */
+    $this->actants['speakers'] = array_merge(
+	  [ 'list' => $event_speakers ],
+	  $this->people_list($event_speakers, "Speaker", "Speakers")
+	);
+	
+    $this->actants['respondents'] = array_merge(
+      [ 'list' => $event_respondents ],
+      $this->people_list($event_respondents, "Respondent", "Respondents")
+    );
     
-    $this->actants['people_with_blurb'] = $this->actants['speakers']['output']['with_blurb'] + $this->actants['respondents']['output']['with_blurb'] + $this->actants['chairs']['output']['with_blurb'] + $this->actants['moderators']['output']['with_blurb'];
+    $this->actants['chairs'] = array_merge(
+      [ 'list' => $event_chairs ],
+      $this->people_list($event_chairs, "Chair", "Chairs")
+    );
+    
+    $this->actants['moderators'] = array_merge(
+      [ 'list' => $event_moderators ],
+      $this->people_list($event_moderators, "Moderator", "Moderators")
+    );
+    
+    $this->actants['people_with_blurb'] = $this->actants['speakers']['with_blurb'] + $this->actants['respondents']['with_blurb'] + $this->actants['chairs']['with_blurb'] + $this->actants['moderators']['with_blurb'];
     
     $this->datetime_start = $pod->field('date_start');
     $this->datetime_end = $pod->field('date_end');
@@ -128,8 +136,8 @@ class Event extends PodsObject {
     
     $event_type = $pod->field('event_type.name');
     $event_series = $pod->field('event_series.name');
-    $event_host_organizations = orgs_list((array) $pod->field('hosted_by'));
-    $event_partner_organizations = orgs_list((array) $pod->field('partners'));
+    $event_host_organizations = $this->orgs_list((array) $pod->field('hosted_by'));
+    $event_partner_organizations = $this->orgs_list((array) $pod->field('partners'));
 
     $this->event_info = '';
     if($event_type) {

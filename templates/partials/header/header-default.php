@@ -38,7 +38,7 @@
         <?php endif; // (lc_data('urban_age_section')) ?>
 				<div class='sixcol last' id='toolbox'>
 					<div id="searchbox" class="clearfix">
-						<form method="get" id="search-box" action="http://www.google.com/search">
+						<form method="get" id="search-box" action="https://www.google.com/search">
 							<div class="hiddenFields">
 								<input type="hidden" value="lsecities.net" name="domains" />
 								<input type="hidden" value="lsecities.net" name="sitesearch" />
@@ -52,7 +52,7 @@
 							<ul>
 								<li>
 									<a title="Follow us on Twitter" href="https://twitter.com/#!/LSECities">
-										<img src="<?php bloginfo('stylesheet_directory'); ?>/images/icons/mal/icon_twitter-v1lightblue_24x24.png" alt="Follow us on Twitter">
+										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/icons/mal/icon_twitter-v1lightblue_24x24.png" alt="Follow us on Twitter">
 									</a>
 								</li>
 								<li>
