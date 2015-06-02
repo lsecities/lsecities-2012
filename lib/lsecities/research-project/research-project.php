@@ -4,8 +4,12 @@ namespace LSECitiesWPTheme;
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
 
+if(!defined('RESEARCH_PROJECTS_PODS_NAME')) {
+  define('RESEARCH_PROJECTS_PODS_NAME', 'research_project');
+}
+
 class ResearchProject extends PodsObject {
-  const PODS_NAME = 'research_project';
+  const PODS_NAME = RESEARCH_PROJECTS_PODS_NAME;
   const PODS_PAGES_BASE_PATH = '/objects/research-projects';
   
   public $permalink;
