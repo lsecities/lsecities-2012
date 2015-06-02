@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Pods - List of Pods objects
+ * Template Name: Pods - List of Pods objects (legacy template)
  * Description: The template used to list Pods objects
  *
  * @package LSECities2012
