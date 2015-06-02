@@ -187,3 +187,23 @@ class ResearchProject extends PodsObject {
     return $project_duration;
   }
 }
+
+/**
+ * Given an array of params corresponding to those accepted by
+ * pods() ($id parameter), return an array of ResearchProject objects
+ */
+function research_project_pods($params) {
+  $pods = pods(RESEARCH_PROJECTS_PODS_NAME, $params);
+  
+  $objects = [];
+  
+  if($pods->total_found() > 0) {
+    while($pods->fetch()) {
+      $objects[] = new ResearchProject($pods->field('slug'));
+    }
+    
+    return $objects;
+  } else {
+    return FALSE;
+  }
+}
