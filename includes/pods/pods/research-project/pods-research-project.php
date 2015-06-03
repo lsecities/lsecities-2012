@@ -86,7 +86,7 @@ function pods_prepare_research_project($pod_slug) {
   $obj['research_external_events'] = get_project_events($pod, FALSE, $obj['research_external_event_categories'], $obj['research_outputs']);
   
   // prepare heading gallery
-  $heading_gallery_permalink = $pod->field('gallery.slug');
+  $heading_gallery_permalink = $pod->field('heading_gallery.slug');
   $obj['heading_gallery'] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
 
   // if we have research photo galleries/photo essays, prepare them
