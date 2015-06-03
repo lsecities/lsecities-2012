@@ -42,7 +42,7 @@ get_header();
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-index lc-index-for-pod-' . $pod_index_configuration['pod']); ?>>
-  <?php \SemanticWP\Templating::get_template_part($pod_index_configuration['template'], get_object_vars($obj)); ?>
+  <?php \SemanticWP\Templating::get_template_part($pod_index_configuration['template'], [ 'research_projects' => $objs ]); ?>
 </div>
 
 <?php get_template_part('nav'); ?>
