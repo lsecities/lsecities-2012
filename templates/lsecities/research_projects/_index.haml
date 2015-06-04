@@ -1,5 +1,10 @@
 - for research_project in research_projects
   .project
-    .tile
-      %img(src = research_project.heading_gallery.slides.0.uri)
-      %h1 = research_project.title
+    %a(href = "/objects/research-projects/#{research_project.permalink}")
+      .tile
+        .main
+          - if(research_project.heading_gallery.slides.0.uri)
+            %img(src = research_project.heading_gallery.slides.0.uri)
+          %h1 = research_project.title
+        .flip
+          .summary = research_project.summary | raw
