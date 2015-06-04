@@ -76,3 +76,41 @@ nav#projectsmenu {
     margin-bottom: 0.5em;
   }
 }
+
+/**
+ * The following styles set is for research project index pages
+ */
+$grid-index: (
+  gutters: 0
+);
+
+.lc-index-for-pod-research_project {
+  @include with-layout($grid-index) {
+    .project {
+      @include gallery(4 of 12 inside);
+      
+      .tile {
+        position: relative;
+        /*
+         TECHNICAL_DEBT: this is needed to compensate for the extra
+         height due to the child img's uneven heights/ratios across
+         the grid - fix that properly...
+         */
+        margin-bottom: -6px;
+      }
+      
+      h1 {
+        font-size: 1rem;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.7);
+        margin: 1rem;
+        padding: 0.5rem;
+        color: white;
+        font-weight: bold;
+        display: block;
+      }
+    }
+  }
+}
