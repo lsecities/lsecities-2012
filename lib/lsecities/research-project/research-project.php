@@ -155,7 +155,7 @@ class ResearchProject extends PodsObject {
         $project_start = $project_start->format('Y');
       }
     } catch (\Exception $e) {
-      error_log('Project start year must be a 4-digit number, "' . $this->start_date . '" was provided.');
+      error_log('Project start year must be a 4-digit number, but "' . $this->start_date . '" was provided.');
     }
     
     try {
@@ -166,7 +166,7 @@ class ResearchProject extends PodsObject {
         $project_end = 'ongoing';
       }
     } catch (\Exception $e) {
-      error_log('Project end year must be a 4-digit number, "' . $this->end_date . '" was provided.');
+      error_log('Project end year must be a 4-digit number, but "' . $this->end_date . '" was provided.');
     }
 
     // get freeform duration text, if available
