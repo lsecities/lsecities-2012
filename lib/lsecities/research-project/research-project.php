@@ -51,15 +51,17 @@ class ResearchProject extends PodsObject {
     $this->tagline = $pod->field('tagline');
     
     $this->status = $pod->field('status.name');
+        
+    $timespan = $this->get_project_timespan();
     
-    // for timespan, store both raw start and end years...
+    // for timespan, store both raw start and end years,
+    // as well as a string representation of the timespan
     $this->timespan = [
-      'start_year' => $pod->field('date_start'),
-      'end_year' => $pod->field('date_end')
+      'start' => $timespan['start'],
+      'end' => $timespan['end'],
+      'text' => $timespan['text']
     ];
-    // as well as string representation of the timespan
-    $this->timespan['timespan'] = $this->get_project_timespan();
-    
+
     $this->web_uri = $pod->field('web_uri');
     
     $this->summary = $pod->field('summary');
@@ -147,12 +149,14 @@ class ResearchProject extends PodsObject {
   function get_project_timespan() {
     // project duration
     $project_duration = '';
-
+    $project_start_year = NULL;
+    $project_end_year = NULL;
+    
     // get years from start and date fields
     try {
       if($this->start_date) {
         $project_start = new \DateTime($this->start_date . '-01-01');
-        $project_start = $project_start->format('Y');
+        $project_start = $project_start_year = $project_start->format('Y');
       }
     } catch (\Exception $e) {
       error_log('Project start year must be a 4-digit number, but "' . $this->start_date . '" was provided.');
@@ -161,7 +165,7 @@ class ResearchProject extends PodsObject {
     try {
       if($this->end_date) {
         $project_end = new \DateTime($this->end_date . '-12-31');
-        $project_end = $project_end->format('Y');
+        $project_end = $project_end_year = $project_end->format('Y');
       } else {
         $project_end = 'ongoing';
       }
@@ -184,7 +188,7 @@ class ResearchProject extends PodsObject {
       }
     }
     
-    return $project_duration;
+    return [ 'start' => $project_start_year , 'end' => $project_end_year, 'text' => $project_duration ];
   }
 }
 
