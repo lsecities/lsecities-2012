@@ -31,6 +31,7 @@ $objs = array_map(function($item) { return [ 'title' => $item['title'], 'labels'
  /**
   * If no configuration is found it either doesn't exist for this URI,
   * or the URI is not supposed to be a Pod index page - so do a 404.
+  * Likewise, if the factory function is not defined, do a 404.
   */
 if(!is_array($pod_index_configuration)) {
   redirect_to_404();
