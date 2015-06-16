@@ -83,12 +83,14 @@ class ResearchProject extends PodsObject {
     
     $this->free_form_project_teams = $pod->display('free_form_project_teams');
     
+    /*
     $this->actants = [
       'coordinators' => $this->get_project_actants('people', 'coordinators'),
       'researchers' => $this->get_project_actants('people', 'researchers'),
       'partners' => $this->get_project_actants('organizations', 'partners'),
       'funders' => $this->get_project_actants('organizations', 'funders')
     ];
+    */
   }
   
   
