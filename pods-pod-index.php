@@ -24,9 +24,16 @@ namespace LSECitiesWPTheme;
  */
 $pod_index_configuration = lc_data('pods_routes')[parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)];
 
-// $objs = '\\LSECitiesWPTheme\\' . $pod_index_configuration['factory_function']();
-
-$objs = array_map(function($item) { return [ 'title' => $item['title'], 'labels' => $item['labels'], 'research_projects' => research_project_pods($item['params']) ]; }, $pod_index_configuration['sections']);
+$objs = array_map(
+  function($item) use ($pod_index_configuration) {
+    return [
+      'title' => $item['title'],
+      'labels' => $item['labels'],
+      'research_projects' => call_user_func($pod_index_configuration['factory_function'], $item['params'])
+    ];
+  },
+  $pod_index_configuration['sections']
+);
 
  /**
   * If no configuration is found it either doesn't exist for this URI,

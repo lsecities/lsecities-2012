@@ -83,7 +83,7 @@ lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-2012
 lc_data('pods_routes', [
   '/research/projects/' => [
     'pod' => 'research_project',
-    'factory_function' => 'research_project_pods',
+    'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
     'sections' => [
       [
@@ -112,7 +112,7 @@ lc_data('pods_routes', [
   ],
   '/research/strands/' => [
     'pod' => 'research_project',
-    'factory_function' => 'research_project_pods',
+    'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
     'sections' => [
       [
