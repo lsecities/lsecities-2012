@@ -24,6 +24,10 @@ namespace LSECitiesWPTheme;
  */
 $pod_index_configuration = lc_data('pods_routes')[parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)];
 
+// $objs = '\\LSECitiesWPTheme\\' . $pod_index_configuration['factory_function']();
+
+$objs = array_map(function($item) { return [ 'title' => $item['title'], 'labels' => $item['labels'], 'research_projects' => research_project_pods($item['params']) ]; }, $pod_index_configuration['sections']);
+
  /**
   * If no configuration is found it either doesn't exist for this URI,
   * or the URI is not supposed to be a Pod index page - so do a 404.
@@ -42,7 +46,7 @@ get_header();
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
 <div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-index lc-index-for-pod-' . $pod_index_configuration['pod']); ?>>
-  <?php \SemanticWP\Templating::get_template_part($pod_index_configuration['template'], [ 'research_projects' => $objs ]); ?>
+  <?php \SemanticWP\Templating::get_template_part($pod_index_configuration['template'], [ 'sections' => $objs ]); ?>
 </div>
 
 <?php get_template_part('nav'); ?>
