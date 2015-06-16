@@ -178,7 +178,7 @@ class ResearchProject extends PodsObject {
     } elseif($project_start and $project_end) { // otherwise use start and end year
       // if start and end year are the same, just display the year, otherwise display the range
       if($project_start === $project_end) {
-    $project_duration = $project_start;
+        $project_duration = $project_start;
       } else {
         $project_duration = $project_start . ' - ' . $project_end;
       }
