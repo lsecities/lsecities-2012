@@ -84,7 +84,71 @@ lc_data('pods_routes', [
   '/research/projects/' => [
     'pod' => 'research_project',
     'factory_function' => 'research_project_pods',
-    'template' => 'lsecities/research_projects/_index'
+    'template' => 'lsecities/research_projects/_index',
+    'sections' => [
+      [
+        'title' => 'Current research',
+        'labels' => [
+          'show-strand'
+        ],
+        'params' => [
+          'limit' => -1,
+          'where' => 'status.name = "Active"',
+          'orderby' => 'research_strand.slug ASC, name ASC'
+        ]
+      ],
+      [
+        'title' => 'Completed research',
+        'labels' => [
+          'show-strand'
+        ],
+        'params' => [
+          'limit' => -1,
+          'where' => 'status.name = "Completed"',
+          'orderby' => 'research_strand.slug ASC, name ASC'
+        ]
+      ]
+    ]
+  ],
+  '/research/strands/' => [
+    'pod' => 'research_project',
+    'factory_function' => 'research_project_pods',
+    'template' => 'lsecities/research_projects/_index',
+    'sections' => [
+      [
+        'title' => 'Cities, space and society',
+        'labels' => [
+          'show-status'
+        ],
+        'params' => [
+          'limit' => -1,
+          'where' => 'research_strand.slug="010-cities-space-and-society"',
+          'orderby' => 'status.name ASC, name ASC'
+        ]
+      ],
+      [
+        'title' => 'Cities, environment and climate change',
+        'labels' => [
+          'show-status'
+        ],
+        'params' => [
+          'limit' => -1,
+          'where' => 'research_strand.slug="020-cities-environment-and-climate-change"',
+          'orderby' => 'status.name ASC, name ASC'
+        ]
+      ],
+      [
+        'title' => 'Urban governance',
+        'labels' => [
+          'show-status'
+        ],
+        'params' => [
+          'limit' => -1,
+          'where' => 'research_strand.slug="030-urban-governance"',
+          'orderby' => 'status.name ASC, name ASC'
+        ]
+      ]
+    ]
   ]
 ]);
 
