@@ -1,10 +1,18 @@
-- for research_project in research_projects
-  .project
-    %a(href = "/objects/research-projects/#{research_project.permalink}")
-      .tile
-        .main
-          - if(research_project.heading_gallery.slides.0.uri)
-            %img(src = research_project.heading_gallery.slides.0.uri)
-          %h1 = research_project.title
-        .flip
-          .summary = research_project.summary | raw
+- for section in sections
+  .section(class = section.labels)
+    %h1 = section.title
+    .projects
+      - for project in section.research_projects
+        .project( data-project-start-year = project.timespan.start data-project-end-year = project.timespan.end data-project-timespan = project.timespan.text)
+          .tile
+            .main
+              %a(href = "/objects/research-projects/#{project.permalink}")
+                - if(project.heading_gallery.slides.0.uri)
+                  %img(src = project.heading_gallery.slides.0.uri)
+                %h1 = project.title
+                - if(project.research_strand.name)
+                  %span.label.research-strand = project.research_strand.name
+                - if(project.status)
+                  %span.label.research-status = project.status
+            .flip
+              .summary = project.summary | raw
