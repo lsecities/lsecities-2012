@@ -33,11 +33,11 @@ $objs = array_map(function($item) { return [ 'title' => $item['title'], 'labels'
   * or the URI is not supposed to be a Pod index page - so do a 404.
   * Likewise, if the factory function is not defined, do a 404.
   */
-if(!is_array($pod_index_configuration)) {
+/*
+if(!is_array($pod_index_configuration) or !defined($pod_index_configuration['factory_function'])) {
   redirect_to_404();
 }
-
-$obj = $pod_index_configuration['factory_function']();
+*/
 
 get_header();
 ?>
