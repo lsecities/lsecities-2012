@@ -27,6 +27,16 @@ class ResearchProject extends PodsObject {
   public $free_form_project_teams;
   // these are either people (coordinators, researchers) or organizations (partners, funders), so let's call them actants
   public $actants;
+  
+  /**
+   * Content associated to research project (events, publications,
+   * posts, data visualizations, other outputs...)
+   */
+  /**
+   * @var Array Events associated to a research project
+   */
+  public $linked_events;
+  
   public $featured_posts;
   public $photo_galleries;
   public $events_blurb;
@@ -36,6 +46,22 @@ class ResearchProject extends PodsObject {
   public $research_output_publications;
   public $research_outputs;
   
+  /**
+   * @var int This is a number meant to represent how 'active' a
+   * research project is; the way this is calculated is deterministic
+   * but somewhat arbitrary as different people may have different
+   * opinions on what counts as a sign of activity and what the weight
+   * of each sign may be. The gist is that each research output,
+   * event and so on adds something to the score: number of items
+   * associated with a research project as well as their 'freshness'
+   * contribute to the score.
+   */
+  public $project_activity_score;
+  public $latest_update;
+    
+  /**
+   * @var Object The Pod object for this ResearchProject
+   */
   private $pod;
   
   function __construct($permalink) {
@@ -91,6 +117,13 @@ class ResearchProject extends PodsObject {
       'funders' => $this->get_project_actants('organizations', 'funders')
     ];
     */
+    
+    // Populate lists of linked content
+    $this->linked_events = $this->get_project_events(TRUE, ['conference', 'presentation', 'public-lecture', 'workshop']);
+
+    // Once all linked content has been populated, calculate project activity score
+    $this->project_activity_score = $this->get_project_activity_score();
+    echo '<!-- ' . $this->permalink . ': ' . var_export($this->project_activity_score, TRUE) . ' -->';
   }
   
   
@@ -191,6 +224,101 @@ class ResearchProject extends PodsObject {
     }
     
     return [ 'start' => $project_start_year , 'end' => $project_end_year, 'text' => $project_duration ];
+  }
+  
+  /**
+   * Fetch lists of events associated to the project, grouped by category
+   * Events from the main LSE Events calendar and events defined as
+   * Research outputs can be fetched here.
+   * 
+   * @param bool $include_events_from_main_calendar Whether to fetch any
+   *    associated events from the main events calendar (Events pod)
+   * @param array $research_event_categories An array of slugs of
+   *    WP categories under which additional events are grouped
+   * @param array $research_outputs A list of research outputs associated
+   *    to the project, from which events are selected
+   * @return array The list of events associated to the project, grouped
+   *    by category
+   */
+  function get_project_events(
+    $include_events_from_main_calendar = FALSE,
+    $research_event_categories = [],
+    $research_outputs = []
+  ) {
+    $research_events = [];
+
+    // Only include events from the main calendar if asked to do so
+    if($include_events_from_main_calendar and $this->pod->field('events')) {
+      foreach($this->pod->field('events', array('orderby' => 'date_start DESC')) as $event) {
+        $research_events[0][] = array(
+          'title' => $event['name'],
+          'citation' => $event['name'],
+          'date' => $event['date_start'],
+          'uri' => PODS_BASEURI_EVENTS . '/' . $event['slug']
+        );
+      }
+    }
+
+    foreach($research_event_categories as $category_slug) {
+      if(is_array($research_outputs[$category_slug])) {
+        foreach($research_outputs[$category_slug] as $event) {
+          $research_events[$category_slug][] = $event;
+        }
+      }
+    }
+
+    // Now sort events within each category, by date
+    foreach($research_events as $category => $evs) {
+      foreach($evs as $key => $value) {
+        $ev_date[$key] = $value['date'];
+      }
+      
+      array_multisort($ev_date, SORT_DESC, $evs);
+      
+      $sorted_research_events[$category] = $evs;
+    }
+      
+    return $sorted_research_events;
+  }
+  
+  /**
+   * Calculate a project activity score based on number, type and
+   * 'freshness' of linked content.
+   * 
+   * This calculation is somewhat arbitrary, but it's a way for us to
+   * have a feel of active/recently updated projects if we want to sort
+   * projects by some measure of their activity levels.
+   * 
+   * @return int The project's activity score
+   */
+  function get_project_activity_score() {
+    $activity_score = [];
+    
+    // Activity score for events
+    $activity_score['events'] = array_map(
+      function($event_category) {
+        return array_map(function($item) {
+          $event_date = new \DateTime($item['date']);
+          $current_date = new \DateTime('now');
+          $date_diff = $current_date->diff($event_date);
+          $days_to_event = $date_diff->days * ($date_diff->invert ? -1 : 1);
+          if($days_to_event > -7) {
+            return 1;
+          } elseif($days_to_event > -30 and -7 >= $days_to_event) {
+            return 0.75;
+          } elseif($days_to_event > -365 and -30 >= $days_to_event) {
+            return 0.25;
+          } else {
+            return 0.11;
+          }
+        },
+        $event_category
+        );
+      },
+      $this->linked_events
+    );
+    
+    return $activity_score;
   }
 }
 
