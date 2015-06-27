@@ -3,7 +3,7 @@
     %h1 = section.title
     .projects
       - for project in section.research_projects
-        .project( data-project-start-year = project.timespan.start data-project-end-year = project.timespan.end data-project-timespan = project.timespan.text)
+        .project( data-project-start-year = project.timespan.start data-project-end-year = project.timespan.end data-project-timespan = project.timespan.text data-project-activity-score = project.project_activity_score)
           .tile
             .main
               %a(href = "/objects/research-projects/#{project.permalink}")

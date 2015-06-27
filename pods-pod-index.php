@@ -29,7 +29,7 @@ $objs = array_map(
     return [
       'title' => $item['title'],
       'labels' => $item['labels'],
-      'research_projects' => call_user_func($pod_index_configuration['factory_function'], $item['params'])
+      'research_projects' => call_user_func($pod_index_configuration['factory_function'], $item['pods_params'], $item['params'])
     ];
   },
   $pod_index_configuration['sections']

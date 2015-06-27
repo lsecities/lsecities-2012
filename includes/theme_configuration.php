@@ -91,10 +91,13 @@ lc_data('pods_routes', [
         'labels' => [
           'show-strand'
         ],
-        'params' => [
+        'pods_params' => [
           'limit' => -1,
           'where' => 'status.name = "Active"',
           'orderby' => 'research_strand.slug ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
         ]
       ],
       [
@@ -102,10 +105,13 @@ lc_data('pods_routes', [
         'labels' => [
           'show-strand'
         ],
-        'params' => [
+        'pods_params' => [
           'limit' => -1,
           'where' => 'status.name = "Completed"',
           'orderby' => 'research_strand.slug ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
         ]
       ]
     ]
@@ -120,10 +126,13 @@ lc_data('pods_routes', [
         'labels' => [
           'show-status'
         ],
-        'params' => [
+        'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="010-cities-space-and-society"',
           'orderby' => 'status.name ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
         ]
       ],
       [
@@ -131,10 +140,13 @@ lc_data('pods_routes', [
         'labels' => [
           'show-status'
         ],
-        'params' => [
+        'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="020-cities-environment-and-climate-change"',
           'orderby' => 'status.name ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
         ]
       ],
       [
@@ -142,10 +154,13 @@ lc_data('pods_routes', [
         'labels' => [
           'show-status'
         ],
-        'params' => [
+        'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="030-urban-governance"',
           'orderby' => 'status.name ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
         ]
       ]
     ]

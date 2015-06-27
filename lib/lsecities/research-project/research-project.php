@@ -318,7 +318,9 @@ class ResearchProject extends PodsObject {
       $this->linked_events
     );
     
-    return $activity_score;
+    $score = array_reduce(array_merge(array_values($activity_score['events']))[0], function($carry, $item) { return $carry + $item; });
+    
+    return $score;
   }
 }
 
@@ -344,6 +346,9 @@ function research_project_pods($pods_params = [], $params = []) {
       $objects[] = new ResearchProject($pods->field('slug'));
     }
     
+    if('project_activity_score' === $params['orderby']) {
+      usort($objects, function($a, $b) { return $a->project_activity_score < $b->project_activity_score; });
+    }
     return $objects;
   } else {
     return FALSE;
