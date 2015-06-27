@@ -351,7 +351,6 @@ class ResearchProject extends PodsObject {
     $score = array_sum(
       array_map(
         function($category) use ($activity_score) {
-          echo '<!-- ' . var_export($activity_score[$category], TRUE) . ' -->';
           return array_reduce(
             array_merge(
               array_values($activity_score[$category]
@@ -365,13 +364,6 @@ class ResearchProject extends PodsObject {
       )
     );
     
-      // fold scores of events
-    /*  array_reduce(array_merge(array_values($activity_score['events']))[0], function($carry, $item) { return $carry + $item; })
-      +
-      // fold scores of research outputs
-      array_reduce(array_merge(array_values($activity_score['research_outputs']))[0], function($carry, $item) { return $carry + $item; });
-      */
-      
     return $score;
   }
   
