@@ -130,7 +130,6 @@ class ResearchProject extends PodsObject {
   
     // Once all linked content has been populated, calculate project activity score
     $this->project_activity_score = $this->get_project_activity_score();
-    echo '<!-- ' . $this->permalink . ': ' . var_export($this->project_activity_score, TRUE) . ' -->';
   }
   
   
