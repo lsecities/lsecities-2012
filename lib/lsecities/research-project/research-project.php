@@ -44,6 +44,7 @@ class ResearchProject extends PodsObject {
   public $news_categories;
   public $data_visualization_collections;
   public $research_output_publications;
+  public $research_output_categories;
   public $research_outputs;
   
   /**
@@ -120,7 +121,13 @@ class ResearchProject extends PodsObject {
     
     // Populate lists of linked content
     $this->linked_events = $this->get_project_events(TRUE, ['conference', 'presentation', 'public-lecture', 'workshop']);
-
+    
+    // Populate lists of research outputs (publications, visualizations, etc.)
+    // hardcoded list of WP categories used to group research outputs linked to a research project
+    // TECHNICAL_DEBT: get this list via get_categories(); and of course this doesn't belong in the ResearchProject class to start with
+    $this->research_output_categories = ['book', 'journal-article', 'book-chapter', 'research-data', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article', 'essay', 'book-review'];
+    $this->research_outputs = $this->get_project_research_outputs();
+  
     // Once all linked content has been populated, calculate project activity score
     $this->project_activity_score = $this->get_project_activity_score();
     echo '<!-- ' . $this->permalink . ': ' . var_export($this->project_activity_score, TRUE) . ' -->';
@@ -318,9 +325,146 @@ class ResearchProject extends PodsObject {
       $this->linked_events
     );
     
-    $score = array_reduce(array_merge(array_values($activity_score['events']))[0], function($carry, $item) { return $carry + $item; });
+    $activity_score['research_outputs'] = array_map(
+      function($output_category) {
+        /**
+         * Each category has a corresponding weight, expressed as
+         * 1/(index of category in category list).
+         * E.g. if the first item within category list is book, the
+         * weight of book category is 1/1 = 1; if the 5th item of the
+         * list is research_report, its weight is 1/5 = 0.2, etc.
+         * Aka these weights are arbitrary but somewhat related to the
+         * ordering of research output categories, which in the original
+         * intention was compiled starting from the most important
+         * output types.
+         */
+        $category_weight = 1 / (array_search($output_category, $this->research_output_categories) + 1);
+        
+        return array_map(function($item) use ($category_weight) {
+          return $category_weight;
+        },
+        $this->research_outputs[$output_category]
+        );
+      },
+      array_keys($this->research_outputs)
+    );
+        
+    $score = array_sum(
+      array_map(
+        function($category) use ($activity_score) {
+          echo '<!-- ' . var_export($activity_score[$category], TRUE) . ' -->';
+          return array_reduce(
+            array_merge(
+              array_values($activity_score[$category]
+            )
+          )[0],
+          function($carry, $item) {
+            return $carry + $item;
+          });
+        },
+        array_keys($activity_score)
+      )
+    );
     
+      // fold scores of events
+    /*  array_reduce(array_merge(array_values($activity_score['events']))[0], function($carry, $item) { return $carry + $item; })
+      +
+      // fold scores of research outputs
+      array_reduce(array_merge(array_values($activity_score['research_outputs']))[0], function($carry, $item) { return $carry + $item; });
+      */
+      
     return $score;
+  }
+  
+  /**
+   * Compile list of research outputs
+   * 
+   * @return Array Data structure with research outputs split by
+   *   category.
+   */
+  function get_project_research_outputs() {
+    // initialize result array
+    $research_outputs = [];
+    
+    /**
+     * First add all the research outputs linked as 'research_outputs'
+     * These are mostly publications for which a full 'publication' Pod
+     * hasn't been created
+     */
+    $linked_publications = $this->pod->field('research_outputs');
+    
+    if(is_array($linked_publications)) {
+      foreach($linked_publications as $publication) {
+        $research_output = pods('research_output', $publication['slug']);
+
+        if(!$research_output->exists()) {
+          continue;
+        }
+
+        $research_outputs[$research_output->field('category.slug')][] = array(
+          'slug' => 'research_outputs__' . $research_output->field('slug'),
+          'title' => $research_output->field('name'),
+          'citation' => $research_output->field('citation'),
+          'date' => date_string($research_output->field('date')),
+          'uri' => $research_output->field('uri')
+        );
+      }
+    }
+
+    /**
+     * Now add to the research outputs found so far all the publications
+     * from the publication_wrappers aka Publications pod
+     */
+    $linked_publications = $this->pod->field('research_output_publications');
+    
+    if(is_array($linked_publications)) {
+      foreach($linked_publications as $publication) {
+        $research_output = pods('publication_wrappers', $publication['slug']);
+
+        if(!$research_output->exists()) {
+          continue;
+        }
+        
+        // get ID of WordPress page linked to this publication object
+        $linked_wp_page_id = $research_output->field('publication_web_page.ID');
+        
+        var_trace(var_export($research_output->field('category'), true), 'output category');
+        var_trace($linked_wp_page_id, 'publication_web_page.ID');
+
+        $__publication_pdf = $research_output->field('publication_pdf');
+        $pdf_uri = $__publication_pdf ? wp_get_attachment_url($__publication_pdf['ID']) : '';
+        $pdf_filesize = $__publication_pdf ? sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) : '';
+          
+        // only add publication to list if publication has a linked WP page; otherwise emit warning
+        if($linked_wp_page_id) {
+          $research_outputs[$research_output->field('category.slug')][] = array(
+            'slug' => $research_output->field('category.slug') . '__' . $research_output->field('slug'),
+            'title' => $research_output->field('name'),
+            'citation' => $research_output->field('name'),
+            'date' => date_string($research_output->field('publishing_date')),
+            'uri' => get_permalink($linked_wp_page_id),
+            'pdf_uri' => $pdf_uri,
+            'pdf_filesize' => $pdf_filesize
+          );
+        } else {
+          trigger_error('No WordPress page linked to Publication with ID ' . $research_output->id(), E_USER_NOTICE);
+        }
+      }
+    }
+    
+    // Now sort publications within each category, by date first, then by title
+    foreach($research_outputs as $category => $ros) {
+      foreach($ros as $key => $value) {
+        $ro_date[$key] = $value['date'];
+        $ro_title[$key] = $value['title'];
+      }
+      
+      array_multisort($ro_date, SORT_DESC, $ro_title, SORT_ASC, $ros);
+      
+      $sorted_research_outputs[$category] = $ros;
+    }
+
+    return $sorted_research_outputs;
   }
 }
 
