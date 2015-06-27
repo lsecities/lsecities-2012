@@ -325,9 +325,17 @@ class ResearchProject extends PodsObject {
 /**
  * Given an array of params corresponding to those accepted by
  * pods() ($id parameter), return an array of ResearchProject objects
+ * 
+ * @param Array $pods_params An array of parameters to pass on to the
+ *   pods() function (see Pods documentation - http://pods.io/docs/code/pods/).
+ * @param Array $params An array of parameters to specify how the
+ *   research project objects should be handled (e.g. post-Pods sorting
+ *   based on research project score, etc.).
+ * @return Array|Bool An array of research project objects, if any
+ *   are found, or FALSE if none is found.
  */
-function research_project_pods($params = []) {
-  $pods = pods(RESEARCH_PROJECTS_PODS_NAME, $params);
+function research_project_pods($pods_params = [], $params = []) {
+  $pods = pods(RESEARCH_PROJECTS_PODS_NAME, $pods_params);
   
   $objects = [];
   
