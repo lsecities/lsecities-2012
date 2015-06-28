@@ -42,6 +42,7 @@ class ResearchProject extends PodsObject {
   public $events_blurb;
   public $event_series;
   public $news_categories;
+  public $project_news;
   public $data_visualization_collections;
   public $research_output_publications;
   public $research_output_categories;
@@ -127,7 +128,11 @@ class ResearchProject extends PodsObject {
     // TECHNICAL_DEBT: get this list via get_categories(); and of course this doesn't belong in the ResearchProject class to start with
     $this->research_output_categories = ['book', 'journal-article', 'book-chapter', 'research-data', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article', 'essay', 'book-review'];
     $this->research_outputs = $this->get_project_research_outputs();
-  
+    
+    // Populate lists of linked news/posts
+    $this->project_news = $this->get_project_news();
+    $this->news_categories = \news_categories($pod->field('news_categories'));
+    
     // Once all linked content has been populated, calculate project activity score
     $this->project_activity_score = $this->get_project_activity_score();
   }
@@ -347,7 +352,26 @@ class ResearchProject extends PodsObject {
       },
       array_keys($this->research_outputs)
     );
-        
+    
+    $activity_score['project_news'][0] = array_map(
+      function($item) {
+        $event_date = new \DateTime($item['date']);
+        $current_date = new \DateTime('now');
+        $date_diff = $current_date->diff($event_date);
+        $days_to_event = $date_diff->days * ($date_diff->invert ? -1 : 1);
+        if($days_to_event > -7) {
+          return 1;
+        } elseif($days_to_event > -30 and -7 >= $days_to_event) {
+          return 0.75;
+        } elseif($days_to_event > -365 and -30 >= $days_to_event) {
+          return 0.25;
+        } else {
+          return 0.11;
+        }
+      },
+      $this->project_news
+    );
+    
     $score = array_sum(
       array_map(
         function($category) use ($activity_score) {
@@ -456,6 +480,31 @@ class ResearchProject extends PodsObject {
     }
 
     return $sorted_research_outputs;
+  }
+  
+  function get_project_news() {
+    $project_news = array();
+    
+    $news_categories = $this->pod->field('news_categories');
+    
+    if(empty($news_categories)) {
+      return array();
+    }
+    
+    $more_news = new \WP_Query('posts_per_page=10' . \news_categories($news_categories));
+    
+    while ($more_news->have_posts()) {
+      $more_news->the_post();
+      $project_news[] = array(
+        'permalink' => get_permalink(),
+        'title' => get_the_title(),
+        'date' => get_the_time('j M Y')
+      );
+    }
+    
+    // var_trace(var_export($project_news, true), 'project_news');
+    
+    return $project_news;
   }
 }
 
