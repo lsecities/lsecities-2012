@@ -13,7 +13,7 @@
 
 $TRACE_PREFIX = 'pods-main-frontpage';
 
-$obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
+$obj = new SectionFront(get_post_meta($post->ID, 'pod_slug', true));
 
 ?><?php get_header(); ?>
 
@@ -24,7 +24,7 @@ $obj = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
 <article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-slider-page'); ?>>
 	<div class=".entry-content">
 		<div id="core" class="row">
-			<?php SemanticWP\Templating::get_template_part('lsecities/sliders/_slider', $obj); ?>
+			<?php SemanticWP\Templating::get_template_part('lsecities/sliders/_slider', get_object_vars($obj)); ?>
     	<div class="extra-content<?php if(count($obj['linked_events']) > 0): ?> multi-section<?php endif; ?>">
     	<?php
       	component_news($obj['news_categories'], '', $obj['linked_events']);
