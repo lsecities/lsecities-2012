@@ -47,7 +47,7 @@ function pods_prepare_slider($pod_slug) {
    * loading the JSON fragment...
    * Twisted, but that's the only way i can think of.
    */
-  $obj['slider_options'] = str_replace('"', "'", $pod->field('jquery_options'));
+  $obj['flexslider_configuration'] = str_replace('"', "'", $pod->field('flexslider_configuration'));
 
   $obj['slides'] = array();
 

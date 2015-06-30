@@ -98,7 +98,7 @@ jQuery(document).ready(function($) {
 
   $('.flexslider').each(function(index) {
     var
-    base_slider_options = {
+    base_flexslider_configuration = {
       animation: 'slide',
       slideshow: true,
       mousewheel: false,
@@ -117,10 +117,10 @@ jQuery(document).ready(function($) {
      * per-template configuration option at least in the current
      * version of MtHAML.
      */
-    slider_options_string = $(this).attr('data-slider-options'),
-    slider_options = $.parseJSON(slider_options_string.replace(/'/g, '"'))
+    flexslider_configuration_string = $(this).attr('data-flexslider-configuration'),
+    flexslider_configuration = $.parseJSON(flexslider_configuration_string.replace(/'/g, '"'))
     
-    $(this).flexslider($.extend(base_slider_options, slider_options));
+    $(this).flexslider($.extend(base_flexslider_configuration, flexslider_configuration));
   });
   
   $('.accordion').accordion({heightStyle: 'content', active: $(this).find('.active')});
