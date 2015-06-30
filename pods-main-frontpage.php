@@ -10,6 +10,7 @@
  * Pods initialization
  * URI: TBD
  */
+namespace LSECitiesWPTheme;
 
 $TRACE_PREFIX = 'pods-main-frontpage';
 
