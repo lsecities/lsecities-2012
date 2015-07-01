@@ -235,7 +235,8 @@ class SectionFront extends PodsObject {
           ]
         ];
       }
-      array_push($slide_content['columns'], $slide_column);
+      
+      $slide_content['columns'][] = $slide_column;
     }
     return $slide_content;
   }
