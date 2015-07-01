@@ -164,7 +164,7 @@ class SectionFront extends PodsObject {
     var_trace('column_spans: ' . var_export($column_spans, true), $TRACE_PREFIX);
 
     foreach($column_spans as $key => $column_span) {
-      $tile_count = $column_span * $this->TILES_PER_COLUMN;
+      $tile_count = $column_span * self::TILES_PER_COLUMN;
 
       // add .last class if this is the last column
       if($key == (count($column_spans) - 1)) { $last_class = ' last'; }
