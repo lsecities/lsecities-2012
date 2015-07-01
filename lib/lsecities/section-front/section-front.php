@@ -59,7 +59,7 @@ class SectionFront extends PodsObject {
     // TECHNICAL_DEBT: moreover, we shouldn't mix global state in here
     // for menus etc.
     global $this_pod;
-    $this_pod = new LC\PodObject($pod, 'Frontpage');
+    $this_pod = new \LC\PodObject($pod, 'Frontpage');
   
     // TECHNICAL_DEBT: we should avoid mixing global state in object constructor
     $this->latest_update = lc_data('META_last_modified', $pod->field('modified'));

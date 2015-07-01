@@ -1,4 +1,5 @@
 <?php
+namespace LSECitiesWPTheme;
 
 // Exit if accessed directly
 if ( !defined('ABSPATH')) exit;
@@ -17,7 +18,7 @@ function pods_prepare_slider($pod_slug) {
 
   // for menus etc.
   global $this_pod;
-  $this_pod = new LC\PodObject($pod, 'Frontpage');
+  $this_pod = new \LC\PodObject($pod, 'Frontpage');
 
   // prepare array for return data structure
   $obj = array();
@@ -164,7 +165,7 @@ function compose_slide_content($column_spans, $tiles) {
       unset($target_event_month, $target_event_day, $target_uri);
 
       if($tile->field('target_event.date_start')) {
-        $target_event_date = new DateTime($tile->field('target_event.date_start'));
+        $target_event_date = new \DateTime($tile->field('target_event.date_start'));
         var_trace('target_event_date: ' . var_export($target_event_date, true), $TRACE_PREFIX);
         $target_event_month = $target_event_date->format('M');
         $target_event_day = $target_event_date->format('j');
@@ -202,8 +203,8 @@ function compose_slide_content($column_spans, $tiles) {
        */
       $show_post_factum_tile_text_after = $tile->field('show_post_factum_tile_text_after');
       if(!preg_match('/^0000/', $show_post_factum_tile_text_after)) { // NOOP if we get Pods' default value of 0000-00-00 00:00
-		$post_factum_after = new DateTime($show_post_factum_tile_text_after);
-		$datetime_now = new DateTime('now');
+		$post_factum_after = new \DateTime($show_post_factum_tile_text_after);
+		$datetime_now = new \DateTime('now');
 		if($post_factum_after < $datetime_now) {
 		  $post_factum_tile_title = $tile->field('post_factum_title');
 		  $post_factum_tile_tagline = $tile->field('post_factum_tagline');
