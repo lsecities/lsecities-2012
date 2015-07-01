@@ -73,7 +73,7 @@ class SectionFront extends PodsObject {
     
     if(is_array($slides)) {
       foreach($slides as $slide) {
-        $this->slides = $this->compose_slide($slide['slug']);
+        $this->slides[] = $this->compose_slide($slide['slug']);
       }
     }
 
