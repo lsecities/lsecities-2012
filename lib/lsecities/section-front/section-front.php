@@ -11,6 +11,10 @@ if(!defined('SECTION_FRONTS_PODS_NAME')) {
 class SectionFront extends PodsObject {
   const PODS_NAME = SECTION_FRONTS_PODS_NAME;
   
+  // TECHNICAL_DEBT: this shouldn't be hardcode here; moreover this
+  // way of managing tiles is going to disappear as part of #102
+  const TILES_PER_COLUMN = 2;
+  
   public $permalink;
   
   /**
@@ -151,8 +155,6 @@ class SectionFront extends PodsObject {
   }
 
   function compose_slide_content($column_spans, $tiles) {
-    $TILES_PER_COLUMN = lc_data('TILES_PER_COLUMN');
-
     var_trace(var_export($tiles, true), 'compose_slide|tiles');
 
     $slide_content = [ 'columns' => [] ];
@@ -162,7 +164,7 @@ class SectionFront extends PodsObject {
     var_trace('column_spans: ' . var_export($column_spans, true), $TRACE_PREFIX);
 
     foreach($column_spans as $key => $column_span) {
-      $tile_count = $column_span * $TILES_PER_COLUMN;
+      $tile_count = $column_span * $this->TILES_PER_COLUMN;
 
       // add .last class if this is the last column
       if($key == (count($column_spans) - 1)) { $last_class = ' last'; }
