@@ -5,7 +5,7 @@ namespace LSECitiesWPTheme;
 if ( !defined('ABSPATH')) exit;
 
 if(!defined('SECTION_FRONTS_PODS_NAME')) {
-  define('SECTION_FRONTS_PODS_NAME', 'slider');
+  define('SECTION_FRONTS_PODS_NAME', 'section_front');
 }
 
 class SectionFront extends PodsObject {
