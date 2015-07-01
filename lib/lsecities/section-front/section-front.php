@@ -221,7 +221,7 @@ class SectionFront extends PodsObject {
 
         $slide_column['tiles'][] = [
           'id' => $tile->field('slug'),
-          'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
+          'element_class' => rtrim($this->get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
           'noblurb_class' => $noblurb_class,
           'title' => $tile_title,
           'display_title' => $tile->field('display_title'),
