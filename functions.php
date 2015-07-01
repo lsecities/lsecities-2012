@@ -61,7 +61,6 @@ require_fragment('/includes/pods/pods/event-programme/pods-event-programme.php' 
 require_fragment('/includes/pods/pods/list/pods-list.php' );
 require_fragment('/includes/pods/pods/media-item/pods-media-item.php' );
 require_fragment('/includes/pods/pods/publication/pods-publication.php' );
-require_fragment('/includes/pods/pods/slider/pods-slider.php' );
 require_fragment('/includes/pods/pods/research-project/pods-research-project.php' );
 
 // Includes for microsites
