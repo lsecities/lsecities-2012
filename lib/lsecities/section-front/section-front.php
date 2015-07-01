@@ -12,20 +12,6 @@ class SectionFront extends PodsObject {
   const PODS_NAME = SECTION_FRONTS_PODS_NAME;
   
   public $permalink;
-  public $title;
-  public $tagline;
-  public $status;
-  public $timespan;
-  public $web_uri;
-  public $summary;
-  public $blurb;
-  public $keywords;
-  public $heading_gallery;
-  public $research_programmes;
-  public $research_strand;
-  public $free_form_project_teams;
-  // these are either people (coordinators, researchers) or organizations (partners, funders), so let's call them actants
-  public $actants;
   
   /**
    * Content associated to research project (events, publications,
