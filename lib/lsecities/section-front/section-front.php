@@ -136,15 +136,15 @@ class SectionFront extends PodsObject {
 
     switch($slide_layout) {
       case 'two-two-one':
-        $slide_content = $this->compose_slide_content(array(2, 2, 1), $tiles);
+        $slide_content = $this->compose_slide_content([2, 2, 1], $tiles);
         var_trace(var_export($slide_content, true), 'slide_content_array');
         break;
       case 'four-one':
-        $slide_content = $this->compose_slide_content(array(4, 1), $tiles);
+        $slide_content = $this->compose_slide_content([4, 1], $tiles);
         var_trace(var_export($slide_content, true), 'slide_content_array');
         break;
       case 'five':
-        $slide_content = $this->compose_slide_content(array(5), $tiles);
+        $slide_content = $this->compose_slide_content([5], $tiles);
         var_trace(var_export($slide_content, true), 'slide_content_array');
         break;
       default:
