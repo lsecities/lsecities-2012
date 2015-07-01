@@ -155,7 +155,7 @@ class SectionFront extends PodsObject {
 
     var_trace(var_export($tiles, true), 'compose_slide|tiles');
 
-    $slide_content = array('columns' => array());
+    $slide_content = [ 'columns' => [] ];
     $tile_index = 0;
     $total_tiles = count($tiles);
 
@@ -245,7 +245,7 @@ class SectionFront extends PodsObject {
         $noblurb_class = empty($tile_blurb) ? 'noblurb' : '';
 
         array_push($slide_column['tiles'],
-          array(
+          [
             'id' => $tile->field('slug'),
             'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
             'noblurb_class' => $noblurb_class,
@@ -258,11 +258,11 @@ class SectionFront extends PodsObject {
             'target_uri' => $target_uri,
             'image' => pods_image_url($tile->field('image.ID'), 'original'),
             'image_attribution' => $image_attribution,
-            'target_event' => array(
+            'target_event' => [
               'month' => $target_event_month,
               'day' => $target_event_day
-            )
-          )
+            ]
+          ]
         );
       }
       array_push($slide_content['columns'], $slide_column);
