@@ -238,6 +238,7 @@ class SectionFront extends PodsObject {
       
       $slide_content['columns'][] = $slide_column;
     }
+    
     return $slide_content;
   }
 }
