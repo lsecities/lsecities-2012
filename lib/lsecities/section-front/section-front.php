@@ -167,7 +167,7 @@ class SectionFront extends PodsObject {
       // add .last class if this is the last column
       if($key == (count($column_spans) - 1)) { $last_class = ' last'; }
 
-      $slide_column = array('layout' => 'col' . $column_span . $last_class, 'tiles' => array());
+      $slide_column = [ 'layout' => 'col' . $column_span . $last_class, 'tiles' => [] ];
       while($tile_count > 0 and $tile_index <= $total_tiles) {
         var_trace(var_export($tiles[$tile_index]['slug'], true), 'tile[slug]');
         $tile = pods('tile', $tiles[$tile_index++]['slug']);
