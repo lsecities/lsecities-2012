@@ -14,7 +14,8 @@ namespace LSECitiesWPTheme;
 
 $TRACE_PREFIX = 'pods-main-frontpage';
 
-$obj = new SectionFront(get_post_meta($post->ID, 'pod_slug', true));
+$obj_sf = get_object_vars(new SectionFront(get_post_meta($post->ID, 'pod_slug', true)));
+$obj = $slider = pods_prepare_slider(get_post_meta($post->ID, 'pod_slug', true));
 
 ?><?php get_header(); ?>
 
