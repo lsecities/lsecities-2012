@@ -216,26 +216,24 @@ class SectionFront extends PodsObject {
         // If no blurb is set, set relevant tile property to be used in element classes
         $noblurb_class = empty($tile_blurb) ? 'noblurb' : '';
 
-        array_push($slide_column['tiles'],
-          [
-            'id' => $tile->field('slug'),
-            'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
-            'noblurb_class' => $noblurb_class,
-            'title' => $tile_title,
-            'display_title' => $tile->field('display_title'),
-            'subtitle' => $tile_tagline,
-            'blurb' => $tile_blurb,
-            'plain_content' => wpautop($tile->field('plain_content')),
-            'posts_category' => $tile->field('posts_category.term_id'),
-            'target_uri' => $target_uri,
-            'image' => pods_image_url($tile->field('image.ID'), 'original'),
-            'image_attribution' => $image_attribution,
-            'target_event' => [
-              'month' => $target_event_month,
-              'day' => $target_event_day
-            ]
+        $slide_column['tiles'][] = [
+          'id' => $tile->field('slug'),
+          'element_class' => rtrim(get_tile_classes($tile_layout) . ' ' . $tile->field('class'), ' '),
+          'noblurb_class' => $noblurb_class,
+          'title' => $tile_title,
+          'display_title' => $tile->field('display_title'),
+          'subtitle' => $tile_tagline,
+          'blurb' => $tile_blurb,
+          'plain_content' => wpautop($tile->field('plain_content')),
+          'posts_category' => $tile->field('posts_category.term_id'),
+          'target_uri' => $target_uri,
+          'image' => pods_image_url($tile->field('image.ID'), 'original'),
+          'image_attribution' => $image_attribution,
+          'target_event' => [
+            'month' => $target_event_month,
+            'day' => $target_event_day
           ]
-        );
+        ];
       }
       array_push($slide_content['columns'], $slide_column);
     }
