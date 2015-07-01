@@ -40,6 +40,8 @@ class SectionFront extends PodsObject {
     if(!$pod->exists()) {
       return;
     }
+
+    $this->permalink = $permalink;
     
     // TECHNICAL_DEBT: do we still need this? (backported from non-OO code)
     // TECHNICAL_DEBT: moreover, we shouldn't mix global state in here
