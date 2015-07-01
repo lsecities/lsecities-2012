@@ -26,6 +26,13 @@ class SectionFront extends PodsObject {
    */
   public $linked_events;
   
+  /**
+   * @var String Twitter timeline ID - used to generate a Twitter
+   *   widget HTML fragment based on the timeline ID associated to
+   *   a Twitter timeline (https://dev.twitter.com/web/embedded-timelines/search)
+   */
+  public $twitter_embedded_timeline_id;
+  
   public $news_categories;
   public $flexslider_configuration;
   public $slides;
@@ -55,6 +62,8 @@ class SectionFront extends PodsObject {
   
     // TECHNICAL_DEBT: we should avoid mixing global state in object constructor
     $this->latest_update = lc_data('META_last_modified', $pod->field('modified'));
+    
+    $this->twitter_embedded_timeline_id = $pod->field('twitter_embedded_timeline_id');
     
     $this->news_categories = $pod->field('news_categories.slug');
     
