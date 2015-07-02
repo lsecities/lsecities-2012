@@ -333,6 +333,8 @@ class SectionFront extends PodsObject {
       }
     }
     
+    wp_reset_postdata();
+
     return $posts;
     
     } else {
