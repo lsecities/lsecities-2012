@@ -397,6 +397,17 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
     font-size: 1em;
     margin-top: 0;
     padding-top: 0;
+
+    // TECHNICAL_DEBT: needs to be done at a container model level
+    .news {
+      margin-bottom: 1.5rem;
+    }
+
+    // TECHNICAL_DEBT: this is a quick hack around 1140px grid - needs to be done properly via Susy's gallery mixin,
+    // and even then, certainly not here but at a more general layout level
+    .fourcol:nth-child(3n) {
+      margin-right: 0;
+    }
   }
 }
 
