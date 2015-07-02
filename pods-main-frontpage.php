@@ -22,7 +22,7 @@ $obj = get_object_vars(new SectionFront(get_post_meta($post->ID, 'pod_slug', tru
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-slider-page'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-section-front'); ?>>
 	<div class=".entry-content">
 		<div id="core" class="row">
 			<?php \SemanticWP\Templating::get_template_part('lsecities/section-front/_slider', $obj); ?>
