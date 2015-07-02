@@ -275,52 +275,32 @@ class SectionFront extends PodsObject {
   
   function get_linked_news() {
     if(!empty($this->news_categories)) {
-    $posts = [
-      'primary' => [],
-      'secondary' => []
-    ];
-    
-    if(is_user_logged_in() and $this->twitter_embedded_timeline_id) {
-      $primary_news_items_count = 2;
-    } else {
-      $primary_news_items_count = 3;
-    }
-    
-    $secondary_news_items_count = 10 + $primary_news_items_count;
-    
-    $wp_primary_query_querystring = 'posts_per_page=' . $primary_news_items_count;
-    $wp_secondary_query_querystring = 'posts_per_page=' . $secondary_news_items_count;
-    
-    $index_of_last_primary_news_item = $primary_news_items_count > 0 ? $primary_news_items_count - 1 : 0;
-
-    $primary_news = new \WP_Query($wp_primary_query_querystring . $this->news_categories);
-    while ($primary_news->have_posts()) {
-      $primary_news->the_post();
-      
-      if(!is_user_logged_in() and $primary_news->current_post == $index_of_last_primary_news_item) { $class_extra = " last"; }
-      
-      $posts['primary'][] = [
-        'date' => [
-          'year' => get_the_time('Y'),
-          'month' => get_the_time('M'),
-          'day' => get_the_time('j')
-        ],
-        'permalink' => get_permalink(),
-        'title' => get_the_title(),
-        'excerpt' => get_the_excerpt()
+      $posts = [
+        'primary' => [],
+        'secondary' => []
       ];
-    }
-    
-    wp_reset_postdata();
+      
+      if(is_user_logged_in() and $this->twitter_embedded_timeline_id) {
+        $primary_news_items_count = 2;
+      } else {
+        $primary_news_items_count = 3;
+      }
+      
+      $secondary_news_items_count = 10 + $primary_news_items_count;
+      
+      $wp_primary_query_querystring = 'posts_per_page=' . $primary_news_items_count;
+      $wp_secondary_query_querystring = 'posts_per_page=' . $secondary_news_items_count;
+      
+      $index_of_last_primary_news_item = $primary_news_items_count > 0 ? $primary_news_items_count - 1 : 0;
 
-    $secondary_news = new \WP_Query($wp_secondary_query_querystring . $this->news_categories);
-    if($secondary_news->found_posts > $primary_news_items_count) {
-      while ($secondary_news->have_posts()) {
-        $secondary_news->the_post();
+      $primary_news = new \WP_Query($wp_primary_query_querystring . $this->news_categories);
+      while ($primary_news->have_posts()) {
+        $primary_news->the_post();
         
-        if ($secondary_news->current_post > $index_of_last_primary_news_item) {
-          $posts['secondary'][] = [
-            'date' => [
+        if(!is_user_logged_in() and $primary_news->current_post == $index_of_last_primary_news_item) { $class_extra = " last"; }
+        
+        $posts['primary'][] = [
+          'date' => [
             'year' => get_the_time('Y'),
             'month' => get_the_time('M'),
             'day' => get_the_time('j')
@@ -328,15 +308,35 @@ class SectionFront extends PodsObject {
           'permalink' => get_permalink(),
           'title' => get_the_title(),
           'excerpt' => get_the_excerpt()
-          ];
+        ];
+      }
+      
+      wp_reset_postdata();
+
+      $secondary_news = new \WP_Query($wp_secondary_query_querystring . $this->news_categories);
+      if($secondary_news->found_posts > $primary_news_items_count) {
+        while ($secondary_news->have_posts()) {
+          $secondary_news->the_post();
+          
+          if ($secondary_news->current_post > $index_of_last_primary_news_item) {
+            $posts['secondary'][] = [
+              'date' => [
+              'year' => get_the_time('Y'),
+              'month' => get_the_time('M'),
+              'day' => get_the_time('j')
+            ],
+            'permalink' => get_permalink(),
+            'title' => get_the_title(),
+            'excerpt' => get_the_excerpt()
+            ];
+          }
         }
       }
-    }
-    
-    wp_reset_postdata();
+      
+      wp_reset_postdata();
 
-    return $posts;
-    
+      return $posts;
+      
     } else {
       return NULL;
     }
