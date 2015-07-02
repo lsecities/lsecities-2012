@@ -81,7 +81,7 @@ class SectionFront extends PodsObject {
     // TECHNICAL_DEBT: we should avoid mixing global state in object constructor
     $this->latest_update = lc_data('META_last_modified', $pod->field('modified'));
     
-    $this->twitter_embedded_timeline_id = $pod->field('twitter_embedded_timeline_id');
+    $this->twitter_embedded_timeline_id = is_user_logged_in() ? $pod->field('twitter_embedded_timeline_id') : NULL;
     
     $this->news_categories = $pod->field('news_categories.slug');
     $this->news_items = $this->get_linked_news();
