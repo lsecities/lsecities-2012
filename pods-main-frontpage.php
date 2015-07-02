@@ -26,10 +26,7 @@ $obj = get_object_vars(new SectionFront(get_post_meta($post->ID, 'pod_slug', tru
 	<div class=".entry-content">
 		<div id="core" class="row">
 			<?php \SemanticWP\Templating::get_template_part('lsecities/section-front/_slider', $obj); ?>
-    	<div class="extra-content<?php if(count($obj['linked_events']) > 0): ?> multi-section<?php endif; ?>">
-    	<?php
-      	component_news($obj['news_categories'], '', $obj['linked_events']);
-    	?>
+      <?php \SemanticWP\Templating::get_template_part('lsecities/section-front/_news', $obj); ?>
       </div><!-- .extra-content -->
   	</div><!-- #core.row -->
 	</div><!-- .entry-content -->

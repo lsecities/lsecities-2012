@@ -1,0 +1,28 @@
+- macro twitter_widget(twitter_embedded_timeline_id)
+  .fourcol
+    %a.twitter-timeline(data-dnt = "true" href = "https://twitter.com/LSECities" data-widget-id = "#{twitter_embedded_timeline_id}")Latest tweets
+    :javascript
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+%section#news-area.extra-content
+  %header
+    %h1 News
+  .news.primary.clearfix.row
+    - for item in news_items.primary
+      .news-item.fourcol
+        .feature-info
+          .feature-date
+            .month = item.date.month
+            .day = item.date.day
+          %header
+            %h3
+              %a( href = item.permalink) = item.title
+          .excerpt = item.excerpt | raw
+    - if twitter_embedded_timeline_id
+      = _self.twitter_widget(twitter_embedded_timeline_id)
+  - if news_items.secondary | length > 0
+    .news.secondary.clearfix.row
+      %ul
+        - for item in news_items.secondary
+          %li.item
+            %a(href = item.permalink)
+              = "#{item.date.day} #{item.date.month} #{item.date.year} | #{item.title}"
