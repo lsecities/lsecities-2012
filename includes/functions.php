@@ -593,45 +593,6 @@ function lsecities_get_archives() {
 }
 
 /**
- * replace post content with 'post-factum' content if a post-date is
- * defined and is in the past, and if 'post-factum' content is defined
- *
- * @param $post_object The WordPress post object
- */
-function post_factum_text_for_posts($post_array) {
-  var_trace(var_export($post_array, true), 'post_array');
-
-  /**
-   * we need to check whether the pods() function is available here,
-   * as pages such as wp-activate.php calls this action function
-   * without the Pods code (or any plugin code) being loaded;
-   * wp-activate doesn't load the full WordPress core, but we do
-   * stuff in header and footer triggering the_posts
-   */
-  if(function_exists('pods')) {
-    foreach($post_array as $post_object) {
-      $pod = pods('post', $post_object->ID);
-
-      $post_factum_content = $pod->display('post_factum_content');
-      $show_post_factum_text_after = new DateTime($pod->field('show_post_factum_text_after'));
-      $datetime_now = new DateTime('now');
-
-      var_trace($show_post_factum_text_after);
-      var_trace($post_factum_content);
-
-      if(!empty($post_factum_content) and $show_post_factum_text_after < $datetime_now) {
-        $post_object->post_content = $post_factum_content;
-        var_trace(var_export($post_object, true), 'replaced post_content');
-      }
-    }
-  }
-  
-  return $post_array;
-}
-
-add_action('the_posts', 'post_factum_text_for_posts');
-
-/**
  * keep hyperlinks in excerpts
  * from: http://lewayotte.com/2010/09/22/allowing-hyperlinks-in-your-wordpress-excerpts/
  */
