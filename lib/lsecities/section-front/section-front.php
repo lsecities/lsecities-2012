@@ -274,6 +274,7 @@ class SectionFront extends PodsObject {
   }
   
   function get_linked_news() {
+    if(!empty($this->news_categories)) {
     $posts = [
       'primary' => [],
       'secondary' => []
@@ -333,5 +334,9 @@ class SectionFront extends PodsObject {
     }
     
     return $posts;
+    
+    } else {
+      return NULL;
+    }
   }
 }
