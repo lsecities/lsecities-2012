@@ -12,12 +12,12 @@ get_header(); ?>
 
 			<article id="post-0" class="post error404 not-found ninecol">
 				<header class="entry-header">
-					<h1 class="entry-title"><?php _e( 'Sorry, we could not find the content you are looking for.', 'lsecities-2012' ); ?></h1>
+					<h1 class="entry-title"><?php _e( 'Sorry, we could not find the content you are looking for.', 'lsecities-alexandria' ); ?></h1>
 				</header>
 
 				<div class="entry-content">
 					<div class="widget">
-          <p><?php _e( 'We are re sorry, but we cannot find the page that you are looking for. You might want to use the search form below to locate the content you are looking for. If you followed a link to our legacy Urban Age website from an external website, you might want to browse for archived content on <a href="http://v0.urban-age.net/">urban-age.net</a>. Otherwise, please <a href="' . esc_url(get_permalink(get_page_by_title('Contacts'))) . '">contact us</a>.', 'lsecities-2012' ); ?></p>
+          <p><?php _e( 'We are re sorry, but we cannot find the page that you are looking for. You might want to use the search form below to locate the content you are looking for. If you followed a link to our legacy Urban Age website from an external website, you might want to browse for archived content on <a href="http://v0.urban-age.net/">urban-age.net</a>. Otherwise, please <a href="' . esc_url(get_permalink(get_page_by_title('Contacts'))) . '">contact us</a>.', 'lsecities-alexandria' ); ?></p>
 
 					<?php get_search_form(); ?>
           </div>

@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
     };
   })(jQuery);
 
-  Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-2012/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
+  Galleria.loadTheme('//lsecities.net/wp-content/themes/lsecities-alexandria/assets/bower_components/galleria/src/themes/classic/galleria.classic.js');
     
   // enable Galleria for embedded slideshows
   try {

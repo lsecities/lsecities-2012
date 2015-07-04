@@ -189,13 +189,13 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
           //-moz-transition: max-height 0.2s ease-in-out 0s;
           //transition: max-height 0.2s ease-in-out 0s;
           max-height: 75%;
-          background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+          background:url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
         }
         
         .feature-info {
           @include single-transition(background-color, 0.5s, ease-in-out, 0s);
           background-color: #000;
-          background: url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
+          background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent;
           max-height: 75%;
         }
         
@@ -284,7 +284,7 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
       }
       
       &.introbox {
-        background: url('//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
+        background: url('//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif');
 
         h1 {
           border-bottom: 1px $palette_red solid;
@@ -325,7 +325,7 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
        bottom:0;
        left:0;
        right:0;
-       background:url("//lsecities.net/wp-content/themes/lsecities-2012/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
+       background:url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif");
        opacity:0.7;
       }
       
