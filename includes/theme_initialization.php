@@ -28,3 +28,7 @@ add_action('init', function() {
   }
 });
 
+/**
+ * Add support for post thumbnails
+ */
+add_theme_support( 'post-thumbnails' );
