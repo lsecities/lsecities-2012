@@ -83,7 +83,7 @@ class SectionFront extends PodsObject {
     
     $this->twitter_embedded_timeline_id = is_user_logged_in() ? $pod->field('twitter_embedded_timeline_id') : NULL;
     
-    $this->news_categories = $pod->field('news_categories.slug');
+    $this->news_categories = $pod->field('news_categories.term_id');
     $this->news_items = $this->get_linked_news();
     
     /**
@@ -288,12 +288,20 @@ class SectionFront extends PodsObject {
       
       $secondary_news_items_count = 10 + $primary_news_items_count;
       
-      $wp_primary_query_querystring = 'posts_per_page=' . $primary_news_items_count;
-      $wp_secondary_query_querystring = 'posts_per_page=' . $secondary_news_items_count;
+      $wp_primary_query = [
+        'posts_per_page' => $primary_news_items_count,
+        'category__in' => $this->news_categories
+      ];
+
+      $wp_secondary_query = [
+        'posts_per_page' => $secondary_news_items_count,
+        'category__in' => $this->news_categories
+      ];
       
       $index_of_last_primary_news_item = $primary_news_items_count > 0 ? $primary_news_items_count - 1 : 0;
 
-      $primary_news = new \WP_Query($wp_primary_query_querystring . $this->news_categories);
+      $primary_news = new \WP_Query($wp_primary_query);
+
       while ($primary_news->have_posts()) {
         $primary_news->the_post();
         
@@ -313,7 +321,8 @@ class SectionFront extends PodsObject {
       
       wp_reset_postdata();
 
-      $secondary_news = new \WP_Query($wp_secondary_query_querystring . $this->news_categories);
+      $secondary_news = new \WP_Query($wp_secondary_query);
+
       if($secondary_news->found_posts > $primary_news_items_count) {
         while ($secondary_news->have_posts()) {
           $secondary_news->the_post();
