@@ -69,7 +69,8 @@ $obj = prepare_header($post);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
   wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
-  
+  wp_enqueue_script('isotope', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js', 'jquery', FALSE, TRUE);
+ 
   /**
    * Finally enqueue our own app.js
    */
