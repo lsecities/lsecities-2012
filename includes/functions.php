@@ -667,3 +667,20 @@ function highlight_toplevel_ancestor_of_pods_pages($css_class, $page, $depth, $a
 }
 
 add_filter('page_css_class', 'highlight_toplevel_ancestor_of_pods_pages', 10, 5);
+
+/**
+ * WordPress has a limit of 30 custom field names displayed in the field name list
+ * dropbox UI: this filter overrides this setting.
+ * See http://wordpress.stackexchange.com/questions/130616/custom-field-select-list-is-truncated
+ * This obviously may end up causing page sizes to grow considerably for posts or
+ * pages with several custom fields and if the limit is increased beyond the default,
+ * so use this with caution.
+ */
+add_filter( 'postmeta_form_limit' , 'customfield_limit_override' );
+function customfield_limit_override( $limit ) {
+  if(lc_data('ui_custom_fields_limit')) {
+    $limit = lc_data('ui_custom_fields_limit');
+  }
+
+  return $limit;
+}

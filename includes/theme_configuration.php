@@ -55,6 +55,13 @@ function lc_data($key, $value = false) {
 lc_data('template_root', get_stylesheet_directory() . '/templates');
 
 /**
+ * Maximum number of custom fields names displayed in field name
+ * dropdown lists; increasing this number beyond the default 30
+ * is useful when using Pods, which adds a number of field names.
+ */
+lc_data('ui_custom_fields_limit', 180);
+
+/**
  * Filename for the template used for conference frontpage WP Pages.
  * This is used in id_of_parent_conference(). If the name of the
  * template file is changed, update the following constant.
