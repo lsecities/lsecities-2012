@@ -502,8 +502,6 @@ class ResearchProject extends PodsObject {
       ];
     }
     
-    // var_trace(var_export($project_news, true), 'project_news');
-    
     return $project_news;
   }
 }
