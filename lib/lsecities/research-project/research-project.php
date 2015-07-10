@@ -37,6 +37,7 @@ class ResearchProject extends PodsObject {
    */
   public $linked_events;
   
+  public $linked_posts;
   public $featured_posts;
   public $photo_galleries;
   public $events_blurb;
@@ -482,8 +483,40 @@ class ResearchProject extends PodsObject {
     return $sorted_research_outputs;
   }
   
+  /**
+   * Get list of WP Posts associated to this project.
+   * Originally this was done by associating one or more WP Post
+   * Categories to a research project and then adding any relevant
+   * news item to any of the linked categories.
+   * In practice though we would alywas only use one category per
+   * research project, so the extra layer of indirection ended up being
+   * just an usability hindrance.
+   * Since 1.13, this function supports news items linked directly
+   * from research projects; if none is found, the previous linking
+   * structure is used, before giving up if no associated news are found
+   * either way.
+   * @todo The fallback behaviour described above should be removed
+   *   after migrating all existing news items to the new structure
+   * 
+   * @return Array List of posts associated to the project
+   */
   function get_project_news() {
     $project_news = [];
+    
+    // try linked_posts first
+    $linked_posts = $this->pod->field([ 'name' => 'linked_posts.ID', 'orderby' => 'post_date DESC']);
+    
+    if(!empty($linked_posts)) {
+      foreach($linked_posts as $post) {
+        $project_news[] = [
+          'permalink' => get_permalink($post),
+          'title' => get_the_title($post),
+          'date' => get_post_time('j M Y', FALSE, $post)
+        ];
+      }
+      
+      return $project_news;
+    }
     
     $news_categories = $this->pod->field('news_categories');
     

@@ -366,7 +366,22 @@ function get_project_events($pod, $include_events_from_main_calendar = FALSE, $r
 
 function get_project_news($pod) {
   $project_news = array();
+
+  // try linked_posts first
+  $linked_posts = $pod->field([ 'name' => 'linked_posts.ID', 'orderby' => 'post_date DESC']);
   
+  if(!empty($linked_posts)) {
+    foreach($linked_posts as $post) {
+      $project_news[] = [
+        'permalink' => get_permalink($post),
+        'title' => get_the_title($post),
+        'date' => get_post_time('j M Y', FALSE, $post)
+      ];
+    }
+    
+    return $project_news;
+  }
+    
   $news_categories = $pod->field('news_categories');
   
   if(empty($news_categories)) {
