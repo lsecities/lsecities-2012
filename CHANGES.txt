@@ -1,3 +1,23 @@
+lsecities-theme-alexandria (1.13) lsecities-experimental; urgency=low
+
+  release 1.13 "cumin"
+
+  * [feature] new Class: Research projects (except actants)
+  * [feature] project activity score for Research project: compute
+    a score based on associated events/publications/news items and
+    (for events and news items) how 'fresh' they are (i.e. events or
+    news items older than ~6 months count almost zero)
+  * [feature] new Class: Pods index, currently supporting research
+    projects only, but with a highly configurable setup in order to
+    enable refactoring of events indexes, which are currently still
+    using brittle ancient code
+  * [feature] support for Research programmes (currently used for Urban
+    Age and Mellon Fellowship Programme)
+  * [update] removed indirection between research projects and
+    associated news
+
+ -- andrea rota <a.rota@lse.ac.uk>  Friday, 10 July 2015 16:30:00 +0100
+
 lsecities-theme-alexandria (1.12) lsecities-experimental; urgency=low
 
   release 1.12 "brocoli"
