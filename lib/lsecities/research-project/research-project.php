@@ -492,11 +492,7 @@ class ResearchProject extends PodsObject {
    * research project, so the extra layer of indirection ended up being
    * just an usability hindrance.
    * Since 1.13, this function supports news items linked directly
-   * from research projects; if none is found, the previous linking
-   * structure is used, before giving up if no associated news are found
-   * either way.
-   * @todo The fallback behaviour described above should be removed
-   *   after migrating all existing news items to the new structure
+   * from research projects.
    * 
    * @return Array List of posts associated to the project
    */
@@ -518,24 +514,7 @@ class ResearchProject extends PodsObject {
       return $project_news;
     }
     
-    $news_categories = $this->pod->field('news_categories');
-    
-    if(empty($news_categories)) {
-      return [];
-    }
-    
-    $more_news = new \WP_Query('posts_per_page=10' . \news_categories($news_categories));
-    
-    while ($more_news->have_posts()) {
-      $more_news->the_post();
-      $project_news[] = [
-        'permalink' => get_permalink(),
-        'title' => get_the_title(),
-        'date' => get_the_time('j M Y')
-      ];
-    }
-    
-    return $project_news;
+    return NULL;
   }
 }
 
