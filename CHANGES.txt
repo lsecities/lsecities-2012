@@ -1,3 +1,11 @@
+lsecities-theme-alexandria (1.13.1) lsecities-experimental; urgency=low
+
+  release 1.13 "cumin 1"
+
+  * [fixed] top-level navigation parent for Pods pages is now highlighted
+
+ -- andrea rota <a.rota@lse.ac.uk>  Friday, 10 July 2015 18:30:00 +0100
+
 lsecities-theme-alexandria (1.13) lsecities-experimental; urgency=low
 
   release 1.13 "cumin"
