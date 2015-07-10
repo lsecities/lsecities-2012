@@ -631,3 +631,39 @@ function new_excerpt_more( $more ) {
 	return ' <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">[&hellip;]</a>';
 }
 add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+/**
+ * Correctly handle detection of top-level ancestor in navigation menus.
+ * 
+ * Since Pods pages sit outside of WordPress' page hierarchies, WP
+ * cannot know where a page rendered through Pods pages is supposed to
+ * sit. This function detects location of pods pages within the site's
+ * URI space by matching the first part of the current page's URI path
+ * (top folder) to the first part of the URI path of each page included
+ * in top level navigation.
+ * *NOTE*: this assumes that we will never have two pages in the top
+ * level navigation (either on the main lsecities.net site or on any
+ * microsite) whose path starts with the same top-level folder.
+ * 
+ * Alternatively, if a Pods class (such as Event) sets the lc_data
+ * variable 'pods_toplevel_ancestor', this is matched to the ID of each
+ * page included in top level navigation.
+ * 
+ * For parameters and return values, see documentation of WordPress'
+ * page_css_class filter.
+ * 
+ * This filter hook is invoked from within the Walker_Page walker used
+ * by wp_list_pages(), which we use to generate level1nav and level2nav.
+ */
+function highlight_toplevel_ancestor_of_pods_pages($css_class, $page, $depth, $args, $current_page) {
+  $item_uri_path = parse_url(get_permalink($page->ID), PHP_URL_PATH);
+  $current_page_top_folder = '/' . pods_v('first', 'url') . '/';
+  
+  if((substr_count($item_uri_path, '/') < 3) and (0 === strripos($item_uri_path, $current_page_top_folder) or lc_data('pods_toplevel_ancestor') === $page->ID)) {
+    $css_class[] = 'current_page_ancestor';
+  }
+  
+  return $css_class;
+}
+
+add_filter('page_css_class', 'highlight_toplevel_ancestor_of_pods_pages', 10, 5);
