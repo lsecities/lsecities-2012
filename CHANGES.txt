@@ -2,7 +2,8 @@ lsecities-theme-alexandria (1.13) lsecities-experimental; urgency=low
 
   release 1.13 "cumin"
 
-  * [feature] new Class: Research projects (except actants)
+  * [update] refactored Research projects using OO code (except actants
+    code)
   * [feature] project activity score for Research project: compute
     a score based on associated events/publications/news items and
     (for events and news items) how 'fresh' they are (i.e. events or
@@ -15,6 +16,23 @@ lsecities-theme-alexandria (1.13) lsecities-experimental; urgency=low
     Age and Mellon Fellowship Programme)
   * [update] removed indirection between research projects and
     associated news
+  * [update] refactored Section fronts (previously Sliders) using OO
+    code
+  * [feature] add support for Twitter timeline on section fronts
+  * [update] removed dependency on Twentytwelve theme as parent theme;
+    lsecities-wp-theme is now a self-standing theme
+  * [cleanup] remove code to deal with post-factum texts as we finally
+    dropped this feature
+  * [update] various updates to make theme work consistently under the
+    new (June 2015) HTTPS-only setup
+  * [update] refactored Events pod using OO code
+  * [update] refactored Galleria pod to use OO code
+  * [update] refactored Galleria pod to use MtHAML+Twig templates
+  * [tooling] incorporate SASS source, compile within the main theme
+    repository
+  * [update] refactored footer templates using MtHAML+Twig
+  * [feature] add support for tabbed WP Pages (using subpages with
+    specific template)
 
  -- andrea rota <a.rota@lse.ac.uk>  Friday, 10 July 2015 16:30:00 +0100
 
