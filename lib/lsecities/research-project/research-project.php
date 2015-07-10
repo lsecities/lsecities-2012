@@ -483,23 +483,23 @@ class ResearchProject extends PodsObject {
   }
   
   function get_project_news() {
-    $project_news = array();
+    $project_news = [];
     
     $news_categories = $this->pod->field('news_categories');
     
     if(empty($news_categories)) {
-      return array();
+      return [];
     }
     
     $more_news = new \WP_Query('posts_per_page=10' . \news_categories($news_categories));
     
     while ($more_news->have_posts()) {
       $more_news->the_post();
-      $project_news[] = array(
+      $project_news[] = [
         'permalink' => get_permalink(),
         'title' => get_the_title(),
         'date' => get_the_time('j M Y')
-      );
+      ];
     }
     
     // var_trace(var_export($project_news, true), 'project_news');
