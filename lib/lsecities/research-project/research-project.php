@@ -79,16 +79,21 @@ class ResearchProject extends PodsObject {
     $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
     
-    $this->status = $pod->field('status.name');
+    $_status = $pod->field('status');
+    
+    $this->status = [
+      'permalink' => $_status['slug'],
+      'name' => $_status['name']
+    ];
         
-    $timespan = $this->get_project_timespan();
+    $_timespan = $this->get_project_timespan();
     
     // for timespan, store both raw start and end years,
     // as well as a string representation of the timespan
     $this->timespan = [
-      'start' => $timespan['start'],
-      'end' => $timespan['end'],
-      'text' => $timespan['text']
+      'start' => $_timespan['start'],
+      'end' => $_timespan['end'],
+      'text' => $_timespan['text']
     ];
 
     $this->web_uri = $pod->field('web_uri');
@@ -105,9 +110,11 @@ class ResearchProject extends PodsObject {
     }
     
     $this->research_programmes = $pod->field('research_programmes');
+    $_research_strand = $pod->field('research_strand');
     $this->research_strand = [
-      'name' => $pod->field('research_strand.name'),
-      'summary' => $pod->display('research_strand.summary')
+      'permalink' => $_research_strand['slug'],
+      'name' => $_research_strand['name'],
+      'summary' => $_research_strand['summary']
     ];
     
     $this->free_form_project_teams = $pod->display('free_form_project_teams');
