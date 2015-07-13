@@ -666,6 +666,8 @@ blockquote::before { color: #999999; content: '\00AB'; display: block; font-size
 
 .reset-layout { overflow: hidden; *zoom: 1; }
 
+.lc-article { position: relative; }
+
 #page-meta { clear: both; margin: 1em 0; opacity: 0.6; font-size: 0.8rem; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; -webkit-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
 #page-meta:hover, #page-meta:focus, #page-meta:active { opacity: 1; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; -webkit-transition: opacity 0.5s ease; transition: opacity 0.5s ease; }
 #page-meta h1 { font-size: inherit; font-weight: 900; }
@@ -859,6 +861,35 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-people-list ul.people-list.grid li:nth-child(4n) { margin-right: 0; }
 .lc-people-list ul.people-list.grid li:nth-child(4n+1) { clear: left; }
 
+/** The following styles set is for research pod index pages */
+.lc-index .page-title { font-weight: 900; font-size: 2rem; margin-bottom: 1.5rem; }
+.lc-index .label { background-color: rgba(255, 0, 0, 0.85); color: white; bottom: 0; right: 0; margin: 0 0.5rem; padding: 0 0.25rem; border-radius: 0.25rem; transition: all 0.3s; }
+.lc-index .label[data-status="disabled"] { background-color: rgba(255, 0, 0, 0.2); color: rgba(0, 0, 0, 0.85); transition: all 0.3s; }
+.lc-index section { overflow: hidden; *zoom: 1; margin: 1rem 0; }
+.lc-index section > h1 { font-weight: 900; font-size: 1.5rem; margin-bottom: 1rem; }
+.lc-index section .label { display: none; position: absolute; }
+.lc-index .items .item { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 33.33333%; float: left; padding-left: 0.83333%; padding-right: 0.83333%; transition: opacity 0.3s; }
+.lc-index .items .item:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; }
+.lc-index .items .item:nth-child(3n + 2) { margin-left: 33.33333%; margin-right: -100%; clear: none; }
+.lc-index .items .item:nth-child(3n + 3) { margin-left: 66.66667%; margin-right: -100%; clear: none; }
+.lc-index .items .item[data-status="disabled"] { opacity: 0.1; transition: opacity 0.3s; }
+.lc-index .items .item .tile { padding-bottom: 1rem; margin-bottom: 1rem; transition: box-shadow 1s ease-in; }
+.lc-index .items .item .tile:hover { transition: box-shadow 0.5s; box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2); }
+.lc-index .items .item .main { position: relative; min-height: 8rem; }
+.lc-index .items .item .flip { padding-left: 1rem; padding-right: 1rem; }
+.lc-index .items .item .summary { line-height: 1.25rem; }
+.lc-index .items .item h1 { font-size: 1rem; position: absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, 0.7); margin: 0.5rem; padding: 0.5rem; color: white; font-weight: bold; display: block; }
+
+.filter-search-controls { overflow: hidden; *zoom: 1; }
+.no-js .filter-search-controls { display: none; }
+.filter-search-controls h1 { font-weight: 700; font-size: 1rem; }
+.filter-search-controls .controls .label { cursor: pointer; }
+.filter-search-controls .controls li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.filter-search-controls .controls li h1 { display: inline; }
+.filter-search-controls .controls li h1:after { content: ': '; }
+.filter-search-controls .controls li ul { display: inline; }
+.filter-search-controls .controls li ul li { display: inline; margin-right: 1rem; }
+
 .lc-publication { /** For research data/data section publications, display credits inline rather than as vertical list */ /** For ToC of research data/data sections, use a block grid */ }
 .lc-publication * { box-sizing: border-box; }
 .lc-publication .heading-image { margin-bottom: 1rem; }
@@ -916,21 +947,8 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 
 nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em; }
 
-/** The following styles set is for research project index pages */
-.lc-index-for-pod-research_project .section { overflow: hidden; *zoom: 1; }
-.lc-index-for-pod-research_project .section .label { display: none; position: absolute; background-color: rgba(255, 0, 0, 0.85); color: white; bottom: 0; right: 0; margin: 0 0.5rem; padding: 0 0.25rem; border-radius: 0.25rem; }
-.lc-index-for-pod-research_project .section.show-strand .research-strand { display: inline; }
-.lc-index-for-pod-research_project .section.show-status .research-status { display: inline; }
-.lc-index-for-pod-research_project .projects .project { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 33.33333%; float: left; padding-left: 0.83333%; padding-right: 0.83333%; }
-.lc-index-for-pod-research_project .projects .project:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; }
-.lc-index-for-pod-research_project .projects .project:nth-child(3n + 2) { margin-left: 33.33333%; margin-right: -100%; clear: none; }
-.lc-index-for-pod-research_project .projects .project:nth-child(3n + 3) { margin-left: 66.66667%; margin-right: -100%; clear: none; }
-.lc-index-for-pod-research_project .projects .project .tile { padding-bottom: 1rem; margin-bottom: 1rem; transition: box-shadow 1s ease-in; }
-.lc-index-for-pod-research_project .projects .project .tile:hover { transition: box-shadow 0.5s; box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2); }
-.lc-index-for-pod-research_project .projects .project .main { position: relative; min-height: 8rem; background-color: rgba(0, 0, 0, 0.05); }
-.lc-index-for-pod-research_project .projects .project .flip { padding-left: 1rem; padding-right: 1rem; }
-.lc-index-for-pod-research_project .projects .project .summary { line-height: 1.25rem; }
-.lc-index-for-pod-research_project .projects .project h1 { font-size: 1rem; position: absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, 0.7); margin: 0.5rem; padding: 0.5rem; color: white; font-weight: bold; display: block; }
+.lc-index-for-pod-research_project section.show-strand .research-strand { display: inline; }
+.lc-index-for-pod-research_project section.show-status .research-status { display: inline; }
 
 .lc-section-front #main { margin-top: 0; }
 .lc-section-front .flexslider { position: relative; font-size: 0.875em; border: 0; background: transparent; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
