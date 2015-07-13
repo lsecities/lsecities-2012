@@ -1,0 +1,142 @@
+/**
+ * The following styles set is for research pod index pages
+ */
+$grid-index: (
+  // gutters: 0
+);
+
+.lc-index {
+  .page-title {
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .label {
+    background-color: rgba(255, 0, 0, 0.85);
+    color: white;
+    bottom: 0;
+    right: 0;
+    margin: 0 0.5rem;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s;
+    
+    &[data-status="disabled"] {
+      background-color: rgba(255,0,0,0.2);
+      color: rgba(0,0,0,0.85);
+      transition: all 0.3s;
+    }
+  }
+  
+  section {
+    @include clearfix;
+    
+    margin: 1rem 0;
+    
+    & > h1 {
+      font-weight: 900;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .label {
+      display: none;
+      position: absolute;
+    }
+  }
+  
+  .items {
+    @include with-layout($grid-index) {
+      .item {
+        @include gallery(4 of 12 inside);
+        
+        transition: opacity 0.3s;
+        
+        &[data-status="disabled"] {
+          opacity: 0.1;
+          transition: opacity 0.3s;
+        }
+        
+        .tile {
+          padding-bottom: 1rem;
+          margin-bottom: 1rem;
+          transition: box-shadow 1s ease-in;
+          
+          &:hover {
+            transition: box-shadow 0.5s;
+            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+          }
+        }
+        
+        .main {
+          position: relative;
+          min-height: 8rem;
+        }
+        
+        .flip {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        
+        .summary {
+          line-height: 1.25rem;
+        }
+        
+        h1 {
+          font-size: 1rem;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          background-color: rgba(0, 0, 0, 0.7);
+          margin: 0.5rem;
+          padding: 0.5rem;
+          color: white;
+          font-weight: bold;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.filter-search-controls {
+  @include clearfix;
+  
+  .no-js & {
+    display: none;
+  }
+  
+  h1 {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .controls {
+    .label {
+      cursor: pointer;
+    }
+    
+    li {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      
+      h1 {
+        display: inline;
+      
+        &:after {
+          content: ': ';
+        }
+      }
+
+      ul {
+        display: inline;
+        
+        li {
+          display: inline;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}

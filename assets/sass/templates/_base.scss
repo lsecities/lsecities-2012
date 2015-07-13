@@ -509,3 +509,7 @@ blockquote {
 .reset-layout {
   @include clearfix;
 }
+
+.lc-article {
+  position: relative;
+}
