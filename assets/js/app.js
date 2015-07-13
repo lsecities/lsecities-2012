@@ -127,6 +127,21 @@ jQuery(document).ready(function($) {
 
   // enable tabs on #uiTabs and .uiTabs lists
   $('#uiTabs, .uiTabs').tabs();
+  
+  jQuery('.lc-index .controls ul li').click(function() {
+    var selector = '[data-' + jQuery(this).closest('[data-toggle-on]').data('toggle-on') + '="' + jQuery(this).data('toggle') + '"]';
+    var toggle_status = jQuery(this).attr('data-status') == 'disabled' ? 'enabled' : 'disabled';
+    
+    jQuery(this).attr(
+      'data-status',
+      toggle_status
+    );
+    
+    console.log(toggle_status);
+    
+    jQuery(selector)
+      .attr('data-status', toggle_status);
+  });
 
   // track clicks to binary files hosted in WordPress.
   // based on http://www.wduffy.co.uk/blog/tracking-google-goals-with-no-url-using-jquery/.
