@@ -89,6 +89,7 @@ lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-alex
  */
 lc_data('pods_routes', [
   '/research/projects/' => [
+    'title' => 'Research',
     'pod' => 'research_project',
     'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
@@ -124,6 +125,7 @@ lc_data('pods_routes', [
     ]
   ],
   '/research/strands/' => [
+    'title' => 'Research',
     'pod' => 'research_project',
     'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
