@@ -1,3 +1,18 @@
+%h1.page-title = title
+.filter-search-controls
+  .heading Filter projects by:
+  %ul.controls
+    -#%li( data-toggle-on = "project-status" )
+      %h1 Status
+      %ul
+        %li.label( data-status = "enabled" data-toggle = "active" ) Current
+        %li.label( data-status = "enabled" data-toggle = "completed" ) Completed
+    %li( data-toggle-on = "research-strand" )
+      %h1 Research strand
+      %ul
+        %li.label( data-status = "enabled" data-toggle = "010-cities-space-and-society" ) Cities, space and society
+        %li.label( data-status = "enabled" data-toggle = "020-cities-environment-and-climate-change" ) Cities, environment and climate change
+        %li.label( data-status = "enabled" data-toggle = "030-urban-governance" ) Urban governance
 - for section in sections
   %section(class = section.labels)
     %h1 = section.title
