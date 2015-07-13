@@ -28,6 +28,6 @@
                 - if(project.research_strand.name)
                   %span.label.research-strand = project.research_strand.name
                 - if(project.status)
-                  %span.label.research-status = project.status
+                  %span.label.research-status = project.status.name
             .flip
               .summary = project.summary | raw
