@@ -22,7 +22,9 @@ namespace LSECitiesWPTheme;
 /**
  * Fetch metadata for index generation based on request URI
  */
-$pod_index_configuration = lc_data('pods_routes')[parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)];
+// first make sure path ends in '/' (should be done by HTTP server, but still)
+$uri_path = trailingslashit(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$pod_index_configuration = lc_data('pods_routes')[$uri_path];
 
 $objs = array_map(
   function($item) use ($pod_index_configuration) {
