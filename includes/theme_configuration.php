@@ -88,7 +88,7 @@ lc_data('theme_filesystem_abspath', ABSPATH . '/wp-content/themes/lsecities-alex
  * in Pods index template
  */
 lc_data('pods_routes', [
-  '/research/projects/' => [
+  '/research/' => [
     'title' => 'Research',
     'pod' => 'research_project',
     'factory_function' => '\LSECitiesWPTheme\research_project_pods',
