@@ -95,33 +95,47 @@ lc_data('pods_routes', [
     'template' => 'lsecities/research_projects/_index',
     'sections' => [
       [
-        'title' => 'Current research',
+        'title' => 'Cities, space and society',
         'labels' => [
-          'show-strand'
+          'show-status--completed-only'
         ],
         'pods_params' => [
           'limit' => -1,
-          'where' => 'status.name = "Active"',
-          'orderby' => 'research_strand.slug ASC, name ASC'
+          'where' => 'research_strand.slug="010-cities-space-and-society"',
+          'orderby' => 'status.name ASC, name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
         ]
       ],
       [
-        'title' => 'Completed research',
+        'title' => 'Cities, environment and climate change',
         'labels' => [
-          'show-strand'
+          'show-status--completed-only'
         ],
         'pods_params' => [
           'limit' => -1,
-          'where' => 'status.name = "Completed"',
-          'orderby' => 'research_strand.slug ASC, name ASC'
+          'where' => 'research_strand.slug="020-cities-environment-and-climate-change"',
+          'orderby' => 'status.name ASC, name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
         ]
-      ]
+      ],
+      [
+        'title' => 'Urban governance',
+        'labels' => [
+          'show-status--completed-only'
+        ],
+        'pods_params' => [
+          'limit' => -1,
+          'where' => 'research_strand.slug="030-urban-governance"',
+          'orderby' => 'status.name ASC, name ASC'
+        ],
+        'params' => [
+          'orderby' => 'project_activity_score'
+        ]
+      ],
     ]
   ],
   '/research/strands/' => [

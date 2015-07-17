@@ -46,10 +46,14 @@ $grid-index: (
     }
   }
   
+  section {
+    @include gallery(4 of 12 inside);
+  }
+  
   .items {
     @include with-layout($grid-index) {
       .item {
-        @include gallery(4 of 12 inside);
+        //@include gallery(4 of 12 inside);
         
         transition: opacity 0.3s;
         

@@ -86,5 +86,9 @@ nav#projectsmenu {
     &.show-status .research-status {
       display: inline;
     }
+    
+    &.show-status--completed-only .research-status.completed {
+      display: inline;
+    }
   }
 }

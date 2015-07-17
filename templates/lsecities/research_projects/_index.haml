@@ -1,6 +1,6 @@
 %header.entry-header
   %h1.entry-title = title
-.filter-search-controls
+-#.filter-search-controls
   .heading Filter projects by:
   %ul.controls
     -#%li( data-toggle-on = "project-status" )
@@ -14,21 +14,22 @@
         %li.label( data-status = "enabled" data-toggle = "010-cities-space-and-society" ) Cities, space and society
         %li.label( data-status = "enabled" data-toggle = "020-cities-environment-and-climate-change" ) Cities, environment and climate change
         %li.label( data-status = "enabled" data-toggle = "030-urban-governance" ) Urban governance
-- for section in sections
-  %section(class = section.labels)
-    %h1 = section.title
-    .items.projects
-      - for project in section.research_projects
-        .item.project( data-status = "enabled" data-project-start-year = project.timespan.start data-project-end-year = project.timespan.end data-project-timespan = project.timespan.text data-project-activity-score = project.project_activity_score data-research-strand = project.research_strand.permalink data-project-status = project.status.permalink )
-          .tile
-            .main
-              %a(href = "/objects/research-projects/#{project.permalink}")
-                - if(project.heading_gallery.slides.0.uri)
-                  %img(src = project.heading_gallery.slides.0.uri)
-                %h1 = project.title
-                - if(project.research_strand.name)
-                  %span.label.research-strand = project.research_strand.name
-                - if(project.status)
-                  %span.label.research-status = project.status.name
-            .flip
-              .summary = project.summary | raw
+.sections
+  - for section in sections
+    %section(class = section.labels)
+      %h1 = section.title
+      .items.projects
+        - for project in section.research_projects
+          .item.project( data-status = "enabled" data-project-start-year = project.timespan.start data-project-end-year = project.timespan.end data-project-timespan = project.timespan.text data-project-activity-score = project.project_activity_score data-research-strand = project.research_strand.permalink data-project-status = project.status.permalink )
+            .tile
+              .main
+                %a(href = "/objects/research-projects/#{project.permalink}")
+                  - if(project.heading_gallery.slides.0.uri)
+                    %img(src = project.heading_gallery.slides.0.uri)
+                  %h1 = project.title
+                  - if(project.research_strand.name)
+                    %span.label.research-strand( class = project.research_strand.permalink ) = project.research_strand.name
+                  - if(project.status)
+                    %span.label.research-status( class = project.status.permalink ) = project.status.name
+              .flip
+                .summary = project.summary | raw
