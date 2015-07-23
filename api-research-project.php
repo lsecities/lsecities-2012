@@ -9,4 +9,5 @@ namespace LSECitiesWPTheme;
  * URI: /api/v0/research_projects/*
  */
 header("Content-Type: application/json");
-echo new ResearchProject(pods_v('last', 'url'))->to_json();
+$obj = new ResearchProject(pods_v('last', 'url'));
+echo $obj->to_json();
