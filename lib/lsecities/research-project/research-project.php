@@ -529,7 +529,9 @@ class ResearchProject extends PodsObject {
    * @return string A JSON serialization of the object
    */
   function to_json() {
-    return json_encode(get_object_vars($this));
+    $vars = get_object_vars($this);
+    unset($vars['pod']);
+    return json_encode($vars);
   }
 }
 
