@@ -158,6 +158,7 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
     'respondents_label' => count($session_respondents) > 1 ? "Respondents" : "Respondent",
     'respondents_blurb' => !is_array($session_respondents) ? NULL : generate_session_people_blurb($pod, 'respondents_blurb', $special_fields_prefix, $is_lang2, $session_respondents),
     'youtube_video' => $pod->field('media_items.youtube_uri'),
+    'audio_uri' => $pod->field('media_items.audio_uri'),
     'slides' => $session_slides,
     'sessions' => $sessions_data
   );
