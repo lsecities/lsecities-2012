@@ -54,6 +54,8 @@ function pods_prepare_media_item($query_string = '', $options = []) {
       }
     }
     
+    $_audio_file_uri = wp_get_attachment_url($pod->field('audio_file.id', TRUE));
+
     $media_item = array (
       'id' => $pod->field('slug'),
       'title' => $pod->field('name'),
@@ -61,7 +63,7 @@ function pods_prepare_media_item($query_string = '', $options = []) {
       'research_programmes' => $research_programmes,
       'youtube_uri' => $pod->field('youtube_uri'),
       'video_uri' => $pod->field('video_uri'),
-      'audio_uri' => $pod->field('audio_uri'),
+      'audio_uri' => !empty($_audio_file_uri) ? $_audio_file_uri : $pod->field('audio_uri'),
       'presentation_uri' => $pod->field('presentation_uri'),
       'tags' => $pod->field('tag.name'),
       'geotags' => $pod->field('geotags.name'),
