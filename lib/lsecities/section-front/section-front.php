@@ -81,7 +81,7 @@ class SectionFront extends PodsObject {
     // TECHNICAL_DEBT: we should avoid mixing global state in object constructor
     $this->latest_update = lc_data('META_last_modified', $pod->field('modified'));
     
-    $this->twitter_embedded_timeline_id = is_user_logged_in() ? $pod->field('twitter_embedded_timeline_id') : NULL;
+    $this->twitter_embedded_timeline_id = $pod->field('twitter_embedded_timeline_id');
     
     $this->news_categories = $pod->field('news_categories.term_id');
     $this->news_items = $this->get_linked_news();
@@ -280,7 +280,7 @@ class SectionFront extends PodsObject {
         'secondary' => []
       ];
       
-      if(is_user_logged_in() and $this->twitter_embedded_timeline_id) {
+      if($this->twitter_embedded_timeline_id) {
         $primary_news_items_count = 2;
       } else {
         $primary_news_items_count = 3;
@@ -304,8 +304,6 @@ class SectionFront extends PodsObject {
 
       while ($primary_news->have_posts()) {
         $primary_news->the_post();
-        
-        if(!is_user_logged_in() and $primary_news->current_post == $index_of_last_primary_news_item) { $class_extra = " last"; }
         
         $posts['primary'][] = [
           'date' => [
