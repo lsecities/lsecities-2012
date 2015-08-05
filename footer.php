@@ -66,6 +66,7 @@
             <li><a href="https://twitter.com/#!/LSECities">Twitter</a></li>
             <li><a href="https://facebook.com/lsecities">Facebook</a></li>
             <li><a href="https://youtube.com/urbanage">Youtube</a></li>
+            <li><a href="https://linkedin.com/company/lse-cities">LinkedIn</a></li>
             <li><a href="https://lsecities.net/feed/">News feed</a></li>
           </ul>
         </div>
