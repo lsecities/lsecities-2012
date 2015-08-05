@@ -44,7 +44,7 @@
 								<input type="hidden" value="lsecities.net" name="sitesearch" />
 								<div id="queryfield">
 									<input type="text" placeholder="Search LSE Cities" name="q" />
-									<button><span>&#xE4A2;</span></button>
+									<button><i class="icon-right-open"></i></button>
 								</div>
 							</div>
              </form>
@@ -52,25 +52,35 @@
 							<ul>
 								<li>
 									<a title="Follow us on Twitter" href="https://twitter.com/#!/LSECities">
-										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/icons/mal/icon_twitter-v1lightblue_24x24.png" alt="Follow us on Twitter">
+										<i class="icon-twitter in-circle"></i>
 									</a>
 								</li>
 								<li>
 									<a title="Follow us on Facebook" href="https://facebook.com/lsecities">
-										<img src="<?php bloginfo('stylesheet_directory'); ?>/images/icons/mal/icon_facebook-v2lightblue_24x24.png" alt="Follow us on Facebook">
+										<i class="icon-facebook in-circle"></i>
 									</a>
 								</li>
 								<li>
 									<a title="Follow us on YouTube" href="https://youtube.com/urbanage">
-										<img src="<?php bloginfo('stylesheet_directory'); ?>/images/icons/mal/icon_youtubelightblue_24x24.png" alt="Follow us on YouTube">
+										<i class="icon-youtube-play in-circle"></i>
+									</a>
+								</li>
+								<li>
+									<a title="Follow us on LinkedIn" href="https://linkedin.com/company/lse-cities">
+										<i class="icon-linkedin in-circle"></i>
 									</a>
 								</li>
 								<li>
 									<a title="News feed" href="http://lsecities.net/feed/">
-										<img src="<?php bloginfo('stylesheet_directory'); ?>/images/icons/mal/icon_rsslightblue_24x24.png" alt="News archive">
+										<i class="icon-rss"></i>
 									</a>
 								</li>
-							</ul>
+								<li>
+									<a title="Subscribe to email updates" href="http://eepurl.com/bjuwIP">
+										<i class="icon-mail-alt"></i>
+									</a>
+								</li>
+              </ul>
 						</span>
 					</div>
 				</div><!-- #toolbox -->
