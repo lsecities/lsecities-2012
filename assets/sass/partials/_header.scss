@@ -78,6 +78,14 @@ $social-media-icons-hover-color: #b9bbc1;
       margin: 0 0.3125em;
       padding: 0;
       @include round-button-effects;
+      
+      color: $icon_foreground;
+      
+      .in-circle {
+        color: $icon-background;
+        background-color: $icon_foreground;  // swap background with foreground
+        border-radius: 50%;
+      }
     }
   }
  }
@@ -208,10 +216,9 @@ header #searchbox {
     
     button {
       float: right;
+      font-size: 1.2rem;
       color: $social-media-icons-color;
       @include transition(color 0.4s ease-out 0s);
-      font-family: fontello;
-      font-size: 2.25em;
       background: transparent;
       border: none;
       width: 1em;
