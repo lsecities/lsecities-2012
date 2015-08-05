@@ -71,7 +71,7 @@
 									</a>
 								</li>
 								<li>
-									<a title="News feed" href="http://lsecities.net/feed/">
+									<a title="News feed" href="https://lsecities.net/feed/">
 										<i class="icon-rss"></i>
 									</a>
 								</li>
