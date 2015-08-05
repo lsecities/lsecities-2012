@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?32573579');
-  src: url('../font/fontello.eot?32573579#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff?32573579') format('woff'),
-       url('../font/fontello.ttf?32573579') format('truetype'),
-       url('../font/fontello.svg?32573579#fontello') format('svg');
+  src: url('../font/fontello.eot?95074372');
+  src: url('../font/fontello.eot?95074372#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?95074372') format('woff'),
+       url('../font/fontello.ttf?95074372') format('truetype'),
+       url('../font/fontello.svg?95074372#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?32573579#fontello') format('svg');
+    src: url('../font/fontello.svg?95074372#fontello') format('svg');
   }
 }
 */
@@ -35,7 +35,7 @@
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+ 
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
  
@@ -46,6 +46,10 @@
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
  
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
@@ -53,3 +57,16 @@
 .icon-resize-full-alt:before { content: '\e800'; } /* '' */
 .icon-right-open:before { content: '\e801'; } /* '' */
 .icon-home:before { content: '\e802'; } /* '' */
+.icon-left-open:before { content: '\e803'; } /* '' */
+.icon-down-open:before { content: '\e804'; } /* '' */
+.icon-up-open:before { content: '\e805'; } /* '' */
+.icon-headphones:before { content: '\e806'; } /* '' */
+.icon-facebook-official:before { content: '\e807'; } /* '' */
+.icon-headphones-2:before { content: '\e808'; } /* '' */
+.icon-linkedin-squared:before { content: '\e809'; } /* '' */
+.icon-youtube-play:before { content: '\e80a'; } /* '' */
+.icon-twitter:before { content: '\e80b'; } /* '' */
+.icon-facebook:before { content: '\e80c'; } /* '' */
+.icon-linkedin:before { content: '\e80d'; } /* '' */
+.icon-rss:before { content: '\e80e'; } /* '' */
+.icon-mail-alt:before { content: '\e80f'; } /* '' */
