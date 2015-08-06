@@ -111,12 +111,24 @@ class SectionFront extends PodsObject {
 
     $this->linked_events = sort_linked_field($pod->field('linked_events'), 'date_start', SORT_DESC);
   }
-  
+
+  /**
+   * Return x and y size of a tile, given its layout
+   * Tile layouts are strings with format XxY, with 1 <= X < 5= and 1 <= Y <= 2
+   * @param String $tile_layout The tile layout
+   * @return Array An array with x and y sizes: [X, Y]
+   */
+  function get_tile_size($tile_layout) {
+    $xcount = substr($tile_layout, 0, 1);
+    $ycount = substr($tile_layout, -1);
+    
+    return [ $xcount, $ycount ];
+  }
+
   function get_tile_classes($tile_layout) {
     $element_classes = '';
 
-    $xcount = substr($tile_layout, 0, 1);
-    $ycount = substr($tile_layout, -1);
+    list($xcount, $ycount) = $this->get_tile_size($tile_layout);
 
     switch($xcount) {
       case '1':
@@ -203,6 +215,7 @@ class SectionFront extends PodsObject {
         var_trace(var_export($tiles[$tile_index]['slug'], true), 'tile[slug]');
         $tile = pods('tile', $tiles[$tile_index++]['slug']);
         $tile_layout = $tile->field('tile_layout.name');
+        $tile_xcount = $this->get_tile_size($tile_layout)[0];
         var_trace(var_export($tile_layout, true), 'tile[layout]');
         $this_tile_count = preg_replace('/x/', '*', $tile_layout);
         var_trace(var_export($this_tile_count, true), 'this_tile_count');
@@ -258,7 +271,10 @@ class SectionFront extends PodsObject {
           'plain_content' => wpautop($tile->field('plain_content')),
           'posts_category' => $tile->field('posts_category.term_id'),
           'target_uri' => $target_uri,
-          'image' => pods_image_url($tile->field('image.ID'), 'original'),
+	  // 500px times column spans; height = 9999 is to keep ratio as per
+	  // https://developer.wordpress.org/reference/functions/add_image_size/,
+          // section 'Other Notes'
+          'image' => pods_image_url($tile->field('image.ID'), [ $tile_xcount * 500 , 9999 ]),
           'image_attribution' => $image_attribution,
           'target_event' => [
             'month' => $target_event_month,
