@@ -197,6 +197,7 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
    */
   if($is_lang2) {
     $lang_suffix = '_lang2';
+    $blurb_field = $blurb_field . $lang_suffix;
   }
     
   $session_people_blurb = '';
