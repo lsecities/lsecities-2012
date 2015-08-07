@@ -191,15 +191,6 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
     return;
   }
 
-  /**
-   * If second language is requested, append suitable suffix to all
-   * field names available in lang2.
-   */
-  if($is_lang2) {
-    $lang_suffix = '_lang2';
-    $blurb_field = $blurb_field . $lang_suffix;
-  }
-    
   $session_people_blurb = '';
 
   /* If we have event-specific author info, use this */
@@ -235,8 +226,26 @@ function generate_session_people_blurb($pod, $blurb_field, $special_fields_prefi
     
     /* remove trailing semicolon */
     $session_people_blurb = preg_replace('/; $/', '', $session_people_blurb);
-  } elseif($pod->field($blurb_field)) { /* otherwise, if per-session blurb is available, use this */
-    $session_people_blurb = strip_tags($pod->field($blurb_field), $ALLOWED_TAGS_IN_BLURBS);
+  } else {
+    /**
+     * get per-session actant blurb (English and 2nd language), if available;
+     * these are used as fallback if no per-person info is available
+     */
+    $__blurb = $pod->field($blurb_field);
+    $__blurb_lang2 = $pod->field($blurb_field . '_lang2');
+
+    /**
+     * otherwise, if per-session blurb is available, use this as a fallback;
+     * if we are generating English output and English blurb is available
+     * *or* we are generating lang2 output and no lang2 blurb is available
+     * *but* English blurb is available, use English blurb (as a fallback
+     * in the second case)
+     */
+    if((FALSE === $is_lang2 and $__blurb) or (TRUE === $is_lang2 and empty($__blurb_lang2) and !empty($__blurb))) {
+      $session_people_blurb = strip_tags($__blurb, $ALLOWED_TAGS_IN_BLURBS);
+    } elseif(TRUE == $is_lang2 and !empty($__blurb_lang2)) {
+      $session_people_blurb = strip_tags($__blurb_lang2, $ALLOWED_TAGS_IN_BLURBS);
+    }
   }
   
   return $session_people_blurb;
