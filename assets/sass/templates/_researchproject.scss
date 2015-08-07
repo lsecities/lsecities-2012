@@ -47,6 +47,10 @@
   #t-galleries .photo-essay {
     @include gallery(6 of 12);
     height: 6rem;
+
+    .lc-galleria {
+      min-height: 290px;
+    }
   }
 
   #t-dataviz {
