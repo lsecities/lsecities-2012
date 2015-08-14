@@ -12,16 +12,18 @@ class PhotoGallery extends PodsObject {
    * @var string $name The photo gallery's name
    * @var string $picasa_gallery_id If the gallery is stored in PicasaWeb, this is the Picasa gallery id
    * @var array $slides An array of slides (photos from WordPress' media library)
+   * @var bool $allow_fullscreen Whether galleria should trigger fullscreen mode on click
    */
   const MAX_SLIDE_COUNT = 12;  // TECHNICAL_DEBT: remove once we can use Pods loop fields
   public $permalink;
   public $name;
   public $picasa_gallery_id;
   public $slides;
+  public $allow_fullscreen;
   
   private $pod;
 
-  function __construct($permalink, $random_slide_order = FALSE) {
+  function __construct($permalink, $allow_fullscreen = FALSE, $random_slide_order = FALSE) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
 
     // If no such Pod is found, return false
@@ -32,6 +34,7 @@ class PhotoGallery extends PodsObject {
     $this->permalink = $pod->field('slug');
     $this->name = $pod->field('name');
     $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
+    $this->allow_fullscreen = $allow_fullscreen;
 
     // populate slides array; slide count starts from 1, not 0 (because content editors don't start counting from zero)
     foreach(range(1, self::MAX_SLIDE_COUNT) as $slide_index) {
@@ -60,7 +63,8 @@ class PhotoGallery extends PodsObject {
       'permalink' => $this->permalink,
       'class' => $class,
       'slides' => $this->slides,
-      'picasa_gallery_id' => $this->picasa_gallery_id
+      'picasa_gallery_id' => $this->picasa_gallery_id,
+      'allow_fullscreen' => $this->allow_fullscreen
     ];
   }
 }
@@ -74,15 +78,11 @@ class PhotoGallery extends PodsObject {
  * @return array Data structure with the photo gallery's full data
  */
 function photo_gallery_get_galleria_data($permalink, $extra_classes = '', $allow_fullscreen = FALSE, $random_slide_order = FALSE) {
-  $photo_gallery = new PhotoGallery($permalink, TRUE);
+  $photo_gallery = new PhotoGallery($permalink, $allow_fullscreen, $random_slide_order);
 
   if(is_object($photo_gallery)) {
     $gallery = $photo_gallery->get_galleria_data($extra_classes);
-
-    if($allow_fullscreen) {
-      $gallery['allow_fullscreen'] = TRUE;
-    }
-
+    
     return $gallery;
   } else {
     return NULL;
