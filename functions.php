@@ -49,6 +49,7 @@ require_fragment('/lib/theme-functions.php');
 require_fragment('/lib/pods-object.php');
 require_fragment('/lib/lsecities/course/course.php');
 require_fragment('/lib/lsecities/event/event.php');
+require_fragment('/lib/lsecities/event-programme/event-programme.php');
 require_fragment('/lib/lsecities/person/person.php');
 require_fragment('/lib/lsecities/group/group.php');
 require_fragment('/lib/lsecities/photo-gallery/photo-gallery.php');

@@ -18,9 +18,13 @@ function pods_prepare_event_programme($pod_slug) {
   $obj['current_page_uri'] = $uri_parts[0];
   $obj['lang2_slug'] = $pod->field('lang2.slug');
   $obj['lang2_name'] = $pod->field('lang2.name');
-  
+
   $is_lang2 = (!empty($obj['request_language']) && $obj['request_language'] == $obj['lang2_slug']) ? TRUE : FALSE;
-  
+
+  // set the actual language code of the current language: en-GB if first
+  // language, second language's slug if second language
+  $obj['language_code'] = $is_lang2 ? $obj['lang2_slug'] : 'en-gb';
+    
   if($is_lang2) {
     $obj['pod_title'] = $pod->field('name');
     $obj['pod_subtitle'] = $pod->field('programme_subtitle');
@@ -29,7 +33,6 @@ function pods_prepare_event_programme($pod_slug) {
     $obj['pod_subtitle'] = $pod->field('programme_subtitle_lang2');
   }
   $subsessions = sort_linked_field($pod->field('sessions'), 'sequence', SORT_ASC);
-
   
   $subsession_slugs = array();
   foreach($subsessions as $subsession) {
@@ -60,7 +63,7 @@ function pods_prepare_event_programme($pod_slug) {
   $obj['page_title'] = !empty($for_conference) ? "Conference programme" : "Event programme";
   
   foreach($subsession_slugs as $session_slug) {
-    $obj['sessions'][] = process_session($session_slug, $special_fields_prefix, $is_lang2, $all_speakers);
+    $obj['sessions'][] = process_session($session_slug, $special_fields_prefix, $obj['language_code'], $is_lang2, $all_speakers);
   }
   
   $obj['programme_pdf'] = wp_get_attachment_url($pod->field('programme_pdf.ID'));
@@ -81,7 +84,7 @@ function pods_prepare_event_programme($pod_slug) {
   return $obj;
 }
 
-function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALSE, &$all_speakers) {
+function process_session($session_slug, $special_fields_prefix, $language_code, $is_lang2 = FALSE, &$all_speakers) {
   global $TRACE_ENABLED;
   
   /**
@@ -137,7 +140,7 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
 
   if(count($sessions) > 0) {
     foreach($sessions as $session) {
-      $sessions_data[] = process_session($session, $special_fields_prefix, $is_lang2, $all_speakers);
+      $sessions_data[] = process_session($session, $special_fields_prefix, $language_code, $is_lang2, $all_speakers);
     }
   }
   
@@ -155,9 +158,10 @@ function process_session($session_slug, $special_fields_prefix, $is_lang2 = FALS
     'hide_title' => $pod->field('hide_title'),
     'type' => $session_type,
     'speakers_blurb' => !is_array($session_speakers) ? NULL : generate_session_people_blurb($pod, 'speakers_blurb', $special_fields_prefix, $is_lang2, $session_speakers),
-    'chairs_label' => count($session_chairs) > 1 ? "Chairs" : "Chair",
+    'chairs_label' => count($session_chairs) > 1 ? ucfirst(\LSECitiesWPTheme\EventProgramme::TRANSLATION_STRINGS[$language_code]['chair']['plural']) : ucfirst(\LSECitiesWPTheme\EventProgramme::TRANSLATION_STRINGS[$language_code]['chair']['singular'])
+    ,
     'chairs_blurb' => !is_array($session_chairs) ? NULL : generate_session_people_blurb($pod, 'chairs_blurb', $special_fields_prefix, $is_lang2, $session_chairs),
-    'respondents_label' => count($session_respondents) > 1 ? "Respondents" : "Respondent",
+    'respondents_label' => count($session_respondents) > 1 ? ucfirst(\LSECitiesWPTheme\EventProgramme::TRANSLATION_STRINGS[$language_code]['respondent']['plural']) : ucfirst(\LSECitiesWPTheme\EventProgramme::TRANSLATION_STRINGS[$language_code]['respondent']['singular']),
     'respondents_blurb' => !is_array($session_respondents) ? NULL : generate_session_people_blurb($pod, 'respondents_blurb', $special_fields_prefix, $is_lang2, $session_respondents),
     'youtube_video' => $pod->field('media_items.youtube_uri'),
     'audio_uri' => !empty($_audio_file_uri) ? $_audio_file_uri : $pod->field('media_items.audio_uri'),
