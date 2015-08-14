@@ -1,9 +1,9 @@
 - if gallery.slides|length > 0
-  %div(class = "lc-galleria #{gallery.class}" id = "lc-galleria-#{gallery.permalink}")
+  %div(class = "lc-galleria #{gallery.class}" id = "lc-galleria-#{gallery.permalink}" data-allow-fullscreen = gallery.allow_fullscreen)
     %ul
       - for slide in gallery.slides
         %li
           %a(href = slide.uri)
             %img(title = slide.slide.post_title src = slide.uri alt = slide.slide.post_title data-title = slide.slide.post_title data-description = slide.slide.post_excerpt)
 - elseif gallery.picasa_gallery_id
-  %div(class = "lc-galleria galleria-tag #{gallery.class}" id = "lc-galleria-#{gallery.permalink}" data-picasa-selector = "useralbum:#{gallery.picasa_gallery_id}")
+  %div(class = "lc-galleria galleria-tag #{gallery.class}" id = "lc-galleria-#{gallery.permalink}" data-picasa-selector = "useralbum:#{gallery.picasa_gallery_id}" data-allow-fullscreen = gallery.allow_fullscreen)

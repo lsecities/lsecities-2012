@@ -69,14 +69,21 @@ class PhotoGallery extends PodsObject {
  * Build data object to be used in templating
  * @param string $permalink The photo gallery's permalink
  * @param string $extra_classes Any extra classes to use for the gallery
+ * @param bool $allow_fullscreen Whether to allow toggling galleria to fullscreen
  * @param bool $random_slide_order Whether to shuffle slides randomly
  * @return array Data structure with the photo gallery's full data
  */
-function photo_gallery_get_galleria_data($permalink, $extra_classes = '', $random_slide_order = FALSE) {
+function photo_gallery_get_galleria_data($permalink, $extra_classes = '', $allow_fullscreen = FALSE, $random_slide_order = FALSE) {
   $photo_gallery = new PhotoGallery($permalink, TRUE);
 
   if(is_object($photo_gallery)) {
-    return $photo_gallery->get_galleria_data($extra_classes);
+    $gallery = $photo_gallery->get_galleria_data($extra_classes);
+
+    if($allow_fullscreen) {
+      $gallery['allow_fullscreen'] = TRUE;
+    }
+
+    return $gallery;
   } else {
     return NULL;
   }

@@ -53,7 +53,27 @@ jQuery(document).ready(function($) {
         fullbleed_selector = '.lc-research-project .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-publication .lc-galleria .lc-galleria.fullbleed .galleria-thumbnails-container, .lc-event .lc-galleria.fullbleed .galleria-thumbnails-container';
 
     if(jQuery(selector).length > 0) {
-      jQuery(selector).galleria({responsive: true, height: 0.4, transition: 'fade', transitionSpeed: 600, carousel: false, thumbnails: false, autoplay: 5000, showInfo: false, preload: 'all', wait: true, debug: $('body').hasClass('user_logged_in') ? 'true' : 'false' });
+      jQuery(selector).galleria({
+        responsive: true,
+        height: 0.4,
+        transition: 'fade',
+        transitionSpeed: 600,
+        carousel: false,
+        thumbnails: false,
+        autoplay: 5000,
+        showInfo: false,
+        preload: 'all',
+        wait: true,
+        debug: $('body').hasClass('user_logged_in') ? 'true' : 'false',
+        extend: function() {
+          var gallery = this;
+          this.bind('image', function(e) {
+            $(e.imageTarget).unbind('click').click(function() {
+              gallery.toggleFullscreen();
+            });
+          });
+        }
+      });
       jQuery(fullbleed_selector).hide();
     }
   } catch(error) { }
@@ -68,6 +88,16 @@ jQuery(document).ready(function($) {
         height: $(this).data('height')
       };
       
+      if($(this).data('allowFullscreen')) {
+        galleria_options['extend'] = function() {
+          var gallery = this;
+          this.bind('image', function(e) {
+            $(e.imageTarget).unbind('click').click(function() {
+              gallery.toggleFullscreen();
+            });
+          });
+        };
+      }
       if($(this).data('picasaSelector')) {
         galleria_options['picasa'] = $(this).data('picasaSelector');
         galleria_options['picasaOptions'] = $(this).data('picasaOptions');

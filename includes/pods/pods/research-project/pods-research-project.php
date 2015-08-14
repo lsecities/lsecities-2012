@@ -94,7 +94,7 @@ function pods_prepare_research_project($pod_slug) {
   
   if(is_array($photo_galleries)) {
     foreach($photo_galleries as $photo_gallery) {
-      $obj['research_photo_galleries'][] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($photo_gallery['slug'], 'fullbleed wait');
+      $obj['research_photo_galleries'][] = \LSECitiesWPTheme\photo_gallery_get_galleria_data($photo_gallery['slug'], 'fullbleed wait', TRUE);
     }
   }
 
