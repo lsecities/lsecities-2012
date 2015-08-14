@@ -64,15 +64,7 @@ jQuery(document).ready(function($) {
         showInfo: false,
         preload: 'all',
         wait: true,
-        debug: $('body').hasClass('user_logged_in') ? 'true' : 'false',
-        extend: function() {
-          var gallery = this;
-          this.bind('image', function(e) {
-            $(e.imageTarget).unbind('click').click(function() {
-              gallery.toggleFullscreen();
-            });
-          });
-        }
+        debug: $('body').hasClass('user_logged_in') ? 'true' : 'false'
       });
       jQuery(fullbleed_selector).hide();
     }
