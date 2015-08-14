@@ -930,10 +930,10 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-research-project section > header > h1 { margin-bottom: 0; }
 .lc-research-project #keyfacts .highlights > a { position: relative; }
 .lc-research-project #keyfacts .highlights > a h1 { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; position: absolute; bottom: 0; color: white; background: rgba(0, 0, 0, 0.6); width: 100%; padding: 0.3em; }
-.lc-research-project #t-galleries .photo-essay { width: 49.15254%; float: left; height: 6rem; }
+.lc-research-project #t-galleries .photo-essay { width: 49.15254%; float: left; min-height: 278px; }
 .lc-research-project #t-galleries .photo-essay:nth-child(2n + 1) { margin-left: 0; margin-right: -100%; clear: both; margin-left: 0; }
 .lc-research-project #t-galleries .photo-essay:nth-child(2n + 2) { margin-left: 50.84746%; margin-right: -100%; clear: none; }
-.lc-research-project #t-galleries .photo-essay .lc-galleria { min-height: 290px; }
+.lc-research-project #t-galleries .photo-essay .lc-galleria { height: 278px; }
 .lc-research-project #t-dataviz section.toc { margin-top: 1rem; }
 .lc-research-project #t-dataviz section.toc section { margin-top: 0; }
 .lc-research-project #t-dataviz .toc .article { float: left; width: 32%; margin-right: 2%; padding: 0.5rem; background-color: rgba(240, 240, 240, 0.9); margin-bottom: 2rem; }
