@@ -28,12 +28,12 @@ class EventProgramme extends PodsObject {
     ],
     'cmn-cn' => [
       'chair' => [
-        'singular' => 'chair',
-        'plural' => 'chairs'
+        'singular' => '主持',
+        'plural' => '主持'
        ],
        'respondent' => [
-         'singular' => 'respondent',
-         'plural' => 'respondents'
+         'singular' => '回应',
+         'plural' => '回应'
        ]
     ],
     'pt-br' => [
