@@ -96,7 +96,7 @@ class Article extends PodsObject {
       return;
     }
 
-    $this->permalink = $pod->field('permalink');
+    $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
 
     // TODO: check, move
