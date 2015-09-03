@@ -47,6 +47,7 @@ require_fragment('/includes/pods/ui/lsecities-pods-ui.php' );
 // Pods document types and classes
 require_fragment('/lib/theme-functions.php');
 require_fragment('/lib/pods-object.php');
+require_fragment('/lib/lsecities/article/article.php');
 require_fragment('/lib/lsecities/course/course.php');
 require_fragment('/lib/lsecities/event/event.php');
 require_fragment('/lib/lsecities/event-programme/event-programme.php');
