@@ -172,9 +172,13 @@ function get_article_data($pod, $options = []) {
     $obj['article_publishing_date'] = $publication_pod->field('publishing_date');
   }
   $obj['article_tags'] = $pod->field('tags');
-  
+  $obj['article_themes'] = array_map(function($item) { return [ 'permalink' => $item['slug'], 'name' => $item['name'] ]; }, $pod->field('themes'));
+  $obj['article_topics'] = array_map(function($item) { return [ 'permalink' => $item['slug'], 'name' => $item['name'] ]; }, $pod->field('topics'));
+  $obj['about_cities'] = array_map(function($item) { $country_pod = pods('country', $item['country.id']); $country_name = $country_pod->field('name'); return [ 'permalink' => $item['permalink'], 'name' => $item['name'], 'hierarchical_name' => $country_name . '|' . $item['name'], 'country' => $country_name ]; }, $pod->field('about_cities'));
+  $obj['about_countries'] = array_map(function($item) { return [ 'permalink' => $item['permalink'], 'name' => $item['name'] ]; }, $pod->field('about_countries'));
+
   $__article_authors = $pod->field('authors');
-  
+
   if($options['shallow'] and is_array($__article_authors)) {
     // if preparing a shallow object, filter out the array items we don't need
     $obj['article_authors'] = \LSECitiesWPTheme\filter_items($__article_authors, ['name', 'family_name']);
