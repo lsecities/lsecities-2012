@@ -529,6 +529,8 @@ header #socialbuttons ul { height: 16px; }
 .single-post .comments-area h2 { font-size: 1.125em; }
 .single-post .comments-area .commentlist p { margin-bottom: 0; }
 
+.lc-article.layout-lists-by-column .sections > section > h1 { /** TECHNICAL_DEBT - fiddly vertical spacing - manually tuned to allow titles spanning over 1 and 2 lines to have identical height on full-width layout in order to let column contents start aligned */ min-height: 3rem; }
+
 #main { margin-top: 1em; }
 
 .twitterbox { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_twitter-v1darkblue_24x24.png") no-repeat scroll 0 50% transparent; line-height: 2em; padding-left: 2em; }

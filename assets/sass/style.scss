@@ -33,6 +33,9 @@
 // Add more as needed
 @import "partials/wordpress/single";
 
+// page layouts - pod-independent
+@import "templates/layouts/lists-by-column";
+
 // Final designs - main frame and one SCSS per template
 @import "templates/base";
 @import "templates/page-meta";

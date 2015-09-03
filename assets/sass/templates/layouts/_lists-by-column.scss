@@ -1,0 +1,10 @@
+.lc-article.layout-lists-by-column {
+  .sections > section > h1 {
+    /**
+     * TECHNICAL_DEBT - fiddly vertical spacing - manually tuned to allow
+     * titles spanning over 1 and 2 lines to have identical height on full-width
+     * layout in order to let column contents start aligned
+     */
+    min-height: 3rem;
+  }
+}
