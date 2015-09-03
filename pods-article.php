@@ -103,7 +103,7 @@ set_query_var('parent_publication_id', $obj['parent_publication_id']);
                         </div>
                       </div>
                     </aside><!-- #keyfacts -->
-                    <div class="entry-content article-text<?php if($obj['article_layout']) { echo ' ' . $obj['article_layout']; } ?>">
+                    <div class="entry-content article-text<?php if($obj['layout']) { echo ' ' . $obj['layout']; } ?>">
                     <?php if($obj['article_text']): ?>
                       <?php echo $obj['article_text']; ?>
                     <?php elseif($obj['article_summary']): ?>

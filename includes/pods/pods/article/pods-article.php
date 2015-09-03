@@ -105,7 +105,7 @@ function get_article_data($pod, $options = []) {
   $obj['current_page_uri'] = $uri_parts[0];
   $obj['lang2_slug'] = $pod->field('language.slug');
   $obj['lang2_name'] = $pod->field('language.name');
-  $article_layout = $pod->field('layout');
+  $obj['layout'] = $pod->field('layout');
 
   $obj['parent_publication_id'] = $pod->field('in_publication.id');
   $publication_pod = pods('publication_wrappers', $obj['parent_publication_id']);
