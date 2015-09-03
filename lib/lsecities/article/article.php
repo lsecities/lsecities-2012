@@ -73,7 +73,7 @@ class Article extends PodsObject {
   public $publishing_date;
 
   public $attachments;
-  
+
   public $data_gallery;
 
   /**
