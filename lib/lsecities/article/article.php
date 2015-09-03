@@ -184,36 +184,47 @@ class Article extends PodsObject {
    * @return String A JSON serialization of the object
    */
   function to_json($options) {
+    return json_encode($this->to_var($options));
+  }
+
+  function to_var($options) {
     // set defaults
     if(!array_key_exists('shallow', $options)) {
       $options['shallow'] = FALSE;
     }
-
-    // TODO: port
-    if($options['shallow'] and is_array($this->authors)) {
-      // if preparing a shallow object, filter out the array items we don't need
-      $__authors = \LSECitiesWPTheme\filter_items($this->authors, ['name', 'family_name']);
-    } elseif(is_array($this->authors)) {
-      // otherwise, just add the set of full linked objects
-      $__authors = $this->authors;
-    } else {
-      $__authors = NULL;
+    if(!array_key_exists('full_content', $options)) {
+      $options['full_content'] = TRUE;
     }
 
-    $vars = get_object_vars($this);
-    unset($vars['pod']);
-    unset($vars['authors']);
-    $vars['authors'] = $__authors;
-
-
-    if(TRUE === $options['shallow']) {
-      $vars['article_data']->text = NULL;
-      if($vars['article_data_lang2']) {
-        $vars['article_data_lang2']->text = NULL;
+    if($options['full_content']) {
+      // TODO: port
+      if($options['shallow'] and is_array($this->authors)) {
+        // if preparing a shallow object, filter out the array items we don't need
+        $__authors = \LSECitiesWPTheme\filter_items($this->authors, ['name', 'family_name']);
+      } elseif(is_array($this->authors)) {
+        // otherwise, just add the set of full linked objects
+        $__authors = $this->authors;
+      } else {
+        $__authors = NULL;
       }
-    }
 
-    return json_encode($vars);
+      $vars = get_object_vars($this);
+      unset($vars['pod']);
+      unset($vars['authors']);
+      $vars['authors'] = $__authors;
+
+
+      if(TRUE === $options['shallow']) {
+        $vars['article_data']->text = NULL;
+        if($vars['article_data_lang2']) {
+          $vars['article_data_lang2']->text = NULL;
+        }
+      }
+
+      return $vars;
+    } else {
+      return $this->permalink;
+    }
   }
 }
 
@@ -228,12 +239,27 @@ class ArticlesList {
     $this->articles = [];
 
     while($pod->fetch()) {
-      $this->articles[] = $pod->field('slug');
+      $this->articles[] = new Article($pod->field('slug'));
     }
   }
 
-  function to_json() {
-    return json_encode($this->articles);
+  function to_json($options) {
+    // set defaults
+    if(!array_key_exists('shallow', $options)) {
+      $options['shallow'] = FALSE;
+    }
+    if(!array_key_exists('full_content', $options)) {
+      $options['full_content'] = FALSE;
+    }
+
+    return json_encode(array_map(function($item) use ($options) { return $item->to_var($options); }, $this->articles));
+    /*
+    if($options['full_content']) {
+      return array_map(function($item) { return $item->to_json($options); }, $this->articles);
+    } else {
+      $__all_articles = array_map(function($item) { return})
+      return json_encode($this->articles);
+    }*/
   }
 }
 
