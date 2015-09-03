@@ -12,7 +12,7 @@ header("Content-Type: application/json");
 $obj = new Article(pods_v('last', 'url'));
 
 if($_REQUEST['shallow'] === 'true') {
-  $options = [ 'shallow' => true ];
+  $options = [ 'shallow' => TRUE ];
 }
 
 echo $obj->to_json($options);
