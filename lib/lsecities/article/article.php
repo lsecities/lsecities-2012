@@ -61,6 +61,8 @@ class Article extends PodsObject {
   public $about_cities;
   public $about_countries;
 
+  public $layout;
+  
   /**
    * @var Array List of permalinks of research programmes associated to this
    * article (e.g. Urban Age, Mellon Programme, etc.)
@@ -120,8 +122,7 @@ class Article extends PodsObject {
     $this->lang2['slug'] = $__lang2_slug;
     $this->lang2['name'] = $pod->field('language.name');
 
-    // TODO: this doesn't seem to be used anywhere - remove?
-    // $article_layout = $pod->field('layout');
+    $this->layout = $pod->field('layout');
 
     $this->parent_publication_id = $pod->field('in_publication.id');
     $__publication_pod = pods('publication_wrappers', $this->parent_publication_id);
