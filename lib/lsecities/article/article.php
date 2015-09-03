@@ -212,13 +212,9 @@ class Article extends PodsObject {
       $obj['article_authors'] = NULL;
     }
 
-
     $vars = get_object_vars($this);
     unset($vars['pod']);
-    $vars['article_data'] = get_object_vars($this->article_data);
-    if($this->lang2) {
-      $vars['article_data_lang2'] = get_object_vars($this->article_data_lang2);
-    }
+
     return json_encode($vars);
   }
 }
