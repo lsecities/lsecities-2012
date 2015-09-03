@@ -17,7 +17,7 @@ function pods_prepare_article($post_id) {
   }
   var_trace('article pod - var 3: '. pods_var(3, 'url'));
   var_trace('article pod - var 4: '. pods_var(4, 'url'));
-  
+
   return get_article_data($pod);
 }
 
@@ -26,7 +26,7 @@ function pods_prepare_article($post_id) {
  * By default, all articles are added to the list; to filter by
  * type (plain articles or data articles), the optional $type
  * parameter must be used.
- * 
+ *
  * @param Array $options An associative array of configuration options
  *   'type' (string) default:"all' - The type of article: all, plain, data
  *   'shallow' (bool) default:FALSE - Whether to generate shallow or
@@ -40,42 +40,42 @@ function pods_prepare_article_list($options = []) {
     trigger_error('invalid type parameter');
     return;
   }
-  
+
   if(!array_key_exists('type', $options)) {
     $options['type'] = 'all';
   }
-  
+
   if(array_key_exists('shallow', $options) and !is_bool($options['shallow'])) {
     trigger_error("'shallow' parameter must be bool");
     return;
   }
-  
+
   if(!array_key_exists('shallow', $options)) {
     $options['shallow'] = FALSE;
   }
-  
+
   // set default parameter
   $find_params = ['limit' => -1 ];
-  
+
   if('plain' === $options['type']) {
     $find_params['where'] = 'data_package.id IS NULL';
   } elseif('data' === $options['type']) {
     $find_params['where'] = 'data_package.id IS NOT NULL';
   }
-  
+
   $pod = pods('article')->find($find_params);
   $articles = array();
-  
+
   while($pod->fetch()) {
     $articles[] = get_article_data($pod, [ 'shallow' => TRUE ]);
   }
-  
+
   return $articles;
 }
 
 /**
  * Retrieve article data and pack it as an array
- * 
+ *
  * @param Object $pod The pod object for this article
  * @param Array $options An associative array of options:
  *   'shallow' (bool) default: FALSE - If false, most details of linked
@@ -89,7 +89,7 @@ function get_article_data($pod, $options = []) {
   if(!array_key_exists('shallow', $options)) {
     $options['shallow'] = FALSE;
   }
-  
+
   global $this_pod;
   $this_pod = new LC\PodObject($pod, 'Articles');
 
@@ -99,7 +99,7 @@ function get_article_data($pod, $options = []) {
 
   // trim trailing slash (may be added by Varnish)
   $obj['request_language'] = strtolower(pods_var(4, 'url'));//rtrim(strtolower(pods_url_variable('lang', 'get')), '/');
-  
+
   // save current path (used to generate links to translation of article, if available)
   $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
   $obj['current_page_uri'] = $uri_parts[0];
@@ -113,13 +113,13 @@ function get_article_data($pod, $options = []) {
 
   // research programmes
   $obj['research_programmes'] = array_map(function($item) { return $item['permalink']; }, $pod->field('research_programmes'));
-  
+
   // grab the featured image URI
   $obj['featured_image_uri'] = pods_image_url($pod->field('heading_image'), 'original');
-  
+
   // grab the ToC image URI
   $obj['toc_image_uri'] = pods_image_url($pod->field('cover_image'), 'original');
-  
+
   var_trace($obj['request_language'], 'request_language');
   var_trace($obj['lang2_slug'], 'article_lang2');
 
@@ -128,7 +128,7 @@ function get_article_data($pod, $options = []) {
     $obj['article_subtitle'] = $pod->field('subtitle_lang2');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract_lang2'));
     $obj['article_summary'] = do_shortcode($pod->display('summary_lang2'));
-    
+
     // do not include full article text if we are generating shallow data
     if(TRUE !== $options['shallow']) {
       $obj['article_text'] = do_shortcode($pod->display('text_lang2'));
