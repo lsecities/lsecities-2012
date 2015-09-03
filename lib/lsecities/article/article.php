@@ -204,6 +204,14 @@ class Article extends PodsObject {
     unset($vars['authors']);
     $vars['authors'] = $__authors;
 
+
+    if(TRUE === $options['shallow']) {
+      $vars['article_data']->text = NULL;
+      if($vars['article_data_lang2']) {
+        $vars['article_data_lang2']->text = NULL;
+      }
+    }
+
     return json_encode($vars);
   }
 }
