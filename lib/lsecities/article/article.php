@@ -166,19 +166,6 @@ class Article extends PodsObject {
 
     $this->authors = $pod->field('authors');
 
-    // TODO: check, move
-    /*
-    if($options['shallow'] and is_array($__article_authors)) {
-      // if preparing a shallow object, filter out the array items we don't need
-      $obj['article_authors'] = \LSECitiesWPTheme\filter_items($__article_authors, ['name', 'family_name']);
-    } elseif(is_array($__article_authors)) {
-      // otherwise, just add the set of full linked objects
-      $obj['article_authors'] = $__article_authors;
-    } else {
-      $obj['article_authors'] = NULL;
-    }
-    */
-
     // fetch any attachments, replace hostname until we switch to WP+Pods for the whole website
     $this->attachments = $pod->field('attachments');
 
@@ -202,18 +189,20 @@ class Article extends PodsObject {
     }
 
     // TODO: port
-    if($options['shallow'] and is_array($__article_authors)) {
+    if($options['shallow'] and is_array($this->authors)) {
       // if preparing a shallow object, filter out the array items we don't need
-      $obj['article_authors'] = \LSECitiesWPTheme\filter_items($__article_authors, ['name', 'family_name']);
-    } elseif(is_array($__article_authors)) {
+      $__authors = \LSECitiesWPTheme\filter_items($this->authors, ['name', 'family_name']);
+    } elseif(is_array($this->authors)) {
       // otherwise, just add the set of full linked objects
-      $obj['article_authors'] = $__article_authors;
+      $__authors = $this->authors;
     } else {
-      $obj['article_authors'] = NULL;
+      $__authors = NULL;
     }
 
     $vars = get_object_vars($this);
     unset($vars['pod']);
+    unset($vars['authors']);
+    $vars['authors'] = $__authors;
 
     return json_encode($vars);
   }
