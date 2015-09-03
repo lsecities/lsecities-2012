@@ -10,4 +10,9 @@ namespace LSECitiesWPTheme;
  */
 header("Content-Type: application/json");
 $obj = new Article(pods_v('last', 'url'));
-echo $obj->to_json();
+
+if($_REQUEST['shallow'] === 'true') {
+  $options = [ 'shallow' => true ];
+}
+
+echo $obj->to_json($options);
