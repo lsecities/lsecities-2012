@@ -161,8 +161,9 @@ class Article extends PodsObject {
     $this->tags = $pod->field('tags');
     $this->themes = array_map(function($item) { return [ 'permalink' => $item['slug'], 'name' => $item['name'] ]; }, $pod->field('themes'));
     $this->topics = array_map(function($item) { return [ 'permalink' => $item['slug'], 'name' => $item['name'] ]; }, $pod->field('topics'));
-    $this->about_cities = array_map(function($item) { $country_pod = pods('country', $item['country.id']); $country_name = $country_pod->field('name'); return [ 'permalink' => $item['permalink'], 'name' => $item['name'], 'hierarchical_name' => $country_name . '|' . $item['name'], 'country' => $country_name ]; }, $pod->field('about_cities'));
-    $this->about_countries = array_map(function($item) { return [ 'permalink' => $item['permalink'], 'name' => $item['name'] ]; }, $pod->field('about_countries'));
+    //$this->about_cities = array_map(function($item) { $country_pod = pods('country', $item['country.id']); $country_name = $country_pod->field('name'); return [ 'permalink' => $item['permalink'], 'name' => $item['name'], 'hierarchical_name' => $country_name . '|' . $item['name'], 'country' => $country_name ]; }, $pod->field('about_cities'));
+    $this->about_cities = array_map(function($item) { return new City($item); }, $pod->field('about_cities.permalink'));
+    $this->about_countries = array_map(function($item) { return new Country($item); }, $pod->field('about_countries.permalink'));
 
     $this->authors = $pod->field('authors');
 
