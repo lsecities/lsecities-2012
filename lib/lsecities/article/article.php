@@ -18,7 +18,7 @@ class ArticleData {
   public $author_info;
   public $pdf_uri;
 
-  function __construct($pod, $lang2 = FALSE) {
+  function __construct($pod, $is_lang2 = FALSE) {
     if($is_lang2) {
       $lang_suffix = '_lang2';
     }
