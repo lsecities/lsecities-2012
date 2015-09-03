@@ -62,7 +62,7 @@ class Article extends PodsObject {
   public $about_countries;
 
   public $layout;
-  
+
   /**
    * @var Array List of permalinks of research programmes associated to this
    * article (e.g. Urban Age, Mellon Programme, etc.)
