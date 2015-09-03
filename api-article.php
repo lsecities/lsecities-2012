@@ -6,7 +6,7 @@ namespace LSECitiesWPTheme;
  *
  * @package LSECities2012
  *
- * URI: /api/v0/articles/*
+ * URI: /api/v0/article/*
  */
 header("Content-Type: application/json");
 $obj = new Article(pods_v('last', 'url'));
