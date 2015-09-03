@@ -124,7 +124,7 @@ function get_article_data($pod, $options = []) {
   var_trace($obj['lang2_slug'], 'article_lang2');
 
   if(!empty($obj['request_language']) && $obj['request_language'] == $obj['lang2_slug']) {
-    $obj['article_title'] = $pod->field('title_lang2');
+    $obj['title'] = $pod->field('title_lang2');
     $obj['article_subtitle'] = $pod->field('subtitle_lang2');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract_lang2'));
     $obj['article_summary'] = do_shortcode($pod->display('summary_lang2'));
@@ -140,7 +140,7 @@ function get_article_data($pod, $options = []) {
       $obj['pdf_uri'] = $pod->field('article_pdf_uri_lang2');
     }
   } else {
-    $obj['article_title'] = $pod->field('name');
+    $obj['title'] = $pod->field('name');
     $obj['permalink'] = $pod->field('slug');
     $obj['article_subtitle'] = $pod->field('article_subtitle');
     $obj['article_abstract'] = do_shortcode($pod->display('abstract'));

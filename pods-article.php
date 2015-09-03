@@ -30,7 +30,7 @@ set_query_var('parent_publication_id', $obj['parent_publication_id']);
               <?php endif; ?>
               
               <header class="entry-header row">
-                <h1 class="entry-title article-title"><?php echo $obj['article_title']; ?></h1>
+                <h1 class="entry-title article-title"><?php echo $obj['title']; ?></h1>
                 <?php if($obj['article_subtitle']): ?>
                 <h2><?php echo $obj['article_subtitle']; ?></h2>
                 <?php endif; ?>
