@@ -99,7 +99,7 @@ class Article extends PodsObject {
 
     // TODO: check, move
     global $this_pod;
-    $this_pod = new LC\PodObject($pod, 'Articles');
+    $this_pod = new \LC\PodObject($pod, 'Articles');
 
     // TODO: check, move
     lc_data('pods_toplevel_ancestor', 309);
