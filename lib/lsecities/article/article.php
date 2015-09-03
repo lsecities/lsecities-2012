@@ -118,9 +118,10 @@ class Article extends PodsObject {
     $obj['current_page_uri'] = $uri_parts[0];
 
     $__lang2_slug = $pod->field('language.slug');
-    if($__lang2_slug)
-    $this->lang2['slug'] = $__lang2_slug;
-    $this->lang2['name'] = $pod->field('language.name');
+    if($__lang2_slug) {
+      $this->lang2['slug'] = $__lang2_slug;
+      $this->lang2['name'] = $pod->field('language.name');
+    }
 
     $this->layout = $pod->field('layout');
 
