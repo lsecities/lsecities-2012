@@ -216,6 +216,26 @@ class Article extends PodsObject {
   }
 }
 
+class ArticlesList {
+  public $articles;
+
+  function __construct() {
+    // set default parameter
+    $find_params = ['limit' => -1 ];
+
+    $pod = pods('article')->find($find_params);
+    $this->articles = [];
+
+    while($pod->fetch()) {
+      $this->articles[] = $pod->field('slug');
+    }
+  }
+
+  function to_json() {
+    return json_encode($this->articles);
+  }
+}
+
 function pods_prepare_article($post_id) {
   var_trace($post_id, 'POST_ID');
   /* URI: /media/objects/articles/<article-slug>[?lang=<language>] */
