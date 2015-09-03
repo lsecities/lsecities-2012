@@ -216,8 +216,10 @@ class Article extends PodsObject {
 
       if(TRUE === $options['shallow']) {
         $vars['article_data']->text = NULL;
+        $vars['article_data']->extra_content = NULL;
         if($vars['article_data_lang2']) {
           $vars['article_data_lang2']->text = NULL;
+          $vars['article_data_lang2']->extra_content = NULL;
         }
       }
 
