@@ -138,9 +138,9 @@ class Article extends PodsObject {
     // grab the ToC image URI
     $this->toc_image_uri = pods_image_url($pod->field('cover_image'), 'original');
 
-    $article_data = new ArticleData($pod, FALSE);
-    if($this->lang2['slug']) {
-      $article_data_lang2 = new ArticleData($pod, TRUE);
+    $this->article_data = new ArticleData($pod, FALSE);
+    if(is_array($this->lang2)) {
+      $this->article_data_lang2 = new ArticleData($pod, TRUE);
     }
 
     // prepend base URI
