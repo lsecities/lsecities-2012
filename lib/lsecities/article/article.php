@@ -184,7 +184,7 @@ class Article extends PodsObject {
    * @return String A JSON serialization of the object
    */
   function to_json($options) {
-    return json_encode($this->to_var($options));
+    return json_encode($this->to_var($options),  JSON_PRETTY_PRINT);
   }
 
   function to_var($options) {
@@ -254,6 +254,6 @@ class ArticlesList {
       $options['full_content'] = FALSE;
     }
 
-    return json_encode(array_map(function($item) use ($options) { return $item->to_var($options); }, $this->articles));
+    return json_encode(array_map(function($item) use ($options) { return $item->to_var($options); }, $this->articles), JSON_PRETTY_PRINT);
   }
 }
