@@ -51,7 +51,7 @@ class Article extends PodsObject {
   public $article_data;
   public $article_data_lang2;
 
-  public $parent_publication_id;
+  public $parent_publication;
 
   public $authors;
 
@@ -125,7 +125,11 @@ class Article extends PodsObject {
 
     $this->layout = $pod->field('layout');
 
-    $this->parent_publication_id = $pod->field('in_publication.id');
+    $this->parent_publication = [
+      'id' => $pod->field('in_publication.id'),
+      'title' => $pod->field('in_publication.name')
+    ];
+
     $__publication_pod = pods('publication_wrappers', $this->parent_publication_id);
     lc_data('publication_pod', $__publication_pod);
 
