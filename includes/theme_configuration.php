@@ -81,7 +81,7 @@ lc_data('meta_description', 'LSE Cities is an international centre at the London
  * (protocol-relative) base URI of theme and absolute filesystem path
  */
 lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/app/themes/lsecities-alexandria/');
-lc_data('theme_filesystem_abspath', ABSPATH . '/app/themes/lsecities-alexandria');
+lc_data('theme_filesystem_abspath', dirname(__DIR__));
 
 /**
  * Mapping from URIs (later: Pods types) to data to be used
