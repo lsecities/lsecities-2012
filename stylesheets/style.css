@@ -243,11 +243,11 @@ blockquote { margin: 1.5em 0 0.75em 3em; -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0
 
 blockquote::before { color: #999999; content: "â"; display: block; font-size: 4em; font-style: italic; line-height: 1em; height: 0; margin-left: -0.8em; }
 
-.downloadthis.pdf { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
+.downloadthis.pdf { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
 
-.readthis.online { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
+.readthis.online { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
 
-.watchvideo.onyoutube { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
+.watchvideo.onyoutube { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; transition: opacity 0.4s ease 0s; }
 
 .lc-slider-page .flexslider .flex-direction-nav li a { -moz-transition-property: none; -webkit-transition-property: none; -o-transition-property: none; transition-property: none; top: 467 -64/2 px; }
 
@@ -281,7 +281,7 @@ blockquote::before { color: #999999; content: "â"; display: block; font-siz
 
 .lc-slider-page .flexslider .tile.tall { height: 32.357em; }
 
-.lc-slider-page .flexslider .tile:hover .feature-info { -moz-transition-property: background-color; -webkit-transition-property: background-color; -o-transition-property: background-color; transition-property: background-color; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; -moz-transition-timing-function: ease-in-out; -webkit-transition-timing-function: ease-in-out; -o-transition-timing-function: ease-in-out; transition-timing-function: ease-in-out; -moz-transition-delay: 0s; -webkit-transition-delay: 0s; -o-transition-delay: 0s; transition-delay: 0s; background-color: #000; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; max-height: 75%; }
+.lc-slider-page .flexslider .tile:hover .feature-info { -moz-transition-property: background-color; -webkit-transition-property: background-color; -o-transition-property: background-color; transition-property: background-color; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; -moz-transition-timing-function: ease-in-out; -webkit-transition-timing-function: ease-in-out; -o-transition-timing-function: ease-in-out; transition-timing-function: ease-in-out; -moz-transition-delay: 0s; -webkit-transition-delay: 0s; -o-transition-delay: 0s; transition-delay: 0s; background-color: #000; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; max-height: 75%; }
 
 .lc-slider-page .flexslider .tile:hover .feature-info.textonly { -moz-transition-property: background-color; -webkit-transition-property: background-color; -o-transition-property: background-color; transition-property: background-color; -moz-transition-duration: 0.5s; -webkit-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; -moz-transition-timing-function: ease-in-out; -webkit-transition-timing-function: ease-in-out; -o-transition-timing-function: ease-in-out; transition-timing-function: ease-in-out; -moz-transition-delay: 0s; -webkit-transition-delay: 0s; -o-transition-delay: 0s; transition-delay: 0s; background-color: #000; max-height: inherit; }
 
@@ -309,7 +309,7 @@ blockquote::before { color: #999999; content: "â"; display: block; font-siz
 
 .lc-people-list #contentarea section.people-list .person .profile-photo img { width: 144px; max-width: 144px; -moz-border-radius: 2px; -webkit-border-radius: 2px; -o-border-radius: 2px; -ms-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px; }
 
-.lc-media-archive-search .queryarea { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -moz-box-shadow: 1px 1px 10px #cccccc; -webkit-box-shadow: 1px 1px 10px #cccccc; -o-box-shadow: 1px 1px 10px #cccccc; box-shadow: 1px 1px 10px #cccccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
+.lc-media-archive-search .queryarea { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -moz-box-shadow: 1px 1px 10px #cccccc; -webkit-box-shadow: 1px 1px 10px #cccccc; -o-box-shadow: 1px 1px 10px #cccccc; box-shadow: 1px 1px 10px #cccccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -ms-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
 
 body.ec2012 { background-color: black; color: white; font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
 
@@ -481,7 +481,7 @@ header #searchbox #queryfield input[type="text"] { border: none; border-bottom: 
 header #searchbox #queryfield input[type="text"]:focus { border: none; border-bottom: 1px solid #a8abb2; width: 20em; -moz-transition: width 0.6s ease 0s; -o-transition: width 0.6s ease 0s; -webkit-transition: width 0.6s ease; -webkit-transition-delay: 0s; transition: width 0.6s ease 0s; }
 header #searchbox #queryfield button { float: right; font-size: 1.2rem; color: #a8abb2; -moz-transition: color 0.4s ease-out 0s; -o-transition: color 0.4s ease-out 0s; -webkit-transition: color 0.4s ease-out; -webkit-transition-delay: 0s; transition: color 0.4s ease-out 0s; background: transparent; border: none; width: 1em; height: 1em; padding: 0; margin: 0; }
 header #searchbox #queryfield button:hover { color: #b9bbc1; }
-header #searchbox #queryfield input[type="submit"] { float: right; color: white; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent; border: none; background: #a8abb2; width: 1em; height: 1em; font-weight: bold; font-size: 2.1em; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; }
+header #searchbox #queryfield input[type="submit"] { float: right; color: white; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/searchicon_for_header.gif") no-repeat scroll right center transparent; border: none; background: #a8abb2; width: 1em; height: 1em; font-weight: bold; font-size: 2.1em; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; }
 header #searchbox #queryfield input[type="submit"]:hover { background: #b9bbc1; }
 header #searchbox form { float: right; opacity: 1; font-size: 0.75em; margin-left: 0.625em; }
 header #searchbox form:hover { opacity: 1; }
@@ -507,7 +507,7 @@ header #socialbuttons ul { height: 16px; }
 #level3nav ul.children { margin-left: 1em; }
 #level3nav #organizer-logos { max-width: 67.7290%; width: 67.7290%; }
 
-#footer { font-size: 0.75em; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; border-top: 1px solid #E5E5E0; margin-top: 20px; padding: 40px; color: #fff; }
+#footer { font-size: 0.75em; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; border-top: 1px solid #E5E5E0; margin-top: 20px; padding: 40px; color: #fff; }
 #footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 { font-weight: bold; margin-bottom: 0.5em; color: #fff; border-bottom: 1px solid rgba(204, 204, 204, 0.6); font-size: 1em; }
 #footer ul { list-style-type: none; margin-bottom: 2em; }
 #footer a, #footer a:visited, #footer a:active { color: #ee2222; }
@@ -533,7 +533,7 @@ header #socialbuttons ul { height: 16px; }
 
 #main { margin-top: 1em; }
 
-.twitterbox { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_twitter-v1darkblue_24x24.png") no-repeat scroll 0 50% transparent; line-height: 2em; padding-left: 2em; }
+.twitterbox { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_twitter-v1darkblue_24x24.png") no-repeat scroll 0 50% transparent; line-height: 2em; padding-left: 2em; }
 
 th, td { padding: 0.25em; border-left: 1px dashed #eee; }
 
@@ -620,8 +620,8 @@ html.js .organictabs, html.js .uiTabs { display: inline-block; }
 
 #navigationarea nav { margin-top: 2.5em; }
 #navigationarea nav:first-child { margin-top: inherit; }
-#navigationarea nav dl dt.ui-accordion-header:before { content: ''; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/bullet-horizontal.gif") no-repeat 0; padding-left: 0.75em; }
-#navigationarea nav dl dt.ui-accordion-header.ui-state-active:before { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/bullet-vertical.gif") no-repeat 0; padding-left: 0.75em; }
+#navigationarea nav dl dt.ui-accordion-header:before { content: ''; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/bullet-horizontal.gif") no-repeat 0; padding-left: 0.75em; }
+#navigationarea nav dl dt.ui-accordion-header.ui-state-active:before { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/bullet-vertical.gif") no-repeat 0; padding-left: 0.75em; }
 #navigationarea #whoswho-side-toc h1 { font-weight: bold; }
 #navigationarea #whoswho-side-toc h1 + ul { margin-bottom: 1.5em; }
 
@@ -654,13 +654,13 @@ html.js .organictabs, html.js .uiTabs { display: inline-block; }
 blockquote { margin: 1.5em 0 0.75em 3em; -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; box-shadow: rgba(0, 0, 0, 0.5) 0 0 6px; border-left: 0.5em solid #DDDDDD; padding: 0 0.5em; }
 blockquote::before { color: #999999; content: '\00AB'; display: block; font-size: 4em; font-style: italic; line-height: 1em; height: 0; margin-left: -0.8em; }
 
-.downloadthis.pdf { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
+.downloadthis.pdf { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_downloaddarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
 .downloadthis.pdf:hover { opacity: 0.6; }
 
-.readthis.online { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
+.readthis.online { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_magglassdarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
 .readthis.online:hover { opacity: 0.6; }
 
-.watchvideo.onyoutube { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
+.watchvideo.onyoutube { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/icons/mal/icon_youtubedarkblue_20x20.png") no-repeat scroll 0 0 transparent; padding-left: 28px; padding-bottom: 8px; -moz-transition: opacity 0.4s ease 0s; -o-transition: opacity 0.4s ease 0s; -webkit-transition: opacity 0.4s ease; -webkit-transition-delay: 0s; transition: opacity 0.4s ease 0s; }
 .watchvideo.onyoutube:hover { opacity: 0.6; }
 
 .reset-layout { overflow: hidden; *zoom: 1; }
@@ -794,7 +794,7 @@ right: -21px; */ }
 .lc-article.lc-list section.list.by-four ul li:nth-of-type(4n+1) { clear: both; }
 
 .lc-media-archive-search input[type="checkbox"] { margin-right: 0.5em; }
-.lc-media-archive-search .queryarea { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -moz-box-shadow: 1px 1px 10px #ccc; -webkit-box-shadow: 1px 1px 10px #ccc; box-shadow: 1px 1px 10px #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
+.lc-media-archive-search .queryarea { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_lightgrey_120420.gif"); -moz-box-shadow: 1px 1px 10px #ccc; -webkit-box-shadow: 1px 1px 10px #ccc; box-shadow: 1px 1px 10px #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 1em; margin-bottom: 2em; }
 .lc-media-archive-search .queryarea h3 { font-weight: bold; margin-bottom: 0.5em; }
 .lc-media-archive-search #query { border: none; background-color: #fcfcfc; color: #999; line-height: 2em; padding: 0.5em 1em; font-style: italics; }
 .lc-media-archive-search .results { *zoom: 1; }
@@ -980,8 +980,8 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-section-front .flexslider .tile:hover header, .lc-section-front .flexslider .tile:hover .feature-title, .lc-section-front .flexslider .tile:hover .feature-caption, .lc-section-front .flexslider .tile:hover .feature-date { display: none; }
 .lc-section-front .flexslider .tile:hover .feature-info.noblurb header, .lc-section-front .flexslider .tile:hover .feature-info.noblurb .feature-title, .lc-section-front .flexslider .tile:hover .feature-info.noblurb .feature-caption, .lc-section-front .flexslider .tile:hover .feature-info.noblurb .feature-date { display: inherit; }
 .lc-section-front .flexslider .tile:hover .feature-info.textonly .feature-title, .lc-section-front .flexslider .tile:hover .feature-info.textonly .feature-caption { display: block; }
-.lc-section-front .flexslider .tile:hover .feature-blurb { max-height: 75%; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); }
-.lc-section-front .flexslider .tile:hover .feature-info { -moz-transition: background-color 0.5s ease-in-out 0s; -o-transition: background-color 0.5s ease-in-out 0s; -webkit-transition: background-color 0.5s ease-in-out; -webkit-transition-delay: 0s; transition: background-color 0.5s ease-in-out 0s; background-color: #000; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; max-height: 75%; }
+.lc-section-front .flexslider .tile:hover .feature-blurb { max-height: 75%; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); }
+.lc-section-front .flexslider .tile:hover .feature-info { -moz-transition: background-color 0.5s ease-in-out 0s; -o-transition: background-color 0.5s ease-in-out 0s; -webkit-transition: background-color 0.5s ease-in-out; -webkit-transition-delay: 0s; transition: background-color 0.5s ease-in-out 0s; background-color: #000; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif") repeat scroll 0 0 transparent; max-height: 75%; }
 .lc-section-front .flexslider .tile:hover .feature-info.textonly { -moz-transition: background-color 0.5s ease-in-out 0s; -o-transition: background-color 0.5s ease-in-out 0s; -webkit-transition: background-color 0.5s ease-in-out; -webkit-transition-delay: 0s; transition: background-color 0.5s ease-in-out 0s; background-color: #000; max-height: inherit; }
 .lc-section-front .flexslider .tile .inner-box { padding: 0.714285714em; }
 .lc-section-front .flexslider .tile .crop { position: relative; overflow: hidden; }
@@ -998,12 +998,12 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-section-front .flexslider .tile.citieslist ul li:nth-of-type(2n) { color: #999; }
 .lc-section-front .flexslider .tile.citieslist ul li a, .lc-section-front .flexslider .tile.citieslist ul li a:active, .lc-section-front .flexslider .tile.citieslist ul li a:visited { color: inherit; }
 .lc-section-front .flexslider .tile.citieslist ul li a:hover { color: #990000; }
-.lc-section-front .flexslider .tile.introbox { background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); }
+.lc-section-front .flexslider .tile.introbox { background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); }
 .lc-section-front .flexslider .tile.introbox h1 { border-bottom: 1px red solid; margin-bottom: 0.225em; }
 .lc-section-front .flexslider .tile.introbox .inner-box { color: #fff; }
 .lc-section-front .flexslider .tile.introbox .inner-box p { font-size: 0.9em; line-height: 1.3em; }
 .lc-section-front .flexslider .feature-info { -moz-transition: background-color 0.5s ease-in-out 0s; -o-transition: background-color 0.5s ease-in-out 0s; -webkit-transition: background-color 0.5s ease-in-out; -webkit-transition-delay: 0s; transition: background-color 0.5s ease-in-out 0s; bottom: 0; color: #F8F8F8; cursor: pointer; line-height: 1em; padding-left: 0.714285em; padding-right: 0.714285em; padding-top: 0.714285em; padding-bottom: 0.3571428em; position: absolute; left: 0; right: 0; z-index: 1; }
-.lc-section-front .flexslider .feature-info:before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; right: 0; background: url("//lsecities.net/wp-content/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); opacity: 0.7; }
+.lc-section-front .flexslider .feature-info:before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; right: 0; background: url("//lsecities.net/app/themes/lsecities-alexandria/images/backgrounds/mal/pixelpattern_darkgrey_120420.gif"); opacity: 0.7; }
 .lc-section-front .flexslider .feature-info p { margin: 0; }
 .lc-section-front .flexslider .feature-info header { display: table-cell; vertical-align: middle; }
 .lc-section-front .flexslider .feature-info .feature-date { border-right: 1px solid red; display: table-cell; padding-right: 0.714285em; padding-left: 0; vertical-align: middle; text-align: center; }
