@@ -24,7 +24,7 @@ mediaArchiveApp.controller('MediaArchiveCtrl', function ($scope, $http) {
     } else {
       var httpRequest = $http({
         method: 'GET',
-        url: '/wp-content/themes/lsecities-alexandria/assets/js/media-archive-app/media_archive_data.json'
+        url: '/app/themes/lsecities-alexandria/assets/js/media-archive-app/media_archive_data.json'
       }).success(function(data, status) {
         $scope.audio_video_items = data.audio_video_items;
         $scope.articles = data.articles;
