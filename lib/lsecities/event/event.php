@@ -237,6 +237,38 @@ class Event extends PodsObject {
     
     return $output;
   }
+
+  /**
+   * Serialize object vars to JSON
+   * @param Array $options An associative array of options:
+   *   'shallow' (bool) default: FALSE - If false, most details of linked
+   *      objects (if any) will be added to the returned data
+   *      structure; otherwise, only basic data from linked objects will
+   *      be added (e.g. people names only)
+   * @return String A JSON serialization of the object
+   */
+  function to_json($options) {
+    return json_encode($this->to_var($options),  JSON_PRETTY_PRINT);
+  }
+
+  function to_var($options) {
+    // set defaults
+    if(!array_key_exists('shallow', $options)) {
+      $options['shallow'] = FALSE;
+    }
+    if(!array_key_exists('full_content', $options)) {
+      $options['full_content'] = TRUE;
+    }
+
+    if($options['full_content']) {
+      $vars = get_object_vars($this);
+      unset($vars['pod']);
+
+      return $vars;
+    } else {
+      return $this->permalink;
+    }
+  }
 }
 
 function event_get_data($permalink) {
