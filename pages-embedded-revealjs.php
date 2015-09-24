@@ -12,6 +12,9 @@ namespace LSECitiesWPTheme;
 $slideshow = new Slideshow(pods_v('last', 'url'));
 $obj = $slideshow->to_var();
 
+wp_enqueue_script('revealjs', 'https://raw.githubusercontent.com/hakimel/reveal.js/master/js/reveal.js', NULL, NULL, FALSE);
+wp_enqueue_style('revealjs', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/reveal.css');
+wp_enqueue_style('revealjs-theme-solarized', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/css/solarized.css');
 get_header();
 ?>
 
@@ -23,6 +26,18 @@ get_header();
   <?php \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj); ?>
 </article>
 
+<script>
+Reveal.initialize({
+  width: 1140,
+  height: 400,
+  center: false,
+  controls: true,
+  progress: true,
+  history: true,
+  transition: 'slide',
+  embedded: true
+});
+</script>
 <?php get_template_part('nav'); ?>
 
 </div><!-- #contentarea -->
