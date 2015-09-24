@@ -9,7 +9,7 @@
 
 namespace LSECitiesWPTheme;
 
-$slideshow = new Slideshow(pods_v('url', 'last'));
+$slideshow = new Slideshow(pods_v('last', 'url'));
 $obj = $slideshow->to_var();
 
 get_header();
