@@ -37,11 +37,11 @@ class Slideshow extends PodsObject {
    *      be added
    * @return String A JSON serialization of the object
    */
-  function to_json($options) {
+  function to_json($options = []) {
     return json_encode($this->to_var($options),  JSON_PRETTY_PRINT);
   }
 
-  function to_var($options) {
+  function to_var($options = []) {
     // set defaults
     if(!array_key_exists('shallow', $options)) {
       $options['shallow'] = FALSE;
