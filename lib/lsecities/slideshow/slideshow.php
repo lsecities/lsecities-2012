@@ -5,7 +5,7 @@ namespace LSECitiesWPTheme;
 if ( !defined('ABSPATH')) exit;
 
 class Slideshow extends PodsObject {
-  const PODS_NAME = 'event';
+  const PODS_NAME = 'slideshow';
 
   public $permalink;
   public $title;
