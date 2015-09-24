@@ -10,7 +10,7 @@
 namespace LSECitiesWPTheme;
 
 $slideshow = new Slideshow(pods_v('last', 'url'));
-$obj = $slideshow->to_var();
+$obj = $slideshow->to_var([ 'full_content' => TRUE ]);
 
 wp_enqueue_script('revealjs', 'https://raw.githubusercontent.com/hakimel/reveal.js/master/js/reveal.js', NULL, NULL, FALSE);
 wp_enqueue_style('revealjs', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/reveal.css');
