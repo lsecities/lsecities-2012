@@ -22,7 +22,7 @@ get_header();
 
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-index layout-2d-revealjs'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article layout-2d-revealjs'); ?>>
   <?php \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj); ?>
 </article>
 
