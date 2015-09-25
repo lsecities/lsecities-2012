@@ -14,7 +14,7 @@ $obj = $slideshow->to_var([ 'full_content' => TRUE ]);
 
 wp_enqueue_script('revealjs', get_stylesheet_directory_uri() . '/javascripts/reveal.js', NULL, NULL, FALSE);
 wp_enqueue_style('revealjs', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/reveal.css');
-wp_enqueue_style('revealjs-theme-solarized', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/css/solarized.css');
+wp_enqueue_style('revealjs-theme-solarized', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/css/white.css');
 get_header();
 ?>
 
