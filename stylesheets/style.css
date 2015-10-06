@@ -529,7 +529,7 @@ header #socialbuttons ul { height: 16px; }
 .single-post .comments-area h2 { font-size: 1.125em; }
 .single-post .comments-area .commentlist p { margin-bottom: 0; }
 
-.lc-article.layout-lists-by-column .sections > section > h1 { /** TECHNICAL_DEBT - fiddly vertical spacing - manually tuned to allow titles spanning over 1 and 2 lines to have identical height on full-width layout in order to let column contents start aligned */ min-height: 3rem; }
+.lc-article.layout-lists.by-column .sections > section > h1 { /** TECHNICAL_DEBT - fiddly vertical spacing - manually tuned to allow titles spanning over 1 and 2 lines to have identical height on full-width layout in order to let column contents start aligned */ min-height: 3rem; }
 
 #main { margin-top: 1em; }
 
@@ -867,15 +867,20 @@ body#newsletter-2013 .page-body .newsletter-section.news-section .section-item {
 .lc-index section { overflow: hidden; *zoom: 1; margin: 1rem 0; }
 .lc-index section > h1 { font-weight: 900; font-size: 1.5rem; margin-bottom: 1rem; }
 .lc-index section .label { display: none; position: absolute; }
-.lc-index section { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 33.33333%; float: left; padding-left: 0.83333%; padding-right: 0.83333%; }
-.lc-index section:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; }
-.lc-index section:nth-child(3n + 2) { margin-left: 33.33333%; margin-right: -100%; clear: none; }
-.lc-index section:nth-child(3n + 3) { margin-left: 66.66667%; margin-right: -100%; clear: none; }
+.lc-index.layout-lists.by-column section { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 33.33333%; float: left; padding-left: 0.83333%; padding-right: 0.83333%; }
+.lc-index.layout-lists.by-column section:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; }
+.lc-index.layout-lists.by-column section:nth-child(3n + 2) { margin-left: 33.33333%; margin-right: -100%; clear: none; }
+.lc-index.layout-lists.by-column section:nth-child(3n + 3) { margin-left: 66.66667%; margin-right: -100%; clear: none; }
+.lc-index.layout-lists.by-row .item { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; width: 33.33333%; float: left; padding-left: 0.83333%; padding-right: 0.83333%; }
+.lc-index.layout-lists.by-row .item:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; }
+.lc-index.layout-lists.by-row .item:nth-child(3n + 2) { margin-left: 33.33333%; margin-right: -100%; clear: none; }
+.lc-index.layout-lists.by-row .item:nth-child(3n + 3) { margin-left: 66.66667%; margin-right: -100%; clear: none; }
 .lc-index .items .item { transition: opacity 0.3s; }
 .lc-index .items .item[data-status="disabled"] { opacity: 0.1; transition: opacity 0.3s; }
 .lc-index .items .item .tile { padding-bottom: 1rem; margin-bottom: 1rem; transition: box-shadow 1s ease-in; }
 .lc-index .items .item .tile:hover { transition: box-shadow 0.5s; box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2); }
 .lc-index .items .item .main { position: relative; min-height: 8rem; }
+.lc-index .items .item .main img { width: 100%; }
 .lc-index .items .item .flip { padding-left: 1rem; padding-right: 1rem; }
 .lc-index .items .item .summary { line-height: 1.25rem; }
 .lc-index .items .item h1 { font-size: 1rem; position: absolute; top: 0px; left: 0px; background-color: rgba(0, 0, 0, 0.7); margin: 0.5rem; padding: 0.5rem; color: white; font-weight: bold; display: block; }

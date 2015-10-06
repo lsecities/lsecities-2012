@@ -37,6 +37,10 @@ $objs = array_map(
   $pod_index_configuration['sections']
 );
 
+// set default (horizontal) for section layouts if none is provided,
+// otherwise set as provided in configuration
+$layout = empty($pod_index_configuration['layout']) ? 'by-row' : $pod_index_configuration['layout'];
+
  /**
   * If no configuration is found it either doesn't exist for this URI,
   * or the URI is not supposed to be a Pod index page - so do a 404.
@@ -55,7 +59,7 @@ get_header();
 
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-index layout-lists-by-column lc-index-for-pod-' . $pod_index_configuration['pod']); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-index lc-index-for-pod-' . $pod_index_configuration['pod'] . ' layout-lists ' . $layout); ?>>
   <?php \SemanticWP\Templating::get_template_part($pod_index_configuration['template'], [ 'title' => $pod_index_configuration['title'], 'sections' => $objs ]); ?>
 </article>
 

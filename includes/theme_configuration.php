@@ -93,6 +93,7 @@ lc_data('pods_routes', [
     'pod' => 'award',
     'factory_function' => '\LSECitiesWPTheme\award_pods',
     'template' => 'lsecities/award/_index',
+    'layout' => 'by-row',
     'sections' => [
       [
         'title' => '',
@@ -114,6 +115,7 @@ lc_data('pods_routes', [
     'pod' => 'research_project',
     'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
+    'layout' => 'by-column',
     'sections' => [
       [
         'title' => 'Cities, space and society',

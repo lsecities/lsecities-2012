@@ -46,15 +46,17 @@ $grid-index: (
     }
   }
   
-  section {
+  &.layout-lists.by-column section {
+    @include gallery(4 of 12 inside);
+  }
+  
+  &.layout-lists.by-row .item {
     @include gallery(4 of 12 inside);
   }
   
   .items {
     @include with-layout($grid-index) {
-      .item {
-        //@include gallery(4 of 12 inside);
-        
+      .item {        
         transition: opacity 0.3s;
         
         &[data-status="disabled"] {
