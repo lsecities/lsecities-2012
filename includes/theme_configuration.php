@@ -97,15 +97,9 @@ lc_data('pods_routes', [
     'sections' => [
       [
         'title' => '',
-        'labels' => [
-          'show-status--completed-only'
-        ],
         'pods_params' => [
           'limit' => -1,
-          'orderby' => 'date DESC'
-        ],
-        'params' => [
-          'orderby' => 'date'
+          'orderby' => 't.year DESC'
         ]
       ],
     ]
@@ -125,7 +119,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="010-cities-space-and-society"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
@@ -139,7 +133,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="020-cities-environment-and-climate-change"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
@@ -153,7 +147,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="030-urban-governance"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
