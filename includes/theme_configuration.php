@@ -88,7 +88,7 @@ lc_data('theme_filesystem_abspath', dirname(__DIR__));
  * in Pods index template
  */
 lc_data('pods_routes', [
-  '/tests/db-ua-award/' => [
+  '/ua/award/' => [
     'title' => 'Deutsche Bank Urban Age Award',
     'pod' => 'award',
     'factory_function' => '\LSECitiesWPTheme\award_pods',
