@@ -78,6 +78,10 @@ $grid-index: (
         .main {
           position: relative;
           min-height: 8rem;
+          
+          img {
+            width: 100%; // TECHNICAL_DEBT: resize images properly instead!
+          }
         }
         
         .flip {
