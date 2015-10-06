@@ -88,11 +88,28 @@ lc_data('theme_filesystem_abspath', dirname(__DIR__));
  * in Pods index template
  */
 lc_data('pods_routes', [
+  '/ua/award/' => [
+    'title' => 'Deutsche Bank Urban Age Award',
+    'pod' => 'award',
+    'factory_function' => '\LSECitiesWPTheme\award_pods',
+    'template' => 'lsecities/award/_index',
+    'layout' => 'by-row',
+    'sections' => [
+      [
+        'title' => '',
+        'pods_params' => [
+          'limit' => -1,
+          'orderby' => 't.year DESC'
+        ]
+      ],
+    ]
+  ],
   '/research/' => [
     'title' => 'Research',
     'pod' => 'research_project',
     'factory_function' => '\LSECitiesWPTheme\research_project_pods',
     'template' => 'lsecities/research_projects/_index',
+    'layout' => 'by-column',
     'sections' => [
       [
         'title' => 'Cities, space and society',
@@ -102,7 +119,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="010-cities-space-and-society"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
@@ -116,7 +133,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="020-cities-environment-and-climate-change"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'
@@ -130,7 +147,7 @@ lc_data('pods_routes', [
         'pods_params' => [
           'limit' => -1,
           'where' => 'research_strand.slug="030-urban-governance"',
-          'orderby' => 'status.name ASC, name ASC'
+          'orderby' => 'status.name ASC, t.name ASC'
         ],
         'params' => [
           'orderby' => 'project_activity_score'

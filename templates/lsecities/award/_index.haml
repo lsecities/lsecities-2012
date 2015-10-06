@@ -1,0 +1,17 @@
+%header.entry-header
+  %h1.entry-title = title
+.sections
+  - for section in sections
+    %section(class = section.labels)
+      %h1 = section.title
+      .items.awards
+        - for item in section.items
+          .item.award( data-status = "enabled" data-year = item.year data-city = item.city )
+            .tile
+              .main
+                %a(href = item.web_uri)
+                  - if(item.heading_photo)
+                    %img(src = item.heading_photo.uri)
+                  %h1 = item.title
+              -#.flip
+                .summary = item.blurb | raw
