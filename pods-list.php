@@ -42,8 +42,7 @@ var_trace(var_export($pod_list, true), $TRACE_PREFIX . ' - pod_list');
         include('templates/pods/list/list-content-generic.php');
       }
     } // ($obj['lists'] as $list) ?>
-
-		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
+    
 	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->
 
