@@ -17,7 +17,7 @@ class Award extends PodsObject {
   public $city;
   public $year;
   public $web_uri;
-  public $photo;
+  public $heading_photo;
   public $blurb;
     
   /**
@@ -39,7 +39,7 @@ class Award extends PodsObject {
     $this->city = $pod->field('city');
     $this->year = $pod->field('year');
     $this->web_uri = $pod->field('web_uri');
-    $this->photo = wp_get_attachment_url($pod->field('heading_photo.ID'));
+    $this->heading_photo['uri'] = wp_get_attachment_url($pod->field('heading_photo.ID'));
     $this->blurb = $pod->field('blurb');    
   }
   
