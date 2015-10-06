@@ -4,7 +4,7 @@
   - for section in sections
     %section(class = section.labels)
       %h1 = section.title
-      .items.projects
+      .items.awards
         - for item in section.items
           .item.award( data-status = "enabled" data-year = item.year data-city = item.city )
             .tile
