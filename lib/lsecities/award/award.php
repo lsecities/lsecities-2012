@@ -27,12 +27,12 @@ class Award extends PodsObject {
   
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
-    
+
     // return if a Pod cannot be found
     if(!$pod->exists()) {
       return;
     }
-    
+
     $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
     
@@ -40,7 +40,7 @@ class Award extends PodsObject {
     $this->year = $pod->field('year');
     $this->web_uri = $pod->field('web_uri');
     $this->heading_photo['uri'] = wp_get_attachment_url($pod->field('heading_photo.ID'));
-    $this->blurb = $pod->field('blurb');    
+    $this->blurb = $pod->field('blurb');
   }
   
   /**
@@ -70,7 +70,7 @@ function award_pods($pods_params = [], $params = []) {
   $pods = pods(AWARDS_PODS_NAME, $pods_params);
   
   $objects = [];
-  
+
   if($pods->total_found() > 0) {
     while($pods->fetch()) {
       $objects[] = new Award($pods->field('slug'));
