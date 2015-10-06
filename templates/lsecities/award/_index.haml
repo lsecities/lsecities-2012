@@ -13,5 +13,5 @@
                   - if(item.heading_photo)
                     %img(src = item.heading_photo.uri)
                   %h1 = item.title
-              .flip
+              -#.flip
                 .summary = item.blurb | raw
