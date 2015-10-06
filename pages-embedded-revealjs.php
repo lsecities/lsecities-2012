@@ -29,7 +29,7 @@ get_header();
 <script>
 Reveal.initialize({
   width: 1140,
-  height: 400,
+  height: 960,
   center: false,
   controls: true,
   progress: true,
@@ -37,6 +37,7 @@ Reveal.initialize({
   transition: 'slide',
   embedded: true
 });
+Reveal.toggleOverview();
 </script>
 <?php get_template_part('nav'); ?>
 

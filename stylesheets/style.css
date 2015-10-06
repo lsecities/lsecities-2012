@@ -1024,6 +1024,8 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .feature-info .feature-date .day { font-size: 1.2em; font-weight: bold; padding-top: 0.1em; }
 .feature-info .feature-date + header { display: table-cell; }
 
+body.pod-page-tests-slideshow-w { overflow: auto; }
+
 article.layout-2d-revealjs .reveal { min-height: 600px; }
 
 /** MONKEYPATCH - while we investigate why WP decided to override this all of a sudden */
