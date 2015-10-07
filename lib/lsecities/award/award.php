@@ -50,7 +50,7 @@ class Award extends PodsObject {
   function to_json() {
     $vars = get_object_vars($this);
     unset($vars['pod']);
-    return json_encode($vars);
+    return json_encode($vars, JSON_PRETTY_PRINT);
   }
 }
 
