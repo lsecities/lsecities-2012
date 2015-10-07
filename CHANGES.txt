@@ -1,8 +1,16 @@
 lsecities-theme-alexandria (1.14) lsecities-experimental; urgency=low
+
   release 1.14 "unnamed"
+  
   * [update] refactored Awards using OO code; now index page for Awards
     uses new Pods index code (#128)
   * [new feature] 2D slideshow using Reveal.JS (#125)
+  * [API] endpoint for Events (#124)
+  * [API] endpoint for Event Sessions
+  * [API] endpoint for Research projects (no issue associated)
+  * [API] endpoint for Articles (no issue associated)
+  * [API] endpoint for Awards (#129)
+  * [API] general framework for endpoints to existing objects
 
  -- andrea rota <a.rota@lse.ac.uk>  [date]
   
