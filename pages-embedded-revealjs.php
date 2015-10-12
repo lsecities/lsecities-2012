@@ -32,7 +32,7 @@ Reveal.initialize({
   height: 960,
   center: false,
   controls: true,
-  progress: true,
+  progress: false,
   history: true,
   transition: 'slide',
   embedded: true
