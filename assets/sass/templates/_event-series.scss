@@ -1,0 +1,8 @@
+.lc-event-series-frontpage {
+  .main-content {
+    @include span(12 of 12);
+  }
+  #keyfacts {
+    display: none;
+  }
+}
