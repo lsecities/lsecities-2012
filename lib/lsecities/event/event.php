@@ -71,7 +71,7 @@ class Event extends PodsObject {
      */
     $__event_programme_id = $pod->field('event_programme.id');
     
-    if($__event_programme_id) {
+    if($__event_programme_id and FALSE) {
       $__event_programme = new EventProgramme($__event_programme_id);
       $this->event_programme = $__event_programme->to_var();
     } else {
