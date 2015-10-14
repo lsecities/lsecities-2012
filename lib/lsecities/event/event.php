@@ -24,6 +24,12 @@ class Event extends PodsObject {
   public $featured_image_uri;
   public $heading_gallery;
   
+  /**
+   * @var Array Data structure with event programme (includes:
+   * sessions - and related media if available, speakers)
+   */
+  public $event_programme;
+  
   public $datetime_start;
   public $datetime_end;
   public $free_form_event_dates;
@@ -54,43 +60,57 @@ class Event extends PodsObject {
     $this->event_story_id = $pod->field('storify_id');
   
     /**
-     * Let's deal with event actants. That is, speakers, respondents,
-     * chairs, moderators. They can be either people or organizations.
-     * And their participation may be unconfirmed yet.
+     * Event programme
+     * If we have an Event programme associated to the event, use
+     * that to generate list of programme sessions and speakers lists;
+     * otherwise, use the Event's field (speakers/respondents/chairs/
+     * moderators) for these.
      */
-    $event_speakers = \sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
-    $event_respondents = \sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
-    $event_chairs = \sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
-    $event_moderators = \sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
-  
-    $this->all_actants = array_map([$this, 'event_speaker_profile_wpautop_fn'], array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators));
-  
-    /** TECHNICAL_DEBT: assemble the four arrays before in a sensible
-     * way - requires either incorporating the code above in
-     * people_list() or cleaning up anyways the way these lists are
-     * generated
-     */
-    $this->actants['speakers'] = array_merge(
-	  [ 'list' => $event_speakers ],
-	  $this->people_list($event_speakers, "Speaker", "Speakers")
-	);
-	
-    $this->actants['respondents'] = array_merge(
-      [ 'list' => $event_respondents ],
-      $this->people_list($event_respondents, "Respondent", "Respondents")
+    $__event_programme_id = $pod->field('event_programme.id');
+    
+    if($__event_programme_id) {
+      $__event_programme = new EventProgramme($__event_programme_id);
+      $this->event_programme = $__event_programme->to_var();
+    } else {
+      /**
+       * Let's deal with event actants. That is, speakers, respondents,
+       * chairs, moderators. They can be either people or organizations.
+       * And their participation may be unconfirmed yet.
+       */
+      $event_speakers = \sort_linked_field($pod->field('speakers'), 'family_name', SORT_ASC);
+      $event_respondents = \sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
+      $event_chairs = \sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
+      $event_moderators = \sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
+    
+      $this->all_actants = array_map([$this, 'event_speaker_profile_wpautop_fn'], array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators));
+    
+      /** TECHNICAL_DEBT: assemble the four arrays before in a sensible
+       * way - requires either incorporating the code above in
+       * people_list() or cleaning up anyways the way these lists are
+       * generated
+       */
+      $this->actants['speakers'] = array_merge(
+      [ 'list' => $event_speakers ],
+      $this->people_list($event_speakers, "Speaker", "Speakers")
     );
     
-    $this->actants['chairs'] = array_merge(
-      [ 'list' => $event_chairs ],
-      $this->people_list($event_chairs, "Chair", "Chairs")
-    );
-    
-    $this->actants['moderators'] = array_merge(
-      [ 'list' => $event_moderators ],
-      $this->people_list($event_moderators, "Moderator", "Moderators")
-    );
-    
-    $this->actants['people_with_blurb'] = $this->actants['speakers']['with_blurb'] + $this->actants['respondents']['with_blurb'] + $this->actants['chairs']['with_blurb'] + $this->actants['moderators']['with_blurb'];
+      $this->actants['respondents'] = array_merge(
+        [ 'list' => $event_respondents ],
+        $this->people_list($event_respondents, "Respondent", "Respondents")
+      );
+      
+      $this->actants['chairs'] = array_merge(
+        [ 'list' => $event_chairs ],
+        $this->people_list($event_chairs, "Chair", "Chairs")
+      );
+      
+      $this->actants['moderators'] = array_merge(
+        [ 'list' => $event_moderators ],
+        $this->people_list($event_moderators, "Moderator", "Moderators")
+      );
+      
+      $this->actants['people_with_blurb'] = $this->actants['speakers']['with_blurb'] + $this->actants['respondents']['with_blurb'] + $this->actants['chairs']['with_blurb'] + $this->actants['moderators']['with_blurb'];
+    }
     
     $this->datetime_start = $pod->field('date_start');
     $this->datetime_end = $pod->field('date_end');
