@@ -423,9 +423,9 @@ header h1.entry-title { font-size: 2em; /* margin-bottom: 1.2em; */ font-family:
 
 body h1 { font-size: 2em; margin-bottom: 0.25em; }
 body h1.mainheading { font-size: 3em; }
-body h2 { font-size: 1.5em; margin-bottom: 0.25em; }
+body h2 { font-size: 1.5em; margin-top: 1em; margin-bottom: 0.25em; }
 body h2.mainheading { font-size: 2.5em; }
-body h3 { font-size: 1.125em; margin-bottom: 0.25em; }
+body h3 { font-size: 1.125em; margin-top: 1em; margin-bottom: 0.25em; }
 body article .introblurb h2 { margin-top: 0.6em; margin-bottom: 0; }
 body article .introblurb p { font-size: 1.25em; line-height: 1.2em; }
 body .wp-caption { max-width: 100% !important; }
@@ -737,7 +737,7 @@ right: -21px; */ }
 .lc-event .speaker-profiles .person { overflow: hidden; *zoom: 1; margin-bottom: 2rem; }
 .lc-event .speaker-profiles .person .name { overflow: hidden; *zoom: 1; }
 .lc-event .speaker-profiles .person .name h1 { width: 66.10169%; float: right; margin-right: 0; margin-left: -105.26316%; }
-.lc-event .speaker-profiles .person .photo { width: 32.20339%; float: left; margin-right: 1.69492%; text-align: center; }
+.lc-event .speaker-profiles .person .photo { width: 32.20339%; float: left; margin-right: 1.69492%; text-align: center; min-height: 4rem; }
 .lc-event .speaker-profiles .person .photo img { width: 144px; max-width: 144px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ /** Chrome 19+, Safari 6+, Safari 6+ iOS need -webkit-filter; disabling now as it seems to be broken in Desktop Chrome/Chromium version 45ish - some of the images on a page don't get displayed at all when the filter is applied */ }
 .lc-event .speaker-profiles .person .profile { width: 66.10169%; float: right; margin-right: 0; }
 
@@ -752,6 +752,9 @@ right: -21px; */ }
 .lc-event-programme .session-chairs dt, .lc-event-programme .session-chairs dd { display: inline; }
 .lc-event-programme ul.mediaitems { display: inline; }
 .lc-event-programme ul.mediaitems > li { display: inline; margin-right: 1em; }
+
+.lc-event-series-frontpage .main-content { width: 100%; float: left; margin-left: 0; margin-right: 0; }
+.lc-event-series-frontpage #keyfacts { display: none; }
 
 .lc-event-speaker-list .clearline { display: block; clear: both; }
 .lc-event-speaker-list .clearline.halfway { display: none; }
