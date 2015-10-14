@@ -729,11 +729,17 @@ right: -21px; */ }
 
 .lc-event .event-info { font-size: 0.9em; margin-top: 1em; }
 .lc-event .extra-content .item h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
-.lc-event .event-materials, .lc-event .people-list { overflow: hidden; *zoom: 1; }
-.lc-event .event-materials .item, .lc-event .people-list .item { width: 32.20339%; float: left; }
-.lc-event .event-materials .item:nth-child(3n + 1), .lc-event .people-list .item:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; margin-left: 0; }
-.lc-event .event-materials .item:nth-child(3n + 2), .lc-event .people-list .item:nth-child(3n + 2) { margin-left: 33.89831%; margin-right: -100%; clear: none; }
-.lc-event .event-materials .item:nth-child(3n + 3), .lc-event .people-list .item:nth-child(3n + 3) { margin-left: 67.79661%; margin-right: -100%; clear: none; }
+.lc-event .event-materials { overflow: hidden; *zoom: 1; }
+.lc-event .event-materials .item { width: 32.20339%; float: left; }
+.lc-event .event-materials .item:nth-child(3n + 1) { margin-left: 0; margin-right: -100%; clear: both; margin-left: 0; }
+.lc-event .event-materials .item:nth-child(3n + 2) { margin-left: 33.89831%; margin-right: -100%; clear: none; }
+.lc-event .event-materials .item:nth-child(3n + 3) { margin-left: 67.79661%; margin-right: -100%; clear: none; }
+.lc-event .speaker-profiles .person { overflow: hidden; *zoom: 1; margin-bottom: 2rem; }
+.lc-event .speaker-profiles .person .name { overflow: hidden; *zoom: 1; }
+.lc-event .speaker-profiles .person .name h1 { width: 66.10169%; float: right; margin-right: 0; margin-left: -105.26316%; }
+.lc-event .speaker-profiles .person .photo { width: 32.20339%; float: left; margin-right: 1.69492%; text-align: center; }
+.lc-event .speaker-profiles .person .photo img { width: 144px; max-width: 144px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */ filter: gray; /* IE6-9 */ /** Chrome 19+, Safari 6+, Safari 6+ iOS need -webkit-filter; disabling now as it seems to be broken in Desktop Chrome/Chromium version 45ish - some of the images on a page don't get displayed at all when the filter is applied */ }
+.lc-event .speaker-profiles .person .profile { width: 66.10169%; float: right; margin-right: 0; }
 
 .lc-event-programme .entry-content section.sessiontype-day > header { border-top: none; }
 .lc-event-programme .entry-content section.sessiontype-day > header > h1 { font-size: 1.5em; color: inherit; background-color: inherit; padding-left: 0; }

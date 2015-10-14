@@ -16,11 +16,38 @@
     margin-bottom: 0.444444444em;
   }
     
-  .event-materials, .people-list {
+  .event-materials {
     @include clearfix;
 
     .item {
       @include gallery(4 of 12);
+    }
+  }
+  
+  .speaker-profiles {
+    .person {
+      @include clearfix;
+      margin-bottom: 2rem;
+      
+      .name {
+        @include clearfix;
+        
+        h1 {
+          @include span(last 8 of 12);
+          @include pull(4);
+        }
+      }
+        
+      .photo {
+        @include span(4 of 12);
+        text-align: center;
+        
+        @include person-photo-in-people-list;
+      }
+      
+      .profile {
+        @include span(last 8 of 12);
+      }
     }
   }
 }
