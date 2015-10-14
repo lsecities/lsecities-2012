@@ -10,6 +10,8 @@
     %header
       %h1.hentry-title.p-name.summary
         = title
+      - if tagline
+        %h2.hentry-subtitle = tagline
       %p.event-info
         = event_info | raw
     %article.eightcol
