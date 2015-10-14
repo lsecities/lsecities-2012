@@ -21,7 +21,7 @@
         %h1 = conference_title
         - if conference_tagline
           %h2 = conference_tagline
-      .eightcol
+      .main-content.eightcol
         - if event_blurb
           .blurb = event_blurb|raw
         - if event_contact_info and is_future_event
