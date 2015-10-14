@@ -173,7 +173,7 @@ class Event extends PodsObject {
       $this->event_info .= 'An event ';
     }
     if($event_series) {
-      $this->event_info .= 'of the <em>' . $event_series . '</em> event series ';
+      $this->event_info .= 'of the <em>' . $event_series . '</em> series ';
     }
     if($event_host_organizations) {
       $this->event_info .= 'hosted by ' . $event_host_organizations . ' ';
