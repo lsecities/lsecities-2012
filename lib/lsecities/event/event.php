@@ -13,6 +13,8 @@ class Event extends PodsObject {
 
   public $permalink;
   public $title;
+  public $tagline;
+  
   public $event_hashtag;
   public $event_story_id;
   // these are either people (speakers, chairs, etc.) or organizations, so let's call them actants
@@ -53,6 +55,7 @@ class Event extends PodsObject {
     
     $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
+    $this->tagline = $pod->field('tagline');
     
     $this->event_page_uri = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . PODS_BASEURI_EVENTS . "/" . $this->permalink;
 
