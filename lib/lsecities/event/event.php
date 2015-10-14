@@ -90,9 +90,9 @@ class Event extends PodsObject {
        * generated
        */
       $this->actants['speakers'] = array_merge(
-      [ 'list' => $event_speakers ],
-      $this->people_list($event_speakers, "Speaker", "Speakers")
-    );
+        [ 'list' => $event_speakers ],
+        $this->people_list($event_speakers, "Speaker", "Speakers")
+      );
     
       $this->actants['respondents'] = array_merge(
         [ 'list' => $event_respondents ],
@@ -109,7 +109,11 @@ class Event extends PodsObject {
         $this->people_list($event_moderators, "Moderator", "Moderators")
       );
       
-      $this->actants['people_with_blurb'] = $this->actants['speakers']['with_blurb'] + $this->actants['respondents']['with_blurb'] + $this->actants['chairs']['with_blurb'] + $this->actants['moderators']['with_blurb'];
+      $this->actants['people_with_blurb'] =
+        $this->actants['speakers']['with_blurb'] + 
+        $this->actants['respondents']['with_blurb'] + 
+        $this->actants['chairs']['with_blurb'] + 
+        $this->actants['moderators']['with_blurb'];
     }
     
     $this->datetime_start = $pod->field('date_start');
