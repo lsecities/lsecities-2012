@@ -24,6 +24,7 @@
         = actants.respondents.output | raw
         = actants.chairs.output | raw
         = actants.moderators.output | raw
+        = actants.panelists.output | raw
         - if event_date_string
           %dt When
           %dd.date
@@ -96,14 +97,19 @@
           - for person in all_actants
             - if person.profile_text
               %li.item.person(id = "person-profile-#{person.slug}")
-                %h1 = "#{person.name} #{person.family_name}"
-                .content = person.profile_text | raw
-                - if person.homepage or person.twitterhandle
-                  .personal-links
-                    %ul
-                      - if person.homepage
-                        %li
-                          %a(href = person.homepage) = person.homepage
-                      - if person.twitterhandle
-                        %li
-                          %a(href = person.twitterhandle) = person.twitterhandle
+                .name
+                  %h1 = "#{person.name} #{person.family_name}"
+                .photo
+                  -if person.photo_uri
+                    %img(src = person.photo_uri alt = "#{person.name} #{person.family_name}")
+                .profile
+                  .content = person.profile_text | raw
+                  - if person.homepage or person.twitterhandle
+                    .personal-links
+                      %ul
+                        - if person.homepage
+                          %li
+                            %a(href = person.homepage) = person.homepage
+                        - if person.twitterhandle
+                          %li
+                            %a(href = person.twitterhandle) = person.twitterhandle

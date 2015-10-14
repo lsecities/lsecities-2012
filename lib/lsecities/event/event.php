@@ -84,8 +84,9 @@ class Event extends PodsObject {
       $event_respondents = \sort_linked_field($pod->field('respondents'), 'family_name', SORT_ASC);
       $event_chairs = \sort_linked_field($pod->field('chairs'), 'family_name', SORT_ASC);
       $event_moderators = \sort_linked_field($pod->field('moderators'), 'family_name', SORT_ASC);
+      $event_panelists = \sort_linked_field($pod->field('panelists'), 'family_name', SORT_ASC);
     
-      $this->all_actants = array_map([$this, 'event_speaker_profile_wpautop_fn'], array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators));
+      $this->all_actants = array_map([$this, 'event_speaker_profile_wpautop_fn'], array_merge((array)$event_speakers, (array)$event_respondents, (array)$event_chairs, (array)$event_moderators, (array)$event_panelists));
     
       /** TECHNICAL_DEBT: assemble the four arrays before in a sensible
        * way - requires either incorporating the code above in
@@ -101,7 +102,12 @@ class Event extends PodsObject {
         [ 'list' => $event_respondents ],
         $this->people_list($event_respondents, "Respondent", "Respondents")
       );
-      
+
+      $this->actants['panelists'] = array_merge(
+        [ 'list' => $event_panelists ],
+        $this->people_list($event_panelists, "Panelist", "Panelists")
+      );
+            
       $this->actants['chairs'] = array_merge(
         [ 'list' => $event_chairs ],
         $this->people_list($event_chairs, "Chair", "Chairs")
@@ -116,7 +122,8 @@ class Event extends PodsObject {
         $this->actants['speakers']['with_blurb'] + 
         $this->actants['respondents']['with_blurb'] + 
         $this->actants['chairs']['with_blurb'] + 
-        $this->actants['moderators']['with_blurb'];
+        $this->actants['moderators']['with_blurb'] +
+        $this->actants['panelists']['with_blurb'];
     }
     
     $this->datetime_start = $pod->field('date_start');
@@ -204,6 +211,14 @@ class Event extends PodsObject {
     if(!is_array($person)) {
       return;
     }
+    
+    /**
+     * in order to retrieve a person's photo, we need to get the
+     * person's full Pod as the photo field is a linked field
+     * and doesn't get captured via the relationship from parent (speakers, chairs, etc.)
+     */
+    $pod = pods('authors', $person['slug']);
+    $person['photo_uri'] = \pods_image_url($pod->field('photo'), [150,150]);
     
     $person['profile_text'] = \do_https_shortcode(\wpautop($person['profile_text']));
     return $person;
