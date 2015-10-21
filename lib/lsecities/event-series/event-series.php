@@ -41,6 +41,8 @@ class EventSeries extends PodsObject {
   public $featured_image_uri;
   public $heading_gallery;
   
+  public $hide_full_event_calendar_in_sidebars;
+  
   /**
    * @var Array Data structure with event programme (includes:
    * sessions - and related media if available, speakers)

@@ -35,15 +35,24 @@ if(!empty($obj->event_series['permalink'])) {
  * starting transition of nav to HAML, from events that are part
  * of an events series and therefore need an ad-hoc menu anyways;
  * make sure event series is not empty as in that case displaying an
- * empty sidebar wouldn't make sense
+ * empty sidebar wouldn't make sense.
  */
-if(empty($obj->event_series['permalink']) or empty($obj->event_series['events'])) {
-  // not part of an event series: go with legacy nav
-  get_template_part('nav');
-} else {
+if(!empty($obj->event_series['permalink'])) {
   $event_series = new EventSeries($obj->event_series['permalink']);
   $event_series->fetch_events();
-  \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $event_series->to_var());
+  
+  if(!empty($event_series->events)) {
+    \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $event_series->to_var());
+  }
+}  
+/**
+ * By default, events part of an event series show the series'
+ * navigation in the sidebar, followed by the full events calendar,
+ * *unless* this has been set to be hidden within the event series.
+ */
+ 
+if(!is_object($event_series) or !$event_series->hide_full_event_calendar_in_sidebars) {
+   get_template_part('nav');
 }
 ?>
 
