@@ -184,16 +184,18 @@ class Event extends PodsObject {
       }
     }
     
-    // Set featured image, forcing 960px width and 2.5:1 ratio
-    $this->featured_image_uri = pods_image_url($pod->field('heading_image'), [960,384]);
+    if(!$options['child_object']) {
+      // Set featured image, forcing 960px width and 2.5:1 ratio
+      $this->featured_image_uri = pods_image_url($pod->field('heading_image'), [960,384]);
     
-    // If a heading photo gallery is provided, use it instead of the single featured image
-    $heading_gallery_permalink = $pod->field('heading_gallery.slug');
+      // If a heading photo gallery is provided, use it instead of the single featured image
+      $heading_gallery_permalink = $pod->field('heading_gallery.slug');
     
-    if($heading_gallery_permalink) {
-      $this->heading_gallery = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
+      if($heading_gallery_permalink) {
+        $this->heading_gallery = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
+      }
     }
-    
+
     $event_type = $pod->field('event_type.name');
     $event_series = $pod->field('event_series.name');
     $event_host_organizations = $this->orgs_list((array) $pod->field('hosted_by'));
