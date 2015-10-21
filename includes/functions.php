@@ -144,6 +144,7 @@ function shorten_string($string, $wordsreturned) {
 include_once('pods/class.podobject.inc.php');
 function set_pod_page_title($title, $sep, $seplocation) {
   global $this_pod;
+  global $obj;
   if(isset($this_pod) and $this_pod->page_title){
     $title = $this_pod->page_title;
 
@@ -154,8 +155,16 @@ function set_pod_page_title($title, $sep, $seplocation) {
     $title .= " $sep ";
 
     var_trace($title, 'page_title');
-  }
 
+    $title = $this_pod->page_title;
+  } elseif(isset($obj) and $obj->title) {
+    $title = $obj->title;
+    echo '<!-- title: ' . $title . ' -->';
+  } 
+
+  if(preg_match('/([^\|]+)\s\|\s$/', $title, $matches)) {
+    $title = $matches[1];
+  }
   return $title;
 }
 add_filter('wp_title', 'set_pod_page_title', 5, 3);
