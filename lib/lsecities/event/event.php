@@ -158,7 +158,7 @@ class Event extends PodsObject {
 
     $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
     
-    $this->event_date_for_navigation = $this->event_start->format('j F');
+    $this->event_date_for_navigation = $this->event_start->format('j F Y');
     
     $event_blurb = do_https_shortcode($pod->display('blurb'));
     $event_blurb_after_event = do_https_shortcode($pod->display('blurb_after_event'));
