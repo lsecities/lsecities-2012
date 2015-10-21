@@ -10,8 +10,19 @@ class Event extends PodsObject {
   }
   
   const PODS_NAME = 'event';
+  const BASE_URI = '/media/objects/events';
 
+  /**
+   * @var String This is the human-friendly unique id of the object (e.g. 'rebel-cities')
+   */
   public $permalink;
+  
+  /**
+   * @var String This is the canonical (relative) URI for the page of this event:
+   * basically the BASE_URI for this class + the permalink
+   */
+  public $link_to_self;
+
   public $title;
   public $tagline;
   
@@ -32,8 +43,20 @@ class Event extends PodsObject {
    */
   public $event_programme;
   
+  /**
+   * @var Array The array_vars of the event series of which this event
+   * is part, if any
+   */
+  public $event_series;
+  
   public $datetime_start;
   public $datetime_end;
+  
+  /**
+   * @var string Only day of month and month to be used in lists
+   * in section navigation
+   */
+  public $event_date_for_navigation;
   public $free_form_event_dates;
 
   public $event_location;
@@ -45,7 +68,7 @@ class Event extends PodsObject {
     
   private $pod;
 
-  function __construct($permalink) {
+  function __construct($permalink, $options = []) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
       
     // return if a Pod cannot be found
@@ -54,6 +77,7 @@ class Event extends PodsObject {
     }
     
     $this->permalink = $pod->field('slug');
+    $this->link_to_self = self::BASE_URI . '/' . $this->permalink;
     $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
     
@@ -134,6 +158,8 @@ class Event extends PodsObject {
 
     $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
     
+    $this->event_date_for_navigation = $this->event_start->format('j F');
+    
     $event_blurb = do_https_shortcode($pod->display('blurb'));
     $event_blurb_after_event = do_https_shortcode($pod->display('blurb_after_event'));
     
@@ -197,6 +223,20 @@ class Event extends PodsObject {
 
     $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
     $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
+  }
+  
+  /**
+   * Fetch parent event series, if any
+   * This is not done in __construct() to avoid circular loops (we build
+   * a Event objects in the parent EventSeries)
+   */
+  function fetch_events_series() {
+    $__event_series_id = $this->pod->field('event_series.id');
+    
+    if(!empty($__event_series_id)) {
+      $__event_series = new EventSeries($__event_series_id);
+      $this->event_series = get_object_vars($__event_series);
+    }
   }
   
   /**

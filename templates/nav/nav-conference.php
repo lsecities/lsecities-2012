@@ -6,8 +6,8 @@ $obj = prepare_conference(get_post_meta($parent_conference_page['id'], 'pod_slug
 
 if(count($obj['button_links'])) :
 ?>
-<div id="conferencepagesnav">
-  <nav class="conferencemenu">
+<div class='conference-sidebar'>
+  <nav class="section">
     <ul>
     <?php foreach($obj['button_links'] as $link) : ?>
       <li>
@@ -18,7 +18,7 @@ if(count($obj['button_links'])) :
     <?php endforeach ; ?>
     </ul>
   </nav><!-- .conferencemenu -->
-  <nav>
+  <nav class="content-type">
     <dl>
       <dt>Urban Age conferences</dt>
       <dd>

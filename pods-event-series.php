@@ -21,9 +21,10 @@ if(empty($pod_id)) {
 }
 
 $event_series = new EventSeries($pod_id);
-$obj = $event_series->to_var();
+$event_series->fetch_events();
 
-echo '<!-- event_series: ' . $pod_id . ' - ' . var_export($obj, TRUE) . ' -->';
+global $obj;
+$obj = $event_series->to_var();
 
 /**
  * Copy gallery object to own variable for compatibility with
@@ -41,7 +42,7 @@ $gallery = $obj['gallery'];
 
   <?php \SemanticWP\Templating::get_template_part('lsecities/_conference', $obj); ?>
 
-          <?php get_template_part('nav'); ?>
+  <?php \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $obj); ?>
 
 </div><!-- #post-<?php the_ID(); ?> -->
 </div>

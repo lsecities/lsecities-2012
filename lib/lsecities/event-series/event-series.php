@@ -17,6 +17,7 @@ class EventSeries extends PodsObject {
   const PODS_NAME = 'event_series';
 
   public $permalink;
+  public $link_to_self;
   
   /**
    * @var Bool While we use the same template as conferences, setting
@@ -29,6 +30,11 @@ class EventSeries extends PodsObject {
   
   public $event_series_hashtag;
 
+  /**
+   * @var Array The events part of this series
+   */
+  public $events;
+  
   public $event_blurb;
   public $contact_info;
   public $event_media;

@@ -14,6 +14,11 @@ namespace LSECitiesWPTheme;
 lc_data('pods_toplevel_ancestor', 311);
 
 $obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
+$obj->fetch_events_series();
+$post_class = 'lc-article lc-event h-event vevent';
+if(!empty($obj->event_series['permalink'])) {
+  $post_class .= ' lc-event-of-event-series';
+}
 ?>
 
 <?php get_header(); ?>
@@ -22,12 +27,28 @@ $obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3
 
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
-<div id="post-<?php the_ID(); ?>" <?php post_class('lc-article lc-event h-event vevent'); ?>>
+<div id="post-<?php the_ID(); ?>" <?php post_class($post_class); ?>>
   <?php \SemanticWP\Templating::get_template_part('lsecities/_event', get_object_vars($obj)); ?>
+
+<?php
+/**
+ * starting transition of nav to HAML, from events that are part
+ * of an events series and therefore need an ad-hoc menu anyways;
+ * make sure event series is not empty as in that case displaying an
+ * empty sidebar wouldn't make sense
+ */
+if(empty($obj->event_series['permalink']) or empty($obj->event_series['events'])) {
+  // not part of an event series: go with legacy nav
+  get_template_part('nav');
+} else {
+  $event_series = new EventSeries($obj->event_series['permalink']);
+  $event_series->fetch_events();
+  \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $event_series->to_var());
+}
+?>
+
 </div>
 
-<?php get_template_part('nav'); ?>
-          
 </div><!-- #contentarea -->
 
 <?php get_sidebar(); ?>
