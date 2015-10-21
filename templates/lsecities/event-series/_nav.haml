@@ -1,0 +1,11 @@
+.threecol.last
+  %nav.section
+    %ul
+      %li
+        %a(href = link_to_self)
+          .title = conference_title
+          - if display_timespan
+            .timespan = date_span
+      - for event in events
+        %li
+          %a(href = event.link_to_self) = "#{event.event_date_for_navigation} | #{event.title}" | raw
