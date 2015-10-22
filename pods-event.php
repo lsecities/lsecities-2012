@@ -41,7 +41,7 @@ if(!empty($obj->event_series['permalink'])) {
   $event_series = new EventSeries($obj->event_series['permalink']);
   $event_series->fetch_events();
   
-  if(!empty($event_series->events)) {
+  if(!empty($event_series->events) and !empty($event_series->event_blurb)) {
     \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $event_series->to_var());
   }
 }  
