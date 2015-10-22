@@ -60,7 +60,7 @@ $obj = pods_prepare_event_programme(get_post_meta($post->ID, 'pod_slug', true));
             <?php if($speaker['blurb']): ?><p><?php echo $speaker['blurb']; ?></p><?php endif; ?>
             <ul>
               <?php foreach($speaker['speaker_in'] as $speaker_session): ?>
-              <li><a href="/programme/#<?php echo $speaker_session[0]; ?>"><?php echo $speaker_session[1]; ?></a><?php if($speaker_session[2]): ?> (to be confirmed)<?php endif; ?></li>
+              <li><a href="../programme/#<?php echo $speaker_session[0]; ?>"><?php echo $speaker_session[1]; ?></a><?php if($speaker_session[2]): ?> (to be confirmed)<?php endif; ?></li>
               <?php endforeach; ?>
             </ul>
           </div>
