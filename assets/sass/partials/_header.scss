@@ -109,8 +109,6 @@ $social-media-icons-hover-color: #b9bbc1;
     }
     
     ul {
-	  font-weight: bold;
-	  
       li.current, li.current_page_item, li.current_page_ancestor, li.current_page_parent {
         background-color: #ddd;
         
@@ -150,6 +148,11 @@ nav#level1nav,
 nav#level2nav {
   line-height: 1.2em;
   font-family: $navmenu-font-family;
+  
+  .logged-in & {
+    font-family: "Helsinki", $navmenu-font-family;
+  }
+
   text-transform: uppercase;
   
   ul li {
