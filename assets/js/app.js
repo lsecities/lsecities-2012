@@ -165,6 +165,26 @@ jQuery(document).ready(function($) {
       .attr('data-status', toggle_status);
   });
 
+  /**
+   * If we are on an article page that contains a grid slideshow (reveal.js), trigger the
+   * reveal.js initialization and start in overview mode
+   * TECHNICAL_DEBT: allow configuration of Reveal via data- attributes, falling back to
+   * defaults if no configuration is provided.
+   */
+  if(jQuery('.lc-newspaper-article .reveal').length) {
+    Reveal.initialize({
+      width: 844,
+      height: 700,
+      center: false,
+      controls: true,
+      progress: false,
+      history: true,
+      transition: 'slide',
+      embedded: true
+    });
+    Reveal.toggleOverview();
+  }
+
   // track clicks to binary files hosted in WordPress.
   // based on http://www.wduffy.co.uk/blog/tracking-google-goals-with-no-url-using-jquery/.
   // uses regex jQuery filter (http://james.padolsey.com/javascript/regex-selector-for-jquery/).
