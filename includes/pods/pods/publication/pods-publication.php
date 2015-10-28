@@ -205,7 +205,7 @@ function pods_prepare_table_of_contents($pod_slug) {
           $this_article = array();
 
           $this_article['uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/en-gb/';
-          $this_article['title'] = $article['name'];
+          $this_article['title'] = $article['title'];
           if(!empty($article_lang2['name'])) {
             $this_article['lang2_uri'] = PODS_BASEURI_ARTICLES . '/' . $article['slug'] . '/' . strtolower($article_lang2['language_code']) . '/';
             $this_article['lang2_title'] = $article['title_lang2'];

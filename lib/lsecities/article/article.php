@@ -22,8 +22,8 @@ class ArticleData {
     if($is_lang2) {
       $lang_suffix = '_lang2';
     }
-    $this->title = $pod->field('name' . $lang_suffix);
-    $this->subtitle = $pod->field('article_subtitle' . $lang_suffix);
+    $this->title = $pod->field('title' . $lang_suffix);
+    $this->subtitle = $pod->field('subtitle' . $lang_suffix);
     $this->abstract = do_shortcode($pod->display('abstract' . $lang_suffix));
     $this->summary = do_shortcode($pod->display('summary' . $lang_suffix));
     $this->text = do_shortcode($pod->display('text' . $lang_suffix));
@@ -48,7 +48,7 @@ class Article extends PodsObject {
 
   public $lang2;
 
-  public $article_data;
+  public $article_data_english;
   public $article_data_lang2;
 
   public $parent_publication;
@@ -97,7 +97,7 @@ class Article extends PodsObject {
     }
 
     $this->permalink = $pod->field('slug');
-    $this->title = $pod->field('name');
+    $this->title = $pod->field('title');
 
     // TODO: check, move
     global $this_pod;
@@ -142,7 +142,7 @@ class Article extends PodsObject {
     // grab the ToC image URI
     $this->toc_image_uri = pods_image_url($pod->field('cover_image'), 'original');
 
-    $this->article_data = new ArticleData($pod, FALSE);
+    $this->article_data_english = new ArticleData($pod, FALSE);
     if($this->lang2) {
       $this->article_data_lang2 = new ArticleData($pod, TRUE);
     }
@@ -260,4 +260,51 @@ class ArticlesList {
 
     return json_encode(array_map(function($item) use ($options) { return $item->to_var($options); }, $this->articles), JSON_PRETTY_PRINT);
   }
+}
+
+/**
+ * Prepare data structure with article data to be used in the Article page
+ * template
+ * @param String $permalink Permalink of the requested article
+ * @param String $request_language The language code for the request. Defaults to en-gb.
+ * @return Array The PHP serialization of the Article object, plus page data (current URI, page title, etc.)
+ */
+function pods_prepare_article($permalink, $request_language = 'en-gb') {
+  $__obj = new Article($permalink);
+  $obj = $__obj->to_var();
+
+  /**
+   * Articles can include content in a second language; this is requested via
+   * the last part of the URI path (e.g. /pt-br - default is en-gb); if the
+   * requested language matches the article's second language (if any), serve
+   * content in this language, otherwise fall back to English
+   */
+  $obj['article_data'] = $request_language == $obj['lang2']['slug'] ?
+    $obj['article_data_lang2'] :
+    $obj['article_data_english'];
+
+  /**
+   * Check request language and available translations, if any, and create
+   * data structure for links to alternate version (translation) of the
+   * article.
+   */
+  if($obj['lang2']['slug']) {
+    $obj[translations][] = $obj['lang2']['slug'] === $request_language ?
+        [
+          'uri' => '../en-gb/',
+          'language_name' => 'English'
+        ] :
+        [
+          'uri' => '../' . strtolower($obj['lang2']['slug']) . '/',
+          'language_name' => $obj['lang2']['name']
+        ];
+  }
+
+  /**
+   * Add HTML page data
+   */
+  $__page = new Page();
+  $obj['html_page'] = $__page->to_var();
+
+  return $obj;
 }
