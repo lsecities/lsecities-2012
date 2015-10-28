@@ -54,67 +54,18 @@ set_query_var('page_obj', $obj);
               <article class='wireframe'>
                 <div class="entry-content">
                   <div class="article">
-                    <aside class='wireframe minorfacts' id='keyfacts'>
-                      <div>
-                        <dl>
-                        <?php if(is_array($obj['article_authors'])): ?>
-                          <dt>Authors</dt>
-                          <dd>
-                            <ul>
-                            <?php foreach($obj['article_authors'] as $author): ?>
-                              <li><?php echo $author['name'] ?> <?php echo $author['family_name'] ?></li>
-                            <?php endforeach; ?>
-                            </ul>
-                          </dd>
-                        <?php endif; ?>
-                          <?php if($obj['article_publishing_date']): ?>
-                          <dt>Publication date</dt>
-                          <dd><?php echo $obj['article_publishing_date'] ?></dd>
-                          <?php endif; ?>
-                          <?php if(is_array($obj['article_tags'])): ?>
-                          <dt>Tags</dt>
-                          <dd>
-                            <ul>
-                              <?php foreach($obj['article_tags'] as $tag): ?>
-                                <li><?php echo $tag['name'] ; ?></li>
-                              <?php endforeach; ?>
-                            </ul>
-                          </dd>
-                          <?php endif; ?>
-                          <?php if($obj['lang2_slug']): ?>
-                          <dt>Translations</dt>
-                            <?php if($obj['lang2_slug'] === $obj['request_language']): // we are currently serving article in lang2: show English as translation ?>
-                          <dd><a href='../en-gb/'>English</a></dd>
-                          <?php else: ?>
-                          <dd><a href='<?php echo '../' . strtolower($obj['lang2_slug']) . '/'; ?>'><?php echo $obj['lang2_name']; ?></a></dd>
-                            <?php endif; ?>
-                          <?php endif; ?>
-                        </dl>
-                        <?php if($obj['pdf_uri'] or is_array($obj['attachments'])) : ?>
-                        <div class="downloads-area">
-                          <ul>
-                          <?php if($obj['pdf_uri']): ?>
-                          <li>
-                            <a class='downloadthis pdf button' href="<?php echo $obj['pdf_uri']; ?>">Download this article as PDF</a>
-                          </li>
-                          <?php endif; ?>
-                          <?php
-                            if(is_array($obj['attachments'])) :
-                              foreach($obj['attachments'] as $attachment) :?>
-                              <li><a class='downloadthis pdf button' href="<?php echo wp_get_attachment_url($attachment['ID']); ?>" /><?php echo $attachment['post_title']; ?></a></li>
-                          <?php
-                              endforeach;
-                            endif; ?>
-                          </ul>
-                        </div>
-                        <?php endif; ?>           
-        
-                        <?php get_template_part('templates/partials/socialmedia-share'); ?>
-                        <div class="media-items">
-                          
-                        </div>
-                      </div>
-                    </aside><!-- #keyfacts -->
+
+                    <?php
+                    /**
+                     * Display metadata in main article body,
+                     * unless this is an article with an attached
+                     * grid slideshow, in which case the metadata box
+                     * should be displayed in the sidebar
+                     */
+                    if(empty($obj['grid_slideshow'])) {
+                      \SemanticWP\Templating::get_template_part('lsecities/articles/_metadata', $obj);
+                    }
+                    ?>
                     <div class="entry-content article-text<?php if($obj['layout']) { echo ' ' . $obj['layout']; } ?>">
                     <?php if($obj['article_data']->text): ?>
                       <?php echo $obj['article_data']->text; ?>
