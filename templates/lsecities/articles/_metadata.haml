@@ -1,0 +1,30 @@
+%aside.minorfacts#keyfacts
+  %div
+    %dl
+      - if authors
+        %dt Authors
+        - for author in authors
+          %dd = "#{author.name} #{author.family_name}"
+      - if publishing_date
+        %dt Date of publication
+        %dd = publishing_date
+      - if tags
+        %dt Tags
+        - for tag in tags
+          %dd tag.name
+      - if lang2.slug
+        %dt Translations
+        - for translation in translations
+          %dd
+            %a( href = translation.uri ) = translation.language_name
+    - if pdf_uri or attachments
+      .downloads-area
+        %ul
+          - if pdf_uri
+            %li
+              %a.downloadthis.pdf.button( href = pdf_uri )Download this article as PDF
+          - if attachments
+            - for attachment in attachments
+              %li
+                %a.downloadthis.pdf.button( href = attachment_uri ) = attachment.post_title
+    = include('lsecities/partials/_socialmedia-share.haml')
