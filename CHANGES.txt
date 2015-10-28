@@ -4,6 +4,10 @@ lsecities-theme-alexandria (1.14) lsecities-experimental; urgency=low
   
   * [update] refactored Awards using OO code; now index page for Awards
     uses new Pods index code (#128)
+  * [update] refactor Article template:
+    * use Article class
+    * add support for GridSlideshow layout
+    * switch to MtHAML for templating (except main template)
   * [new feature] 2D slideshow using Reveal.JS (#125)
   * [API] endpoint for Events (#124)
   * [API] endpoint for Event Sessions
