@@ -40,7 +40,7 @@ set_query_var('page_obj', $obj);
                 </div>
               </header>
               <?php endif; ?>
-              
+
               <header class="entry-header row">
                 <h1 class="entry-title article-title"><?php echo $obj['article_data']->title; ?></h1>
                 <?php if($obj['article_data']->subtitle): ?>
@@ -52,7 +52,7 @@ set_query_var('page_obj', $obj);
               </header><!-- .entry-header -->
 
               <article class='wireframe'>
-                <div class="entry-content">    
+                <div class="entry-content">
                   <div class="article">
                     <aside class='wireframe minorfacts' id='keyfacts'>
                       <div>
@@ -141,12 +141,10 @@ set_query_var('page_obj', $obj);
                     </div>
                     <?php endif; // ($obj['article_data']->author_info)?>
                   </div>
-                    
-                <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
                 </div><!-- .entry-content -->
               </article>
-  
-  
+
+
 
 
 
@@ -155,7 +153,7 @@ set_query_var('page_obj', $obj);
 
           <?php get_template_part('nav'); ?>
           </div><!-- #navigationarea -->
-          
+
 </div><!-- #post-<?php the_ID(); ?> -->
 
 </div><!-- role="main" -->
