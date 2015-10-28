@@ -1,4 +1,5 @@
 <?php
+namespace LSECitiesWPTheme;
 /**
  * Template Name: Pods - Articles
  * Description: The template used for Article Pods
@@ -7,9 +8,20 @@
  */
 $TRACE_ENABLED = is_user_logged_in();
 
-$obj = pods_prepare_article($post->ID);
+$obj = \LSECitiesWPTheme\pods_prepare_article(pods_v(-2, 'url'), pods_v('last', 'url'));
 
-set_query_var('parent_publication_id', $obj['parent_publication_id']);
+if(!empty($obj['grid_slideshow'])) {
+  /**
+   * If a grid slideshow is attached to this article, enqueue assets needed for the embedded revealjs
+   * slideshow.
+  */
+  wp_enqueue_script('revealjs', get_stylesheet_directory_uri() . '/javascripts/reveal.js', NULL, NULL, FALSE);
+  wp_enqueue_style('revealjs', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/reveal.css');
+  wp_enqueue_style('revealjs-theme-white', get_stylesheet_directory_uri() . '/stylesheets/plugins/revealjs/css/white.css');
+}
+
+set_query_var('parent_publication_id', $obj['parent_publication']['id']);
+set_query_var('page_obj', $obj);
 
 ?><?php get_header(); ?>
 
@@ -30,12 +42,12 @@ set_query_var('parent_publication_id', $obj['parent_publication_id']);
               <?php endif; ?>
               
               <header class="entry-header row">
-                <h1 class="entry-title article-title"><?php echo $obj['title']; ?></h1>
-                <?php if($obj['article_subtitle']): ?>
-                <h2><?php echo $obj['article_subtitle']; ?></h2>
+                <h1 class="entry-title article-title"><?php echo $obj['article_data']->title; ?></h1>
+                <?php if($obj['article_data']->subtitle): ?>
+                <h2><?php echo $obj['article_data']->subtitle; ?></h2>
                 <?php endif; ?>
-                <?php if($obj['article_abstract']): ?>
-                <div class="entry-meta article-abstract"><?php echo $obj['article_abstract']; ?></div>
+                <?php if($obj['article_data']->abstract): ?>
+                <div class="entry-meta article-abstract"><?php echo $obj['article_data']->abstract; ?></div>
                 <?php endif; ?>
               </header><!-- .entry-header -->
 
@@ -104,21 +116,30 @@ set_query_var('parent_publication_id', $obj['parent_publication_id']);
                       </div>
                     </aside><!-- #keyfacts -->
                     <div class="entry-content article-text<?php if($obj['layout']) { echo ' ' . $obj['layout']; } ?>">
-                    <?php if($obj['article_text']): ?>
-                      <?php echo $obj['article_text']; ?>
-                    <?php elseif($obj['article_summary']): ?>
-                      <?php echo $obj['article_summary']; ?>
+                    <?php if($obj['article_data']->text): ?>
+                      <?php echo $obj['article_data']->text; ?>
+                    <?php elseif($obj['article_data']->summary): ?>
+                      <?php echo $obj['article_data']->summary; ?>
                     <?php endif; ?>
                     </div>
-                    <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
-                    <?php if($obj['article_extra_content']): ?>
-                    <div class="extra-content"><?php echo $obj['article_extra_content']; ?></div>
+                    <?php
+                    if(!empty($obj['grid_slideshow'])) {
+                      /**
+                       * If a grid slideshow is attached to this article, include the actual template
+                       */
+                       \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj['grid_slideshow']);
+                    }
+
+                    \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
+
+                    <?php if($obj['article_data']->extra_content): ?>
+                    <div class="extra-content"><?php echo $obj['article_data']->extra_content; ?></div>
                     <?php endif; ?>
-                    <?php if($obj['article_author_info']): ?>
+                    <?php if($obj['article_data']->author_info): ?>
                     <div class="author-info">
-                      <?php echo $obj['article_author_info']; ?>
+                      <?php echo $obj['article_data']->author_info; ?>
                     </div>
-                    <?php endif; // ($obj['article_author_info'])?>
+                    <?php endif; // ($obj['article_data']->author_info)?>
                   </div>
                     
                 <?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
