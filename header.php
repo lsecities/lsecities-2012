@@ -52,8 +52,6 @@ $obj = prepare_header($post);
   // enqueue styles first
   wp_enqueue_style('font-open-sans', '//fonts.googleapis.com/css?family=Open+Sans:400,300,800,300italic,400italic,800italic');
   wp_enqueue_style('jquery.flexslider', get_stylesheet_directory_uri() . '/stylesheets/flexslider/flexslider.css');
-  wp_enqueue_style('jquery-mediaelement', get_stylesheet_directory_uri() .'/stylesheets/mediaelement/mediaelementplayer.css');
-  wp_enqueue_style('font-theovandoegsburg', get_stylesheet_directory_uri() . '/stylesheets/fonts/theovand/stylesheet.css');
   wp_enqueue_style('font-fontello', get_stylesheet_directory_uri() . '/stylesheets/fonts/fontello/css/fontello.css');
 
   if(is_user_logged_in()) {
@@ -74,7 +72,6 @@ $obj = prepare_header($post);
   wp_enqueue_script('jquery-ui-accordion', '', 'jquery', '', true);
   wp_enqueue_script('jquery-ui-tabs', '', 'jquery', '', true);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
-  wp_enqueue_script('jquery-mediaelement', get_stylesheet_directory_uri() . '/javascripts/mediaelement-and-player.js', 'jquery', '2.9.2', true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
  
   /**

@@ -210,10 +210,4 @@ jQuery(document).ready(function($) {
       _gaq.push(['_trackEvent', 'Word document', 'download', href]);
     });
   }
-  
-  // Enable mediaelementjs for event materials (audio)
-  $('.event-materials audio').mediaelementplayer({
-    audiowidth: '100%',
-    defaultVideoWidth: '100%'
-  });
 });
