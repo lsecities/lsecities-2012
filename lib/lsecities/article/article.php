@@ -79,6 +79,12 @@ class Article extends PodsObject {
   public $data_gallery;
 
   /**
+   * @var Array Data structure with content of linked 'grid-style'
+   * slideshow (Reveal.js)
+   */
+  public $grid_slideshow;
+
+  /**
    * @var Object The Pod object for this ResearchProject
    */
   private $pod;
@@ -176,6 +182,11 @@ class Article extends PodsObject {
 
     $__data_gallery_permalink = $pod->field('gallery.slug');
     $this->data_gallery = \LSECitiesWPTheme\photo_gallery_get_galleria_data($__data_gallery_permalink);
+
+    if($pod->field('grid_slideshow.permalink')) {
+      $__grid_slideshow = new GridSlideshow($pod->field('grid_slideshow.permalink'));
+      $this->grid_slideshow = $__grid_slideshow->to_var();
+    }
   }
 
   /**
