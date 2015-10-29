@@ -73,15 +73,7 @@ set_query_var('page_obj', $obj);
                       <?php echo $obj['article_data']->summary; ?>
                     <?php endif; ?>
                     </div>
-                    <?php
-                    if(!empty($obj['grid_slideshow'])) {
-                      /**
-                       * If a grid slideshow is attached to this article, include the actual template
-                       */
-                       \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj['grid_slideshow']);
-                    }
-
-                    \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
+                    <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
 
                     <?php if($obj['article_data']->extra_content): ?>
                     <div class="extra-content"><?php echo $obj['article_data']->extra_content; ?></div>
@@ -100,6 +92,8 @@ set_query_var('page_obj', $obj);
 
 
             </div><!-- .top-content -->
+
+            <?php \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj['grid_slideshow']); ?>
           </div><!-- #contentarea -->
 
           <?php get_template_part('nav'); ?>
