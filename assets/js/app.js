@@ -171,10 +171,13 @@ jQuery(document).ready(function($) {
    * TECHNICAL_DEBT: allow configuration of Reveal via data- attributes, falling back to
    * defaults if no configuration is provided.
    */
-  if(jQuery('.lc-newspaper-article .reveal').length) {
+  if($('.lc-newspaper-article .reveal').length) {
+    var width = $(this).data('width') || 844;
+    var height = $(this).data('height') || 700;
+
     Reveal.initialize({
-      width: 844,
-      height: 700,
+      width: width,
+      height: height,
       center: false,
       controls: true,
       progress: false,
@@ -183,6 +186,25 @@ jQuery(document).ready(function($) {
       embedded: true
     });
     Reveal.toggleOverview();
+
+    $('.reveal-link').click(function(){
+      $('.top-content').addClass('inactive');
+      $('.reveal,#toggle-revealjs-overview').removeClass('inactive');
+    });
+
+    $('.intro-link').click(function(){
+      $('.top-content').removeClass('inactive');
+      $('.reveal,#toggle-revealjs-overview').addClass('inactive');
+    });
+
+    $('#toggle-revealjs-overview').click(Reveal.toggleOverview);
+
+    var navSize = 50;
+    var navTrans = navSize/2;
+    $(".navigate-left").css('top', height/2 - navTrans).css('left', 0);
+    $(".navigate-right").css('top', height/2 - navTrans).css('right', 0);
+    $(".navigate-up").css('top', 0).css('left', width/2 - navTrans);
+    $(".navigate-down").css('bottom', '2rem').css('left', width/2 - navTrans);
   }
 
   // track clicks to binary files hosted in WordPress.
