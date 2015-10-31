@@ -29,10 +29,10 @@ set_query_var('page_obj', $obj);
 
 <?php if ( have_posts() ) : the_post(); endif; ?>
 
-<div id="post-<?php the_ID(); ?>" class='lc-article lc-newspaper-article'>
+<div id="post-<?php the_ID(); ?>" class='lc-article lc-newspaper-article<?php if(!empty($obj['grid_slideshow'])): ?> lc-grid-slideshow<?php endif;?>'>
 
           <div class='ninecol' id='contentarea'>
-            <div class='top-content'>
+            <div class='top-content page-tab'>
               <?php if($obj['featured_image_uri']): ?>
               <header class="heading-image">
                 <div class='photospread wireframe'>
@@ -72,6 +72,9 @@ set_query_var('page_obj', $obj);
                     <?php elseif($obj['article_data']->summary): ?>
                       <?php echo $obj['article_data']->summary; ?>
                     <?php endif; ?>
+                    <?php if(!empty($obj['grid_slideshow'])): ?>
+                    <p><a class="reveal-link" href="#">Show data</a></p>
+                    <?php endif; // (!empty($obj['grid_slideshow'])) ?>
                     </div>
                     <?php \SemanticWP\Templating::get_template_part('lsecities/partials/_galleria', [ 'gallery' => $obj['data_gallery'] ]); ?>
 
@@ -93,7 +96,7 @@ set_query_var('page_obj', $obj);
 
             </div><!-- .top-content -->
 
-            <?php \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj['grid_slideshow']); ?>
+            <?php \SemanticWP\Templating::get_template_part('lsecities/revealjs/_embedded_revealjs', $obj); ?>
           </div><!-- #contentarea -->
 
           <?php get_template_part('nav'); ?>
