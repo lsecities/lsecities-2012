@@ -112,7 +112,15 @@ var usernoiseButton = {"text":"Feedback","style":"background-color: #ff0000; col
 </script>
 </head>
 
-<body <?php body_class($obj['body_class_extra']); ?>>
+<?php
+/**
+ * body_class - can be passed two extra class lists: the first from the prepare_header
+ * function called from within this file, the other passed from the template
+ * via set_query_var('body_class_extra', [...]); and hence available here
+ * as $body_class_extra
+ */
+?>
+<body <?php body_class([ $obj['body_class_extra'], $body_class_extra]); ?>>
 
     <!--[if lt IE 9 ]>
       <p class='flash top chromeframe'>
