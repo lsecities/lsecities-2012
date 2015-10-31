@@ -22,6 +22,7 @@ if(!empty($obj['grid_slideshow'])) {
 
 set_query_var('parent_publication_id', $obj['parent_publication']['id']);
 set_query_var('page_obj', $obj);
+set_query_var('body_class_extra', $obj['extra_body_class']);
 
 ?><?php get_header(); ?>
 
