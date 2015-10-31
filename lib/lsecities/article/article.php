@@ -295,6 +295,13 @@ function pods_prepare_article($permalink, $request_language = 'en-gb') {
     $obj['article_data_english'];
 
   /**
+   * If article includes a grid_slideshow, set extra body class to trigger overflow: auto on HTML body
+   */
+  if(!empty($obj['grid_slideshow'])) {
+    $obj['extra_body_class'] = 'layout-grid-slideshow';
+  }
+
+  /**
    * Check request language and available translations, if any, and create
    * data structure for links to alternate version (translation) of the
    * article.
