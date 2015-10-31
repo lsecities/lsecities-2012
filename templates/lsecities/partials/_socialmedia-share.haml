@@ -1,11 +1,12 @@
-#share-on-social-media
-  %span Share
-  %span
-    %a( href = "https://www.facebook.com/sharer.php?u=#{html_page.uri.urlencoded}&t=#{html_page.title_for_citations}" )
-      %i.icon-facebook.in-circle
-  %span
-    %a( href = "https://twitter.com/intent/tweet?url=#{html_page.uri.urlencoded}" )
-      %i.icon-twitter.in-circle
-  %span
-    %a( href = "https://plus.google.com/share?url=#{html_page.uri.urlencoded}" )
-      %i.icon-google-plus.in-circle
+%section.socialbuttons.share
+  %h1 Share
+  %ul
+    %li
+      %a( href = "https://www.facebook.com/sharer.php?u=#{html_page.uri.urlencoded}&t=#{html_page.title_for_citations}" )
+        %i.icon-facebook.in-circle
+    %li
+      %a( href = "https://twitter.com/intent/tweet?url=#{html_page.uri.urlencoded}" )
+        %i.icon-twitter.in-circle
+    %li
+      %a( href = "https://plus.google.com/share?url=#{html_page.uri.urlencoded}" )
+        %i.icon-google-plus.in-circle
