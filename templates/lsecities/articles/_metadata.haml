@@ -1,23 +1,29 @@
 %aside.minorfacts#keyfacts
-  %div
-    %dl
-      - if authors
-        %dt Authors
+  - if authors
+    %section
+      %h1 Authors
+      %ul
         - for author in authors
-          %dd = "#{author.name} #{author.family_name}"
-      - if publishing_date
-        %dt Date of publication
-        %dd = publishing_date
-      - if tags
-        %dt Tags
+          %li = "#{author.name} #{author.family_name}"
+  - if publishing_date
+    %section
+      %h1 Date of publication
+      %div = publishing_date
+  - if tags
+    %section
+      %h1 Tags
+      %ul
         - for tag in tags
-          %dd tag.name
-      - if lang2.slug
-        %dt Translations
+          %li tag.name
+  - if lang2.slug
+    %section
+      %h1 Translations
+      %ul
         - for translation in translations
-          %dd
+          %li
             %a( href = translation.uri ) = translation.language_name
-    - if pdf_uri or attachments
+  - if pdf_uri or attachments
+    %section
       .downloads-area
         %ul
           - if pdf_uri
@@ -27,4 +33,4 @@
             - for attachment in attachments
               %li
                 %a.downloadthis.pdf.button( href = attachment_uri ) = attachment.post_title
-    = include('lsecities/partials/_socialmedia-share.haml')
+  = include('lsecities/partials/_socialmedia-share.haml')
