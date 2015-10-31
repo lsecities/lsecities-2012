@@ -1,0 +1,25 @@
+@import "templates/palette";
+
+.socialbuttons {
+  ul li {
+    display: inline;
+    
+    &::after {
+      content: "";
+    }
+
+    a {
+      margin: 0 0.2rem;
+      padding: 0;
+      @include round-button-effects;
+
+      color: $icon_foreground;
+
+      .in-circle {
+        color: $icon-background;
+        background-color: $icon_foreground;  // swap background with foreground
+        border-radius: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+$metadata-list-heading-size: 1rem;
+$metadata-list-heading-margin: 0.2rem;
+$metadata-section-margin-bottom: 1rem;
+
+#keyfacts section {
+  margin: 0;
+  margin-bottom: $metadata-section-margin-bottom;
+}
+
+aside {
+  h1 {
+    font-size: $metadata-list-heading-size;
+    margin-bottom: $metadata-list-heading-margin;
+
+    font-family: $headings-font-family;
+    @include clearfix;
+
+    .logged-in & {
+      font-family: "Helsinki", $headings-font-family;
+    }
+  }
+
+  section {
+    margin-bottom: $metadata-section-margin-bottom;
+  }
+
+  ul {
+    li {
+      display: inline;
+
+      &::after {
+        content: ', ';
+      }
+
+      &:last-child::after {
+       content: '';
+      }
+    }
+  }
+
+}
