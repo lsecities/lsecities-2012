@@ -4,7 +4,7 @@
         <h1 class='conference-title row'><a href="/">Governing Urban Futures</a></h1>
         <span class="twitter-hashtag"><a href="https://twitter.com/search?q=%23UADelhi&src=typd&f=realtime">#UADelhi</a></span>
         <div class='row' id='mainmenus'>
-          <nav class='twelvecol section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
+          <nav class='twelvecol top-navigation section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
             <ul>
             <?php if($lc_toplevel_ancestor and $lc_level2nav): ?>
               <?php echo $lc_level2nav ; ?>

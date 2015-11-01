@@ -48,7 +48,7 @@
 								</div>
 							</div>
              </form>
-						<span id="socialbuttons">
+						<span class="socialbuttons">
 							<ul>
 								<li>
 									<a title="Follow us on Twitter" href="https://twitter.com/#!/LSECities">
@@ -84,14 +84,14 @@
 						</span>
 					</div>
 				</div><!-- #toolbox -->
-				<nav id='level1nav'>
+				<nav id='level1nav' class='top-navigation'>
 					<ul>
 					<?php echo $lc_level1nav; ?>
 					</ul>
 				</nav><!-- #level1nav -->
 			</div><!-- row -->
 			<div class='row' id='mainmenus'>
-				<nav class='twelvecol section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
+				<nav class='twelvecol top-navigation section-ancestor-<?php echo $lc_toplevel_ancestor ; ?>' id='level2nav'>
 					<ul>
 					<?php if($lc_toplevel_ancestor and $lc_level2nav): ?>
 						<?php echo $lc_level2nav ; ?>
