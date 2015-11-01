@@ -1,0 +1,16 @@
+{
+  "name": "lsecities-theme",
+  "version": "1.11.0",
+  "description": "WordPress theme for lsecities.net",
+  "author": "andrea rota <a.rota@lse.ac.uk>",
+  "main": "metalsmith.js",
+  "dependencies": {
+    "metalsmith": "~1.0",
+    "metalsmith-sass": "*",
+    "jquery-colorbox": "~1.6.3"
+  },
+  "devDependencies": {
+    "revealjs": "hakimel/reveal.js#3.1.0"
+  },
+  "license": "AGPL-3.0"
+}
