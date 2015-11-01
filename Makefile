@@ -34,6 +34,7 @@ sync-theme: check-env mktmp
 vendor-install: check-env sync-theme
 	cd $(THEME_TMPDIR)/$(DEPLOY_BRANCH) && composer install
 	cd $(THEME_TMPDIR)/$(DEPLOY_BRANCH) && bower install
+	cd $(THEME_TMPDIR)/$(DEPLOY_BRANCH) && npm install --production
 	
 go-live: check-env vendor-install
 	mkdir -p $(THEME_LIVEDIR)
