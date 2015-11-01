@@ -1,7 +1,137 @@
-body.pod-page-tests-slideshow-w {
+body.layout-grid-slideshow {
   overflow: auto;
 }
 
-article.layout-2d-revealjs .reveal {
-  min-height: 600px;
+.lc-grid-slideshow {
+  .page-tab {
+    transition: opacity 1s ease-in;
+    z-index: 1;
+
+    &.inactive {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+      z-index: -1;
+    }
+  }
+
+  #toggle-revealjs-overview {
+    background: #FC0D1D;
+    color: #FFF;
+    cursor: pointer;
+    padding: 5px 15px;
+    margin-top: 20px;
+    border: 0;
+    opacity: 1;
+    transition: opacity 1s ease-in;
+
+    &.inactive {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+  }
+
+  #contentarea {
+    position: relative;
+  }
+
+  .reveal {
+    min-height: 700px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1;
+      
+      font-family: $headings-font-family;
+
+      .logged-in & {
+        font-family: 'Helsinki', $headings-font-family;
+      }
+    }
+    
+    h1 {
+      font-size: 1.5rem
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+
+    p, .slides section {
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    .controls {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+
+      * {
+        color: inhert !important;
+      }
+
+      div {
+        pointer-events:auto;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 3rem;
+        background-color: #eee;
+        text-align: center;
+        border: inherit;
+
+        &:hover {
+          background: #ccc;
+        }
+
+        i {
+          font-size: 1.25rem;
+          line-height: 2rem;
+        }
+
+        &.enabled:active {
+          margin-top: inherit;
+        }
+
+        &.navigate-left {
+          top: inherit;
+        }
+
+        &.navigate-right {
+          left: inherit;
+          top: inherit;
+        }
+
+        &.navigate-up {
+          left: inherit;
+        }
+
+        &.navigate-down {
+          left: inherit;
+          top: inherit;
+        }
+      }
+    }
+
+    &.overview .slides {
+      section:hover, section.present {
+        outline: 10px solid rgba(150, 150, 150, 1);
+        outline-offset: 10px;
+        background: #ccc;
+      }
+    }
+  }
+
+  #keyfacts {
+    margin-top: 3rem;
+  }
 }
