@@ -1,16 +1,16 @@
 // This file must be imported before loading html5-boilerplate
 
-$main-headings-font-family: "Open Sans", sans-serif;
+$main-headings-font-family: Helsinki, "Open Sans", sans-serif;
 
-$navmenu-font-family: $main-headings-font-family;
+$navmenu-font-family: Helsinki, $main-headings-font-family;
 
-$base-font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;  // default font-family
+$base-font-family: "Neue Haas Unica W01", "Open Sans", "Helvetica Neue", Helvetica, sans-serif;  // default font-family
 
 $article-font-family: $base-font-family; // default font-family for page body
 
-$headings-font-family: $base-font-family;
+$headings-font-family: Helsinki, $base-font-family;
 
-$grotesque-font-family: unquote('BureauGrotesque-ThreeSeven, Anton, Arial, Helvetica, sans-serif'); // for Urban Age cities
+$grotesque-font-family: unquote('Helsinki, Arial, Helvetica, sans-serif'); // for Urban Age cities
 
 $base-font-size: 16px;  // default font-size for YUI fonts
 
