@@ -1007,7 +1007,7 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-index-for-pod-research_project section.show-status--completed-only .research-status.completed { display: inline; }
 
 .lc-section-front #main { margin-top: 0; }
-.lc-section-front .flexslider { position: relative; font-size: 0.875em; border: 0; background: transparent; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+.lc-section-front .flexslider { position: relative; font-size: 0.875em; border: 0; background: transparent; margin: 0; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
 .lc-section-front .flexslider .flex-direction-nav li a { -moz-transition-property: none; -o-transition-property: none; -webkit-transition-property: none; transition-property: none; top: 201.5 px; }
 .lc-section-front .flexslider .onecol, .lc-section-front .flexslider .twocol, .lc-section-front .flexslider .threecol, .lc-section-front .flexslider .fourcol, .lc-section-front .flexslider .fivecol, .lc-section-front .flexslider .sixcol, .lc-section-front .flexslider .sevencol, .lc-section-front .flexslider .eightcol, .lc-section-front .flexslider .ninecol, .lc-section-front .flexslider .tencol, .lc-section-front .flexslider .elevencol { margin-right: 0; }
 .lc-section-front .flexslider .slides > li { width: 100%; }
@@ -1078,6 +1078,26 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .feature-info .feature-date { display: table-cell; padding: 0 0.714285em; text-align: center; vertical-align: top; line-height: 1em; }
 .feature-info .feature-date .day { font-size: 1.2em; font-weight: bold; padding-top: 0.1em; }
 .feature-info .feature-date + header { display: table-cell; }
+
+.ua10-debates-banner { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background: rgba(8, 8, 8, 0.9); color: white; opacity: 0; max-height: 0; transition: opacity 1s ease, max-height 1s 1s ease; }
+.ua10-debates-banner.active { opacity: 1; max-height: 40rem; transition: height 1s ease, opacity 1s ease; }
+.ua10-debates-banner .wrapper { margin-left: auto; margin-right: auto; max-width: 1140px; box-sizing: border-box; padding-top: 1rem; }
+.ua10-debates-banner .heading { margin-bottom: 1rem; }
+.ua10-debates-banner .heading, .ua10-debates-banner .content { max-width: 100%; margin-left: auto; margin-right: auto; }
+.ua10-debates-banner .heading:after, .ua10-debates-banner .content:after { content: " "; display: block; clear: both; }
+.ua10-debates-banner .text { width: 66.10169%; float: left; margin-right: 1.69492%; }
+.ua10-debates-banner .action { width: 32.20339%; float: right; margin-right: 0; }
+.ua10-debates-banner .action > * { margin: 1rem 0; text-align: right; }
+.ua10-debates-banner .action > *:first-child { margin-top: 0; }
+.ua10-debates-banner .dismiss-banner { cursor: pointer; }
+.ua10-debates-banner .logos .logo { vertical-align: middle; display: inline-block; padding: 0.25rem 0.5rem; }
+.ua10-debates-banner .logos .logo:first-child { padding-left: 0; }
+.ua10-debates-banner .logos .logo:last-child { padding-right: 0; }
+.ua10-debates-banner .logos .logo.lse { border-right: 1px solid white; border-left: 1px solid white; }
+.ua10-debates-banner .cta a { background-color: white; color: #f00; border: none; padding: 0.5rem 2rem; text-transform: uppercase; font-family: Helsinki; display: inline-block; }
+.ua10-debates-banner .cta a i { margin-left: 1rem; }
+.ua10-debates-banner svg { fill: white; }
+.ua10-debates-banner .svg__group__path--white { fill: black; }
 
 /** MONKEYPATCH - while we investigate why WP decided to override this all of a sudden */
 body.ec2012.custom-background { background-color: black !important; }
