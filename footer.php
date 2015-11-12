@@ -82,6 +82,13 @@
   </footer><!-- #footer -->
 </div><!-- ## grid # container -->
 
+<?php
+// display UA10 banner: only on front page, and initially only for logged-in users
+if(is_user_logged_in()) {
+  get_template_part('templates/partials/ua10-banner');
+}
+?>
+
 <?php wp_footer(); ?>
 
 <?php if(!is_user_logged_in()): ?>
@@ -101,10 +108,6 @@
    //]]>
 </script>
 <?php endif; ?>
-
-<script>
-
-</script>
 <?php
 /**
  * run microsite-specific footer code, if it exists,
