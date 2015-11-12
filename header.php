@@ -54,11 +54,9 @@ $obj = prepare_header($post);
   wp_enqueue_style('jquery.flexslider', get_stylesheet_directory_uri() . '/stylesheets/flexslider/flexslider.css');
   wp_enqueue_style('font-fontello', get_stylesheet_directory_uri() . '/stylesheets/fonts/fontello/css/fontello.css');
 
-  if(is_user_logged_in()) {
-    /** preview fonts: Helsinki & Neue Haas Unica */
-    wp_enqueue_style('font-helsinki', get_stylesheet_directory_uri() . '/assets/bower_components/helsinki-fonts/css/helsinki.css');
-    wp_enqueue_style('font-neue-haas-unica', '//fast.fonts.net/cssapi/2798ec56-50e4-42fc-b9ca-7525414ae7ce.css');
-  } 
+  /** preview fonts: Helsinki & Neue Haas Unica */
+  wp_enqueue_style('font-helsinki', get_stylesheet_directory_uri() . '/assets/bower_components/helsinki-fonts/css/helsinki.css');
+  wp_enqueue_style('font-neue-haas-unica', '//fast.fonts.net/cssapi/2798ec56-50e4-42fc-b9ca-7525414ae7ce.css');
 ?>
 
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_directory'); ?>/stylesheets/cssgrid.net/1140.css" />
