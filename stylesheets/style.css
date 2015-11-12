@@ -738,6 +738,35 @@ right: -21px; */ }
 #publication-side-toc h2 { font-size: 1em; margin-bottom: 0.25em; margin-top: 1em; }
 #publication-side-toc ul li { line-height: 1.125em; margin-bottom: 0.3em; }
 
+body.layout-grid-slideshow { overflow: auto; }
+
+.lc-grid-slideshow .page-tab { transition: opacity 1s ease-in; z-index: 1; }
+.lc-grid-slideshow .page-tab.inactive { opacity: 0; transition: opacity 1s ease-out; z-index: -1; }
+.lc-grid-slideshow #toggle-revealjs-overview { background: #FC0D1D; color: #FFF; cursor: pointer; padding: 5px 15px; margin-top: 20px; border: 0; opacity: 1; transition: opacity 1s ease-in; }
+.lc-grid-slideshow #toggle-revealjs-overview.inactive { opacity: 0; transition: opacity 1s ease-out; }
+.lc-grid-slideshow #contentarea { position: relative; }
+.lc-grid-slideshow .reveal { min-height: 700px; position: absolute; top: 0; left: 0; }
+.lc-grid-slideshow .reveal h1, .lc-grid-slideshow .reveal h2, .lc-grid-slideshow .reveal h3, .lc-grid-slideshow .reveal h4, .lc-grid-slideshow .reveal h5, .lc-grid-slideshow .reveal h6 { line-height: 1; font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
+.logged-in .lc-grid-slideshow .reveal h1, .logged-in .lc-grid-slideshow .reveal h2, .logged-in .lc-grid-slideshow .reveal h3, .logged-in .lc-grid-slideshow .reveal h4, .logged-in .lc-grid-slideshow .reveal h5, .logged-in .lc-grid-slideshow .reveal h6 { font-family: "Helsinki", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
+.lc-grid-slideshow .reveal h1 { font-size: 1.5rem; }
+.lc-grid-slideshow .reveal h2 { font-size: 1.25rem; }
+.lc-grid-slideshow .reveal h3 { font-size: 1rem; }
+.lc-grid-slideshow .reveal h4 { font-size: 0.8rem; }
+.lc-grid-slideshow .reveal p, .lc-grid-slideshow .reveal .slides section { font-size: 1.1rem; text-align: left; }
+.lc-grid-slideshow .reveal .controls { position: absolute; width: 100%; height: 100%; right: 0; bottom: 0; pointer-events: none; }
+.lc-grid-slideshow .reveal .controls * { color: inhert !important; }
+.lc-grid-slideshow .reveal .controls div { pointer-events: auto; width: 3rem; height: 3rem; text-align: center; border: inherit; }
+.lc-grid-slideshow .reveal .controls div.enabled { opacity: 0.5; transition: opacity 1s; }
+.lc-grid-slideshow .reveal .controls div.enabled:hover { transition: opacity 1s; opacity: 1; }
+.lc-grid-slideshow .reveal .controls div i { font-size: 1.25rem; line-height: 2rem; }
+.lc-grid-slideshow .reveal .controls div.enabled:active { margin-top: inherit; }
+.lc-grid-slideshow .reveal .controls div.navigate-left { top: inherit; }
+.lc-grid-slideshow .reveal .controls div.navigate-right { left: inherit; top: inherit; }
+.lc-grid-slideshow .reveal .controls div.navigate-up { left: inherit; }
+.lc-grid-slideshow .reveal .controls div.navigate-down { left: inherit; top: inherit; }
+.lc-grid-slideshow .reveal.overview .slides section:hover, .lc-grid-slideshow .reveal.overview .slides section.present { outline: 10px solid #969696; outline-offset: 10px; background: #ccc; }
+.lc-grid-slideshow #keyfacts { margin-top: 3rem; }
+
 .lc-event .event-info { font-size: 0.9rem; margin-top: 1em; }
 .lc-event .extra-content .item h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
 .lc-event .event-materials { overflow: hidden; *zoom: 1; }
@@ -1049,34 +1078,6 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .feature-info .feature-date { display: table-cell; padding: 0 0.714285em; text-align: center; vertical-align: top; line-height: 1em; }
 .feature-info .feature-date .day { font-size: 1.2em; font-weight: bold; padding-top: 0.1em; }
 .feature-info .feature-date + header { display: table-cell; }
-
-body.layout-grid-slideshow { overflow: auto; }
-
-.lc-grid-slideshow .page-tab { transition: opacity 1s ease-in; z-index: 1; }
-.lc-grid-slideshow .page-tab.inactive { opacity: 0; transition: opacity 1s ease-out; z-index: -1; }
-.lc-grid-slideshow #toggle-revealjs-overview { background: #FC0D1D; color: #FFF; cursor: pointer; padding: 5px 15px; margin-top: 20px; border: 0; opacity: 1; transition: opacity 1s ease-in; }
-.lc-grid-slideshow #toggle-revealjs-overview.inactive { opacity: 0; transition: opacity 1s ease-out; }
-.lc-grid-slideshow #contentarea { position: relative; }
-.lc-grid-slideshow .reveal { min-height: 700px; position: absolute; top: 0; left: 0; }
-.lc-grid-slideshow .reveal h1, .lc-grid-slideshow .reveal h2, .lc-grid-slideshow .reveal h3, .lc-grid-slideshow .reveal h4, .lc-grid-slideshow .reveal h5, .lc-grid-slideshow .reveal h6 { line-height: 1; font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
-.logged-in .lc-grid-slideshow .reveal h1, .logged-in .lc-grid-slideshow .reveal h2, .logged-in .lc-grid-slideshow .reveal h3, .logged-in .lc-grid-slideshow .reveal h4, .logged-in .lc-grid-slideshow .reveal h5, .logged-in .lc-grid-slideshow .reveal h6 { font-family: "Helsinki", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
-.lc-grid-slideshow .reveal h1 { font-size: 1.5rem; }
-.lc-grid-slideshow .reveal h2 { font-size: 1.25rem; }
-.lc-grid-slideshow .reveal h3 { font-size: 1rem; }
-.lc-grid-slideshow .reveal h4 { font-size: 0.8rem; }
-.lc-grid-slideshow .reveal p, .lc-grid-slideshow .reveal .slides section { font-size: 1.1rem; text-align: left; }
-.lc-grid-slideshow .reveal .controls { position: absolute; width: 100%; height: 100%; right: 0; bottom: 0; pointer-events: none; }
-.lc-grid-slideshow .reveal .controls * { color: inhert !important; }
-.lc-grid-slideshow .reveal .controls div { pointer-events: auto; width: 3rem; height: 3rem; border-radius: 3rem; background-color: #eee; text-align: center; border: inherit; }
-.lc-grid-slideshow .reveal .controls div:hover { background: #ccc; }
-.lc-grid-slideshow .reveal .controls div i { font-size: 1.25rem; line-height: 2rem; }
-.lc-grid-slideshow .reveal .controls div.enabled:active { margin-top: inherit; }
-.lc-grid-slideshow .reveal .controls div.navigate-left { top: inherit; }
-.lc-grid-slideshow .reveal .controls div.navigate-right { left: inherit; top: inherit; }
-.lc-grid-slideshow .reveal .controls div.navigate-up { left: inherit; }
-.lc-grid-slideshow .reveal .controls div.navigate-down { left: inherit; top: inherit; }
-.lc-grid-slideshow .reveal.overview .slides section:hover, .lc-grid-slideshow .reveal.overview .slides section.present { outline: 10px solid #969696; outline-offset: 10px; background: #ccc; }
-.lc-grid-slideshow #keyfacts { margin-top: 3rem; }
 
 /** MONKEYPATCH - while we investigate why WP decided to override this all of a sudden */
 body.ec2012.custom-background { background-color: black !important; }

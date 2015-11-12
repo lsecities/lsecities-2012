@@ -84,15 +84,19 @@ body.layout-grid-slideshow {
         pointer-events:auto;
         width: 3rem;
         height: 3rem;
-        border-radius: 3rem;
-        background-color: #eee;
         text-align: center;
         border: inherit;
 
-        &:hover {
-          background: #ccc;
+        &.enabled {
+          opacity: 0.5;
+          transition: opacity 1s;
+          
+          &:hover {
+            transition: opacity 1s;
+            opacity: 1;
+          }
         }
-
+        
         i {
           font-size: 1.25rem;
           line-height: 2rem;
