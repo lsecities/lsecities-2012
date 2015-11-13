@@ -1072,6 +1072,7 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-section-front .flexslider ul li { list-style-type: inherit; }
 .lc-section-front .extra-content { font-size: 1em; margin-top: 0; padding-top: 0; }
 .lc-section-front .extra-content .news { margin-bottom: 1.5rem; }
+.lc-section-front .extra-content .news h3 { margin: 0; }
 .lc-section-front .extra-content .fourcol:nth-child(3n) { margin-right: 0; }
 
 .feature-info { padding-top: 0.5em; }
@@ -1079,25 +1080,34 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .feature-info .feature-date .day { font-size: 1.2em; font-weight: bold; padding-top: 0.1em; }
 .feature-info .feature-date + header { display: table-cell; }
 
-.ua10-debates-banner { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background: rgba(8, 8, 8, 0.9); color: white; opacity: 0; max-height: 0; transition: opacity 1s ease, max-height 1s 1s ease; }
-.ua10-debates-banner.active { opacity: 1; max-height: 40rem; transition: height 1s ease, opacity 1s ease; }
+.ua10-debates-banner { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background: rgba(8, 8, 8, 0.9); color: white; opacity: 0; transform: translateY(100%); transition: opacity 1s ease-in, transform 1s 0.3s ease; /** media queries */ }
+.ua10-debates-banner.active { opacity: 1; transform: translateY(0); transition: transform 1s ease, opacity 1s ease; }
 .ua10-debates-banner .wrapper { margin-left: auto; margin-right: auto; max-width: 1140px; box-sizing: border-box; padding-top: 1rem; }
 .ua10-debates-banner .heading { margin-bottom: 1rem; }
 .ua10-debates-banner .heading, .ua10-debates-banner .content { max-width: 100%; margin-left: auto; margin-right: auto; }
 .ua10-debates-banner .heading:after, .ua10-debates-banner .content:after { content: " "; display: block; clear: both; }
-.ua10-debates-banner .text { width: 66.10169%; float: left; margin-right: 1.69492%; }
-.ua10-debates-banner .action { width: 32.20339%; float: right; margin-right: 0; }
-.ua10-debates-banner .action > * { margin: 1rem 0; text-align: right; }
+.ua10-debates-banner .heading .text { width: 74.57627%; float: left; margin-right: 1.69492%; }
+.ua10-debates-banner .heading .action { width: 23.72881%; float: right; margin-right: 0; text-align: right; }
+.ua10-debates-banner .content .text { width: 100%; float: left; margin-left: 0; margin-right: 0; }
+.ua10-debates-banner .content .action { width: 100%; float: left; margin-left: 0; margin-right: 0; }
+.ua10-debates-banner .text { font-family: Helsinki, Helvetica, Arial, sans-serif; text-transform: uppercase; font-size: 20px; }
+.ua10-debates-banner .action > * { margin: 1rem 0; }
 .ua10-debates-banner .action > *:first-child { margin-top: 0; }
 .ua10-debates-banner .dismiss-banner { cursor: pointer; }
 .ua10-debates-banner .logos .logo { vertical-align: middle; display: inline-block; padding: 0.25rem 0.5rem; }
 .ua10-debates-banner .logos .logo:first-child { padding-left: 0; }
 .ua10-debates-banner .logos .logo:last-child { padding-right: 0; }
 .ua10-debates-banner .logos .logo.lse { border-right: 1px solid white; border-left: 1px solid white; }
-.ua10-debates-banner .cta a { background-color: white; color: #f00; border: none; padding: 0.5rem 2rem; text-transform: uppercase; font-family: Helsinki; display: inline-block; }
-.ua10-debates-banner .cta a i { margin-left: 1rem; }
+.ua10-debates-banner .cta a { font-size: 18px; background-color: #ff3741; color: white; border: none; padding: 0.5rem 2rem; text-transform: uppercase; font-family: Helsinki; display: inline-block; }
+.ua10-debates-banner .cta a .cta-arrow { margin-left: 1rem; }
 .ua10-debates-banner svg { fill: white; }
 .ua10-debates-banner .svg__group__path--white { fill: black; }
+@media only screen and (min-width: 1140px) { .ua10-debates-banner .content .text { width: 66.10169%; float: left; margin-right: 1.69492%; }
+  .ua10-debates-banner .content .action { width: 32.20339%; float: right; margin-right: 0; } }
+@media only screen and (min-width: 768px) and (max-width: 1139px) { .ua10-debates-banner .content .text { width: 49.15254%; float: left; margin-right: 1.69492%; }
+  .ua10-debates-banner .content .action { width: 49.15254%; float: right; margin-right: 0; } }
+@media only screen and (min-width: 768px) { .ua10-debates-banner .action { text-align: right; } }
+@media only screen and (max-width: 1139px) { .ua10-debates-banner .wrapper { padding: 1rem; } }
 
 /** MONKEYPATCH - while we investigate why WP decided to override this all of a sudden */
 body.ec2012.custom-background { background-color: black !important; }
