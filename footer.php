@@ -84,7 +84,7 @@
 
 <?php
 // display UA10 banner: only on front page, and initially only for logged-in users
-if(is_user_logged_in()) {
+if(is_user_logged_in() and is_front_page()) {
   get_template_part('templates/partials/ua10-banner');
 }
 ?>
