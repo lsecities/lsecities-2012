@@ -408,6 +408,10 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
     // TECHNICAL_DEBT: needs to be done at a container model level
     .news {
       margin-bottom: 1.5rem;
+
+      h3 {
+        margin: 0;
+      }
     }
 
     // TECHNICAL_DEBT: this is a quick hack around 1140px grid - needs to be done properly via Susy's gallery mixin,
