@@ -7,13 +7,14 @@
   background: rgba(8, 8, 8, 0.9);
   color: white;
   opacity: 0;
-  max-height: 0;
-  transition: opacity 1s ease, max-height 1s 1s ease;
+  transform: translateY(100%);
+
+  transition: opacity 1s ease-in, transform 1s 0.3s ease;
 
   &.active {
     opacity: 1;
-    max-height: 40rem;
-    transition: height 1s ease, opacity 1s ease;
+    transform: translateY(0);
+    transition: transform 1s ease, opacity 1s ease;
   }
   
   .wrapper {
