@@ -46,7 +46,7 @@ trait ObjectWithTimespan {
    * @var Integer Minutes since event ended (positive for future events or events that have started, negative for events that have finished)
    */
   public $minutes_to_start_of_event;
-  public $minutes_since_event_ended;
+  public $minutes_to_end_of_event;
 
   public function __construct($datetime_start, $datetime_end, $free_form_dates, $datetimezone = 'Europe/London') {
     /**
@@ -83,10 +83,12 @@ trait ObjectWithTimespan {
     $this->is_future_event = ($this->event_end > $datetime_now) ? true : false;
 
     // calculate distance of event from now
-    $minutes_to_start_of_event = $this->event_start - $datetime_now;
-    $minutes_since_event_ended = $this->event_end - $datetime_now;
-
-    echo '<!-- mtsoe/msee: ' . $minutes_to_start_of_event . '/' . $minutes_since_event_ended . ' -->';
+    $__minutes_to_start_of_event = $datetime_now->diff($this->event_start);
+    $__minutes_to_end_of_event = $datetime_now->diff($this->event_end);
+    $this->minutes_to_start_of_event = ($__minutes_to_start_of_event->d * 24 * 60 + $__minutes_to_start_of_event->h * 60 + $__minutes_to_start_of_event->i);
+    if($datetime_now > $this->event_start) $this->minutes_to_start_of_event *= -1;
+    $this->minutes_to_end_of_event = ($__minutes_to_end_of_event->d * 24 * 60 + $__minutes_to_end_of_event->h * 60 + $__minutes_to_end_of_event->i);
+    if($datetime_now > $this->event_end) $this->minutes_to_end_of_event *= -1;
 
     // check whether the event starts and ends on same day
     $this->event_starts_and_ends_on_same_day = $this->event_start->format('Y-m-d') != $this->event_end->format('Y-m-d');
