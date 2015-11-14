@@ -25,7 +25,9 @@ class Event extends PodsObject {
 
   public $title;
   public $tagline;
-  
+
+  public $live_streaming_video_embedcode;
+
   public $event_hashtag;
   public $event_story_id;
   // these are either people (speakers, chairs, etc.) or organizations, so let's call them actants
@@ -51,6 +53,7 @@ class Event extends PodsObject {
 
   public $datetime_start;
   public $datetime_end;
+  public $is_live_now;
 
   /**
    * @var string Only day of month and month to be used in lists
@@ -85,6 +88,8 @@ class Event extends PodsObject {
 
     $this->event_hashtag = ltrim($pod->field('hashtag'), '#');
     $this->event_story_id = $pod->field('storify_id');
+
+    $this->live_streaming_video_embedcode = $pod->field('live_streaming_video_embedcode');
 
     /**
      * Event programme
@@ -159,7 +164,43 @@ class Event extends PodsObject {
     $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
 
     $this->event_date_for_navigation = $this->event_start->format('j F Y');
-    
+
+
+    $event_type = $pod->field('event_type.name');
+    $event_series = $pod->field('event_series.name');
+    $event_host_organizations = $this->orgs_list((array) $pod->field('hosted_by'));
+    $event_partner_organizations = $this->orgs_list((array) $pod->field('partners'));
+
+    $this->event_info = '';
+    if($event_type) {
+      $this->event_info .= '<em>' . ucfirst($event_type) . '</em> ';
+    } else {
+      $this->event_info .= 'An event ';
+    }
+    if($event_series) {
+      $this->event_info .= 'of the <em>' . $event_series . '</em> series ';
+    }
+    if($event_host_organizations) {
+      $this->event_info .= 'hosted by ' . $event_host_organizations . ' ';
+    } else {
+      $this->event_info .= 'hosted by LSE Cities ';
+    }
+    if($event_partner_organizations) {
+      $this->event_info .= 'in partnership with ' . $event_partner_organizations;
+    }
+
+    $poster_pdf = $pod->field('poster_pdf');
+    $this->poster_pdf = wp_get_attachment_url($poster_pdf[0]['ID']);
+
+
+    $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
+    $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
+
+
+    if($this->is_live([10080,-10080]) and is_user_logged_in() and empty($event_series)) {
+      $this->is_live_now = TRUE;
+    }
+
     $event_blurb = do_https_shortcode($pod->display('blurb'));
     $event_blurb_after_event = do_https_shortcode($pod->display('blurb_after_event'));
 
@@ -195,36 +236,6 @@ class Event extends PodsObject {
         $this->heading_gallery = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
       }
     }
-
-    $event_type = $pod->field('event_type.name');
-    $event_series = $pod->field('event_series.name');
-    $event_host_organizations = $this->orgs_list((array) $pod->field('hosted_by'));
-    $event_partner_organizations = $this->orgs_list((array) $pod->field('partners'));
-
-    $this->event_info = '';
-    if($event_type) {
-      $this->event_info .= '<em>' . ucfirst($event_type) . '</em> ';
-    } else {
-      $this->event_info .= 'An event ';
-    }
-    if($event_series) {
-      $this->event_info .= 'of the <em>' . $event_series . '</em> series ';
-    }
-    if($event_host_organizations) {
-      $this->event_info .= 'hosted by ' . $event_host_organizations . ' ';
-    } else {
-      $this->event_info .= 'hosted by LSE Cities ';
-    }
-    if($event_partner_organizations) {
-      $this->event_info .= 'in partnership with ' . $event_partner_organizations;
-    }
-
-    $poster_pdf = $pod->field('poster_pdf');
-    $this->poster_pdf = wp_get_attachment_url($poster_pdf[0]['ID']);
-
-
-    $this->picasa_gallery_id = $pod->field('picasa_gallery_id');
-    $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
   }
 
   /**
