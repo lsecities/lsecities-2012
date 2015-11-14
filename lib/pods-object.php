@@ -125,4 +125,28 @@ trait ObjectWithTimespan {
     }
 
   }
+
+  /**
+   * Given a number of minutes of tolerance before the start and after the end
+   * of the timespan of the object, if current time is within this interval,
+   * consider the event as 'live'
+   * @param Array $tolerance Two integers, expressing the minutes of tolerance
+   *   before the start and after the end of a timespan; for minutes to start,
+   *   negative values are for times after the start of the timespan (i.e.
+   *   the object with timespan is considered live only some time *after* it
+   *   has started); for minutes to end, positive values are for times before
+   *   the end of the timespan (i.e. the object is considered live only until
+   *   some time before its end); if no $tolerance parameter is provided,
+   *   zero tolerance for start and end is assumed.
+   * @return Boolean Whether the object is to be considered live
+   */
+  public function is_live($tolerance = [0, 0]) {
+    $datetime_now = new \DateTime('now');
+    $start = clone $this->event_start;
+    $end = clone $this->event_end;
+    $start->add(\DateInterval::createFromDateString($tolerance[0] * -1 . ' minutes'));
+    $end->add(\DateInterval::createFromDateString($tolerance[1] * -1 . ' minutes'));
+
+    return ($start < $datetime_now and $end > $datetime_now) ? TRUE : FALSE;
+  }
 }
