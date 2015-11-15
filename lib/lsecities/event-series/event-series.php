@@ -54,7 +54,13 @@ class EventSeries extends PodsObject {
   public $date_start;
   public $date_end;
   public $date_span;
-    
+
+  /**
+   * @var String Livestreaming embed code if an event of the series is
+   * currently live and a livestreaming embed code is defined for it
+   */
+  public $live_streaming_video_embedcode_for_live_event;
+
   private $pod;
 
   function __construct($permalink) {
@@ -121,7 +127,19 @@ class EventSeries extends PodsObject {
         function($id) { $__pod = new Event($id, [ 'child_object' => TRUE]); return $__pod->to_var(); },
         $__sorted_event_ids
       );
-      
+
+      /**
+       * For each event of the series, check if it is currently
+       * live; if so, use its livestream embed code as the
+       * series' livestream embed code
+       */
+      foreach($this->events as $event) {
+        if($event['is_live_now'] and !empty($event['live_streaming_video_embedcode'])) {
+          $this->live_streaming_video_embedcode_for_live_event = $event['live_streaming_video_embedcode'];
+          break;
+        }
+      }
+
       /**
        * now that we have linked events to the event series, we can
        * work out the date span of the series
