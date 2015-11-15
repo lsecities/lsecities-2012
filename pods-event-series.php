@@ -31,7 +31,6 @@ $obj = $event_series->to_var();
  * gallery partial.
  */
 $gallery = $obj['gallery'];
-
 ?>
 
 <div role="main">

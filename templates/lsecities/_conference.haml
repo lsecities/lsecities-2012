@@ -13,10 +13,14 @@
 #contentarea.ninecol
   .top-content.clearfix
     %article
-      - if featured_image_uri
+      - if live_streaming_video_embedcode_for_live_event
         %header.heading-image
-          .photospread
-            %img( src = featured_image_uri )
+          = live_streaming_video_embedcode_for_live_event | raw
+      - else
+        - if featured_image_uri
+          %header.heading-image
+            .photospread
+              %img( src = featured_image_uri )
       %header
         %h1 = conference_title
         - if conference_tagline

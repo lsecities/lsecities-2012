@@ -1,12 +1,16 @@
 #contentarea.ninecol
   .top-content
-    - if heading_gallery or featured_image_uri
+    - if is_live_now and live_streaming_video_embedcode and not event_series
       %header.heading-image
-        .photospread
-          - if heading_gallery|length > 0
-            - include 'lsecities/partials/_galleria.haml' with { 'gallery': heading_gallery }
-          - else
-            %img( src = featured_image_uri alt = 'event photo')
+        = live_streaming_video_embedcode | raw
+    - else
+      - if heading_gallery or featured_image_uri
+        %header.heading-image
+          .photospread
+            - if heading_gallery|length > 0
+              - include 'lsecities/partials/_galleria.haml' with { 'gallery': heading_gallery }
+            - else
+              %img( src = featured_image_uri alt = 'event photo')
     %header
       %h1.hentry-title.p-name.summary
         = title

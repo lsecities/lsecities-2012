@@ -46,7 +46,7 @@ trait ObjectWithTimespan {
    * @var Integer Minutes since event ended (positive for future events or events that have started, negative for events that have finished)
    */
   public $minutes_to_start_of_event;
-  public $minutes_since_event_ended;
+  public $minutes_to_end_of_event;
 
   public function __construct($datetime_start, $datetime_end, $free_form_dates, $datetimezone = 'Europe/London') {
     /**
@@ -83,10 +83,12 @@ trait ObjectWithTimespan {
     $this->is_future_event = ($this->event_end > $datetime_now) ? true : false;
 
     // calculate distance of event from now
-    $minutes_to_start_of_event = $this->event_start - $datetime_now;
-    $minutes_since_event_ended = $this->event_end - $datetime_now;
-
-    echo '<!-- mtsoe/msee: ' . $minutes_to_start_of_event . '/' . $minutes_since_event_ended . ' -->';
+    $__minutes_to_start_of_event = $datetime_now->diff($this->event_start);
+    $__minutes_to_end_of_event = $datetime_now->diff($this->event_end);
+    $this->minutes_to_start_of_event = ($__minutes_to_start_of_event->d * 24 * 60 + $__minutes_to_start_of_event->h * 60 + $__minutes_to_start_of_event->i);
+    if($datetime_now > $this->event_start) $this->minutes_to_start_of_event *= -1;
+    $this->minutes_to_end_of_event = ($__minutes_to_end_of_event->d * 24 * 60 + $__minutes_to_end_of_event->h * 60 + $__minutes_to_end_of_event->i);
+    if($datetime_now > $this->event_end) $this->minutes_to_end_of_event *= -1;
 
     // check whether the event starts and ends on same day
     $this->event_starts_and_ends_on_same_day = $this->event_start->format('Y-m-d') != $this->event_end->format('Y-m-d');
@@ -122,5 +124,29 @@ trait ObjectWithTimespan {
         .'&sprop=' . urlencode($this->event_page_uri).'&sprop=name:';
     }
 
+  }
+
+  /**
+   * Given a number of minutes of tolerance before the start and after the end
+   * of the timespan of the object, if current time is within this interval,
+   * consider the event as 'live'
+   * @param Array $tolerance Two integers, expressing the minutes of tolerance
+   *   before the start and after the end of a timespan; for minutes to start,
+   *   negative values are for times after the start of the timespan (i.e.
+   *   the object with timespan is considered live only some time *after* it
+   *   has started); for minutes to end, positive values are for times before
+   *   the end of the timespan (i.e. the object is considered live only until
+   *   some time before its end); if no $tolerance parameter is provided,
+   *   zero tolerance for start and end is assumed.
+   * @return Boolean Whether the object is to be considered live
+   */
+  public function is_live($tolerance = [0, 0]) {
+    $datetime_now = new \DateTime('now');
+    $start = clone $this->event_start;
+    $end = clone $this->event_end;
+    $start->add(\DateInterval::createFromDateString($tolerance[0] * -1 . ' minutes'));
+    $end->add(\DateInterval::createFromDateString($tolerance[1] * -1 . ' minutes'));
+
+    return ($start < $datetime_now and $end > $datetime_now) ? TRUE : FALSE;
   }
 }
