@@ -1,7 +1,7 @@
 <?php
 /**
  * EventSeries class
- * 
+ *
  * @package LSECities2012
  */
 namespace LSECitiesWPTheme;
@@ -13,12 +13,12 @@ class EventSeries extends PodsObject {
   use ObjectWithTimespan {
     ObjectWithTimespan::__construct as private __ObjectWithTimespanConstructor;
   }
-  
+
   const PODS_NAME = 'event_series';
 
   public $permalink;
   public $link_to_self;
-  
+
   /**
    * @var Bool While we use the same template as conferences, setting
    * this variable to TRUE for event series allows us to apply any
@@ -27,30 +27,30 @@ class EventSeries extends PodsObject {
   public $is_event_series;
   public $conference_title;
   public $conference_tagline;
-  
+
   public $event_series_hashtag;
 
   /**
    * @var Array The events part of this series
    */
   public $events;
-  
+
   public $event_blurb;
   public $contact_info;
   public $event_media;
   public $featured_image_uri;
   public $heading_gallery;
-  
+
   public $display_timespan;
-  
+
   public $hide_full_event_calendar_in_sidebars;
-  
+
   /**
    * @var Array Data structure with event programme (includes:
    * sessions - and related media if available, speakers)
    */
   public $event_programme;
-  
+
   public $date_start;
   public $date_end;
   public $date_span;
@@ -59,14 +59,14 @@ class EventSeries extends PodsObject {
 
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
-      
+
     // return if a Pod cannot be found
     if(!$pod->exists()) {
       return;
     }
-    
+
     $this->is_event_series = TRUE;
-    
+
     $this->permalink = $pod->field('permalink');
 
     $this->link_to_self = '/ua/events/s/global-debates';
@@ -75,9 +75,9 @@ class EventSeries extends PodsObject {
     $this->conference_tagline = $pod->field('tagline');
 
     $this->event_blurb = do_shortcode($pod->display('blurb'));
-    
+
     $this->featured_image_uri = pods_image_url($pod->field('heading_image'), [1280,512]);
-    
+
     $this->display_timespan = $pod->field('display_timespan');
     $this->hide_full_event_calendar_in_sidebars = $pod->field('hide_full_event_calendar_in_sidebars');
   }
@@ -91,7 +91,7 @@ class EventSeries extends PodsObject {
   function fetch_events() {
     // Get list of ids of all linked events
     $__event_ids = $this->pod->field('events.id');
-    
+
     /**
      * Some event series may not have any events linked to them yet:
      * if so, just set the member function accordingly and avoid
@@ -129,7 +129,7 @@ class EventSeries extends PodsObject {
       $this->fetch_series_date_span();
     }
   }
-  
+
   /**
    * Calculate and store start and end dates of event series
    */
@@ -158,7 +158,7 @@ class EventSeries extends PodsObject {
       if(!$this->display_timespan) {
         return;
       }
-      
+
       /**
        * If start and end date of event series fall within the same year
        * only add year to end date, in timespan
@@ -172,7 +172,7 @@ class EventSeries extends PodsObject {
       $this->date_span = NULL;
     }
   }
-  
+
   /**
    * Return date of Nth event of the series
    * @param Integer $index Index of event within the series; this is
@@ -192,14 +192,14 @@ class EventSeries extends PodsObject {
     } elseif(-1 === $index) {
       $__requested_event = $this->events[array_pop(array_keys($this->events))];
     }
-    
+
     if(is_array($__requested_event)) {
       return new \DateTime($__requested_event['datetime_start']);
     } else {
       throw new Exception("I was asked to find an event with index $index (or i assumed so if no explicit index was given) but no event with such index can be found.");
     }
   }
-  
+
   /**
    * Serialize object vars to JSON
    * @param Array $options An associative array of options:
