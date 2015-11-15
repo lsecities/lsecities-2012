@@ -117,12 +117,12 @@ class EventSeries extends PodsObject {
           'where' => 'id IN (' . implode(',', $__event_ids) . ')'
         ]
       );
-      
+
       $__sorted_event_ids = [];
       while($__pods->fetch()) {
         $__sorted_event_ids[] = $__pods->id();
       }
-      
+
       $this->events = array_map(
         function($id) { $__pod = new Event($id, [ 'child_object' => TRUE]); return $__pod->to_var(); },
         $__sorted_event_ids
