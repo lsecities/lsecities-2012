@@ -2062,9 +2062,18 @@
 		var indexhBefore = indexh || 0,
 			indexvBefore = indexv || 0;
 
+                // LSE CITIES MOD: remove class 'vertical'
+ 		var previousVerticalSlides = toArray( dom.wrapper.querySelectorAll( '.vertical' ) )
+ 		for( i in previousVerticalSlides ) {
+			previousVerticalSlides[i].classList.remove('vertical')
+ 		}
+ 
+ 		// LSE CITIES MOD: check if navigation is vertical
+ 		var verticalNav = (indexhBefore === h)? true: false;
+
 		// Activate and transition to the new slide
-		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, h === undefined ? indexh : h );
-		indexv = updateSlides( VERTICAL_SLIDES_SELECTOR, v === undefined ? indexv : v );
+		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, h === undefined ? indexh : h, false );
+		indexv = updateSlides( VERTICAL_SLIDES_SELECTOR, v === undefined ? indexv : v, verticalNav );
 
 		// Update the visibility of slides now that the indices have changed
 		updateSlidesVisibility();
@@ -2270,12 +2279,13 @@
 	 * the group of slides we are working with
 	 * @param {Number} index The index of the slide that should be
 	 * shown
-	 *
+	 * @param {Boolean} verticalNav Whether the current navigation
+	 * direction is vertical
 	 * @return {Number} The index of the slide that is now shown,
 	 * might differ from the passed in index if it was out of
 	 * bounds.
 	 */
-	function updateSlides( selector, index ) {
+	function updateSlides( selector, index, verticalNav) {
 
 		// Select all slides and convert the NodeList result to
 		// an array
@@ -2358,6 +2368,26 @@
 			slides[index].classList.add( 'present' );
 			slides[index].removeAttribute( 'hidden' );
 			slides[index].removeAttribute( 'aria-hidden' );
+
+
+			// LSE CITIES MOD
+			// Add class 'vertical' to the previous and next vertical slide, setting
+			// up a time out when navigation is horizontal to avoid viewing vertical transition
+			// in the next vertical column
+			
+			if (isVerticalSlide( slides[index] )){ 
+				slides[index].classList.add( 'vertical' )
+				if (!verticalNav){
+					setTimeout(function(){ 
+						if (index > 0) slides[index - 1].classList.add( 'vertical' )
+						if (index < slides.length - 1) slides[index + 1].classList.add( 'vertical' )
+					}, 800);
+				}
+				else {
+					if (index > 0) slides[index - 1].classList.add( 'vertical' )
+					if (index < slides.length - 1) slides[index + 1].classList.add( 'vertical' )
+				}
+			}
 
 			// If this slide has a state associated with it, add it
 			// onto the current state of the deck
