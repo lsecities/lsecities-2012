@@ -193,7 +193,8 @@ jQuery(document).ready(function($) {
       progress: false,
       history: true,
       transition: 'slide',
-      embedded: true
+      embedded: true,
+      viewDistanceInOverviewMode: 15 // default is 10: setting to 15 to avoid final slides being hidden when browsing through the end of grid if current slide is way up
     });
     Reveal.toggleOverview();
 

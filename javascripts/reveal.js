@@ -143,6 +143,9 @@
 			// Number of slides away from the current that are visible
 			viewDistance: 3,
 
+			// As above, but for overview mode
+			viewDistanceInOverviewMode: 10,
+
 			// Script dependencies to load
 			dependencies: []
 
@@ -2391,7 +2394,7 @@
 
 			// The number of steps away from the present slide that will
 			// be visible
-			var viewDistance = isOverview() ? 10 : config.viewDistance;
+			var viewDistance = isOverview() ? config.viewDistanceInOverviewMode : config.viewDistance;
 
 			// Limit view distance on weaker devices
 			if( isMobileDevice ) {
