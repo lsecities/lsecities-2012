@@ -1,6 +1,6 @@
 #contentarea.ninecol
   .top-content
-    - if is_live_now and live_streaming_video_embedcode
+    - if is_live_now and live_streaming_video_embedcode and not event_series
       %header.heading-image
         = live_streaming_video_embedcode | raw
     - else
