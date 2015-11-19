@@ -793,6 +793,10 @@ body.layout-grid-slideshow { overflow: auto; }
 .lc-event-programme ul.mediaitems { display: inline; }
 .lc-event-programme ul.mediaitems > li { display: inline; margin-right: 1em; }
 
+.lc-event-series-frontpage header { overflow: hidden; *zoom: 1; }
+.lc-event-series-frontpage header .heading-image { width: 74.57627%; float: left; margin-right: 1.69492%; }
+.lc-event-series-frontpage header .heading-image:only-child { width: 100%; float: left; margin-left: 0; margin-right: 0; }
+.lc-event-series-frontpage header .twitter-embedded-timeline { width: 23.72881%; float: right; margin-right: 0; }
 .lc-event-series-frontpage .main-content { width: 100%; float: left; margin-left: 0; margin-right: 0; }
 .lc-event-series-frontpage #keyfacts { display: none; }
 
