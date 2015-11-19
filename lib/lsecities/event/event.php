@@ -204,7 +204,7 @@ class Event extends PodsObject {
     $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
 
 
-    if($this->is_live([30,-30]) and is_user_logged_in()) {
+    if($this->is_live([30,-30])) {
       $this->is_live_now = TRUE;
     }
 
