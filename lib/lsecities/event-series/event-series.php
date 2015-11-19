@@ -58,8 +58,11 @@ class EventSeries extends PodsObject {
   /**
    * @var String Livestreaming embed code if an event of the series is
    * currently live and a livestreaming embed code is defined for it
+   * @var String Twitter embedded timeline code if an event of the series
+   * is currently live and Twitter embedded timeline code is defined for it
    */
   public $live_streaming_video_embedcode_for_live_event;
+  public $twitter_embedded_timeline_code_for_live_event;
 
   private $pod;
 
@@ -136,6 +139,9 @@ class EventSeries extends PodsObject {
       foreach($this->events as $event) {
         if($event['is_live_now'] and !empty($event['live_streaming_video_embedcode'])) {
           $this->live_streaming_video_embedcode_for_live_event = $event['live_streaming_video_embedcode'];
+          if(!empty($event['twitter_embedded_timeline_code'])) {
+            $this->twitter_embedded_timeline_code_for_live_event = $event['twitter_embedded_timeline_code'];
+          }
           break;
         }
       }
