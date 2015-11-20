@@ -262,12 +262,13 @@ $sides_margin: 0; // left margin of first column tiles, right margin of last col
           display: inline;
           text-transform: uppercase;
           font-family: $grotesque-font-family;
+          font-weight: bold;
+          font-size: 1.9em;
+
           .logged-in & {
             font-family: "Helsinki", $grotesque-font-family;
-            font-weight: bold;
           }
-          font-size: 1.9em;
-              
+
           li {
             display: inline;
             
