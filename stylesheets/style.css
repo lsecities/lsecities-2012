@@ -1050,8 +1050,8 @@ nav#projectsmenu h1 { font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em;
 .lc-section-front .flexslider .tile.citieslist .inner-box { padding: 0; }
 .lc-section-front .flexslider .tile.citieslist .inner-box { padding: 0; }
 .lc-section-front .flexslider .tile.citieslist.onetile.tall li { font-size: 0.95em; line-height: 1.15; }
-.lc-section-front .flexslider .tile.citieslist ul { display: inline; text-transform: uppercase; font-family: Helsinki, Arial, Helvetica, sans-serif; font-size: 1.9em; }
-.logged-in .lc-section-front .flexslider .tile.citieslist ul { font-family: "Helsinki", Helsinki, Arial, Helvetica, sans-serif; font-weight: bold; }
+.lc-section-front .flexslider .tile.citieslist ul { display: inline; text-transform: uppercase; font-family: Helsinki, Arial, Helvetica, sans-serif; font-weight: bold; font-size: 1.9em; }
+.logged-in .lc-section-front .flexslider .tile.citieslist ul { font-family: "Helsinki", Helsinki, Arial, Helvetica, sans-serif; }
 .lc-section-front .flexslider .tile.citieslist ul li { display: inline; }
 .lc-section-front .flexslider .tile.citieslist ul li::after { content: "\2009"; }
 .lc-section-front .flexslider .tile.citieslist ul li:nth-of-type(2n) { color: #999; }
