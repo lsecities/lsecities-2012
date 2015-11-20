@@ -412,10 +412,10 @@ div.widget {
   .citieslist li {
     text-transform: uppercase;
     font-family: $grotesque-font-family;
+    font-weight: bold;
 
     .logged-in & {
       font-family: "Helsinki", $grotesque-font-family;
-      font-weight: bold;
     }
 
     font-size: 1.2em;
