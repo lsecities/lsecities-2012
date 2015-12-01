@@ -11,7 +11,7 @@ if(!defined('RESEARCH_PROJECTS_PODS_NAME')) {
 class ResearchProject extends PodsObject {
   const PODS_NAME = RESEARCH_PROJECTS_PODS_NAME;
   const PODS_PAGES_BASE_PATH = '/objects/research-projects';
-  
+
   public $permalink;
   public $title;
   public $tagline;
@@ -27,7 +27,7 @@ class ResearchProject extends PodsObject {
   public $free_form_project_teams;
   // these are either people (coordinators, researchers) or organizations (partners, funders), so let's call them actants
   public $actants;
-  
+
   /**
    * Content associated to research project (events, publications,
    * posts, data visualizations, other outputs...)
@@ -36,7 +36,7 @@ class ResearchProject extends PodsObject {
    * @var Array Events associated to a research project
    */
   public $linked_events;
-  
+
   public $linked_posts;
   public $featured_posts;
   public $photo_galleries;
@@ -48,7 +48,7 @@ class ResearchProject extends PodsObject {
   public $research_output_publications;
   public $research_output_categories;
   public $research_outputs;
-  
+
   /**
    * @var int This is a number meant to represent how 'active' a
    * research project is; the way this is calculated is deterministic
@@ -61,7 +61,7 @@ class ResearchProject extends PodsObject {
    */
   public $project_activity_score;
   public $latest_update;
-    
+
   /**
    * @var Object The Pod object for this ResearchProject
    */
@@ -69,7 +69,7 @@ class ResearchProject extends PodsObject {
 
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
-    
+
     // return if a Pod cannot be found
     if(!$pod->exists()) {
       return;
@@ -81,16 +81,16 @@ class ResearchProject extends PodsObject {
     $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
-    
+
     $_status = $pod->field('status');
-    
+
     $this->status = [
       'permalink' => $_status['slug'],
       'name' => $_status['name']
     ];
-        
+
     $_timespan = $this->get_project_timespan();
-    
+
     // for timespan, store both raw start and end years,
     // as well as a string representation of the timespan
     $this->timespan = [
@@ -100,18 +100,18 @@ class ResearchProject extends PodsObject {
     ];
 
     $this->web_uri = $pod->field('web_uri');
-    
+
     $this->summary = $pod->field('summary');
     $this->blurb = $pod->field('blurb');
     $this->keywords = $pod->field('keywords');
-    
+
     // If a heading photo gallery is provided, use it instead of the single featured image
     $heading_gallery_permalink = $pod->field('heading_gallery.slug');
-    
+
     if($heading_gallery_permalink) {
       $this->heading_gallery = photo_gallery_get_galleria_data($heading_gallery_permalink, 'fullbleed');
     }
-    
+
     $this->research_programmes = $pod->field('research_programmes');
     $_research_strand = $pod->field('research_strand');
     $this->research_strand = [
@@ -119,9 +119,9 @@ class ResearchProject extends PodsObject {
       'name' => $_research_strand['name'],
       'summary' => $_research_strand['summary']
     ];
-    
+
     $this->free_form_project_teams = $pod->display('free_form_project_teams');
-    
+
     /*
     $this->actants = [
       'coordinators' => $this->get_project_actants('people', 'coordinators'),
@@ -130,25 +130,25 @@ class ResearchProject extends PodsObject {
       'funders' => $this->get_project_actants('organizations', 'funders')
     ];
     */
-    
+
     // Populate lists of linked content
     $this->linked_events = $this->get_project_events(TRUE, ['conference', 'presentation', 'public-lecture', 'workshop']);
-    
+
     // Populate lists of research outputs (publications, visualizations, etc.)
     // hardcoded list of WP categories used to group research outputs linked to a research project
     // TECHNICAL_DEBT: get this list via get_categories(); and of course this doesn't belong in the ResearchProject class to start with
     $this->research_output_categories = ['book', 'journal-article', 'book-chapter', 'research-data', 'research-report', 'conference-newspaper', 'conference-proceedings', 'conference-report', 'report', 'blog-post', 'interview', 'magazine-article', 'essay', 'book-review'];
     $this->research_outputs = $this->get_project_research_outputs();
-    
+
     // Populate lists of linked news/posts
     $this->project_news = $this->get_project_news();
     $this->news_categories = \news_categories($pod->field('news_categories'));
-    
+
     // Once all linked content has been populated, calculate project activity score
     $this->project_activity_score = $this->get_project_activity_score();
   }
-  
-  
+
+
   function get_project_actants($type, $role) {
     // build a list of all current members of staff
     $staff = pods('people_group', 'lsecities-staff');
@@ -208,7 +208,7 @@ class ResearchProject extends PodsObject {
     $project_duration = '';
     $project_start_year = NULL;
     $project_end_year = NULL;
-    
+
     // get years from start and date fields
     try {
       if($this->start_date) {
@@ -218,7 +218,7 @@ class ResearchProject extends PodsObject {
     } catch (\Exception $e) {
       error_log('Project start year must be a 4-digit number, but "' . $this->start_date . '" was provided.');
     }
-    
+
     try {
       if($this->end_date) {
         $project_end = new \DateTime($this->end_date . '-12-31');
@@ -244,15 +244,15 @@ class ResearchProject extends PodsObject {
         $project_duration = $project_start . ' - ' . $project_end;
       }
     }
-    
+
     return [ 'start' => $project_start_year , 'end' => $project_end_year, 'text' => $project_duration ];
   }
-  
+
   /**
    * Fetch lists of events associated to the project, grouped by category
    * Events from the main LSE Events calendar and events defined as
    * Research outputs can be fetched here.
-   * 
+   *
    * @param bool $include_events_from_main_calendar Whether to fetch any
    *    associated events from the main events calendar (Events pod)
    * @param array $research_event_categories An array of slugs of
@@ -423,27 +423,27 @@ class ResearchProject extends PodsObject {
         array_keys($activity_score)
       )
     );
-    
+
     return $score;
   }
-  
+
   /**
    * Compile list of research outputs
-   * 
+   *
    * @return Array Data structure with research outputs split by
    *   category.
    */
   function get_project_research_outputs() {
     // initialize result array
     $research_outputs = [];
-    
+
     /**
      * First add all the research outputs linked as 'research_outputs'
      * These are mostly publications for which a full 'publication' Pod
      * hasn't been created
      */
     $linked_publications = $this->pod->field('research_outputs');
-    
+
     if(is_array($linked_publications)) {
       foreach($linked_publications as $publication) {
         $research_output = pods('research_output', $publication['slug']);
@@ -467,7 +467,7 @@ class ResearchProject extends PodsObject {
      * from the publication_wrappers aka Publications pod
      */
     $linked_publications = $this->pod->field('research_output_publications');
-    
+
     if(is_array($linked_publications)) {
       foreach($linked_publications as $publication) {
         $research_output = pods('publication_wrappers', $publication['slug']);
@@ -475,17 +475,17 @@ class ResearchProject extends PodsObject {
         if(!$research_output->exists()) {
           continue;
         }
-        
+
         // get ID of WordPress page linked to this publication object
         $linked_wp_page_id = $research_output->field('publication_web_page.ID');
-        
+
         var_trace(var_export($research_output->field('category'), true), 'output category');
         var_trace($linked_wp_page_id, 'publication_web_page.ID');
 
         $__publication_pdf = $research_output->field('publication_pdf');
         $pdf_uri = $__publication_pdf ? wp_get_attachment_url($__publication_pdf['ID']) : '';
         $pdf_filesize = $__publication_pdf ? sprintf("%0.1f MB", filesize(get_attached_file($__publication_pdf['ID'], TRUE)) / 1e+6 ) : '';
-          
+
         // only add publication to list if publication has a linked WP page; otherwise emit warning
         if($linked_wp_page_id) {
           $research_outputs[$research_output->field('category.slug')][] = array(
@@ -502,22 +502,22 @@ class ResearchProject extends PodsObject {
         }
       }
     }
-    
+
     // Now sort publications within each category, by date first, then by title
     foreach($research_outputs as $category => $ros) {
       foreach($ros as $key => $value) {
         $ro_date[$key] = $value['date'];
         $ro_title[$key] = $value['title'];
       }
-      
+
       array_multisort($ro_date, SORT_DESC, $ro_title, SORT_ASC, $ros);
-      
+
       $sorted_research_outputs[$category] = $ros;
     }
 
     return $sorted_research_outputs;
   }
-  
+
   /**
    * Get list of WP Posts associated to this project.
    * Originally this was done by associating one or more WP Post
@@ -528,15 +528,15 @@ class ResearchProject extends PodsObject {
    * just an usability hindrance.
    * Since 1.13, this function supports news items linked directly
    * from research projects.
-   * 
+   *
    * @return Array List of posts associated to the project
    */
   function get_project_news() {
     $project_news = [];
-    
+
     // try linked_posts first
     $linked_posts = $this->pod->field([ 'name' => 'linked_posts.ID', 'orderby' => 'post_date DESC']);
-    
+
     if(!empty($linked_posts)) {
       foreach($linked_posts as $post) {
         $project_news[] = [
@@ -545,10 +545,10 @@ class ResearchProject extends PodsObject {
           'date' => get_post_time('j M Y', FALSE, $post)
         ];
       }
-      
+
       return $project_news;
     }
-    
+
     return NULL;
   }
 
@@ -566,7 +566,7 @@ class ResearchProject extends PodsObject {
 /**
  * Given an array of params corresponding to those accepted by
  * pods() ($id parameter), return an array of ResearchProject objects
- * 
+ *
  * @param Array $pods_params An array of parameters to pass on to the
  *   pods() function (see Pods documentation - http://pods.io/docs/code/pods/).
  * @param Array $params An array of parameters to specify how the
@@ -577,14 +577,14 @@ class ResearchProject extends PodsObject {
  */
 function research_project_pods($pods_params = [], $params = []) {
   $pods = pods(RESEARCH_PROJECTS_PODS_NAME, $pods_params);
-  
+
   $objects = [];
-  
+
   if($pods->total_found() > 0) {
     while($pods->fetch()) {
       $objects[] = new ResearchProject($pods->field('slug'));
     }
-    
+
     if('project_activity_score' === $params['orderby']) {
       usort($objects, function($a, $b) { return $a->project_activity_score < $b->project_activity_score; });
     }
