@@ -65,8 +65,8 @@ class ResearchProject extends PodsObject {
   /**
    * @var Object The Pod object for this ResearchProject
    */
-  private $pod;
-  
+  protected $pod;
+
   function __construct($permalink) {
     $this->pod = $pod = pods(self::PODS_NAME, $permalink);
     
@@ -74,7 +74,10 @@ class ResearchProject extends PodsObject {
     if(!$pod->exists()) {
       return;
     }
-    
+
+    // General Pods initializations through parent constructor
+    parent::__construct();
+
     $this->permalink = $pod->field('slug');
     $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
@@ -291,34 +294,36 @@ class ResearchProject extends PodsObject {
       foreach($evs as $key => $value) {
         $ev_date[$key] = $value['date'];
       }
-      
+
       array_multisort($ev_date, SORT_DESC, $evs);
-      
+
       $sorted_research_events[$category] = $evs;
     }
-      
+
     return $sorted_research_events;
   }
-  
+
   /**
    * Calculate a project activity score based on number, type and
    * 'freshness' of linked content.
-   * 
+   *
    * This calculation is somewhat arbitrary, but it's a way for us to
    * have a feel of active/recently updated projects if we want to sort
    * projects by some measure of their activity levels.
-   * 
+   *
    * @return int The project's activity score
    */
   function get_project_activity_score() {
     $activity_score = [];
-    
+
+    // DateTime object for current date (used throughout the function)
+    $current_date = new \DateTime();
+
     // Activity score for events
     $activity_score['events'] = array_map(
-      function($event_category) {
-        return array_map(function($item) {
+      function($event_category) use ($current_date) {
+        return array_map(function($item) use ($current_date) {
           $event_date = new \DateTime($item['date']);
-          $current_date = new \DateTime('now');
           $date_diff = $current_date->diff($event_date);
           $days_to_event = $date_diff->days * ($date_diff->invert ? -1 : 1);
           if($days_to_event > -7) {
@@ -336,7 +341,8 @@ class ResearchProject extends PodsObject {
       },
       $this->linked_events
     );
-    
+
+    // Activity score for research outputs
     $activity_score['research_outputs'] = array_map(
       function($output_category) {
         /**
@@ -351,7 +357,7 @@ class ResearchProject extends PodsObject {
          * output types.
          */
         $category_weight = 1 / (array_search($output_category, $this->research_output_categories) + 1);
-        
+
         return array_map(function($item) use ($category_weight) {
           return $category_weight;
         },
@@ -360,11 +366,11 @@ class ResearchProject extends PodsObject {
       },
       array_keys($this->research_outputs)
     );
-    
+
+    // Activity score for news items
     $activity_score['project_news'][0] = array_map(
-      function($item) {
+      function($item) use ($current_date) {
         $event_date = new \DateTime($item['date']);
-        $current_date = new \DateTime('now');
         $date_diff = $current_date->diff($event_date);
         $days_to_event = $date_diff->days * ($date_diff->invert ? -1 : 1);
         if($days_to_event > -7) {
@@ -379,10 +385,32 @@ class ResearchProject extends PodsObject {
       },
       $this->project_news
     );
-    
+
+    /**
+     * Activity score boost for recently created projects: this is a way
+     * to ensure that new projects, which won't have much activity or
+     * outputs until some time has passed, can still have a chance of being
+     * displayed prominently towards the top of lists for some time.
+     * The current algorithm gives 12 extra points to projects that
+     * have been created (in WP/Pods) within the last three months,
+     * then a smaller boost of 3 points when a project's record
+     * is between three and nine months old. No extra boost beyond that,
+     * assuming that the project is operating quitely and doesn't need
+     * any extra visibility until associated events or publications
+     * start appearing.
+     */
+    $__meta_created = new \DateTime($this->pods_metadata['created']);
+    $__pod_age_diff = $current_date->diff($__meta_created);
+    $pod_age_in_days = $__pod_age_diff->days;
+    if($pod_age_in_days < 90) {
+      $activity_score['new_project_boost'][0] = [ 12 ];
+    } elseif($pod_age_in_days < 270) {
+      $activity_score['new_project_boost'][0] = [ 3 ];
+    }
+
     $score = array_sum(
       array_map(
-        function($category) use ($activity_score) {
+        function($category) use ($activity_score, $pod_age_in_days) {
           return array_reduce(
             array_merge(
               array_values($activity_score[$category]
