@@ -15,6 +15,8 @@ lsecities-theme-alexandria (1.14) lsecities-experimental; urgency=low
   * [API] endpoint for Articles (no issue associated)
   * [API] endpoint for Awards (#129)
   * [API] general framework for endpoints to existing objects
+  * [update] research projects: activity score now adds a boost for new (<90
+    days old) and newish (> 90 and < 270 days old) research projects
 
  -- andrea rota <a.rota@lse.ac.uk>  [date]
   
