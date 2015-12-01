@@ -5,6 +5,18 @@ namespace LSECitiesWPTheme;
 class PodsObject {
 
   /**
+   * @var Array Pods metadata (created, modified, author, etc.)
+   */
+  protected $pods_metadata;
+
+  protected function __construct() {
+    $this->pods_metadata = [
+      'created' => $this->pod->field('created'),
+      'modified' => $this->pod->field('modified')
+    ];
+  }
+
+  /**
    * Given a Pods pick field's name, read the related
    * table and return it as an array.
    * @param Object $pod The Pod object

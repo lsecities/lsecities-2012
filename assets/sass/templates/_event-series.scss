@@ -1,4 +1,18 @@
 .lc-event-series-frontpage {
+  header {
+    @include clearfix;
+
+    .heading-image {
+      @include span(9 of 12);
+    }
+    .heading-image:only-child {
+      @include span(12 of 12);
+    }
+    .twitter-embedded-timeline {
+      @include span(last 3 of 12);
+    }
+  }
+
   .main-content {
     @include span(12 of 12);
   }

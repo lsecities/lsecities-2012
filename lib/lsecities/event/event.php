@@ -26,7 +26,13 @@ class Event extends PodsObject {
   public $title;
   public $tagline;
 
+  /**
+   * @var String HTML embed code for live streaming
+   * @var String HTML embed code for Twitter embedded timeline
+   */
   public $live_streaming_video_embedcode;
+  public $twitter_embedded_timeline_code;
+
 
   public $event_hashtag;
   public $event_story_id;
@@ -90,6 +96,7 @@ class Event extends PodsObject {
     $this->event_story_id = $pod->field('storify_id');
 
     $this->live_streaming_video_embedcode = $pod->field('live_streaming_video_embedcode');
+    $this->twitter_embedded_timeline_code = $pod->field('twitter_embedded_timeline_code');
 
     /**
      * Event programme
@@ -197,7 +204,7 @@ class Event extends PodsObject {
     $this->photo_gallery_credits = $pod->field('photo_gallery_credits');
 
 
-    if($this->is_live([30,-30]) and is_user_logged_in()) {
+    if($this->is_live([240,-30])) {
       $this->is_live_now = TRUE;
     }
 
