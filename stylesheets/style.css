@@ -786,7 +786,7 @@ body.layout-grid-slideshow { overflow: auto; }
 .lc-grid-slideshow .reveal .controls div.navigate-down { left: inherit; top: inherit; }
 .lc-grid-slideshow .reveal.overview .slides > section > section:hover, .lc-grid-slideshow .reveal.overview .slides > section section.present { outline: 10px solid #969696; outline-offset: 10px; background: #ccc; }
 .lc-grid-slideshow .metadata { font-size: 0.9rem; }
-.lc-grid-slideshow .metadata section { margin-top: 0; margin-bottom: 1rem; }
+.lc-grid-slideshow .metadata section { margin-top: 0; margin-bottom: 0.5rem; }
 
 .lc-event .event-info { font-size: 0.9rem; margin-top: 1em; }
 .lc-event .extra-content .item h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
