@@ -183,8 +183,9 @@ class Article extends PodsObject {
     $__data_gallery_permalink = $pod->field('gallery.slug');
     $this->data_gallery = \LSECitiesWPTheme\photo_gallery_get_galleria_data($__data_gallery_permalink);
 
-    if($pod->field('grid_slideshow.permalink')) {
-      $__grid_slideshow = new GridSlideshow($pod->field('grid_slideshow.permalink'));
+    $__grid_slideshow_obj = $pod->field('grid_slideshow');
+    if($__grid_slideshow_obj['permalink']) {
+      $__grid_slideshow = new GridSlideshow($__grid_slideshow_obj['permalink']);
       $this->grid_slideshow = $__grid_slideshow->to_var();
     }
   }
