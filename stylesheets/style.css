@@ -753,6 +753,14 @@ body.layout-grid-slideshow { overflow: auto; }
 .lc-grid-slideshow .reveal h3 { font-size: 1rem; }
 .lc-grid-slideshow .reveal h4 { font-size: 0.8rem; }
 .lc-grid-slideshow .reveal p, .lc-grid-slideshow .reveal .slides section { font-size: 1.1rem; text-align: left; }
+.lc-grid-slideshow .reveal a, .lc-grid-slideshow .reveal a:active, .lc-grid-slideshow .reveal a:visited { color: #850000; }
+.lc-grid-slideshow .reveal .slides > section > section:first-child { text-align: center; }
+.lc-grid-slideshow .reveal .slides > section > section:first-child h1 { font-size: 4rem; }
+.lc-grid-slideshow .reveal .slides > section > section:first-child h2 { font-size: 3rem; }
+.lc-grid-slideshow .reveal .slides > section > section:first-child h3 { font-size: 2rem; }
+.lc-grid-slideshow .reveal.overview .slides > section > section:first-child .heading { transform: scale(2) translateY(50%); }
+.lc-grid-slideshow .reveal.overview .slides > section > section:first-child .extras { display: none; }
+.lc-grid-slideshow .reveal section img { border: none; box-shadow: none; }
 .lc-grid-slideshow .reveal .controls { position: absolute; width: 100%; height: 100%; right: 0; bottom: 0; pointer-events: none; }
 .lc-grid-slideshow .reveal .controls * { color: inhert !important; }
 .lc-grid-slideshow .reveal .controls div { pointer-events: auto; width: 3rem; height: 3rem; text-align: center; border: inherit; }
