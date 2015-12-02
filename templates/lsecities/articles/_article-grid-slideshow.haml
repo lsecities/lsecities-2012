@@ -1,0 +1,29 @@
+- if featured_image_uri
+  .heading-image.full-width
+    %img( src = featured_image_uri alt = "")
+.heading-row
+  %header
+    %h1 = article_data.title
+    - if article_data.subtitle
+      %h2 = article_data.subtitle
+  %ul.toolbar
+    %li
+      %button#toggle-revealjs-overview.inactive view current slide  
+    %li
+      %a(class="intro-link" href="#") Read article
+    %li
+      %a(class="reveal-link" href="#") Show data
+.entry-content.article-text
+  .top-content.page-tab
+    .main-content
+      - if article_data.text
+        = article_data.text | raw
+      - elseif article_data.summary
+        = article_data.summary | raw
+      - if article_data.extra_content
+        .extra-content = article_data.extra_content | raw
+      - if article_data.author_info
+        .author-info = article_data.author_info
+    %nav.metadata
+      - include("lsecities/articles/_metadata.haml")
+  - include("lsecities/revealjs/_embedded_revealjs.haml")
