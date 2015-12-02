@@ -53,12 +53,15 @@ body.layout-grid-slideshow {
     h1 {
       font-size: 1.5rem
     }
+
     h2 {
       font-size: 1.25rem;
     }
+
     h3 {
       font-size: 1rem;
     }
+
     h4 {
       font-size: 0.8rem;
     }
@@ -66,6 +69,39 @@ body.layout-grid-slideshow {
     p, .slides section {
       font-size: 1.1rem;
       text-align: left;
+    }
+
+    a, a:active, a:visited {
+      color: $link_red;
+    }
+
+    .slides > section > section:first-child {
+      text-align: center;
+
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      h3 {
+        font-size: 2rem;
+      }
+    }
+
+    &.overview .slides > section > section:first-child {
+      .heading {
+        transform: scale(2) translateY(50%);
+      }
+      .extras {
+        display: none;
+      }
+    }
+    section img {
+      border: none;
+      box-shadow: none;
     }
 
     .controls {
