@@ -182,7 +182,7 @@ jQuery(document).ready(function($) {
    * defaults if no configuration is provided.
    */
   if($('.lc-newspaper-article .reveal').length) {
-    var width = $(this).data('width') || 844;
+    var width = $(this).data('width') || 1140;
     var height = $(this).data('height') || 700;
 
     Reveal.initialize({
