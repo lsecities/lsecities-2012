@@ -1,8 +1,21 @@
+$reveal_area_height: 700px;
+
 body.layout-grid-slideshow {
   overflow: auto;
 }
 
 .lc-grid-slideshow {
+  // add media queries for proper responsive layout
+  .top-content {
+    @include container;
+    .main-content {
+      @include span(9 of 12);
+    }
+    nav {
+      @include span(last 3 of 12);
+    }
+  }
+
   .page-tab {
     transition: opacity 1s ease-in;
     z-index: 1;
@@ -30,12 +43,40 @@ body.layout-grid-slideshow {
     }
   }
 
-  #contentarea {
+  .heading-row {
+    @include clearfix;
+  }
+
+  .toolbar {
+    float: right;
+    transform: translateY(-1.5rem);  // MONKEYPATCH - position this properly
+    @include clearfix;
+
+    li {
+      display: inline;
+      margin-right: 1rem;
+    }
+  }
+
+  .entry-content {
     position: relative;
+    min-height: $reveal-area-height;
+  }
+
+  .top-content {
+    nav {
+      h1 {
+        font-size: 1rem;
+      }
+
+      section:first-child {
+        margin-top: 0;
+      }
+    }
   }
 
   .reveal {
-    min-height: 700px;
+    min-height: $reveal-area-height;
     position: absolute;
     top: 0;
     left: 0;
@@ -75,33 +116,52 @@ body.layout-grid-slideshow {
       color: $link_red;
     }
 
-    .slides > section > section:first-child {
-      text-align: center;
+    .slides section, .slides section > section {
+      margin-top: inherit;  // MONKEYPATCH: overriding general layout setting for theme
+    }
 
-      h1 {
-        font-size: 4rem;
-      }
+    .slides > section {
+      min-height: 700px;
 
-      h2 {
-        font-size: 3rem;
-      }
+      & > section:first-child {
+        text-align: center;
 
-      h3 {
-        font-size: 2rem;
+        h1 {
+          font-size: 4rem;
+        }
+
+        h2 {
+          font-size: 3rem;
+        }
+
+        h3 {
+          font-size: 2rem;
+        }
       }
     }
 
-    &.overview .slides > section > section:first-child {
-      .heading {
-        transform: scale(2) translateY(50%);
+    &.overview {
+      section {
+        margin: 0 !important;
       }
-      .extras {
-        display: none;
+
+      .slides > section > section:first-child {
+        .heading {
+          transform: scale(2) translateY(50%);
+        }
+      
+        .extras {
+          display: none;
+        }
       }
     }
+
     section img {
       border: none;
       box-shadow: none;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .controls {
@@ -162,8 +222,8 @@ body.layout-grid-slideshow {
       }
     }
 
-    &.overview .slides {
-      section:hover, section.present {
+    &.overview .slides > section {
+      & > section:hover, section.present {
         outline: 10px solid rgba(150, 150, 150, 1);
         outline-offset: 10px;
         background: #ccc;
@@ -171,7 +231,12 @@ body.layout-grid-slideshow {
     }
   }
 
-  #keyfacts {
-    margin-top: 3rem;
+  .metadata {
+    font-size: 0.9rem;
+    
+    section {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
   }
 }
