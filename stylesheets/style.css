@@ -740,11 +740,20 @@ right: -21px; */ }
 
 body.layout-grid-slideshow { overflow: auto; }
 
+.lc-grid-slideshow .top-content { max-width: 100%; margin-left: auto; margin-right: auto; }
+.lc-grid-slideshow .top-content:after { content: " "; display: block; clear: both; }
+.lc-grid-slideshow .top-content .main-content { width: 74.57627%; float: left; margin-right: 1.69492%; }
+.lc-grid-slideshow .top-content nav { width: 23.72881%; float: right; margin-right: 0; }
 .lc-grid-slideshow .page-tab { transition: opacity 1s ease-in; z-index: 1; }
 .lc-grid-slideshow .page-tab.inactive { opacity: 0; transition: opacity 1s ease-out; z-index: -1; }
 .lc-grid-slideshow #toggle-revealjs-overview { background: #FC0D1D; color: #FFF; cursor: pointer; padding: 5px 15px; margin-top: 20px; border: 0; opacity: 1; transition: opacity 1s ease-in; }
 .lc-grid-slideshow #toggle-revealjs-overview.inactive { opacity: 0; transition: opacity 1s ease-out; }
-.lc-grid-slideshow #contentarea { position: relative; }
+.lc-grid-slideshow .heading-row { overflow: hidden; *zoom: 1; }
+.lc-grid-slideshow .toolbar { float: right; transform: translateY(-1.5rem); overflow: hidden; *zoom: 1; }
+.lc-grid-slideshow .toolbar li { display: inline; margin-right: 1rem; }
+.lc-grid-slideshow .entry-content { position: relative; min-height: 700px; }
+.lc-grid-slideshow .top-content nav h1 { font-size: 1rem; }
+.lc-grid-slideshow .top-content nav section:first-child { margin-top: 0; }
 .lc-grid-slideshow .reveal { min-height: 700px; position: absolute; top: 0; left: 0; }
 .lc-grid-slideshow .reveal h1, .lc-grid-slideshow .reveal h2, .lc-grid-slideshow .reveal h3, .lc-grid-slideshow .reveal h4, .lc-grid-slideshow .reveal h5, .lc-grid-slideshow .reveal h6 { line-height: 1; font-family: Helsinki, "Neue Haas Unica W01", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
 .logged-in .lc-grid-slideshow .reveal h1, .logged-in .lc-grid-slideshow .reveal h2, .logged-in .lc-grid-slideshow .reveal h3, .logged-in .lc-grid-slideshow .reveal h4, .logged-in .lc-grid-slideshow .reveal h5, .logged-in .lc-grid-slideshow .reveal h6 { font-family: "Helsinki", Helsinki, "Neue Haas Unica W01", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
@@ -754,13 +763,16 @@ body.layout-grid-slideshow { overflow: auto; }
 .lc-grid-slideshow .reveal h4 { font-size: 0.8rem; }
 .lc-grid-slideshow .reveal p, .lc-grid-slideshow .reveal .slides section { font-size: 1.1rem; text-align: left; }
 .lc-grid-slideshow .reveal a, .lc-grid-slideshow .reveal a:active, .lc-grid-slideshow .reveal a:visited { color: #850000; }
+.lc-grid-slideshow .reveal .slides section, .lc-grid-slideshow .reveal .slides section > section { margin-top: inherit; }
+.lc-grid-slideshow .reveal .slides > section { min-height: 700px; }
 .lc-grid-slideshow .reveal .slides > section > section:first-child { text-align: center; }
 .lc-grid-slideshow .reveal .slides > section > section:first-child h1 { font-size: 4rem; }
 .lc-grid-slideshow .reveal .slides > section > section:first-child h2 { font-size: 3rem; }
 .lc-grid-slideshow .reveal .slides > section > section:first-child h3 { font-size: 2rem; }
+.lc-grid-slideshow .reveal.overview section { margin: 0 !important; }
 .lc-grid-slideshow .reveal.overview .slides > section > section:first-child .heading { transform: scale(2) translateY(50%); }
 .lc-grid-slideshow .reveal.overview .slides > section > section:first-child .extras { display: none; }
-.lc-grid-slideshow .reveal section img { border: none; box-shadow: none; }
+.lc-grid-slideshow .reveal section img { border: none; box-shadow: none; display: block; margin-left: auto; margin-right: auto; }
 .lc-grid-slideshow .reveal .controls { position: absolute; width: 100%; height: 100%; right: 0; bottom: 0; pointer-events: none; }
 .lc-grid-slideshow .reveal .controls * { color: inhert !important; }
 .lc-grid-slideshow .reveal .controls div { pointer-events: auto; width: 3rem; height: 3rem; text-align: center; border: inherit; }
@@ -772,8 +784,9 @@ body.layout-grid-slideshow { overflow: auto; }
 .lc-grid-slideshow .reveal .controls div.navigate-right { left: inherit; top: inherit; }
 .lc-grid-slideshow .reveal .controls div.navigate-up { left: inherit; }
 .lc-grid-slideshow .reveal .controls div.navigate-down { left: inherit; top: inherit; }
-.lc-grid-slideshow .reveal.overview .slides section:hover, .lc-grid-slideshow .reveal.overview .slides section.present { outline: 10px solid #969696; outline-offset: 10px; background: #ccc; }
-.lc-grid-slideshow #keyfacts { margin-top: 3rem; }
+.lc-grid-slideshow .reveal.overview .slides > section > section:hover, .lc-grid-slideshow .reveal.overview .slides > section section.present { outline: 10px solid #969696; outline-offset: 10px; background: #ccc; }
+.lc-grid-slideshow .metadata { font-size: 0.9rem; }
+.lc-grid-slideshow .metadata section { margin-top: 0; margin-bottom: 1rem; }
 
 .lc-event .event-info { font-size: 0.9rem; margin-top: 1em; }
 .lc-event .extra-content .item h1 { font-size: 1.125em; font-weight: bold; text-transform: inherit; border-bottom: 1px solid #eee; margin-bottom: 0.444444444em; }
