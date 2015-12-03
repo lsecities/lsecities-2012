@@ -178,7 +178,13 @@ class Article extends PodsObject {
     $this->authors = $pod->field('authors');
 
     // fetch any attachments, replace hostname until we switch to WP+Pods for the whole website
-    $this->attachments = $pod->field('attachments');
+    $__attachments = $pod->field('attachments');
+    if(is_array($__attachments)) {
+      foreach($__attachments as $__attachment) {
+        $__attachment['uri'] = wp_get_attachment_url($__attachment['ID']);
+        $this->attachments[] = $__attachment; 
+      }
+    }
 
     $__data_gallery_permalink = $pod->field('gallery.slug');
     $this->data_gallery = \LSECitiesWPTheme\photo_gallery_get_galleria_data($__data_gallery_permalink);
