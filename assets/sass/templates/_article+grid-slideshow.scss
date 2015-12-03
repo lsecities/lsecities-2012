@@ -76,6 +76,7 @@ body.layout-grid-slideshow {
   }
 
   .reveal {
+    font-family: $base-font-family;
     min-height: $reveal-area-height;
     position: absolute;
     top: 0;
@@ -85,10 +86,6 @@ body.layout-grid-slideshow {
       line-height: 1;
       
       font-family: $headings-font-family;
-
-      .logged-in & {
-        font-family: 'Helsinki', $headings-font-family;
-      }
     }
     
     h1 {
