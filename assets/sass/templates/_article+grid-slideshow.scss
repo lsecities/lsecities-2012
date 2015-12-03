@@ -113,6 +113,14 @@ body.layout-grid-slideshow {
       color: $link_red;
     }
 
+    img {
+      max-width: 90%;
+    }
+
+    .heading, .extras {
+      text-align: center;
+    }
+
     .slides section, .slides section > section {
       margin-top: inherit;  // MONKEYPATCH: overriding general layout setting for theme
     }
@@ -120,8 +128,10 @@ body.layout-grid-slideshow {
     .slides > section {
       min-height: $reveal-area-height;
 
-      & > section:first-child {
-        text-align: center;
+      & > section {
+        h1, h2, h3, h4 {
+          text-align: center;
+        }
 
         h1 {
           font-size: 4rem;
@@ -142,13 +152,19 @@ body.layout-grid-slideshow {
         margin: 0 !important;
       }
 
-      .slides > section > section:first-child {
-        .heading {
-          transform: scale(2) translateY(50%);
-        }
-      
-        .extras {
-          display: none;
+      .slides > section {
+        & > section {
+          .heading, & > h3:first-child {
+            transform: scale(2) translateY(50%);
+          }
+
+          h3:first-child {
+            margin-bottom: 5rem;
+          }
+
+          .extras {
+            display: none;
+          }
         }
       }
     }
