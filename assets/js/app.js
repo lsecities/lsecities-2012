@@ -183,7 +183,7 @@ jQuery(document).ready(function($) {
    */
   if($('.lc-newspaper-article .reveal').length) {
     var width = $(this).data('width') || 1140;
-    var height = $(this).data('height') || 700;
+    var height = $(this).data('height') || 806;
 
     Reveal.initialize({
       width: width,

@@ -1,19 +1,10 @@
-.minorfacts
+%aside.minorfacts#keyfacts
   - if authors
-    -# %section
+    %section
       %h1 Authors
       %ul
         - for author in authors
           %li = "#{author.name} #{author.family_name}"
-  %section
-    %h1 Principal investigator
-    %ul
-      %li Suzanne Hall
-  %section
-    %h1 Researchers
-    %ul
-      %li Robin Finlay
-      %li Julia King
   - if publishing_date
     %section
       %h1 Date of publication

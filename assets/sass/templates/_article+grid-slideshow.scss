@@ -1,4 +1,4 @@
-$reveal_area_height: 700px;
+$reveal-area-height: 806px;
 
 body.layout-grid-slideshow {
   overflow: auto;
@@ -121,7 +121,7 @@ body.layout-grid-slideshow {
     }
 
     .slides > section {
-      min-height: 700px;
+      min-height: $reveal-area-height;
 
       & > section:first-child {
         text-align: center;
