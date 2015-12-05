@@ -5,25 +5,28 @@ body.layout-grid-slideshow {
 }
 
 .lc-grid-slideshow {
-  // add media queries for proper responsive layout
-  .top-content {
-    @include container;
-    .main-content {
-      @include span(9 of 12);
-    }
-    nav {
-      @include span(last 3 of 12);
-    }
-  }
+  @media only screen and (min-device-width: 960px) {
 
-  .page-tab {
-    transition: opacity 1s ease-in;
-    z-index: 1;
+    // add media queries for proper responsive layout
+    .top-content {
+      @include container;
+      .main-content {
+        @include span(9 of 12);
+      }
+      nav {
+        @include span(last 3 of 12);
+      }
+    }
 
-    &.inactive {
-      opacity: 0;
-      transition: opacity 1s ease-out;
-      z-index: -1;
+    .page-tab {
+      transition: opacity 1s ease-in;
+      z-index: 1;
+
+      &.inactive {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+        z-index: -1;
+      }
     }
   }
 
@@ -48,13 +51,18 @@ body.layout-grid-slideshow {
   }
 
   .toolbar {
-    float: right;
-    transform: translateY(-1.5rem);  // MONKEYPATCH - position this properly
-    @include clearfix;
+    display: none;
+    
+    @media only screen and (min-device-width: 960px) {
+      display: block;
+      float: right;
+      transform: translateY(-1.5rem);  // MONKEYPATCH - position this properly
+      @include clearfix;
 
-    li {
-      display: inline;
-      margin-right: 1rem;
+      li {
+        display: inline;
+        margin-right: 1rem;
+      }
     }
   }
 
@@ -75,7 +83,24 @@ body.layout-grid-slideshow {
     }
   }
 
+  .extra-content {
+    display: none;
+    font-size: inherit;
+    
+    @media only screen and (max-device-width: 959px) {
+      display: block;
+    }
+  }
+  
+
+  // only display reveal at 960px screen size and above (JS isn't triggered below that either)
   .reveal {
+    display: none;
+  }
+
+@media only screen and (min-device-width: 960px) {
+  .reveal {
+    display: block;
     font-family: $base-font-family;
     min-height: $reveal-area-height;
     position: absolute;
@@ -243,6 +268,7 @@ body.layout-grid-slideshow {
       }
     }
   }
+}
 
   .metadata {
     font-size: 0.9rem;
