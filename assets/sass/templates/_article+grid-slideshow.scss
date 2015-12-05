@@ -173,6 +173,9 @@ body.layout-grid-slideshow {
     }
 
     &.overview {
+      perspective: 630px;
+      -webkit-perspective: 630px;
+
       section {
         margin: 0 !important;
       }
