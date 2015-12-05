@@ -110,7 +110,6 @@ class Article extends PodsObject {
     $this_pod = new \LC\PodObject($pod, 'Articles');
 
     // TODO: check, move
-    lc_data('pods_toplevel_ancestor', 309);
     global $nav_show_conferences;
     $nav_show_conferences = $pod_from_page;
 
@@ -193,6 +192,15 @@ class Article extends PodsObject {
     if($__grid_slideshow_obj['permalink']) {
       $__grid_slideshow = new GridSlideshow($__grid_slideshow_obj['permalink']);
       $this->grid_slideshow = $__grid_slideshow->to_var();
+    }
+
+    /**
+     * If this is a plain article (i.e. not a grid slideshow article, which we
+     * consider a 'research output' rather than a publication), explicitly set
+     * toplevel ancestor to the root Publications page.
+     */
+    if(empty($__grid_slideshow_obj)) {
+      lc_data('pods_toplevel_ancestor', 309);
     }
   }
 
