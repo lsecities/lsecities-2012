@@ -23,7 +23,7 @@
       - if article_data.extra_content
         .extra-content = article_data.extra_content | raw
       - if article_data.author_info
-        .author-info = article_data.author_info
+        .author-info = article_data.author_info | raw
     %nav.metadata
       - include("lsecities/articles/_metadata-for-grid-slideshow.haml")
   - include("lsecities/revealjs/_embedded_revealjs.haml")
