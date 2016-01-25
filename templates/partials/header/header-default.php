@@ -66,7 +66,7 @@
 									</a>
 								</li>
 								<li>
-									<a title="Follow us on LinkedIn" href="https://linkedin.com/company/lse-cities">
+									<a title="Follow us on LinkedIn" href="https://linkedin.com/company/lsecities">
 										<i class="icon-linkedin in-circle"></i>
 									</a>
 								</li>
