@@ -68,6 +68,9 @@ function pods_prepare_research_project($pod_slug) {
   // Data visualization collections
   $obj['data_visualization_collections'] = get_project_data_visualization_collections($pod);
   
+  // Grid slideshows
+  $obj['grid_slideshows'] = get_project_grid_slideshows($pod);
+  
   // news
   $obj['project_news'] = get_project_news($pod);
   $obj['news_categories'] = news_categories($pod->field('news_categories'));
@@ -119,6 +122,33 @@ function get_project_data_visualization_collections($pod) {
       $obj[] = [
         'publication' => \LSECitiesWPTheme\publication\pods_prepare_publication($data_visualization_collection['slug']),
         'publication_sections' => \LSECitiesWPTheme\publication\pods_prepare_table_of_contents($data_visualization_collection['slug'])
+      ];
+    }
+  }
+  
+  return $obj;
+}
+
+/**
+ * Generate list of grid slideshows linked to this
+ * research project
+ * 
+ * @param Object $pod the Research project Pod object
+ * @return Object The data structure with collections of grid
+ *  slideshows
+ */
+function get_project_grid_slideshows($pod) {
+  $grid_slideshows = $pod->field('grid_slideshows');
+  
+  $obj = [];
+  
+  if(is_array($grid_slideshows)) {
+    foreach($grid_slideshows as $item) {
+      $grid_slideshow_pod = pods('grid_slideshow', $item['permalink']);
+      $obj[] = [
+        'title' => $item['name'],
+        'abstract' => $grid_slideshow_pod->field('parent_article.abstract'),
+        'uri' => lc_data('pod_to_route')['grid_slideshow'] . '/' . $grid_slideshow_pod->field('parent_article.slug') . '/en-gb'  // TECHNICAL_DEBT: hardcoded language suffix
       ];
     }
   }

@@ -51,7 +51,7 @@ $obj = pods_prepare_research_project($pod_slug);
             <?php endif; // ($obj['summary'])?>
 
             <div class="organictabs-container">
-              <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_external_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections'])): ?>
+              <?php if(count($obj['project_news']) or count($obj['research_events']) or count($obj['research_external_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections']) or count($obj['grid_slideshows'])): ?>
               <!--[if gt IE 8]><!-->
               <script>jQuery(function($) {
                 $("article").organicTabs();
@@ -69,14 +69,14 @@ $obj = pods_prepare_research_project($pod_slug);
                 <?php if(count($obj['research_outputs'])): ?>
                 <li><a href="#t-publications">Publications</a></li>
                 <?php endif; ?>
-                <?php if(count($obj['data_visualization_collections'])): ?>
+                <?php if(count($obj['data_visualization_collections']) or count($obj['grid_slideshows'])): ?>
                 <li><a href="#t-dataviz">Data</a></li>
                 <?php endif; ?>
                 <?php if(count($obj['research_photo_galleries'])): ?>
                 <li><a href="#t-galleries">Galleries</a></li>
                 <?php endif; ?>
               </ul>
-              <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections'])) ?>
+              <?php endif; // (count($obj['project_news']) or count($obj['research_events']) or count($obj['research_photo_galleries']) or count($obj['research_outputs']) or count($obj['data_visualization_collections']) or count($obj['grid_slideshows'])) ?>
               
               <div class='list-wrap'>
                 <section id="t-project-info" class="project-tab row current">
@@ -241,7 +241,7 @@ $obj = pods_prepare_research_project($pod_slug);
                 
                 <?php
                 // data visualization collections
-                if(count($obj['data_visualization_collections'])): ?>
+                if(count($obj['data_visualization_collections']) or count($obj['grid_slideshows'])): ?>
                 <section id="t-dataviz" class="project-tab">
                   <?php
                   foreach($obj['data_visualization_collections'] as $data_visualization_collection): ?>
@@ -250,7 +250,14 @@ $obj = pods_prepare_research_project($pod_slug);
                       $publication_sections = $data_visualization_collection['publication_sections']['sections'];
                       include('templates/pods/publication/publication-toc.php'); ?>
                     <?php
-                  endforeach; // ($obj['data_visualization_collections'] as $data_visualization_collection) ?>
+                  endforeach; // ($obj['data_visualization_collections'] as $data_visualization_collection)
+                  
+                  if(count($obj['grid_slideshows'])):
+                  foreach($obj['grid_slideshows'] as $grid_slideshow): ?>
+                    <?php \SemanticWP\Templating::get_template_part('lsecities/grid_slideshows/_heading-with-download', $grid_slideshow); ?>
+                  <?php
+                  endforeach;
+                  endif; // (count($obj['grid_slideshows'])) ?>
                 </section>
                 <?php endif; // (count($obj['data_visualization_collections'])) ?>
                 

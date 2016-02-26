@@ -84,6 +84,13 @@ lc_data('theme_base_path', '//' . $_SERVER['SERVER_NAME'] . '/app/themes/lseciti
 lc_data('theme_filesystem_abspath', dirname(__DIR__));
 
 /**
+ * Mapping from pods page types to route
+ */
+lc_data('pod_to_route', [
+  'grid_slideshow' => '/research/data/cr'
+]);
+
+/**
  * Mapping from URIs (later: Pods types) to data to be used
  * in Pods index template
  */

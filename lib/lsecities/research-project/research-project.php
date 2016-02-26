@@ -45,6 +45,7 @@ class ResearchProject extends PodsObject {
   public $news_categories;
   public $project_news;
   public $data_visualization_collections;
+  public $grid_slideshows;
   public $research_output_publications;
   public $research_output_categories;
   public $research_outputs;
