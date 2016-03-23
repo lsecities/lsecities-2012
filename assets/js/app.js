@@ -14,16 +14,6 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 
 jQuery(document).ready(function($) {
   /**
-   * UA10 banner
-   */
-  // if no ua10_bugmenot cookie is set, display banner
-  if(! Cookies.get('ua10_bugmenot')) {
-    $('.ua10-debates-banner').addClass('active');
-  }
-  // if visitor clicks on dismiss button, 
-  $('.ua10-debates-banner .dismiss-banner').on('click', function() { Cookies.set('ua10_bugmenot', 'true', { expires: new Date(2025, 0, 1) }); $('.ua10-debates-banner').removeClass('active'); });
-   
-  /**
    * jQuery plugin to change element type (http://stackoverflow.com/questions/8584098/how-to-change-an-element-type-using-jquery)
    */
   (function($) {
