@@ -356,9 +356,6 @@ body.ec2012 .lc-event-speaker-list .speaker-card { -moz-box-shadow: none; -webki
 #mc_signup .mc_merge_var input { width: 60%; }
 #mc_signup .mc_merge_var #mc_mv_TOPICS, #mc_signup .mc_merge_var #mc_mv_2012CONF { height: 5em; }
 
-/* MONKEYPATCH - align 'required field' asterisk in embedded MailChimp signup form for Rio 2013 conference */
-#mc_embed_signup .mc-field-group span.asterisk { right: 20px; top: 35px; }
-
 body, select, input, textarea { color: #000; font-family: "Neue Haas Unica W01", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
 
 body.logged-in { font-family: "Neue Haas Unica W01", "Neue Haas Unica W01", "Open Sans", "Helvetica Neue", Helvetica, sans-serif; }
