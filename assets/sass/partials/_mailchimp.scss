@@ -1,0 +1,28 @@
+/**
+ * Styles for mailchimp embedded forms
+ * Mostly legacy stuff which used to be used for conference expression of interest forms until 2014
+ */
+
+#mc_signup {
+  .mc_merge_var {
+    margin-bottom: 1em;
+    width: 100%;
+    @include clearfix;
+
+    label {
+      width: 30%;
+      margin-right: 3%;
+      float: left;
+    }
+
+    input {
+      width: 60%;
+    }
+
+    #mc_mv_TOPICS, #mc_mv_2012CONF {
+      height: 5em;
+
+    }
+  }
+}
+
