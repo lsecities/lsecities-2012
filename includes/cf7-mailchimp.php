@@ -13,7 +13,7 @@ function cf7mailchimp_integration_on_submission($cf7_data) {
       // the form being submitted is the Delhi 2014 register your interest one
       $MailChimp = new \DrewM\MailChimp\MailChimp(LSECITIES_MAILCHIMP_API_KEY);
       $list_id = '1f3b65491d';
-      $result = $MailChimp->call('lists/' . $list_id. '/members', [
+      $result = $MailChimp->post('lists/' . $list_id. '/members', [
         'email_address' => $cf7_data->posted_data['your-email'],
         'merge_vars' => [
           'FNAME' => $cf7_data->posted_data['first-name'],
