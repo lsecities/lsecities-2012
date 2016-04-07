@@ -13,14 +13,11 @@ define('PODS_BASEURI_RESEARCH_PROJECTS', '/objects/research-projects');
 define('TRACE_ENABLED', is_user_logged_in());
 define('TRACE_PREFIX', __FILE__);
 
-// log php errors
-define('LSECITIES2012_LOG_FILE', '/srv/web/wordpress/www/tmp/lsecities-2012.log');
-
 // dump error log info only if LSE Cities theme debugging is enabled in wp-config.php (LSECITIES_THEME_DEBUG)
 if(LSECITIES_THEME_DEBUG) {
   @ini_set('log_errors', 'On'); // enable or disable php error logging (use 'On' or 'Off')
   @ini_set('display_errors', 'Off'); // enable or disable public display of errors (use 'On' or 'Off')
-  @ini_set('error_log', LSECITIES2012_LOG_FILE); // path to server-writable log file
+  @ini_set('error_log', LSECITIES_THEME_LOG_FILE); // path to server-writable log file; ignored if running under PHP-FPM
 }
 
 /**
@@ -50,7 +47,7 @@ function var_trace($var, $prefix = 'pods', $destination = 'error_log') {
    */
   if(
     (LSECITIES_THEME_DEBUG & 1 and current_user_can('manage_network')) or
-    (LSECITIES_THEME_DEBUG & 2 and current_user_can('')) or
+    (LSECITIES_THEME_DEBUG & 2 and current_user_can('administrator')) or
     (LSECITIES_THEME_DEBUG & 4 and is_user_logged_in()) or
      LSECITIES_THEME_DEBUG & 8
     ) {
