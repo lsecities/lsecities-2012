@@ -32,6 +32,18 @@ function cf7mailchimp_integration_on_submission($cf7_data) {
       break;
 
     case 11074:
+      // the form being submitted is the Venice 2016 register your interest one
+      $MailChimp = new \DrewM\MailChimp\MailChimp(URBANAGE_MAILCHIMP_API_KEY);
+      $list_id = '189097';
+      $result = $MailChimp->post('lists/' . $list_id. '/members', [
+        'email_address' => $cf7_data->posted_data['your-email'],
+        'merge_vars' => [
+          'FNAME' => $cf7_data->posted_data['first-name'],
+          'LNAME' => $cf7_data->posted_data['your-name'],
+        ],
+        'double_optin' => FALSE,
+        'update_existing' => TRUE,
+      ]);
       break;
 
     var_trace(var_export($result, TRUE), 'mailchimp API result');
