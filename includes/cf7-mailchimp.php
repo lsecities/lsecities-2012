@@ -79,3 +79,22 @@ function cf7mailchimp_integration_on_submission($cf7_data) {
  */
 add_action('wpcf7_before_send_mail', 'cf7mailchimp_integration_on_submission');
 
+/**
+ * Allow editors (rather than just admins) to view, edit and flag as spam
+ * Flamingo inbound messages.
+ * Simply replace the required capability from the stock edit_users (normally
+ * available to admins) to edit_posts (normally avaiilable to editors), leaving
+ * all the rest of the capabilities to their defaults.
+ */
+function lsecities_flamingo_map_meta_cap( $meta_caps ) {
+  return array_merge($meta_caps, [
+    'flamingo_edit_inbound_messages' => 'edit_posts',
+    'flamingo_spam_inbound_message' => 'edit_posts',
+    'flamingo_unspam_inbound_message' => 'edit_posts'
+  ]);
+}
+
+/**
+ * Register filter
+ */
+add_filter( 'flamingo_map_meta_cap', 'lsecities_flamingo_map_meta_cap' );
