@@ -224,6 +224,17 @@ class Event extends PodsObject {
     if(is_array($event_media_items)) {
       foreach($event_media_items as $item) {
         $item_pod = pods('media_item_v0', $item['id']);
+
+        /**
+         * Members of the related media_item pod which are plain URIs (e.g.
+         * YouTube URI, externally hosted MP3 or webm files) are left
+         * as-is.
+         * Linked Pods (such as PDF slides or audio files hosted
+         * within the WP media library) are processed here to retrieve the
+         * URI of the file to serve.
+         */
+
+        // do the above for PDF slides
         $slides_pdf_id = $item_pod->field('slides_pdf.ID', TRUE);
         if($slides_pdf_id) {
           $item['slides_uri'] = wp_get_attachment_url($slides_pdf_id);
