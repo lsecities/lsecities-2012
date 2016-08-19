@@ -239,6 +239,20 @@ class Event extends PodsObject {
         if($slides_pdf_id) {
           $item['slides_uri'] = wp_get_attachment_url($slides_pdf_id);
         }
+
+        /**
+         * do the above for MP3 files served from the WP media library;
+         * here we set the item's audio_uri member, therefore basically
+         * overriding any such URI that may have been entered; this is the
+         * expected behaviour as per editors' documentation (MP3 hosted in
+         * the WP media library leads to any Audio URI to be ignored)
+         */
+        $audio_file_id = $item_pod->field('audio_file.ID', TRUE);
+        if($audio_file_id) {
+          $item['audio_uri'] = wp_get_attachment_url($audio_file_id);
+        }
+
+        // push this to the array of media items attached to the event
         $this->event_media[] = $item;
       }
     }
