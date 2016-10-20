@@ -74,6 +74,11 @@ if('' === locate_template(array(lc_data('pods_conference__wp_page_template')))) 
 }
 
 /**
+ * Default timezone
+ */
+lc_data('default_timezone', new \DateTimeZone('Europe/London'));
+
+/**
  * meta description
  */
 lc_data('meta_description', 'LSE Cities is an international centre at the London School of Economics and Political Science that studies how people and cities interact in a rapidly urbanising world, focussing on how the design of cities impacts on society, culture and the environment. Through research, conferences, teaching and projects, the centre aims to shape new thinking and practice on how to make cities fairer and more sustainable for the next generation of urban dwellers, who will make up some 70 per cent of the global population by 2050.');
