@@ -224,6 +224,9 @@ class SectionFront extends PodsObject {
         var_trace(var_export($tile_count, true), 'tile_countdown');
 
         unset($target_event_month, $target_event_day, $target_uri);
+	$tile_title = '';
+        $tile_tagline = '';
+        $tile_blurb - '';
 
         if($tile->field('target_event.date_start')) {
           $target_event_date = new \DateTime($tile->field('target_event.date_start'));
@@ -252,11 +255,36 @@ class SectionFront extends PodsObject {
          */
         $image_attribution = format_media_attribution(get_media_attribution($tile->field('image.id')));
 
-        // Read tile title, subtitle (tagline) and blurb
+	      /**
+         * Read tile title, subtitle (tagline) and blurb: original ones if no
+	       * post-factum timestamp is set, post-factum ones if this timestamp is set,
+         * or if the linked object is an event and it has happened already.
+         * If a post-factum state is triggered either way, use post-factum
+         * content if available, falling back to original content otherwise.
+         * To avoid confusion, the tile-specific post-factum timestamp is
+         * tried first; if this is not set, and the linked object is an
+         * event, its end timestamp is fetched.
+         */
+        if($tile->field('show_post_factum_tile_text_after') and !preg_match('/^0000/', $tile->field('show_post_factum_tile_text_after'))) {
+error_log('show_post_factum_tile_text_after: ' . $tile->display('show_post_factum_tile_text_after'));
+          $__post_factum_timestamp = new \DateTime($tile->field('show_post_factum_tile_text_after'), lc_data('default_timezone'));
+          $__now = new \DateTime('now', lc_data('default_timezone'));
+        } elseif($tile->field('target_event.date_end') and !preg_match('/^0000/', $tile->field('target_event.date_end'))) {
+error_log('target_event.date_end: ' . $tile->field('target_event.date_end'));
+          $__post_factum_timestamp = new \DateTime($tile->field('target_event.date_end'), lc_data('default_timezone'));
+          $__now = new \DateTime('now', lc_data('default_timezone'));
+        }
+
         $tile_title = $tile->field('name');
         $tile_tagline = $tile->field('tagline');
         $tile_blurb = $tile->field('blurb');
-      
+
+        if(!empty($__post_factum_timestamp) and  $__post_factum_timestamp < $__now) {
+          $tile_title = !empty($tile->field('post_factum_title')) ? $tile->field('post_factum_title') : $tile_title;
+          $tile_tagline = !empty($tile->field('post_factum_tagline')) ? $tile->field('post_factum_tagline') : $tile_tagline;
+          $tile_blurb = !empty($tile->field('post_factum_blurb')) ? $tile->field('post_factum_blurb') : $tile_blurb;
+        }
+
         // If no blurb is set, set relevant tile property to be used in element classes
         $noblurb_class = empty($tile_blurb) ? 'noblurb' : '';
 
