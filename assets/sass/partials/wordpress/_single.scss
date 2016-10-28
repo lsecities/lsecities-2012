@@ -1,6 +1,6 @@
 .single-post {
   article {
-    clear: both;
+    @include clearfix;
   }
 
   .nav-single {    
