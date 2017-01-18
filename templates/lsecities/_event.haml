@@ -42,6 +42,10 @@
                 %a(href = addtocal_uri_google target = "_blank")><
                   google
                 ]
+        - if eventbrite_uri and is_future_event
+          %dt Attending this event
+          %dd
+            %a(href = eventbrite_uri) Book a place
         - if event_location
           %dt Where
           %dd.h-card.vcard

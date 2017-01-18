@@ -75,6 +75,11 @@ class Event extends PodsObject {
   public $picasa_gallery_id;
   public $photo_gallery_credits;
 
+  /**
+   * @var string URI for EventBrite page for this event
+   */
+  public $eventbrite_uri;
+
   private $pod;
 
   function __construct($permalink, $options = []) {
@@ -218,6 +223,8 @@ class Event extends PodsObject {
     }
 
     $this->contact_info = do_shortcode($pod->display('contact_info'));
+
+    $this->eventbrite_uri = $pod->field('eventbrite_uri');
 
     $event_media_items = $pod->field('media_attachments');
 
