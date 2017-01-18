@@ -40,6 +40,7 @@ function pods_prepare_research_project($pod_slug) {
   $obj['project_timespan'] = get_project_timespan($pod);
 
   $obj['free_form_project_teams'] = $pod->display('free_form_project_teams');
+  $obj['free_form_other_actants'] = $pod->display('free_form_other_actants');
 
   list($obj['project_coordinators'], $obj['project_coordinators_string']) = get_project_people($pod, 'coordinators');
   list($obj['project_researchers'], $obj['project_researchers_string']) = get_project_people($pod, 'researchers');

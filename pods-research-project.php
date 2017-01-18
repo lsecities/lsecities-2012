@@ -104,6 +104,9 @@ $obj = pods_prepare_research_project($pod_slug);
                       <dt>Project <?php echo count($obj['project_partners']) > 1 ? 'partners' : 'partner'; ?></dt>
                       <dd><?php echo $obj['project_partners_string']; ?></dd>
                     <?php endif; ?>
+                    <?php if(!empty($obj['free_form_other_actants'])) {
+                      echo $obj['free_form_other_actants'];
+                    } ?>
                     <?php if(count($obj['project_funders'])): ?>
                       <dt>Project <?php echo count($obj['project_funders']) > 1 ? 'funders' : 'funder'; ?></dt>
                       <dd><?php echo $obj['project_funders_string']; ?></dd>

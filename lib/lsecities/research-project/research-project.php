@@ -25,6 +25,8 @@ class ResearchProject extends PodsObject {
   public $research_programmes;
   public $research_strand;
   public $free_form_project_teams;
+  public $free_form_other_actants;
+
   // these are either people (coordinators, researchers) or organizations (partners, funders), so let's call them actants
   public $actants;
 
@@ -122,6 +124,7 @@ class ResearchProject extends PodsObject {
     ];
 
     $this->free_form_project_teams = $pod->display('free_form_project_teams');
+    $this->free_form_other_actants = $pod->display('free_form_other_actants');
 
     /*
     $this->actants = [
