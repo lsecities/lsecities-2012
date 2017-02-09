@@ -114,6 +114,10 @@ ul.run-in.comma-separated {
 
 article header {
   margin-bottom: 1.5rem;
+
+  .description {
+    font-style: italic;
+  }
 }
 
 header.entry-header { // TODO : remove once all templates have been refactored to new scheme

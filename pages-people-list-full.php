@@ -9,6 +9,12 @@ if ( !defined('ABSPATH')) exit;
  *
  * @package LSECities2012
  */
+
+$page_data = lc_data('page_data', [ 
+  'post_title' => get_the_title(),
+  'people_list' => LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true))
+]);
+
 ?><?php get_header(); ?>
 
 <div role="main">
@@ -19,13 +25,14 @@ if ( !defined('ABSPATH')) exit;
         <article class='wireframe row'>
           <header class='entry-header'>
             <h1><?php the_title(); ?></h1>
+            <?php
+            if($page_data['people_list']['description']) : ?>
+            <div class="description"><?php echo $page_data['people_list']['description']; ?></div>
+            <?php endif; // ($page_data['people_list']['description']) ?>
           </header>
             
           <?php 
-          lc_data('page_data', [ 
-            'post_title' => get_the_title(),
-            'people_list' => LSECitiesWPTheme\group_get_data(get_post_meta($post->ID, 'pod_slug', true))
-          ]);
+
           SemanticWP\Templating::get_template_part('lsecities/_people-list-full', lc_data('page_data')); ?>
           
           <?php get_template_part('templates/partials/socialmedia-share'); ?>

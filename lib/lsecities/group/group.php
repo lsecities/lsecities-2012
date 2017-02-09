@@ -11,6 +11,7 @@ class Group extends PodsObject {
    * @var string $permalink The object's permalink
    * @var string $name The group's name
    * @var string $label The group's label (to be used in generated lists)
+   * @var string $description A brief description of the group's role and functions
    * @var array $members All the members of the group
    * @var array $members_in_groups Used while splitting members in groups;
    *   holds list of members already put in a group
@@ -24,6 +25,7 @@ class Group extends PodsObject {
   public $permalink;
   public $name;
   public $label;
+  public $description;
   public $use_start_end_dates;
   public $members;
   public $members_in_groups;
@@ -45,6 +47,8 @@ class Group extends PodsObject {
     $this->name = $pod->field('name');
     $label = $pod->field('section_label');
     $this->label = $label ? $label : $this->name;
+
+    $this->description = $pod->field('description');
 
     $this->use_start_end_dates = $pod->field('use_start_end_dates');
 
@@ -131,6 +135,7 @@ class Group extends PodsObject {
    
     $this->people_list = [
       'title' => $this->label,
+      'description' => $this->description,
       'groups' => $tmp_groups
     ];
   }
