@@ -57,6 +57,11 @@ class Event extends PodsObject {
    */
   public $event_series;
 
+  /**
+   * @var Bool Whether this event is private (e.g. invitation-only seminar)
+   */
+  public $private_event;
+
   public $datetime_start;
   public $datetime_end;
   public $is_live_now;
@@ -171,6 +176,8 @@ class Event extends PodsObject {
     $this->datetime_end = $pod->field('date_end');
     $this->free_form_event_dates = $pod->field('free_form_dates');
 
+    $this->private_event = $pod->field('private_event');
+    
     $this->event_location = $pod->field('venue.name');
 
     $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);

@@ -20,8 +20,23 @@
         = event_info | raw
     %article.eightcol
       .blurb.description = blurb | raw
-      - if is_future_event and contact_info
-        %aside.booking-and-access = contact_info | raw
+      - if is_future_event
+        - if contact_info is not empty
+          %aside.booking-and-access = contact_info | raw
+        - else
+          -if not private_event
+            -if eventbrite_uri
+              %aside.event-tickets
+                %h3
+                  %a(href = eventbrite_uri) Please register for a ticket
+                %p
+                  This event is free and open to all. Entry is on a first-come, first-served basis. Not everyone who registers attends our events, so to ensure a full house, we allow more registrations than there are places. Our events are very well attended, so please make sure you arrive early to avoid disappointment. We cannot guarantee entry.
+            - else
+              %aside.event-tickets
+                %h3
+                  Ticket registration
+                %p
+                  This event is free and open to all, and no registration is required. Entry is on a first-come, first-served basis. Our events are very well attended, so please make sure you arrive early to avoid disappointment. We cannot guarantee entry.
     %aside#keyfacts.fourcol.last
       %dl
         = actants.speakers.output | raw
