@@ -40,6 +40,10 @@ class Event extends PodsObject {
   public $actants;
   public $all_actants;
   public $blurb;
+  /**
+   * @var String Event-specific ticket notice
+   */
+  public $ticket_notice;
   public $contact_info;
   public $event_media;
   public $featured_image_uri;
@@ -74,6 +78,7 @@ class Event extends PodsObject {
   public $free_form_event_dates;
 
   public $event_location;
+
   public $event_info;
   public $poster_pdf;
   public $event_page_uri;
@@ -229,6 +234,7 @@ class Event extends PodsObject {
       $this->blurb = $event_blurb_after_event;
     }
 
+    $this->ticket_notice = do_shortcode($pod->display('ticket_notice'));
     $this->contact_info = do_shortcode($pod->display('contact_info'));
 
     $this->eventbrite_uri = $pod->field('eventbrite_uri');

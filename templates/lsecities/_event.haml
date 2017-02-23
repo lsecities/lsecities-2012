@@ -20,12 +20,16 @@
         = event_info | raw
     %article.eightcol
       .blurb.description = blurb | raw
+      - if is_future_event and contact_info is not empty
+        %aside.booking-and-access = contact_info | raw
       - if is_future_event
-        - if contact_info is not empty
-          %aside.booking-and-access = contact_info | raw
+        - if ticket_notice is not empty
+          %aside.event-tickets
+            %h3 Tickets
+            %div = ticket_notice | raw
         - else
-          -if not private_event
-            -if eventbrite_uri
+          - if not private_event
+            - if eventbrite_uri
               %aside.event-tickets
                 %h3
                   %a(href = eventbrite_uri) Please register for a ticket
