@@ -60,7 +60,7 @@ trait ObjectWithTimespan {
   public $minutes_to_start_of_event;
   public $minutes_to_end_of_event;
 
-  public function __construct($datetime_start, $datetime_end, $free_form_dates, $datetimezone = 'Europe/London') {
+  public function __construct($datetime_start, $datetime_end, $free_form_event_dates, $datetimezone = 'Europe/London') {
     /**
      * event start and end
      * We only support a single timespan (i.e. an event with a session

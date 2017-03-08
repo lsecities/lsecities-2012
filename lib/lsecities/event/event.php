@@ -179,7 +179,7 @@ class Event extends PodsObject {
 
     $this->datetime_start = $pod->field('date_start');
     $this->datetime_end = $pod->field('date_end');
-    $this->free_form_event_dates = $pod->field('free_form_dates');
+    $this->free_form_event_dates = $pod->field('free_form_event_dates');
 
     $this->private_event = $pod->field('private_event');
     
