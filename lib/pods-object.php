@@ -106,10 +106,13 @@ trait ObjectWithTimespan {
     $this->event_starts_and_ends_on_same_day = $this->event_start->format('Y-m-d') != $this->event_end->format('Y-m-d');
 
     /**
-     * if the free_form_dates field is filled in and the event is a
-     * future event, this means that the event is planned for some
-     * approximate time in the future but an exact date/time hasn't been
-     * set yet, we just use the value of this field as event_date_string
+     * If the free_form_event_dates field is filled in, this is assumed
+     * to mean that the event is planned for some approximate time in the
+     * future but an exact date/time hasn't been set yet, so we just use
+     * the value of this field as event_date_string. If the event "has
+     * happened" (according to its date_end field), we assume that it
+     * was never scheduled and we only keep the display of the free form
+     * date for reference.
      */
     $this->event_free_form_dates = $free_form_event_dates;
     if(!empty($this->event_free_form_dates)) {
