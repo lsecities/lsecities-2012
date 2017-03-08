@@ -20,7 +20,7 @@ var_trace('datetime_now: ' . $datetime_now->format(DATE_ATOM), $TRACE_PREFIX);
 // prepare array with list of upcoming events
 $upcoming_events = Array();
 $events_pod->find(array(
-  'where' => 't.date_end > NOW() AND event_calendar.permalink = "lse-cities-events-calendar"',
+  'where' => 't.date_end > NOW() AND event_calendar.permalink = "lse-cities-events-calendar" AND t.free_form_event_dates = ""',
   'orderby' => 't.date_start ASC',
   'limit' => -1
 ));
