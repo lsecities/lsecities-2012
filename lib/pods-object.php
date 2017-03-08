@@ -111,8 +111,8 @@ trait ObjectWithTimespan {
      * approximate time in the future but an exact date/time hasn't been
      * set yet, we just use the value of this field as event_date_string
      */
-    $this->event_free_form_dates = $free_form_dates;
-    if(!empty($this->event_free_form_dates) and $this->is_future_event) {
+    $this->event_free_form_dates = $free_form_event_dates;
+    if(!empty($this->event_free_form_dates)) {
       $this->event_date_string = $this->event_free_form_dates;
     } else {
       // depending on whether event starts and ends on the
