@@ -19,6 +19,8 @@
 # but leaving the previous build artifacts around can make successive
 # deploys almost instant.
 
+SHELL := /bin/bash
+
 .PHONY: clean mktmp sync-theme vendor-install go-live deploy check-env
 
 clean: check-env
@@ -38,7 +40,7 @@ vendor-install: check-env sync-theme
 	
 go-live: check-env vendor-install
 	mkdir -p $(THEME_LIVEDIR)
-	rsync -rav --delete $(THEME_TMPDIR)/$(DEPLOY_BRANCH)/ $(THEME_LIVEDIR)
+	sudo -u $(DEPLOY_USER) rsync -rav --delete $(THEME_TMPDIR)/$(DEPLOY_BRANCH)/ $(THEME_LIVEDIR)
 
 deploy: check-env mktmp sync-theme vendor-install go-live
 
@@ -51,4 +53,7 @@ ifndef THEME_LIVEDIR
 endif
 ifndef DEPLOY_BRANCH
 	$(error DEPLOY_BRANCH is undefined)
+endif
+ifndef DEPLOY_USER
+	$(error DEPLOY_USER is undefined)
 endif
