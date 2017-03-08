@@ -52,7 +52,7 @@
           %dt When
           %dd.date
             = event_date_string | raw
-            - if free_form_dates is empty
+            - if free_form_event_dates is empty
               .calendar-link
                 [add to calendar: 
                 %a(href = "#{permalink}/ical")><
