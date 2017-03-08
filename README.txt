@@ -9,6 +9,34 @@ types (see the Developer section of the
 [LSE Cities Web Handbook](http://web-handbook.docs.lsecities.net/)
 for details).
 
+## Deploying
+
+When updating the theme, in order to deploy to testing/staging/production,
+a Make task can be used (from the root of the theme repo):
+
+`make deploy`
+
+This Make tasks needs all the following four environment variables to be
+defined:
+
+* `DEPLOY_BRANCH`: the branch to deploy (when deploying to testing, it
+  will be necessary to commit or stage any current changes if deploying
+  a branch other than the current branch; this shouldn't affect straging
+  or production as we wouldn't be committing from random development
+  branches)
+* `THEME_TMPDIR`: this is a temporary directory; the task will create a
+  subdirectory named after the branch that it is asked to deploy (via
+  `DEPLOY_BRANCH`)
+* `THEME_LIVEDIR`: this is the theme's directory within the WordPress themes
+  folder
+* `DEPLOY_USER`: user to deploy as; `THEME_LIVEDIR` will typically be
+  owned by a system user specific to the instance being deployed to,
+  and we use sudo to deploy as such user
+
+Therefore, a full deploy command may look like:
+
+`DEPLOY_BRANCH=master THEME_TMPDIR=/tmp/lsecities-wp-theme THEME_LIVEDIR=/path/to/wordpress/themes/lsecities-wp-theme DEPLOY_USER=user1234 make deploy`
+
 ## Contributing
 
 Starting in early 2014, the theme's code is being gradually refactored,
