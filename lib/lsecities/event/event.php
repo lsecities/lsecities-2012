@@ -97,15 +97,34 @@ class Event extends PodsObject {
 
     // return if a Pod cannot be found
     if(!$pod->exists()) {
+      throw new \Exception('Event not found.');
+      return;
+    }
+
+    $this->title = $pod->field('name');
+    $this->event_location = $pod->field('venue.name');
+    $this->datetime_start = $pod->field('date_start');
+    $this->datetime_end = $pod->field('date_end');
+    $this->free_form_event_dates = $pod->field('free_form_event_dates');
+    $this->event_page_uri = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . PODS_BASEURI_EVENTS . "/" . $pod->field('slug');
+  
+    $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
+
+    /**
+     * if this is not a future event (according to date_end) *and*
+     * a free form event date is set, we consider this event to
+     * have been originally advertised with a tentative date but
+     * not having actually happened, so we stop fetching event data
+     * here so that we can 404 the event page
+     */
+    if(!$this->is_future_event and !empty($this->free_form_event_dates)) {
+      throw new \Exception('Event has a free-form date defined, but date_end is in the past: assuming this event never actually happened.');
       return;
     }
 
     $this->permalink = $pod->field('slug');
     $this->link_to_self = self::BASE_URI . '/' . $this->permalink;
-    $this->title = $pod->field('name');
     $this->tagline = $pod->field('tagline');
-
-    $this->event_page_uri = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . PODS_BASEURI_EVENTS . "/" . $this->permalink;
 
     $this->event_hashtag = ltrim($pod->field('hashtag'), '#');
     $this->event_story_id = $pod->field('storify_id');
@@ -177,15 +196,7 @@ class Event extends PodsObject {
         $this->actants['panelists']['with_blurb'];
     }
 
-    $this->datetime_start = $pod->field('date_start');
-    $this->datetime_end = $pod->field('date_end');
-    $this->free_form_event_dates = $pod->field('free_form_event_dates');
-
     $this->private_event = $pod->field('private_event');
-    
-    $this->event_location = $pod->field('venue.name');
-
-    $this->__ObjectWithTimespanConstructor($this->datetime_start, $this->datetime_end, $this->free_form_event_dates);
 
     $this->event_date_for_navigation = $this->event_start->format('j F Y');
 

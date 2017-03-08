@@ -13,7 +13,14 @@ namespace LSECitiesWPTheme;
 
 lc_data('pods_toplevel_ancestor', 311);
 
-$obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
+try {
+  // If Event object creation was not successful (event was not found), we catch the
+  // exception and return 404.
+  $obj = new Event(get_pod_permalink([ 'from_uri' => TRUE, 'uri_var_position' => 3 ]));
+} catch(\Exception $e) {
+  redirect_to_404();
+}
+
 $obj->fetch_events_series();
 $post_class = 'lc-article lc-event h-event vevent';
 if(!empty($obj->event_series['permalink'])) {
@@ -40,19 +47,19 @@ if(!empty($obj->event_series['permalink'])) {
 if(!empty($obj->event_series['permalink'])) {
   $event_series = new EventSeries($obj->event_series['permalink']);
   $event_series->fetch_events();
-  
+
   if(!empty($event_series->events) and !empty($event_series->event_blurb)) {
     \SemanticWP\Templating::get_template_part('lsecities/event-series/_nav', $event_series->to_var());
   }
 }  
 /**
- * By default, events part of an event series show the series'
- * navigation in the sidebar, followed by the full events calendar,
- * *unless* this has been set to be hidden within the event series.
- */
- 
+* By default, events part of an event series show the series'
+* navigation in the sidebar, followed by the full events calendar,
+* *unless* this has been set to be hidden within the event series.
+*/
+
 if(!is_object($event_series) or !$event_series->hide_full_event_calendar_in_sidebars) {
-   get_template_part('nav');
+  get_template_part('nav');
 }
 ?>
 
