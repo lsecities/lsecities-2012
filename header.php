@@ -71,6 +71,7 @@ $obj = prepare_header($post);
   wp_enqueue_script('jquery-ui-tabs', '', 'jquery', '', true);
   wp_enqueue_script('jquery-organictabs', get_stylesheet_directory_uri() . '/javascripts/jquery.organictabs.js', 'jquery', false, true);
   wp_enqueue_script('cookie-control', get_stylesheet_directory_uri() . '/javascripts/civicuk.com/cookieControl-5.1.min.js', 'jquery', false, true);
+  wp_enqueue_script('modernizr-custom', get_stylesheet_directory_uri() . '/javascripts/vendor/modernizr-custom.js', '', FALSE, FALSE);
  
   /**
    * Finally enqueue our own app.js
