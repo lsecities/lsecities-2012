@@ -102,11 +102,6 @@ function prepare_header() {
     // And strip prefix
     // TODO: get full URI from WP's get_page_uri()
     $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/' . $microsite_configuration['conference_pod_slug']. '\/site/', '', $obj['level2nav']);
-
-    // Enable appcache manifest, if needed
-    if($microsite_configuration['appcache_manifest']) {
-      $appcache_manifest = '/appcache-manifests/' . $microsite_configuration['appcache_manifest'];
-    }
   }
   
   /* if within Newsletter section, do not populate level2nav: otherwise,
