@@ -58,8 +58,7 @@ function prepare_header() {
    * settings of the microsite via the lc_data('conference_microsites')
    * configuration array.
    */ 
-  $http_req_headers = getallheaders();
-  $x_site_id = strtolower($http_req_headers['X-Site-Id']);
+  $x_site_id = $_SERVER['HTTP_X_SITE_ID'];
   if(strlen($x_site_id) > 0) {
     lc_data('x-site-id', $x_site_id);
     
