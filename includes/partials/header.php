@@ -46,66 +46,9 @@ function prepare_header() {
   var_trace($ancestors[0], 'ancestor[0]');
   var_trace($obj['toplevel_ancestor'], 'toplevel_ancestor');
 
-  // co-branding: check the X-Site-Id HTTP header from frontend cache
-  /**
-   * Co-branding
-   * For microsites (e.g. Electric City conference, City Transformations
-   * conference) we get a custom HTTP header from the frontend reverse
-   * proxy, which is used to set up the microsite: e.g. custom
-   * templates, extra classes for HTML elements, menus, etc.
-   * 
-   * If the X-Site-Id HTTP request header is set, we configure several
-   * settings of the microsite via the lc_data('conference_microsites')
-   * configuration array.
-   */ 
-  $x_site_id = $_SERVER['HTTP_X_SITE_ID'];
-  if(strlen($x_site_id) > 0) {
-    lc_data('x-site-id', $x_site_id);
-    
-    $microsite_configuration = array_shift(array_filter(lc_data('conference_microsites'), function($microsite) use ($x_site_id) { return $x_site_id === $microsite['x-site-id']; }));
-    
-    $obj['theme_js'] = $microsite_configuration['theme_js'];
-    $obj['body_class_extra'] = $microsite_configuration['body_class_extra'];
-    if(is_user_logged_in()) {
-      $obj['body_class_extra'] .= ' user_logged_in';
-    }
-    
-    lc_data('microsite_id', $microsite_configuration['x-site-id']);
-    lc_data('body_class_extra', $microsite_configuration['body_class_extra']);
-    $obj['conference_data'] = \LSECitiesWPTheme\conference\prepare_conference($microsite_configuration['conference_pod_slug']);
-    
-    // Now set microsite nav menus
-    
-    // We only use level2nav - set level1nav to empty string
-    $obj['level1nav'] = '';
-    
-    // Check whether the current page is the microsite's homepage
-    $microsite_homepage_id = $obj['conference_data']['conference_microsite_frontpage_wp_page']['ID'];
-    $on_microsite_homepage = $post->ID == $microsite_homepage_id ? TRUE : FALSE;
-    // And set classes for home item li accordingly
-    $home_item_classes = 'page-item page-item-' . $microsite_homepage_id;
-    $home_item_classes .= ($on_microsite_homepage == TRUE) ? ' current_page_item' : '';
-    
-    if(is_user_logged_in()) {
-      // Add all subpages of microsite's homepage to navmenu for logged-in users
-      $pages_included_in_navmenu = '&child_of=' . $microsite_homepage_id;
-    } else {
-      // Whereas for all other users, add pages from lists configured within the conference Pod
-      $pages_included_in_navmenu = '&include=' . implode(',', $obj['conference_data']['microsite_navmenu_pages']);
-    }
-
-    $obj['level2nav'] = '<li class="' . $home_item_classes . '">' .
-      '<a href="/">Home</a></li>' .
-      wp_list_pages('echo=0&depth=1&sort_column=menu_order&title_li=' . $pages_included_in_navmenu);
-      
-    // And strip prefix
-    // TODO: get full URI from WP's get_page_uri()
-    $obj['level2nav'] = preg_replace('/https?:\/\/lsecities\.net\/ua\/conferences\/' . $microsite_configuration['conference_pod_slug']. '\/site/', '', $obj['level2nav']);
-  }
-  
   /* if within Newsletter section, do not populate level2nav: otherwise,
      all the children pages will be listd there! */
-  elseif($post->ID == 1074 or in_array(1074, $post->ancestors)) {
+  if($post->ID == 1074 or in_array(1074, $post->ancestors)) {
     $obj['level2nav'] = '';
   } else {
     $include_pages = '617,306,309,311,94,8871,3338,12825';

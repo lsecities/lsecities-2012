@@ -225,40 +225,6 @@ lc_data('pods_routes', [
 lc_data('template_filename_page_tab', 'pages-section.php');
 
 /**
- * Conference microsites configuration map
- */
- 
-lc_data('conference_microsites', [
-  [
-    'x-site-id' => 'ec2012',
-    'body_class_extra' => 'ec2012',
-    'conference_pod_slug' => '2012-london'
-  ],
-  [
-    'x-site-id' => 'rio2013',
-    'body_class_extra' => 'urban-age-twentyfifteen',
-    'conference_pod_slug' => '2013-rio',
-    'theme_js' => [
-      'handle' => 'urban-age-twentyfifteen',
-      'src' => get_stylesheet_directory_uri() . '/javascripts/themes/urban-age-twentyfifteen/urban-age-twentyfifteen.js',
-      'deps' => [ 'jquery' ],
-      'in_footer' => TRUE
-    ]
-  ],
-  [
-    'x-site-id' => 'delhi2014',
-    'body_class_extra' => 'urban-age-twentyfifteen',
-    'conference_pod_slug' => '2014-delhi',
-    'theme_js' => [
-      'handle' => 'urban-age-twentyfifteen',
-      'src' => get_stylesheet_directory_uri() . '/javascripts/themes/urban-age-twentyfifteen/urban-age-twentyfifteen.js',
-      'deps' => [ 'jquery' ],
-      'in_footer' => TRUE
-    ]
-  ]
-]);
-
-/**
  * rio2013 microsite configuration
  */
 
